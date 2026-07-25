@@ -1,0 +1,18 @@
+477 USD pairs to fetch (1460 days daily)
+  25/477 (saved 25, skipped 0, 0.7 min)
+  50/477 (saved 48, skipped 0, 1.4 min)
+  75/477 (saved 72, skipped 0, 2.0 min)
+  100/477 (saved 94, skipped 0, 2.5 min)
+  125/477 (saved 115, skipped 0, 3.1 min)
+  150/477 (saved 135, skipped 0, 3.6 min)
+[175] GNO-USD FAILED: HTTPSConnectionPool(host='api.exchange.coinbase.com', port=443): Read timed out. (read timeout=30)
+  200/477 (saved 180, skipped 0, 5.4 min)
+  225/477 (saved 203, skipped 0, 5.9 min)
+  300/477 (saved 261, skipped 0, 7.5 min)
+  325/477 (saved 283, skipped 0, 8.1 min)
+  375/477 (saved 323, skipped 0, 9.1 min)
+  425/477 (saved 367, skipped 0, 10.2 min)
+  450/477 (saved 386, skipped 0, 10.7 min)
+  475/477 (saved 409, skipped 0, 11.3 min)
+
+DONE in 11.3 min: saved=411 skipped=0 failed=66

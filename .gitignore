@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+*.pyc
+data/candles/
+data/candles_daily/
+backups/

@@ -1,0 +1,4 @@
+candidate,date,verdict,windows,pairs,stitched,stitched_bh,trades
+trend_150,2026-07-24,FAIL,100,8,66.6505,702.9823,302
+trend_200,2026-07-24,FAIL,92,8,7.7796,2583.3643,254
+trend_250,2026-07-24,FAIL,92,8,-0.2762,38.7346,265
