@@ -22,6 +22,9 @@ import requests
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
+import sys as _sys
+_sys.path.insert(0, HERE)
+import strategies as S   # shared logic: exam graduate == live member (W1.1)
 STATE = os.path.join(HERE, "league_state.json")
 LEGACY = os.path.join(HERE, "state.json")
 UNIVERSE = os.path.join(ROOT, "data", "universe.json")
@@ -41,14 +44,28 @@ STRATS = {
 
 _cache = {}
 
-def daily_closes(pair):
+def _raw(pair):
+    """Cached (close, date) rows, oldest..newest, from Coinbase."""
     if pair not in _cache:
         r = requests.get(f"{BASE}/products/{pair}/candles",
                          params={"granularity": 86400}, timeout=30)
         r.raise_for_status()
-        _cache[pair] = [row[4] for row in sorted(r.json())]
+        rows = sorted(r.json())  # each: [time, low, high, open, close, vol]
+        _cache[pair] = [(row[4],
+                         datetime.fromtimestamp(row[0], timezone.utc)
+                         .strftime("%Y-%m-%d")) for row in rows]
         time.sleep(0.12)
     return _cache[pair]
+
+def daily_closes(pair):
+    """ALL closes incl. today's forming bar — used for live valuation."""
+    return [c for c, _ in _raw(pair)]
+
+def completed_closes(pair):
+    """Closes on COMPLETED days only (drops today's partial candle).
+    Signals use this so the live signal == the exam signal (W1.3)."""
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    return [c for c, d in _raw(pair) if d < today]
 
 def price(pair):
     return daily_closes(pair)[-1]
@@ -63,10 +80,14 @@ def targets(cfg):
     if cfg["kind"] == "hold":
         return [cfg["pair"]]
     if cfg["kind"] == "trend":
-        cl, n = daily_closes(cfg["pair"]), cfg["ma"]
-        if len(cl) <= n:
+        # SAME code path as the exam: shared Trend strategy on COMPLETED
+        # closes. If this passes the exam, this is what trades. (W1.1/W1.3)
+        cl = completed_closes(cfg["pair"])
+        strat = S.Trend(cfg["ma"])
+        if len(cl) < strat.warmup:
             return []
-        return [cfg["pair"]] if cl[-1] > sum(cl[-n:]) / n else []
+        w = strat.step(cl, {"weight": 0.0, "entry_price": None})
+        return [cfg["pair"]] if w > 0 else []
     if cfg["kind"] == "momrot":
         with open(UNIVERSE) as f:
             pairs = json.load(f)
@@ -174,8 +195,14 @@ def cycle():
             st["cash"] = 0.0
         st["last_rebalance"] = now.isoformat()
 
-    with open(STATE, "w") as f:
+    # atomic write (W2.2): temp file + replace, so a crash mid-write
+    # can never corrupt the forward record.
+    tmp = STATE + ".tmp"
+    with open(tmp, "w") as f:
         json.dump(league, f, indent=2)
+        f.flush()
+        os.fsync(f.fileno())
+    os.replace(tmp, STATE)
     print("league state saved.")
 
 if __name__ == "__main__":
