@@ -7,10 +7,10 @@
     <string>/Users/haroonrasheed/Projects/cryptobot/.venv/bin/python</string>
     <string>/Users/haroonrasheed/Projects/cryptobot/bot/daily.py</string>
   </array>
-  <key>StartCalendarInterval</key><dict>
-    <key>Hour</key><integer>9</integer>
-    <key>Minute</key><integer>0</integer>
-  </dict>
+  <key>StartInterval</key><integer>3600</integer>
+  <key>RunAtLoad</key><true/>
+  <key>WorkingDirectory</key>
+  <string>/Users/haroonrasheed/Projects/cryptobot</string>
   <key>StandardOutPath</key>
   <string>/Users/haroonrasheed/Projects/cryptobot/logs/daily.log</string>
   <key>StandardErrorPath</key>

@@ -1,8 +1,11 @@
 """
-Build the public league page: one self-contained HTML file with all
-league data embedded. site/index.html works from file://, from the
-local portal at /public, and later deploys to Vercel unchanged.
-Run after each league cycle: python portal/build_site.py
+Build the public league page: one self-contained HTML file, all data
+embedded. Works from file://, from the portal at /public, and deploys
+to Vercel unchanged. Rebuilt every league cycle by bot/daily.py.
+
+Display scale: every strategy book is shown normalized to a $300
+virtual fund (internal books stay at $10,000 so the forward record is
+continuous). Fees shown in trades are scaled by the same factor.
 """
 import csv, json, os
 from datetime import datetime, timezone
@@ -10,6 +13,8 @@ from datetime import datetime, timezone
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 OUT = os.path.join(ROOT, "site")
+SHOW_FUND = 300.0
+BOOK = 10000.0
 
 def read_csv(path, tail=None):
     if not os.path.exists(path):
@@ -21,124 +26,219 @@ def read_csv(path, tail=None):
 def build():
     sp = os.path.join(ROOT, "bot", "league_state.json")
     state = json.load(open(sp)) if os.path.exists(sp) else {}
+    ledger = read_csv(os.path.join(ROOT, "backtest", "results",
+                                   "exam_ledger.csv"))
     data = {
         "generated": datetime.now(timezone.utc).isoformat(),
+        "show_fund": SHOW_FUND,
+        "scale": SHOW_FUND / BOOK,
         "league": state,
-        "equity": read_csv(os.path.join(ROOT, "logs", "league_equity.csv")),
-        "trades": read_csv(os.path.join(ROOT, "logs", "league_trades.csv"),
-                           tail=40),
+        "equity": read_csv(os.path.join(ROOT, "logs",
+                                        "league_equity.csv")),
+        "trades": read_csv(os.path.join(ROOT, "logs",
+                                        "league_trades.csv"), tail=30),
+        "examined": len(ledger),
     }
     os.makedirs(OUT, exist_ok=True)
     html = TEMPLATE.replace("__DATA__", json.dumps(data))
     with open(os.path.join(OUT, "index.html"), "w") as f:
         f.write(html)
-    print(f"site/index.html built "
-          f"({len(data['equity'])} equity rows, "
-          f"{len(data['trades'])} trades embedded)")
+    print(f"site/index.html built ({len(data['equity'])} equity rows, "
+          f"{len(data['trades'])} trades, {data['examined']} exams)")
 
 TEMPLATE = r"""<!doctype html>
 <html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CRYPTOBOT League</title>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="refresh" content="300">
+<title>Strategy League</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
-:root{--bg:#0B0F17;--panel:#121826;--line:#1F2A3D;--txt:#C6D2E4;--dim:#5B6B84;
---amber:#F0B429;--up:#4FD97B;--down:#F4645C;--blue:#59C2FF;--ink:#0c1119}
+:root{--bg:#FAFAF7;--card:#FFFFFF;--line:#E7E5DE;--txt:#1A1E24;
+--dim:#8A8F98;--up:#0E8F5B;--down:#C93B3B;--wait:#9A6B15;--accent:#2B4C7E}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--txt);
-font:13.5px/1.55 "IBM Plex Mono",ui-monospace,Menlo,monospace;
-font-variant-numeric:tabular-nums;padding:20px;max-width:880px;margin:0 auto}
-header{border-bottom:2px solid var(--amber);padding-bottom:12px;margin-bottom:8px}
-h1{font-family:"Archivo",sans-serif;font-stretch:75%;font-weight:700;
-font-size:24px;letter-spacing:.06em;color:var(--amber)}
-h1 small{color:var(--dim);font-size:12px;letter-spacing:.2em;margin-left:8px}
-.sub{color:var(--dim);font-size:11px;margin:6px 0 18px}
-.panel{background:var(--panel);border:1px solid var(--line);
-padding:16px;margin-bottom:16px}
-.panel h2{font-size:10.5px;letter-spacing:.18em;color:var(--dim);
-text-transform:uppercase;margin-bottom:12px}
-.srow{display:grid;grid-template-columns:auto 1fr auto;gap:4px 14px;
-padding:12px 0;border-bottom:1px solid #151d2c;align-items:baseline}
-.srow:last-child{border-bottom:0}
-.sname{font-weight:600;font-size:15px}
-.role{color:var(--dim);font-size:10px;letter-spacing:.06em}
-.eq{font-size:15px;text-align:right}
-.meta{grid-column:1/-1;color:var(--dim);font-size:11px;display:flex;
-gap:16px;flex-wrap:wrap}
-.pos{color:var(--up)}.neg{color:var(--down)}
-.halt{color:var(--down);font-weight:600}
-table{width:100%;border-collapse:collapse;font-size:11.5px}
-th{color:var(--dim);text-align:left;font-weight:400;font-size:9.5px;
-letter-spacing:.14em;text-transform:uppercase;
-border-bottom:1px solid var(--line);padding:4px 6px}
-td{padding:4px 6px;border-bottom:1px solid #151d2c}
-.buy{color:var(--up)}.sell{color:var(--down)}
-.foot{color:var(--dim);font-size:10.5px;line-height:1.7;margin-top:14px}
-.trwrap{overflow-x:auto}
-</style></head>
-<body>
-<header><h1>CRYPTOBOT<small>STRATEGY LEAGUE</small></h1></header>
-<div class="sub" id="sub"></div>
-<div class="panel"><h2>League table · forward paper results only</h2>
-<div id="league"></div></div>
-<div class="panel"><h2>Equity race</h2><canvas id="eqChart" height="120"></canvas></div>
-<div class="panel"><h2>Recent trades</h2><div class="trwrap" id="trades"></div></div>
-<div class="foot">Paper trading only — no real money. Success bar, committed
-2026-07-24 before the race began: beat BTC-HOLD over 90+ days of forward
-trading with a smaller drawdown, after simulated fees, without ever tripping
-the −20% circuit breaker. Backtests never appear on this page.</div>
+body{background:var(--bg);color:var(--txt);max-width:760px;margin:0 auto;
+padding:28px 18px 60px;font:15px/1.55 -apple-system,"Segoe UI",Roboto,sans-serif}
+h1{font-size:21px;margin-bottom:2px}
+.sub{color:var(--dim);font-size:13px;margin-bottom:22px}
+.card{background:var(--card);border:1px solid var(--line);
+border-radius:12px;padding:18px;margin-bottom:16px}
+.card h2{font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+color:var(--dim);margin-bottom:12px}
+.big{font-size:34px;font-weight:700;font-variant-numeric:tabular-nums}
+.pnl{font-size:16px;font-weight:600;margin-left:8px}
+.up{color:var(--up)}.down{color:var(--down)}.wait{color:var(--wait)}
+.day{color:var(--dim);font-size:13px;margin-top:4px}
+.row{display:flex;justify-content:space-between;align-items:flex-start;
+gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:none}
+.rname{font-weight:650}
+.rdesc{color:var(--dim);font-size:12.5px;margin-top:2px;max-width:430px}
+.rnum{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.rv{font-weight:650;font-size:16px}
+.badge{display:inline-block;font-size:10.5px;font-weight:650;
+letter-spacing:.05em;padding:2px 8px;border-radius:20px;margin-top:3px}
+.b-in{background:#E6F4EC;color:var(--up)}
+.b-wait{background:#F7EFDD;color:var(--wait)}
+.b-bench{background:#E8EEF7;color:var(--accent)}
+canvas{width:100%!important;max-height:280px}
+.trade{padding:9px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.trade:last-child{border-bottom:none}
+.trade .who{font-weight:650}
+.trade .fee{color:var(--down);font-size:12.5px}
+.trade .when{color:var(--dim);font-size:11.5px}
+.pipe{display:flex;gap:8px;text-align:center;flex-wrap:wrap}
+.pipe div{flex:1;min-width:110px;background:var(--bg);
+border:1px solid var(--line);border-radius:10px;padding:10px 6px}
+.pipe b{display:block;font-size:20px}
+.pipe span{font-size:11px;color:var(--dim)}
+.note{color:var(--dim);font-size:12.5px;line-height:1.6;margin-top:10px}
+</style></head><body>
+<h1>Strategy League</h1>
+<div class="sub">Six trading brains compete with simulated money.
+Real money is only unlocked if one of them beats simply holding
+Bitcoin over 90 days, after fees.</div>
+
+<div class="card">
+  <h2>Your virtual $300 &mdash; following the benchmark (BTC-HOLD)</h2>
+  <div><span class="big" id="heroV"></span><span class="pnl" id="heroP"></span></div>
+  <div class="day" id="dayline"></div>
+</div>
+
+<div class="card"><h2>All six brains &mdash; each given a virtual $300</h2>
+  <div id="rows"></div>
+</div>
+
+<div class="card"><h2>The race so far</h2>
+  <canvas id="chart"></canvas>
+  <div class="note">Each line = one brain's $300. The gray line
+  (BTC-HOLD) is the one to beat.</div>
+</div>
+
+<div class="card"><h2>Recent trades &mdash; and what each one cost</h2>
+  <div id="trades"></div>
+</div>
+
+<div class="card"><h2>How the bot gets better</h2>
+  <div class="pipe">
+    <div><b>&infin;</b><span>ideas screened freely<br>(research, unrecorded)</span></div>
+    <div><b id="pExam"></b><span>took the one-shot exam<br>(all recorded forever)</span></div>
+    <div><b>6</b><span>competing in the league<br>(90-day forward test)</span></div>
+    <div><b id="pDays"></b><span>days remaining<br>before first judgment</span></div>
+  </div>
+  <div class="note">Pipeline: unlimited research &rarr; one exam per
+  idea, ever &rarr; 90 days of live paper competition &rarr; only a
+  winner can touch real money. No step can be skipped, and the pass
+  bar can only ever be made stricter.</div>
+</div>
+
+<div class="note">All figures simulated. Internal books run at $10,000
+and are displayed scaled to $300; fees scale identically. Updated
+hourly. Not financial advice.</div>
+
 <script>
-const DATA=__DATA__;
-const $=id=>document.getElementById(id);
-const usd=x=>'$'+Number(x).toLocaleString(undefined,
-  {minimumFractionDigits:2,maximumFractionDigits:2});
-const ROLES={'BTC-HOLD':'benchmark','BTC-TREND':'exam graduate',
-  'MOM-ROT':'control · failed exam'};
-const COLORS={'BTC-HOLD':'#5B6B84','BTC-TREND':'#59C2FF','MOM-ROT':'#F0B429'};
-$('sub').textContent='updated '+DATA.generated.slice(0,16).replace('T',' ')
-  +' UTC · zero real money · rules locked before the race';
-const last={};DATA.equity.forEach(r=>last[r.strategy]=r);
-const rows=Object.keys(DATA.league).map(n=>{
-  const st=DATA.league[n],cur=last[n];
-  const eq=cur?Number(cur.equity):10000;
-  const peak=Number(st.peak_equity||eq);
-  return{n,st,eq,ret:eq/10000-1,dd:Math.max(0,1-eq/peak),
-    hold:(cur&&cur.holdings)?cur.holdings.replace(/-USD/g,''):'cash'};
-}).sort((a,b)=>b.eq-a.eq);
-$('league').innerHTML=rows.map((r,i)=>
-  `<div class="srow">`+
-  `<div class="sname" style="color:${COLORS[r.n]}">${i+1}. ${r.n}</div>`+
-  `<div class="role">${ROLES[r.n]||''}</div>`+
-  `<div class="eq">${usd(r.eq)} <span class="${r.ret>=0?'pos':'neg'}">`+
-  `${(r.ret>=0?'+':'')+(r.ret*100).toFixed(2)}%</span></div>`+
-  `<div class="meta"><span>since ${(r.st.created||'').slice(0,10)}</span>`+
-  `<span>drawdown −${(r.dd*100).toFixed(1)}%</span>`+
-  `<span>holding ${r.hold}</span>`+
-  `${r.st.halted?'<span class="halt">HALTED</span>':''}</div></div>`).join('');
-const names=[...new Set(DATA.equity.map(r=>r.strategy))];
-const times=[...new Set(DATA.equity.map(r=>r.time))];
-new Chart($('eqChart'),{type:'line',
- data:{labels:times.map(t=>t.slice(5,16).replace('T',' ')),
-  datasets:names.map(n=>{const m={};
-   DATA.equity.filter(r=>r.strategy===n).forEach(r=>m[r.time]=+r.equity);
-   return{label:n,data:times.map(t=>m[t]??null),borderColor:COLORS[n]||'#C6D2E4',
-    borderWidth:1.6,pointRadius:2,tension:.25,spanGaps:true};})},
- options:{plugins:{legend:{labels:{color:'#8fa2bc',boxWidth:14,
-  font:{family:'IBM Plex Mono',size:11}}}},
- scales:{x:{ticks:{color:'#5B6B84',maxTicksLimit:6},grid:{color:'#151d2c'}},
-  y:{ticks:{color:'#5B6B84',callback:v=>'$'+v.toLocaleString()},
-   grid:{color:'#151d2c'}}}}});
-$('trades').innerHTML=DATA.trades.length?
- `<table><tr><th>time</th><th>strategy</th><th>side</th><th>pair</th>`+
- `<th>price</th><th>value</th></tr>`+
- DATA.trades.slice().reverse().map(r=>`<tr>`+
-  `<td>${r.time.slice(0,16).replace('T',' ')}</td>`+
-  `<td style="color:${COLORS[r.strategy]||'inherit'}">${r.strategy}</td>`+
-  `<td class="${r.action.includes('BUY')?'buy':'sell'}">${r.action}</td>`+
-  `<td>${r.pair}</td><td>${r.price}</td><td>${r.value}</td></tr>`).join('')
- +'</table>':'No trades yet.';
+const D = __DATA__;
+const S = D.scale, F = D.show_fund;
+const DESC = {
+ "BTC-HOLD":  ["Benchmark","Bought Bitcoin on day one and never trades again. Every other brain exists to try to beat this."],
+ "BTC-TREND": ["Exam graduate*","Holds Bitcoin only while it trades above its 200-day average; otherwise waits in cash."],
+ "MOM-ROT":   ["Control (failed exam)","Each week buys the 3 hottest coins of the last month. Kept as a live warning: its exam predicted losses."],
+ "CROSS-BTC": ["Control (failed exam)","Buys when the 20-day average crosses over the 50-day. Trades often; its exam said fees would eat it."],
+ "DONCH-BTC": ["Control (failed exam)","Buys 20-day breakout highs, sells 20-day lows. Waiting for a breakout."],
+ "RSI-BTC":   ["Control (failed exam)","Buys panic dips (RSI oversold), sells the recovery. Waiting for a dip."]
+};
+const nm = v => "$" + (v*S).toFixed(2);
+const pc = v => { const p=(v/10000-1)*100;
+  return (p>=0?"+":"") + p.toFixed(2) + "%"; };
+
+// latest equity per strategy
+const last = {}, first = {};
+for (const r of D.equity){
+  if(!(r.strategy in first)) first[r.strategy]=r;
+  last[r.strategy]=r;
+}
+const names = Object.keys(last);
+const t0 = D.equity.length ? new Date(D.equity[0].timestamp) : new Date();
+const days = Math.max(1, Math.ceil((Date.now()-t0)/86400000));
+document.getElementById("pDays").textContent = Math.max(0, 90-days);
+document.getElementById("pExam").textContent = D.examined;
+
+// hero = benchmark
+const bh = last["BTC-HOLD"];
+if (bh){
+  const v = parseFloat(bh.equity);
+  document.getElementById("heroV").textContent = nm(v);
+  const p = document.getElementById("heroP");
+  p.textContent = pc(v);
+  p.className = "pnl " + (v>=10000?"up":"down");
+}
+document.getElementById("dayline").textContent =
+  "Day " + days + " of 90 \u00b7 updated " +
+  new Date(D.generated).toLocaleString();
+
+// rows, sorted by equity
+const rowsEl = document.getElementById("rows");
+names.sort((a,b)=>parseFloat(last[b].equity)-parseFloat(last[a].equity));
+for (const n of names){
+  const v = parseFloat(last[n].equity);
+  const cash = parseFloat(last[n].cash || 0);
+  const inMkt = cash < v*0.5;
+  const [role, desc] = DESC[n] || ["",""];
+  const badge = n==="BTC-HOLD" ? '<span class="badge b-bench">BENCHMARK</span>'
+    : inMkt ? '<span class="badge b-in">IN MARKET</span>'
+    : '<span class="badge b-wait">WAITING IN CASH</span>';
+  const el = document.createElement("div");
+  el.className = "row";
+  el.innerHTML = '<div><div class="rname">'+n+'</div>' +
+    '<div class="rdesc">'+desc+'</div>'+badge+'</div>' +
+    '<div class="rnum"><div class="rv '+(v>=10000?"up":"down")+'">'+nm(v)+
+    '</div><div class="'+(v>=10000?"up":"down")+'">'+pc(v)+'</div></div>';
+  rowsEl.appendChild(el);
+}
+
+// chart
+const byS = {};
+for (const r of D.equity){
+  (byS[r.strategy] = byS[r.strategy] || []).push(
+    {x:r.timestamp.slice(5,16).replace("T"," "), y:parseFloat(r.equity)*S});
+}
+const colors = {"BTC-HOLD":"#8A8F98","BTC-TREND":"#2B4C7E",
+ "MOM-ROT":"#C93B3B","CROSS-BTC":"#B0691C","DONCH-BTC":"#0E8F5B",
+ "RSI-BTC":"#7A4CB0"};
+new Chart(document.getElementById("chart"),{type:"line",
+ data:{datasets:Object.entries(byS).map(([n,pts])=>({label:n,data:pts,
+  borderColor:colors[n]||"#999",borderWidth:n==="BTC-HOLD"?3:1.6,
+  pointRadius:0,tension:.25}))},
+ options:{animation:false,interaction:{mode:"index",intersect:false},
+  scales:{x:{type:"category",ticks:{maxTicksLimit:6,font:{size:10}}},
+   y:{ticks:{callback:v=>"$"+v.toFixed(0)}}},
+  plugins:{legend:{labels:{boxWidth:12,font:{size:11}}}}}});
+
+// trades in plain English
+const tEl = document.getElementById("trades");
+const tr = (D.trades||[]).slice().reverse();
+if (!tr.length) tEl.innerHTML =
+  '<div class="note">No trades yet beyond initial buys.</div>';
+for (const t of tr){
+  const qty = parseFloat(t.qty||0), px = parseFloat(t.price||0),
+        fee = parseFloat(t.fee||0)*S;
+  const d = document.createElement("div");
+  d.className = "trade";
+  d.innerHTML = '<span class="who">'+t.strategy+'</span> ' +
+   (t.side==="BUY"?"bought ":"sold ") +
+   qty.toFixed(5)+" "+(t.pair||"").replace("-USD","") +
+   " at $"+px.toLocaleString(undefined,{maximumFractionDigits:2}) +
+   ' \u00b7 <span class="fee">fee '+
+   "$"+fee.toFixed(2)+'</span>' +
+   ' <div class="when">'+new Date(t.timestamp).toLocaleString()+
+   " \u00b7 on a $300 fund</div>";
+  tEl.appendChild(d);
+}
 </script>
+<div class="note" style="margin-top:6px">*BTC-TREND graduated under the
+original exam, which was later found to be miscalibrated and was
+corrected (Amendment 001). Under today's stricter-but-fair exam it
+would not pass. Its league seat stands; expectations should not.</div>
 </body></html>"""
 
 if __name__ == "__main__":

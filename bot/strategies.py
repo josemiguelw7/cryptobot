@@ -59,6 +59,27 @@ def rsi(closes, n):
     return 100 - 100 / (1 + rs)
 
 
+def ema_series(closes, n):
+    """EMA series seeded with SMA of the first n bars. Returned list is
+    aligned to closes[n-1:]."""
+    if len(closes) < n:
+        return []
+    k = 2 / (n + 1)
+    out = [sum(closes[:n]) / n]
+    for c in closes[n:]:
+        out.append(c * k + out[-1] * (1 - k))
+    return out
+
+
+def ret_stdev(closes, n):
+    """Stdev of the last n bar-to-bar returns."""
+    if len(closes) < n + 1:
+        return None
+    rets = [closes[i] / closes[i - 1] - 1 for i in range(-n, 0)]
+    mu = sum(rets) / n
+    return (sum((r - mu) ** 2 for r in rets) / n) ** 0.5
+
+
 class Strategy:
     name = "base"
     warmup = 1
@@ -187,6 +208,148 @@ class RSIRevert(Strategy):
         return 1.0 if held else 0.0
 
 
+class MACDTrend(Strategy):
+    """Hold while MACD line is above its signal line. The classic
+    medium-speed momentum gauge."""
+    def __init__(self, f=12, s=26, sig=9):
+        self.f, self.s, self.sig = f, s, sig
+        self.name = f"macd_{f}_{s}"
+        self.warmup = s + sig + 5
+    def step(self, closes, ctx):
+        ef = ema_series(closes, self.f)
+        es = ema_series(closes, self.s)
+        if not ef or not es:
+            return 0.0
+        L = min(len(ef), len(es))
+        macd = [a - b for a, b in zip(ef[-L:], es[-L:])]
+        sig = ema_series(macd, self.sig)
+        if not sig:
+            return 0.0
+        return 1.0 if macd[-1] > sig[-1] else 0.0
+
+
+class Bollinger(Strategy):
+    """Mean reversion: buy below the lower band (mid - k*sd), exit at
+    the middle band, hold in between."""
+    def __init__(self, n=20, k=2.0):
+        self.n, self.k = n, k
+        self.name = f"boll_{n}"
+        self.warmup = n + 1
+    def step(self, closes, ctx):
+        mid = sma(closes, self.n)
+        if mid is None:
+            return 0.0
+        w = closes[-self.n:]
+        mu = sum(w) / self.n
+        sd = (sum((c - mu) ** 2 for c in w) / self.n) ** 0.5
+        px, held = closes[-1], ctx.get("weight", 0) > 0
+        if px < mid - self.k * sd:
+            return 1.0
+        if px >= mid:
+            return 0.0
+        return 1.0 if held else 0.0
+
+
+class RSIRegime(Strategy):
+    """'Read the market first': the RSI dip-buyer, but ONLY allowed to
+    act while price is above its 200-day SMA (uptrend regime). In a
+    downtrend it stays flat no matter how oversold. Tests whether the
+    regime filter rescues plain rsi_14."""
+    def __init__(self, n=14, lo=30, hi=55, regime=200):
+        self.n, self.lo, self.hi, self.rg = n, lo, hi, regime
+        self.name = f"rsi_regime"
+        self.warmup = regime + 1
+    def step(self, closes, ctx):
+        m = sma(closes, self.rg)
+        if m is None or closes[-1] < m:
+            return 0.0                     # wrong regime: stand down
+        r = rsi(closes, self.n)
+        if r is None:
+            return 0.0
+        held = ctx.get("weight", 0) > 0
+        if r < self.lo:
+            return 1.0
+        if r > self.hi:
+            return 0.0
+        return 1.0 if held else 0.0
+
+
+class TSMom(Strategy):
+    """Time-series momentum: hold while the trailing n-day return is
+    positive. Moskowitz/Ooi/Pedersen's classic, one line of logic."""
+    def __init__(self, n=90):
+        self.n = n
+        self.name = f"tsmom_{n}"
+        self.warmup = n + 1
+    def step(self, closes, ctx):
+        if len(closes) < self.n + 1:
+            return 0.0
+        return 1.0 if closes[-1] > closes[-self.n - 1] else 0.0
+
+
+class Donchian2(Strategy):
+    """Turtle-style asymmetric channel: enter on an n_in-day high,
+    exit on an n_out-day low. Slower entry, quicker exit."""
+    def __init__(self, n_in=55, n_out=20):
+        self.n_in, self.n_out = n_in, n_out
+        self.name = f"donch_{n_in}_{n_out}"
+        self.warmup = n_in + 1
+    def step(self, closes, ctx):
+        if len(closes) < self.n_in + 1:
+            return 0.0
+        px = closes[-1]
+        held = ctx.get("weight", 0) > 0
+        if px >= max(closes[-self.n_in - 1:-1]):
+            return 1.0
+        if px <= min(closes[-self.n_out - 1:-1]):
+            return 0.0
+        return 1.0 if held else 0.0
+
+
+class EMACross(Strategy):
+    """Fast EMA over slow EMA. The archetypal short-term trader's
+    signal — in the screen mostly to measure what its turnover costs."""
+    def __init__(self, f=9, s=21):
+        self.f, self.s = f, s
+        self.name = f"ema_{f}_{s}"
+        self.warmup = s + 5
+    def step(self, closes, ctx):
+        ef, es = ema_series(closes, self.f), ema_series(closes, self.s)
+        if not ef or not es:
+            return 0.0
+        return 1.0 if ef[-1] > es[-1] else 0.0
+
+
+class NearHigh(Strategy):
+    """52-week-high proximity: hold while price is within band of its
+    n-day high. Momentum anomaly classic (George & Hwang)."""
+    def __init__(self, n=250, band=0.20):
+        self.n, self.band = n, band
+        self.name = f"near_hi_{n}"
+        self.warmup = n
+    def step(self, closes, ctx):
+        if len(closes) < self.n:
+            return 0.0
+        hi = max(closes[-self.n:])
+        return 1.0 if closes[-1] >= hi * (1 - self.band) else 0.0
+
+
+class CalmRegime(Strategy):
+    """Pure regime reader: hold ONLY when recent volatility (n_fast) is
+    below the longer baseline (n_slow). No price signal at all — tests
+    whether 'trade the calm, sit out the storm' has value by itself."""
+    def __init__(self, n_fast=30, n_slow=100):
+        self.nf, self.ns = n_fast, n_slow
+        self.name = f"calm_{n_fast}_{n_slow}"
+        self.warmup = n_slow + 1
+    def step(self, closes, ctx):
+        vf = ret_stdev(closes, self.nf)
+        vs = ret_stdev(closes, self.ns)
+        if vf is None or vs is None:
+            return 0.0
+        return 1.0 if vf < vs else 0.0
+
+
 # ---------------------------------------------------------------- registry
 # Every examinable candidate, by permanent name. exam.py reads this;
 # league.py builds live members from the same classes.
@@ -206,6 +369,15 @@ REGISTRY = {
     "cross_20_50": Cross(20, 50),
     "donch_20":    Breakout(20),
     "rsi_14":      RSIRevert(14),
+    # research wave 2 (2026-07-31) — screened, none examined yet:
+    "macd_12_26":  MACDTrend(),
+    "boll_20":     Bollinger(),
+    "rsi_regime":  RSIRegime(),
+    "tsmom_90":    TSMom(90),
+    "donch_55_20": Donchian2(55, 20),
+    "ema_9_21":    EMACross(9, 21),
+    "near_hi_250": NearHigh(250, 0.20),
+    "calm_30_100": CalmRegime(30, 100),
 }
 
 
