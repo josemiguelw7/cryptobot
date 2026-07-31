@@ -105,6 +105,15 @@ def _dd(curve):
 
 def exam_pair(pair, strat, fee, slip):
     closes, dates = load_closes(pair)
+    return exam_pair_closes(pair, strat, closes, fee, slip, dates)
+
+
+def exam_pair_closes(pair, strat, closes, fee, slip, dates=None):
+    """Window-and-grade a supplied price series. exam_pair() feeds it
+    real data; validation.permutation_test() feeds it shuffled data, so
+    both travel the identical grading path."""
+    if dates is None:
+        dates = [""] * len(closes)
     # need warmup history before the first window can open
     start = strat.warmup
     if len(closes) < start + WIN:
@@ -120,6 +129,10 @@ def exam_pair(pair, strat, fee, slip):
         rows.append({
             "pair": pair, "start": dates[start],
             "ret": curve[-1] - 1, "bh": w[-1] / w[0] - 1,
+            # DIAGNOSTIC ONLY (amendment 001, not adopted): the same
+            # buy-hold benchmark charged the entry cost a candidate pays.
+            # Reported alongside; the verdict still uses gross "bh".
+            "bh_net": (w[-1] / w[0]) * (1 - fee - slip) - 1,
             "dd": _dd(curve), "bh_dd": _dd(bh), "trades": trades})
         start += STEP
     return rows
@@ -238,6 +251,16 @@ def run_exam(name, fee, slip, record):
     for label, ok in checks.items():
         print(f"  [{'PASS' if ok else 'FAIL'}] {label}")
     print(f"VERDICT: {'PASS - eligible for league' if verdict else 'FAIL'}")
+    # --- diagnostics (amendment 001 pending; verdict unaffected) ---
+    st_net = float(np.prod([1 + r["bh_net"] for r in rows]) - 1)
+    print(f"\n  [diag] benchmark charged the SAME fees: {st_net:+.1%} "
+          f"(vs gross {sm['stitched_bh']:+.1%})")
+    print(f"  [diag] criterion 4 under amendment 001 would be: "
+          f"{'PASS' if sm['stitched'] >= st_net else 'FAIL'}")
+    worse = sum(1 for r in rows if r["dd"] < r["bh_dd"])
+    print(f"  [diag] windows where candidate DD is WORSE than buy-hold: "
+          f"{worse}/{len(rows)} ({worse/len(rows):.0%})")
+    print(f"  [diag] candidates examined to date: {len(ledger_names())}")
     if record:
         out = save_windows(name, rows)
         ledger_record(name, verdict, sm, PAIRS)

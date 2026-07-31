@@ -41,6 +41,24 @@ def realized_vol(closes, n):
     return var ** 0.5
 
 
+def rsi(closes, n):
+    """Simple RSI over the last n bar-to-bar changes. 0..100."""
+    if len(closes) < n + 1:
+        return None
+    gains = losses = 0.0
+    for i in range(-n, 0):
+        ch = closes[i] - closes[i - 1]
+        if ch >= 0:
+            gains += ch
+        else:
+            losses -= ch
+    avg_gain, avg_loss = gains / n, losses / n
+    if avg_loss == 0:
+        return 100.0
+    rs = avg_gain / avg_loss
+    return 100 - 100 / (1 + rs)
+
+
 class Strategy:
     name = "base"
     warmup = 1
@@ -113,6 +131,62 @@ class VolTarget(Strategy):
         return max(0.0, min(1.0, self.tv / rv))
 
 
+class Cross(Strategy):
+    """Fast trend: hold while SMA(fast) > SMA(slow), else cash. Flips on
+    medium-term momentum shifts — far more active than one long MA."""
+    def __init__(self, fast, slow):
+        self.f, self.s = fast, slow
+        self.name = f"cross_{fast}_{slow}"
+        self.warmup = slow
+    def step(self, closes, ctx):
+        mf, ms = sma(closes, self.f), sma(closes, self.s)
+        if mf is None or ms is None:
+            return 0.0
+        return 1.0 if mf > ms else 0.0
+
+
+class Breakout(Strategy):
+    """Donchian channel. Enter on a new n-day high; exit to cash on a new
+    n-day low; hold in between. Channel uses the n bars BEFORE today, so
+    the breakout is real, not self-referential. Path-dependent via ctx."""
+    def __init__(self, n):
+        self.n = n
+        self.name = f"donch_{n}"
+        self.warmup = n + 1
+    def step(self, closes, ctx):
+        if len(closes) < self.n + 1:
+            return 0.0
+        px = closes[-1]
+        window = closes[-self.n - 1:-1]      # prior n bars, excl. today
+        hi, lo = max(window), min(window)
+        held = ctx.get("weight", 0) > 0
+        if px >= hi:
+            return 1.0
+        if px <= lo:
+            return 0.0
+        return 1.0 if held else 0.0
+
+
+class RSIRevert(Strategy):
+    """Mean reversion. Buy when RSI(n) < lo (oversold); exit when RSI(n)
+    > hi (recovered); hold between. Counter-trend — profits from the
+    whipsaws that punish trend-followers, and trades often."""
+    def __init__(self, n=14, lo=30, hi=55):
+        self.n, self.lo, self.hi = n, lo, hi
+        self.name = f"rsi_{n}"
+        self.warmup = n + 1
+    def step(self, closes, ctx):
+        r = rsi(closes, self.n)
+        if r is None:
+            return 0.0
+        held = ctx.get("weight", 0) > 0
+        if r < self.lo:
+            return 1.0
+        if r > self.hi:
+            return 0.0
+        return 1.0 if held else 0.0
+
+
 # ---------------------------------------------------------------- registry
 # Every examinable candidate, by permanent name. exam.py reads this;
 # league.py builds live members from the same classes.
@@ -128,6 +202,10 @@ REGISTRY = {
     "t200s15":   TrendStop(200, 0.15),
     "voltgt_200": VolTarget(200),
     "voltgt_150": VolTarget(150),
+    # active daily candidates — the "more active" push:
+    "cross_20_50": Cross(20, 50),
+    "donch_20":    Breakout(20),
+    "rsi_14":      RSIRevert(14),
 }
 
 

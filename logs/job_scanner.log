@@ -1,0 +1,32 @@
+
+=== Average edge vs hold, by timeframe (all 25 pairs) ===
+           avg_edge  avg_trades  avg_fees
+timeframe                                
+5min          -93.8       197.1    8476.4
+15min         -62.1        68.2    5423.3
+1h             -9.0        14.0    1687.2
+
+=== Top 12 pair/timeframe combos by edge vs hold ===
+    pair timeframe  strat_return  buy_hold  edge_vs_hold  trades  win_rate  fees_paid  max_dd
+GWEI-USD        1h          32.4     -76.3         108.7      13      46.2     2109.0   -45.7
+ TAO-USD        1h          -1.2     -32.0          30.8      13      30.8     1679.0   -22.2
+ XLM-USD        1h          40.1      18.7          21.5      11      27.3     1848.0   -31.6
+ ADA-USD        1h         -11.9     -33.0          21.1      14      21.4     1618.0   -23.3
+ ZEC-USD        1h          -2.8     -23.6          20.8      15      26.7     1805.0   -22.1
+ SOL-USD        1h           7.3     -13.4          20.7      11      45.5     1412.0   -12.9
+NEAR-USD        1h         -14.9     -34.2          19.2      15      26.7     1697.0   -32.1
+BILL-USD        1h         -50.4     -68.5          18.1      13      30.8     1098.0   -56.6
+ LTC-USD        1h          -0.1     -12.5          12.4      12      50.0     1477.0    -9.3
+HBAR-USD        1h          -8.8     -18.5           9.7      12      25.0     1384.0   -26.5
+ XRP-USD        1h         -10.2     -19.4           9.2      13      23.1     1470.0   -16.5
+DOGE-USD        1h         -23.4     -32.3           8.9      16      12.5     1701.0   -25.0
+
+=== Bottom 5 (worst) ===
+    pair timeframe  strat_return  buy_hold  edge_vs_hold  trades  win_rate  fees_paid  max_dd
+ALLO-USD      5min         -49.5     491.7        -541.2     185      22.7    35457.0   -89.7
+ALLO-USD     15min          16.7     491.7        -475.1      77      22.1    19207.0   -79.7
+ALLO-USD        1h          78.8     491.7        -412.9      17      23.5     4123.0   -60.4
+ XLM-USD      5min         -92.8      18.5        -111.3     200      13.0     9993.0   -95.0
+ UNI-USD      5min         -94.3      15.0        -109.2     203      11.8     7248.0   -94.3
+
+Full results -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/scan_sma20_50.csv

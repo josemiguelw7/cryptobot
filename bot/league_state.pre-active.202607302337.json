@@ -25,28 +25,5 @@
     "last_rebalance": "2026-07-24T21:27:02.426612+00:00",
     "created": "2026-07-24T21:26:54.850165+00:00",
     "peak_equity": 9901.559624675114
-  },
-  "CROSS-BTC": {
-    "cash": 0.0,
-    "units": {
-      "BTC-USD": 0.15465374693994585
-    },
-    "last_rebalance": "2026-07-31T04:37:54.556389+00:00",
-    "created": "2026-07-31T04:37:54.556198+00:00",
-    "peak_equity": 10000.0
-  },
-  "DONCH-BTC": {
-    "cash": 10000.0,
-    "units": {},
-    "last_rebalance": null,
-    "created": "2026-07-31T04:37:54.556198+00:00",
-    "peak_equity": 10000.0
-  },
-  "RSI-BTC": {
-    "cash": 10000.0,
-    "units": {},
-    "last_rebalance": null,
-    "created": "2026-07-31T04:37:54.556198+00:00",
-    "peak_equity": 10000.0
   }
 }

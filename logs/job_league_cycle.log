@@ -1,0 +1,11 @@
+[2026-07-25 11:36 UTC] league cycle
+  [BTC-HOLD] equity $9,927.49 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $8,809.76 holding ['PUMP-USD', 'UNI-USD', 'ALLO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+league state saved.
+nt call last):
+  File "/Users/haroonrasheed/Projects/cryptobot/bot/league.py", line 209, in <module>
+    cycle()
+  File "/Users/haroonrasheed/Projects/cryptobot/bot/league.py", line 205, in cycle
+    os.replace(tmp, STATE)
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/haroonrasheed/Projects/cryptobot/bot/league_state.json.tmp' -> '/Users/haroonrasheed/Projects/cryptobot/bot/league_state.json'

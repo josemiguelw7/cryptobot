@@ -40,6 +40,15 @@ STRATS = {
     "BTC-TREND": {"kind": "trend",  "pair": "BTC-USD", "ma": 200},
     "MOM-ROT":   {"kind": "momrot", "top_n": 3, "lookback": 30,
                   "rebal_days": 7, "note": "control (failed exam)"},
+    # active controls — FAILED the entrance exam (2026-07-30), so they
+    # are NEVER eligible for real money. They ride along on BTC-USD as a
+    # live, forward demonstration of the fee-drag the backtest predicts.
+    "CROSS-BTC": {"kind": "signal", "strat": "cross_20_50",
+                  "pair": "BTC-USD", "note": "control (failed exam)"},
+    "DONCH-BTC": {"kind": "signal", "strat": "donch_20",
+                  "pair": "BTC-USD", "note": "control (failed exam)"},
+    "RSI-BTC":   {"kind": "signal", "strat": "rsi_14",
+                  "pair": "BTC-USD", "note": "control (failed exam)"},
 }
 
 _cache = {}
@@ -76,9 +85,22 @@ def days_since(iso):
     return (datetime.now(timezone.utc)
             - datetime.fromisoformat(iso)).total_seconds() / 86400
 
-def targets(cfg):
+def targets(cfg, st=None):
     if cfg["kind"] == "hold":
         return [cfg["pair"]]
+    if cfg["kind"] == "signal":
+        # generic single-asset registry strategy — SAME class the exam
+        # graded, on COMPLETED closes (W1.1/W1.3). Path-dependent members
+        # (breakout, RSI) see their current held-weight from live state,
+        # so the "hold in between" branch matches the exam's bar-by-bar ctx.
+        cl = completed_closes(cfg["pair"])
+        strat = S.get(cfg["strat"])
+        if len(cl) < strat.warmup:
+            return []
+        held = bool(st and cfg["pair"] in st.get("units", {}))
+        ctx = {"weight": 1.0 if held else 0.0, "entry_price": None}
+        w = strat.step(cl, ctx)
+        return [cfg["pair"]] if w > 0 else []
     if cfg["kind"] == "trend":
         # SAME code path as the exam: shared Trend strategy on COMPLETED
         # closes. If this passes the exam, this is what trades. (W1.1/W1.3)
@@ -106,7 +128,13 @@ def targets(cfg):
 def load():
     if os.path.exists(STATE):
         with open(STATE) as f:
-            return json.load(f)
+            league = json.load(f)
+        now = datetime.now(timezone.utc).isoformat()
+        for n in STRATS:                 # backfill members added later
+            if n not in league:
+                league[n] = {"cash": START, "units": {},
+                             "last_rebalance": None, "created": now}
+        return league
     now = datetime.now(timezone.utc).isoformat()
     st = {n: {"cash": START, "units": {}, "last_rebalance": None,
               "created": now} for n in STRATS}
@@ -147,7 +175,7 @@ def cycle():
     print(f"[{now:%Y-%m-%d %H:%M} UTC] league cycle")
     for name, cfg in STRATS.items():
         st = league[name]
-        tgt = targets(cfg) or []
+        tgt = targets(cfg, st) or []
         px = {p: price(p) for p in set(list(st["units"]) + tgt)}
         equity = st["cash"] + sum(u * px.get(p, 0)
                                   for p, u in st["units"].items())
