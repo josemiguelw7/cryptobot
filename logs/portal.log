@@ -10559,3 +10559,12 @@ TypeError: '<' not supported between instances of 'NoneType' and 'str'
 127.0.0.1 - - [31/Jul/2026 11:53:34] "GET /api/league HTTP/1.1" 200 -
 127.0.0.1 - - [31/Jul/2026 11:53:34] "GET /api/league_equity HTTP/1.1" 200 -
 127.0.0.1 - - [31/Jul/2026 11:53:34] "GET /api/league_trades HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jul/2026 11:54:04] "GET /api/league HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jul/2026 11:54:04] "GET /api/league_trades HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jul/2026 11:54:04] "GET /api/league_equity HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jul/2026 11:54:34] "GET /api/league HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jul/2026 11:54:34] "GET /api/league_equity HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jul/2026 11:54:34] "GET /api/league_trades HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jul/2026 11:55:04] "GET /api/league_trades HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jul/2026 11:55:04] "GET /api/league_equity HTTP/1.1" 200 -
+127.0.0.1 - - [31/Jul/2026 11:55:04] "GET /api/league HTTP/1.1" 200 -

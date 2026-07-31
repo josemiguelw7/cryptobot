@@ -31,7 +31,14 @@ slowly and confidently.
 
 ## Data
 
-  - Source: existing data/candles_1h (_3600s.csv), already downloaded.
+  - Source: data/candles/{PAIR}_3600s.csv (25 pairs available).
+    NOTE: an earlier draft of this document cited a non-existent
+    data/candles_1h/ directory. Corrected 2026-07-31 after verifying
+    on disk. The data does exist; the path was wrong.
+  - VERIFIED COVERAGE (2026-07-31): all eight universe pairs have
+    8,750 hourly bars = ~364 days, spanning 2025-07-24 to 2026-07-24.
+    The feed is currently ~1 week stale and MUST be refreshed before
+    any exam run.
   - Universe (FIXED, chosen now, before any results):
         BTC-USD, ETH-USD, SOL-USD, XRP-USD, ADA-USD, DOGE-USD,
         LINK-USD, LTC-USD
@@ -42,6 +49,30 @@ slowly and confidently.
   - Gap policy: any window containing a gap of >6 consecutive missing
     hours is DISCARDED, not interpolated. Exchange outages must not be
     silently converted into fake price continuity.
+
+## THE BINDING LIMITATION: one year, one regime
+
+Only ~364 days of hourly history exist. After reserving the 120-day
+holdout, ~244 days remain for the main windows. At 90-day windows
+stepping 45 days that yields ~4 windows per pair, ~32 across eight
+pairs — which clears criterion 1 only barely, and every one of those
+windows comes from the SAME twelve-month market regime.
+
+The daily exam spans multiple years and several regimes. The hourly
+exam cannot. This means:
+
+  - A PASS on this standard is much weaker evidence than a daily pass.
+    It says "worked in one particular year," not "works."
+  - Therefore a passing hourly strategy enters the league as a
+    CANDIDATE ONLY and, regardless of forward performance, may not be
+    proposed for real money until hourly history covers at least two
+    distinct regimes (a sustained drawdown AND a sustained rally).
+  - Strategy lookbacks must be hourly-appropriate. Porting a 200-DAY
+    lookback to hourly bars would consume 200 days of warmup and leave
+    almost no window budget. Lookbacks are measured in BARS here.
+
+This limitation is recorded now, before results, so that a lucky pass
+cannot later be presented as stronger evidence than it is.
 
 ## Windows
 
