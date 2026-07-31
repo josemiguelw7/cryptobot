@@ -1,11 +1,11 @@
 # Amendment 001 to entrance_exam.md — PROPOSED, NOT ADOPTED
 
-Status: **AWAITING APPROVAL**. Nothing in exam.py's verdict logic has
+Status: **APPROVED AND ADOPTED 2026-07-31**. Fixes 4a and 2a-ii are live in
 been changed. This document exists so the decision is deliberate and
 on the record, per the standing rule in entrance_exam.md.
 
-Proposed: 2026-07-30
-Approved: ____________  (sign + date, or reject)
+Proposed: 2026-07-30 / Adopted: 2026-07-31
+Approved: Jose Miguel, 2026-07-31. Adopted in commit (see git log).
 
 ## Why an amendment is being proposed at all
 

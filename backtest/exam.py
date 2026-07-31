@@ -37,6 +37,7 @@ LEDGER = os.path.join(RESULTS, "exam_ledger.csv")
 
 WIN, STEP = 183, 91
 FEE, SLIP = 0.006, 0.0005
+DD_EPS = 1e-9   # float-noise guard for drawdown comparisons (amendment 001)
 PAIRS = ["BTC-USD", "ETH-USD", "SOL-USD", "XRP-USD",
          "ADA-USD", "DOGE-USD", "LINK-USD", "LTC-USD"]
 
@@ -145,7 +146,18 @@ def grade(rows):
     pairs = len({r["pair"] for r in rows})
     stitched = float(np.prod([1 + r["ret"] for r in rows]) - 1)
     stitched_bh = float(np.prod([1 + r["bh"] for r in rows]) - 1)
-    shallower = sum(1 for r in rows if r["dd"] > r["bh_dd"])
+    # AMENDMENT 001 (approved 2026-07-31), fix 4a: the benchmark is
+    # charged the same entry cost the candidate pays, so criterion 4
+    # compares net-to-net instead of net-to-frictionless.
+    stitched_bhn = float(np.prod([1 + r["bh_net"] for r in rows]) - 1)
+    shallower = sum(1 for r in rows if r["dd"] > r["bh_dd"] + DD_EPS)
+    # AMENDMENT 001, fix 2a-ii: safety is judged RELATIVE to buy-and-hold
+    # in the same window, not against an absolute -20% line that no
+    # crypto-exposed strategy (including buy-and-hold itself) can clear.
+    # DD_EPS guards float noise: drawdown is scale-invariant, so a
+    # one-time entry fee leaves DD mathematically unchanged while the
+    # curves still differ in their last bits.
+    worse_dd = sum(1 for r in rows if r["dd"] < r["bh_dd"] - DD_EPS)
     trades = sum(r["trades"] for r in rows)
     worst_dd = min((r["dd"] for r in rows), default=0.0)
     # non-overlapping subset (W3.2): every other window ~ step 183
@@ -154,13 +166,14 @@ def grade(rows):
     st_no_bh = float(np.prod([1 + r["bh"] for r in nonov]) - 1)
     checks = {
         "1_sample  (>=8 windows, >=2 pairs)": n >= 8 and pairs >= 2,
-        "2_safety  (no window DD <= -20%)":   worst_dd > -0.20,
+        "2_safety  (DD never worse than B&H)": n > 0 and worse_dd == 0,
         "3_riskedge(shallower DD >=60% win.)": n > 0 and shallower / n >= 0.60,
-        "4_return  (stitched >= buy-hold)":   stitched >= stitched_bh,
+        "4_return  (stitched >= B&H net fees)": stitched >= stitched_bhn,
         "5_activity(>=4 trades total)":       trades >= 4,
     }
     summary = {"windows": n, "pairs": pairs, "stitched": stitched,
-               "stitched_bh": stitched_bh, "worst_dd": worst_dd,
+               "stitched_bh": stitched_bh, "stitched_bhn": stitched_bhn,
+               "worst_dd": worst_dd, "worse_dd_windows": worse_dd,
                "shallower_pct": shallower / n if n else 0.0,
                "trades": trades, "nonov_windows": len(nonov),
                "nonov_stitched": st_no, "nonov_bh": st_no_bh}
@@ -257,7 +270,7 @@ def run_exam(name, fee, slip, record):
           f"(vs gross {sm['stitched_bh']:+.1%})")
     print(f"  [diag] criterion 4 under amendment 001 would be: "
           f"{'PASS' if sm['stitched'] >= st_net else 'FAIL'}")
-    worse = sum(1 for r in rows if r["dd"] < r["bh_dd"])
+    worse = sum(1 for r in rows if r["dd"] < r["bh_dd"] - DD_EPS)
     print(f"  [diag] windows where candidate DD is WORSE than buy-hold: "
           f"{worse}/{len(rows)} ({worse/len(rows):.0%})")
     print(f"  [diag] candidates examined to date: {len(ledger_names())}")

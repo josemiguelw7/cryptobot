@@ -41,6 +41,14 @@ def main():
         if label.startswith("1_") or label.startswith("5_"):
             check(f"benchmark clears {label}", ok)
 
+    # 1b. POST-AMENDMENT-001: buy-and-hold must clear criteria 2 and 4.
+    #     It cannot have a drawdown worse than its own, and it cannot
+    #     underperform itself net of the same fees. If either fails, the
+    #     instrument is broken again.
+    for label, ok in checks.items():
+        if label.startswith("2_") or label.startswith("4_"):
+            check(f"benchmark clears {label}", ok)
+
     # 2. Buy-and-hold must not be judged worse than buy-and-hold by
     #    more than transaction costs. If it is, the comparison is
     #    apples-to-oranges.
