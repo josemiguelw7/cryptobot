@@ -8,131 +8,151 @@
 html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--tx);
 font:12px/1.35 "SF Mono",Menlo,Consolas,monospace}
 #app{display:grid;height:100vh;gap:8px;padding:8px;
-grid-template-rows:34px 1.25fr 1fr 22px;grid-template-columns:1fr 1fr}
+grid-template-rows:40px 1.25fr 1fr 22px;grid-template-columns:1fr 1fr}
 header,footer{grid-column:1/3;display:flex;align-items:center;gap:14px;
 background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:0 12px}
-header b{color:var(--acc);letter-spacing:.12em}
+header b.logo{color:var(--acc);letter-spacing:.12em}
+#agg{font-size:15px;font-weight:700}
+#agg small{font-weight:400;color:var(--dim);font-size:11px}
 .badge{padding:2px 8px;border-radius:10px;font-weight:700;font-size:11px}
 .armed{background:#0e3a24;color:var(--up)}.unarmed{background:#3a2f0e;color:var(--amb)}
 .closed{background:#231a2e;color:var(--vio)}
 .sp{flex:1}.dim{color:var(--dim)}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;
 padding:8px 10px;overflow:hidden;display:flex;flex-direction:column;min-height:0}
-.panel h2{font-size:11px;color:var(--dim);letter-spacing:.14em;margin-bottom:6px}
+.panel h2{font-size:11px;color:var(--dim);letter-spacing:.14em}
 .panel h2 b{color:var(--tx)}
+.cap{display:flex;align-items:baseline;gap:10px;margin:4px 0 6px}
+.cap .eq{font-size:20px;font-weight:700}
+.cap .pnl{font-size:13px;font-weight:700}
 table{width:100%;border-collapse:collapse;font-size:12px}
 th{text-align:left;color:var(--dim);font-weight:400;border-bottom:1px solid var(--line);padding:1px 4px}
 td{padding:2px 4px;border-bottom:1px solid #131c26;white-space:nowrap}
 td.r,th.r{text-align:right}
 .up{color:var(--up)}.dn{color:var(--dn)}.amb{color:var(--amb)}
-svg.spark{width:70px;height:15px;display:block}
+svg.spark{width:64px;height:15px;display:block}
 .chips{display:grid;grid-template-columns:1fr 1fr;gap:5px;overflow:hidden}
 .chip{border:1px solid var(--line);border-radius:6px;padding:3px 8px;display:flex;justify-content:space-between;align-items:center}
 .v-PASS{color:var(--up)}.v-FAIL{color:var(--amb)}
 .v-WAIT{color:var(--dim);animation:pulse 1.6s infinite}
 .v-PROP{color:var(--vio)}
 @keyframes pulse{50%{opacity:.35}}
-#chart{flex:1;min-height:0}
+#chartWrap{flex:1;min-height:0;position:relative}
+#chart{width:100%;height:100%}
+#chartEmpty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--dim)}
 #charter p{margin:3px 0;color:var(--dim)}#charter b{color:var(--tx)}
 .legend{display:flex;gap:9px;font-size:10px;color:var(--dim);flex-wrap:wrap}
 .legend i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:3px}
-.empty{flex:1;display:flex;align-items:center;justify-content:center;color:var(--dim)}
+.ylab{fill:#71808f;font-size:9px}
 </style></head><body><div id="app">
-<header><b>CRYPTOBOT · 20</b>
+<header><b class="logo">CRYPTOBOT·20</b>
+<span id="agg">$60,000 <small>capital paper</small></span>
+<span id="aggP" class="dim"></span>
+<span class="sp"></span>
 <span id="bC" class="badge unarmed">crypto …</span>
 <span id="bS" class="badge unarmed">stocks …</span>
 <span id="mkt" class="badge closed">NYSE –</span>
-<span class="sp"></span><span id="clock" class="dim"></span></header>
+<span id="clock" class="dim"></span></header>
 
-<div class="panel"><h2>ESCUADRÓN <b>CRYPTO</b> · 10 bots · $3K c/u · 24/7 <span id="cSub" class="dim"></span></h2>
+<div class="panel"><h2>ESCUADRÓN <b>CRYPTO</b> · 10 × $3,000 · 24/7 <span id="cSub" class="dim"></span></h2>
+<div class="cap"><span class="eq" id="cEq">$30,000</span><span class="pnl" id="cPnl"></span><span class="dim" id="cNote"></span></div>
 <div id="cBody" style="flex:1;min-height:0;overflow:hidden"></div></div>
 
-<div class="panel"><h2>ESCUADRÓN <b>STOCKS</b> · 10 bots · $3K c/u · RTH <span id="sSub" class="dim"></span></h2>
+<div class="panel"><h2>ESCUADRÓN <b>STOCKS</b> · 10 × $3,000 · RTH <span id="sSub" class="dim"></span></h2>
+<div class="cap"><span class="eq" id="sEq">$30,000</span><span class="pnl" id="sPnl"></span><span class="dim" id="sNote"></span></div>
 <div id="sBody" style="flex:1;min-height:0;overflow:hidden"></div></div>
 
-<div class="panel"><h2>CURVAS FORWARD · normalizadas a 100</h2>
-<div id="chartWrap" style="flex:1;min-height:0;display:flex;flex-direction:column">
-<svg id="chart" preserveAspectRatio="none" style="flex:1"></svg>
-<div id="legend" class="legend"></div></div></div>
+<div class="panel"><h2>EQUITY EN DÓLARES · cada bot desde $3,000</h2>
+<div id="chartWrap"><svg id="chart" preserveAspectRatio="none"></svg>
+<div id="chartEmpty">las curvas arrancan cuando el escuadrón arme y marque su primera hora</div></div>
+<div id="legend" class="legend"></div></div>
 
 <div class="panel" id="charter"><h2>RELOJ DEL CHARTER</h2>
 <p><b>$3,000 = asignación inicial por bot</b>, no techo. Real: escalera $500→$1.5K→$3K; encima, solo ganancias propias.</p>
-<p>Stage 1: <b>90 días contados</b> · Sharpe ≥ 1.0 · LCB &gt; 0 · maxDD ≤ 10% · sin kill switch → Stage 2: 60d frescos → piloto</p>
+<p>Stage 1: <b>90 días contados</b> · Sharpe ≥ 1.0 · LCB &gt; 0 · maxDD ≤ 10% → Stage 2: 60d → piloto</p>
 <p id="clkC">Crypto: <b>–</b></p><p id="clkS">Stocks: <b>–</b></p>
 <p>Exámenes: crypto <b id="exC">0</b>/10 · stocks <b id="exS">0</b>/10 · revisión sáb 09:00 CT</p></div>
 
 <footer><span id="foot" class="dim"></span><span class="sp"></span>
-<span class="dim">liga diaria (controles) → /public · refresh 60s</span></footer>
+<span class="dim">liga (controles) → /public · refresh 60s</span></footer>
 </div><script>
 const $=q=>document.querySelector(q);
 const pal=["#4db8ff","#3fd08b","#ff6b6b","#e8b63f","#b78bff","#5fe0d8","#ff9d5c","#8fd14f","#f76bd0","#9aa7ff"];
 const CR=["h_trend_168","h_cross_24_168","h_tsmom_72","h_macd_12_26","h_donch_48_24","h_volbrk_24_96","h_rsi14_reg168","h_boll_48","h_calm_24_168","h_nearhi_168"];
 const ST=["s_trend_33","s_cross_7_33","s_tsmom_21","s_macd_12_26","s_donch_14_7","s_volbrk_7_33","s_rsi14_reg33","s_boll_14","s_calm_7_33","s_nearhi_33"];
-const fmt=n=>"$"+Number(n).toLocaleString("en-US",{maximumFractionDigits:0});
-const pct=(n,d=1)=>(n>=0?"+":"")+(100*n).toFixed(d)+"%";
+const money=n=>"$"+Number(n).toLocaleString("en-US",{maximumFractionDigits:0});
+const money2=n=>(n>=0?"+$":"−$")+Math.abs(n).toLocaleString("en-US",{maximumFractionDigits:0});
+const pct=(n,d=2)=>(n>=0?"+":"")+(100*n).toFixed(d)+"%";
 function series(rows,key){const m={};for(const r of rows){(m[r[key]]??=[]).push(+r.equity)}return m}
 function spark(v,c){if(v.length<2)return"";const n=v.slice(-150),mn=Math.min(...n),mx=Math.max(...n),s=mx-mn||1;
-const p=n.map((y,i)=>`${(70*i/(n.length-1)).toFixed(1)},${(14-13*(y-mn)/s).toFixed(1)}`).join(" ");
-return`<svg class="spark" viewBox="0 0 70 15"><polyline fill="none" stroke="${c}" stroke-width="1.2" points="${p}"/></svg>`}
-function nyseOpen(){const now=new Date();
-const et=new Date(now.toLocaleString("en-US",{timeZone:"America/New_York"}));
-const d=et.getDay(),m=et.getHours()*60+et.getMinutes();
-return d>0&&d<6&&m>=570&&m<960}
+const p=n.map((y,i)=>`${(64*i/(n.length-1)).toFixed(1)},${(14-13*(y-mn)/s).toFixed(1)}`).join(" ");
+return`<svg class="spark" viewBox="0 0 64 15"><polyline fill="none" stroke="${c}" stroke-width="1.2" points="${p}"/></svg>`}
+function nyseOpen(){const et=new Date(new Date().toLocaleString("en-US",{timeZone:"America/New_York"}));
+const d=et.getDay(),m=et.getHours()*60+et.getMinutes();return d>0&&d<6&&m>=570&&m<960}
+function capStrip(ss,eqEl,pnlEl,noteEl,note0){const bots=Object.keys(ss);
+if(!bots.length){$(eqEl).textContent="$30,000";$(pnlEl).textContent="";$(noteEl).textContent=note0;return}
+const tot=bots.reduce((a,n)=>a+ss[n].at(-1),0),base=bots.length*3000,d=tot-base;
+$(eqEl).textContent=money(tot);
+const p=$(pnlEl);p.textContent=`${money2(d)} (${pct(d/base)})`;p.className="pnl "+(d>=0?"up":"dn");
+$(noteEl).textContent=""}
 function chips(names,vmap,pending){return`<div class="chips">`+names.map(s=>{
 const v=vmap[s];const cls=v==="PASS"?"v-PASS":v?"v-FAIL":pending;
 const lab=v==="PASS"?"CANDIDATA":v?"CONTROL":(pending==="v-WAIT"?"examen…":"propuesta");
 return`<div class="chip"><span>${s.replace(/^[hs]_/,"")}</span><small class="${cls}">${lab}</small></div>`}).join("")+`</div>`}
-function squadTable(ss,sst){let h=`<table><thead><tr><th>bot</th><th class="r">equity</th><th class="r">ret</th><th>pos</th><th></th></tr></thead><tbody>`;
-Object.keys(ss).forEach((n,i)=>{const v=ss[n],e=v.at(-1),r=e/v[0]-1;
+function squadTable(ss,sst){let h=`<table><thead><tr><th>bot</th><th class="r">equity</th><th class="r">P&L $</th><th class="r">ret</th><th>pos</th><th></th></tr></thead><tbody>`;
+Object.keys(ss).forEach((n,i)=>{const v=ss[n],e=v.at(-1),d=e-v[0],r=e/v[0]-1;
 const u=Object.keys((sst[n]||{}).units||{}).map(p=>p.replace("-USD","")).join(",")||"cash";
 const halt=(sst[n]||{}).halt_day?` <span class="dn">⛔</span>`:"";
-h+=`<tr><td style="color:${pal[i%10]}">${n.replace(/^[hs]_/,"")}${halt}</td><td class="r">${fmt(e)}</td>
-<td class="r ${r>=0?"up":"dn"}">${pct(r)}</td><td class="dim">${u}</td><td>${spark(v,pal[i%10])}</td></tr>`});
+h+=`<tr><td style="color:${pal[i%10]}">${n.replace(/^[hs]_/,"")}${halt}</td><td class="r">${money(e)}</td>
+<td class="r ${d>=0?"up":"dn"}">${money2(d)}</td><td class="r ${r>=0?"up":"dn"}">${pct(r)}</td>
+<td class="dim">${u}</td><td>${spark(v,pal[i%10])}</td></tr>`});
 return h+"</tbody></table>"}
 async function j(u){try{const r=await fetch(u);return await r.json()}catch(e){return null}}
 async function refresh(){
 const[meta,sq,seq,sqS,seqS,led]=await Promise.all(["/api/meta","/api/squad","/api/squad_equity","/api/squad_stocks","/api/squad_stocks_equity","/api/exam_ledger"].map(j));
 const aC=meta&&meta.armed_crypto,aS=meta&&meta.armed_stocks;
+const cS=seq?series(seq,"bot"):{},sS=seqS?series(seqS,"bot"):{};
 const bC=$("#bC");bC.textContent="crypto "+(aC?"ARMED":"UNARMED");bC.className="badge "+(aC?"armed":"unarmed");
 const bS=$("#bS");bS.textContent="stocks "+(aS?"ARMED":"PROPUESTO");bS.className="badge "+(aS?"armed":"unarmed");
-const open=nyseOpen();const mk=$("#mkt");mk.textContent="NYSE "+(open?"ABIERTO":"CERRADO");
+const open=nyseOpen(),mk=$("#mkt");mk.textContent="NYSE "+(open?"ABIERTO":"CERRADO");
 mk.className="badge "+(open?"armed":"closed");
+// capital strips + aggregate
+capStrip(cS,"#cEq","#cPnl","#cNote","en espera — arma al 10/10");
+capStrip(sS,"#sEq","#sPnl","#sNote","reservado — pendiente de firma");
+const tc=Object.values(cS).reduce((a,v)=>a+v.at(-1),0)||30000;
+const ts=Object.values(sS).reduce((a,v)=>a+v.at(-1),0)||30000;
+$("#agg").innerHTML=money(tc+ts)+" <small>capital paper</small>";
+const dA=tc+ts-60000,pA=$("#aggP");
+pA.textContent=dA?`${money2(dA)} (${pct(dA/60000)})`:"";pA.className=dA>=0?"up":"dn";
+// panels
 const l1=(led||[]).filter(r=>r.timeframe==="1h"),lS=(led||[]).filter(r=>r.timeframe==="1h-stk");
 $("#exC").textContent=l1.length;$("#exS").textContent=lS.length;
 const vC={},vS={};l1.forEach(r=>vC[r.candidate]=r.verdict);lS.forEach(r=>vS[r.candidate]=r.verdict);
-// crypto panel
-if(aC&&seq&&seq.length){$("#cSub").textContent="· forward record";
-$("#cBody").innerHTML=squadTable(series(seq,"bot"),(sq&&sq.bots)||{})}
-else{$("#cSub").textContent=`· exámenes ${l1.length}/10`;
-$("#cBody").innerHTML=chips(CR,vC,"v-WAIT")}
-// stocks panel
-if(aS&&seqS&&seqS.length){$("#sSub").textContent="· forward record";
-$("#sBody").innerHTML=squadTable(series(seqS,"bot"),(sqS&&sqS.bots)||{})}
+if(aC&&seq&&seq.length){$("#cSub").textContent="· forward record";$("#cBody").innerHTML=squadTable(cS,(sq&&sq.bots)||{})}
+else{$("#cSub").textContent=`· exámenes ${l1.length}/10`;$("#cBody").innerHTML=chips(CR,vC,"v-WAIT")}
+if(aS&&seqS&&seqS.length){$("#sSub").textContent="· forward record";$("#sBody").innerHTML=squadTable(sS,(sqS&&sqS.bots)||{})}
 else{$("#sSub").textContent=lS.length?`· exámenes ${lS.length}/10`:"· pendiente de firma";
 $("#sBody").innerHTML=chips(ST,vS,lS.length?"v-WAIT":"v-PROP")}
-// curvas: forward squads only (crypto + stocks juntas)
-const all={};if(seq)Object.entries(series(seq,"bot")).forEach(([k,v])=>all["c:"+k.replace(/^h_/,"")]=v);
-if(seqS)Object.entries(series(seqS,"bot")).forEach(([k,v])=>all["s:"+k.replace(/^s_/,"")]=v);
+// dollar curves
+const all={};Object.entries(cS).forEach(([k,v])=>all["c:"+k.replace(/^h_/,"")]=v);
+Object.entries(sS).forEach(([k,v])=>all["s:"+k.replace(/^s_/,"")]=v);
 const names=Object.keys(all).filter(n=>all[n].length>1);
-if(!names.length){$("#chart").innerHTML="";$("#legend").innerHTML="";
-$("#chart").outerHTML='<svg id="chart" preserveAspectRatio="none" style="flex:1"></svg>';
-$("#chartWrap").querySelector("svg").insertAdjacentHTML("beforebegin","");
-$("#chartWrap").firstElementChild.id="chart";
-$("#chart").parentElement.querySelectorAll(".empty").forEach(e=>e.remove());
-$("#chart").insertAdjacentHTML("afterend",'<div class="empty">las curvas forward arrancan al armar el escuadrón</div>');
-$("#chart").style.display="none"}
-else{const svg=$("#chart");svg.style.display="";
-$("#chartWrap").querySelectorAll(".empty").forEach(e=>e.remove());
+const svg=$("#chart"),empty=$("#chartEmpty");
+if(!names.length){svg.innerHTML="";$("#legend").innerHTML="";empty.style.display="flex"}
+else{empty.style.display="none";
 const W=600,H=190;svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
-let mn=1e9,mx=-1e9;const norm={};names.forEach(n=>{const v=all[n];
-norm[n]=v.map(x=>100*x/v[0]);mn=Math.min(mn,...norm[n]);mx=Math.max(mx,...norm[n])});
-const s=mx-mn||1;let out="";
-names.forEach((n,i)=>{const v=norm[n];
-const p=v.map((y,k)=>`${(W*k/(v.length-1||1)).toFixed(1)},${(H-4-(H-8)*(y-mn)/s).toFixed(1)}`).join(" ");
+let mn=1e9,mx=-1e9;names.forEach(n=>{mn=Math.min(mn,...all[n]);mx=Math.max(mx,...all[n])});
+mn=Math.min(mn,2990);mx=Math.max(mx,3010);const s=mx-mn||1,y=v=>H-6-(H-14)*(v-mn)/s;
+let out=`<line x1="30" x2="${W}" y1="${y(3000)}" y2="${y(3000)}" stroke="#1e2a36" stroke-dasharray="3 3"/>
+<text class="ylab" x="2" y="${y(3000)+3}">$3,000</text>
+<text class="ylab" x="2" y="12">${money(mx)}</text>
+<text class="ylab" x="2" y="${H-2}">${money(mn)}</text>`;
+names.forEach((n,i)=>{const v=all[n];
+const p=v.map((q,k)=>`${(30+(W-32)*k/(v.length-1||1)).toFixed(1)},${y(q).toFixed(1)}`).join(" ");
 out+=`<polyline fill="none" stroke="${pal[i%10]}" stroke-width="1.3" points="${p}"/>`});
 svg.innerHTML=out;
 $("#legend").innerHTML=names.map((n,i)=>`<span><i style="background:${pal[i%10]}"></i>${n}</span>`).join("")}
-// reloj + footer
+// clock + footer
 $("#clkC").innerHTML="Crypto: <b>"+(aC?"shakedown — 7 días contados consecutivos arrancan el reloj":"exámenes en curso, arma al completar 10/10")+"</b>";
 $("#clkS").innerHTML="Stocks: <b>"+(aS?"shakedown":"roster propuesto — pendiente de firma del owner")+"</b>";
 const f1=l1.filter(r=>r.verdict==="FAIL").length,p1=l1.filter(r=>r.verdict==="PASS").length;
