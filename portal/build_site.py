@@ -14,7 +14,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 OUT = os.path.join(ROOT, "site")
 SHOW_FUND = 300.0
-BOOK = 10000.0
+BOOK = 3000.0
 
 def read_csv(path, tail=None):
     if not os.path.exists(path):
@@ -245,7 +245,7 @@ const DESC = {
  "RSI-BTC":   ["Control (failed exam)","Buys panic dips (RSI oversold), sells the recovery. Waiting for a dip."]
 };
 const nm = v => "$" + (v*S).toFixed(2);
-const pc = v => { const p=(v/10000-1)*100;
+const pc = v => { const p=(v/3000-1)*100;
   return (p>=0?"+":"") + p.toFixed(2) + "%"; };
 
 // latest equity per strategy
@@ -267,7 +267,7 @@ if (bh){
   document.getElementById("heroV").textContent = nm(v);
   const p = document.getElementById("heroP");
   p.textContent = pc(v);
-  p.className = "pnl " + (v>=10000?"up":"down");
+  p.className = "pnl " + (v>=3000?"up":"down");
 }
 document.getElementById("dayline").textContent =
   "Day " + days + " of 90 \u00b7 updated " +
@@ -288,8 +288,8 @@ for (const n of names){
   el.className = "row";
   el.innerHTML = '<div><div class="rname">'+n+'</div>' +
     '<div class="rdesc">'+desc+'</div>'+badge+'</div>' +
-    '<div class="rnum"><div class="rv '+(v>=10000?"up":"down")+'">'+nm(v)+
-    '</div><div class="'+(v>=10000?"up":"down")+'">'+pc(v)+'</div></div>';
+    '<div class="rnum"><div class="rv '+(v>=3000?"up":"down")+'">'+nm(v)+
+    '</div><div class="'+(v>=3000?"up":"down")+'">'+pc(v)+'</div></div>';
   rowsEl.appendChild(el);
 }
 

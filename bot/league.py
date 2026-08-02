@@ -32,7 +32,10 @@ EQLOG = os.path.join(ROOT, "logs", "league_equity.csv")
 TRLOG = os.path.join(ROOT, "logs", "league_trades.csv")
 BASE = "https://api.exchange.coinbase.com"
 FEE, SLIP = 0.006, 0.0005
-START = 10_000.0
+START = 3_000.0   # epoch 2 (2026-08-02): owner aligned paper
+                  # slices with the planned real allocation.
+                  # Epoch 1 ($10K, 2026-07-24..08-02) archived
+                  # in archive/league_epoch1_10k/.
 MAXDD = 0.20
 
 STRATS = {
@@ -138,13 +141,8 @@ def load():
     now = datetime.now(timezone.utc).isoformat()
     st = {n: {"cash": START, "units": {}, "last_rebalance": None,
               "created": now} for n in STRATS}
-    if os.path.exists(LEGACY):            # continuity for MOM-ROT
-        with open(LEGACY) as f:
-            old = json.load(f)
-        for k in ("cash", "units", "last_rebalance", "created",
-                  "peak_equity", "halted"):
-            if k in old:
-                st["MOM-ROT"][k] = old[k]
+    # Epoch 2: every member starts fresh at START. The legacy MOM-ROT
+    # import served epoch-1 continuity only (archived).
     return st
 
 def append(path, header, row):

@@ -39,7 +39,7 @@ svg.spark{width:74px;height:16px;display:block}
 <span class="dim">escuadrón <span id="lastSquad">–</span></span>
 <span class="sp"></span><span id="clock" class="dim"></span></header>
 
-<div class="panel"><h2>LIGA DIARIA · $10K iniciales</h2>
+<div class="panel"><h2>LIGA DIARIA · $3K iniciales · época 2</h2>
 <table id="leagueT"><thead><tr><th>bot</th><th class="r">equity</th>
 <th class="r">ret</th><th class="r">vs HOLD</th><th>posición</th><th></th></tr></thead>
 <tbody></tbody></table></div>
@@ -80,8 +80,8 @@ $("#lastLeague").textContent=ago(meta&&meta.league_last);
 $("#lastSquad").textContent=armed?ago(meta&&meta.squad_last):"–";
 // LIGA
 const ls=series(leq||[],"strategy");const names=Object.keys(ls);
-const latest={},hold=ls["BTC-HOLD"]?.at(-1)/10000-1||0;
-let rowsH="";names.forEach((n,i)=>{const v=ls[n],e=v.at(-1),r=e/10000-1;latest[n]=e;
+const latest={},hv=ls["BTC-HOLD"],hold=hv?hv.at(-1)/hv[0]-1:0;
+let rowsH="";names.forEach((n,i)=>{const v=ls[n],e=v.at(-1),r=e/v[0]-1;latest[n]=e;
 const posArr=(leq||[]).filter(x=>x.strategy===n);const pos=posArr.at(-1)?.holdings||"–";
 rowsH+=`<tr><td style="color:${pal[i%10]}">${n}</td><td class="r">${fmt(e)}</td>
 <td class="r ${r>=0?"up":"dn"}">${pct(r)}</td>
@@ -99,7 +99,7 @@ const lab=v==="PASS"?"CANDIDATA":v?"CONTROL":"examen…";
 return`<div class="chip"><span>${s.replace("h_","")}</span><small class="${cls}">${lab}</small></div>`}).join("")+`</div>`}
 else{const ss=series(seq||[],"bot");const sst=(sq&&sq.bots)||{};
 let h=`<table><thead><tr><th>bot</th><th class="r">equity</th><th class="r">ret</th><th>pos</th><th></th></tr></thead><tbody>`;
-Object.keys(ss).forEach((n,i)=>{const v=ss[n],e=v.at(-1),r=e/3000-1;
+Object.keys(ss).forEach((n,i)=>{const v=ss[n],e=v.at(-1),r=e/v[0]-1;
 const u=Object.keys(sst[n]?.units||{}).map(p=>p.replace("-USD","")).join(",")||"cash";
 const halt=sst[n]?.halt_day?` <span class="dn">⛔</span>`:"";
 h+=`<tr><td style="color:${pal[i%10]}">${n.replace("h_","")}${halt}</td><td class="r">${fmt(e)}</td>
