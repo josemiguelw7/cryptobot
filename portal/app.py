@@ -141,6 +141,24 @@ def squad_equity():
         return jsonify(list(csv.DictReader(f))[-4000:])
 
 
+@app.get("/api/squad_stocks")
+def squad_stocks():
+    p = os.path.join(ROOT, "bot", "squad_stocks_state.json")
+    if not os.path.exists(p):
+        return jsonify({})
+    with open(p) as f:
+        return jsonify(json.load(f))
+
+
+@app.get("/api/squad_stocks_equity")
+def squad_stocks_equity():
+    p = os.path.join(LOGS, "squad_stocks_equity.csv")
+    if not os.path.exists(p):
+        return jsonify([])
+    with open(p) as f:
+        return jsonify(list(csv.DictReader(f))[-4000:])
+
+
 @app.get("/api/exam_ledger")
 def exam_ledger():
     p = os.path.join(ROOT, "backtest", "results", "exam_ledger.csv")
@@ -150,26 +168,31 @@ def exam_ledger():
         return jsonify(list(csv.DictReader(f)))
 
 
-@app.get("/api/meta")
-def meta():
-    armed = None
+def _armed(mod):
     try:
-        with open(os.path.join(ROOT, "bot", "seeds_crypto.py")) as f:
+        with open(os.path.join(ROOT, "bot", mod)) as f:
             for line in f:
                 if line.startswith("ARMED"):
-                    armed = "True" in line.split("#")[0]
-                    break
+                    return "True" in line.split("#")[0]
     except OSError:
-        pass
+        return None
+
+
+@app.get("/api/meta")
+def meta():
+    armed = _armed("seeds_crypto.py")
+    armed_stk = _armed("seeds_stocks.py")
     def last_ts(fname, col="time"):
         p = os.path.join(LOGS, fname)
         if not os.path.exists(p):
             return None
         rows = list(csv.DictReader(open(p)))
         return rows[-1][col] if rows else None
-    return jsonify({"armed": armed,
+    return jsonify({"armed": armed, "armed_crypto": armed,
+                    "armed_stocks": armed_stk,
                     "league_last": last_ts("league_equity.csv"),
-                    "squad_last": last_ts("squad_equity.csv")})
+                    "squad_last": last_ts("squad_equity.csv"),
+                    "squad_stk_last": last_ts("squad_stocks_equity.csv")})
 
 
 if __name__ == "__main__":
