@@ -43,6 +43,19 @@ if rc_intraday == 2:
     print("\n!!! INTRADAY GATE: execution_data condition. No counted "
           "intraday cycle today. See logs/intraday_gate.json.\n", flush=True)
 
+# Upgrade pending OpenTimestamps receipts and stamp any new criteria doc.
+# A fresh stamp is PENDING, not proof: it becomes proof only once a Bitcoin
+# block confirms it and the receipt is upgraded, hours later. A pending
+# receipt nobody upgrades proves nothing, and remembering to do it by hand
+# is exactly the step that gets skipped. Exit 1 means still pending, which
+# is the normal state for the first hours. Exit 2 means a criteria document
+# no longer matches its receipt - loud, but not a reason to stop the run.
+rc_stamp = run("ops/stamp.py", fatal=False, ok_codes=(0, 1))
+if rc_stamp == 2:
+    print("\n!!! CRITERIA RECEIPT MISMATCH. A pre-registered document was "
+          "edited after stamping. Under the ratchet this is legitimate only "
+          "if the change makes the criteria STRICTER.\n", flush=True)
+
 run("bot/league.py",         fatal=True)     # the forward record
 run("portal/build_site.py",  fatal=True)     # public page
 run("ops/backup.py",         fatal=False)    # snapshot the record
