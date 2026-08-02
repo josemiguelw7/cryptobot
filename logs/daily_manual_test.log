@@ -1,0 +1,613 @@
+=== data/refresh_daily.py  ===
+  BTC-USD: +0 new, 1469 total
+  ETH-USD: +0 new, 1469 total
+  SOL-USD: +0 new, 1469 total
+  XRP-USD: +0 new, 1117 total
+  ADA-USD: +0 new, 1469 total
+  DOGE-USD: +0 new, 1469 total
+  LINK-USD: +0 new, 1469 total
+  LTC-USD: +0 new, 1469 total
+refresh complete.
+=== data/refresh_intraday.py  ===
+intraday refresh · 2026-08-02 03:57 UTC
+
+==========================================================
+refreshing 25 pairs @ 300s (60d window, merge)
+==========================================================
+
+[1/25] ADA-USD
+     gaps .................. 18, worst 0.2h at 2026-06-20 10:05 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 19654 -> 19654 bars (+0)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ADA-USD_300s.csv
+   Fetched range: 2026-06-03 04:00 to 2026-08-02 03:50 UTC
+
+[2/25] AERO-USD
+     gaps .................. 8, worst 0.2h at 2026-07-01 09:20 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 19663 -> 19663 bars (+0)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/AERO-USD_300s.csv
+   Fetched range: 2026-06-03 04:00 to 2026-08-02 03:50 UTC
+
+[3/25] ALLO-USD
+     gaps .................. 265, worst 0.6h at 2026-06-21 04:10 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 19053 -> 19053 bars (+0)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ALLO-USD_300s.csv
+   Fetched range: 2026-06-03 04:00 to 2026-08-02 03:50 UTC
+
+[4/25] BILL-USD
+     gaps .................. 63, worst 0.3h at 2026-07-26 23:10 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 19607 -> 19607 bars (+0)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/BILL-USD_300s.csv
+   Fetched range: 2026-06-03 04:00 to 2026-08-02 03:50 UTC
+
+[5/25] BTC-USD
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 19675 -> 19675 bars (+0)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/BTC-USD_300s.csv
+   Fetched range: 2026-06-03 04:00 to 2026-08-02 03:50 UTC
+
+[6/25] DOGE-USD
+     gaps .................. 1, worst 0.2h at 2026-07-12 09:50 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 19672 -> 19673 bars (+1)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/DOGE-USD_300s.csv
+   Fetched range: 2026-06-03 04:05 to 2026-08-02 03:55 UTC
+
+[7/25] ENA-USD
+     gaps .................. 1121, worst 0.4h at 2026-07-04 06:45 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 18263 -> 18264 bars (+1)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ENA-USD_300s.csv
+   Fetched range: 2026-06-03 04:05 to 2026-08-02 03:55 UTC
+
+[8/25] ETH-USD
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 19674 -> 19675 bars (+1)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ETH-USD_300s.csv
+   Fetched range: 2026-06-03 04:05 to 2026-08-02 03:55 UTC
+
+[9/25] GWEI-USD
+     gaps .................. 1213, worst 0.8h at 2026-06-04 19:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 17150 -> 17150 bars (+0)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/GWEI-USD_300s.csv
+   Fetched range: 2026-06-03 04:10 to 2026-08-02 03:55 UTC
+
+[10/25] HBAR-USD
+     gaps .................. 6, worst 0.2h at 2026-06-16 21:40 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 19667 -> 19667 bars (+0)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/HBAR-USD_300s.csv
+   Fetched range: 2026-06-03 04:05 to 2026-08-02 03:55 UTC
+
+[11/25] HYPE-USD
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 19674 -> 19674 bars (+0)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/HYPE-USD_300s.csv
+   Fetched range: 2026-06-03 04:05 to 2026-08-02 03:55 UTC
+
+[12/25] LINK-USD
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 19673 -> 19673 bars (+0)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/LINK-USD_300s.csv
+   Fetched range: 2026-06-03 04:05 to 2026-08-02 03:55 UTC
+
+[13/25] LTC-USD
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 19673 -> 19673 bars (+0)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/LTC-USD_300s.csv
+   Fetched range: 2026-06-03 04:05 to 2026-08-02 03:55 UTC
+
+[14/25] NEAR-USD
+     gaps .................. 10, worst 0.2h at 2026-06-29 13:05 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 19664 -> 19664 bars (+0)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/NEAR-USD_300s.csv
+   Fetched range: 2026-06-03 04:05 to 2026-08-02 03:55 UTC
+
+[15/25] ONDO-USD
+     gaps .................. 1, worst 0.2h at 2026-06-29 13:05 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 19672 -> 19673 bars (+1)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ONDO-USD_300s.csv
+   Fetched range: 2026-06-03 04:10 to 2026-08-02 04:00 UTC
+
+[16/25] PUMP-USD
+     gaps .................. 663, worst 0.4h at 2026-07-12 08:15 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 18863 -> 18864 bars (+1)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/PUMP-USD_300s.csv
+   Fetched range: 2026-06-03 04:10 to 2026-08-02 04:00 UTC
+
+[17/25] RE-USD
+     gaps .................. 204, worst 0.3h at 2026-07-12 11:30 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 12624 -> 12624 bars (+0)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/RE-USD_300s.csv
+   Fetched range: 2026-06-18 12:40 to 2026-08-02 04:00 UTC
+
+[18/25] SOL-USD
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 19675 -> 19675 bars (+0)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/SOL-USD_300s.csv
+   Fetched range: 2026-06-03 04:10 to 2026-08-02 04:00 UTC
+
+[19/25] SUI-USD
+     gaps .................. 3, worst 0.2h at 2026-06-14 09:40 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 19672 -> 19672 bars (+0)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/SUI-USD_300s.csv
+   Fetched range: 2026-06-03 04:10 to 2026-08-02 04:00 UTC
+
+[20/25] TAO-USD
+     gaps .................. 3, worst 0.2h at 2026-07-25 05:15 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 19670 -> 19670 bars (+0)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/TAO-USD_300s.csv
+   Fetched range: 2026-06-03 04:10 to 2026-08-02 04:00 UTC
+
+[21/25] UNI-USD
+     gaps .................. 72, worst 0.2h at 2026-06-28 21:20 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 19575 -> 19575 bars (+0)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/UNI-USD_300s.csv
+   Fetched range: 2026-06-03 04:10 to 2026-08-02 04:00 UTC
+
+[22/25] VVV-USD
+     gaps .................. 38, worst 0.2h at 2026-06-17 21:25 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 19635 -> 19635 bars (+0)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/VVV-USD_300s.csv
+   Fetched range: 2026-06-03 04:10 to 2026-08-02 04:00 UTC
+
+[23/25] XLM-USD
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 19675 -> 19675 bars (+0)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/XLM-USD_300s.csv
+   Fetched range: 2026-06-03 04:10 to 2026-08-02 04:00 UTC
+
+[24/25] XRP-USD
+     missing ............... 0
+     unclosed bars dropped . 0
+     merged into store ..... 19668 -> 19676 bars (+8)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/XRP-USD_300s.csv
+   Fetched range: 2026-06-03 04:10 to 2026-08-02 04:05 UTC
+
+[25/25] ZEC-USD
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 19668 -> 19676 bars (+8)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ZEC-USD_300s.csv
+   Fetched range: 2026-06-03 04:15 to 2026-08-02 04:05 UTC
+
+300s done in 13.6 min · clean 9 · gaps 16 · failed 0
+
+==========================================================
+hourly: 42 pairs staler than 3.0h
+==========================================================
+
+[1/42] AAVE-USD
+     gaps .................. 2, worst 6.0h at 2025-10-25 15:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8749 -> 8751 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/AAVE-USD_3600s.csv
+   Fetched range: 2025-08-02 05:00 to 2026-08-02 03:00 UTC
+
+[2/42] ALLO-USD
+     gaps .................. 204, worst 7.0h at 2026-05-08 00:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 6055 -> 6057 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ALLO-USD_3600s.csv
+   Fetched range: 2025-11-12 16:00 to 2026-08-02 03:00 UTC
+
+[3/42] ARB-USD
+     gaps .................. 2, worst 6.0h at 2025-10-25 15:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8749 -> 8751 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ARB-USD_3600s.csv
+   Fetched range: 2025-08-02 05:00 to 2026-08-02 03:00 UTC
+
+[4/42] AVAX-USD
+     gaps .................. 2, worst 6.0h at 2025-10-25 15:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8749 -> 8751 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/AVAX-USD_3600s.csv
+   Fetched range: 2025-08-02 05:00 to 2026-08-02 03:00 UTC
+
+[5/42] AVNT-USD
+     gaps .................. 11, worst 6.0h at 2025-10-25 15:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 7813 -> 7815 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/AVNT-USD_3600s.csv
+   Fetched range: 2025-09-09 18:00 to 2026-08-02 03:00 UTC
+
+[6/42] BCH-USD
+     gaps .................. 2, worst 6.0h at 2025-10-25 15:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8749 -> 8751 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/BCH-USD_3600s.csv
+   Fetched range: 2025-08-02 05:00 to 2026-08-02 03:00 UTC
+
+[7/42] BILL-USD
+     gaps .................. 1, worst 6.0h at 2026-05-08 01:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 2144 -> 2146 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/BILL-USD_3600s.csv
+   Fetched range: 2026-05-04 13:00 to 2026-08-02 03:00 UTC
+
+[8/42] BNKR-USD
+     gaps .................. 19, worst 7.0h at 2026-05-08 01:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8731 -> 8733 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/BNKR-USD_3600s.csv
+   Fetched range: 2025-08-02 05:00 to 2026-08-02 03:00 UTC
+
+[9/42] BONK-USD
+     gaps .................. 2, worst 6.0h at 2025-10-25 15:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8749 -> 8751 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/BONK-USD_3600s.csv
+   Fetched range: 2025-08-02 05:00 to 2026-08-02 03:00 UTC
+
+[10/42] CRO-USD
+     gaps .................. 2, worst 6.0h at 2025-10-25 15:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8749 -> 8751 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/CRO-USD_3600s.csv
+   Fetched range: 2025-08-02 05:00 to 2026-08-02 03:00 UTC
+
+[11/42] CRV-USD
+     gaps .................. 4, worst 6.0h at 2025-10-25 15:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8747 -> 8749 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/CRV-USD_3600s.csv
+   Fetched range: 2025-08-02 05:00 to 2026-08-02 03:00 UTC
+
+[12/42] DASH-USD
+     gaps .................. 6, worst 6.0h at 2025-10-25 15:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8745 -> 8747 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/DASH-USD_3600s.csv
+   Fetched range: 2025-08-02 05:00 to 2026-08-02 03:00 UTC
+
+[13/42] DOT-USD
+     gaps .................. 2, worst 6.0h at 2025-10-25 15:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8749 -> 8751 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/DOT-USD_3600s.csv
+   Fetched range: 2025-08-02 05:00 to 2026-08-02 03:00 UTC
+
+[14/42] FARTCOIN-USD
+     gaps .................. 2, worst 6.0h at 2025-10-25 15:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8749 -> 8751 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/FARTCOIN-USD_3600s.csv
+   Fetched range: 2025-08-02 05:00 to 2026-08-02 03:00 UTC
+
+[15/42] FET-USD
+     gaps .................. 2, worst 6.0h at 2025-10-25 15:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8749 -> 8751 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/FET-USD_3600s.csv
+   Fetched range: 2025-08-02 05:00 to 2026-08-02 03:00 UTC
+
+[16/42] FIL-USD
+     gaps .................. 2, worst 6.0h at 2025-10-25 15:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8749 -> 8751 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/FIL-USD_3600s.csv
+   Fetched range: 2025-08-02 05:00 to 2026-08-02 03:00 UTC
+
+[17/42] HYPE-USD
+     gaps .................. 1, worst 6.0h at 2026-05-08 01:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 4250 -> 4252 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/HYPE-USD_3600s.csv
+   Fetched range: 2026-02-05 19:00 to 2026-08-02 03:00 UTC
+
+[18/42] ICP-USD
+     gaps .................. 2, worst 16.0h at 2026-05-08 01:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8739 -> 8741 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ICP-USD_3600s.csv
+   Fetched range: 2025-08-02 05:00 to 2026-08-02 03:00 UTC
+
+[19/42] INJ-USD
+     gaps .................. 2, worst 6.0h at 2025-10-25 15:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8749 -> 8751 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/INJ-USD_3600s.csv
+   Fetched range: 2025-08-02 05:00 to 2026-08-02 03:00 UTC
+
+[20/42] IP-USD
+     gaps .................. 18, worst 7.0h at 2025-10-25 14:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8732 -> 8734 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/IP-USD_3600s.csv
+   Fetched range: 2025-08-02 05:00 to 2026-08-02 03:00 UTC
+
+[21/42] JTO-USD
+     gaps .................. 2, worst 7.0h at 2025-10-25 14:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8748 -> 8750 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/JTO-USD_3600s.csv
+   Fetched range: 2025-08-02 05:00 to 2026-08-02 03:00 UTC
+
+[22/42] LIGHTER-USD
+     gaps .................. 11, worst 6.0h at 2026-05-08 01:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 4745 -> 4747 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/LIGHTER-USD_3600s.csv
+   Fetched range: 2026-01-15 15:00 to 2026-08-02 03:00 UTC
+
+[23/42] MON-USD
+     gaps .................. 1, worst 6.0h at 2026-05-08 01:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 6008 -> 6010 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/MON-USD_3600s.csv
+   Fetched range: 2025-11-24 13:00 to 2026-08-02 03:00 UTC
+
+[24/42] MOODENG-USD
+     gaps .................. 5, worst 6.0h at 2025-10-25 15:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8746 -> 8748 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/MOODENG-USD_3600s.csv
+   Fetched range: 2025-08-02 05:00 to 2026-08-02 03:00 UTC
+
+[25/42] PAXG-USD
+     gaps .................. 3, worst 7.0h at 2025-10-25 14:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8747 -> 8749 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/PAXG-USD_3600s.csv
+   Fetched range: 2025-08-02 05:00 to 2026-08-02 03:00 UTC
+
+[26/42] PENGU-USD
+     gaps .................. 2, worst 6.0h at 2025-10-25 15:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8749 -> 8751 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/PENGU-USD_3600s.csv
+   Fetched range: 2025-08-02 05:00 to 2026-08-02 03:00 UTC
+
+[27/42] PEPE-USD
+     gaps .................. 2, worst 7.0h at 2026-05-08 01:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8748 -> 8750 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/PEPE-USD_3600s.csv
+   Fetched range: 2025-08-02 05:00 to 2026-08-02 03:00 UTC
+
+[28/42] RAVE-USD
+     gaps .................. 61, worst 6.0h at 2026-05-08 01:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 4039 -> 4041 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/RAVE-USD_3600s.csv
+   Fetched range: 2026-02-11 17:00 to 2026-08-02 03:00 UTC
+
+[29/42] RENDER-USD
+     gaps .................. 2, worst 6.0h at 2025-10-25 15:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8749 -> 8751 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/RENDER-USD_3600s.csv
+   Fetched range: 2025-08-02 05:00 to 2026-08-02 03:00 UTC
+
+[30/42] SAPIEN-USD
+     gaps .................. 4, worst 6.0h at 2025-10-25 15:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8299 -> 8301 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/SAPIEN-USD_3600s.csv
+   Fetched range: 2025-08-20 19:00 to 2026-08-02 03:00 UTC
+
+[31/42] SEI-USD
+     gaps .................. 2, worst 6.0h at 2025-10-25 15:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8749 -> 8751 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/SEI-USD_3600s.csv
+   Fetched range: 2025-08-02 05:00 to 2026-08-02 03:00 UTC
+
+[32/42] SPK-USD
+     gaps .................. 8, worst 6.0h at 2025-10-25 15:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8743 -> 8745 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/SPK-USD_3600s.csv
+   Fetched range: 2025-08-02 05:00 to 2026-08-02 03:00 UTC
+
+[33/42] TON-USD
+     gaps .................. 3, worst 6.0h at 2026-05-08 01:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 6146 -> 6148 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/TON-USD_3600s.csv
+   Fetched range: 2025-11-18 17:00 to 2026-08-02 03:00 UTC
+
+[34/42] TOSHI-USD
+     gaps .................. 2, worst 6.0h at 2025-10-25 15:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8749 -> 8751 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/TOSHI-USD_3600s.csv
+   Fetched range: 2025-08-02 05:00 to 2026-08-02 03:00 UTC
+
+[35/42] TRUMP-USD
+     gaps .................. 8, worst 6.0h at 2025-10-25 15:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8743 -> 8745 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/TRUMP-USD_3600s.csv
+   Fetched range: 2025-08-02 05:00 to 2026-08-02 03:00 UTC
+
+[36/42] USD1-USD
+     gaps .................. 407, worst 7.0h at 2025-10-25 14:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 7797 -> 7798 bars (+1)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/USD1-USD_3600s.csv
+   Fetched range: 2025-08-21 17:00 to 2026-08-02 02:00 UTC
+
+[37/42] USELESS-USD
+     gaps .................. 2, worst 6.0h at 2025-10-25 15:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8304 -> 8306 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/USELESS-USD_3600s.csv
+   Fetched range: 2025-08-20 16:00 to 2026-08-02 03:00 UTC
+
+[38/42] WIF-USD
+     gaps .................. 35, worst 6.0h at 2025-10-25 15:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8715 -> 8717 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/WIF-USD_3600s.csv
+   Fetched range: 2025-08-02 05:00 to 2026-08-02 03:00 UTC
+
+[39/42] WLD-USD
+     gaps .................. 2, worst 7.0h at 2025-10-25 14:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8748 -> 8750 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/WLD-USD_3600s.csv
+   Fetched range: 2025-08-02 05:00 to 2026-08-02 03:00 UTC
+
+[40/42] WLFI-USD
+     gaps .................. 2, worst 6.0h at 2025-10-25 15:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8018 -> 8020 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/WLFI-USD_3600s.csv
+   Fetched range: 2025-09-01 14:00 to 2026-08-02 03:00 UTC
+
+[41/42] ZORA-USD
+     gaps .................. 2, worst 6.0h at 2025-10-25 15:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8749 -> 8751 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ZORA-USD_3600s.csv
+   Fetched range: 2025-08-02 05:00 to 2026-08-02 03:00 UTC
+
+[42/42] ZRO-USD
+     gaps .................. 4, worst 6.0h at 2025-10-25 15:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8747 -> 8749 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ZRO-USD_3600s.csv
+   Fetched range: 2025-08-02 05:00 to 2026-08-02 03:00 UTC
+
+==========================================================
+AUDIT
+==========================================================
+DATA AUDIT  2026-08-02 04:23 UTC
+90 files checked across 1 store(s)
+
+gap (72):
+  [WARN] gap              AAVE-USD_3600s         2 gap(s) >= 3 bars; worst 6.0h at 2025-10-25 15:00 UTC
+  [WARN] gap              ADA-USD_3600s          2 gap(s) >= 3 bars; worst 6.0h at 2025-10-25 15:00 UTC
+  [WARN] gap              AERO-USD_3600s         2 gap(s) >= 3 bars; worst 6.0h at 2025-10-25 15:00 UTC
+  [WARN] gap              ALLO-USD_300s          93 gap(s) >= 3 bars; worst 1.4h at 2026-05-25 21:20 UTC
+  [WARN] gap              ALLO-USD_3600s         29 gap(s) >= 3 bars; worst 7.0h at 2026-05-08 00:00 UTC
+  [WARN] gap              ARB-USD_3600s          2 gap(s) >= 3 bars; worst 6.0h at 2025-10-25 15:00 UTC
+       ... and 66 more
+
+correlated_gap (2):
+  [WARN] correlated_gap   3600s @ 2026-05-08 01:00 absent in 63/65 pairs (threshold 16) -> upstream event; re-request the window to classify
+  [WARN] correlated_gap   3600s @ 2025-10-25 15:00 absent in 49/65 pairs (threshold 16) -> upstream event; re-request the window to classify
+
+RESULT: 0 blocking, 74 warnings
+
+==========================================================
+RESULT: warnings only. Intraday stores are current and usable.
+(exit 0 is unreachable while the two permanent Coinbase holes
+ of 2025-10-25 and 2026-05-08 remain WARNING-level findings.)
+=== ops/stamp.py  ===
+
+pending confirmation ..... 5: intraday_success_criteria.md, intraday_standard.md, success_criteria.md, entrance_exam.md, exam_amendment_001.md
+  Normal for the first hours after stamping. Re-run later;
+  the daily driver does this automatically.
+=== bot/league.py  ===
+[2026-08-02 04:23 UTC] league cycle
+  [BTC-HOLD] equity $9,841.54 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,396.66 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,819.00 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py  ===
+site/index.html built (273 equity rows, 4 trades, 10 exams)
+=== ops/backup.py  ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-01.zip (9 snapshots kept)
+=== bot/digest.py  ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-02
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,841.54   -1.58%  today +0.22%  breaker room 18%
+5. CROSS-BTC  $  9,819.00   -1.81%  today +0.22%  breaker room 19%
+6. MOM-ROT    $  9,396.66   -6.03%  today -0.31%  breaker room 16%
+daily run complete.
