@@ -62,3 +62,25 @@ dirección MÁS estricta, ratchet-compatible:
 5. El armado del track espera al **motor con reloj de mercado**
    (squad_stocks) — los veredictos etiquetan candidata/control desde
    ya, pero ARMED se enciende cuando exista quien ejecute.
+
+## Motor forward (2026-08-02)
+
+`bot/squad_stocks.py` es un **adaptador sobre `bot/squad.py`**: no
+duplica lógica. Todas las reglas del charter (§4.1 costes, §4.3
+compuerta, §4.5 integridad, §8 kill switches, §3 días contados, §12.1
+taxonomía) las ejecuta el MISMO código que corre crypto. Un motor, dos
+mercados. Overrides: reloj RTH, comisión 0, slip 5bps plano, sizing con
+escala de sesión (7 barras), datos del store de stocks, ledgers propios.
+
+**Referencia de ejecución, declarada:** las acciones no tienen un
+top-of-book público 24/7 como el ticker de Coinbase, así que el fill se
+referencia al cierre de la última barra RTH CERRADA más slippage
+modelado. El requisito del §4.5 se mantiene — la señal lee la barra
+cerrada y el fill nunca usa la misma barra que generó la señal — pero
+queda registrado como una diferencia real frente al track de crypto:
+**el escuadrón de acciones no ve spread vivo.** Al pasar a dinero real
+esto se sustituye por quotes del broker, y hasta entonces cualquier
+resultado de stocks lleva esta nota.
+
+Fuera de sesión el ciclo marca equity y sale con 0: los feriados no
+necesitan calendario (sin barra fresca no hay ciclo contado).

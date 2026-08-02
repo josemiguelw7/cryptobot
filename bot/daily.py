@@ -114,6 +114,10 @@ run("bot/league.py",         fatal=True)     # the forward record
 # roster in bot/seeds_crypto.py is unarmed this is a one-line no-op; once
 # armed it is forward record, so it is fatal like the league.
 run("bot/squad.py",          fatal=True)
+
+# Stock squad. Same engine, market clock: outside 9:30-16:00 ET it
+# marks and exits 0, so the hourly plist can fire it unconditionally.
+run("bot/squad_stocks.py",   fatal=True)
 run("portal/build_site.py",  fatal=True)     # public page
 run("ops/backup.py",         fatal=False)    # snapshot the record
 run("bot/digest.py",         fatal=False)    # standings email/print
