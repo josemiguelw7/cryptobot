@@ -1,0 +1,590 @@
+{
+ "bots": {
+  "h_trend_168": {
+   "cash": 137.25034712735214,
+   "units": {
+    "ADA-USD": 7136.540587103199,
+    "XRP-USD": 1385.1577656682068
+   },
+   "entries": {
+    "ADA-USD": {
+     "px": 0.19018999999999997,
+     "mid": 0.18995,
+     "ts": 1785687684.571924,
+     "cost_basis": 1362.7496528726479
+    },
+    "XRP-USD": {
+     "px": 1.0785774999999997,
+     "mid": 1.0774499999999998,
+     "ts": 1785687684.571924,
+     "cost_basis": 1500.0
+    }
+   },
+   "ctx": {
+    "BTC-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "ETH-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "SOL-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "XRP-USD": {
+     "weight": 0.5,
+     "entry_price": 1.0785774999999997
+    },
+    "ADA-USD": {
+     "weight": 0.45424988429088264,
+     "entry_price": 0.19018999999999997
+    },
+    "DOGE-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "LINK-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "LTC-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    }
+   },
+   "slice_peak": 3000.0,
+   "day_open": 3000.0,
+   "day_date": "2026-08-02",
+   "eod": [],
+   "halt_day": null,
+   "halt_review": false,
+   "benched": false,
+   "data_events": {},
+   "exam": "control",
+   "last_eq": 3000.0
+  },
+  "h_cross_24_168": {
+   "cash": 1637.2503471273521,
+   "units": {
+    "ADA-USD": 7136.540587103199
+   },
+   "entries": {
+    "ADA-USD": {
+     "px": 0.19018999999999997,
+     "mid": 0.18995,
+     "ts": 1785687684.571924,
+     "cost_basis": 1362.7496528726479
+    }
+   },
+   "ctx": {
+    "BTC-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "ETH-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "SOL-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "XRP-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "ADA-USD": {
+     "weight": 0.45424988429088264,
+     "entry_price": 0.19018999999999997
+    },
+    "DOGE-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "LINK-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "LTC-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    }
+   },
+   "slice_peak": 3000.0,
+   "day_open": 3000.0,
+   "day_date": "2026-08-02",
+   "eod": [],
+   "halt_day": null,
+   "halt_review": false,
+   "benched": false,
+   "data_events": {},
+   "exam": "control",
+   "last_eq": 3000.0
+  },
+  "h_tsmom_72": {
+   "cash": 1637.2503471273521,
+   "units": {
+    "ADA-USD": 7136.540587103199
+   },
+   "entries": {
+    "ADA-USD": {
+     "px": 0.19018999999999997,
+     "mid": 0.18995,
+     "ts": 1785687684.571924,
+     "cost_basis": 1362.7496528726479
+    }
+   },
+   "ctx": {
+    "BTC-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "ETH-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "SOL-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "XRP-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "ADA-USD": {
+     "weight": 0.45424988429088264,
+     "entry_price": 0.19018999999999997
+    },
+    "DOGE-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "LINK-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "LTC-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    }
+   },
+   "slice_peak": 3000.0,
+   "day_open": 3000.0,
+   "day_date": "2026-08-02",
+   "eod": [],
+   "halt_day": null,
+   "halt_review": false,
+   "benched": false,
+   "data_events": {},
+   "exam": "control",
+   "last_eq": 3000.0
+  },
+  "h_macd_12_26": {
+   "cash": 137.25034712735214,
+   "units": {
+    "ADA-USD": 7136.540587103199,
+    "SOL-USD": 20.470545775716538
+   },
+   "entries": {
+    "ADA-USD": {
+     "px": 0.19018999999999997,
+     "mid": 0.18995,
+     "ts": 1785687684.571924,
+     "cost_basis": 1362.7496528726479
+    },
+    "SOL-USD": {
+     "px": 72.98290999999999,
+     "mid": 72.905,
+     "ts": 1785687684.571924,
+     "cost_basis": 1500.0
+    }
+   },
+   "ctx": {
+    "BTC-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "ETH-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "SOL-USD": {
+     "weight": 0.5,
+     "entry_price": 72.98290999999999
+    },
+    "XRP-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "ADA-USD": {
+     "weight": 0.45424988429088264,
+     "entry_price": 0.19018999999999997
+    },
+    "DOGE-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "LINK-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "LTC-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    }
+   },
+   "slice_peak": 3000.0,
+   "day_open": 3000.0,
+   "day_date": "2026-08-02",
+   "eod": [],
+   "halt_day": null,
+   "halt_review": false,
+   "benched": false,
+   "data_events": {},
+   "exam": "control",
+   "last_eq": 3000.0
+  },
+  "h_donch_48_24": {
+   "cash": 1637.2503471273521,
+   "units": {
+    "ADA-USD": 7136.540587103199
+   },
+   "entries": {
+    "ADA-USD": {
+     "px": 0.19018999999999997,
+     "mid": 0.18995,
+     "ts": 1785687684.571924,
+     "cost_basis": 1362.7496528726479
+    }
+   },
+   "ctx": {
+    "BTC-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "ETH-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "SOL-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "XRP-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "ADA-USD": {
+     "weight": 0.45424988429088264,
+     "entry_price": 0.19018999999999997
+    },
+    "DOGE-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "LINK-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "LTC-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    }
+   },
+   "slice_peak": 3000.0,
+   "day_open": 3000.0,
+   "day_date": "2026-08-02",
+   "eod": [],
+   "halt_day": null,
+   "halt_review": false,
+   "benched": false,
+   "data_events": {},
+   "exam": "control",
+   "last_eq": 3000.0
+  },
+  "h_volbrk_24_96": {
+   "cash": 3000.0,
+   "units": {},
+   "entries": {},
+   "ctx": {
+    "BTC-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "ETH-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "SOL-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "XRP-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "ADA-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "DOGE-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "LINK-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "LTC-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    }
+   },
+   "slice_peak": 3000.0,
+   "day_open": 3000.0,
+   "day_date": "2026-08-02",
+   "eod": [],
+   "halt_day": null,
+   "halt_review": false,
+   "benched": false,
+   "data_events": {},
+   "exam": "control",
+   "last_eq": 3000.0
+  },
+  "h_rsi14_reg168": {
+   "cash": 3000.0,
+   "units": {},
+   "entries": {},
+   "ctx": {
+    "BTC-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "ETH-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "SOL-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "XRP-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "ADA-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "DOGE-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "LINK-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "LTC-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    }
+   },
+   "slice_peak": 3000.0,
+   "day_open": 3000.0,
+   "day_date": "2026-08-02",
+   "eod": [],
+   "halt_day": null,
+   "halt_review": false,
+   "benched": false,
+   "data_events": {},
+   "exam": "control",
+   "last_eq": 3000.0
+  },
+  "h_boll_48": {
+   "cash": 3000.0,
+   "units": {},
+   "entries": {},
+   "ctx": {
+    "BTC-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "ETH-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "SOL-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "XRP-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "ADA-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "DOGE-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "LINK-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "LTC-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    }
+   },
+   "slice_peak": 3000.0,
+   "day_open": 3000.0,
+   "day_date": "2026-08-02",
+   "eod": [],
+   "halt_day": null,
+   "halt_review": false,
+   "benched": false,
+   "data_events": {},
+   "exam": "control",
+   "last_eq": 3000.0
+  },
+  "h_calm_24_168": {
+   "cash": 0.0,
+   "units": {
+    "SOL-USD": 20.470545775716538,
+    "LINK-USD": 181.04166575782298
+   },
+   "entries": {
+    "SOL-USD": {
+     "px": 72.98290999999999,
+     "mid": 72.905,
+     "ts": 1785687684.571924,
+     "cost_basis": 1500.0
+    },
+    "LINK-USD": {
+     "px": 8.252244,
+     "mid": 8.243500000000001,
+     "ts": 1785687684.571924,
+     "cost_basis": 1500.0
+    }
+   },
+   "ctx": {
+    "BTC-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "ETH-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "SOL-USD": {
+     "weight": 0.5,
+     "entry_price": 72.98290999999999
+    },
+    "XRP-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "ADA-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "DOGE-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "LINK-USD": {
+     "weight": 0.5,
+     "entry_price": 8.252244
+    },
+    "LTC-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    }
+   },
+   "slice_peak": 3000.0,
+   "day_open": 3000.0,
+   "day_date": "2026-08-02",
+   "eod": [],
+   "halt_day": null,
+   "halt_review": false,
+   "benched": false,
+   "data_events": {},
+   "exam": "control",
+   "last_eq": 3000.0
+  },
+  "h_nearhi_168": {
+   "cash": 137.25034712735214,
+   "units": {
+    "ADA-USD": 7136.540587103199,
+    "DOGE-USD": 21282.01187091819
+   },
+   "entries": {
+    "ADA-USD": {
+     "px": 0.19018999999999997,
+     "mid": 0.18995,
+     "ts": 1785687684.571924,
+     "cost_basis": 1362.7496528726479
+    },
+    "DOGE-USD": {
+     "px": 0.07020012999999999,
+     "mid": 0.07012499999999999,
+     "ts": 1785687684.571924,
+     "cost_basis": 1500.0
+    }
+   },
+   "ctx": {
+    "BTC-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "ETH-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "SOL-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "XRP-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "ADA-USD": {
+     "weight": 0.45424988429088264,
+     "entry_price": 0.19018999999999997
+    },
+    "DOGE-USD": {
+     "weight": 0.5,
+     "entry_price": 0.07020012999999999
+    },
+    "LINK-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "LTC-USD": {
+     "weight": 0.0,
+     "entry_price": null
+    }
+   },
+   "slice_peak": 3000.0,
+   "day_open": 3000.0,
+   "day_date": "2026-08-02",
+   "eod": [],
+   "halt_day": null,
+   "halt_review": false,
+   "benched": false,
+   "data_events": {},
+   "exam": "control",
+   "last_eq": 3000.0
+  }
+ },
+ "squad_day_open": 30000.0,
+ "squad_day_date": "2026-08-02",
+ "squad_halt_review": false,
+ "voided_days": [],
+ "squad_last_eq": 30000.0
+}
