@@ -123,5 +123,54 @@ def joblog(job):
         return jsonify({"log": f.read()[-8000:]})
 
 
+@app.get("/api/squad")
+def squad_state():
+    p = os.path.join(ROOT, "bot", "squad_state.json")
+    if not os.path.exists(p):
+        return jsonify({})
+    with open(p) as f:
+        return jsonify(json.load(f))
+
+
+@app.get("/api/squad_equity")
+def squad_equity():
+    p = os.path.join(LOGS, "squad_equity.csv")
+    if not os.path.exists(p):
+        return jsonify([])
+    with open(p) as f:
+        return jsonify(list(csv.DictReader(f))[-4000:])
+
+
+@app.get("/api/exam_ledger")
+def exam_ledger():
+    p = os.path.join(ROOT, "backtest", "results", "exam_ledger.csv")
+    if not os.path.exists(p):
+        return jsonify([])
+    with open(p) as f:
+        return jsonify(list(csv.DictReader(f)))
+
+
+@app.get("/api/meta")
+def meta():
+    armed = None
+    try:
+        with open(os.path.join(ROOT, "bot", "seeds_crypto.py")) as f:
+            for line in f:
+                if line.startswith("ARMED"):
+                    armed = "True" in line.split("#")[0]
+                    break
+    except OSError:
+        pass
+    def last_ts(fname, col="time"):
+        p = os.path.join(LOGS, fname)
+        if not os.path.exists(p):
+            return None
+        rows = list(csv.DictReader(open(p)))
+        return rows[-1][col] if rows else None
+    return jsonify({"armed": armed,
+                    "league_last": last_ts("league_equity.csv"),
+                    "squad_last": last_ts("squad_equity.csv")})
+
+
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=8787, debug=False)

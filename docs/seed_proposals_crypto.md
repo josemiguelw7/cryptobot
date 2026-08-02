@@ -76,7 +76,7 @@ vivo). El horizonte está declarado en la tabla y no se ajusta después.
 
 ## Matemática del reloj (para la meta de "probar unas semanas")
 
-Con el techo del charter, el camino más corto a dinero real es:
+Con la asignación inicial de $3,000 por bot, el camino más corto a dinero real es:
 7 días de shakedown mínimo → 90 días contados (Stage 1, ruta A) →
 60 días frescos (Stage 2) → piloto $500. **~5 meses, mínimo teórico.**
 "Unas semanas" de forward testing alcanzan para: validar la fontanería,
@@ -137,3 +137,15 @@ bajista colapsa a "-100.0%". Los números por ventana en el CSV del
 examen son la lectura sana. Cambiar el print es cosmético y se hará
 después de la tanda para no mezclar versiones del instrumento en un
 mismo log.
+
+## Aclaración del owner sobre el monto (2026-08-02)
+
+Los $3,000 por bot son la **asignación inicial**, no un techo de
+crecimiento. En paper ya es así: cada slice del escuadrón nace con
+$3,000 y compone sin límite. Para dinero real, la lectura compatible
+con el charter sellado queda registrada así: la escalera del piloto
+($500 → $1,500 → $3,000) es **cómo llega** la asignación inicial de
+$3,000 a un bot que se la ganó; por encima de esa cifra el crecimiento
+no tiene techo, pero SOLO con ganancias realizadas del propio bot —
+jamás capital fresco. Esto no afloja el ratchet: añade una restricción
+(prohibición de recargas) en vez de quitar una.
