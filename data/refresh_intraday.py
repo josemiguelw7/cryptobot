@@ -83,6 +83,24 @@ def newest_bar_age_hours(pair, granularity):
     return (now - max(ts)) / 3600.0
 
 
+def days_to_cover(pair, granularity, cap):
+    """Per-pair fetch window: just enough days to cover the gap between
+    the newest bar on disk and now, plus slack — capped at `cap`.
+
+    This is the fix for the 2026-08-02 handoff bug: the hourly top-up
+    used to request DAYS_1H=365 per pair (~30 API calls) to gain +2
+    bars; 42 stale pairs meant ~1,260 calls for ~84 bars. A fixed small
+    constant would be the WRONG fix (skip a week of runs and it no
+    longer reaches the gap). Deriving from the newest bar on disk is
+    self-healing: fresh store -> 2-day window (1 API call); store
+    ignored for 3 weeks -> 23-day window; unreadable/empty file -> full
+    `cap`. fetch_candles.py merges, so covering the gap is sufficient."""
+    age_h = newest_bar_age_hours(pair, granularity)
+    if age_h is None:
+        return cap
+    return min(cap, max(2, int(age_h // 24) + 2))
+
+
 def fetch(pair, granularity, days):
     """-> returncode. 0 complete, 1 gaps, 2 refused/failed."""
     r = subprocess.run(
@@ -154,8 +172,9 @@ def main():
         print(f"\n{'='*58}\nhourly: {len(todo)} pairs staler than {STALE_1H}h"
               f"\n{'='*58}", flush=True)
         for i, pair in enumerate(todo, 1):
-            print(f"\n[{i}/{len(todo)}] {pair}", flush=True)
-            rc = fetch(pair, 3600, DAYS_1H)
+            d = days_to_cover(pair, 3600, DAYS_1H)
+            print(f"\n[{i}/{len(todo)}] {pair} ({d}d window)", flush=True)
+            rc = fetch(pair, 3600, d)
             if rc == 1:
                 gapped.append(pair)
             elif rc != 0:
@@ -179,10 +198,11 @@ def main():
                 print(f"\n  retry {pair}", flush=True)
                 g = 300 if os.path.exists(
                     os.path.join(CANDLES, f"{pair}_300s.csv")) else 3600
-                fetch(pair, g, DAYS_5M if g == 300 else DAYS_1H)
+                fetch(pair, g, DAYS_5M if g == 300
+                      else days_to_cover(pair, 3600, DAYS_1H))
                 if g == 300 and os.path.exists(
                         os.path.join(CANDLES, f"{pair}_3600s.csv")):
-                    fetch(pair, 3600, DAYS_1H)
+                    fetch(pair, 3600, days_to_cover(pair, 3600, DAYS_1H))
             print(f"\n{'='*58}\nAUDIT (after retry)\n{'='*58}", flush=True)
             rc, out = run_audit()
             print(out.strip()[-2000:], flush=True)

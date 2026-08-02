@@ -350,6 +350,32 @@ class CalmRegime(Strategy):
         return 1.0 if vf < vs else 0.0
 
 
+class VolBreak(Strategy):
+    """Volatility-compression breakout ('squeeze'). Enter when recent
+    realized vol (n_fast) sits below the longer baseline (n_slow) AND
+    price makes a new n_fast-bar high — quiet coil, then expansion.
+    Exit on an n_fast-bar low. Path-dependent via ctx. Written for the
+    hourly seed squad; bar-length agnostic like every class here."""
+    def __init__(self, n_fast=24, n_slow=96):
+        self.nf, self.ns = n_fast, n_slow
+        self.name = f"volbrk_{n_fast}_{n_slow}"
+        self.warmup = n_slow + 1
+    def step(self, closes, ctx):
+        if len(closes) < self.ns + 1:
+            return 0.0
+        px = closes[-1]
+        held = ctx.get("weight", 0) > 0
+        window = closes[-self.nf - 1:-1]     # prior n_fast bars, excl. now
+        hi, lo = max(window), min(window)
+        if held:
+            return 0.0 if px <= lo else 1.0
+        vf = ret_stdev(closes, self.nf)
+        vs = ret_stdev(closes, self.ns)
+        if vf is None or vs is None:
+            return 0.0
+        return 1.0 if (vf < vs and px >= hi) else 0.0
+
+
 # ---------------------------------------------------------------- registry
 # Every examinable candidate, by permanent name. exam.py reads this;
 # league.py builds live members from the same classes.

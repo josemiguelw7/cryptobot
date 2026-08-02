@@ -108,6 +108,12 @@ if rc_stamp == 2:
           "if the change makes the criteria STRICTER.\n", flush=True)
 
 run("bot/league.py",         fatal=True)     # the forward record
+
+# Intraday squad (charter: docs/intraday_success_criteria.md). Hourly by
+# design — this is the cadence the whole plist exists for. While the seed
+# roster in bot/seeds_crypto.py is unarmed this is a one-line no-op; once
+# armed it is forward record, so it is fatal like the league.
+run("bot/squad.py",          fatal=True)
 run("portal/build_site.py",  fatal=True)     # public page
 run("ops/backup.py",         fatal=False)    # snapshot the record
 run("bot/digest.py",         fatal=False)    # standings email/print
