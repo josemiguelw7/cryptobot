@@ -88,6 +88,22 @@ acciones corriendo su propio reloj en paralelo.
 
 ## Firma
 
-Adoptado por el owner: ____________  fecha: ____________
-(al firmar, ejecutar los pasos 2–4 y commitear este documento con la
-firma; queda cubierto por el ratchet)
+**Adoptado por el owner: Jose Miguel — fecha: 2026-08-02** (aprobación
+expresa vía chat: "lets go with your recommendation yes"). La lista de
+10 semillas queda cerrada; desde aquí aplica §9.3 (inmortales e
+inmutables). Cubierto por el ratchet: este documento solo puede volverse
+más estricto.
+
+## Decisiones registradas en la misma aprobación
+
+1. **Roster adoptado** tal como está (10/10, sin ediciones ni vetos).
+2. **Interpretación §2.5 confirmada**, a asentar en la revisión del
+   sábado 2026-08-08 09:00 America/Chicago: examen primero; el
+   veredicto etiqueta candidata (PASS) o control (FAIL); los controles
+   corren para siempre como demostración forward y jamás son elegibles
+   para capital real. Precedente: MOM-ROT en la liga diaria.
+3. **Expansión del store 5m: diferida.** Ninguna semilla adoptada opera
+   bajo la hora; ampliar 25→65 pares en 5m sería coste sin hipótesis.
+   Se reabre solo si algún candidato futuro declara horizonte sub-1h.
+4. **Track de acciones (SPY/QQQ, swing, §4.6/PDT): próxima sesión**,
+   con su propio reloj en paralelo — la palanca de velocidad legítima.
