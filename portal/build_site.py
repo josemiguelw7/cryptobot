@@ -37,6 +37,7 @@ def charter_integrity():
         "league_criteria": "docs/success_criteria.md",
         "intraday_exam_bar": "docs/intraday_standard.md",
         "entrance_exam": "docs/entrance_exam.md",
+        "exam_amendment_001": "docs/exam_amendment_001.md",
     }
     out = {}
     for label, rel in docs.items():
@@ -46,8 +47,45 @@ def charter_integrity():
             continue
         with open(path, "rb") as fh:
             digest = hashlib.sha256(fh.read()).hexdigest()
-        out[label] = {"path": rel, "sha256": digest, "status": "ok"}
+        rec = path + ".ots"
+        stamped = os.path.exists(rec)
+        matches = None
+        if stamped:
+            # The receipt carries the hash it committed to Bitcoin. If that
+            # stops matching the file, the document was edited after being
+            # timestamped. Published either way: a mismatch is a finding, not
+            # something to fix quietly.
+            try:
+                raw = open(rec, "rb").read()
+                matches = bytes.fromhex(digest) in raw
+            except Exception:
+                matches = None
+        out[label] = {"path": rel, "sha256": digest, "status": "ok",
+                      "stamped": stamped, "receipt_matches": matches}
     return out
+
+
+def intraday_status():
+    """The intraday squad, reported honestly while it does not yet exist.
+
+    A public page that only shows the running league would imply the intraday
+    experiment is further along than it is. Publishing 'zero seeds, clock not
+    started' costs nothing now and makes it impossible to later imply the
+    clock started earlier than it did."""
+    gate = os.path.join(ROOT, "logs", "intraday_gate.json")
+    latest = {}
+    if os.path.exists(gate):
+        try:
+            latest = json.load(open(gate)).get("latest", {})
+        except Exception:
+            latest = {}
+    return {
+        "seeds": 0,
+        "counted_days": 0,
+        "clock_started": False,
+        "data_ok": latest.get("execution_data") is False,
+        "last_audit": latest.get("utc"),
+    }
 
 
 def build():
@@ -66,6 +104,7 @@ def build():
                                         "league_trades.csv"), tail=30),
         "examined": len(ledger),
         "integrity": charter_integrity(),
+        "intraday": intraday_status(),
     }
     os.makedirs(OUT, exist_ok=True)
     html = TEMPLATE.replace("__DATA__", json.dumps(data))
@@ -145,6 +184,36 @@ Bitcoin over 90 days, after fees.</div>
 
 <div class="card"><h2>Recent trades &mdash; and what each one cost</h2>
   <div id="trades"></div>
+</div>
+
+<div class="card"><h2>Intraday squad &mdash; not started</h2>
+  <div id="intraday"></div>
+  <div class="note">This is the second, harder experiment: strategies that
+  decide on hourly bars rather than daily. It has <b>zero strategies</b> and
+  its clock reads <b>zero counted days</b>. It is published in that state on
+  purpose &mdash; so that when the clock does start, nobody, including me,
+  can imply it started earlier.</div>
+</div>
+
+<div class="card"><h2>What was measured before the experiment began</h2>
+  <div class="note">Three diagnostics run on 8 pairs and ~8,750 hourly bars,
+  published here <b>before</b> any intraday strategy exists. None of them
+  computes a return, a Sharpe, or any measure of profit &mdash; they measure
+  cost and structure only, which is why running them does not compromise a
+  standard that was written while blind to results.
+  <div class="pipe" style="margin-top:12px">
+    <div><b>6.2</b><span>independent signals inside a basket of 20
+      &ldquo;classic&rdquo; indicators</span></div>
+    <div><b>14</b><span>most that ever agree at once, out of 20 &mdash;
+      a structural ceiling</span></div>
+    <div><b>0.31%</b><span>median hourly price move, against a 2.60%
+      cost hurdle per round trip</span></div>
+  </div>
+  The third number is the binding one. A trade must clear twice its
+  round-trip cost before it is allowed to happen, and the typical hour moves
+  a fraction of that. This is arithmetic between volatility and a fee
+  schedule; no strategy can change it. It is recorded now so that whatever
+  the experiment concludes later, the prior was on the record first.</div>
 </div>
 
 <div class="card"><h2>How the bot gets better</h2>
@@ -263,6 +332,31 @@ for (const t of tr){
   tEl.appendChild(d);
 }
 </script>
+<script>
+// intraday squad status
+(function(){
+  var I = D.intraday || {}, el = document.getElementById("intraday");
+  if(!el) return;
+  var ok = I.data_ok;
+  el.innerHTML =
+    '<div class="row"><div><div class="rname">Strategies entered</div>' +
+    '<div class="rdesc">Ten are planned. Each must pass a written exam ' +
+    'before it may enter, and once entered its rules are frozen forever.' +
+    '</div></div><div class="rnum"><div class="rv">' + (I.seeds||0) +
+    '</div></div></div>' +
+    '<div class="row"><div><div class="rname">Counted days on the clock</div>' +
+    '<div class="rdesc">The judgment window is 90 or 180 days depending on ' +
+    'how often a strategy trades. It has not begun.</div></div>' +
+    '<div class="rnum"><div class="rv">' + (I.counted_days||0) +
+    '</div></div></div>' +
+    '<div class="row"><div><div class="rname">Data integrity gate</div>' +
+    '<div class="rdesc">Checked before every cycle. If it fails, no day is ' +
+    'counted &mdash; broken plumbing must not become a result.</div>' +
+    (ok ? '<span class="badge b-in">PASSING</span>'
+        : '<span class="badge b-wait">NOT PASSING</span>') +
+    '</div><div class="rnum"></div></div>';
+})();
+</script>
 <div id="integrity" class="note" style="margin-top:18px"></div>
 <script>
 (function(){
@@ -270,7 +364,12 @@ for (const t of tr){
   var keys = Object.keys(I); if(!keys.length){ return; }
   var rows = keys.map(function(k){
     var d = I[k], h = d.sha256;
-    return '<div style="margin-top:4px"><b>'+d.path+'</b><br>'+
+    var seal = d.stamped
+      ? (d.receipt_matches === false
+          ? ' <b style="color:#C93B3B">RECEIPT MISMATCH</b>'
+          : ' <span style="color:#0E8F5B">timestamped on Bitcoin</span>')
+      : ' <span style="color:#9A6B15">not timestamped</span>';
+    return '<div style="margin-top:6px"><b>'+d.path+'</b>'+seal+'<br>'+
       (h ? '<code style="font-size:11px;word-break:break-all">'+h+'</code>'
          : '<span>MISSING</span>')+'</div>';
   }).join("");
@@ -279,7 +378,9 @@ for (const t of tr){
     'only ever be edited to make the standards stricter, never looser. ' +
     'The hashes are recomputed every build, so if a document is quietly ' +
     'changed, this page changes with it &mdash; the commitment is checkable ' +
-    'rather than just claimed.' + rows;
+    'rather than just claimed. Each hash is also timestamped on the ' +
+    'Bitcoin blockchain via OpenTimestamps, which is the part I cannot ' +
+    'rewrite: a private repository proves a date only to its owner.' + rows;
 })();
 </script>
 <div class="note" style="margin-top:6px">*BTC-TREND graduated under the
