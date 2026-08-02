@@ -234,3 +234,1161 @@ Subject: Cryptobot league — 2026-07-31
 5. CROSS-BTC  $  9,707.00   -2.93%  today -0.66%  breaker room 18%
 6. MOM-ROT    $  9,381.03   -6.19%  today +1.87%  breaker room 16%
 daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1467 total
+  ETH-USD: +0 new, 1467 total
+  SOL-USD: +0 new, 1467 total
+  XRP-USD: +0 new, 1115 total
+  ADA-USD: +0 new, 1467 total
+  DOGE-USD: +0 new, 1467 total
+  LINK-USD: +0 new, 1467 total
+  LTC-USD: +0 new, 1467 total
+refresh complete.
+=== bot/league.py ===
+[2026-07-31 17:46 UTC] league cycle
+  [BTC-HOLD] equity $9,763.30 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,386.42 holding ['PUMP-USD', 'UNI-USD', 'ALLO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,740.94 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (69 equity rows, 2 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-07-31.zip (8 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-07-31
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,763.30   -2.37%  today +0.35%  breaker room 17%
+5. CROSS-BTC  $  9,740.94   -2.59%  today +0.35%  breaker room 18%
+6. MOM-ROT    $  9,386.42   -6.14%  today +0.06%  breaker room 16%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1467 total
+  ETH-USD: +0 new, 1467 total
+  SOL-USD: +0 new, 1467 total
+  XRP-USD: +0 new, 1115 total
+  ADA-USD: +0 new, 1467 total
+  DOGE-USD: +0 new, 1467 total
+  LINK-USD: +0 new, 1467 total
+  LTC-USD: +0 new, 1467 total
+refresh complete.
+=== bot/league.py ===
+[2026-07-31 18:46 UTC] league cycle
+  [BTC-HOLD] equity $9,758.63 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,336.74 holding ['PUMP-USD', 'UNI-USD', 'ALLO-USD'] -> target ['UNI-USD', 'PUMP-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,736.28 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (75 equity rows, 2 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-07-31.zip (8 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-07-31
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,758.63   -2.41%  today -0.05%  breaker room 17%
+5. CROSS-BTC  $  9,736.28   -2.64%  today -0.05%  breaker room 18%
+6. MOM-ROT    $  9,336.74   -6.63%  today -0.53%  breaker room 15%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1467 total
+  ETH-USD: +0 new, 1467 total
+  SOL-USD: +0 new, 1467 total
+  XRP-USD: +0 new, 1115 total
+  ADA-USD: +0 new, 1467 total
+  DOGE-USD: +0 new, 1467 total
+  LINK-USD: +0 new, 1467 total
+  LTC-USD: +0 new, 1467 total
+refresh complete.
+=== bot/league.py ===
+[2026-07-31 19:46 UTC] league cycle
+  [BTC-HOLD] equity $9,754.24 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,341.00 holding ['PUMP-USD', 'UNI-USD', 'ALLO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,731.90 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (81 equity rows, 2 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-07-31.zip (8 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-07-31
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,754.24   -2.46%  today -0.04%  breaker room 17%
+5. CROSS-BTC  $  9,731.90   -2.68%  today -0.04%  breaker room 18%
+6. MOM-ROT    $  9,341.00   -6.59%  today +0.05%  breaker room 15%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1467 total
+  ETH-USD: +0 new, 1467 total
+  SOL-USD: +0 new, 1467 total
+  XRP-USD: +0 new, 1115 total
+  ADA-USD: +0 new, 1467 total
+  DOGE-USD: +0 new, 1467 total
+  LINK-USD: +0 new, 1467 total
+  LTC-USD: +0 new, 1467 total
+refresh complete.
+=== bot/league.py ===
+[2026-07-31 20:47 UTC] league cycle
+  [BTC-HOLD] equity $9,755.72 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,281.66 holding ['PUMP-USD', 'UNI-USD', 'ALLO-USD'] -> target ['UNI-USD', 'PUMP-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,733.37 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (87 equity rows, 2 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-07-31.zip (8 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-07-31
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,755.72   -2.44%  today +0.02%  breaker room 17%
+5. CROSS-BTC  $  9,733.37   -2.67%  today +0.02%  breaker room 18%
+6. MOM-ROT    $  9,281.66   -7.18%  today -0.64%  breaker room 15%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1467 total
+  ETH-USD: +0 new, 1467 total
+  SOL-USD: +0 new, 1467 total
+  XRP-USD: +0 new, 1115 total
+  ADA-USD: +0 new, 1467 total
+  DOGE-USD: +0 new, 1467 total
+  LINK-USD: +0 new, 1467 total
+  LTC-USD: +0 new, 1467 total
+refresh complete.
+=== bot/league.py ===
+[2026-07-31 21:47 UTC] league cycle
+  [BTC-HOLD] equity $9,755.28 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,221.74 holding ['PUMP-USD', 'UNI-USD', 'ALLO-USD'] -> target ['UNI-USD', 'PUMP-USD', 'ONDO-USD']
+  [MOM-ROT] SELL ALLO-USD @ 0.2725 (fee $10.58)
+  [MOM-ROT] BUY ONDO-USD @ 0.3925 ($1,752.48, fee $10.51)
+  [CROSS-BTC] equity $9,732.93 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (93 equity rows, 4 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-07-31.zip (8 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-07-31
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,755.28   -2.45%  today -0.00%  breaker room 17%
+5. CROSS-BTC  $  9,732.93   -2.67%  today -0.00%  breaker room 18%
+6. MOM-ROT    $  9,221.74   -7.78%  today -0.65%  breaker room 14%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1467 total
+  ETH-USD: +0 new, 1467 total
+  SOL-USD: +0 new, 1467 total
+  XRP-USD: +0 new, 1115 total
+  ADA-USD: +0 new, 1467 total
+  DOGE-USD: +0 new, 1467 total
+  LINK-USD: +0 new, 1467 total
+  LTC-USD: +0 new, 1467 total
+refresh complete.
+=== bot/league.py ===
+[2026-07-31 22:47 UTC] league cycle
+  [BTC-HOLD] equity $9,748.39 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,182.22 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['UNI-USD', 'PUMP-USD', 'ALLO-USD']
+  [CROSS-BTC] equity $9,726.06 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (99 equity rows, 4 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-07-31.zip (8 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-07-31
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,748.39   -2.52%  today -0.07%  breaker room 17%
+5. CROSS-BTC  $  9,726.06   -2.74%  today -0.07%  breaker room 18%
+6. MOM-ROT    $  9,182.22   -8.18%  today -0.43%  breaker room 14%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1467 total
+  ETH-USD: +0 new, 1467 total
+  SOL-USD: +0 new, 1467 total
+  XRP-USD: +0 new, 1115 total
+  ADA-USD: +0 new, 1467 total
+  DOGE-USD: +0 new, 1467 total
+  LINK-USD: +0 new, 1467 total
+  LTC-USD: +0 new, 1467 total
+refresh complete.
+=== bot/league.py ===
+[2026-07-31 23:47 UTC] league cycle
+  [BTC-HOLD] equity $9,749.63 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,244.54 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['UNI-USD', 'PUMP-USD', 'ALLO-USD']
+  [CROSS-BTC] equity $9,727.30 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (105 equity rows, 4 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-07-31.zip (8 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-07-31
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,749.63   -2.50%  today +0.01%  breaker room 17%
+5. CROSS-BTC  $  9,727.30   -2.73%  today +0.01%  breaker room 18%
+6. MOM-ROT    $  9,244.54   -7.55%  today +0.68%  breaker room 14%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +1 new, 1468 total
+  ETH-USD: +1 new, 1468 total
+  SOL-USD: +1 new, 1468 total
+  XRP-USD: +1 new, 1116 total
+  ADA-USD: +1 new, 1468 total
+  DOGE-USD: +1 new, 1468 total
+  LINK-USD: +1 new, 1468 total
+  LTC-USD: +1 new, 1468 total
+refresh complete.
+=== bot/league.py ===
+[2026-08-01 00:48 UTC] league cycle
+  [BTC-HOLD] equity $9,754.60 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,327.12 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,732.26 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (111 equity rows, 4 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-07-31.zip (8 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-01
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,754.60   -2.45%  today +0.05%  breaker room 17%
+5. CROSS-BTC  $  9,732.26   -2.68%  today +0.05%  breaker room 18%
+6. MOM-ROT    $  9,327.12   -6.73%  today +0.89%  breaker room 15%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1468 total
+  ETH-USD: +0 new, 1468 total
+  SOL-USD: +0 new, 1468 total
+  XRP-USD: +0 new, 1116 total
+  ADA-USD: +0 new, 1468 total
+  DOGE-USD: +0 new, 1468 total
+  LINK-USD: +0 new, 1468 total
+  LTC-USD: +0 new, 1468 total
+refresh complete.
+=== bot/league.py ===
+[2026-08-01 01:48 UTC] league cycle
+  [BTC-HOLD] equity $9,751.09 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,304.36 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,728.76 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (117 equity rows, 4 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-07-31.zip (8 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-01
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,751.09   -2.49%  today -0.04%  breaker room 17%
+5. CROSS-BTC  $  9,728.76   -2.71%  today -0.04%  breaker room 18%
+6. MOM-ROT    $  9,304.36   -6.96%  today -0.24%  breaker room 15%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1468 total
+  ETH-USD: +0 new, 1468 total
+  SOL-USD: +0 new, 1468 total
+  XRP-USD: +0 new, 1116 total
+  ADA-USD: +0 new, 1468 total
+  DOGE-USD: +0 new, 1468 total
+  LINK-USD: +0 new, 1468 total
+  LTC-USD: +0 new, 1468 total
+refresh complete.
+=== bot/league.py ===
+[2026-08-01 02:48 UTC] league cycle
+  [BTC-HOLD] equity $9,766.22 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,342.53 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,743.85 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (123 equity rows, 4 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-07-31.zip (8 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-01
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,766.22   -2.34%  today +0.16%  breaker room 17%
+5. CROSS-BTC  $  9,743.85   -2.56%  today +0.16%  breaker room 18%
+6. MOM-ROT    $  9,342.53   -6.57%  today +0.41%  breaker room 15%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1468 total
+  ETH-USD: +0 new, 1468 total
+  SOL-USD: +0 new, 1468 total
+  XRP-USD: +0 new, 1116 total
+  ADA-USD: +0 new, 1468 total
+  DOGE-USD: +0 new, 1468 total
+  LINK-USD: +0 new, 1468 total
+  LTC-USD: +0 new, 1468 total
+refresh complete.
+=== bot/league.py ===
+[2026-08-01 03:48 UTC] league cycle
+  [BTC-HOLD] equity $9,754.98 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,365.24 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,732.63 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (129 equity rows, 4 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-07-31.zip (8 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-01
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,754.98   -2.45%  today -0.12%  breaker room 17%
+5. CROSS-BTC  $  9,732.63   -2.67%  today -0.12%  breaker room 18%
+6. MOM-ROT    $  9,365.24   -6.35%  today +0.24%  breaker room 15%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1468 total
+  ETH-USD: +0 new, 1468 total
+  SOL-USD: +0 new, 1468 total
+  XRP-USD: +0 new, 1116 total
+  ADA-USD: +0 new, 1468 total
+  DOGE-USD: +0 new, 1468 total
+  LINK-USD: +0 new, 1468 total
+  LTC-USD: +0 new, 1468 total
+refresh complete.
+=== bot/league.py ===
+[2026-08-01 04:49 UTC] league cycle
+  [BTC-HOLD] equity $9,766.31 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,460.33 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,743.94 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (135 equity rows, 4 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-07-31.zip (8 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-01
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,766.31   -2.34%  today +0.12%  breaker room 17%
+5. CROSS-BTC  $  9,743.94   -2.56%  today +0.12%  breaker room 18%
+6. MOM-ROT    $  9,460.33   -5.40%  today +1.02%  breaker room 16%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1468 total
+  ETH-USD: +0 new, 1468 total
+  SOL-USD: +0 new, 1468 total
+  XRP-USD: +0 new, 1116 total
+  ADA-USD: +0 new, 1468 total
+  DOGE-USD: +0 new, 1468 total
+  LINK-USD: +0 new, 1468 total
+  LTC-USD: +0 new, 1468 total
+refresh complete.
+=== bot/league.py ===
+[2026-08-01 05:49 UTC] league cycle
+  [BTC-HOLD] equity $9,758.29 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,273.87 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,735.94 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (141 equity rows, 4 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-01.zip (9 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-01
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,758.29   -2.42%  today -0.08%  breaker room 17%
+5. CROSS-BTC  $  9,735.94   -2.64%  today -0.08%  breaker room 18%
+6. MOM-ROT    $  9,273.87   -7.26%  today -1.97%  breaker room 15%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1468 total
+  ETH-USD: +0 new, 1468 total
+  SOL-USD: +0 new, 1468 total
+  XRP-USD: +0 new, 1116 total
+  ADA-USD: +0 new, 1468 total
+  DOGE-USD: +0 new, 1468 total
+  LINK-USD: +0 new, 1468 total
+  LTC-USD: +0 new, 1468 total
+refresh complete.
+=== bot/league.py ===
+[2026-08-01 06:49 UTC] league cycle
+  [BTC-HOLD] equity $9,767.40 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,287.66 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,745.03 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (147 equity rows, 4 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-01.zip (9 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-01
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,767.40   -2.33%  today +0.09%  breaker room 17%
+5. CROSS-BTC  $  9,745.03   -2.55%  today +0.09%  breaker room 18%
+6. MOM-ROT    $  9,287.66   -7.12%  today +0.15%  breaker room 15%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1468 total
+  ETH-USD: +0 new, 1468 total
+  SOL-USD: +0 new, 1468 total
+  XRP-USD: +0 new, 1116 total
+  ADA-USD: +0 new, 1468 total
+  DOGE-USD: +0 new, 1468 total
+  LINK-USD: +0 new, 1468 total
+  LTC-USD: +0 new, 1468 total
+refresh complete.
+=== bot/league.py ===
+[2026-08-01 07:49 UTC] league cycle
+  [BTC-HOLD] equity $9,763.45 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,247.50 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,741.09 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (153 equity rows, 4 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-01.zip (9 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-01
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,763.45   -2.37%  today -0.04%  breaker room 17%
+5. CROSS-BTC  $  9,741.09   -2.59%  today -0.04%  breaker room 18%
+6. MOM-ROT    $  9,247.50   -7.53%  today -0.43%  breaker room 14%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1468 total
+  ETH-USD: +0 new, 1468 total
+  SOL-USD: +0 new, 1468 total
+  XRP-USD: +0 new, 1116 total
+  ADA-USD: +0 new, 1468 total
+  DOGE-USD: +0 new, 1468 total
+  LINK-USD: +0 new, 1468 total
+  LTC-USD: +0 new, 1468 total
+refresh complete.
+=== bot/league.py ===
+[2026-08-01 08:50 UTC] league cycle
+  [BTC-HOLD] equity $9,773.30 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,237.31 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,750.92 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (159 equity rows, 4 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-01.zip (9 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-01
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,773.30   -2.27%  today +0.10%  breaker room 17%
+5. CROSS-BTC  $  9,750.92   -2.49%  today +0.10%  breaker room 18%
+6. MOM-ROT    $  9,237.31   -7.63%  today -0.11%  breaker room 14%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1468 total
+  ETH-USD: +0 new, 1468 total
+  SOL-USD: +0 new, 1468 total
+  XRP-USD: +0 new, 1116 total
+  ADA-USD: +0 new, 1468 total
+  DOGE-USD: +0 new, 1468 total
+  LINK-USD: +0 new, 1468 total
+  LTC-USD: +0 new, 1468 total
+refresh complete.
+=== bot/league.py ===
+[2026-08-01 09:50 UTC] league cycle
+  [BTC-HOLD] equity $9,767.71 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,179.07 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,745.34 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (165 equity rows, 4 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-01.zip (9 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-01
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,767.71   -2.32%  today -0.06%  breaker room 17%
+5. CROSS-BTC  $  9,745.34   -2.55%  today -0.06%  breaker room 18%
+6. MOM-ROT    $  9,179.07   -8.21%  today -0.63%  breaker room 14%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1468 total
+  ETH-USD: +0 new, 1468 total
+  SOL-USD: +0 new, 1468 total
+  XRP-USD: +0 new, 1116 total
+  ADA-USD: +0 new, 1468 total
+  DOGE-USD: +0 new, 1468 total
+  LINK-USD: +0 new, 1468 total
+  LTC-USD: +0 new, 1468 total
+refresh complete.
+=== bot/league.py ===
+[2026-08-01 10:50 UTC] league cycle
+  [BTC-HOLD] equity $9,764.35 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,188.10 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,741.99 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (171 equity rows, 4 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-01.zip (9 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-01
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,764.35   -2.36%  today -0.03%  breaker room 17%
+5. CROSS-BTC  $  9,741.99   -2.58%  today -0.03%  breaker room 18%
+6. MOM-ROT    $  9,188.10   -8.12%  today +0.10%  breaker room 14%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1468 total
+  ETH-USD: +0 new, 1468 total
+  SOL-USD: +0 new, 1468 total
+  XRP-USD: +0 new, 1116 total
+  ADA-USD: +0 new, 1468 total
+  DOGE-USD: +0 new, 1468 total
+  LINK-USD: +0 new, 1468 total
+  LTC-USD: +0 new, 1468 total
+refresh complete.
+=== bot/league.py ===
+[2026-08-01 11:51 UTC] league cycle
+  [BTC-HOLD] equity $9,768.53 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,132.85 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,746.16 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (177 equity rows, 4 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-01.zip (9 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-01
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,768.53   -2.31%  today +0.04%  breaker room 17%
+5. CROSS-BTC  $  9,746.16   -2.54%  today +0.04%  breaker room 18%
+6. MOM-ROT    $  9,132.85   -8.67%  today -0.60%  breaker room 13%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1468 total
+  ETH-USD: +0 new, 1468 total
+  SOL-USD: +0 new, 1468 total
+  XRP-USD: +0 new, 1116 total
+  ADA-USD: +0 new, 1468 total
+  DOGE-USD: +0 new, 1468 total
+  LINK-USD: +0 new, 1468 total
+  LTC-USD: +0 new, 1468 total
+refresh complete.
+=== bot/league.py ===
+[2026-08-01 12:51 UTC] league cycle
+  [BTC-HOLD] equity $9,770.38 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,109.85 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,748.01 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (183 equity rows, 4 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-01.zip (9 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-01
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,770.38   -2.30%  today +0.02%  breaker room 17%
+5. CROSS-BTC  $  9,748.01   -2.52%  today +0.02%  breaker room 18%
+6. MOM-ROT    $  9,109.85   -8.90%  today -0.25%  breaker room 13%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1468 total
+  ETH-USD: +0 new, 1468 total
+  SOL-USD: +0 new, 1468 total
+  XRP-USD: +0 new, 1116 total
+  ADA-USD: +0 new, 1468 total
+  DOGE-USD: +0 new, 1468 total
+  LINK-USD: +0 new, 1468 total
+  LTC-USD: +0 new, 1468 total
+refresh complete.
+=== bot/league.py ===
+[2026-08-01 13:51 UTC] league cycle
+  [BTC-HOLD] equity $9,763.90 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,157.57 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,741.54 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (189 equity rows, 4 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-01.zip (9 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-01
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,763.90   -2.36%  today -0.07%  breaker room 17%
+5. CROSS-BTC  $  9,741.54   -2.58%  today -0.07%  breaker room 18%
+6. MOM-ROT    $  9,157.57   -8.42%  today +0.52%  breaker room 14%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1468 total
+  ETH-USD: +0 new, 1468 total
+  SOL-USD: +0 new, 1468 total
+  XRP-USD: +0 new, 1116 total
+  ADA-USD: +0 new, 1468 total
+  DOGE-USD: +0 new, 1468 total
+  LINK-USD: +0 new, 1468 total
+  LTC-USD: +0 new, 1468 total
+refresh complete.
+=== bot/league.py ===
+[2026-08-01 14:51 UTC] league cycle
+  [BTC-HOLD] equity $9,770.65 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,144.91 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,748.27 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (195 equity rows, 4 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-01.zip (9 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-01
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,770.65   -2.29%  today +0.07%  breaker room 17%
+5. CROSS-BTC  $  9,748.27   -2.52%  today +0.07%  breaker room 18%
+6. MOM-ROT    $  9,144.91   -8.55%  today -0.14%  breaker room 13%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1468 total
+  ETH-USD: +0 new, 1468 total
+  SOL-USD: +0 new, 1468 total
+  XRP-USD: +0 new, 1116 total
+  ADA-USD: +0 new, 1468 total
+  DOGE-USD: +0 new, 1468 total
+  LINK-USD: +0 new, 1468 total
+  LTC-USD: +0 new, 1468 total
+refresh complete.
+=== bot/league.py ===
+[2026-08-01 15:52 UTC] league cycle
+  [BTC-HOLD] equity $9,761.21 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,124.90 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,738.85 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (201 equity rows, 4 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-01.zip (9 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-01
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,761.21   -2.39%  today -0.10%  breaker room 17%
+5. CROSS-BTC  $  9,738.85   -2.61%  today -0.10%  breaker room 18%
+6. MOM-ROT    $  9,124.90   -8.75%  today -0.22%  breaker room 13%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1468 total
+  ETH-USD: +0 new, 1468 total
+  SOL-USD: +0 new, 1468 total
+  XRP-USD: +0 new, 1116 total
+  ADA-USD: +0 new, 1468 total
+  DOGE-USD: +0 new, 1468 total
+  LINK-USD: +0 new, 1468 total
+  LTC-USD: +0 new, 1468 total
+refresh complete.
+=== bot/league.py ===
+[2026-08-01 16:52 UTC] league cycle
+  [BTC-HOLD] equity $9,748.51 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,127.79 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,726.18 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (207 equity rows, 4 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-01.zip (9 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-01
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,748.51   -2.51%  today -0.13%  breaker room 17%
+5. CROSS-BTC  $  9,726.18   -2.74%  today -0.13%  breaker room 18%
+6. MOM-ROT    $  9,127.79   -8.72%  today +0.03%  breaker room 13%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1468 total
+  ETH-USD: +0 new, 1468 total
+  SOL-USD: +0 new, 1468 total
+  XRP-USD: +0 new, 1116 total
+  ADA-USD: +0 new, 1468 total
+  DOGE-USD: +0 new, 1468 total
+  LINK-USD: +0 new, 1468 total
+  LTC-USD: +0 new, 1468 total
+refresh complete.
+=== bot/league.py ===
+[2026-08-01 17:52 UTC] league cycle
+  [BTC-HOLD] equity $9,724.37 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,029.62 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,702.10 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (213 equity rows, 4 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-01.zip (9 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-01
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,724.37   -2.76%  today -0.25%  breaker room 17%
+5. CROSS-BTC  $  9,702.10   -2.98%  today -0.25%  breaker room 18%
+6. MOM-ROT    $  9,029.62   -9.70%  today -1.08%  breaker room 12%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1468 total
+  ETH-USD: +0 new, 1468 total
+  SOL-USD: +0 new, 1468 total
+  XRP-USD: +0 new, 1116 total
+  ADA-USD: +0 new, 1468 total
+  DOGE-USD: +0 new, 1468 total
+  LINK-USD: +0 new, 1468 total
+  LTC-USD: +0 new, 1468 total
+refresh complete.
+=== bot/league.py ===
+[2026-08-01 18:52 UTC] league cycle
+  [BTC-HOLD] equity $9,659.61 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $8,888.03 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,637.49 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (219 equity rows, 4 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-01.zip (9 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-01
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,659.61   -3.40%  today -0.67%  breaker room 16%
+5. CROSS-BTC  $  9,637.49   -3.63%  today -0.67%  breaker room 17%
+6. MOM-ROT    $  8,888.03  -11.12%  today -1.57%  breaker room 11%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1468 total
+  ETH-USD: +0 new, 1468 total
+  SOL-USD: +0 new, 1468 total
+  XRP-USD: +0 new, 1116 total
+  ADA-USD: +0 new, 1468 total
+  DOGE-USD: +0 new, 1468 total
+  LINK-USD: +0 new, 1468 total
+  LTC-USD: +0 new, 1468 total
+refresh complete.
+=== bot/league.py ===
+[2026-08-01 19:53 UTC] league cycle
+  [BTC-HOLD] equity $9,684.53 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,065.79 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,662.35 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (225 equity rows, 4 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-01.zip (9 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-01
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,684.53   -3.15%  today +0.26%  breaker room 17%
+5. CROSS-BTC  $  9,662.35   -3.38%  today +0.26%  breaker room 17%
+6. MOM-ROT    $  9,065.79   -9.34%  today +2.00%  breaker room 13%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1468 total
+  ETH-USD: +0 new, 1468 total
+  SOL-USD: +0 new, 1468 total
+  XRP-USD: +0 new, 1116 total
+  ADA-USD: +0 new, 1468 total
+  DOGE-USD: +0 new, 1468 total
+  LINK-USD: +0 new, 1468 total
+  LTC-USD: +0 new, 1468 total
+refresh complete.
+=== bot/league.py ===
+[2026-08-01 20:53 UTC] league cycle
+  [BTC-HOLD] equity $9,699.15 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $8,996.02 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,676.94 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (231 equity rows, 4 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-01.zip (9 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-01
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,699.15   -3.01%  today +0.15%  breaker room 17%
+5. CROSS-BTC  $  9,676.94   -3.23%  today +0.15%  breaker room 17%
+6. MOM-ROT    $  8,996.02  -10.04%  today -0.77%  breaker room 12%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1468 total
+  ETH-USD: +0 new, 1468 total
+  SOL-USD: +0 new, 1468 total
+  XRP-USD: +0 new, 1116 total
+  ADA-USD: +0 new, 1468 total
+  DOGE-USD: +0 new, 1468 total
+  LINK-USD: +0 new, 1468 total
+  LTC-USD: +0 new, 1468 total
+refresh complete.
+=== bot/league.py ===
+[2026-08-01 21:53 UTC] league cycle
+  [BTC-HOLD] equity $9,728.84 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,055.79 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,706.55 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (237 equity rows, 4 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-01.zip (9 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-01
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,728.84   -2.71%  today +0.31%  breaker room 17%
+5. CROSS-BTC  $  9,706.55   -2.93%  today +0.31%  breaker room 18%
+6. MOM-ROT    $  9,055.79   -9.44%  today +0.66%  breaker room 13%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1468 total
+  ETH-USD: +0 new, 1468 total
+  SOL-USD: +0 new, 1468 total
+  XRP-USD: +0 new, 1116 total
+  ADA-USD: +0 new, 1468 total
+  DOGE-USD: +0 new, 1468 total
+  LINK-USD: +0 new, 1468 total
+  LTC-USD: +0 new, 1468 total
+refresh complete.
+=== bot/league.py ===
+[2026-08-01 22:53 UTC] league cycle
+  [BTC-HOLD] equity $9,732.83 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,070.34 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,710.53 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (243 equity rows, 4 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-01.zip (9 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-01
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,732.83   -2.67%  today +0.04%  breaker room 17%
+5. CROSS-BTC  $  9,710.53   -2.89%  today +0.04%  breaker room 18%
+6. MOM-ROT    $  9,070.34   -9.30%  today +0.16%  breaker room 13%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1468 total
+  ETH-USD: +0 new, 1468 total
+  SOL-USD: +0 new, 1468 total
+  XRP-USD: +0 new, 1116 total
+  ADA-USD: +0 new, 1468 total
+  DOGE-USD: +0 new, 1468 total
+  LINK-USD: +0 new, 1468 total
+  LTC-USD: +0 new, 1468 total
+refresh complete.
+=== bot/league.py ===
+[2026-08-01 23:54 UTC] league cycle
+  [BTC-HOLD] equity $9,728.95 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,054.78 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,706.67 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (249 equity rows, 4 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-01.zip (9 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-01
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,728.95   -2.71%  today -0.04%  breaker room 17%
+5. CROSS-BTC  $  9,706.67   -2.93%  today -0.04%  breaker room 18%
+6. MOM-ROT    $  9,054.78   -9.45%  today -0.17%  breaker room 13%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +1 new, 1469 total
+  ETH-USD: +1 new, 1469 total
+  SOL-USD: +1 new, 1469 total
+  XRP-USD: +1 new, 1117 total
+  ADA-USD: +1 new, 1469 total
+  DOGE-USD: +1 new, 1469 total
+  LINK-USD: +1 new, 1469 total
+  LTC-USD: +1 new, 1469 total
+refresh complete.
+=== bot/league.py ===
+[2026-08-02 00:54 UTC] league cycle
+  [BTC-HOLD] equity $9,730.94 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,080.02 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,708.66 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (255 equity rows, 4 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-01.zip (9 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-02
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,730.94   -2.69%  today +0.02%  breaker room 17%
+5. CROSS-BTC  $  9,708.66   -2.91%  today +0.02%  breaker room 18%
+6. MOM-ROT    $  9,080.02   -9.20%  today +0.28%  breaker room 13%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1469 total
+  ETH-USD: +0 new, 1469 total
+  SOL-USD: +0 new, 1469 total
+  XRP-USD: +0 new, 1117 total
+  ADA-USD: +0 new, 1469 total
+  DOGE-USD: +0 new, 1469 total
+  LINK-USD: +0 new, 1469 total
+  LTC-USD: +0 new, 1469 total
+refresh complete.
+=== bot/league.py ===
+[2026-08-02 01:54 UTC] league cycle
+  [BTC-HOLD] equity $9,753.66 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,419.41 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,731.32 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (261 equity rows, 4 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-01.zip (9 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-02
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,753.66   -2.46%  today +0.23%  breaker room 17%
+5. CROSS-BTC  $  9,731.32   -2.69%  today +0.23%  breaker room 18%
+6. MOM-ROT    $  9,419.41   -5.81%  today +3.74%  breaker room 16%
+daily run complete.
+=== data/refresh_daily.py ===
+  BTC-USD: +0 new, 1469 total
+  ETH-USD: +0 new, 1469 total
+  SOL-USD: +0 new, 1469 total
+  XRP-USD: +0 new, 1117 total
+  ADA-USD: +0 new, 1469 total
+  DOGE-USD: +0 new, 1469 total
+  LINK-USD: +0 new, 1469 total
+  LTC-USD: +0 new, 1469 total
+refresh complete.
+=== bot/league.py ===
+[2026-08-02 02:54 UTC] league cycle
+  [BTC-HOLD] equity $9,820.26 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $10,000.00 holding cash -> target cash
+  [MOM-ROT] equity $9,425.62 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ONDO-USD']
+  [CROSS-BTC] equity $9,797.77 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $10,000.00 holding cash -> target cash
+  [RSI-BTC] equity $10,000.00 holding cash -> target cash
+league state saved.
+=== portal/build_site.py ===
+site/index.html built (267 equity rows, 4 trades, 10 exams)
+=== ops/backup.py ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-01.zip (9 snapshots kept)
+=== bot/digest.py ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-02
+
+1. BTC-TREND  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $ 10,000.00   +0.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  9,820.26   -1.80%  today +0.68%  breaker room 18%
+5. CROSS-BTC  $  9,797.77   -2.02%  today +0.68%  breaker room 18%
+6. MOM-ROT    $  9,425.62   -5.74%  today +0.07%  breaker room 16%
+daily run complete.
