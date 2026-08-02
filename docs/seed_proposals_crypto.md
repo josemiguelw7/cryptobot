@@ -107,3 +107,33 @@ más estricto.
    Se reabre solo si algún candidato futuro declara horizonte sub-1h.
 4. **Track de acciones (SPY/QQQ, swing, §4.6/PDT): próxima sesión**,
    con su propio reloj en paralelo — la palanca de velocidad legítima.
+
+## Erratum + predicciones pre-registradas (2026-08-02, antes de exámenes 2–10)
+
+**Erratum.** La frase "todas las semillas salen por una línea distinta de
+la que entran" es falsa tal como quedó implementado: h_trend_168 y
+h_tsmom_72 son de línea única; h_cross_24_168 y h_macd_12_26 cruzan
+líneas suavizadas (histéresis débil). Solo donch, volbrk, rsi, boll
+tienen histéresis verdadera; calm y nearhi son de régimen/banda. Bajo
+§9.3 las semillas NO se corrigen: quedan como están y el examen las
+juzga. El primer examen ya lo demostró: h_trend_168 = FAIL con 62–93
+trades por ventana de 90 días (churn de línea única, dominado por
+fees) — el prior de histéresis (997c7d3) predijo exactamente esto.
+
+**Predicciones registradas ANTES de correr los exámenes 2–10:**
+1. h_tsmom_72 fallará igual que h_trend_168: churn de línea única,
+   taxonomía dominante fees_spread, criterio 6 (fee-stress) FAIL.
+2. Las 4 con histéresis verdadera (donch, volbrk, rsi, boll) mostrarán
+   un orden de magnitud menos trades por ventana (~5–15 vs 60–90).
+3. Veredicto agregado: 0 de 10 PASS (predicción del estándar, en un año
+   donde B&H por ventana promedió ~−18% ninguna larga/flat pasa el
+   criterio 4 y 9 a la vez).
+4. Si alguna pasa, será por suerte de ventana, no por edge — y la valla
+   del criterio 9 (K=40+) existe para atraparlo.
+
+**Nota de display (no de criterio):** "stitched" imprime el producto de
+ventanas SOLAPADAS (step 12 < ventana 2160/24 días); a 1 decimal un año
+bajista colapsa a "-100.0%". Los números por ventana en el CSV del
+examen son la lectura sana. Cambiar el print es cosmético y se hará
+después de la tanda para no mezclar versiones del instrumento en un
+mismo log.
