@@ -7,7 +7,7 @@ Display scale: every strategy book is shown normalized to a $300
 virtual fund (internal books stay at $10,000 so the forward record is
 continuous). Fees shown in trades are scaled by the same factor.
 """
-import csv, json, os
+import csv, hashlib, json, os
 from datetime import datetime, timezone
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -22,6 +22,33 @@ def read_csv(path, tail=None):
     with open(path) as f:
         rows = list(csv.DictReader(f))
     return rows[-tail:] if tail else rows
+
+def charter_integrity():
+    """Publish the SHA-256 of every locked governance document.
+
+    A local git commit is weak pre-registration: `git commit --amend` rewrites
+    history and nobody is the wiser. Publishing the hash makes the claim
+    "this document may only be made stricter" verifiable by anyone, including
+    future-Jose, instead of merely asserted. Per charter section 14, a mismatch
+    between a published hash and the committed file is itself a finding and
+    gets disclosed rather than quietly corrected."""
+    docs = {
+        "intraday_charter": "docs/intraday_success_criteria.md",
+        "league_criteria": "docs/success_criteria.md",
+        "intraday_exam_bar": "docs/intraday_standard.md",
+        "entrance_exam": "docs/entrance_exam.md",
+    }
+    out = {}
+    for label, rel in docs.items():
+        path = os.path.join(ROOT, rel)
+        if not os.path.exists(path):
+            out[label] = {"path": rel, "sha256": None, "status": "MISSING"}
+            continue
+        with open(path, "rb") as fh:
+            digest = hashlib.sha256(fh.read()).hexdigest()
+        out[label] = {"path": rel, "sha256": digest, "status": "ok"}
+    return out
+
 
 def build():
     sp = os.path.join(ROOT, "bot", "league_state.json")
@@ -38,6 +65,7 @@ def build():
         "trades": read_csv(os.path.join(ROOT, "logs",
                                         "league_trades.csv"), tail=30),
         "examined": len(ledger),
+        "integrity": charter_integrity(),
     }
     os.makedirs(OUT, exist_ok=True)
     html = TEMPLATE.replace("__DATA__", json.dumps(data))
@@ -234,6 +262,25 @@ for (const t of tr){
    " \u00b7 on a $300 fund</div>";
   tEl.appendChild(d);
 }
+</script>
+<div id="integrity" class="note" style="margin-top:18px"></div>
+<script>
+(function(){
+  var I = D.integrity || {}, el = document.getElementById("integrity");
+  var keys = Object.keys(I); if(!keys.length){ return; }
+  var rows = keys.map(function(k){
+    var d = I[k], h = d.sha256;
+    return '<div style="margin-top:4px"><b>'+d.path+'</b><br>'+
+      (h ? '<code style="font-size:11px;word-break:break-all">'+h+'</code>'
+         : '<span>MISSING</span>')+'</div>';
+  }).join("");
+  el.innerHTML = '<b>Document integrity.</b> These are the SHA-256 hashes of ' +
+    'the governance documents that set the rules for this project. They may ' +
+    'only ever be edited to make the standards stricter, never looser. ' +
+    'The hashes are recomputed every build, so if a document is quietly ' +
+    'changed, this page changes with it &mdash; the commitment is checkable ' +
+    'rather than just claimed.' + rows;
+})();
 </script>
 <div class="note" style="margin-top:6px">*BTC-TREND graduated under the
 original exam, which was later found to be miscalibrated and was
