@@ -39,3 +39,26 @@ declaran hold ≥ 1 sesión.
 0 de 10 PASS. Razón: los megacaps 2024–2026 fueron fuertemente
 alcistas; una long/flat que entra y sale paga peaje y pierde contra
 SPY-HOLD en criterio 4, o sobrevive por suerte y cae en el 9.
+
+## Firma y deltas de implementación (2026-08-02)
+
+**Adoptado por el owner: Jose Miguel — vía chat: "aprobado".** Roster
+de 10 semillas espejo cerrado (bot/seeds_stocks.py); desde aquí aplica
+§9.3. Deltas del adaptador (`backtest/exam_1h_stocks.py`), todos en
+dirección MÁS estricta, ratchet-compatible:
+
+1. **Slippage plano 0.05% ambos lados** para las 10 (el estándar
+   permitía 0.02% a los ETFs; se les cobra como a los nombres).
+2. **Criterio 4 contra el B&H del universo completo** (stitched de los
+   10, mismo método que crypto) — vara más alta que SPY-HOLD solo,
+   porque el universo incluye los megacaps 2024-26.
+3. **Sharpe anualizado por sesiones** (agregación de 7 barras RTH,
+   √252). Usar el √365 de crypto habría inflado el Sharpe de stocks
+   ~20% — corregido antes de examinar a nadie.
+4. **Política de gaps precisa:** >96h = ventana descartada; gaps de
+   2–96h solo son válidos si aterrizan en la barra de apertura (9:30
+   ET); todo lo demás descarta. Dryrun: 120 ventanas main, ~1
+   descartada por ticker.
+5. El armado del track espera al **motor con reloj de mercado**
+   (squad_stocks) — los veredictos etiquetan candidata/control desde
+   ya, pero ARMED se enciende cuando exista quien ejecute.

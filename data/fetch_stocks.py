@@ -27,7 +27,7 @@ def save(tk, interval, period, tag):
         d.columns = d.columns.get_level_values(0)
     d = d.reset_index()
     tcol = d.columns[0]
-    d["timestamp"] = (d[tcol].astype("int64") // 10**9)
+    d["timestamp"] = d[tcol].map(lambda x: int(x.timestamp()))
     d["datetime"] = d[tcol].astype(str)
     d = d[["timestamp", "datetime", "Open", "High", "Low", "Close",
            "Volume"]]
