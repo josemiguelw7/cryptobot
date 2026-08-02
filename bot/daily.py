@@ -24,6 +24,57 @@ def run(script, fatal, args=(), ok_codes=(0,)):
     return r.returncode
 
 
+STATE = os.path.join(ROOT, "logs", "once_daily.json")
+
+
+def once_daily(script, ok_codes=(0,), args=(), done_codes=None):
+    """Run a step at most once per UTC day, no matter how often this driver
+    fires.
+
+    This exists because com.cryptobot.daily is NOT a 9am job - it is
+    StartInterval 3600, i.e. every hour, and it has been live since
+    2026-07-31. An hourly league cycle is intentional. An hourly 15-minute
+    intraday refresh is not: it would be roughly six hours a day of Coinbase
+    API calls to re-fetch bars already on disk, and it would hammer the
+    OpenTimestamps calendars 24 times a day for no gain.
+
+    Keyed on the UTC date of the last SUCCESSFUL run rather than a fixed
+    clock time, deliberately. A fixed 9am job on a laptop that happens to be
+    closed at 9am simply does not run, and for the 5m store a skipped day is
+    unrecoverable - Coinbase serves only ~60 days at that granularity. This
+    way the first fire after the machine wakes picks the day up.
+
+    A failed run is not recorded, so it will be retried on the next hourly
+    fire rather than waiting until tomorrow.
+
+    done_codes separates "did not fail" from "finished the job". ops/stamp.py
+    returns 1 while a receipt is still waiting on a Bitcoin block, which is
+    not an error but is not done either. Marking that as done would park the
+    upgrade until tomorrow; leaving it unrecorded retries every hour until
+    the attestation actually lands, then stops."""
+    import json
+    from datetime import datetime, timezone
+    today = f"{datetime.now(timezone.utc):%Y-%m-%d}"
+    state = {}
+    if os.path.exists(STATE):
+        try:
+            state = json.load(open(STATE))
+        except Exception:
+            state = {}
+    if state.get(script) == today:
+        print(f"=== {script} === already ran today ({today} UTC); skipping.",
+              flush=True)
+        return 0
+    rc = run(script, fatal=False, args=args, ok_codes=ok_codes)
+    if rc in (done_codes if done_codes is not None else ok_codes):
+        state[script] = today
+        try:
+            json.dump(state, open(STATE, "w"), indent=2)
+        except Exception as e:
+            print(f"WARNING: could not write {STATE}: {e}", flush=True)
+    return rc
+
+
 run("data/refresh_daily.py", fatal=False)    # keep exam data current
 
 # Intraday stores, and the section 8 gate that guards them.
@@ -38,7 +89,7 @@ run("data/refresh_daily.py", fatal=False)    # keep exam data current
 # Runtime is ~15 min for 25 pairs at 5m. It comes first because Coinbase
 # serves only ~60 days of 5m data and merges accumulate: a day this does not
 # run is a day of 5m history that no later run can recover.
-rc_intraday = run("data/refresh_intraday.py", fatal=False, ok_codes=(0, 1))
+rc_intraday = once_daily("data/refresh_intraday.py", ok_codes=(0, 1))
 if rc_intraday == 2:
     print("\n!!! INTRADAY GATE: execution_data condition. No counted "
           "intraday cycle today. See logs/intraday_gate.json.\n", flush=True)
@@ -50,7 +101,7 @@ if rc_intraday == 2:
 # is exactly the step that gets skipped. Exit 1 means still pending, which
 # is the normal state for the first hours. Exit 2 means a criteria document
 # no longer matches its receipt - loud, but not a reason to stop the run.
-rc_stamp = run("ops/stamp.py", fatal=False, ok_codes=(0, 1))
+rc_stamp = once_daily("ops/stamp.py", ok_codes=(0, 1), done_codes=(0,))
 if rc_stamp == 2:
     print("\n!!! CRITERIA RECEIPT MISMATCH. A pre-registered document was "
           "edited after stamping. Under the ratchet this is legitimate only "

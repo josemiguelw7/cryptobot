@@ -1392,3 +1392,37 @@ Subject: Cryptobot league — 2026-08-02
 5. CROSS-BTC  $  9,797.77   -2.02%  today +0.68%  breaker room 18%
 6. MOM-ROT    $  9,425.62   -5.74%  today +0.07%  breaker room 16%
 daily run complete.
+=== data/refresh_daily.py  ===
+  BTC-USD: +0 new, 1469 total
+  ETH-USD: +0 new, 1469 total
+  SOL-USD: +0 new, 1469 total
+  XRP-USD: +0 new, 1117 total
+  ADA-USD: +0 new, 1469 total
+  DOGE-USD: +0 new, 1469 total
+  LINK-USD: +0 new, 1469 total
+  LTC-USD: +0 new, 1469 total
+refresh complete.
+=== data/refresh_intraday.py  ===
+intraday refresh · 2026-08-02 03:55 UTC
+
+==========================================================
+refreshing 25 pairs @ 300s (60d window, merge)
+==========================================================
+
+[1/25] ADA-USD
+     gaps .................. 18, worst 0.2h at 2026-06-20 10:05 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 19652 -> 19654 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ADA-USD_300s.csv
+   Fetched range: 2026-06-03 04:00 to 2026-08-02 03:50 UTC
+
+[2/25] AERO-USD
+     gaps .................. 8, worst 0.2h at 2026-07-01 09:20 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 19661 -> 19663 bars (+2)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/AERO-USD_300s.csv
+   Fetched range: 2026-06-03 04:00 to 2026-08-02 03:50 UTC
+
+[3/25] ALLO-USD

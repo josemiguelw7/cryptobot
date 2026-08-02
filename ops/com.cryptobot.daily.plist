@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  NOTE: this is an HOURLY job, not a 9am job. StartInterval 3600 + RunAtLoad.
+  It has been loaded and live since 2026-07-31; `launchctl list | grep
+  cryptobot` shows it.
+
+  bot/daily.py is written to suit that cadence: the league cycle is meant to
+  run hourly, while the expensive steps (data/refresh_intraday.py, ~15 min,
+  and ops/stamp.py) are wrapped in once_daily() and fire at most once per UTC
+  day. Do not add a costly step to daily.py without that wrapper.
+
+  The cadence is deliberately interval-based rather than a fixed clock time:
+  a 9am job on a laptop that is closed at 9am simply does not run, and a
+  skipped day of 5m data is unrecoverable - Coinbase serves only ~60 days at
+  that granularity.
+-->
 <plist version="1.0"><dict>
   <key>Label</key><string>com.cryptobot.daily</string>
   <key>ProgramArguments</key><array>
