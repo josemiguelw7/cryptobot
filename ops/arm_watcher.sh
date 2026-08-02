@@ -4,7 +4,7 @@
 # docs/seed_proposals_crypto.md (2026-08-02). Aborts loudly otherwise.
 cd /Users/haroonrasheed/Projects/cryptobot || exit 1
 LOG=logs/exam_1h_batch.log
-i=0; while [ $i -lt 240 ]; do
+i=0; while [ $i -lt 720 ]; do
   grep -q "BATCH_COMPLETE" "$LOG" && break; sleep 60; i=$((i+1)); done
 grep -q "BATCH_COMPLETE" "$LOG" || { echo "TIMEOUT waiting for batch"; exit 1; }
 ./.venv/bin/python - << 'PY' || exit 1
