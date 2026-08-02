@@ -1,56 +1,51 @@
 """
-Fetch daily stock/ETF history via yfinance (split/dividend adjusted)
-and store it in the system's candle format:
-    timestamp,datetime,low,high,open,close,volume
-Saved as {SYM}-US_86400s.csv in candles_daily so the research screen
-discovers them automatically. Stocks are a RESEARCH universe only; the
-entrance exam pair set and the league are untouched.
+Stock data store - fixed, pre-declared universe. 1h and 1d bars via
+yfinance (auto-adjusted for splits/dividends).
 
-    python data/fetch_stocks.py
+UNIVERSE (declared 2026-08-02, before any strategy result was seen):
+3 index ETFs for breadth/regime + 7 largest liquid megacaps. Chosen by
+TODAY's liquidity, so any backtest on the single names carries
+survivorship optimism - that caveat is pre-registered in
+docs/stocks_standard.md and the forward squad, not the backtest, is
+the judge. The universe is FROZEN: changing it requires a new
+generation, never an edit.
 """
-import csv, os
-from datetime import timezone
+import os, time
 import yfinance as yf
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT = os.path.join(HERE, "candles_daily")
+OUT = os.path.join(HERE, "stocks")
+UNIVERSE = ["SPY", "QQQ", "IWM", "AAPL", "MSFT", "NVDA", "AMZN",
+            "GOOGL", "META", "TSLA"]
 
-SYMS = ["SPY", "QQQ", "AAPL", "MSFT", "NVDA", "GOOGL",
-        "AMZN", "META", "TSLA", "JPM", "XOM", "UNH"]
-
-def fetch(sym):
-    df = yf.Ticker(sym).history(period="max", interval="1d",
-                                auto_adjust=True)
-    if df is None or df.empty:
-        raise RuntimeError("empty response")
-    out = os.path.join(OUT, f"{sym}-US_86400s.csv")
-    n = 0
-    with open(out, "w", newline="") as f:
-        w = csv.writer(f)
-        w.writerow(["timestamp", "datetime", "low", "high",
-                    "open", "close", "volume"])
-        for ts, row in df.iterrows():
-            try:
-                d = ts.strftime("%Y-%m-%d")
-                epoch = int(ts.tz_convert(timezone.utc).timestamp()
-                            if ts.tzinfo else ts.timestamp())
-                w.writerow([epoch, d,
-                            round(float(row["Low"]), 6),
-                            round(float(row["High"]), 6),
-                            round(float(row["Open"]), 6),
-                            round(float(row["Close"]), 6),
-                            int(row.get("Volume", 0) or 0)])
-                n += 1
-            except Exception:
-                continue
-    return n
+def save(tk, interval, period, tag):
+    d = yf.download(tk, period=period, interval=interval,
+                    progress=False, auto_adjust=True)
+    if d is None or len(d) == 0:
+        print(f"  {tk} {tag}: EMPTY"); return 0
+    if hasattr(d.columns, "levels"):          # flatten MultiIndex
+        d.columns = d.columns.get_level_values(0)
+    d = d.reset_index()
+    tcol = d.columns[0]
+    d["timestamp"] = (d[tcol].astype("int64") // 10**9)
+    d["datetime"] = d[tcol].astype(str)
+    d = d[["timestamp", "datetime", "Open", "High", "Low", "Close",
+           "Volume"]]
+    d.columns = ["timestamp", "datetime", "open", "high", "low",
+                 "close", "volume"]
+    p = os.path.join(OUT, f"{tk}_{tag}.csv")
+    d.to_csv(p, index=False)
+    return len(d)
 
 def main():
-    for s in SYMS:
-        try:
-            print(f"  {s:>6}: {fetch(s)} daily bars")
-        except Exception as e:
-            print(f"  {s:>6}: FAILED ({e})")
+    os.makedirs(OUT, exist_ok=True)
+    for tk in UNIVERSE:
+        n1 = save(tk, "1h", "730d", "1h")
+        time.sleep(1)
+        n2 = save(tk, "1d", "10y", "1d")
+        time.sleep(1)
+        print(f"  {tk}: {n1} 1h bars, {n2} 1d bars")
+    print("stock store complete.")
 
 if __name__ == "__main__":
     main()
