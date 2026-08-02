@@ -1,0 +1,257 @@
+refresh mode @ 300s: 25 pairs staler than 6.0h
+
+[1/25] ADA-USD
+     missing ............... 18
+     unclosed bars dropped . 1
+     gaps .................. 18, worst 0.2h at 2026-06-20 10:05 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 17271 -> 19646 bars (+2375)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ADA-USD_300s.csv
+   Fetched range: 2026-06-03 03:20 to 2026-08-02 03:10 UTC
+
+[2/25] AERO-USD
+     missing ............... 8
+     unclosed bars dropped . 1
+     gaps .................. 8, worst 0.2h at 2026-07-01 09:20 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 17273 -> 19655 bars (+2382)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/AERO-USD_300s.csv
+   Fetched range: 2026-06-03 03:20 to 2026-08-02 03:10 UTC
+
+[3/25] ALLO-USD
+     missing ............... 307
+     unclosed bars dropped . 1
+     gaps .................. 265, worst 0.6h at 2026-06-21 04:10 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 16670 -> 19045 bars (+2375)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ALLO-USD_300s.csv
+   Fetched range: 2026-06-03 03:20 to 2026-08-02 03:10 UTC
+
+[4/25] BILL-USD
+     missing ............... 65
+     unclosed bars dropped . 0
+     gaps .................. 63, worst 0.3h at 2026-07-26 23:10 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 17237 -> 19600 bars (+2363)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/BILL-USD_300s.csv
+   Fetched range: 2026-06-03 03:25 to 2026-08-02 03:15 UTC
+
+[5/25] BTC-USD
+     bars written .......... 17279
+     expected in range ..... 17279
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 17280 -> 19668 bars (+2388)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/BTC-USD_300s.csv
+   Fetched range: 2026-06-03 03:25 to 2026-08-02 03:15 UTC
+
+[6/25] DOGE-USD
+     missing ............... 1
+     unclosed bars dropped . 1
+     gaps .................. 1, worst 0.2h at 2026-07-12 09:50 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 17279 -> 19665 bars (+2386)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/DOGE-USD_300s.csv
+   Fetched range: 2026-06-03 03:25 to 2026-08-02 03:15 UTC
+
+[7/25] ENA-USD
+     missing ............... 1304
+     unclosed bars dropped . 1
+     gaps .................. 1121, worst 0.4h at 2026-07-04 06:45 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 16208 -> 18256 bars (+2048)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ENA-USD_300s.csv
+   Fetched range: 2026-06-03 03:25 to 2026-08-02 03:15 UTC
+
+[8/25] ETH-USD
+     bars written .......... 17279
+     expected in range ..... 17279
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 17280 -> 19667 bars (+2387)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ETH-USD_300s.csv
+   Fetched range: 2026-06-03 03:25 to 2026-08-02 03:15 UTC
+
+[9/25] GWEI-USD
+     missing ............... 1613
+     unclosed bars dropped . 0
+     gaps .................. 1214, worst 0.8h at 2026-06-04 19:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 14994 -> 17144 bars (+2150)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/GWEI-USD_300s.csv
+   Fetched range: 2026-06-03 03:35 to 2026-08-02 03:15 UTC
+
+[10/25] HBAR-USD
+     missing ............... 6
+     unclosed bars dropped . 1
+     gaps .................. 6, worst 0.2h at 2026-06-16 21:40 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 17274 -> 19659 bars (+2385)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/HBAR-USD_300s.csv
+   Fetched range: 2026-06-03 03:25 to 2026-08-02 03:15 UTC
+
+[11/25] HYPE-USD
+     bars written .......... 17279
+     expected in range ..... 17279
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 17280 -> 19666 bars (+2386)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/HYPE-USD_300s.csv
+   Fetched range: 2026-06-03 03:25 to 2026-08-02 03:15 UTC
+
+[12/25] LINK-USD
+     bars written .......... 17279
+     expected in range ..... 17279
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 17280 -> 19665 bars (+2385)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/LINK-USD_300s.csv
+   Fetched range: 2026-06-03 03:25 to 2026-08-02 03:15 UTC
+
+[13/25] LTC-USD
+     bars written .......... 17279
+     expected in range ..... 17279
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 17280 -> 19666 bars (+2386)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/LTC-USD_300s.csv
+   Fetched range: 2026-06-03 03:30 to 2026-08-02 03:20 UTC
+
+[14/25] NEAR-USD
+     missing ............... 10
+     unclosed bars dropped . 0
+     gaps .................. 10, worst 0.2h at 2026-06-29 13:05 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 17276 -> 19657 bars (+2381)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/NEAR-USD_300s.csv
+   Fetched range: 2026-06-03 03:30 to 2026-08-02 03:20 UTC
+
+[15/25] ONDO-USD
+     missing ............... 1
+     unclosed bars dropped . 1
+     gaps .................. 1, worst 0.2h at 2026-06-29 13:05 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 17278 -> 19665 bars (+2387)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ONDO-USD_300s.csv
+   Fetched range: 2026-06-03 03:30 to 2026-08-02 03:20 UTC
+
+[16/25] PUMP-USD
+     missing ............... 746
+     unclosed bars dropped . 1
+     gaps .................. 663, worst 0.4h at 2026-07-12 08:15 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 16566 -> 18856 bars (+2290)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/PUMP-USD_300s.csv
+   Fetched range: 2026-06-03 03:30 to 2026-08-02 03:20 UTC
+
+[17/25] RE-USD
+     unclosed bars dropped . 1
+     empty windows ......... 15
+     gaps .................. 203, worst 0.3h at 2026-07-12 11:30 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 10255 -> 12617 bars (+2362)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/RE-USD_300s.csv
+   Fetched range: 2026-06-18 12:40 to 2026-08-02 03:20 UTC
+
+[18/25] SOL-USD
+     bars written .......... 17279
+     expected in range ..... 17279
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 17280 -> 19667 bars (+2387)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/SOL-USD_300s.csv
+   Fetched range: 2026-06-03 03:30 to 2026-08-02 03:20 UTC
+
+[19/25] SUI-USD
+     missing ............... 3
+     unclosed bars dropped . 1
+     gaps .................. 3, worst 0.2h at 2026-06-14 09:40 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 17278 -> 19664 bars (+2386)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/SUI-USD_300s.csv
+   Fetched range: 2026-06-03 03:30 to 2026-08-02 03:20 UTC
+
+[20/25] TAO-USD
+     missing ............... 4
+     unclosed bars dropped . 1
+     gaps .................. 3, worst 0.2h at 2026-07-25 05:15 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 17278 -> 19662 bars (+2384)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/TAO-USD_300s.csv
+   Fetched range: 2026-06-03 03:30 to 2026-08-02 03:20 UTC
+
+[21/25] UNI-USD
+     missing ............... 73
+     unclosed bars dropped . 1
+     gaps .................. 72, worst 0.2h at 2026-06-28 21:20 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 17195 -> 19567 bars (+2372)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/UNI-USD_300s.csv
+   Fetched range: 2026-06-03 03:30 to 2026-08-02 03:20 UTC
+
+[22/25] VVV-USD
+     missing ............... 37
+     unclosed bars dropped . 0
+     gaps .................. 37, worst 0.2h at 2026-06-17 21:25 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 17257 -> 19629 bars (+2372)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/VVV-USD_300s.csv
+   Fetched range: 2026-06-03 03:35 to 2026-08-02 03:25 UTC
+
+[23/25] XLM-USD
+     bars written .......... 17279
+     expected in range ..... 17279
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 17280 -> 19668 bars (+2388)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/XLM-USD_300s.csv
+   Fetched range: 2026-06-03 03:35 to 2026-08-02 03:25 UTC
+
+[24/25] XRP-USD
+     bars written .......... 17279
+     expected in range ..... 17279
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 17280 -> 19668 bars (+2388)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/XRP-USD_300s.csv
+   Fetched range: 2026-06-03 03:35 to 2026-08-02 03:25 UTC
+
+[25/25] ZEC-USD
+     bars written .......... 17279
+     expected in range ..... 17279
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 17280 -> 19668 bars (+2388)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ZEC-USD_300s.csv
+   Fetched range: 2026-06-03 03:35 to 2026-08-02 03:25 UTC
+
+==========================================================
+complete in 13.9 min · clean 9 · with gaps 16 · failed 0
+  gaps (expected for illiquid/new pairs): ADA-USD, AERO-USD, ALLO-USD, BILL-USD, DOGE-USD, ENA-USD, GWEI-USD, HBAR-USD, NEAR-USD, ONDO-USD, PUMP-USD, RE-USD, SUI-USD, TAO-USD, UNI-USD, VVV-USD
+
+Now re-run:  python data/pit_universe.py  and  python data/audit.py --intraday
