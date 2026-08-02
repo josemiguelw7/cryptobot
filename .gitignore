@@ -4,3 +4,13 @@ __pycache__/
 data/candles/
 data/candles_daily/
 backups/
+
+# Credentials. Nothing live exists yet - this is here so that when Coinbase
+# API keys do arrive, the default is already safe. Keys go in .env, never
+# in tracked source, never in league_state.json.
+.env
+.env.*
+*.pem
+*.key
+credentials.json
+secrets.json
