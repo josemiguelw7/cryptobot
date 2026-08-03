@@ -212,7 +212,52 @@ def ledger_names():
         return {row["candidate"] for row in csv.DictReader(f)}
 
 
+def dirty_paths():
+    """Uncommitted changes under the code that DEFINES an exam. A
+    ledger row is a pre-registration record; if the tree was dirty the
+    recorded hash does not pin the strategy or engine that was
+    actually run, so the row proves less than it appears to. Data and
+    logs are excluded — they move constantly and are fingerprinted
+    separately (data_fingerprint)."""
+    watch = ("bot/", "backtest/")
+    try:
+        out = subprocess.check_output(
+            ["git", "status", "--porcelain"], cwd=ROOT,
+            stderr=subprocess.DEVNULL).decode()
+    except Exception:
+        return []                      # no git: git_hash() says "nogit"
+    hits = []
+    for line in out.splitlines():
+        p = line[3:].strip().strip('"')
+        if not p.startswith(watch):
+            continue
+        if p.endswith(("_state.json", ".pyc")) or "__pycache__" in p:
+            continue                   # engine STATE, not engine CODE
+        hits.append(p)
+    return sorted(hits)
+
+
+def require_clean_tree(name):
+    """Refuse to record a verdict from an unpinned tree. Ratchet-safe:
+    this can only ever REFUSE to write a row, never loosen a criterion
+    or alter a verdict. Deliberately has no --force flag; the fix is
+    one commit. (Added 2026-08-03 after the 24h ops audit found every
+    ledger row to date carrying a '-dirty' hash.)"""
+    d = dirty_paths()
+    if not d:
+        return
+    show = "\n  ".join(d[:12]) + (f"\n  ... +{len(d) - 12} more"
+                                  if len(d) > 12 else "")
+    raise SystemExit(
+        f"REFUSING to record exam '{name}': working tree is dirty.\n"
+        f"A ledger row's git_hash must pin the exact code examined.\n"
+        f"Uncommitted under bot/ or backtest/:\n  {show}\n\n"
+        f"Commit (or stash) those, then re-run. To explore without\n"
+        f"recording, use --screen, which never writes a verdict.")
+
+
 def ledger_record(name, verdict, summary, pairs):
+    require_clean_tree(name)
     os.makedirs(RESULTS, exist_ok=True)
     new = not os.path.exists(LEDGER)
     n_examined = len(ledger_names()) + 1

@@ -229,6 +229,7 @@ def fingerprint_1h():
 
 
 def ledger_record_1h(name, verdict, sm):
+    exam.require_clean_tree(name)
     os.makedirs(RESULTS, exist_ok=True)
     n_examined = len(exam.ledger_names()) + 1
     with open(LEDGER, "a", newline="") as f:
@@ -388,6 +389,9 @@ def main():
     if a.candidate in exam.ledger_names():
         sys.exit(f"REFUSED: {a.candidate!r} already examined. One exam "
                  f"per name, ever (docs/intraday_standard.md).")
+    # fail fast: check the tree BEFORE a multi-minute permutation run,
+    # not after, so a dirty tree costs seconds instead of the exam.
+    exam.require_clean_tree(a.candidate)
     run(a.candidate, record=True, n_iter=a.iters)
 
 
