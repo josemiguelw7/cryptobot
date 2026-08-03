@@ -233,6 +233,24 @@ def loss_cause(gross, exit_kind):
 
 # ---------------------------------------------------------------- trading
 
+def update_excursions(st_bot, quotes, data):
+    """MFE/MAE tape — instrumentation only, decides NOTHING (s9.7 safe).
+    Samples each held position's mid at every cycle. Hourly sampling is
+    the truthful resolution here: bots only act at cycles, so
+    cycle-sampled MFE is exactly what any exit rule running in this
+    engine could actually have harvested."""
+    for p, e in st_bot["entries"].items():
+        px = None
+        if p in quotes:
+            px = quotes[p]["mid"]
+        elif data.get(p, ([], []))[0]:
+            px = data[p][0][-1]
+        if px is None:
+            continue
+        e["peak_mid"] = max(e.get("peak_mid", px), px)
+        e["trough_mid"] = min(e.get("trough_mid", px), px)
+
+
 def close_position(st_bot, bot, pair, q, now, exit_kind):
     u = st_bot["units"].pop(pair)
     e = st_bot["entries"].pop(pair, {})
@@ -245,12 +263,17 @@ def close_position(st_bot, bot, pair, q, now, exit_kind):
     net = (gross_notional - fee) - e.get("cost_basis", gross_notional)
     cause = loss_cause(gross, exit_kind) if net < 0 else ""
     hold_h = (now.timestamp() - e.get("ts", now.timestamp())) / 3600
+    # MFE/MAE: peak/trough mids sampled each cycle, incl. this exit.
+    base = e.get("mid") or px
+    peak = max(e.get("peak_mid", base), q["mid"])
+    trough = min(e.get("trough_mid", base), q["mid"])
+    mfe, mae = peak / base - 1, trough / base - 1
     append(TRLOG, ["utc", "bot", "action", "pair", "px", "units", "fee",
                    "net_pnl", "gross_pnl", "hold_h", "exit_kind",
-                   "loss_cause"],
+                   "loss_cause", "mfe_pct", "mae_pct"],
            [now.isoformat(), bot, "SELL", pair, f"{px:.6f}", f"{u:.8f}",
             f"{fee:.2f}", f"{net:.2f}", f"{gross:.2f}", f"{hold_h:.1f}",
-            exit_kind, cause])
+            exit_kind, cause, f"{mfe:.4f}", f"{mae:.4f}"])
     st_bot["ctx"].setdefault(pair, {})["weight"] = 0.0
     st_bot["ctx"][pair]["entry_price"] = None
     print(f"  [{bot}] SELL {pair} @ {px:,.4f} net {net:+,.2f} "
@@ -270,12 +293,14 @@ def open_position(st_bot, bot, pair, q, now, weight, equity):
     st_bot["units"][pair] = u
     st_bot["entries"][pair] = {"px": px, "mid": q["mid"],
                                "ts": now.timestamp(),
-                               "cost_basis": notional}
+                               "cost_basis": notional,
+                               "peak_mid": q["mid"],    # MFE/MAE tape
+                               "trough_mid": q["mid"]}
     append(TRLOG, ["utc", "bot", "action", "pair", "px", "units", "fee",
                    "net_pnl", "gross_pnl", "hold_h", "exit_kind",
-                   "loss_cause"],
+                   "loss_cause", "mfe_pct", "mae_pct"],
            [now.isoformat(), bot, "BUY", pair, f"{px:.6f}", f"{u:.8f}",
-            f"{fee:.2f}", "", "", "", "", ""])
+            f"{fee:.2f}", "", "", "", "", "", "", ""])
     st_bot["ctx"].setdefault(pair, {})["weight"] = weight
     st_bot["ctx"][pair]["entry_price"] = px
     print(f"  [{bot}] BUY {pair} @ {px:,.4f} (${notional:,.2f}, "
@@ -415,6 +440,7 @@ def cycle():
         for p in list(b["units"]):
             q(p)
         eq = mark(b, quotes, data)
+        update_excursions(b, quotes, data)
         rollover(st, name, b, today)
         b["last_eq"] = eq
         total_eq += eq

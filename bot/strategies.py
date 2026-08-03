@@ -376,6 +376,58 @@ class VolBreak(Strategy):
         return 1.0 if (vf < vs and px >= hi) else 0.0
 
 
+class Bracket(Strategy):
+    """Trend entry + full bracket: hard stop below entry AND fixed
+    take-profit above it. Exists to test the owner's 2026-08-03
+    hypothesis ("lock gains at +X%") against the no-TP siblings.
+    NOTE: the exit_autopsy of 2026-08-03 (12 trades, max MFE +1.27%)
+    found nothing for a TP to harvest at hourly horizons — examine only
+    if later MFE data ever reaches TP territory. Path-dependent via ctx
+    like TrendStop; bar-length agnostic."""
+    def __init__(self, n, stop_pct, tp_pct):
+        self.n, self.stop, self.tp = n, stop_pct, tp_pct
+        self.name = f"brk{n}s{int(stop_pct*100)}t{int(tp_pct*100)}"
+        self.warmup = n
+    def step(self, closes, ctx):
+        px = closes[-1]
+        if ctx.get("weight", 0) > 0:
+            entry = ctx.get("entry_price") or px
+            if px <= entry * (1 - self.stop):    # stop -> cash
+                return 0.0
+            if px >= entry * (1 + self.tp):      # take-profit -> cash
+                return 0.0
+        m = sma(closes, self.n)
+        if m is None:
+            return 0.0
+        return 1.0 if px > m else 0.0
+
+
+class TrailStop(Strategy):
+    """Trend entry + trailing stop: exit when price falls trail_pct
+    from the HIGHEST close seen since entry. Ratchets gains without
+    capping them — the middle ground between a fixed TP (caps winners)
+    and a pure signal exit (gives back the peak). Peak lives in ctx
+    ("trail_peak"), reset on entry; path-dependent, bar-agnostic."""
+    def __init__(self, n, trail_pct):
+        self.n, self.trail = n, trail_pct
+        self.name = f"trail{n}x{int(trail_pct*100)}"
+        self.warmup = n
+    def step(self, closes, ctx):
+        px = closes[-1]
+        if ctx.get("weight", 0) > 0:
+            peak = max(ctx.get("trail_peak") or px, px)
+            ctx["trail_peak"] = peak
+            if px <= peak * (1 - self.trail):    # trail hit -> cash
+                ctx["trail_peak"] = None
+                return 0.0
+            return 1.0 if px > (sma(closes, self.n) or px) else 0.0
+        ctx["trail_peak"] = None
+        m = sma(closes, self.n)
+        if m is None:
+            return 0.0
+        return 1.0 if px > m else 0.0
+
+
 # ---------------------------------------------------------------- registry
 # Every examinable candidate, by permanent name. exam.py reads this;
 # league.py builds live members from the same classes.
@@ -404,6 +456,11 @@ REGISTRY = {
     "ema_9_21":    EMACross(9, 21),
     "near_hi_250": NearHigh(250, 0.20),
     "calm_30_100": CalmRegime(30, 100),
+    # Bracket/TrailStop classes exist above but are deliberately NOT
+    # instantiated here: a registry name is a one-shot exam ticket, and
+    # per exit_study_2026-08-03 (max MFE +1.27% over 12 trades) there
+    # is nothing for a TP to harvest yet. Naming any variant is a
+    # Saturday-review decision (charter s10.1).
 }
 
 

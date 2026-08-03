@@ -1,32 +1,11 @@
-===== EXAM h_trend_168 =====
+crypto lane clear; starting stock exams Sun Aug  2 16:22:16 UTC 2026
+===== EXAM s_trend_33 =====
 [criterion 9] permutation x200 ... (minutes)
 
-=== HOURLY EXAM: h_trend_168 ===
-main windows 32 (8 pairs, 0 dropped for gaps) | holdout windows 8 | trades 2562
-stitched -100.0% vs B&H -100.0% (net -100.0%)
-Sharpe -5.16 vs luck hurdle 1.09 (K=40 trials) | permutation p=0.7761
-  [PASS] 1_sample   (>=24 win, >=4 pairs)
-  [FAIL] 2_safety   (DD never worse)
-  [FAIL] 3_riskedge (shallower >=60%)
-  [FAIL] 4_return   (>= B&H net-to-net)
-  [PASS] 5_activity (>=4 trades)
-  [FAIL] 6_feestress(2-4 hold @1.5x)
-  [FAIL] 7_beatsdaily(no daily pass -> =4)
-  [FAIL] 8_holdout  (2-4 on final 120d)
-  [FAIL] 9_notluck  (p<0.05 & SR>hurdle)
-VERDICT: FAIL - control only
-saved -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam1h_h_trend_168_2026-08-02.csv
-ledger -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam_ledger.csv (timeframe=1h)
-exit=0 done-h_trend_168
-===== EXAM h_cross_24_168 =====
-[criterion 9] permutation x200 ... (minutes)
-===== EXAM h_cross_24_168 =====
-[criterion 9] permutation x200 ... (minutes)
-
-=== HOURLY EXAM: h_cross_24_168 ===
-main windows 32 (8 pairs, 0 dropped for gaps) | holdout windows 8 | trades 676
-stitched -100.0% vs B&H -100.0% (net -100.0%)
-Sharpe -3.05 vs luck hurdle 1.10 (K=41 trials) | permutation p=0.9502
+=== HOURLY EXAM: s_trend_33 ===
+main windows 120 (10 pairs, 10 dropped for gaps) | holdout windows 0 | trades 5766
+stitched +428.3% vs B&H +18178008.1% (net +17119140.6%)
+Sharpe 0.28 vs luck hurdle 1.14 (K=50 trials) | permutation p=0.4776
   [PASS] 1_sample   (>=24 win, >=4 pairs)
   [FAIL] 2_safety   (DD never worse)
   [PASS] 3_riskedge (shallower >=60%)
@@ -37,56 +16,16 @@ Sharpe -3.05 vs luck hurdle 1.10 (K=41 trials) | permutation p=0.9502
   [FAIL] 8_holdout  (2-4 on final 120d)
   [FAIL] 9_notluck  (p<0.05 & SR>hurdle)
 VERDICT: FAIL - control only
-saved -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam1h_h_cross_24_168_2026-08-02.csv
+saved -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam1h_s_trend_33_2026-08-02.csv
 ledger -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam_ledger.csv (timeframe=1h)
-exit=0 done-h_cross_24_168
-===== EXAM h_tsmom_72 =====
+exit=0 done-s_trend_33
+===== EXAM s_cross_7_33 =====
 [criterion 9] permutation x200 ... (minutes)
 
-=== HOURLY EXAM: h_tsmom_72 ===
-main windows 32 (8 pairs, 0 dropped for gaps) | holdout windows 8 | trades 3244
-stitched -100.0% vs B&H -100.0% (net -100.0%)
-Sharpe -6.11 vs luck hurdle 1.10 (K=42 trials) | permutation p=0.8109
-  [PASS] 1_sample   (>=24 win, >=4 pairs)
-  [FAIL] 2_safety   (DD never worse)
-  [FAIL] 3_riskedge (shallower >=60%)
-  [FAIL] 4_return   (>= B&H net-to-net)
-  [PASS] 5_activity (>=4 trades)
-  [FAIL] 6_feestress(2-4 hold @1.5x)
-  [FAIL] 7_beatsdaily(no daily pass -> =4)
-  [FAIL] 8_holdout  (2-4 on final 120d)
-  [FAIL] 9_notluck  (p<0.05 & SR>hurdle)
-VERDICT: FAIL - control only
-saved -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam1h_h_tsmom_72_2026-08-02.csv
-ledger -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam_ledger.csv (timeframe=1h)
-exit=0 done-h_tsmom_72
-===== EXAM h_macd_12_26 =====
-[criterion 9] permutation x200 ... (minutes)
-
-=== HOURLY EXAM: h_macd_12_26 ===
-main windows 32 (8 pairs, 0 dropped for gaps) | holdout windows 8 | trades 5328
-stitched -100.0% vs B&H -100.0% (net -100.0%)
-Sharpe -8.34 vs luck hurdle 1.11 (K=43 trials) | permutation p=1.0000
-  [PASS] 1_sample   (>=24 win, >=4 pairs)
-  [FAIL] 2_safety   (DD never worse)
-  [FAIL] 3_riskedge (shallower >=60%)
-  [FAIL] 4_return   (>= B&H net-to-net)
-  [PASS] 5_activity (>=4 trades)
-  [FAIL] 6_feestress(2-4 hold @1.5x)
-  [FAIL] 7_beatsdaily(no daily pass -> =4)
-  [FAIL] 8_holdout  (2-4 on final 120d)
-  [FAIL] 9_notluck  (p<0.05 & SR>hurdle)
-VERDICT: FAIL - control only
-saved -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam1h_h_macd_12_26_2026-08-02.csv
-ledger -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam_ledger.csv (timeframe=1h)
-exit=0 done-h_macd_12_26
-===== EXAM h_donch_48_24 =====
-[criterion 9] permutation x200 ... (minutes)
-
-=== HOURLY EXAM: h_donch_48_24 ===
-main windows 32 (8 pairs, 0 dropped for gaps) | holdout windows 8 | trades 1223
-stitched -100.0% vs B&H -100.0% (net -100.0%)
-Sharpe -3.16 vs luck hurdle 1.11 (K=44 trials) | permutation p=0.4975
+=== HOURLY EXAM: s_cross_7_33 ===
+main windows 120 (10 pairs, 10 dropped for gaps) | holdout windows 0 | trades 3050
+stitched +809.8% vs B&H +18178008.1% (net +17119140.6%)
+Sharpe 0.34 vs luck hurdle 1.14 (K=51 trials) | permutation p=0.6567
   [PASS] 1_sample   (>=24 win, >=4 pairs)
   [FAIL] 2_safety   (DD never worse)
   [PASS] 3_riskedge (shallower >=60%)
@@ -97,19 +36,19 @@ Sharpe -3.16 vs luck hurdle 1.11 (K=44 trials) | permutation p=0.4975
   [FAIL] 8_holdout  (2-4 on final 120d)
   [FAIL] 9_notluck  (p<0.05 & SR>hurdle)
 VERDICT: FAIL - control only
-saved -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam1h_h_donch_48_24_2026-08-02.csv
+saved -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam1h_s_cross_7_33_2026-08-02.csv
 ledger -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam_ledger.csv (timeframe=1h)
-exit=0 done-h_donch_48_24
-===== EXAM h_volbrk_24_96 =====
+exit=0 done-s_cross_7_33
+===== EXAM s_tsmom_21 =====
 [criterion 9] permutation x200 ... (minutes)
 
-=== HOURLY EXAM: h_volbrk_24_96 ===
-main windows 32 (8 pairs, 0 dropped for gaps) | holdout windows 8 | trades 1569
-stitched -100.0% vs B&H -100.0% (net -100.0%)
-Sharpe -3.44 vs luck hurdle 1.12 (K=45 trials) | permutation p=0.6020
+=== HOURLY EXAM: s_tsmom_21 ===
+main windows 120 (10 pairs, 10 dropped for gaps) | holdout windows 0 | trades 6432
+stitched +583.5% vs B&H +21716679.6% (net +20451686.0%)
+Sharpe 0.31 vs luck hurdle 1.14 (K=52 trials) | permutation p=0.3134
   [PASS] 1_sample   (>=24 win, >=4 pairs)
   [FAIL] 2_safety   (DD never worse)
-  [FAIL] 3_riskedge (shallower >=60%)
+  [PASS] 3_riskedge (shallower >=60%)
   [FAIL] 4_return   (>= B&H net-to-net)
   [PASS] 5_activity (>=4 trades)
   [FAIL] 6_feestress(2-4 hold @1.5x)
@@ -117,36 +56,96 @@ Sharpe -3.44 vs luck hurdle 1.12 (K=45 trials) | permutation p=0.6020
   [FAIL] 8_holdout  (2-4 on final 120d)
   [FAIL] 9_notluck  (p<0.05 & SR>hurdle)
 VERDICT: FAIL - control only
-saved -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam1h_h_volbrk_24_96_2026-08-02.csv
+saved -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam1h_s_tsmom_21_2026-08-02.csv
 ledger -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam_ledger.csv (timeframe=1h)
-exit=0 done-h_volbrk_24_96
-===== EXAM h_rsi14_reg168 =====
+exit=0 done-s_tsmom_21
+===== EXAM s_macd_12_26 =====
 [criterion 9] permutation x200 ... (minutes)
 
-=== HOURLY EXAM: h_rsi14_reg168 ===
-main windows 32 (8 pairs, 0 dropped for gaps) | holdout windows 8 | trades 466
-stitched -97.1% vs B&H -100.0% (net -100.0%)
-Sharpe -3.43 vs luck hurdle 1.12 (K=46 trials) | permutation p=0.2189
+=== HOURLY EXAM: s_macd_12_26 ===
+main windows 120 (10 pairs, 10 dropped for gaps) | holdout windows 0 | trades 5574
+stitched +1352.6% vs B&H +12175192.0% (net +11465986.2%)
+Sharpe 0.38 vs luck hurdle 1.15 (K=53 trials) | permutation p=0.2438
+  [PASS] 1_sample   (>=24 win, >=4 pairs)
+  [FAIL] 2_safety   (DD never worse)
+  [PASS] 3_riskedge (shallower >=60%)
+  [FAIL] 4_return   (>= B&H net-to-net)
+  [PASS] 5_activity (>=4 trades)
+  [FAIL] 6_feestress(2-4 hold @1.5x)
+  [FAIL] 7_beatsdaily(no daily pass -> =4)
+  [FAIL] 8_holdout  (2-4 on final 120d)
+  [FAIL] 9_notluck  (p<0.05 & SR>hurdle)
+VERDICT: FAIL - control only
+saved -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam1h_s_macd_12_26_2026-08-02.csv
+ledger -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam_ledger.csv (timeframe=1h)
+exit=0 done-s_macd_12_26
+===== EXAM s_donch_14_7 =====
+[criterion 9] permutation x200 ... (minutes)
+
+=== HOURLY EXAM: s_donch_14_7 ===
+main windows 120 (10 pairs, 10 dropped for gaps) | holdout windows 0 | trades 5017
+stitched -32.8% vs B&H +34913724.2% (net +32880008.0%)
+Sharpe 0.05 vs luck hurdle 1.15 (K=54 trials) | permutation p=0.7861
+  [PASS] 1_sample   (>=24 win, >=4 pairs)
+  [FAIL] 2_safety   (DD never worse)
+  [PASS] 3_riskedge (shallower >=60%)
+  [FAIL] 4_return   (>= B&H net-to-net)
+  [PASS] 5_activity (>=4 trades)
+  [FAIL] 6_feestress(2-4 hold @1.5x)
+  [FAIL] 7_beatsdaily(no daily pass -> =4)
+  [FAIL] 8_holdout  (2-4 on final 120d)
+  [FAIL] 9_notluck  (p<0.05 & SR>hurdle)
+VERDICT: FAIL - control only
+saved -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam1h_s_donch_14_7_2026-08-02.csv
+ledger -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam_ledger.csv (timeframe=1h)
+exit=0 done-s_donch_14_7
+===== EXAM s_volbrk_7_33 =====
+[criterion 9] permutation x200 ... (minutes)
+
+=== HOURLY EXAM: s_volbrk_7_33 ===
+main windows 120 (10 pairs, 10 dropped for gaps) | holdout windows 0 | trades 5572
+stitched +147.5% vs B&H +24969340.7% (net +23514880.9%)
+Sharpe 0.21 vs luck hurdle 1.16 (K=55 trials) | permutation p=0.4279
+  [PASS] 1_sample   (>=24 win, >=4 pairs)
+  [FAIL] 2_safety   (DD never worse)
+  [PASS] 3_riskedge (shallower >=60%)
+  [FAIL] 4_return   (>= B&H net-to-net)
+  [PASS] 5_activity (>=4 trades)
+  [FAIL] 6_feestress(2-4 hold @1.5x)
+  [FAIL] 7_beatsdaily(no daily pass -> =4)
+  [FAIL] 8_holdout  (2-4 on final 120d)
+  [FAIL] 9_notluck  (p<0.05 & SR>hurdle)
+VERDICT: FAIL - control only
+saved -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam1h_s_volbrk_7_33_2026-08-02.csv
+ledger -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam_ledger.csv (timeframe=1h)
+exit=0 done-s_volbrk_7_33
+===== EXAM s_rsi14_reg33 =====
+[criterion 9] permutation x200 ... (minutes)
+
+=== HOURLY EXAM: s_rsi14_reg33 ===
+main windows 120 (10 pairs, 10 dropped for gaps) | holdout windows 0 | trades 63
+stitched +11.6% vs B&H +24969340.7% (net +23514880.9%)
+Sharpe 0.19 vs luck hurdle 1.16 (K=56 trials) | permutation p=0.2139
   [PASS] 1_sample   (>=24 win, >=4 pairs)
   [PASS] 2_safety   (DD never worse)
   [PASS] 3_riskedge (shallower >=60%)
-  [PASS] 4_return   (>= B&H net-to-net)
+  [FAIL] 4_return   (>= B&H net-to-net)
   [PASS] 5_activity (>=4 trades)
   [FAIL] 6_feestress(2-4 hold @1.5x)
-  [PASS] 7_beatsdaily(no daily pass -> =4)
-  [PASS] 8_holdout  (2-4 on final 120d)
+  [FAIL] 7_beatsdaily(no daily pass -> =4)
+  [FAIL] 8_holdout  (2-4 on final 120d)
   [FAIL] 9_notluck  (p<0.05 & SR>hurdle)
 VERDICT: FAIL - control only
-saved -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam1h_h_rsi14_reg168_2026-08-02.csv
+saved -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam1h_s_rsi14_reg33_2026-08-02.csv
 ledger -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam_ledger.csv (timeframe=1h)
-exit=0 done-h_rsi14_reg168
-===== EXAM h_boll_48 =====
+exit=0 done-s_rsi14_reg33
+===== EXAM s_boll_14 =====
 [criterion 9] permutation x200 ... (minutes)
 
-=== HOURLY EXAM: h_boll_48 ===
-main windows 32 (8 pairs, 0 dropped for gaps) | holdout windows 8 | trades 1415
-stitched -100.0% vs B&H -100.0% (net -100.0%)
-Sharpe -3.05 vs luck hurdle 1.13 (K=47 trials) | permutation p=0.4826
+=== HOURLY EXAM: s_boll_14 ===
+main windows 120 (10 pairs, 10 dropped for gaps) | holdout windows 0 | trades 3461
+stitched +1987.3% vs B&H +34913724.2% (net +32880008.0%)
+Sharpe 0.50 vs luck hurdle 1.16 (K=57 trials) | permutation p=0.0199
   [PASS] 1_sample   (>=24 win, >=4 pairs)
   [FAIL] 2_safety   (DD never worse)
   [PASS] 3_riskedge (shallower >=60%)
@@ -157,16 +156,36 @@ Sharpe -3.05 vs luck hurdle 1.13 (K=47 trials) | permutation p=0.4826
   [FAIL] 8_holdout  (2-4 on final 120d)
   [FAIL] 9_notluck  (p<0.05 & SR>hurdle)
 VERDICT: FAIL - control only
-saved -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam1h_h_boll_48_2026-08-02.csv
+saved -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam1h_s_boll_14_2026-08-02.csv
 ledger -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam_ledger.csv (timeframe=1h)
-exit=0 done-h_boll_48
-===== EXAM h_calm_24_168 =====
+exit=0 done-s_boll_14
+===== EXAM s_calm_7_33 =====
 [criterion 9] permutation x200 ... (minutes)
 
-=== HOURLY EXAM: h_calm_24_168 ===
-main windows 32 (8 pairs, 0 dropped for gaps) | holdout windows 8 | trades 2491
-stitched -100.0% vs B&H -100.0% (net -100.0%)
-Sharpe -4.56 vs luck hurdle 1.13 (K=48 trials) | permutation p=0.0050
+=== HOURLY EXAM: s_calm_7_33 ===
+main windows 120 (10 pairs, 10 dropped for gaps) | holdout windows 0 | trades 7802
+stitched +2453.5% vs B&H +24969340.7% (net +23514880.9%)
+Sharpe 0.42 vs luck hurdle 1.17 (K=58 trials) | permutation p=0.1741
+  [PASS] 1_sample   (>=24 win, >=4 pairs)
+  [FAIL] 2_safety   (DD never worse)
+  [PASS] 3_riskedge (shallower >=60%)
+  [FAIL] 4_return   (>= B&H net-to-net)
+  [PASS] 5_activity (>=4 trades)
+  [FAIL] 6_feestress(2-4 hold @1.5x)
+  [FAIL] 7_beatsdaily(no daily pass -> =4)
+  [FAIL] 8_holdout  (2-4 on final 120d)
+  [FAIL] 9_notluck  (p<0.05 & SR>hurdle)
+VERDICT: FAIL - control only
+saved -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam1h_s_calm_7_33_2026-08-02.csv
+ledger -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam_ledger.csv (timeframe=1h)
+exit=0 done-s_calm_7_33
+===== EXAM s_nearhi_33 =====
+[criterion 9] permutation x200 ... (minutes)
+
+=== HOURLY EXAM: s_nearhi_33 ===
+main windows 120 (10 pairs, 10 dropped for gaps) | holdout windows 0 | trades 2000
+stitched +108057.0% vs B&H +18178008.1% (net +17119140.6%)
+Sharpe 0.71 vs luck hurdle 1.17 (K=59 trials) | permutation p=0.2687
   [PASS] 1_sample   (>=24 win, >=4 pairs)
   [FAIL] 2_safety   (DD never worse)
   [FAIL] 3_riskedge (shallower >=60%)
@@ -177,27 +196,8 @@ Sharpe -4.56 vs luck hurdle 1.13 (K=48 trials) | permutation p=0.0050
   [FAIL] 8_holdout  (2-4 on final 120d)
   [FAIL] 9_notluck  (p<0.05 & SR>hurdle)
 VERDICT: FAIL - control only
-saved -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam1h_h_calm_24_168_2026-08-02.csv
+saved -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam1h_s_nearhi_33_2026-08-02.csv
 ledger -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam_ledger.csv (timeframe=1h)
-exit=0 done-h_calm_24_168
-===== EXAM h_nearhi_168 =====
-[criterion 9] permutation x200 ... (minutes)
-
-=== HOURLY EXAM: h_nearhi_168 ===
-main windows 32 (8 pairs, 0 dropped for gaps) | holdout windows 8 | trades 2287
-stitched -100.0% vs B&H -100.0% (net -100.0%)
-Sharpe -5.11 vs luck hurdle 1.13 (K=49 trials) | permutation p=0.7214
-  [PASS] 1_sample   (>=24 win, >=4 pairs)
-  [FAIL] 2_safety   (DD never worse)
-  [FAIL] 3_riskedge (shallower >=60%)
-  [FAIL] 4_return   (>= B&H net-to-net)
-  [PASS] 5_activity (>=4 trades)
-  [FAIL] 6_feestress(2-4 hold @1.5x)
-  [FAIL] 7_beatsdaily(no daily pass -> =4)
-  [FAIL] 8_holdout  (2-4 on final 120d)
-  [FAIL] 9_notluck  (p<0.05 & SR>hurdle)
-VERDICT: FAIL - control only
-saved -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam1h_h_nearhi_168_2026-08-02.csv
-ledger -> /Users/haroonrasheed/Projects/cryptobot/backtest/results/exam_ledger.csv (timeframe=1h)
-exit=0 done-h_nearhi_168
-BATCH_COMPLETE
+exit=0 done-s_nearhi_33
+STOCK_BATCH_COMPLETE
+PUSHED rc=0

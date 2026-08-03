@@ -1,0 +1,40 @@
+all 10 verdicts: {'h_boll_48': 'FAIL', 'h_calm_24_168': 'FAIL', 'h_cross_24_168': 'FAIL', 'h_donch_48_24': 'FAIL', 'h_macd_12_26': 'FAIL', 'h_nearhi_168': 'FAIL', 'h_rsi14_reg168': 'FAIL', 'h_trend_168': 'FAIL', 'h_tsmom_72': 'FAIL', 'h_volbrk_24_96': 'FAIL'}
+[2026-08-02 16:21 UTC] squad cycle (ARMED)
+  [h_trend_168] $3,000.00 cash
+  [h_trend_168] BUY ADA-USD @ 0.1902 ($1,362.75, fee $5.45)
+  [h_trend_168] BUY XRP-USD @ 1.0786 ($1,500.00, fee $6.00)
+  [h_cross_24_168] $3,000.00 cash
+  [h_cross_24_168] BUY ADA-USD @ 0.1902 ($1,362.75, fee $5.45)
+  [h_tsmom_72] $3,000.00 cash
+  [h_tsmom_72] BUY ADA-USD @ 0.1902 ($1,362.75, fee $5.45)
+  [h_macd_12_26] $3,000.00 cash
+  [h_macd_12_26] BUY ADA-USD @ 0.1902 ($1,362.75, fee $5.45)
+  [h_macd_12_26] BUY SOL-USD @ 72.9829 ($1,500.00, fee $6.00)
+  [h_donch_48_24] $3,000.00 cash
+  [h_donch_48_24] BUY ADA-USD @ 0.1902 ($1,362.75, fee $5.45)
+  [h_volbrk_24_96] $3,000.00 cash
+  [h_rsi14_reg168] $3,000.00 cash
+  [h_boll_48] $3,000.00 cash
+  [h_calm_24_168] $3,000.00 cash
+  [h_calm_24_168] BUY SOL-USD @ 72.9829 ($1,500.00, fee $6.00)
+  [h_calm_24_168] BUY LINK-USD @ 8.2522 ($1,500.00, fee $6.00)
+  [h_nearhi_168] $3,000.00 cash
+  [h_nearhi_168] BUY ADA-USD @ 0.1902 ($1,362.75, fee $5.45)
+  [h_nearhi_168] BUY DOGE-USD @ 0.0702 ($1,500.00, fee $6.00)
+  squad total $30,000.00 · state saved
+[main d84cb3f] ARM intraday squad: 10/10 exam verdicts recorded, shakedown begins
+ 13 files changed, 930 insertions(+), 1 deletion(-)
+ create mode 100644 backtest/results/exam1h_h_boll_48_2026-08-02.csv
+ create mode 100644 backtest/results/exam1h_h_calm_24_168_2026-08-02.csv
+ create mode 100644 backtest/results/exam1h_h_donch_48_24_2026-08-02.csv
+ create mode 100644 backtest/results/exam1h_h_macd_12_26_2026-08-02.csv
+ create mode 100644 backtest/results/exam1h_h_nearhi_168_2026-08-02.csv
+ create mode 100644 backtest/results/exam1h_h_rsi14_reg168_2026-08-02.csv
+ create mode 100644 backtest/results/exam1h_h_volbrk_24_96_2026-08-02.csv
+ create mode 100644 bot/squad_state.json
+ create mode 100644 logs/squad_decisions.csv
+ create mode 100644 logs/squad_equity.csv
+ create mode 100644 logs/squad_trades.csv
+To https://github.com/josemiguelw7/cryptobot.git
+   d360a7e..d84cb3f  main -> main
+ARMED_AND_PUSHED rc=0

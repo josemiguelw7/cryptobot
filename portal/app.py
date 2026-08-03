@@ -5,6 +5,7 @@ plus a whitelisted job runner for the test suite.
 Binds to 127.0.0.1 only. Run: .venv/bin/python portal/app.py
 """
 import csv, glob, json, os, subprocess
+from datetime import datetime, timedelta, timezone
 from flask import Flask, jsonify, send_from_directory
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -159,6 +160,97 @@ def squad_stocks_equity():
         return jsonify(list(csv.DictReader(f))[-4000:])
 
 
+@app.get("/api/squad_costs")
+def squad_costs():
+    """Fee-drag + benchmark, derived from logs only (no bot, no state,
+    no governance surface): cumulative fees paid, gross vs net on
+    closed trades, and what the squad's $30K would be worth parked in
+    BTC since the first counted cycle, charged one charter-cost entry
+    (0.40% taker + 2bps slip). The sobering chart, per 2026-08-03."""
+    out = {}
+    for key, tf, sf in [("crypto", "squad_trades.csv", "squad_equity.csv"),
+                        ("stocks", "squad_stocks_trades.csv",
+                         "squad_stocks_equity.csv")]:
+        d = {"fees": 0.0, "gross": 0.0, "net": 0.0, "closed": 0}
+        p = os.path.join(LOGS, tf)
+        if os.path.exists(p):
+            for r in csv.DictReader(open(p)):
+                try:
+                    d["fees"] += float(r["fee"] or 0)
+                    if r["action"] == "SELL":
+                        d["closed"] += 1
+                        d["gross"] += float(r["gross_pnl"] or 0)
+                        d["net"] += float(r["net_pnl"] or 0)
+                except (ValueError, KeyError):
+                    pass
+        out[key] = {k: round(v, 2) for k, v in d.items()}
+    # BTC-hold benchmark (crypto only)
+    try:
+        rows = list(csv.DictReader(
+            open(os.path.join(LOGS, "squad_equity.csv"))))
+        t0 = datetime.fromisoformat(rows[0]["time"]).timestamp()
+        px0 = pxN = None
+        cp = os.path.join(ROOT, "data", "candles", "BTC-USD_3600s.csv")
+        for r in csv.DictReader(open(cp)):
+            if px0 is None and int(r["timestamp"]) >= t0:
+                px0 = float(r["close"])
+            pxN = float(r["close"])
+        if px0 and pxN:
+            spend = 30000.0
+            units = spend * (1 - 0.004) / (px0 * 1.0002)
+            out["btc_hold"] = {"start_px": px0, "now_px": pxN,
+                               "equity": round(units * pxN, 2)}
+    except Exception:
+        pass
+    return jsonify(out)
+
+
+@app.get("/api/exits")
+def exits():
+    """MFE/MAE summary over closed trades + the TP counterfactual.
+    Answers 'were we up and gave it back?' on the dashboard instead of
+    in a terminal. Read-only over logs (charter s9.7 safe)."""
+    out = {}
+    for key, tf in [("crypto", "squad_trades.csv"),
+                    ("stocks", "squad_stocks_trades.csv")]:
+        mfes, maes, rows = [], [], []
+        p = os.path.join(LOGS, tf)
+        if os.path.exists(p):
+            for r in csv.DictReader(open(p)):
+                if r["action"] != "SELL":
+                    continue
+                # blank != zero: trades closed before the MFE tape
+                # existed have no excursion and must not read as 0.00%
+                if not (r.get("mfe_pct") or "").strip():
+                    continue
+                try:
+                    mfe = float(r["mfe_pct"])
+                    mae = float(r["mae_pct"] or 0)
+                except ValueError:
+                    continue
+                mfes.append(mfe)
+                maes.append(mae)
+                rows.append({"bot": r["bot"], "pair": r["pair"],
+                             "mfe": mfe, "mae": mae,
+                             "net": float(r["net_pnl"] or 0),
+                             "exit": r["exit_kind"],
+                             "cause": r["loss_cause"]})
+        def q(xs, f):
+            if not xs:
+                return None
+            s = sorted(xs)
+            return s[min(len(s) - 1, int(f * len(s)))]
+        # round-trip cost floor: 2x(taker+slip) + typical spread
+        rt = 2 * (0.004 + 0.0010) if key == "crypto" else 2 * 0.0005
+        out[key] = {"n": len(rows), "rt_cost": rt,
+                    "mfe_max": max(mfes) if mfes else None,
+                    "mfe_med": q(mfes, 0.5), "mfe_p75": q(mfes, 0.75),
+                    "mae_med": q(maes, 0.5), "mae_min": min(maes) if maes else None,
+                    "above_cost": sum(1 for m in mfes if m >= rt),
+                    "worst": sorted(rows, key=lambda r: r["net"])[:6]}
+    return jsonify(out)
+
+
 @app.get("/api/exam_ledger")
 def exam_ledger():
     p = os.path.join(ROOT, "backtest", "results", "exam_ledger.csv")
@@ -169,11 +261,17 @@ def exam_ledger():
 
 
 def _armed(mod):
+    """Read the ARMED assignment, not prose. The docstrings of both
+    seed modules contain lines that BEGIN with 'ARMED' ("ARMED flips
+    only after owner signature..."), so a startswith() match read the
+    docstring and reported stocks UNARMED while it was armed and
+    trading. Require an actual assignment."""
     try:
         with open(os.path.join(ROOT, "bot", mod)) as f:
             for line in f:
-                if line.startswith("ARMED"):
-                    return "True" in line.split("#")[0]
+                head = line.split("#")[0]
+                if head.replace(" ", "").startswith("ARMED="):
+                    return "True" in head
     except OSError:
         return None
 
@@ -182,6 +280,27 @@ def _armed(mod):
 def meta():
     armed = _armed("seeds_crypto.py")
     armed_stk = _armed("seeds_stocks.py")
+
+    def cycles_24h():
+        """Missed-cycle detector. launchd's StartInterval does not fire
+        while the Mac sleeps, and until 2026-08-03 a skipped hour was
+        completely invisible (the 01:00 UTC gap that night was found by
+        hand). Expected = the last 24 full UTC hours; the squad marks
+        every hour it actually cycled."""
+        try:
+            rows = list(csv.DictReader(
+                open(os.path.join(LOGS, "squad_equity.csv"))))
+            have = {r["time"][:13] for r in rows}
+            now = datetime.now(timezone.utc).replace(
+                minute=0, second=0, microsecond=0)
+            expect = [(now - timedelta(hours=i)).strftime("%Y-%m-%dT%H")
+                      for i in range(1, 25)]
+            missing = [h for h in expect if h not in have]
+            return {"marked": 24 - len(missing), "expected": 24,
+                    "missing": sorted(missing)}
+        except Exception:
+            return None
+
     def last_ts(fname, col="time"):
         p = os.path.join(LOGS, fname)
         if not os.path.exists(p):
@@ -190,6 +309,7 @@ def meta():
         return rows[-1][col] if rows else None
     return jsonify({"armed": armed, "armed_crypto": armed,
                     "armed_stocks": armed_stk,
+                    "cycles": cycles_24h(),
                     "league_last": last_ts("league_equity.csv"),
                     "squad_last": last_ts("squad_equity.csv"),
                     "squad_stk_last": last_ts("squad_stocks_equity.csv")})

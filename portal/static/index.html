@@ -7,8 +7,13 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--tx);
 font:12px/1.35 "SF Mono",Menlo,Consolas,monospace}
-#app{display:grid;height:100vh;gap:8px;padding:8px;
-grid-template-rows:40px 1.25fr 1fr 22px;grid-template-columns:1fr 1fr}
+#app{display:grid;height:100vh;gap:8px;padding:8px 8px 0;
+grid-template-rows:38px 1fr 1fr 0.85fr 20px;grid-template-columns:1fr 1fr}
+/* macOS dock clearance: the footer is the lowest element, so the whole
+   grid reserves dock height at the bottom instead of hiding under it.
+   env(safe-area-inset-bottom) covers iPad/notch clients too. */
+footer{margin-bottom:calc(74px + env(safe-area-inset-bottom,0px))}
+@media (max-height:820px){#app{grid-template-rows:38px 1fr 1fr 0.7fr 20px}}
 header,footer{grid-column:1/3;display:flex;align-items:center;gap:14px;
 background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:0 12px}
 header b.logo{color:var(--acc);letter-spacing:.12em}
@@ -44,6 +49,13 @@ svg.spark{width:64px;height:15px;display:block}
 .legend{display:flex;gap:9px;font-size:10px;color:var(--dim);flex-wrap:wrap}
 .legend i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:3px}
 .ylab{fill:#71808f;font-size:9px}
+/* exits panel */
+.mrow{display:flex;gap:14px;flex-wrap:wrap;margin:5px 0 7px}
+.met{display:flex;flex-direction:column}
+.met b{font-size:15px}.met span{font-size:10px;color:var(--dim);letter-spacing:.08em}
+.bar{height:7px;border-radius:4px;background:#16202b;position:relative;margin-top:3px;overflow:hidden}
+.bar i{position:absolute;top:0;bottom:0;left:0;border-radius:4px}
+.hint{font-size:10px;color:var(--dim);margin-top:auto;padding-top:5px;border-top:1px solid var(--line)}
 </style></head><body><div id="app">
 <header><b class="logo">CRYPTOBOT·20</b>
 <span id="agg">$60,000 <small>capital paper</small></span>
@@ -52,6 +64,7 @@ svg.spark{width:64px;height:15px;display:block}
 <span id="bC" class="badge unarmed">crypto …</span>
 <span id="bS" class="badge unarmed">stocks …</span>
 <span id="mkt" class="badge closed">NYSE –</span>
+<span id="cyc" class="badge closed" title="">ciclos –</span>
 <span id="clock" class="dim"></span></header>
 
 <div class="panel"><h2>ESCUADRÓN <b>CRYPTO</b> · 10 × $3,000 · 24/7 <span id="cSub" class="dim"></span></h2>
@@ -72,6 +85,12 @@ svg.spark{width:64px;height:15px;display:block}
 <p>Stage 1: <b>90 días contados</b> · Sharpe ≥ 1.0 · LCB &gt; 0 · maxDD ≤ 10% → Stage 2: 60d → piloto</p>
 <p id="clkC">Crypto: <b>–</b></p><p id="clkS">Stocks: <b>–</b></p>
 <p>Exámenes: crypto <b id="exC">0</b>/10 · stocks <b id="exS">0</b>/10 · revisión sáb 09:00 CT</p></div>
+
+<div class="panel" id="exits"><h2>EXCURSIONES · <b>¿subimos y lo devolvimos?</b> <span id="xSub" class="dim"></span></h2>
+<div id="xBody" style="flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column"></div></div>
+
+<div class="panel" id="worst"><h2>PEORES SALIDAS · <b>causa congelada s12.1</b></h2>
+<div id="wBody" style="flex:1;min-height:0;overflow:hidden"></div></div>
 
 <footer><span id="foot" class="dim"></span><span class="sp"></span>
 <span class="dim">liga (controles) → /public · refresh 60s</span></footer>
@@ -107,18 +126,64 @@ h+=`<tr><td style="color:${pal[i%10]}">${n.replace(/^[hs]_/,"")}${halt}</td><td 
 <td class="r ${d>=0?"up":"dn"}">${money2(d)}</td><td class="r ${r>=0?"up":"dn"}">${pct(r)}</td>
 <td class="dim">${u}</td><td>${spark(v,pal[i%10])}</td></tr>`});
 return h+"</tbody></table>"}
+function exitsPanel(x){
+// the whole take-profit question in one panel: how far did trades get
+// above entry (MFE) vs the round-trip cost floor they must clear?
+if(!x||!x.n){return`<div class="dim" style="margin:auto">sin trades cerrados todavía</div>`}
+const p=v=>v==null?"–":(v>=0?"+":"")+(100*v).toFixed(2)+"%";
+const rt=x.rt_cost,scale=Math.max(rt*1.6,Math.abs(x.mfe_max||0)*1.2,0.02);
+const w=v=>Math.min(100,100*Math.abs(v||0)/scale);
+return`<div class="mrow">
+<div class="met"><b class="${x.mfe_max>=rt?"up":"amb"}">${p(x.mfe_max)}</b><span>MFE MÁX</span></div>
+<div class="met"><b>${p(x.mfe_med)}</b><span>MFE MEDIANA</span></div>
+<div class="met"><b>${p(x.mfe_p75)}</b><span>MFE P75</span></div>
+<div class="met"><b class="dn">${p(x.mae_min)}</b><span>MAE PEOR</span></div>
+<div class="met"><b class="${x.above_cost?"up":"dn"}">${x.above_cost}/${x.n}</b><span>SUPERAN COSTO</span></div></div>
+<div style="font-size:10px;color:var(--dim)">techo de ganancia alcanzado (MFE máx) vs costo ida y vuelta ${p(rt)}</div>
+<div class="bar"><i style="width:${w(x.mfe_max)}%;background:${x.mfe_max>=rt?"var(--up)":"var(--amb)"}"></i>
+<i style="left:${w(rt)}%;width:2px;background:var(--dn)"></i></div>
+<div class="hint">${x.above_cost?
+`${x.above_cost} de ${x.n} trades superaron el costo — revisar brackets el sábado.`:
+`ningún trade llegó al costo ida y vuelta (${p(rt)}). Un take-profit no tendría nada que cobrar: el muro es el costo, no la salida.`}</div>`}
+function worstTable(x){const rows=(x&&x.worst)||[];
+if(!rows.length){return`<div class="dim">sin trades cerrados</div>`}
+let h=`<table><thead><tr><th>bot</th><th>par</th><th class="r">MFE</th><th class="r">MAE</th><th class="r">net</th><th>causa</th></tr></thead><tbody>`;
+for(const r of rows){h+=`<tr><td>${r.bot.replace(/^[hs]_/,"")}</td><td class="dim">${r.pair.replace("-USD","")}</td>
+<td class="r ${r.mfe>=0?"up":"dn"}">${(100*r.mfe).toFixed(2)}%</td>
+<td class="r dn">${(100*r.mae).toFixed(2)}%</td>
+<td class="r dn">${money2(r.net)}</td><td class="amb">${r.cause||r.exit}</td></tr>`}
+return h+"</tbody></table>"}
+function conc(sst){
+// book concentration: how many bots hold each symbol right now.
+// per-bot caps (s3) don't stop 8/10 bots piling into the same coin —
+// found 2026-08-03 with ADA. Not a rule breach; must be visible.
+const m={};Object.values(sst||{}).forEach(b=>Object.keys(b.units||{}).forEach(p=>{const k=p.replace(/-USD$/,"");m[k]=(m[k]||0)+1}));
+const e=Object.entries(m).sort((a,b)=>b[1]-a[1]);if(!e.length)return"";
+const tot=Object.keys(sst||{}).length||10,warn=e[0][1]>=Math.ceil(tot*0.7);
+return`<div class="${warn?"amb":"dim"}" style="font-size:10px;margin:0 0 4px">concentración: ${e.map(([k,v])=>`${k}×${v}`).join(" · ")}${warn?" — ⚠ libro correlacionado":""}</div>`}
 async function j(u){try{const r=await fetch(u);return await r.json()}catch(e){return null}}
 async function refresh(){
-const[meta,sq,seq,sqS,seqS,led]=await Promise.all(["/api/meta","/api/squad","/api/squad_equity","/api/squad_stocks","/api/squad_stocks_equity","/api/exam_ledger"].map(j));
+const[meta,sq,seq,sqS,seqS,led,costs,xs]=await Promise.all(["/api/meta","/api/squad","/api/squad_equity","/api/squad_stocks","/api/squad_stocks_equity","/api/exam_ledger","/api/squad_costs","/api/exits"].map(j));
 const aC=meta&&meta.armed_crypto,aS=meta&&meta.armed_stocks;
 const cS=seq?series(seq,"bot"):{},sS=seqS?series(seqS,"bot"):{};
 const bC=$("#bC");bC.textContent="crypto "+(aC?"ARMED":"UNARMED");bC.className="badge "+(aC?"armed":"unarmed");
 const bS=$("#bS");bS.textContent="stocks "+(aS?"ARMED":"PROPUESTO");bS.className="badge "+(aS?"armed":"unarmed");
 const open=nyseOpen(),mk=$("#mkt");mk.textContent="NYSE "+(open?"ABIERTO":"CERRADO");
 mk.className="badge "+(open?"armed":"closed");
+// missed-cycle badge (launchd sleeps when the Mac does)
+const cy=meta&&meta.cycles,cb=$("#cyc");
+if(cy){cb.textContent=`ciclos ${cy.marked}/${cy.expected}`;
+cb.className="badge "+(cy.marked>=cy.expected-1?"armed":"unarmed");
+cb.title=cy.missing.length?"horas sin ciclo (UTC): "+cy.missing.join(", "):"sin huecos en 24h"}
 // capital strips + aggregate
 capStrip(cS,"#cEq","#cPnl","#cNote","en espera — arma al 10/10");
 capStrip(sS,"#sEq","#sPnl","#sNote","reservado — pendiente de firma");
+// fee drag + BTC-hold benchmark (derivado de logs, s/ charter costs)
+if(costs){const cc=costs.crypto,cs=costs.stocks,bh=costs.btc_hold;
+if(cc&&cc.fees){let t=`drag: fees ${money2(-cc.fees)} · ${cc.closed} cerrados gross ${money2(cc.gross)} → net ${money2(cc.net)}`;
+if(bh&&bh.equity){const d=bh.equity-30000;t+=` · BTC-HOLD ${money(bh.equity)} (${pct(d/30000)})`}
+$("#cNote").textContent=t}
+if(cs&&cs.closed>0){$("#sNote").textContent=`drag: fees ${money2(-cs.fees)} · ${cs.closed} cerrados gross ${money2(cs.gross)} → net ${money2(cs.net)}`}}
 const tc=Object.values(cS).reduce((a,v)=>a+v.at(-1),0)||30000;
 const ts=Object.values(sS).reduce((a,v)=>a+v.at(-1),0)||30000;
 $("#agg").innerHTML=money(tc+ts)+" <small>capital paper</small>";
@@ -128,9 +193,9 @@ pA.textContent=dA?`${money2(dA)} (${pct(dA/60000)})`:"";pA.className=dA>=0?"up":
 const l1=(led||[]).filter(r=>r.timeframe==="1h"),lS=(led||[]).filter(r=>r.timeframe==="1h-stk");
 $("#exC").textContent=l1.length;$("#exS").textContent=lS.length;
 const vC={},vS={};l1.forEach(r=>vC[r.candidate]=r.verdict);lS.forEach(r=>vS[r.candidate]=r.verdict);
-if(aC&&seq&&seq.length){$("#cSub").textContent="· forward record";$("#cBody").innerHTML=squadTable(cS,(sq&&sq.bots)||{})}
+if(aC&&seq&&seq.length){$("#cSub").textContent="· forward record";$("#cBody").innerHTML=conc((sq&&sq.bots)||{})+squadTable(cS,(sq&&sq.bots)||{})}
 else{$("#cSub").textContent=`· exámenes ${l1.length}/10`;$("#cBody").innerHTML=chips(CR,vC,"v-WAIT")}
-if(aS&&seqS&&seqS.length){$("#sSub").textContent="· forward record";$("#sBody").innerHTML=squadTable(sS,(sqS&&sqS.bots)||{})}
+if(aS&&seqS&&seqS.length){$("#sSub").textContent="· forward record";$("#sBody").innerHTML=conc((sqS&&sqS.bots)||{})+squadTable(sS,(sqS&&sqS.bots)||{})}
 else{$("#sSub").textContent=lS.length?`· exámenes ${lS.length}/10`:"· pendiente de firma";
 $("#sBody").innerHTML=chips(ST,vS,lS.length?"v-WAIT":"v-PROP")}
 // dollar curves
@@ -152,11 +217,17 @@ const p=v.map((q,k)=>`${(30+(W-32)*k/(v.length-1||1)).toFixed(1)},${y(q).toFixed
 out+=`<polyline fill="none" stroke="${pal[i%10]}" stroke-width="1.3" points="${p}"/>`});
 svg.innerHTML=out;
 $("#legend").innerHTML=names.map((n,i)=>`<span><i style="background:${pal[i%10]}"></i>${n}</span>`).join("")}
+// exits / excursions (crypto has the closed trades; stocks joins when it closes any)
+const xc=xs&&xs.crypto,xst=xs&&xs.stocks;
+$("#xSub").textContent=xc?`· ${xc.n} cerrados`+((xst&&xst.n)?` · stocks ${xst.n}`:""):"";
+$("#xBody").innerHTML=exitsPanel(xc);
+$("#wBody").innerHTML=worstTable(xc);
 // clock + footer
 $("#clkC").innerHTML="Crypto: <b>"+(aC?"shakedown — 7 días contados consecutivos arrancan el reloj":"exámenes en curso, arma al completar 10/10")+"</b>";
-$("#clkS").innerHTML="Stocks: <b>"+(aS?"shakedown":"roster propuesto — pendiente de firma del owner")+"</b>";
+$("#clkS").innerHTML="Stocks: <b>"+(aS?"shakedown — 7 días contados consecutivos arrancan el reloj (RTH)":"roster propuesto — pendiente de firma del owner")+"</b>";
 const f1=l1.filter(r=>r.verdict==="FAIL").length,p1=l1.filter(r=>r.verdict==="PASS").length;
-$("#foot").textContent=`ledger global: ${(led||[]).length} exámenes · crypto 1h: ${p1} PASS / ${f1} control · predicción: 0 PASS · K sube con cada intento`;
+const fS=lS.filter(r=>r.verdict==="FAIL").length,pS=lS.filter(r=>r.verdict==="PASS").length;
+$("#foot").textContent=`ledger global: ${(led||[]).length} exámenes · crypto 1h: ${p1} PASS / ${f1} control · stocks 1h: ${pS} PASS / ${fS} control · predicción: 0 PASS · K sube con cada intento`;
 }
 setInterval(()=>{$("#clock").textContent=new Date().toUTCString().slice(17,25)+" UTC · "+new Date().toLocaleTimeString("en-US",{timeZone:"America/Chicago",hour12:false})+" CT"},1000);
 refresh();setInterval(refresh,60000);

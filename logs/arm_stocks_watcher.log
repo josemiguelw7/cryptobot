@@ -1,0 +1,27 @@
+all 10 stock verdicts: {'s_boll_14': 'FAIL', 's_calm_7_33': 'FAIL', 's_cross_7_33': 'FAIL', 's_donch_14_7': 'FAIL', 's_macd_12_26': 'FAIL', 's_nearhi_33': 'FAIL', 's_rsi14_reg33': 'FAIL', 's_trend_33': 'FAIL', 's_tsmom_21': 'FAIL', 's_volbrk_7_33': 'FAIL'}
+[2026-08-02 18:31 UTC / 14:31 ET] market CLOSED - no signals, no counted cycle
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   bot/seeds_stocks.py
+	modified:   bot/squad_state.json
+	modified:   logs/arm_watcher.log
+	modified:   logs/daily.log
+	modified:   logs/exam_1h_batch.log
+	modified:   logs/league_equity.csv
+	modified:   logs/portal.log
+	modified:   logs/squad_decisions.csv
+	modified:   logs/squad_equity.csv
+	modified:   logs/squad_trades.csv
+	modified:   site/index.html
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	logs/arm_stocks_watcher.log
+	logs/stock_exam_watcher.log
+
+no changes added to commit (use "git add" and/or "git commit -a")
+STOCKS_ARMED rc=1

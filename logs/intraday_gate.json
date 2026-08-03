@@ -1,10 +1,10 @@
 {
   "latest": {
-    "utc": "2026-08-02T04:25:28Z",
+    "utc": "2026-08-03T02:08:36Z",
     "audit_exit": 1,
     "execution_data": false,
     "fetch_failures": [],
-    "gapped": 58
+    "gapped": 20
   },
   "history": [
     {
@@ -27,6 +27,20 @@
       "execution_data": false,
       "fetch_failures": [],
       "gapped": 58
+    },
+    {
+      "utc": "2026-08-03T00:49:46Z",
+      "audit_exit": 2,
+      "execution_data": true,
+      "fetch_failures": [],
+      "gapped": 20
+    },
+    {
+      "utc": "2026-08-03T02:08:36Z",
+      "audit_exit": 1,
+      "execution_data": false,
+      "fetch_failures": [],
+      "gapped": 20
     }
   ]
 }
