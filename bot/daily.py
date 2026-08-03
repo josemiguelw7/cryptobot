@@ -109,6 +109,50 @@ if rc_stamp == 2:
 
 run("bot/league.py",         fatal=True)     # the forward record
 
+
+def log_cycle_gap():
+    """Record missed hourly cycles as first-class events.
+
+    launchd's StartInterval does not fire while the Mac sleeps, so a
+    gap leaves no trace anywhere except a hole in the equity log — the
+    01:00 UTC 2026-08-03 gap was found by hand. A gap does NOT void a
+    counted day (decisions read only completed bars, s4.5b), so this
+    is deliberately not an execution_data event; it is an operational
+    record for the weekly review, written before this cycle marks.
+    """
+    import csv as _csv
+    from datetime import datetime as _dt, timezone as _tz
+    eq = os.path.join(ROOT, "logs", "squad_equity.csv")
+    if not os.path.exists(eq):
+        return
+    try:
+        rows = list(_csv.DictReader(open(eq)))
+        if not rows:
+            return
+        last = _dt.fromisoformat(rows[-1]["time"])
+        now = _dt.now(_tz.utc)
+        gap_h = (now - last).total_seconds() / 3600
+        if gap_h < 1.75:                      # normal hourly cadence
+            return
+        missed = int(gap_h) - 1
+        path = os.path.join(ROOT, "logs", "cycle_gaps.csv")
+        new = not os.path.exists(path)
+        with open(path, "a", newline="") as f:
+            w = _csv.writer(f)
+            if new:
+                w.writerow(["detected_utc", "last_cycle_utc", "gap_h",
+                            "cycles_missed", "note"])
+            w.writerow([now.isoformat(), rows[-1]["time"],
+                        f"{gap_h:.2f}", missed,
+                        "launchd did not fire (likely system sleep)"])
+        print(f"  !! CYCLE GAP: {gap_h:.1f}h since last mark "
+              f"(~{missed} cycles missed) -> logs/cycle_gaps.csv")
+    except Exception as e:
+        print(f"  gap check failed (non-fatal): {e}")
+
+
+log_cycle_gap()
+
 # Intraday squad (charter: docs/intraday_success_criteria.md). Hourly by
 # design — this is the cadence the whole plist exists for. While the seed
 # roster in bot/seeds_crypto.py is unarmed this is a one-line no-op; once
