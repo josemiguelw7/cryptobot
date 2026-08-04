@@ -1,4 +1,4 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8">
+<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>CRYPTOBOT · 20 bots · mission control</title>
 <style>
@@ -58,42 +58,42 @@ svg.spark{width:64px;height:15px;display:block}
 .hint{font-size:10px;color:var(--dim);margin-top:auto;padding-top:5px;border-top:1px solid var(--line)}
 </style></head><body><div id="app">
 <header><b class="logo">CRYPTOBOT·20</b>
-<span id="agg">$60,000 <small>capital paper</small></span>
+<span id="agg">$60,000 <small>paper capital</small></span>
 <span id="aggP" class="dim"></span>
 <span class="sp"></span>
 <span id="bC" class="badge unarmed">crypto …</span>
 <span id="bS" class="badge unarmed">stocks …</span>
 <span id="mkt" class="badge closed">NYSE –</span>
-<span id="cyc" class="badge closed" title="">ciclos –</span>
+<span id="cyc" class="badge closed" title="">cycles –</span>
 <span id="clock" class="dim"></span></header>
 
-<div class="panel"><h2>ESCUADRÓN <b>CRYPTO</b> · 10 × $3,000 · 24/7 <span id="cSub" class="dim"></span></h2>
+<div class="panel"><h2>SQUAD <b>CRYPTO</b> · 10 × $3,000 · 24/7 <span id="cSub" class="dim"></span></h2>
 <div class="cap"><span class="eq" id="cEq">$30,000</span><span class="pnl" id="cPnl"></span><span class="dim" id="cNote"></span></div>
 <div id="cBody" style="flex:1;min-height:0;overflow:hidden"></div></div>
 
-<div class="panel"><h2>ESCUADRÓN <b>STOCKS</b> · 10 × $3,000 · RTH <span id="sSub" class="dim"></span></h2>
+<div class="panel"><h2>SQUAD <b>STOCKS</b> · 10 × $3,000 · RTH <span id="sSub" class="dim"></span></h2>
 <div class="cap"><span class="eq" id="sEq">$30,000</span><span class="pnl" id="sPnl"></span><span class="dim" id="sNote"></span></div>
 <div id="sBody" style="flex:1;min-height:0;overflow:hidden"></div></div>
 
-<div class="panel"><h2>EQUITY EN DÓLARES · cada bot desde $3,000</h2>
+<div class="panel"><h2>EQUITY IN DOLLARS · each bot from $3,000</h2>
 <div id="chartWrap"><svg id="chart" preserveAspectRatio="none"></svg>
-<div id="chartEmpty">las curvas arrancan cuando el escuadrón arme y marque su primera hora</div></div>
+<div id="chartEmpty">curves begin once a squad arms and marks its first hour</div></div>
 <div id="legend" class="legend"></div></div>
 
-<div class="panel" id="charter"><h2>RELOJ DEL CHARTER</h2>
-<p><b>$3,000 = asignación inicial por bot</b>, no techo. Real: escalera $500→$1.5K→$3K; encima, solo ganancias propias.</p>
-<p>Stage 1: <b>90 días contados</b> · Sharpe ≥ 1.0 · LCB &gt; 0 · maxDD ≤ 10% → Stage 2: 60d → piloto</p>
+<div class="panel" id="charter"><h2>CHARTER CLOCK</h2>
+<p><b>$3,000 = initial allocation per bot</b>, not a ceiling. Live: ladder $500→$1.5K→$3K; above that, its own profits only.</p>
+<p>Stage 1: <b>90 counted days</b> · Sharpe ≥ 1.0 · LCB &gt; 0 · maxDD ≤ 10% → Stage 2: 60d → pilot</p>
 <p id="clkC">Crypto: <b>–</b></p><p id="clkS">Stocks: <b>–</b></p>
-<p>Exámenes: crypto <b id="exC">0</b>/10 · stocks <b id="exS">0</b>/10 · revisión sáb 09:00 CT</p></div>
+<p>Exams: crypto <b id="exC">0</b>/10 · stocks <b id="exS">0</b>/10 · review Sat 09:00 CT</p></div>
 
-<div class="panel" id="exits"><h2>EXCURSIONES · <b>¿subimos y lo devolvimos?</b> <span id="xSub" class="dim"></span></h2>
+<div class="panel" id="exits"><h2>EXCURSIONS · <b>did we run up and give it back?</b> <span id="xSub" class="dim"></span></h2>
 <div id="xBody" style="flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column"></div></div>
 
-<div class="panel" id="worst"><h2>PEORES SALIDAS · <b>causa congelada s12.1</b></h2>
+<div class="panel" id="worst"><h2>WORST EXITS · <b>frozen cause s12.1</b></h2>
 <div id="wBody" style="flex:1;min-height:0;overflow:hidden"></div></div>
 
 <footer><span id="foot" class="dim"></span><span class="sp"></span>
-<span class="dim">liga (controles) → /public · refresh 60s</span></footer>
+<span class="dim">league (controls) → /public · refresh 60s</span></footer>
 </div><script>
 const $=q=>document.querySelector(q);
 const pal=["#4db8ff","#3fd08b","#ff6b6b","#e8b63f","#b78bff","#5fe0d8","#ff9d5c","#8fd14f","#f76bd0","#9aa7ff"];
@@ -116,7 +116,7 @@ const p=$(pnlEl);p.textContent=`${money2(d)} (${pct(d/base)})`;p.className="pnl 
 $(noteEl).textContent=""}
 function chips(names,vmap,pending){return`<div class="chips">`+names.map(s=>{
 const v=vmap[s];const cls=v==="PASS"?"v-PASS":v?"v-FAIL":pending;
-const lab=v==="PASS"?"CANDIDATA":v?"CONTROL":(pending==="v-WAIT"?"examen…":"propuesta");
+const lab=v==="PASS"?"CANDIDATE":v?"CONTROL":(pending==="v-WAIT"?"exam…":"proposed");
 return`<div class="chip"><span>${s.replace(/^[hs]_/,"")}</span><small class="${cls}">${lab}</small></div>`}).join("")+`</div>`}
 function squadTable(ss,sst){let h=`<table><thead><tr><th>bot</th><th class="r">equity</th><th class="r">P&L $</th><th class="r">ret</th><th>pos</th><th></th></tr></thead><tbody>`;
 Object.keys(ss).forEach((n,i)=>{const v=ss[n],e=v.at(-1),d=e-v[0],r=e/v[0]-1;
@@ -129,25 +129,25 @@ return h+"</tbody></table>"}
 function exitsPanel(x){
 // the whole take-profit question in one panel: how far did trades get
 // above entry (MFE) vs the round-trip cost floor they must clear?
-if(!x||!x.n){return`<div class="dim" style="margin:auto">sin trades cerrados todavía</div>`}
+if(!x||!x.n){return`<div class="dim" style="margin:auto">no closed trades yet</div>`}
 const p=v=>v==null?"–":(v>=0?"+":"")+(100*v).toFixed(2)+"%";
 const rt=x.rt_cost,scale=Math.max(rt*1.6,Math.abs(x.mfe_max||0)*1.2,0.02);
 const w=v=>Math.min(100,100*Math.abs(v||0)/scale);
 return`<div class="mrow">
-<div class="met"><b class="${x.mfe_max>=rt?"up":"amb"}">${p(x.mfe_max)}</b><span>MFE MÁX</span></div>
-<div class="met"><b>${p(x.mfe_med)}</b><span>MFE MEDIANA</span></div>
+<div class="met"><b class="${x.mfe_max>=rt?"up":"amb"}">${p(x.mfe_max)}</b><span>MFE MAX</span></div>
+<div class="met"><b>${p(x.mfe_med)}</b><span>MFE MEDIAN</span></div>
 <div class="met"><b>${p(x.mfe_p75)}</b><span>MFE P75</span></div>
-<div class="met"><b class="dn">${p(x.mae_min)}</b><span>MAE PEOR</span></div>
-<div class="met"><b class="${x.above_cost?"up":"dn"}">${x.above_cost}/${x.n}</b><span>SUPERAN COSTO</span></div></div>
-<div style="font-size:10px;color:var(--dim)">techo de ganancia alcanzado (MFE máx) vs costo ida y vuelta ${p(rt)}</div>
+<div class="met"><b class="dn">${p(x.mae_min)}</b><span>MAE WORST</span></div>
+<div class="met"><b class="${x.above_cost?"up":"dn"}">${x.above_cost}/${x.n}</b><span>ABOVE COST</span></div></div>
+<div style="font-size:10px;color:var(--dim)">peak gain reached (MFE max) vs round-trip cost ${p(rt)}</div>
 <div class="bar"><i style="width:${w(x.mfe_max)}%;background:${x.mfe_max>=rt?"var(--up)":"var(--amb)"}"></i>
 <i style="left:${w(rt)}%;width:2px;background:var(--dn)"></i></div>
 <div class="hint">${x.above_cost?
-`${x.above_cost} de ${x.n} trades superaron el costo — revisar brackets el sábado.`:
-`ningún trade llegó al costo ida y vuelta (${p(rt)}). Un take-profit no tendría nada que cobrar: el muro es el costo, no la salida.`}</div>`}
+`${x.above_cost} of ${x.n} trades cleared the cost — review brackets on Saturday.`:
+`no trade reached the round-trip cost (${p(rt)}). A take-profit would have nothing to harvest: the wall is the cost, not the exit.`}</div>`}
 function worstTable(x){const rows=(x&&x.worst)||[];
-if(!rows.length){return`<div class="dim">sin trades cerrados</div>`}
-let h=`<table><thead><tr><th>bot</th><th>par</th><th class="r">MFE</th><th class="r">MAE</th><th class="r">net</th><th>causa</th></tr></thead><tbody>`;
+if(!rows.length){return`<div class="dim">no closed trades</div>`}
+let h=`<table><thead><tr><th>bot</th><th>par</th><th class="r">MFE</th><th class="r">MAE</th><th class="r">net</th><th>cause</th></tr></thead><tbody>`;
 for(const r of rows){h+=`<tr><td>${r.bot.replace(/^[hs]_/,"")}</td><td class="dim">${r.pair.replace("-USD","")}</td>
 <td class="r ${r.mfe>=0?"up":"dn"}">${(100*r.mfe).toFixed(2)}%</td>
 <td class="r dn">${(100*r.mae).toFixed(2)}%</td>
@@ -160,33 +160,33 @@ function conc(sst){
 const m={};Object.values(sst||{}).forEach(b=>Object.keys(b.units||{}).forEach(p=>{const k=p.replace(/-USD$/,"");m[k]=(m[k]||0)+1}));
 const e=Object.entries(m).sort((a,b)=>b[1]-a[1]);if(!e.length)return"";
 const tot=Object.keys(sst||{}).length||10,warn=e[0][1]>=Math.ceil(tot*0.7);
-return`<div class="${warn?"amb":"dim"}" style="font-size:10px;margin:0 0 4px">concentración: ${e.map(([k,v])=>`${k}×${v}`).join(" · ")}${warn?" — ⚠ libro correlacionado":""}</div>`}
+return`<div class="${warn?"amb":"dim"}" style="font-size:10px;margin:0 0 4px">concentration: ${e.map(([k,v])=>`${k}×${v}`).join(" · ")}${warn?" — ⚠ correlated book":""}</div>`}
 async function j(u){try{const r=await fetch(u);return await r.json()}catch(e){return null}}
 async function refresh(){
 const[meta,sq,seq,sqS,seqS,led,costs,xs]=await Promise.all(["/api/meta","/api/squad","/api/squad_equity","/api/squad_stocks","/api/squad_stocks_equity","/api/exam_ledger","/api/squad_costs","/api/exits"].map(j));
 const aC=meta&&meta.armed_crypto,aS=meta&&meta.armed_stocks;
 const cS=seq?series(seq,"bot"):{},sS=seqS?series(seqS,"bot"):{};
 const bC=$("#bC");bC.textContent="crypto "+(aC?"ARMED":"UNARMED");bC.className="badge "+(aC?"armed":"unarmed");
-const bS=$("#bS");bS.textContent="stocks "+(aS?"ARMED":"PROPUESTO");bS.className="badge "+(aS?"armed":"unarmed");
-const open=nyseOpen(),mk=$("#mkt");mk.textContent="NYSE "+(open?"ABIERTO":"CERRADO");
+const bS=$("#bS");bS.textContent="stocks "+(aS?"ARMED":"PROPOSED");bS.className="badge "+(aS?"armed":"unarmed");
+const open=nyseOpen(),mk=$("#mkt");mk.textContent="NYSE "+(open?"OPEN":"CLOSED");
 mk.className="badge "+(open?"armed":"closed");
 // missed-cycle badge (launchd sleeps when the Mac does)
 const cy=meta&&meta.cycles,cb=$("#cyc");
-if(cy){cb.textContent=`ciclos ${cy.marked}/${cy.expected}`;
+if(cy){cb.textContent=`cycles ${cy.marked}/${cy.expected}`;
 cb.className="badge "+(cy.marked>=cy.expected-1?"armed":"unarmed");
-cb.title=cy.missing.length?"horas sin ciclo (UTC): "+cy.missing.join(", "):"sin huecos en 24h"}
+cb.title=cy.missing.length?"hours with no cycle (UTC): "+cy.missing.join(", "):"no gaps in 24h"}
 // capital strips + aggregate
-capStrip(cS,"#cEq","#cPnl","#cNote","en espera — arma al 10/10");
-capStrip(sS,"#sEq","#sPnl","#sNote","reservado — pendiente de firma");
-// fee drag + BTC-hold benchmark (derivado de logs, s/ charter costs)
+capStrip(cS,"#cEq","#cPnl","#cNote","standby — arms at 10/10");
+capStrip(sS,"#sEq","#sPnl","#sNote","reserved — pending signature");
+// fee drag + BTC-hold benchmark (derived from logs, per charter costs)
 if(costs){const cc=costs.crypto,cs=costs.stocks,bh=costs.btc_hold;
-if(cc&&cc.fees){let t=`drag: fees ${money2(-cc.fees)} · ${cc.closed} cerrados gross ${money2(cc.gross)} → net ${money2(cc.net)}`;
+if(cc&&cc.fees){let t=`drag: fees ${money2(-cc.fees)} · ${cc.closed} closed gross ${money2(cc.gross)} → net ${money2(cc.net)}`;
 if(bh&&bh.equity){const d=bh.equity-30000;t+=` · BTC-HOLD ${money(bh.equity)} (${pct(d/30000)})`}
 $("#cNote").textContent=t}
-if(cs&&cs.closed>0){$("#sNote").textContent=`drag: fees ${money2(-cs.fees)} · ${cs.closed} cerrados gross ${money2(cs.gross)} → net ${money2(cs.net)}`}}
+if(cs&&cs.closed>0){$("#sNote").textContent=`drag: fees ${money2(-cs.fees)} · ${cs.closed} closed gross ${money2(cs.gross)} → net ${money2(cs.net)}`}}
 const tc=Object.values(cS).reduce((a,v)=>a+v.at(-1),0)||30000;
 const ts=Object.values(sS).reduce((a,v)=>a+v.at(-1),0)||30000;
-$("#agg").innerHTML=money(tc+ts)+" <small>capital paper</small>";
+$("#agg").innerHTML=money(tc+ts)+" <small>paper capital</small>";
 const dA=tc+ts-60000,pA=$("#aggP");
 pA.textContent=dA?`${money2(dA)} (${pct(dA/60000)})`:"";pA.className=dA>=0?"up":"dn";
 // panels
@@ -194,9 +194,9 @@ const l1=(led||[]).filter(r=>r.timeframe==="1h"),lS=(led||[]).filter(r=>r.timefr
 $("#exC").textContent=l1.length;$("#exS").textContent=lS.length;
 const vC={},vS={};l1.forEach(r=>vC[r.candidate]=r.verdict);lS.forEach(r=>vS[r.candidate]=r.verdict);
 if(aC&&seq&&seq.length){$("#cSub").textContent="· forward record";$("#cBody").innerHTML=conc((sq&&sq.bots)||{})+squadTable(cS,(sq&&sq.bots)||{})}
-else{$("#cSub").textContent=`· exámenes ${l1.length}/10`;$("#cBody").innerHTML=chips(CR,vC,"v-WAIT")}
+else{$("#cSub").textContent=`· exams ${l1.length}/10`;$("#cBody").innerHTML=chips(CR,vC,"v-WAIT")}
 if(aS&&seqS&&seqS.length){$("#sSub").textContent="· forward record";$("#sBody").innerHTML=conc((sqS&&sqS.bots)||{})+squadTable(sS,(sqS&&sqS.bots)||{})}
-else{$("#sSub").textContent=lS.length?`· exámenes ${lS.length}/10`:"· pendiente de firma";
+else{$("#sSub").textContent=lS.length?`· exams ${lS.length}/10`:"· pending signature";
 $("#sBody").innerHTML=chips(ST,vS,lS.length?"v-WAIT":"v-PROP")}
 // dollar curves
 const all={};Object.entries(cS).forEach(([k,v])=>all["c:"+k.replace(/^h_/,"")]=v);
@@ -219,15 +219,15 @@ svg.innerHTML=out;
 $("#legend").innerHTML=names.map((n,i)=>`<span><i style="background:${pal[i%10]}"></i>${n}</span>`).join("")}
 // exits / excursions (crypto has the closed trades; stocks joins when it closes any)
 const xc=xs&&xs.crypto,xst=xs&&xs.stocks;
-$("#xSub").textContent=xc?`· ${xc.n} cerrados`+((xst&&xst.n)?` · stocks ${xst.n}`:""):"";
+$("#xSub").textContent=xc?`· ${xc.n} closed`+((xst&&xst.n)?` · stocks ${xst.n}`:""):"";
 $("#xBody").innerHTML=exitsPanel(xc);
 $("#wBody").innerHTML=worstTable(xc);
 // clock + footer
-$("#clkC").innerHTML="Crypto: <b>"+(aC?"shakedown — 7 días contados consecutivos arrancan el reloj":"exámenes en curso, arma al completar 10/10")+"</b>";
-$("#clkS").innerHTML="Stocks: <b>"+(aS?"shakedown — 7 días contados consecutivos arrancan el reloj (RTH)":"roster propuesto — pendiente de firma del owner")+"</b>";
+$("#clkC").innerHTML="Crypto: <b>"+(aC?"shakedown — 7 consecutive counted days start the clock":"exams in progress, arms on completing 10/10")+"</b>";
+$("#clkS").innerHTML="Stocks: <b>"+(aS?"shakedown — 7 consecutive counted days start the clock (RTH)":"roster proposed — pending owner signature")+"</b>";
 const f1=l1.filter(r=>r.verdict==="FAIL").length,p1=l1.filter(r=>r.verdict==="PASS").length;
 const fS=lS.filter(r=>r.verdict==="FAIL").length,pS=lS.filter(r=>r.verdict==="PASS").length;
-$("#foot").textContent=`ledger global: ${(led||[]).length} exámenes · crypto 1h: ${p1} PASS / ${f1} control · stocks 1h: ${pS} PASS / ${fS} control · predicción: 0 PASS · K sube con cada intento`;
+$("#foot").textContent=`global ledger: ${(led||[]).length} exams · crypto 1h: ${p1} PASS / ${f1} control · stocks 1h: ${pS} PASS / ${fS} control · prediction: 0 PASS · K rises with every attempt`;
 }
 setInterval(()=>{$("#clock").textContent=new Date().toUTCString().slice(17,25)+" UTC · "+new Date().toLocaleTimeString("en-US",{timeZone:"America/Chicago",hour12:false})+" CT"},1000);
 refresh();setInterval(refresh,60000);

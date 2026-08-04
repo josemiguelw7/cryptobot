@@ -234,6 +234,15 @@ def n_trials():
     if os.path.exists(LEDGER):
         with open(LEDGER) as f:
             ledger = sum(1 for _ in csv.DictReader(f))
+    # K carried across the 2026-08-04 ledger wipe. The names were
+    # cleared; the trials were not un-run. See k_offset.json.
+    off = os.path.join(RESULTS, "k_offset.json")
+    if os.path.exists(off):
+        try:
+            d = json.load(open(off))
+            ledger += int(d.get("carried_ledger_rows", 0))
+        except Exception:
+            pass
     screened = 30
     if os.path.exists(SCREEN_COUNT):
         try:

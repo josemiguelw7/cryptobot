@@ -1,0 +1,52 @@
+{
+  "BTC-HOLD": {
+    "cash": 0.0,
+    "units": {
+      "BTC-USD": 0.04726578133748223
+    },
+    "last_rebalance": "2026-08-02T14:23:57.914356+00:00",
+    "created": "2026-08-02T14:23:57.914159+00:00",
+    "peak_equity": 3039.921414295212
+  },
+  "BTC-TREND": {
+    "cash": 3000.0,
+    "units": {},
+    "last_rebalance": null,
+    "created": "2026-08-02T14:23:57.914159+00:00",
+    "peak_equity": 3000.0
+  },
+  "MOM-ROT": {
+    "cash": 0.0,
+    "units": {
+      "PUMP-USD": 464470.8968563872,
+      "UNI-USD": 236.77389141463587,
+      "ONDO-USD": 2577.715864189228
+    },
+    "last_rebalance": "2026-08-02T14:23:57.914356+00:00",
+    "created": "2026-08-02T14:23:57.914159+00:00",
+    "peak_equity": 3062.820895261107
+  },
+  "CROSS-BTC": {
+    "cash": 0.0,
+    "units": {
+      "BTC-USD": 0.04726578133748223
+    },
+    "last_rebalance": "2026-08-02T14:23:57.914356+00:00",
+    "created": "2026-08-02T14:23:57.914159+00:00",
+    "peak_equity": 3039.921414295212
+  },
+  "DONCH-BTC": {
+    "cash": 3000.0,
+    "units": {},
+    "last_rebalance": null,
+    "created": "2026-08-02T14:23:57.914159+00:00",
+    "peak_equity": 3000.0
+  },
+  "RSI-BTC": {
+    "cash": 3000.0,
+    "units": {},
+    "last_rebalance": null,
+    "created": "2026-08-02T14:23:57.914159+00:00",
+    "peak_equity": 3000.0
+  }
+}

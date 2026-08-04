@@ -1,0 +1,7 @@
+{
+ "carried_ledger_rows": 38,
+ "carried_screened": 31,
+ "date": "2026-08-04",
+ "reason": "Ledger wiped at owner request after the epoch-2 exam bugs. The NAMES are cleared so nothing from the discarded generation is carried forward. The TRIAL COUNT is carried forward because those trials really happened against this same price data: 38 names were tested. Zeroing K would not reset the luck hurdle to neutral, it would set it LOWER than reality and make a false PASS easier. K is the one number that gets harder to satisfy, never easier.",
+ "note": "To zero this too, set both fields to 0 -- an explicit, recorded act, not a side effect of a cleanup."
+}

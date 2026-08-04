@@ -35,7 +35,7 @@ import os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import strategies as S
 
-ARMED = False          # flips only per the procedure in the docstring
+ARMED = True          # flips only per the procedure in the docstring
 ASSET_CLASS = "crypto"
 
 # The eight fixed exam pairs (docs/intraday_standard.md). Same eight as

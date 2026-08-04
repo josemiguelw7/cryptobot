@@ -5321,3 +5321,2216 @@ Subject: Cryptobot league — 2026-08-03
 5. RSI-BTC    $  3,000.00  -70.00%  today +0.00%  breaker room 20%
 6. MOM-ROT    $  2,908.56  -70.91%  today +1.63%  breaker room 17%
 daily run complete.
+=== data/refresh_daily.py  ===
+  BTC-USD: +0 new, 1470 total
+  ETH-USD: +0 new, 1470 total
+  SOL-USD: +0 new, 1470 total
+  XRP-USD: +0 new, 1118 total
+  ADA-USD: +0 new, 1470 total
+  DOGE-USD: +0 new, 1470 total
+  LINK-USD: +0 new, 1470 total
+  LTC-USD: +0 new, 1470 total
+refresh complete.
+=== data/refresh_intraday.py === already ran today (2026-08-03 UTC); skipping.
+=== ops/stamp.py === already ran today (2026-08-03 UTC); skipping.
+=== bot/league.py  ===
+[2026-08-03 18:17 UTC] league cycle
+  [BTC-HOLD] equity $3,020.95 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $3,000.00 holding cash -> target cash
+  [MOM-ROT] equity $2,925.21 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ENA-USD']
+  [CROSS-BTC] equity $3,020.95 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $3,000.00 holding cash -> target cash
+  [RSI-BTC] equity $3,000.00 holding cash -> target cash
+league state saved.
+=== bot/squad.py  ===
+[2026-08-03 18:17 UTC] squad cycle (ARMED)
+  [h_trend_168] $2,998.30 ['ADA-USD', 'XRP-USD']
+  [h_cross_24_168] $3,004.91 ['ADA-USD', 'XRP-USD']
+  [h_tsmom_72] $2,930.23 ['ADA-USD', 'LINK-USD']
+  [h_macd_12_26] $2,932.26 ['ADA-USD', 'BTC-USD']
+  [h_donch_48_24] $2,890.38 ['ADA-USD', 'BTC-USD']
+  [h_volbrk_24_96] $2,938.18 cash
+  [h_rsi14_reg168] $3,000.00 cash
+  [h_boll_48] $3,000.00 cash
+  [h_calm_24_168] $3,011.83 ['SOL-USD', 'LINK-USD']
+  [h_nearhi_168] $2,993.17 ['ADA-USD', 'XRP-USD']
+  squad total $29,699.27 · state saved
+=== bot/squad_stocks.py  ===
+[2026-08-03 18:17 UTC] squad cycle (ARMED)
+  [s_trend_33] $3,050.78 ['TSLA', 'NVDA']
+  [s_cross_7_33] $3,050.78 ['TSLA', 'NVDA']
+  [s_tsmom_21] $3,050.78 ['TSLA', 'NVDA']
+  [s_macd_12_26] $3,050.78 ['TSLA', 'NVDA']
+  [s_donch_14_7] $3,050.78 ['TSLA', 'NVDA']
+  [s_volbrk_7_33] $3,050.78 ['TSLA', 'NVDA']
+  [s_rsi14_reg33] $3,000.00 cash
+  [s_boll_14] $3,000.00 cash
+  [s_calm_7_33] $3,050.78 ['TSLA', 'NVDA']
+  [s_nearhi_33] $3,050.78 ['TSLA', 'NVDA']
+  squad total $30,406.27 · state saved
+=== portal/build_site.py  ===
+site/index.html built (174 equity rows, 5 trades, 30 exams)
+=== ops/backup.py  ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-03.zip (11 snapshots kept)
+=== bot/digest.py  ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-03
+
+1. BTC-HOLD   $  3,020.95  -69.79%  today +0.24%  breaker room 20%
+2. CROSS-BTC  $  3,020.95  -69.79%  today +0.24%  breaker room 20%
+3. BTC-TREND  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+4. DONCH-BTC  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+5. RSI-BTC    $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+6. MOM-ROT    $  2,925.21  -70.75%  today +0.57%  breaker room 18%
+daily run complete.
+=== data/refresh_daily.py  ===
+  BTC-USD: +0 new, 1470 total
+  ETH-USD: +0 new, 1470 total
+  SOL-USD: +0 new, 1470 total
+  XRP-USD: +0 new, 1118 total
+  ADA-USD: +0 new, 1470 total
+  DOGE-USD: +0 new, 1470 total
+  LINK-USD: +0 new, 1470 total
+  LTC-USD: +0 new, 1470 total
+refresh complete.
+=== data/refresh_intraday.py === already ran today (2026-08-03 UTC); skipping.
+=== ops/stamp.py === already ran today (2026-08-03 UTC); skipping.
+=== bot/league.py  ===
+[2026-08-03 19:18 UTC] league cycle
+  [BTC-HOLD] equity $3,019.95 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $3,000.00 holding cash -> target cash
+  [MOM-ROT] equity $2,909.58 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ENA-USD']
+  [CROSS-BTC] equity $3,019.95 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $3,000.00 holding cash -> target cash
+  [RSI-BTC] equity $3,000.00 holding cash -> target cash
+league state saved.
+=== bot/squad.py  ===
+[2026-08-03 19:18 UTC] squad cycle (ARMED)
+  [h_trend_168] $3,008.48 ['ADA-USD', 'XRP-USD']
+  [h_cross_24_168] $3,015.13 ['ADA-USD', 'XRP-USD']
+  [h_tsmom_72] $2,940.23 ['ADA-USD', 'LINK-USD']
+  [h_macd_12_26] $2,942.49 ['ADA-USD', 'BTC-USD']
+  [h_donch_48_24] $2,900.51 ['ADA-USD', 'BTC-USD']
+  [h_volbrk_24_96] $2,938.18 cash
+  [h_rsi14_reg168] $3,000.00 cash
+  [h_boll_48] $3,000.00 cash
+  [h_calm_24_168] $3,007.41 ['SOL-USD', 'LINK-USD']
+  [h_nearhi_168] $3,003.40 ['ADA-USD', 'XRP-USD']
+  squad total $29,755.83 · state saved
+=== bot/squad_stocks.py  ===
+[2026-08-03 19:18 UTC] squad cycle (ARMED)
+  [s_trend_33] $3,049.78 ['TSLA', 'NVDA']
+  [s_cross_7_33] $3,049.78 ['TSLA', 'NVDA']
+  [s_tsmom_21] $3,049.78 ['TSLA', 'NVDA']
+  [s_macd_12_26] $3,049.78 ['TSLA', 'NVDA']
+  [s_donch_14_7] $3,049.78 ['TSLA', 'NVDA']
+  [s_volbrk_7_33] $3,049.78 ['TSLA', 'NVDA']
+  [s_rsi14_reg33] $3,000.00 cash
+  [s_boll_14] $3,000.00 cash
+  [s_calm_7_33] $3,049.78 ['TSLA', 'NVDA']
+  [s_nearhi_33] $3,049.78 ['TSLA', 'NVDA']
+  squad total $30,398.26 · state saved
+=== portal/build_site.py  ===
+site/index.html built (180 equity rows, 5 trades, 30 exams)
+=== ops/backup.py  ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-03.zip (11 snapshots kept)
+=== bot/digest.py  ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-03
+
+1. BTC-HOLD   $  3,019.95  -69.80%  today -0.03%  breaker room 20%
+2. CROSS-BTC  $  3,019.95  -69.80%  today -0.03%  breaker room 20%
+3. BTC-TREND  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+4. DONCH-BTC  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+5. RSI-BTC    $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+6. MOM-ROT    $  2,909.58  -70.90%  today -0.53%  breaker room 18%
+daily run complete.
+=== data/refresh_daily.py  ===
+  BTC-USD: +0 new, 1470 total
+  ETH-USD: +0 new, 1470 total
+  SOL-USD: +0 new, 1470 total
+  XRP-USD: +0 new, 1118 total
+  ADA-USD: +0 new, 1470 total
+  DOGE-USD: +0 new, 1470 total
+  LINK-USD: +0 new, 1470 total
+  LTC-USD: +0 new, 1470 total
+refresh complete.
+=== data/refresh_intraday.py === already ran today (2026-08-03 UTC); skipping.
+=== ops/stamp.py === already ran today (2026-08-03 UTC); skipping.
+=== bot/league.py  ===
+[2026-08-03 20:19 UTC] league cycle
+  [BTC-HOLD] equity $3,018.21 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $3,000.00 holding cash -> target cash
+  [MOM-ROT] equity $2,903.16 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ENA-USD']
+  [CROSS-BTC] equity $3,018.21 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $3,000.00 holding cash -> target cash
+  [RSI-BTC] equity $3,000.00 holding cash -> target cash
+league state saved.
+=== bot/squad.py  ===
+[2026-08-03 20:19 UTC] squad cycle (ARMED)
+  [h_trend_168] $3,007.12 ['ADA-USD', 'XRP-USD']
+  [h_cross_24_168] $3,013.79 ['ADA-USD', 'XRP-USD']
+  [h_tsmom_72] $2,941.72 ['ADA-USD', 'LINK-USD']
+  [h_macd_12_26] $2,942.48 ['ADA-USD', 'BTC-USD']
+  [h_donch_48_24] $2,900.50 ['ADA-USD', 'BTC-USD']
+  [h_volbrk_24_96] $2,938.18 cash
+  [h_rsi14_reg168] $3,000.00 cash
+  [h_boll_48] $3,000.00 cash
+  [h_calm_24_168] $3,008.84 ['SOL-USD', 'LINK-USD']
+  [h_nearhi_168] $3,002.07 ['ADA-USD', 'XRP-USD']
+  squad total $29,754.71 · state saved
+=== bot/squad_stocks.py  ===
+[2026-08-03 20:19 UTC / 16:19 ET] market CLOSED - no signals, no counted cycle
+=== portal/build_site.py  ===
+site/index.html built (186 equity rows, 5 trades, 30 exams)
+=== ops/backup.py  ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-03.zip (11 snapshots kept)
+=== bot/digest.py  ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-03
+
+1. BTC-HOLD   $  3,018.21  -69.82%  today -0.06%  breaker room 20%
+2. CROSS-BTC  $  3,018.21  -69.82%  today -0.06%  breaker room 20%
+3. BTC-TREND  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+4. DONCH-BTC  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+5. RSI-BTC    $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+6. MOM-ROT    $  2,903.16  -70.97%  today -0.22%  breaker room 17%
+daily run complete.
+=== data/refresh_daily.py  ===
+  BTC-USD: +0 new, 1470 total
+  ETH-USD: +0 new, 1470 total
+  SOL-USD: +0 new, 1470 total
+  XRP-USD: +0 new, 1118 total
+  ADA-USD: +0 new, 1470 total
+  DOGE-USD: +0 new, 1470 total
+  LINK-USD: +0 new, 1470 total
+  LTC-USD: +0 new, 1470 total
+refresh complete.
+=== data/refresh_intraday.py === already ran today (2026-08-03 UTC); skipping.
+=== ops/stamp.py === already ran today (2026-08-03 UTC); skipping.
+=== bot/league.py  ===
+[2026-08-03 21:19 UTC] league cycle
+  [BTC-HOLD] equity $3,011.24 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $3,000.00 holding cash -> target cash
+  [MOM-ROT] equity $2,902.07 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ENA-USD']
+  [CROSS-BTC] equity $3,011.24 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $3,000.00 holding cash -> target cash
+  [RSI-BTC] equity $3,000.00 holding cash -> target cash
+league state saved.
+=== bot/squad.py  ===
+[2026-08-03 21:19 UTC] squad cycle (ARMED)
+  [h_trend_168] $3,001.38 ['ADA-USD', 'XRP-USD']
+  [h_cross_24_168] $3,008.06 ['ADA-USD', 'XRP-USD']
+  [h_tsmom_72] $2,930.38 ['ADA-USD', 'LINK-USD']
+  [h_macd_12_26] $2,932.97 ['ADA-USD', 'BTC-USD']
+  [h_donch_48_24] $2,891.18 ['ADA-USD', 'BTC-USD']
+  [h_volbrk_24_96] $2,938.18 cash
+  [h_rsi14_reg168] $3,000.00 cash
+  [h_boll_48] $3,000.00 cash
+  [h_calm_24_168] $2,994.81 ['SOL-USD', 'LINK-USD']
+  [h_nearhi_168] $2,996.35 ['ADA-USD', 'XRP-USD']
+  squad total $29,693.32 · state saved
+=== bot/squad_stocks.py  ===
+[2026-08-03 21:20 UTC / 17:20 ET] market CLOSED - no signals, no counted cycle
+=== portal/build_site.py  ===
+site/index.html built (192 equity rows, 5 trades, 30 exams)
+=== ops/backup.py  ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-03.zip (11 snapshots kept)
+=== bot/digest.py  ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-03
+
+1. BTC-HOLD   $  3,011.24  -69.89%  today -0.23%  breaker room 20%
+2. CROSS-BTC  $  3,011.24  -69.89%  today -0.23%  breaker room 20%
+3. BTC-TREND  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+4. DONCH-BTC  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+5. RSI-BTC    $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+6. MOM-ROT    $  2,902.07  -70.98%  today -0.04%  breaker room 17%
+daily run complete.
+=== data/refresh_daily.py  ===
+  BTC-USD: +0 new, 1470 total
+  ETH-USD: +0 new, 1470 total
+  SOL-USD: +0 new, 1470 total
+  XRP-USD: +0 new, 1118 total
+  ADA-USD: +0 new, 1470 total
+  DOGE-USD: +0 new, 1470 total
+  LINK-USD: +0 new, 1470 total
+  LTC-USD: +0 new, 1470 total
+refresh complete.
+=== data/refresh_intraday.py === already ran today (2026-08-03 UTC); skipping.
+=== ops/stamp.py === already ran today (2026-08-03 UTC); skipping.
+=== bot/league.py  ===
+[2026-08-03 22:20 UTC] league cycle
+  [BTC-HOLD] equity $3,000.56 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $3,000.00 holding cash -> target cash
+  [MOM-ROT] equity $2,876.63 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ENA-USD']
+  [CROSS-BTC] equity $3,000.56 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $3,000.00 holding cash -> target cash
+  [RSI-BTC] equity $3,000.00 holding cash -> target cash
+league state saved.
+=== bot/squad.py  ===
+[2026-08-03 22:20 UTC] squad cycle (ARMED)
+  [h_trend_168] $2,996.15 ['ADA-USD', 'XRP-USD']
+  [h_cross_24_168] $3,002.91 ['ADA-USD', 'XRP-USD']
+  [h_tsmom_72] $2,928.62 ['ADA-USD', 'LINK-USD']
+  [h_macd_12_26] $2,930.11 ['ADA-USD', 'BTC-USD']
+  [h_donch_48_24] $2,888.38 ['ADA-USD', 'BTC-USD']
+  [h_volbrk_24_96] $2,938.18 cash
+  [h_rsi14_reg168] $3,000.00 cash
+  [h_boll_48] $3,000.00 cash
+  [h_calm_24_168] $2,991.00 ['SOL-USD', 'LINK-USD']
+  [h_nearhi_168] $2,991.24 ['ADA-USD', 'XRP-USD']
+  squad total $29,666.59 · state saved
+=== bot/squad_stocks.py  ===
+[2026-08-03 22:20 UTC / 18:20 ET] market CLOSED - no signals, no counted cycle
+=== portal/build_site.py  ===
+site/index.html built (198 equity rows, 5 trades, 30 exams)
+=== ops/backup.py  ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-03.zip (11 snapshots kept)
+=== bot/digest.py  ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-03
+
+1. BTC-HOLD   $  3,000.56  -69.99%  today -0.35%  breaker room 19%
+2. CROSS-BTC  $  3,000.56  -69.99%  today -0.35%  breaker room 19%
+3. BTC-TREND  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+4. DONCH-BTC  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+5. RSI-BTC    $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+6. MOM-ROT    $  2,876.63  -71.23%  today -0.88%  breaker room 17%
+daily run complete.
+=== data/refresh_daily.py  ===
+  BTC-USD: +0 new, 1470 total
+  ETH-USD: +0 new, 1470 total
+  SOL-USD: +0 new, 1470 total
+  XRP-USD: +0 new, 1118 total
+  ADA-USD: +0 new, 1470 total
+  DOGE-USD: +0 new, 1470 total
+  LINK-USD: +0 new, 1470 total
+  LTC-USD: +0 new, 1470 total
+refresh complete.
+=== data/refresh_intraday.py === already ran today (2026-08-03 UTC); skipping.
+=== ops/stamp.py === already ran today (2026-08-03 UTC); skipping.
+=== bot/league.py  ===
+[2026-08-03 23:20 UTC] league cycle
+  [BTC-HOLD] equity $3,003.39 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $3,000.00 holding cash -> target cash
+  [MOM-ROT] equity $2,870.31 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ENA-USD']
+  [CROSS-BTC] equity $3,003.39 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $3,000.00 holding cash -> target cash
+  [RSI-BTC] equity $3,000.00 holding cash -> target cash
+league state saved.
+=== bot/squad.py  ===
+[2026-08-03 23:20 UTC] squad cycle (ARMED)
+  [h_trend_168] $2,990.72 ['ADA-USD', 'XRP-USD']
+  [h_cross_24_168] $2,997.54 ['ADA-USD', 'XRP-USD']
+  [h_tsmom_72] $2,920.53 ['ADA-USD', 'LINK-USD']
+  [h_macd_12_26] $2,927.17 ['ADA-USD', 'BTC-USD']
+  [h_donch_48_24] $2,885.50 ['ADA-USD', 'BTC-USD']
+  [h_volbrk_24_96] $2,938.18 cash
+  [h_rsi14_reg168] $3,000.00 cash
+  [h_boll_48] $3,000.00 cash
+  [h_calm_24_168] $2,980.30 ['SOL-USD', 'LINK-USD']
+  [h_nearhi_168] $2,985.89 ['ADA-USD', 'XRP-USD']
+  squad total $29,625.84 · state saved
+=== bot/squad_stocks.py  ===
+[2026-08-03 23:20 UTC / 19:20 ET] market CLOSED - no signals, no counted cycle
+=== portal/build_site.py  ===
+site/index.html built (204 equity rows, 5 trades, 30 exams)
+=== ops/backup.py  ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-03.zip (11 snapshots kept)
+=== bot/digest.py  ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-03
+
+1. BTC-HOLD   $  3,003.39  -69.97%  today +0.09%  breaker room 20%
+2. CROSS-BTC  $  3,003.39  -69.97%  today +0.09%  breaker room 20%
+3. BTC-TREND  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+4. DONCH-BTC  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+5. RSI-BTC    $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+6. MOM-ROT    $  2,870.31  -71.30%  today -0.22%  breaker room 16%
+daily run complete.
+=== data/refresh_daily.py  ===
+  BTC-USD: +1 new, 1471 total
+  ETH-USD: +1 new, 1471 total
+  SOL-USD: +1 new, 1471 total
+  XRP-USD: +1 new, 1119 total
+  ADA-USD: +1 new, 1471 total
+  DOGE-USD: +1 new, 1471 total
+  LINK-USD: +1 new, 1471 total
+  LTC-USD: +1 new, 1471 total
+refresh complete.
+=== data/refresh_intraday.py  ===
+intraday refresh · 2026-08-04 00:20 UTC
+
+==========================================================
+refreshing 25 pairs @ 300s (60d window, merge)
+==========================================================
+
+[1/25] ADA-USD
+     gaps .................. 18, worst 0.2h at 2026-06-20 10:05 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 19917 -> 20187 bars (+270)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ADA-USD_300s.csv
+   Fetched range: 2026-06-05 00:25 to 2026-08-04 00:15 UTC
+
+[2/25] AERO-USD
+     gaps .................. 12, worst 0.2h at 2026-07-01 09:20 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 19925 -> 20192 bars (+267)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/AERO-USD_300s.csv
+   Fetched range: 2026-06-05 00:25 to 2026-08-04 00:15 UTC
+
+[3/25] ALLO-USD
+     gaps .................. 272, worst 0.6h at 2026-06-21 04:10 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 19310 -> 19579 bars (+269)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ALLO-USD_300s.csv
+   Fetched range: 2026-06-05 00:25 to 2026-08-04 00:15 UTC
+
+[4/25] BILL-USD
+     gaps .................. 77, worst 0.3h at 2026-07-26 23:10 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 19864 -> 20126 bars (+262)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/BILL-USD_300s.csv
+   Fetched range: 2026-06-05 00:25 to 2026-08-04 00:15 UTC
+
+[5/25] BTC-USD
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 19938 -> 20208 bars (+270)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/BTC-USD_300s.csv
+   Fetched range: 2026-06-05 00:25 to 2026-08-04 00:15 UTC
+
+[6/25] DOGE-USD
+     gaps .................. 1, worst 0.2h at 2026-07-12 09:50 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 19935 -> 20205 bars (+270)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/DOGE-USD_300s.csv
+   Fetched range: 2026-06-05 00:25 to 2026-08-04 00:15 UTC
+
+[7/25] ENA-USD
+     gaps .................. 1124, worst 0.4h at 2026-07-04 06:45 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 18526 -> 18794 bars (+268)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ENA-USD_300s.csv
+   Fetched range: 2026-06-05 00:30 to 2026-08-04 00:20 UTC
+
+[8/25] ETH-USD
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 19937 -> 20208 bars (+271)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ETH-USD_300s.csv
+   Fetched range: 2026-06-05 00:30 to 2026-08-04 00:20 UTC
+
+[9/25] GWEI-USD
+     gaps .................. 1186, worst 0.7h at 2026-08-01 22:50 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 17326 -> 17547 bars (+221)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/GWEI-USD_300s.csv
+   Fetched range: 2026-06-05 00:35 to 2026-08-04 00:20 UTC
+
+[10/25] HBAR-USD
+     gaps .................. 6, worst 0.2h at 2026-06-16 21:40 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 19930 -> 20200 bars (+270)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/HBAR-USD_300s.csv
+   Fetched range: 2026-06-05 00:30 to 2026-08-04 00:20 UTC
+
+[11/25] HYPE-USD
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 19937 -> 20207 bars (+270)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/HYPE-USD_300s.csv
+   Fetched range: 2026-06-05 00:30 to 2026-08-04 00:20 UTC
+
+[12/25] LINK-USD
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 19936 -> 20206 bars (+270)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/LINK-USD_300s.csv
+   Fetched range: 2026-06-05 00:30 to 2026-08-04 00:20 UTC
+
+[13/25] LTC-USD
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 19936 -> 20206 bars (+270)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/LTC-USD_300s.csv
+   Fetched range: 2026-06-05 00:30 to 2026-08-04 00:20 UTC
+
+[14/25] NEAR-USD
+     gaps .................. 12, worst 0.2h at 2026-06-29 13:05 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 19926 -> 20196 bars (+270)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/NEAR-USD_300s.csv
+   Fetched range: 2026-06-05 00:35 to 2026-08-04 00:25 UTC
+
+[15/25] ONDO-USD
+     gaps .................. 1, worst 0.2h at 2026-06-29 13:05 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 19935 -> 20206 bars (+271)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ONDO-USD_300s.csv
+   Fetched range: 2026-06-05 00:35 to 2026-08-04 00:25 UTC
+
+[16/25] PUMP-USD
+     gaps .................. 670, worst 0.4h at 2026-07-12 08:15 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 19122 -> 19387 bars (+265)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/PUMP-USD_300s.csv
+   Fetched range: 2026-06-05 00:35 to 2026-08-04 00:25 UTC
+
+[17/25] RE-USD
+     gaps .................. 242, worst 0.3h at 2026-07-12 11:30 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 12863 -> 13115 bars (+252)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/RE-USD_300s.csv
+   Fetched range: 2026-06-18 12:40 to 2026-08-04 00:25 UTC
+
+[18/25] SOL-USD
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 19938 -> 20208 bars (+270)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/SOL-USD_300s.csv
+   Fetched range: 2026-06-05 00:35 to 2026-08-04 00:25 UTC
+
+[19/25] SUI-USD
+     gaps .................. 3, worst 0.2h at 2026-06-14 09:40 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 19935 -> 20205 bars (+270)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/SUI-USD_300s.csv
+   Fetched range: 2026-06-05 00:35 to 2026-08-04 00:25 UTC
+
+[20/25] TAO-USD
+     gaps .................. 3, worst 0.2h at 2026-07-25 05:15 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 19933 -> 20203 bars (+270)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/TAO-USD_300s.csv
+   Fetched range: 2026-06-05 00:35 to 2026-08-04 00:25 UTC
+
+[21/25] UNI-USD
+     gaps .................. 72, worst 0.2h at 2026-06-28 21:20 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 19838 -> 20109 bars (+271)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/UNI-USD_300s.csv
+   Fetched range: 2026-06-05 00:40 to 2026-08-04 00:30 UTC
+
+[22/25] VVV-USD
+     gaps .................. 52, worst 0.2h at 2026-06-17 21:25 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 19887 -> 20155 bars (+268)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/VVV-USD_300s.csv
+   Fetched range: 2026-06-05 00:40 to 2026-08-04 00:30 UTC
+
+[23/25] XLM-USD
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 19939 -> 20209 bars (+270)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/XLM-USD_300s.csv
+   Fetched range: 2026-06-05 00:40 to 2026-08-04 00:30 UTC
+
+[24/25] XRP-USD
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 19939 -> 20209 bars (+270)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/XRP-USD_300s.csv
+   Fetched range: 2026-06-05 00:40 to 2026-08-04 00:30 UTC
+
+[25/25] ZEC-USD
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 19939 -> 20209 bars (+270)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ZEC-USD_300s.csv
+   Fetched range: 2026-06-05 00:40 to 2026-08-04 00:30 UTC
+
+300s done in 18.0 min · clean 9 · gaps 16 · failed 0
+
+==========================================================
+hourly: 57 pairs staler than 3.0h
+==========================================================
+
+[1/57] AAVE-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8773 -> 8795 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/AAVE-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[2/57] AERO-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8971 -> 8993 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/AERO-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[3/57] ALLO-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 6079 -> 6101 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ALLO-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[4/57] ARB-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8773 -> 8795 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ARB-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[5/57] AVAX-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8773 -> 8795 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/AVAX-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[6/57] AVNT-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 7837 -> 7859 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/AVNT-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[7/57] BCH-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8773 -> 8795 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/BCH-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[8/57] BILL-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 2168 -> 2190 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/BILL-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[9/57] BNKR-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8755 -> 8777 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/BNKR-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[10/57] BONK-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8773 -> 8795 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/BONK-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[11/57] CRO-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8773 -> 8795 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/CRO-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[12/57] CRV-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8771 -> 8793 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/CRV-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[13/57] DASH-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8769 -> 8791 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/DASH-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[14/57] DOT-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8773 -> 8795 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/DOT-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[15/57] ENA-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8971 -> 8993 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ENA-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[16/57] FARTCOIN-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8773 -> 8795 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/FARTCOIN-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[17/57] FET-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8773 -> 8795 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/FET-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[18/57] FIL-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8773 -> 8795 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/FIL-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[19/57] GWEI-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 3818 -> 3840 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/GWEI-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[20/57] HBAR-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8971 -> 8993 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/HBAR-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[21/57] HYPE-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 4274 -> 4296 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/HYPE-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[22/57] ICP-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8763 -> 8785 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ICP-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[23/57] INJ-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8773 -> 8795 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/INJ-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[24/57] IP-USD (3d window)
+     gaps .................. 4, worst 2.0h at 2026-08-01 12:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8753 -> 8775 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/IP-USD_3600s.csv
+   Fetched range: 2026-08-01 02:00 to 2026-08-03 23:00 UTC
+
+[25/57] JTO-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8772 -> 8794 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/JTO-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[26/57] LIGHTER-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 4769 -> 4791 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/LIGHTER-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[27/57] MON-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 6032 -> 6054 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/MON-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[28/57] MOODENG-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8770 -> 8792 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/MOODENG-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[29/57] NEAR-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8971 -> 8993 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/NEAR-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[30/57] NOM-USD (2d window)
+     gaps .................. 6, worst 4.0h at 2026-08-02 18:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 5862 -> 5880 bars (+18)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/NOM-USD_3600s.csv
+   Fetched range: 2026-08-02 02:00 to 2026-08-03 23:00 UTC
+
+[31/57] ONDO-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8971 -> 8993 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ONDO-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[32/57] PAXG-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8771 -> 8793 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/PAXG-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[33/57] PENGU-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8773 -> 8795 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/PENGU-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[34/57] PEPE-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8772 -> 8794 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/PEPE-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[35/57] PUMP-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8971 -> 8993 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/PUMP-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[36/57] RAVE-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 4063 -> 4085 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/RAVE-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[37/57] RE-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 1094 -> 1116 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/RE-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[38/57] RENDER-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8773 -> 8795 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/RENDER-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[39/57] SAPIEN-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8323 -> 8345 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/SAPIEN-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[40/57] SEI-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8773 -> 8795 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/SEI-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[41/57] SPK-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8767 -> 8789 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/SPK-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[42/57] SUI-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8971 -> 8993 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/SUI-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[43/57] TAO-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8971 -> 8993 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/TAO-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[44/57] TON-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 6170 -> 6192 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/TON-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[45/57] TOSHI-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8773 -> 8795 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/TOSHI-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[46/57] TRUMP-USD (2d window)
+     gaps .................. 1, worst 2.0h at 2026-08-03 01:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 8767 -> 8788 bars (+21)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/TRUMP-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[47/57] UNI-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8971 -> 8993 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/UNI-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[48/57] USD1-USD (2d window)
+     gaps .................. 9, worst 6.0h at 2026-08-02 05:00 UTC
+         Gaps are reported, never filled. Re-request the window to tell an upstream hole from a fetch failure.
+     merged into store ..... 7809 -> 7823 bars (+14)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/USD1-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[49/57] USELESS-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8328 -> 8350 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/USELESS-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[50/57] VVV-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8815 -> 8837 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/VVV-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[51/57] WIF-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8739 -> 8761 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/WIF-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[52/57] WLD-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8772 -> 8794 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/WLD-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[53/57] WLFI-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8042 -> 8064 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/WLFI-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[54/57] XLM-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8971 -> 8993 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/XLM-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[55/57] ZEC-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8971 -> 8993 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ZEC-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[56/57] ZORA-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8773 -> 8795 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ZORA-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+[57/57] ZRO-USD (2d window)
+     missing ............... 0
+     unclosed bars dropped . 1
+     merged into store ..... 8771 -> 8793 bars (+22)
+   
+   Saved -> /Users/haroonrasheed/Projects/cryptobot/data/candles/ZRO-USD_3600s.csv
+   Fetched range: 2026-08-02 01:00 to 2026-08-03 23:00 UTC
+
+==========================================================
+AUDIT
+==========================================================
+DATA AUDIT  2026-08-04 00:39 UTC
+90 files checked across 1 store(s)
+
+gap (72):
+  [WARN] gap              AAVE-USD_3600s         2 gap(s) >= 3 bars; worst 6.0h at 2025-10-25 15:00 UTC
+  [WARN] gap              ADA-USD_3600s          2 gap(s) >= 3 bars; worst 6.0h at 2025-10-25 15:00 UTC
+  [WARN] gap              AERO-USD_3600s         2 gap(s) >= 3 bars; worst 6.0h at 2025-10-25 15:00 UTC
+  [WARN] gap              ALLO-USD_300s          93 gap(s) >= 3 bars; worst 1.4h at 2026-05-25 21:20 UTC
+  [WARN] gap              ALLO-USD_3600s         29 gap(s) >= 3 bars; worst 7.0h at 2026-05-08 00:00 UTC
+  [WARN] gap              ARB-USD_3600s          2 gap(s) >= 3 bars; worst 6.0h at 2025-10-25 15:00 UTC
+       ... and 66 more
+
+correlated_gap (2):
+  [WARN] correlated_gap   3600s @ 2026-05-08 01:00 absent in 63/65 pairs (threshold 16) -> upstream event; re-request the window to classify
+  [WARN] correlated_gap   3600s @ 2025-10-25 15:00 absent in 49/65 pairs (threshold 16) -> upstream event; re-request the window to classify
+
+RESULT: 0 blocking, 74 warnings
+
+==========================================================
+RESULT: warnings only. Intraday stores are current and usable.
+(exit 0 is unreachable while the two permanent Coinbase holes
+ of 2025-10-25 and 2026-05-08 remain WARNING-level findings.)
+=== ops/stamp.py  ===
+
+confirmed on Bitcoin ..... 5: intraday_success_criteria.md, intraday_standard.md, success_criteria.md, entrance_exam.md, exam_amendment_001.md
+=== bot/league.py  ===
+[2026-08-04 00:39 UTC] league cycle
+  [BTC-HOLD] equity $2,992.92 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $3,000.00 holding cash -> target cash
+  [MOM-ROT] equity $2,858.99 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ENA-USD']
+  [CROSS-BTC] equity $2,992.92 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $3,000.00 holding cash -> target cash
+  [RSI-BTC] equity $3,000.00 holding cash -> target cash
+league state saved.
+=== bot/squad.py  ===
+[2026-08-04 00:40 UTC] squad cycle (ARMED)
+  [h_trend_168] $2,975.17 ['ADA-USD', 'XRP-USD']
+  [h_cross_24_168] $2,982.05 ['ADA-USD', 'XRP-USD']
+  [h_tsmom_72] $2,901.09 ['ADA-USD', 'LINK-USD']
+  [h_macd_12_26] $2,913.85 ['ADA-USD', 'BTC-USD']
+  [h_donch_48_24] $2,872.38 ['ADA-USD', 'BTC-USD']
+  [h_volbrk_24_96] $2,938.18 cash
+  [h_rsi14_reg168] $3,000.00 cash
+  [h_boll_48] $3,000.00 cash
+  [h_calm_24_168] $2,966.77 ['SOL-USD', 'LINK-USD']
+  [h_nearhi_168] $2,970.45 ['ADA-USD', 'XRP-USD']
+  squad total $29,519.95 · state saved
+=== bot/squad_stocks.py  ===
+[2026-08-04 00:40 UTC / 20:40 ET] market CLOSED - no signals, no counted cycle
+=== portal/build_site.py  ===
+site/index.html built (210 equity rows, 5 trades, 30 exams)
+=== ops/backup.py  ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-03.zip (11 snapshots kept)
+=== bot/digest.py  ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-04
+
+1. BTC-TREND  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+2. DONCH-BTC  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+3. RSI-BTC    $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+4. BTC-HOLD   $  2,992.92  -70.07%  today -0.35%  breaker room 19%
+5. CROSS-BTC  $  2,992.92  -70.07%  today -0.35%  breaker room 19%
+6. MOM-ROT    $  2,858.99  -71.41%  today -0.39%  breaker room 16%
+daily run complete.
+=== data/refresh_daily.py  ===
+  BTC-USD: +0 new, 1471 total
+  ETH-USD: +0 new, 1471 total
+  SOL-USD: +0 new, 1471 total
+  XRP-USD: +0 new, 1119 total
+  ADA-USD: +0 new, 1471 total
+  DOGE-USD: +0 new, 1471 total
+  LINK-USD: +0 new, 1471 total
+  LTC-USD: +0 new, 1471 total
+refresh complete.
+=== data/refresh_intraday.py === already ran today (2026-08-04 UTC); skipping.
+=== ops/stamp.py === already ran today (2026-08-04 UTC); skipping.
+=== bot/league.py  ===
+[2026-08-04 01:40 UTC] league cycle
+  [BTC-HOLD] equity $3,007.76 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $3,000.00 holding cash -> target cash
+  [MOM-ROT] equity $2,874.35 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ENA-USD']
+  [CROSS-BTC] equity $3,007.76 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $3,000.00 holding cash -> target cash
+  [RSI-BTC] equity $3,000.00 holding cash -> target cash
+league state saved.
+=== bot/squad.py  ===
+[2026-08-04 01:40 UTC] squad cycle (ARMED)
+  [h_trend_168] $2,982.34 ['ADA-USD', 'XRP-USD']
+  [h_trend_168] SELL XRP-USD @ 1.0741 net -13.17 (signal, fees_spread)
+  [h_cross_24_168] $2,989.12 ['ADA-USD', 'XRP-USD']
+  [h_tsmom_72] $2,913.45 ['ADA-USD', 'LINK-USD']
+  [h_tsmom_72] SELL LINK-USD @ 8.1788 net -29.36 (signal, signal_reversal)
+  [h_tsmom_72] BUY SOL-USD @ 73.5735 ($1,456.72, fee $5.83)
+  [h_macd_12_26] $2,923.47 ['ADA-USD', 'BTC-USD']
+  [h_donch_48_24] $2,881.75 ['ADA-USD', 'BTC-USD']
+  [h_volbrk_24_96] $2,938.18 cash
+  [h_rsi14_reg168] $3,000.00 cash
+  [h_boll_48] $3,000.00 cash
+  [h_calm_24_168] $2,986.76 ['SOL-USD', 'LINK-USD']
+  [h_nearhi_168] $2,977.46 ['ADA-USD', 'XRP-USD']
+  squad total $29,592.53 · state saved
+=== bot/squad_stocks.py  ===
+[2026-08-04 01:40 UTC / 21:40 ET] market CLOSED - no signals, no counted cycle
+=== portal/build_site.py  ===
+site/index.html built (216 equity rows, 5 trades, 30 exams)
+=== ops/backup.py  ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-03.zip (11 snapshots kept)
+=== bot/digest.py  ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-04
+
+1. BTC-HOLD   $  3,007.76  -69.92%  today +0.50%  breaker room 20%
+2. CROSS-BTC  $  3,007.76  -69.92%  today +0.50%  breaker room 20%
+3. BTC-TREND  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+4. DONCH-BTC  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+5. RSI-BTC    $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+6. MOM-ROT    $  2,874.35  -71.26%  today +0.54%  breaker room 17%
+daily run complete.
+=== data/refresh_daily.py  ===
+  BTC-USD: +0 new, 1471 total
+  ETH-USD: +0 new, 1471 total
+  SOL-USD: +0 new, 1471 total
+  XRP-USD: +0 new, 1119 total
+  ADA-USD: +0 new, 1471 total
+  DOGE-USD: +0 new, 1471 total
+  LINK-USD: +0 new, 1471 total
+  LTC-USD: +0 new, 1471 total
+refresh complete.
+=== data/refresh_intraday.py === already ran today (2026-08-04 UTC); skipping.
+=== ops/stamp.py === already ran today (2026-08-04 UTC); skipping.
+=== bot/league.py  ===
+[2026-08-04 02:40 UTC] league cycle
+  [BTC-HOLD] equity $3,016.88 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $3,000.00 holding cash -> target cash
+  [MOM-ROT] equity $2,893.41 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ENA-USD']
+  [CROSS-BTC] equity $3,016.88 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $3,000.00 holding cash -> target cash
+  [RSI-BTC] equity $3,000.00 holding cash -> target cash
+league state saved.
+=== bot/squad.py  ===
+[2026-08-04 02:40 UTC] squad cycle (ARMED)
+  [h_trend_168] $2,978.40 ['ADA-USD']
+  [h_trend_168] BUY SOL-USD @ 73.9639 ($1,489.20, fee $5.96)
+  [h_cross_24_168] $2,996.29 ['ADA-USD', 'XRP-USD']
+  [h_tsmom_72] $2,910.02 ['ADA-USD', 'SOL-USD']
+  [h_macd_12_26] $2,928.79 ['ADA-USD', 'BTC-USD']
+  [h_macd_12_26] SELL ADA-USD @ 0.1924 net -22.45 (signal, signal_reversal)
+  [h_macd_12_26] BUY SOL-USD @ 73.9639 ($1,446.55, fee $5.79)
+  [h_donch_48_24] $2,886.98 ['ADA-USD', 'BTC-USD']
+  [h_volbrk_24_96] $2,938.18 cash
+  [h_rsi14_reg168] $3,000.00 cash
+  [h_boll_48] $3,000.00 cash
+  [h_calm_24_168] $2,997.10 ['SOL-USD', 'LINK-USD']
+  [h_calm_24_168] SELL SOL-USD @ 73.8061 net +4.81 (signal)
+  [h_calm_24_168] BUY ETH-USD @ 1,866.8533 ($1,498.55, fee $5.99)
+  [h_nearhi_168] $2,984.60 ['ADA-USD', 'XRP-USD']
+  squad total $29,620.35 · state saved
+=== bot/squad_stocks.py  ===
+[2026-08-04 02:41 UTC / 22:41 ET] market CLOSED - no signals, no counted cycle
+=== portal/build_site.py  ===
+site/index.html built (222 equity rows, 5 trades, 30 exams)
+=== ops/backup.py  ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-03.zip (11 snapshots kept)
+=== bot/digest.py  ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-04
+
+1. BTC-HOLD   $  3,016.88  -69.83%  today +0.30%  breaker room 20%
+2. CROSS-BTC  $  3,016.88  -69.83%  today +0.30%  breaker room 20%
+3. BTC-TREND  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+4. DONCH-BTC  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+5. RSI-BTC    $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+6. MOM-ROT    $  2,893.41  -71.07%  today +0.66%  breaker room 17%
+daily run complete.
+=== data/refresh_daily.py  ===
+  BTC-USD: +0 new, 1471 total
+  ETH-USD: +0 new, 1471 total
+  SOL-USD: +0 new, 1471 total
+  XRP-USD: +0 new, 1119 total
+  ADA-USD: +0 new, 1471 total
+  DOGE-USD: +0 new, 1471 total
+  LINK-USD: +0 new, 1471 total
+  LTC-USD: +0 new, 1471 total
+refresh complete.
+=== data/refresh_intraday.py === already ran today (2026-08-04 UTC); skipping.
+=== ops/stamp.py === already ran today (2026-08-04 UTC); skipping.
+=== bot/league.py  ===
+[2026-08-04 03:41 UTC] league cycle
+  [BTC-HOLD] equity $3,013.24 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $3,000.00 holding cash -> target cash
+  [MOM-ROT] equity $2,882.55 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ENA-USD']
+  [CROSS-BTC] equity $3,013.24 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $3,000.00 holding cash -> target cash
+  [RSI-BTC] equity $3,000.00 holding cash -> target cash
+league state saved.
+=== bot/squad.py  ===
+[2026-08-04 03:41 UTC] squad cycle (ARMED)
+  [h_trend_168] $2,992.80 ['ADA-USD', 'SOL-USD']
+  [h_cross_24_168] $3,020.37 ['ADA-USD', 'XRP-USD']
+  [h_tsmom_72] $2,932.03 ['ADA-USD', 'SOL-USD']
+  [h_macd_12_26] $2,909.68 ['BTC-USD', 'SOL-USD']
+  [h_donch_48_24] $2,908.49 ['ADA-USD', 'BTC-USD']
+  [h_volbrk_24_96] $2,938.18 cash
+  [h_rsi14_reg168] $3,000.00 cash
+  [h_boll_48] $3,000.00 cash
+  [h_calm_24_168] $2,979.21 ['LINK-USD', 'ETH-USD']
+  [h_nearhi_168] $3,008.70 ['ADA-USD', 'XRP-USD']
+  squad total $29,689.47 · state saved
+=== bot/squad_stocks.py  ===
+[2026-08-04 03:41 UTC / 23:41 ET] market CLOSED - no signals, no counted cycle
+=== portal/build_site.py  ===
+site/index.html built (228 equity rows, 5 trades, 30 exams)
+=== ops/backup.py  ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-03.zip (11 snapshots kept)
+=== bot/digest.py  ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-04
+
+1. BTC-HOLD   $  3,013.24  -69.87%  today -0.12%  breaker room 20%
+2. CROSS-BTC  $  3,013.24  -69.87%  today -0.12%  breaker room 20%
+3. BTC-TREND  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+4. DONCH-BTC  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+5. RSI-BTC    $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+6. MOM-ROT    $  2,882.55  -71.17%  today -0.38%  breaker room 17%
+daily run complete.
+=== data/refresh_daily.py  ===
+  BTC-USD: +0 new, 1471 total
+  ETH-USD: +0 new, 1471 total
+  SOL-USD: +0 new, 1471 total
+  XRP-USD: +0 new, 1119 total
+  ADA-USD: +0 new, 1471 total
+  DOGE-USD: +0 new, 1471 total
+  LINK-USD: +0 new, 1471 total
+  LTC-USD: +0 new, 1471 total
+refresh complete.
+=== data/refresh_intraday.py === already ran today (2026-08-04 UTC); skipping.
+=== ops/stamp.py === already ran today (2026-08-04 UTC); skipping.
+=== bot/league.py  ===
+[2026-08-04 04:41 UTC] league cycle
+  [BTC-HOLD] equity $3,021.78 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $3,000.00 holding cash -> target cash
+  [MOM-ROT] equity $2,887.21 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ENA-USD']
+  [CROSS-BTC] equity $3,021.78 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $3,000.00 holding cash -> target cash
+  [RSI-BTC] equity $3,000.00 holding cash -> target cash
+league state saved.
+=== bot/squad.py  ===
+[2026-08-04 04:41 UTC] squad cycle (ARMED)
+  [h_trend_168] $2,993.15 ['ADA-USD', 'SOL-USD']
+  [h_cross_24_168] $3,020.73 ['ADA-USD', 'XRP-USD']
+  [h_tsmom_72] $2,932.33 ['ADA-USD', 'SOL-USD']
+  [h_macd_12_26] $2,917.60 ['BTC-USD', 'SOL-USD']
+  [h_donch_48_24] $2,910.73 ['ADA-USD', 'BTC-USD']
+  [h_volbrk_24_96] $2,938.18 cash
+  [h_rsi14_reg168] $3,000.00 cash
+  [h_boll_48] $3,000.00 cash
+  [h_calm_24_168] $2,989.82 ['LINK-USD', 'ETH-USD']
+  [h_nearhi_168] $3,009.04 ['ADA-USD', 'XRP-USD']
+  squad total $29,711.59 · state saved
+=== bot/squad_stocks.py  ===
+[2026-08-04 04:41 UTC / 00:41 ET] market CLOSED - no signals, no counted cycle
+=== portal/build_site.py  ===
+site/index.html built (234 equity rows, 5 trades, 30 exams)
+=== ops/backup.py  ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-03.zip (11 snapshots kept)
+=== bot/digest.py  ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-04
+
+1. BTC-HOLD   $  3,021.78  -69.78%  today +0.28%  breaker room 20%
+2. CROSS-BTC  $  3,021.78  -69.78%  today +0.28%  breaker room 20%
+3. BTC-TREND  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+4. DONCH-BTC  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+5. RSI-BTC    $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+6. MOM-ROT    $  2,887.21  -71.13%  today +0.16%  breaker room 17%
+daily run complete.
+=== data/refresh_daily.py  ===
+  BTC-USD: +0 new, 1471 total
+  ETH-USD: +0 new, 1471 total
+  SOL-USD: +0 new, 1471 total
+  XRP-USD: +0 new, 1119 total
+  ADA-USD: +0 new, 1471 total
+  DOGE-USD: +0 new, 1471 total
+  LINK-USD: +0 new, 1471 total
+  LTC-USD: +0 new, 1471 total
+refresh complete.
+=== data/refresh_intraday.py === already ran today (2026-08-04 UTC); skipping.
+=== ops/stamp.py === already ran today (2026-08-04 UTC); skipping.
+=== bot/league.py  ===
+[2026-08-04 05:42 UTC] league cycle
+  [BTC-HOLD] equity $3,014.22 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $3,000.00 holding cash -> target cash
+  [MOM-ROT] equity $2,918.44 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ENA-USD']
+  [CROSS-BTC] equity $3,014.22 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $3,000.00 holding cash -> target cash
+  [RSI-BTC] equity $3,000.00 holding cash -> target cash
+league state saved.
+=== bot/squad.py  ===
+[2026-08-04 05:42 UTC] squad cycle (ARMED)
+  [h_trend_168] $2,986.20 ['ADA-USD', 'SOL-USD']
+  [h_cross_24_168] $3,012.30 ['ADA-USD', 'XRP-USD']
+  [h_tsmom_72] $2,925.40 ['ADA-USD', 'SOL-USD']
+  [h_macd_12_26] $2,911.67 ['BTC-USD', 'SOL-USD']
+  [h_donch_48_24] $2,901.89 ['ADA-USD', 'BTC-USD']
+  [h_volbrk_24_96] $2,938.18 cash
+  [h_rsi14_reg168] $3,000.00 cash
+  [h_boll_48] $3,000.00 cash
+  [h_calm_24_168] $2,979.24 ['LINK-USD', 'ETH-USD']
+  [h_nearhi_168] $3,000.63 ['ADA-USD', 'XRP-USD']
+  squad total $29,655.50 · state saved
+=== bot/squad_stocks.py  ===
+[2026-08-04 05:42 UTC / 01:42 ET] market CLOSED - no signals, no counted cycle
+=== portal/build_site.py  ===
+site/index.html built (240 equity rows, 5 trades, 30 exams)
+=== ops/backup.py  ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-04.zip (12 snapshots kept)
+=== bot/digest.py  ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-04
+
+1. BTC-HOLD   $  3,014.22  -69.86%  today -0.25%  breaker room 20%
+2. CROSS-BTC  $  3,014.22  -69.86%  today -0.25%  breaker room 20%
+3. BTC-TREND  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+4. DONCH-BTC  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+5. RSI-BTC    $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+6. MOM-ROT    $  2,918.44  -70.82%  today +1.08%  breaker room 18%
+daily run complete.
+=== data/refresh_daily.py  ===
+  BTC-USD: +0 new, 1471 total
+  ETH-USD: +0 new, 1471 total
+  SOL-USD: +0 new, 1471 total
+  XRP-USD: +0 new, 1119 total
+  ADA-USD: +0 new, 1471 total
+  DOGE-USD: +0 new, 1471 total
+  LINK-USD: +0 new, 1471 total
+  LTC-USD: +0 new, 1471 total
+refresh complete.
+=== data/refresh_intraday.py === already ran today (2026-08-04 UTC); skipping.
+=== ops/stamp.py === already ran today (2026-08-04 UTC); skipping.
+=== bot/league.py  ===
+[2026-08-04 06:42 UTC] league cycle
+  [BTC-HOLD] equity $3,008.08 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $3,000.00 holding cash -> target cash
+  [MOM-ROT] equity $2,918.37 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ENA-USD']
+  [CROSS-BTC] equity $3,008.08 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $3,000.00 holding cash -> target cash
+  [RSI-BTC] equity $3,000.00 holding cash -> target cash
+league state saved.
+=== bot/squad.py  ===
+[2026-08-04 06:42 UTC] squad cycle (ARMED)
+  [h_trend_168] $2,981.95 ['ADA-USD', 'SOL-USD']
+  [h_cross_24_168] $3,009.00 ['ADA-USD', 'XRP-USD']
+  [h_tsmom_72] $2,921.27 ['ADA-USD', 'SOL-USD']
+  [h_macd_12_26] $2,902.43 ['BTC-USD', 'SOL-USD']
+  [h_donch_48_24] $2,900.83 ['ADA-USD', 'BTC-USD']
+  [h_volbrk_24_96] $2,938.18 cash
+  [h_rsi14_reg168] $3,000.00 cash
+  [h_boll_48] $3,000.00 cash
+  [h_calm_24_168] $2,962.93 ['LINK-USD', 'ETH-USD']
+  [h_nearhi_168] $2,997.37 ['ADA-USD', 'XRP-USD']
+  squad total $29,613.96 · state saved
+=== bot/squad_stocks.py  ===
+[2026-08-04 06:42 UTC / 02:42 ET] market CLOSED - no signals, no counted cycle
+=== portal/build_site.py  ===
+site/index.html built (246 equity rows, 5 trades, 30 exams)
+=== ops/backup.py  ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-04.zip (12 snapshots kept)
+=== bot/digest.py  ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-04
+
+1. BTC-HOLD   $  3,008.08  -69.92%  today -0.20%  breaker room 20%
+2. CROSS-BTC  $  3,008.08  -69.92%  today -0.20%  breaker room 20%
+3. BTC-TREND  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+4. DONCH-BTC  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+5. RSI-BTC    $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+6. MOM-ROT    $  2,918.37  -70.82%  today -0.00%  breaker room 18%
+daily run complete.
+=== data/refresh_daily.py  ===
+  BTC-USD: +0 new, 1471 total
+  ETH-USD: +0 new, 1471 total
+  SOL-USD: +0 new, 1471 total
+  XRP-USD: +0 new, 1119 total
+  ADA-USD: +0 new, 1471 total
+  DOGE-USD: +0 new, 1471 total
+  LINK-USD: +0 new, 1471 total
+  LTC-USD: +0 new, 1471 total
+refresh complete.
+=== data/refresh_intraday.py === already ran today (2026-08-04 UTC); skipping.
+=== ops/stamp.py === already ran today (2026-08-04 UTC); skipping.
+=== bot/league.py  ===
+[2026-08-04 07:42 UTC] league cycle
+  [BTC-HOLD] equity $3,007.05 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $3,000.00 holding cash -> target cash
+  [MOM-ROT] equity $2,910.58 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ENA-USD']
+  [CROSS-BTC] equity $3,007.05 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $3,000.00 holding cash -> target cash
+  [RSI-BTC] equity $3,000.00 holding cash -> target cash
+league state saved.
+=== bot/squad.py  ===
+[2026-08-04 07:43 UTC] squad cycle (ARMED)
+  [h_trend_168] $2,984.37 ['ADA-USD', 'SOL-USD']
+  [h_cross_24_168] $3,013.50 ['ADA-USD', 'XRP-USD']
+  [h_tsmom_72] $2,923.66 ['ADA-USD', 'SOL-USD']
+  [h_macd_12_26] $2,902.52 ['BTC-USD', 'SOL-USD']
+  [h_macd_12_26] SELL SOL-USD @ 73.3965 net -22.56 (signal, signal_reversal)
+  [h_macd_12_26] BUY LTC-USD @ 44.2142 ($1,424.00, fee $5.70)
+  [h_donch_48_24] $2,900.81 ['ADA-USD', 'BTC-USD']
+  [h_volbrk_24_96] $2,938.18 cash
+  [h_rsi14_reg168] $3,000.00 cash
+  [h_boll_48] $3,000.00 cash
+  [h_calm_24_168] $2,968.12 ['LINK-USD', 'ETH-USD']
+  [h_nearhi_168] $3,001.84 ['ADA-USD', 'XRP-USD']
+  squad total $29,633.02 · state saved
+=== bot/squad_stocks.py  ===
+[2026-08-04 07:43 UTC / 03:43 ET] market CLOSED - no signals, no counted cycle
+=== portal/build_site.py  ===
+site/index.html built (252 equity rows, 5 trades, 30 exams)
+=== ops/backup.py  ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-04.zip (12 snapshots kept)
+=== bot/digest.py  ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-04
+
+1. BTC-HOLD   $  3,007.05  -69.93%  today -0.03%  breaker room 20%
+2. CROSS-BTC  $  3,007.05  -69.93%  today -0.03%  breaker room 20%
+3. BTC-TREND  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+4. DONCH-BTC  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+5. RSI-BTC    $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+6. MOM-ROT    $  2,910.58  -70.89%  today -0.27%  breaker room 18%
+daily run complete.
+=== data/refresh_daily.py  ===
+  BTC-USD: +0 new, 1471 total
+  ETH-USD: +0 new, 1471 total
+  SOL-USD: +0 new, 1471 total
+  XRP-USD: +0 new, 1119 total
+  ADA-USD: +0 new, 1471 total
+  DOGE-USD: +0 new, 1471 total
+  LINK-USD: +0 new, 1471 total
+  LTC-USD: +0 new, 1471 total
+refresh complete.
+=== data/refresh_intraday.py === already ran today (2026-08-04 UTC); skipping.
+=== ops/stamp.py === already ran today (2026-08-04 UTC); skipping.
+=== bot/league.py  ===
+[2026-08-04 08:43 UTC] league cycle
+  [BTC-HOLD] equity $3,001.71 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $3,000.00 holding cash -> target cash
+  [MOM-ROT] equity $2,908.19 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ENA-USD']
+  [CROSS-BTC] equity $3,001.71 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $3,000.00 holding cash -> target cash
+  [RSI-BTC] equity $3,000.00 holding cash -> target cash
+league state saved.
+=== bot/squad.py  ===
+[2026-08-04 08:43 UTC] squad cycle (ARMED)
+  [h_trend_168] $2,968.08 ['ADA-USD', 'SOL-USD']
+  [h_cross_24_168] $2,999.66 ['ADA-USD', 'XRP-USD']
+  [h_tsmom_72] $2,907.43 ['ADA-USD', 'SOL-USD']
+  [h_macd_12_26] $2,885.18 ['BTC-USD', 'LTC-USD']
+  [h_macd_12_26] SELL BTC-USD @ 63,488.7897 net -6.40 (signal, fees_spread)
+  [h_macd_12_26] BUY ETH-USD @ 1,856.6413 ($1,442.59, fee $5.77)
+  [h_donch_48_24] $2,887.35 ['ADA-USD', 'BTC-USD']
+  [h_volbrk_24_96] $2,938.18 cash
+  [h_rsi14_reg168] $3,000.00 cash
+  [h_boll_48] $3,000.00 cash
+  [h_calm_24_168] $2,963.55 ['LINK-USD', 'ETH-USD']
+  [h_nearhi_168] $2,988.01 ['ADA-USD', 'XRP-USD']
+  squad total $29,537.44 · state saved
+=== bot/squad_stocks.py  ===
+[2026-08-04 08:43 UTC / 04:43 ET] market CLOSED - no signals, no counted cycle
+=== portal/build_site.py  ===
+site/index.html built (258 equity rows, 5 trades, 30 exams)
+=== ops/backup.py  ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-04.zip (12 snapshots kept)
+=== bot/digest.py  ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-04
+
+1. BTC-HOLD   $  3,001.71  -69.98%  today -0.18%  breaker room 19%
+2. CROSS-BTC  $  3,001.71  -69.98%  today -0.18%  breaker room 19%
+3. BTC-TREND  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+4. DONCH-BTC  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+5. RSI-BTC    $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+6. MOM-ROT    $  2,908.19  -70.92%  today -0.08%  breaker room 17%
+daily run complete.
+=== data/refresh_daily.py  ===
+  BTC-USD: +0 new, 1471 total
+  ETH-USD: +0 new, 1471 total
+  SOL-USD: +0 new, 1471 total
+  XRP-USD: +0 new, 1119 total
+  ADA-USD: +0 new, 1471 total
+  DOGE-USD: +0 new, 1471 total
+  LINK-USD: +0 new, 1471 total
+  LTC-USD: +0 new, 1471 total
+refresh complete.
+=== data/refresh_intraday.py === already ran today (2026-08-04 UTC); skipping.
+=== ops/stamp.py === already ran today (2026-08-04 UTC); skipping.
+=== bot/league.py  ===
+[2026-08-04 09:43 UTC] league cycle
+  [BTC-HOLD] equity $3,002.03 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $3,000.00 holding cash -> target cash
+  [MOM-ROT] equity $2,896.78 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ENA-USD']
+  [CROSS-BTC] equity $3,002.03 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $3,000.00 holding cash -> target cash
+  [RSI-BTC] equity $3,000.00 holding cash -> target cash
+league state saved.
+=== bot/squad.py  ===
+[2026-08-04 09:44 UTC] squad cycle (ARMED)
+  [h_trend_168] $2,978.71 ['ADA-USD', 'SOL-USD']
+  [h_trend_168] SELL SOL-USD @ 73.1268 net -28.61 (signal, signal_reversal)
+  [h_trend_168] BUY XRP-USD @ 1.0741 ($1,489.35, fee $5.96)
+  [h_cross_24_168] $3,011.06 ['ADA-USD', 'XRP-USD']
+  [h_tsmom_72] $2,918.09 ['ADA-USD', 'SOL-USD']
+  [h_macd_12_26] $2,874.29 ['LTC-USD', 'ETH-USD']
+  [h_macd_12_26] SELL ETH-USD @ 1,853.8891 net -13.64 (signal, signal_reversal)
+  [h_donch_48_24] $2,898.42 ['ADA-USD', 'BTC-USD']
+  [h_volbrk_24_96] $2,938.18 cash
+  [h_rsi14_reg168] $3,000.00 cash
+  [h_boll_48] $3,000.00 cash
+  [h_calm_24_168] $2,962.88 ['LINK-USD', 'ETH-USD']
+  [h_nearhi_168] $2,999.42 ['ADA-USD', 'XRP-USD']
+  squad total $29,581.04 · state saved
+=== bot/squad_stocks.py  ===
+[2026-08-04 09:44 UTC / 05:44 ET] market CLOSED - no signals, no counted cycle
+=== portal/build_site.py  ===
+site/index.html built (264 equity rows, 5 trades, 30 exams)
+=== ops/backup.py  ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-04.zip (12 snapshots kept)
+=== bot/digest.py  ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-04
+
+1. BTC-HOLD   $  3,002.03  -69.98%  today +0.01%  breaker room 19%
+2. CROSS-BTC  $  3,002.03  -69.98%  today +0.01%  breaker room 19%
+3. BTC-TREND  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+4. DONCH-BTC  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+5. RSI-BTC    $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+6. MOM-ROT    $  2,896.78  -71.03%  today -0.39%  breaker room 17%
+daily run complete.
+=== data/refresh_daily.py  ===
+  BTC-USD: +0 new, 1471 total
+  ETH-USD: +0 new, 1471 total
+  SOL-USD: +0 new, 1471 total
+  XRP-USD: +0 new, 1119 total
+  ADA-USD: +0 new, 1471 total
+  DOGE-USD: +0 new, 1471 total
+  LINK-USD: +0 new, 1471 total
+  LTC-USD: +0 new, 1471 total
+refresh complete.
+=== data/refresh_intraday.py === already ran today (2026-08-04 UTC); skipping.
+=== ops/stamp.py === already ran today (2026-08-04 UTC); skipping.
+=== bot/league.py  ===
+[2026-08-04 10:44 UTC] league cycle
+  [BTC-HOLD] equity $3,001.00 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $3,000.00 holding cash -> target cash
+  [MOM-ROT] equity $2,892.29 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ENA-USD']
+  [CROSS-BTC] equity $3,001.00 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $3,000.00 holding cash -> target cash
+  [RSI-BTC] equity $3,000.00 holding cash -> target cash
+league state saved.
+=== bot/squad.py  ===
+[2026-08-04 10:44 UTC] squad cycle (ARMED)
+  [h_trend_168] $2,961.20 ['ADA-USD', 'XRP-USD']
+  [h_trend_168] SELL XRP-USD @ 1.0709 net -16.22 (signal, signal_reversal)
+  [h_trend_168] BUY DOGE-USD @ 0.0703 ($1,480.60, fee $5.92)
+  [h_cross_24_168] $3,008.50 ['ADA-USD', 'XRP-USD']
+  [h_tsmom_72] $2,917.36 ['ADA-USD', 'SOL-USD']
+  [h_macd_12_26] $2,868.10 ['LTC-USD']
+  [h_donch_48_24] $2,898.53 ['ADA-USD', 'BTC-USD']
+  [h_volbrk_24_96] $2,938.18 cash
+  [h_rsi14_reg168] $3,000.00 cash
+  [h_boll_48] $3,000.00 cash
+  [h_calm_24_168] $2,970.47 ['LINK-USD', 'ETH-USD']
+  [h_nearhi_168] $2,996.88 ['ADA-USD', 'XRP-USD']
+  squad total $29,559.22 · state saved
+=== bot/squad_stocks.py  ===
+[2026-08-04 10:44 UTC / 06:44 ET] market CLOSED - no signals, no counted cycle
+=== portal/build_site.py  ===
+site/index.html built (270 equity rows, 5 trades, 30 exams)
+=== ops/backup.py  ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-04.zip (12 snapshots kept)
+=== bot/digest.py  ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-04
+
+1. BTC-HOLD   $  3,001.00  -69.99%  today -0.03%  breaker room 19%
+2. CROSS-BTC  $  3,001.00  -69.99%  today -0.03%  breaker room 19%
+3. BTC-TREND  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+4. DONCH-BTC  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+5. RSI-BTC    $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+6. MOM-ROT    $  2,892.29  -71.08%  today -0.15%  breaker room 17%
+daily run complete.
+=== data/refresh_daily.py  ===
+  BTC-USD: +0 new, 1471 total
+  ETH-USD: +0 new, 1471 total
+  SOL-USD: +0 new, 1471 total
+  XRP-USD: +0 new, 1119 total
+  ADA-USD: +0 new, 1471 total
+  DOGE-USD: +0 new, 1471 total
+  LINK-USD: +0 new, 1471 total
+  LTC-USD: +0 new, 1471 total
+refresh complete.
+=== data/refresh_intraday.py === already ran today (2026-08-04 UTC); skipping.
+=== ops/stamp.py === already ran today (2026-08-04 UTC); skipping.
+=== bot/league.py  ===
+[2026-08-04 11:44 UTC] league cycle
+  [BTC-HOLD] equity $3,009.54 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $3,000.00 holding cash -> target cash
+  [MOM-ROT] equity $2,904.42 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ENA-USD']
+  [CROSS-BTC] equity $3,009.54 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $3,000.00 holding cash -> target cash
+  [RSI-BTC] equity $3,000.00 holding cash -> target cash
+league state saved.
+=== bot/squad.py  ===
+[2026-08-04 11:44 UTC] squad cycle (ARMED)
+  [h_trend_168] $2,944.43 ['ADA-USD', 'DOGE-USD']
+  [h_cross_24_168] $3,007.59 ['ADA-USD', 'XRP-USD']
+  [h_tsmom_72] $2,922.48 ['ADA-USD', 'SOL-USD']
+  [h_macd_12_26] $2,867.94 ['LTC-USD']
+  [h_donch_48_24] $2,899.47 ['ADA-USD', 'BTC-USD']
+  [h_volbrk_24_96] $2,938.18 cash
+  [h_rsi14_reg168] $3,000.00 cash
+  [h_boll_48] $3,000.00 cash
+  [h_calm_24_168] $2,985.70 ['LINK-USD', 'ETH-USD']
+  [h_nearhi_168] $2,995.93 ['ADA-USD', 'XRP-USD']
+  squad total $29,561.72 · state saved
+=== bot/squad_stocks.py  ===
+[2026-08-04 11:45 UTC / 07:45 ET] market CLOSED - no signals, no counted cycle
+=== portal/build_site.py  ===
+site/index.html built (276 equity rows, 5 trades, 30 exams)
+=== ops/backup.py  ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-04.zip (12 snapshots kept)
+=== bot/digest.py  ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-04
+
+1. BTC-HOLD   $  3,009.54  -69.90%  today +0.28%  breaker room 20%
+2. CROSS-BTC  $  3,009.54  -69.90%  today +0.28%  breaker room 20%
+3. BTC-TREND  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+4. DONCH-BTC  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+5. RSI-BTC    $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+6. MOM-ROT    $  2,904.42  -70.96%  today +0.42%  breaker room 17%
+daily run complete.
+=== data/refresh_daily.py  ===
+  BTC-USD: +0 new, 1471 total
+  ETH-USD: +0 new, 1471 total
+  SOL-USD: +0 new, 1471 total
+  XRP-USD: +0 new, 1119 total
+  ADA-USD: +0 new, 1471 total
+  DOGE-USD: +0 new, 1471 total
+  LINK-USD: +0 new, 1471 total
+  LTC-USD: +0 new, 1471 total
+refresh complete.
+=== data/refresh_intraday.py === already ran today (2026-08-04 UTC); skipping.
+=== ops/stamp.py === already ran today (2026-08-04 UTC); skipping.
+=== bot/league.py  ===
+[2026-08-04 12:45 UTC] league cycle
+  [BTC-HOLD] equity $3,019.72 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $3,000.00 holding cash -> target cash
+  [MOM-ROT] equity $2,915.83 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ENA-USD']
+  [CROSS-BTC] equity $3,019.72 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $3,000.00 holding cash -> target cash
+  [RSI-BTC] equity $3,000.00 holding cash -> target cash
+league state saved.
+=== bot/squad.py  ===
+[2026-08-04 12:45 UTC] squad cycle (ARMED)
+  [h_trend_168] $2,943.89 ['ADA-USD', 'DOGE-USD']
+  [h_cross_24_168] $3,008.49 ['ADA-USD', 'XRP-USD']
+  [h_tsmom_72] $2,924.09 ['ADA-USD', 'SOL-USD']
+  [h_macd_12_26] $2,871.30 ['LTC-USD']
+  [h_macd_12_26] BUY LINK-USD @ 8.2192 ($1,435.65, fee $5.74)
+  [h_donch_48_24] $2,900.71 ['ADA-USD', 'BTC-USD']
+  [h_volbrk_24_96] $2,938.18 cash
+  [h_volbrk_24_96] BUY DOGE-USD @ 0.0704 ($1,469.09, fee $5.88)
+  [h_rsi14_reg168] $3,000.00 cash
+  [h_boll_48] $3,000.00 cash
+  [h_calm_24_168] $2,992.37 ['LINK-USD', 'ETH-USD']
+  [h_nearhi_168] $2,996.82 ['ADA-USD', 'XRP-USD']
+  squad total $29,575.86 · state saved
+=== bot/squad_stocks.py  ===
+[2026-08-04 12:45 UTC / 08:45 ET] market CLOSED - no signals, no counted cycle
+=== portal/build_site.py  ===
+site/index.html built (282 equity rows, 5 trades, 30 exams)
+=== ops/backup.py  ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-04.zip (12 snapshots kept)
+=== bot/digest.py  ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-04
+
+1. BTC-HOLD   $  3,019.72  -69.80%  today +0.34%  breaker room 20%
+2. CROSS-BTC  $  3,019.72  -69.80%  today +0.34%  breaker room 20%
+3. BTC-TREND  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+4. DONCH-BTC  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+5. RSI-BTC    $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+6. MOM-ROT    $  2,915.83  -70.84%  today +0.39%  breaker room 18%
+daily run complete.
+=== data/refresh_daily.py  ===
+  BTC-USD: +0 new, 1471 total
+  ETH-USD: +0 new, 1471 total
+  SOL-USD: +0 new, 1471 total
+  XRP-USD: +0 new, 1119 total
+  ADA-USD: +0 new, 1471 total
+  DOGE-USD: +0 new, 1471 total
+  LINK-USD: +0 new, 1471 total
+  LTC-USD: +0 new, 1471 total
+refresh complete.
+=== data/refresh_intraday.py === already ran today (2026-08-04 UTC); skipping.
+=== ops/stamp.py === already ran today (2026-08-04 UTC); skipping.
+=== bot/league.py  ===
+[2026-08-04 13:45 UTC] league cycle
+  [BTC-HOLD] equity $3,024.95 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $3,000.00 holding cash -> target cash
+  [MOM-ROT] equity $2,905.56 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ENA-USD']
+  [CROSS-BTC] equity $3,024.95 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $3,000.00 holding cash -> target cash
+  [RSI-BTC] equity $3,000.00 holding cash -> target cash
+league state saved.
+=== bot/squad.py  ===
+[2026-08-04 13:45 UTC] squad cycle (ARMED)
+  [h_trend_168] $2,924.09 ['ADA-USD', 'DOGE-USD']
+  [h_cross_24_168] $2,990.28 ['ADA-USD', 'XRP-USD']
+  [h_tsmom_72] $2,905.71 ['ADA-USD', 'SOL-USD']
+  [h_macd_12_26] $2,855.39 ['LTC-USD', 'LINK-USD']
+  [h_donch_48_24] $2,885.73 ['ADA-USD', 'BTC-USD']
+  [h_volbrk_24_96] $2,928.56 ['DOGE-USD']
+  [h_rsi14_reg168] $3,000.00 cash
+  [h_boll_48] $3,000.00 cash
+  [h_calm_24_168] $2,983.20 ['LINK-USD', 'ETH-USD']
+  [h_nearhi_168] $2,978.61 ['ADA-USD', 'XRP-USD']
+  squad total $29,451.58 · state saved
+=== bot/squad_stocks.py  ===
+[2026-08-04 13:46 UTC] squad cycle (ARMED)
+  [s_trend_33] $3,072.85 ['TSLA', 'NVDA']
+  [s_cross_7_33] $3,072.85 ['TSLA', 'NVDA']
+  [s_tsmom_21] $3,072.85 ['TSLA', 'NVDA']
+  [s_macd_12_26] $3,072.85 ['TSLA', 'NVDA']
+  [s_donch_14_7] $3,072.85 ['TSLA', 'NVDA']
+  [s_volbrk_7_33] $3,072.85 ['TSLA', 'NVDA']
+  [s_rsi14_reg33] $3,000.00 cash
+  [s_boll_14] $3,000.00 cash
+  [s_calm_7_33] $3,072.85 ['TSLA', 'NVDA']
+  [s_nearhi_33] $3,072.85 ['TSLA', 'NVDA']
+  squad total $30,582.80 · state saved
+=== portal/build_site.py  ===
+site/index.html built (288 equity rows, 5 trades, 30 exams)
+=== ops/backup.py  ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-04.zip (12 snapshots kept)
+=== bot/digest.py  ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-04
+
+1. BTC-HOLD   $  3,024.95  -69.75%  today +0.17%  breaker room 20%
+2. CROSS-BTC  $  3,024.95  -69.75%  today +0.17%  breaker room 20%
+3. BTC-TREND  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+4. DONCH-BTC  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+5. RSI-BTC    $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+6. MOM-ROT    $  2,905.56  -70.94%  today -0.35%  breaker room 17%
+daily run complete.
+=== data/refresh_daily.py  ===
+  BTC-USD: +0 new, 1471 total
+  ETH-USD: +0 new, 1471 total
+  SOL-USD: +0 new, 1471 total
+  XRP-USD: +0 new, 1119 total
+  ADA-USD: +0 new, 1471 total
+  DOGE-USD: +0 new, 1471 total
+  LINK-USD: +0 new, 1471 total
+  LTC-USD: +0 new, 1471 total
+refresh complete.
+=== data/refresh_intraday.py === already ran today (2026-08-04 UTC); skipping.
+=== ops/stamp.py === already ran today (2026-08-04 UTC); skipping.
+=== bot/league.py  ===
+[2026-08-04 14:46 UTC] league cycle
+  [BTC-HOLD] equity $3,028.81 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $3,000.00 holding cash -> target cash
+  [MOM-ROT] equity $2,924.94 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ENA-USD']
+  [CROSS-BTC] equity $3,028.81 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $3,000.00 holding cash -> target cash
+  [RSI-BTC] equity $3,000.00 holding cash -> target cash
+league state saved.
+=== bot/squad.py  ===
+[2026-08-04 14:46 UTC] squad cycle (ARMED)
+  [h_trend_168] $2,925.42 ['ADA-USD', 'DOGE-USD']
+  [h_trend_168] SELL DOGE-USD @ 0.0701 net -16.01 (signal, signal_reversal)
+  [h_trend_168] BUY SOL-USD @ 73.8638 ($1,462.71, fee $5.85)
+  [h_cross_24_168] $2,993.19 ['ADA-USD', 'XRP-USD']
+  [h_tsmom_72] $2,908.44 ['ADA-USD', 'SOL-USD']
+  [h_macd_12_26] $2,872.82 ['LTC-USD', 'LINK-USD']
+  [h_macd_12_26] SELL LTC-USD @ 44.3556 net -6.85 (signal, fees_spread)
+  [h_macd_12_26] BUY ETH-USD @ 1,871.4742 ($1,430.46, fee $5.72)
+  [h_donch_48_24] $2,892.39 ['ADA-USD', 'BTC-USD']
+  [h_volbrk_24_96] $2,926.59 ['DOGE-USD']
+  [h_rsi14_reg168] $3,000.00 cash
+  [h_boll_48] $3,000.00 cash
+  [h_calm_24_168] $2,995.44 ['LINK-USD', 'ETH-USD']
+  [h_nearhi_168] $2,981.52 ['ADA-USD', 'XRP-USD']
+  squad total $29,495.80 · state saved
+=== bot/squad_stocks.py  ===
+[2026-08-04 14:47 UTC] squad cycle (ARMED)
+  [s_trend_33] $3,071.26 ['TSLA', 'NVDA']
+  [s_cross_7_33] $3,071.26 ['TSLA', 'NVDA']
+  [s_tsmom_21] $3,071.26 ['TSLA', 'NVDA']
+  [s_macd_12_26] $3,071.26 ['TSLA', 'NVDA']
+  [s_donch_14_7] $3,071.26 ['TSLA', 'NVDA']
+  [s_volbrk_7_33] $3,071.26 ['TSLA', 'NVDA']
+  [s_rsi14_reg33] $3,000.00 cash
+  [s_boll_14] $3,000.00 cash
+  [s_calm_7_33] $3,071.26 ['TSLA', 'NVDA']
+  [s_nearhi_33] $3,071.26 ['TSLA', 'NVDA']
+  squad total $30,570.07 · state saved
+=== portal/build_site.py  ===
+site/index.html built (294 equity rows, 5 trades, 30 exams)
+=== ops/backup.py  ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-04.zip (12 snapshots kept)
+=== bot/digest.py  ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-04
+
+1. BTC-HOLD   $  3,028.81  -69.71%  today +0.13%  breaker room 20%
+2. CROSS-BTC  $  3,028.81  -69.71%  today +0.13%  breaker room 20%
+3. BTC-TREND  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+4. DONCH-BTC  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+5. RSI-BTC    $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+6. MOM-ROT    $  2,924.94  -70.75%  today +0.67%  breaker room 18%
+daily run complete.
+=== data/refresh_daily.py  ===
+  BTC-USD: +0 new, 1471 total
+  ETH-USD: +0 new, 1471 total
+  SOL-USD: +0 new, 1471 total
+  XRP-USD: +0 new, 1119 total
+  ADA-USD: +0 new, 1471 total
+  DOGE-USD: +0 new, 1471 total
+  LINK-USD: +0 new, 1471 total
+  LTC-USD: +0 new, 1471 total
+refresh complete.
+=== data/refresh_intraday.py === already ran today (2026-08-04 UTC); skipping.
+=== ops/stamp.py === already ran today (2026-08-04 UTC); skipping.
+=== bot/league.py  ===
+[2026-08-04 15:47 UTC] league cycle
+  [BTC-HOLD] equity $3,021.32 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $3,000.00 holding cash -> target cash
+  [MOM-ROT] equity $2,904.96 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ENA-USD']
+  [CROSS-BTC] equity $3,021.32 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $3,000.00 holding cash -> target cash
+  [RSI-BTC] equity $3,000.00 holding cash -> target cash
+league state saved.
+=== bot/squad.py  ===
+[2026-08-04 15:47 UTC] squad cycle (ARMED)
+  [h_trend_168] $2,918.39 ['ADA-USD', 'SOL-USD']
+  [h_cross_24_168] $3,001.72 ['ADA-USD', 'XRP-USD']
+  [h_tsmom_72] $2,916.28 ['ADA-USD', 'SOL-USD']
+  [h_macd_12_26] $2,852.73 ['LINK-USD', 'ETH-USD']
+  [h_donch_48_24] $2,898.45 ['ADA-USD', 'BTC-USD']
+  [h_volbrk_24_96] $2,928.77 ['DOGE-USD']
+  [h_rsi14_reg168] $3,000.00 cash
+  [h_boll_48] $3,000.00 cash
+  [h_calm_24_168] $2,988.55 ['LINK-USD', 'ETH-USD']
+  [h_nearhi_168] $2,990.03 ['ADA-USD', 'XRP-USD']
+  squad total $29,494.90 · state saved
+=== bot/squad_stocks.py  ===
+[2026-08-04 15:48 UTC] squad cycle (ARMED)
+  [s_trend_33] $3,075.33 ['TSLA', 'NVDA']
+  [s_cross_7_33] $3,075.33 ['TSLA', 'NVDA']
+  [s_tsmom_21] $3,075.33 ['TSLA', 'NVDA']
+  [s_macd_12_26] $3,075.33 ['TSLA', 'NVDA']
+  [s_donch_14_7] $3,075.33 ['TSLA', 'NVDA']
+  [s_volbrk_7_33] $3,075.33 ['TSLA', 'NVDA']
+  [s_rsi14_reg33] $3,000.00 cash
+  [s_boll_14] $3,000.00 cash
+  [s_calm_7_33] $3,075.33 ['TSLA', 'NVDA']
+  [s_nearhi_33] $3,075.33 ['TSLA', 'NVDA']
+  squad total $30,602.60 · state saved
+=== portal/build_site.py  ===
+site/index.html built (300 equity rows, 5 trades, 30 exams)
+=== ops/backup.py  ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-04.zip (12 snapshots kept)
+=== bot/digest.py  ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-04
+
+1. BTC-HOLD   $  3,021.32  -69.79%  today -0.25%  breaker room 20%
+2. CROSS-BTC  $  3,021.32  -69.79%  today -0.25%  breaker room 20%
+3. BTC-TREND  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+4. DONCH-BTC  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+5. RSI-BTC    $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+6. MOM-ROT    $  2,904.96  -70.95%  today -0.68%  breaker room 17%
+daily run complete.
+=== data/refresh_daily.py  ===
+  BTC-USD: +0 new, 1471 total
+  ETH-USD: +0 new, 1471 total
+  SOL-USD: +0 new, 1471 total
+  XRP-USD: +0 new, 1119 total
+  ADA-USD: +0 new, 1471 total
+  DOGE-USD: +0 new, 1471 total
+  LINK-USD: +0 new, 1471 total
+  LTC-USD: +0 new, 1471 total
+refresh complete.
+=== data/refresh_intraday.py === already ran today (2026-08-04 UTC); skipping.
+=== ops/stamp.py === already ran today (2026-08-04 UTC); skipping.
+=== bot/league.py  ===
+[2026-08-04 16:48 UTC] league cycle
+  [BTC-HOLD] equity $3,020.46 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $3,000.00 holding cash -> target cash
+  [MOM-ROT] equity $2,891.10 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ENA-USD']
+  [CROSS-BTC] equity $3,020.46 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $3,000.00 holding cash -> target cash
+  [RSI-BTC] equity $3,000.00 holding cash -> target cash
+league state saved.
+=== bot/squad.py  ===
+[2026-08-04 16:48 UTC] squad cycle (ARMED)
+  [h_trend_168] $2,905.30 ['ADA-USD', 'SOL-USD']
+  [h_cross_24_168] $2,988.60 ['ADA-USD', 'XRP-USD']
+  [h_tsmom_72] $2,903.18 ['ADA-USD', 'SOL-USD']
+  [h_macd_12_26] $2,843.32 ['LINK-USD', 'ETH-USD']
+  [h_donch_48_24] $2,887.10 ['ADA-USD', 'BTC-USD']
+  [h_volbrk_24_96] $2,928.04 ['DOGE-USD']
+  [h_rsi14_reg168] $3,000.00 cash
+  [h_boll_48] $3,000.00 cash
+  [h_calm_24_168] $2,978.70 ['LINK-USD', 'ETH-USD']
+  [h_nearhi_168] $2,976.95 ['ADA-USD', 'XRP-USD']
+  squad total $29,411.20 · state saved
+=== bot/squad_stocks.py  ===
+[2026-08-04 16:49 UTC] squad cycle (ARMED)
+  [s_trend_33] $3,077.26 ['TSLA', 'NVDA']
+  [s_cross_7_33] $3,077.26 ['TSLA', 'NVDA']
+  [s_tsmom_21] $3,077.26 ['TSLA', 'NVDA']
+  [s_macd_12_26] $3,077.26 ['TSLA', 'NVDA']
+  [s_donch_14_7] $3,077.26 ['TSLA', 'NVDA']
+  [s_volbrk_7_33] $3,077.26 ['TSLA', 'NVDA']
+  [s_rsi14_reg33] $3,000.00 cash
+  [s_boll_14] $3,000.00 cash
+  [s_calm_7_33] $3,077.26 ['TSLA', 'NVDA']
+  [s_nearhi_33] $3,077.26 ['TSLA', 'NVDA']
+  squad total $30,618.05 · state saved
+=== portal/build_site.py  ===
+site/index.html built (306 equity rows, 5 trades, 30 exams)
+=== ops/backup.py  ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-04.zip (12 snapshots kept)
+=== bot/digest.py  ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-04
+
+1. BTC-HOLD   $  3,020.46  -69.80%  today -0.03%  breaker room 20%
+2. CROSS-BTC  $  3,020.46  -69.80%  today -0.03%  breaker room 20%
+3. BTC-TREND  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+4. DONCH-BTC  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+5. RSI-BTC    $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+6. MOM-ROT    $  2,891.10  -71.09%  today -0.48%  breaker room 17%
+daily run complete.
+=== data/refresh_daily.py  ===
+  BTC-USD: +0 new, 1471 total
+  ETH-USD: +0 new, 1471 total
+  SOL-USD: +0 new, 1471 total
+  XRP-USD: +0 new, 1119 total
+  ADA-USD: +0 new, 1471 total
+  DOGE-USD: +0 new, 1471 total
+  LINK-USD: +0 new, 1471 total
+  LTC-USD: +0 new, 1471 total
+refresh complete.
+=== data/refresh_intraday.py === already ran today (2026-08-04 UTC); skipping.
+=== ops/stamp.py === already ran today (2026-08-04 UTC); skipping.
+=== bot/league.py  ===
+[2026-08-04 17:49 UTC] league cycle
+  [BTC-HOLD] equity $3,024.99 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $3,000.00 holding cash -> target cash
+  [MOM-ROT] equity $2,907.58 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ENA-USD']
+  [CROSS-BTC] equity $3,024.99 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $3,000.00 holding cash -> target cash
+  [RSI-BTC] equity $3,000.00 holding cash -> target cash
+league state saved.
+=== bot/squad.py  ===
+[2026-08-04 17:49 UTC] squad cycle (ARMED)
+  [h_trend_168] $2,902.66 ['ADA-USD', 'SOL-USD']
+  [h_cross_24_168] $2,982.40 ['ADA-USD', 'XRP-USD']
+  [h_tsmom_72] $2,900.54 ['ADA-USD', 'SOL-USD']
+  [h_macd_12_26] $2,845.81 ['LINK-USD', 'ETH-USD']
+  [h_donch_48_24] $2,881.99 ['ADA-USD', 'BTC-USD']
+  [h_volbrk_24_96] $2,928.46 ['DOGE-USD']
+  [h_rsi14_reg168] $3,000.00 cash
+  [h_boll_48] $3,000.00 cash
+  [h_calm_24_168] $2,981.33 ['LINK-USD', 'ETH-USD']
+  [h_nearhi_168] $2,970.75 ['ADA-USD', 'XRP-USD']
+  squad total $29,393.94 · state saved
+=== bot/squad_stocks.py  ===
+[2026-08-04 17:50 UTC] squad cycle (ARMED)
+  [s_trend_33] $3,092.89 ['TSLA', 'NVDA']
+  [s_cross_7_33] $3,092.89 ['TSLA', 'NVDA']
+  [s_tsmom_21] $3,092.89 ['TSLA', 'NVDA']
+  [s_macd_12_26] $3,092.89 ['TSLA', 'NVDA']
+  [s_donch_14_7] $3,092.89 ['TSLA', 'NVDA']
+  [s_volbrk_7_33] $3,092.89 ['TSLA', 'NVDA']
+  [s_rsi14_reg33] $3,000.00 cash
+  [s_boll_14] $3,000.00 cash
+  [s_calm_7_33] $3,092.89 ['TSLA', 'NVDA']
+  [s_nearhi_33] $3,092.89 ['TSLA', 'NVDA']
+  squad total $30,743.09 · state saved
+=== portal/build_site.py  ===
+site/index.html built (312 equity rows, 5 trades, 30 exams)
+=== ops/backup.py  ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-04.zip (12 snapshots kept)
+=== bot/digest.py  ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-04
+
+1. BTC-HOLD   $  3,024.99  -69.75%  today +0.15%  breaker room 20%
+2. CROSS-BTC  $  3,024.99  -69.75%  today +0.15%  breaker room 20%
+3. BTC-TREND  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+4. DONCH-BTC  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+5. RSI-BTC    $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+6. MOM-ROT    $  2,907.58  -70.92%  today +0.57%  breaker room 17%
+daily run complete.
+=== data/refresh_daily.py  ===
+  BTC-USD: +0 new, 1471 total
+  ETH-USD: +0 new, 1471 total
+  SOL-USD: +0 new, 1471 total
+  XRP-USD: +0 new, 1119 total
+  ADA-USD: +0 new, 1471 total
+  DOGE-USD: +0 new, 1471 total
+  LINK-USD: +0 new, 1471 total
+  LTC-USD: +0 new, 1471 total
+refresh complete.
+=== data/refresh_intraday.py === already ran today (2026-08-04 UTC); skipping.
+=== ops/stamp.py === already ran today (2026-08-04 UTC); skipping.
+=== bot/league.py  ===
+[2026-08-04 18:50 UTC] league cycle
+  [BTC-HOLD] equity $3,038.39 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $3,000.00 holding cash -> target cash
+  [MOM-ROT] equity $2,957.25 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ENA-USD']
+  [CROSS-BTC] equity $3,038.39 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $3,000.00 holding cash -> target cash
+  [RSI-BTC] equity $3,000.00 holding cash -> target cash
+league state saved.
+=== bot/squad.py  ===
+[2026-08-04 18:50 UTC] squad cycle (ARMED)
+  [h_trend_168] $2,907.14 ['ADA-USD', 'SOL-USD']
+  [h_cross_24_168] $2,985.88 ['ADA-USD', 'XRP-USD']
+  [h_tsmom_72] $2,905.02 ['ADA-USD', 'SOL-USD']
+  [h_macd_12_26] $2,856.20 ['LINK-USD', 'ETH-USD']
+  [h_donch_48_24] $2,889.22 ['ADA-USD', 'BTC-USD']
+  [h_donch_48_24] SELL ADA-USD @ 0.1912 net -29.39 (signal, signal_reversal)
+  [h_volbrk_24_96] $2,930.95 ['DOGE-USD']
+  [h_rsi14_reg168] $3,000.00 cash
+  [h_boll_48] $3,000.00 cash
+  [h_calm_24_168] $2,992.16 ['LINK-USD', 'ETH-USD']
+  [h_nearhi_168] $2,974.21 ['ADA-USD', 'XRP-USD']
+  squad total $29,440.77 · state saved
+=== bot/squad_stocks.py  ===
+[2026-08-04 18:51 UTC] squad cycle (ARMED)
+  [s_trend_33] $3,111.11 ['TSLA', 'NVDA']
+  [s_cross_7_33] $3,111.11 ['TSLA', 'NVDA']
+  [s_tsmom_21] $3,111.11 ['TSLA', 'NVDA']
+  [s_macd_12_26] $3,111.11 ['TSLA', 'NVDA']
+  [s_donch_14_7] $3,111.11 ['TSLA', 'NVDA']
+  [s_volbrk_7_33] $3,111.11 ['TSLA', 'NVDA']
+  [s_rsi14_reg33] $3,000.00 cash
+  [s_boll_14] $3,000.00 cash
+  [s_calm_7_33] $3,111.11 ['TSLA', 'NVDA']
+  [s_nearhi_33] $3,111.11 ['TSLA', 'NVDA']
+  squad total $30,888.86 · state saved
+=== portal/build_site.py  ===
+site/index.html built (318 equity rows, 5 trades, 30 exams)
+=== ops/backup.py  ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-04.zip (12 snapshots kept)
+=== bot/digest.py  ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-04
+
+1. BTC-HOLD   $  3,038.39  -69.62%  today +0.44%  breaker room 20%
+2. CROSS-BTC  $  3,038.39  -69.62%  today +0.44%  breaker room 20%
+3. BTC-TREND  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+4. DONCH-BTC  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+5. RSI-BTC    $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+6. MOM-ROT    $  2,957.25  -70.43%  today +1.71%  breaker room 19%
+daily run complete.
+=== data/refresh_daily.py  ===
+  BTC-USD: +0 new, 1471 total
+  ETH-USD: +0 new, 1471 total
+  SOL-USD: +0 new, 1471 total
+  XRP-USD: +0 new, 1119 total
+  ADA-USD: +0 new, 1471 total
+  DOGE-USD: +0 new, 1471 total
+  LINK-USD: +0 new, 1471 total
+  LTC-USD: +0 new, 1471 total
+refresh complete.
+=== data/refresh_intraday.py === already ran today (2026-08-04 UTC); skipping.
+=== ops/stamp.py === already ran today (2026-08-04 UTC); skipping.
+=== bot/league.py  ===
+[2026-08-04 19:51 UTC] league cycle
+  [BTC-HOLD] equity $3,038.59 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $3,000.00 holding cash -> target cash
+  [MOM-ROT] equity $2,991.88 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ENA-USD']
+  [CROSS-BTC] equity $3,038.59 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $3,000.00 holding cash -> target cash
+  [RSI-BTC] equity $3,000.00 holding cash -> target cash
+league state saved.
+=== bot/squad.py  ===
+[2026-08-04 19:51 UTC] squad cycle (ARMED)
+  [h_trend_168] $2,913.94 ['ADA-USD', 'SOL-USD']
+  [h_cross_24_168] $2,994.73 ['ADA-USD', 'XRP-USD']
+  [h_tsmom_72] $2,911.83 ['ADA-USD', 'SOL-USD']
+  [h_macd_12_26] $2,856.26 ['LINK-USD', 'ETH-USD']
+  [h_donch_48_24] $2,884.27 ['BTC-USD']
+  [h_donch_48_24] BUY SOL-USD @ 74.2041 ($1,435.85, fee $5.74)
+  [h_volbrk_24_96] $2,931.16 ['DOGE-USD']
+  [h_volbrk_24_96] BUY ETH-USD @ 1,875.9551 ($1,465.58, fee $5.86)
+  [h_rsi14_reg168] $3,000.00 cash
+  [h_boll_48] $3,000.00 cash
+  [h_calm_24_168] $2,992.23 ['LINK-USD', 'ETH-USD']
+  [h_nearhi_168] $2,983.03 ['ADA-USD', 'XRP-USD']
+  squad total $29,467.44 · state saved
+=== bot/squad_stocks.py  ===
+[2026-08-04 19:52 UTC] squad cycle (ARMED)
+  [s_trend_33] $3,102.97 ['TSLA', 'NVDA']
+  [s_cross_7_33] $3,102.97 ['TSLA', 'NVDA']
+  [s_tsmom_21] $3,102.97 ['TSLA', 'NVDA']
+  [s_macd_12_26] $3,102.97 ['TSLA', 'NVDA']
+  [s_donch_14_7] $3,102.97 ['TSLA', 'NVDA']
+  [s_volbrk_7_33] $3,102.97 ['TSLA', 'NVDA']
+  [s_rsi14_reg33] $3,000.00 cash
+  [s_boll_14] $3,000.00 cash
+  [s_calm_7_33] $3,102.97 ['TSLA', 'NVDA']
+  [s_nearhi_33] $3,102.97 ['TSLA', 'NVDA']
+  squad total $30,823.77 · state saved
+=== portal/build_site.py  ===
+site/index.html built (324 equity rows, 5 trades, 30 exams)
+=== ops/backup.py  ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-04.zip (12 snapshots kept)
+=== bot/digest.py  ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-04
+
+1. BTC-HOLD   $  3,038.59  -69.61%  today +0.01%  breaker room 20%
+2. CROSS-BTC  $  3,038.59  -69.61%  today +0.01%  breaker room 20%
+3. BTC-TREND  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+4. DONCH-BTC  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+5. RSI-BTC    $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+6. MOM-ROT    $  2,991.88  -70.08%  today +1.17%  breaker room 20%
+daily run complete.
+=== data/refresh_daily.py  ===
+  BTC-USD: +0 new, 1471 total
+  ETH-USD: +0 new, 1471 total
+  SOL-USD: +0 new, 1471 total
+  XRP-USD: +0 new, 1119 total
+  ADA-USD: +0 new, 1471 total
+  DOGE-USD: +0 new, 1471 total
+  LINK-USD: +0 new, 1471 total
+  LTC-USD: +0 new, 1471 total
+refresh complete.
+=== data/refresh_intraday.py === already ran today (2026-08-04 UTC); skipping.
+=== ops/stamp.py === already ran today (2026-08-04 UTC); skipping.
+=== bot/league.py  ===
+[2026-08-04 20:52 UTC] league cycle
+  [BTC-HOLD] equity $3,039.92 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $3,000.00 holding cash -> target cash
+  [MOM-ROT] equity $3,062.82 holding ['PUMP-USD', 'UNI-USD', 'ONDO-USD'] -> target ['PUMP-USD', 'UNI-USD', 'ENA-USD']
+  [CROSS-BTC] equity $3,039.92 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $3,000.00 holding cash -> target cash
+  [RSI-BTC] equity $3,000.00 holding cash -> target cash
+league state saved.
+=== bot/squad.py  ===
+[2026-08-04 20:52 UTC] squad cycle (ARMED)
+  [h_trend_168] $2,923.18 ['ADA-USD', 'SOL-USD']
+  [h_cross_24_168] $2,999.50 ['ADA-USD', 'XRP-USD']
+  [h_tsmom_72] $2,921.06 ['ADA-USD', 'SOL-USD']
+  [h_macd_12_26] $2,853.39 ['LINK-USD', 'ETH-USD']
+  [h_donch_48_24] $2,879.87 ['BTC-USD', 'SOL-USD']
+  [h_volbrk_24_96] $2,923.83 ['DOGE-USD', 'ETH-USD']
+  [h_rsi14_reg168] $3,000.00 cash
+  [h_boll_48] $3,000.00 cash
+  [h_calm_24_168] $2,989.24 ['LINK-USD', 'ETH-USD']
+  [h_nearhi_168] $2,987.81 ['ADA-USD', 'XRP-USD']
+  squad total $29,477.89 · state saved
+=== bot/squad_stocks.py  ===
+[2026-08-04 20:53 UTC / 16:53 ET] market CLOSED - no signals, no counted cycle
+=== bot/diversity.py --log ===
+crypto · 8/10 bots invested
+  mean pairwise overlap (invested only): 0.20   distinct books: 5   effective diversity: 62%
+    [2] ETH-USD LINK-USD  :: h_calm_24_168, h_macd_12_26  <-- CLONE SET
+    [2] ADA-USD XRP-USD  :: h_cross_24_168, h_nearhi_168  <-- CLONE SET
+    [2] ADA-USD SOL-USD  :: h_trend_168, h_tsmom_72  <-- CLONE SET
+    [1] BTC-USD SOL-USD  :: h_donch_48_24
+    [1] DOGE-USD ETH-USD  :: h_volbrk_24_96
+  WARNING: 2 bots hold an identical book. That is 1 slice(s) of capital buying an opinion already owned.
+
+stocks · 8/10 bots invested
+  mean pairwise overlap (invested only): 1.00   distinct books: 1   effective diversity: 12%
+    [8] NVDA TSLA  :: s_calm_7_33, s_cross_7_33, s_donch_14_7, s_macd_12_26, s_nearhi_33, s_trend_33, s_tsmom_21, s_volbrk_7_33  <-- CLONE SET
+  WARNING: 8 bots hold an identical book. That is 7 slice(s) of capital buying an opinion already owned.
+
+logged -> /Users/haroonrasheed/Projects/cryptobot/logs/diversity.csv
+=== portal/build_site.py  ===
+site/index.html built (330 equity rows, 5 trades, 32 exams)
+=== ops/backup.py  ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-04.zip (12 snapshots kept)
+=== bot/digest.py  ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-04
+
+1. MOM-ROT    $  3,062.82  -69.37%  today +2.37%  breaker room 20%
+2. BTC-HOLD   $  3,039.92  -69.60%  today +0.04%  breaker room 20%
+3. CROSS-BTC  $  3,039.92  -69.60%  today +0.04%  breaker room 20%
+4. BTC-TREND  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+5. DONCH-BTC  $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+6. RSI-BTC    $  3,000.00  -70.00%  today +0.00%  breaker room 20%
+daily run complete.
