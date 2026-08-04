@@ -571,6 +571,20 @@ class BarStrategy(Strategy):
     wants_bars = True
     wants_market = False
 
+    @property
+    def tail(self):
+        """How much history the seed is ALLOWED to see, in bars.
+
+        Declared, bounded, and identical in the exam and in forward
+        trading -- that identity is the point (W1.1). It exists because
+        some of these seeds (OBV, anything resampled) are cumulative:
+        given unbounded history their cost per bar grows with the store,
+        and worse, their value would silently depend on how much history
+        happened to be on disk that day. A bounded window makes the seed
+        a fixed function of recent data instead of a function of the
+        archive. Declared BEFORE any exam, per pre-registration."""
+        return max(200, self.warmup * 3 + 10)
+
     def step(self, closes, ctx):
         raise RuntimeError(
             f"{self.name} needs full bars; engine called step() with "

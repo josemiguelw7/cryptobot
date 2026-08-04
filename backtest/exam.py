@@ -366,3 +366,80 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# ==================================================================
+# EPOCH 2 (docs/seed_proposals_v2.md). Additive: simulate_window()
+# above is untouched, so every epoch-1 ledger row stays reproducible.
+# ==================================================================
+
+def simulate_window_bars(strat, bars, a, b, fee, slip, market=None,
+                         panel=None, pair=None):
+    """simulate_window's twin for full-candle seeds. Identical costing,
+    identical fresh-position-at-open rule, identical ctx statefulness.
+
+    The seed sees only bars[i+1-tail : i+1] -- the same bounded window
+    it will see when trading forward, so the exam grades the function
+    that actually trades (W1.1).
+
+    market : bars of the proxy asset, sliced to the same instant.
+    panel  : {pair: bars} for cross-sectional seeds, sliced by TIMESTAMP
+             so a seed can never see another pair's future.
+    """
+    import bisect
+    eq = 1.0
+    ctx = {"weight": 0.0, "entry_price": None}
+    curve, trades = [], 0
+    tail = getattr(strat, "tail", 10 ** 9)
+    cross = getattr(strat, "cross_sectional", False)
+    pctx = {} if cross else None
+    idx = ({p: [x[0] for x in bs] for p, bs in panel.items()}
+           if cross else None)
+    mkt_ts = [x[0] for x in market] if market is not None else None
+
+    def apply_target(tgt, px):
+        nonlocal eq, trades
+        tgt = max(0.0, min(1.0, float(tgt)))
+        turn = abs(tgt - ctx["weight"])
+        if turn > 1e-9:
+            eq *= (1 - (fee + slip) * turn)
+            trades += 1
+            if ctx["weight"] == 0 and tgt > 0:
+                ctx["entry_price"] = px
+            elif tgt == 0:
+                ctx["entry_price"] = None
+            ctx["weight"] = tgt
+
+    def signal(i):
+        lo = max(0, i + 1 - tail)
+        if cross:
+            t = bars[i][0]
+            sl = {}
+            for p, bs in panel.items():
+                j = bisect.bisect_right(idx[p], t)     # strictly <= t
+                if j > 0:
+                    sl[p] = bs[max(0, j - tail):j]
+            for p in sl:
+                pctx.setdefault(p, {"weight": 0.0, "entry_price": None})
+            pctx[pair]["weight"] = ctx["weight"]
+            try:
+                w = strat.step_all(sl, pctx)
+            except Exception:
+                return 0.0
+            return float(w.get(pair, 0.0))
+        if market is not None:
+            t = bars[i][0]
+            k = bisect.bisect_right(mkt_ts, t)
+            ctx["market"] = market[max(0, k - tail):k]
+        try:
+            return strat.step_bars(bars[lo:i + 1], ctx)
+        finally:
+            ctx.pop("market", None)
+
+    apply_target(signal(a), bars[a][4])
+    for i in range(a + 1, b):
+        r = bars[i][4] / bars[i - 1][4] - 1
+        eq *= (1 + ctx["weight"] * r)
+        apply_target(signal(i), bars[i][4])
+        curve.append(eq)
+    return curve, trades

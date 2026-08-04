@@ -43,7 +43,9 @@ sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(ROOT, "bot"))
 import exam                      # simulate_window, _dd, ledger helpers
 import validation                # expected_max_sharpe
-import seeds_crypto as SEEDS
+import os as _os
+_ROSTER = _os.environ.get("EXAM_ROSTER", "seeds_crypto")
+SEEDS = __import__(_ROSTER)          # EXAM_ROSTER=seeds_crypto_v2 for epoch 2
 
 RESULTS = os.path.join(HERE, "results")
 LEDGER = exam.LEDGER
@@ -55,6 +57,7 @@ HOLDOUT_DAYS = 120
 GAP_LIMIT_S = 6 * 3600           # windows containing a >6h gap: discarded
 FEE, SLIP = 0.006, 0.0005        # the standard's costs, not the charter's
 PAIRS = SEEDS.PAIRS
+MARKET = _os.environ.get("EXAM_MARKET", "BTC-USD")
 DD_EPS = exam.DD_EPS
 
 
@@ -88,6 +91,27 @@ def window_has_gap(ts, a, b):
     return any(ts[i] - ts[i - 1] > GAP_LIMIT_S for i in range(a + 1, b))
 
 
+def load_bars_exam(pair):
+    """Full completed candles, same completeness rule as load_hourly."""
+    path = os.path.join(CANDLES, f"{pair}_3600s.csv")
+    if not os.path.exists(path):
+        return []
+    with open(path) as f:
+        rows = list(csv.DictReader(f))
+    now = datetime.now(timezone.utc).timestamp()
+    out = []
+    for r in rows:
+        t = int(r["timestamp"])
+        if t + 3600 <= now:
+            out.append((t, float(r["open"]), float(r["high"]),
+                        float(r["low"]), float(r["close"]),
+                        float(r["volume"])))
+    return out
+
+
+BARS_CACHE = {}
+
+
 def windows_for(pair, strat, closes, ts, lo_idx, hi_idx, fee, slip,
                 dates=True):
     """Grade rolling windows whose [a, a+WIN) lies inside [lo_idx,
@@ -101,8 +125,20 @@ def windows_for(pair, strat, closes, ts, lo_idx, hi_idx, fee, slip,
             dropped += 1
             start += STEP
             continue
-        curve, trades = exam.simulate_window(strat, closes, start,
-                                             start + WIN, fee, slip)
+        if getattr(strat, "wants_bars", False):
+            bars = BARS_CACHE.setdefault(pair, load_bars_exam(pair))
+            mkt = (BARS_CACHE.setdefault(MARKET, load_bars_exam(MARKET))
+                   if getattr(strat, "wants_market", False) else None)
+            panel = None
+            if getattr(strat, "cross_sectional", False):
+                panel = {p: BARS_CACHE.setdefault(p, load_bars_exam(p))
+                         for p in PAIRS}
+            curve, trades = exam.simulate_window_bars(
+                strat, bars, start, start + WIN, fee, slip,
+                market=mkt, panel=panel, pair=pair)
+        else:
+            curve, trades = exam.simulate_window(strat, closes, start,
+                                                 start + WIN, fee, slip)
         if curve:
             w = closes[start:start + WIN]
             bh = [c / w[0] for c in w]
