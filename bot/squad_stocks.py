@@ -82,6 +82,28 @@ def load_stk(tk):
 Q.load_hourly = load_stk
 
 
+def load_bars_stk(tk):
+    """E2.1 full RTH candles. yfinance gives o/h/l/c/v; the store has
+    always had them."""
+    path = os.path.join(STOCKS, f"{tk}_1h.csv")
+    if not os.path.exists(path):
+        return []
+    with open(path) as f:
+        rows = list(csv.DictReader(f))
+    out = []
+    for r in rows:
+        try:
+            out.append((int(float(r["timestamp"])), float(r["open"]),
+                        float(r["high"]), float(r["low"]),
+                        float(r["close"]), float(r["volume"])))
+        except (KeyError, ValueError):
+            continue
+    return out
+
+Q.load_bars = load_bars_stk
+Q.MARKET = "SPY"                  # E2.4: stock market proxy
+
+
 def topup_stk(tickers):
     """Refresh the whole store (yfinance is batch-shaped). Returns the
     tickers that came back with no data — each an execution_data event."""

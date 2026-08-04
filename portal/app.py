@@ -4,7 +4,7 @@ Read-only views over bot state, trades, equity, and backtest results,
 plus a whitelisted job runner for the test suite.
 Binds to 127.0.0.1 only. Run: .venv/bin/python portal/app.py
 """
-import csv, glob, json, os, subprocess
+import csv, glob, json, os, subprocess, sys
 from datetime import datetime, timedelta, timezone
 from flask import Flask, jsonify, send_from_directory
 
@@ -313,6 +313,34 @@ def meta():
                     "league_last": last_ts("league_equity.csv"),
                     "squad_last": last_ts("squad_equity.csv"),
                     "squad_stk_last": last_ts("squad_stocks_equity.csv")})
+@app.get("/api/diversity")
+def diversity_api():
+    """E2.6 diversity gauge. Read-only: how many of the squad's slices
+    are buying an opinion the squad already owns."""
+    sys.path.insert(0, os.path.join(ROOT, "bot"))
+    import importlib
+    dv = importlib.import_module("diversity")
+    importlib.reload(dv)
+    out = {}
+    for label, path in dv.SQUADS:
+        r = dv.analyse(path)
+        if not r:
+            continue
+        out[label] = {
+            "bots": r["bots"], "invested": r["invested"],
+            "overlap": round(r["overlap_invested"], 4),
+            "distinct_books": r["distinct"],
+            "effective": round(r["effective"], 4),
+            "clusters": [{"book": sorted(b), "members": sorted(m)}
+                         for b, m in r["clusters"]],
+            "clone_sets": [sorted(m) for b, m in r["clusters"]
+                           if len(m) > 1],
+        }
+    hist = []
+    p = os.path.join(LOGS, "diversity.csv")
+    if os.path.exists(p):
+        hist = list(csv.DictReader(open(p)))[-200:]
+    return jsonify({"now": out, "history": hist})
 
 
 if __name__ == "__main__":

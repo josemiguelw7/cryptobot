@@ -469,3 +469,465 @@ def get(name):
         raise KeyError(f"unknown strategy {name!r}; "
                        f"known: {sorted(REGISTRY)}")
     return REGISTRY[name]
+
+
+# ====================================================================
+# EPOCH 2 ADDITIONS (docs/seed_proposals_v2.md)
+#
+# Everything below is ADDITIVE. No class above this line is modified:
+# epoch 1 seeds are immortal and immutable (charter s9.3), and their
+# code must stay byte-for-byte what the exam graded.
+#
+# Three new optional contracts, all opt-in via class attributes:
+#
+#   wants_bars = True   -> engine calls step_bars(bars, ctx) instead of
+#                          step(closes, ctx). bars is a list of tuples
+#                          (ts, open, high, low, close, volume), oldest
+#                          first, COMPLETED bars only.
+#   wants_market = True -> ctx['market'] holds the market proxy's bars
+#                          (BTC-USD for crypto, SPY for stocks).
+#   cross_sectional     -> engine calls step_all(data, ctx) -> {pair: w}
+#                          for strategies that compare names to each
+#                          other rather than to their own past.
+#
+#   conviction(...)     -> float >= 0, "how much do I like this one".
+#                          Used ONLY to order candidates when a bot has
+#                          more signals than slots. It does NOT grant
+#                          permission to trade: the s4.3 cost gate is
+#                          unchanged and still signal-free. Default
+#                          implementation returns the signal weight, so
+#                          a strategy that does not override it keeps
+#                          the old behaviour.
+# ====================================================================
+
+O, H, L, C, V, TS = 1, 2, 3, 4, 5, 0
+
+
+def closes_of(bars):
+    return [b[C] for b in bars]
+
+
+def true_range(bars, i):
+    prev = bars[i - 1][C] if i > 0 else bars[i][O]
+    return max(bars[i][H] - bars[i][L], abs(bars[i][H] - prev),
+               abs(bars[i][L] - prev))
+
+
+def atr(bars, n):
+    if len(bars) < n + 1:
+        return None
+    return sum(true_range(bars, i) for i in range(len(bars) - n,
+                                                  len(bars))) / n
+
+
+def vol_ratio(bars, fast, slow):
+    """Recent volume vs its own baseline. 1.0 = normal, 2.0 = double."""
+    if len(bars) < slow:
+        return None
+    f = sum(b[V] for b in bars[-fast:]) / fast
+    s = sum(b[V] for b in bars[-slow:]) / slow
+    return None if s <= 0 else f / s
+
+
+def obv_series(bars):
+    out, run = [], 0.0
+    for i in range(1, len(bars)):
+        if bars[i][C] > bars[i - 1][C]:
+            run += bars[i][V]
+        elif bars[i][C] < bars[i - 1][C]:
+            run -= bars[i][V]
+        out.append(run)
+    return out
+
+
+def body(bar):
+    return abs(bar[C] - bar[O])
+
+
+def upper_wick(bar):
+    return bar[H] - max(bar[O], bar[C])
+
+
+def lower_wick(bar):
+    return min(bar[O], bar[C]) - bar[L]
+
+
+def resample(bars, k):
+    """Fold k consecutive bars into one. Used for the slow-clock family
+    so the same maths runs on a genuinely different timescale."""
+    out = []
+    for i in range(0, len(bars) - k + 1, k):
+        w = bars[i:i + k]
+        out.append((w[0][TS], w[0][O], max(b[H] for b in w),
+                    min(b[L] for b in w), w[-1][C],
+                    sum(b[V] for b in w)))
+    return out
+
+
+class BarStrategy(Strategy):
+    """Base for seeds that need full candles. Subclasses implement
+    step_bars; step() raises so a mis-wired engine fails loudly instead
+    of silently trading on a degraded signal."""
+    wants_bars = True
+    wants_market = False
+
+    def step(self, closes, ctx):
+        raise RuntimeError(
+            f"{self.name} needs full bars; engine called step() with "
+            f"closes only. Wire step_bars() (charter E2.1).")
+
+    def step_bars(self, bars, ctx):
+        raise NotImplementedError
+
+    def conviction(self, bars, ctx):
+        return self.step_bars(bars, ctx)
+
+
+# ---------------------------------------------------- volume family
+class VolConfirmBreak(BarStrategy):
+    """Donchian-style breakout that only counts when volume expands.
+    Hysteresis kept (exit on a shorter low) so turnover stays low."""
+    def __init__(self, n_hi, n_lo, vmult=1.5):
+        self.hi, self.lo, self.vm = n_hi, n_lo, vmult
+        self.name = f"volconf_{n_hi}_{n_lo}"
+        self.warmup = max(n_hi, 60) + 1
+
+    def _vr(self, bars):
+        return vol_ratio(bars, 3, 30)
+
+    def step_bars(self, bars, ctx):
+        if len(bars) < self.warmup:
+            return 0.0
+        c = bars[-1][C]
+        if ctx.get("weight", 0) > 0:
+            lo = min(b[L] for b in bars[-self.lo - 1:-1])
+            return 0.0 if c < lo else 1.0
+        hi = max(b[H] for b in bars[-self.hi - 1:-1])
+        vr = self._vr(bars)
+        return 1.0 if (c > hi and vr is not None and vr >= self.vm) else 0.0
+
+    def conviction(self, bars, ctx):
+        if self.step_bars(bars, ctx) <= 0:
+            return 0.0
+        vr = self._vr(bars) or 1.0
+        return vr - 1.0
+
+
+class OBVTrend(BarStrategy):
+    """Hold while on-balance-volume is above its own moving average:
+    accumulation, not price. Conviction = OBV slope in baseline units."""
+    def __init__(self, n):
+        self.n = n
+        self.name = f"obv_{n}"
+        self.warmup = n + 2
+
+    def step_bars(self, bars, ctx):
+        o = obv_series(bars)
+        m = sma(o, self.n)
+        return 1.0 if m is not None and o and o[-1] > m else 0.0
+
+    def conviction(self, bars, ctx):
+        o = obv_series(bars)
+        m = sma(o, self.n)
+        if m is None or not o:
+            return 0.0
+        base = sum(b[V] for b in bars[-self.n:]) / self.n or 1.0
+        return max(0.0, (o[-1] - m) / (base * self.n ** 0.5))
+
+
+class VolDryUp(BarStrategy):
+    """Quiet accumulation then a volume thrust. Compression measured on
+    volume, not price, which is what makes it independent of VolBreak."""
+    def __init__(self, quiet, thrust=2.0, regime=168):
+        self.q, self.t, self.regime = quiet, thrust, regime
+        self.name = f"dryup_{quiet}"
+        self.warmup = max(quiet * 3, regime) + 2
+
+    def step_bars(self, bars, ctx):
+        if len(bars) < self.warmup:
+            return 0.0
+        cl = closes_of(bars)
+        m = sma(cl, self.regime)
+        if m is None or cl[-1] <= m:
+            return 0.0
+        if ctx.get("weight", 0) > 0:
+            vr_now = vol_ratio(bars, self.q, self.q * 3)
+            return 0.0 if (vr_now is not None and vr_now < 0.8) else 1.0
+        prior = vol_ratio(bars[:-1], self.q, self.q * 3)
+        now = vol_ratio(bars, 1, self.q * 3)
+        return 1.0 if (prior is not None and prior < 0.8 and
+                       now is not None and now >= self.t) else 0.0
+
+    def conviction(self, bars, ctx):
+        if self.step_bars(bars, ctx) <= 0:
+            return 0.0
+        return (vol_ratio(bars, 1, self.q * 3) or 0.0)
+
+
+# ------------------------------------------------ candlestick family
+class Engulfing(BarStrategy):
+    """Bullish engulfing, permitted only above the regime MA. Exits on
+    a close back below the pattern low (a different line than entry)."""
+    def __init__(self, regime=168, hold=None):
+        self.regime = regime
+        self.name = f"engulf_{regime}"
+        self.warmup = regime + 3
+
+    def _pattern(self, bars):
+        a, b = bars[-2], bars[-1]
+        return (a[C] < a[O] and b[C] > b[O] and
+                b[C] >= a[O] and b[O] <= a[C] and
+                body(b) > body(a))
+
+    def step_bars(self, bars, ctx):
+        if len(bars) < self.warmup:
+            return 0.0
+        cl = closes_of(bars)
+        m = sma(cl, self.regime)
+        if m is None:
+            return 0.0
+        if ctx.get("weight", 0) > 0:
+            stop = ctx.get("pattern_low")
+            if stop is not None and cl[-1] < stop:
+                ctx["pattern_low"] = None
+                return 0.0
+            return 1.0 if cl[-1] > m else 0.0
+        if cl[-1] > m and self._pattern(bars):
+            ctx["pattern_low"] = min(bars[-2][L], bars[-1][L])
+            return 1.0
+        return 0.0
+
+    def conviction(self, bars, ctx):
+        if self.step_bars(bars, ctx) <= 0:
+            return 0.0
+        a = atr(bars, 14)
+        return 0.0 if not a else body(bars[-1]) / a
+
+
+class PinBar(BarStrategy):
+    """Long lower wick (hammer) on a pullback inside an uptrend: sellers
+    tried and failed. Wick ratio is the conviction."""
+    def __init__(self, regime=168, ratio=2.0):
+        self.regime, self.ratio = regime, ratio
+        self.name = f"pin_{regime}"
+        self.warmup = regime + 3
+
+    def _ratio(self, bars):
+        b = bars[-1]
+        d = body(b) or (b[H] - b[L]) * 0.01
+        return 0.0 if d <= 0 else lower_wick(b) / d
+
+    def step_bars(self, bars, ctx):
+        if len(bars) < self.warmup:
+            return 0.0
+        cl = closes_of(bars)
+        m = sma(cl, self.regime)
+        if m is None or cl[-1] <= m:
+            return 0.0
+        if ctx.get("weight", 0) > 0:
+            return 1.0
+        b = bars[-1]
+        return 1.0 if (self._ratio(bars) >= self.ratio and
+                       lower_wick(b) > upper_wick(b) * 2) else 0.0
+
+    def conviction(self, bars, ctx):
+        return self._ratio(bars) if self.step_bars(bars, ctx) > 0 else 0.0
+
+
+class InsideBreak(BarStrategy):
+    """Inside bar = range compression = coiled spring. Enter on the
+    break of the mother bar's high, exit below its low."""
+    def __init__(self, regime=168):
+        self.regime = regime
+        self.name = f"inside_{regime}"
+        self.warmup = regime + 4
+
+    def step_bars(self, bars, ctx):
+        if len(bars) < self.warmup:
+            return 0.0
+        cl = closes_of(bars)
+        m = sma(cl, self.regime)
+        if m is None:
+            return 0.0
+        if ctx.get("weight", 0) > 0:
+            lo = ctx.get("mother_low")
+            if lo is not None and cl[-1] < lo:
+                ctx["mother_low"] = None
+                return 0.0
+            return 1.0
+        mother, inside = bars[-3], bars[-2]
+        is_inside = inside[H] <= mother[H] and inside[L] >= mother[L]
+        if cl[-1] > m and is_inside and cl[-1] > mother[H]:
+            ctx["mother_low"] = mother[L]
+            return 1.0
+        return 0.0
+
+    def conviction(self, bars, ctx):
+        if self.step_bars(bars, ctx) <= 0:
+            return 0.0
+        mother, inside = bars[-3], bars[-2]
+        rng = mother[H] - mother[L]
+        return 0.0 if rng <= 0 else 1.0 - (inside[H] - inside[L]) / rng
+
+
+# ------------------------------------------- cross-sectional family
+class RelStrength(BarStrategy):
+    """Ranks names AGAINST EACH OTHER, not against their own past —
+    the only family here that asks a cross-sectional question.
+
+    Deliberately slow and sticky, because MOM-ROT already proved that
+    fast rotation on retail fees is negative-sum: a held name is kept
+    until it falls out of the top `keep` band, not the top `top` band.
+    Hysteresis is the whole point.
+    """
+    cross_sectional = True
+
+    def __init__(self, look, top=2, keep=4, regime=168):
+        self.look, self.top, self.keep = look, top, keep
+        self.regime = regime
+        self.name = f"rs_{look}_{top}"
+        self.warmup = max(look, regime) + 2
+
+    def _score(self, bars):
+        cl = closes_of(bars)
+        if len(cl) < self.look + 1:
+            return None
+        m = sma(cl, self.regime)
+        if m is None or cl[-1] <= m:
+            return None          # absolute filter: no shorting the pack
+        return cl[-1] / cl[-1 - self.look] - 1
+
+    def step_all(self, data, ctx):
+        scores = {}
+        for p, bars in data.items():
+            s = self._score(bars)
+            if s is not None:
+                scores[p] = s
+        order = sorted(scores, key=lambda p: (-scores[p], p))
+        held = {p for p, c in ctx.items()
+                if isinstance(c, dict) and c.get("weight", 0) > 0}
+        out = {}
+        for i, p in enumerate(order):
+            if i < self.top or (p in held and i < self.keep):
+                out[p] = 1.0
+        self._scores = scores
+        return out
+
+    def conviction_all(self, pair):
+        return getattr(self, "_scores", {}).get(pair, 0.0)
+
+
+# ------------------------------------------------ cross-asset family
+class MarketRegime(BarStrategy):
+    """Trades a name only while the MARKET PROXY is healthy — the
+    signal comes from a different asset than the one being traded
+    (BTC-USD for crypto, SPY for stocks). Naturally low turnover."""
+    wants_market = True
+
+    def __init__(self, mkt_n=168, own_n=48):
+        self.mkt_n, self.own_n = mkt_n, own_n
+        self.name = f"regime_{mkt_n}_{own_n}"
+        self.warmup = max(mkt_n, own_n) + 2
+
+    def step_bars(self, bars, ctx):
+        mkt = ctx.get("market")
+        if not mkt:
+            return 0.0
+        mc = closes_of(mkt)
+        mm = sma(mc, self.mkt_n)
+        if mm is None or mc[-1] <= mm:
+            return 0.0
+        cl = closes_of(bars)
+        om = sma(cl, self.own_n)
+        return 1.0 if om is not None and cl[-1] > om else 0.0
+
+    def conviction(self, bars, ctx):
+        if self.step_bars(bars, ctx) <= 0:
+            return 0.0
+        cl = closes_of(bars)
+        om = sma(cl, self.own_n)
+        return 0.0 if not om else (cl[-1] / om - 1)
+
+
+# -------------------------------------------------- calendar family
+class Calendar(BarStrategy):
+    """The date is the signal. Turn-of-month for stocks, weekend for
+    crypto. Nearly free on fees, probably weak — a clean control."""
+    def __init__(self, mode, regime=168):
+        assert mode in ("tom", "weekend")
+        self.mode, self.regime = mode, regime
+        self.name = f"cal_{mode}"
+        self.warmup = regime + 2
+
+    def _on(self, ts):
+        from datetime import datetime, timezone
+        d = datetime.fromtimestamp(ts, timezone.utc)
+        if self.mode == "weekend":
+            return d.weekday() >= 4
+        return d.day >= 26 or d.day <= 5
+
+    def step_bars(self, bars, ctx):
+        cl = closes_of(bars)
+        m = sma(cl, self.regime)
+        if m is None or cl[-1] <= m:
+            return 0.0
+        return 1.0 if self._on(bars[-1][TS]) else 0.0
+
+    def conviction(self, bars, ctx):
+        return self.step_bars(bars, ctx)
+
+
+# --------------------------------------------------- committee family
+class Committee(BarStrategy):
+    """The owner's original 'mix of both': enter only when 2 of 3
+    UNRELATED families agree; exit when any one leaves. Fewer, higher
+    conviction trades — the direction the fee maths rewards."""
+    wants_market = False
+
+    def __init__(self, members, need=2, name="vote"):
+        self.members = members
+        self.need = need
+        self.name = name
+        self.warmup = max(m.warmup for m in members) + 1
+        self.wants_market = any(getattr(m, "wants_market", False)
+                                for m in members)
+
+    def _votes(self, bars, ctx):
+        out = []
+        for i, m in enumerate(self.members):
+            sub = ctx.setdefault(f"_m{i}", {})
+            sub["weight"] = ctx.get("weight", 0.0)
+            sub["market"] = ctx.get("market")
+            try:
+                out.append(1.0 if m.step_bars(bars, sub) > 0 else 0.0)
+            except Exception:
+                out.append(0.0)
+        return out
+
+    def step_bars(self, bars, ctx):
+        v = sum(self._votes(bars, ctx))
+        if ctx.get("weight", 0) > 0:
+            return 1.0 if v >= len(self.members) else 0.0
+        return 1.0 if v >= self.need else 0.0
+
+    def conviction(self, bars, ctx):
+        return sum(self._votes(bars, ctx)) / len(self.members)
+
+
+# ------------------------------------------------- slow-clock family
+class SlowClock(BarStrategy):
+    """Wraps any bar strategy and feeds it resampled bars, so the same
+    maths runs on a genuinely slower timescale. move_scale says the
+    useful direction is UP: hourly moves cannot pay a 1.6-2.6% round
+    trip, multi-day ones can."""
+    def __init__(self, inner, k, name=None):
+        self.inner, self.k = inner, k
+        self.name = name or f"slow{k}_{inner.name}"
+        self.warmup = inner.warmup * k + k
+        self.wants_market = getattr(inner, "wants_market", False)
+
+    def step_bars(self, bars, ctx):
+        return self.inner.step_bars(resample(bars, self.k), ctx)
+
+    def conviction(self, bars, ctx):
+        return self.inner.conviction(resample(bars, self.k), ctx)

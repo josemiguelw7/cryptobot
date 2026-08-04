@@ -74,6 +74,32 @@ def slip_for(pair):
 
 # ---------------------------------------------------------------- data
 
+MARKET = "BTC-USD"                # E2.4 cross-asset proxy (SPY for stocks)
+
+
+def load_bars(pair):
+    """Full COMPLETED candles (ts, o, h, l, c, v), oldest first — E2.1.
+
+    Same completeness rule as load_hourly (s4.5b: forming bars are
+    invisible). The store has always held o/h/l/c/v; until epoch 2
+    nothing downstream asked for more than the close."""
+    path = os.path.join(CANDLES, f"{pair}_3600s.csv")
+    out = []
+    try:
+        with open(path) as f:
+            rows = list(csv.DictReader(f))
+    except Exception:
+        return out
+    now = utc_now().timestamp()
+    for r in rows:
+        t = int(r["timestamp"])
+        if t + 3600 <= now:
+            out.append((t, float(r["open"]), float(r["high"]),
+                        float(r["low"]), float(r["close"]),
+                        float(r["volume"])))
+    return out
+
+
 def load_hourly(pair):
     """Completed bars only (s4.5b: forming bars are invisible)."""
     path = os.path.join(CANDLES, f"{pair}_3600s.csv")
@@ -399,6 +425,12 @@ def cycle():
 
     failed = topup(SEEDS.PAIRS)
     data = {p: load_hourly(p) for p in SEEDS.PAIRS}
+    # E2.3: position cap is a roster property. Epoch 1 rosters declare
+    # nothing and keep the charter default of 2.
+    global MAX_POS
+    MAX_POS = getattr(SEEDS, "MAX_POS", MAX_POS)
+    bars = {p: load_bars(p) for p in SEEDS.PAIRS}      # E2.1
+    mkt_bars = bars.get(MARKET) or load_bars(MARKET)   # E2.4
     snaps = {p: snapshot_hash(*data[p]) for p in SEEDS.PAIRS}
     lastbar = {p: (datetime.fromtimestamp(data[p][1][-1], timezone.utc)
                    .strftime("%Y-%m-%dT%H:%MZ") if data[p][1] else "")
@@ -459,14 +491,47 @@ def cycle():
         if not tradable:
             continue
 
-        sigs = {}
-        for p in SEEDS.PAIRS:
-            closes, ts = data[p]
-            if len(closes) < strat.warmup + 1:
-                continue
-            ctx = b["ctx"].setdefault(p, {"weight": 0.0,
-                                          "entry_price": None})
-            sigs[p] = strat.step(closes, ctx)
+        sigs, conv = {}, {}
+        cross = getattr(strat, "cross_sectional", False)
+        wants_bars = getattr(strat, "wants_bars", False)
+        wants_mkt = getattr(strat, "wants_market", False)
+
+        if cross:
+            # E2.5: strategy ranks the names against EACH OTHER.
+            elig = {p: bars[p] for p in SEEDS.PAIRS
+                    if len(bars[p]) >= strat.warmup + 1}
+            try:
+                allw = strat.step_all(elig, b["ctx"])
+            except Exception as e:
+                print(f"  [{name}] step_all failed: {e}")
+                allw = {}
+            for p in elig:
+                b["ctx"].setdefault(p, {"weight": 0.0,
+                                        "entry_price": None})
+                sigs[p] = float(allw.get(p, 0.0))
+                conv[p] = strat.conviction_all(p)
+        else:
+            for p in SEEDS.PAIRS:
+                closes, ts = data[p]
+                series = bars[p] if wants_bars else closes
+                if len(series) < strat.warmup + 1:
+                    continue
+                ctx = b["ctx"].setdefault(p, {"weight": 0.0,
+                                              "entry_price": None})
+                if wants_mkt:
+                    ctx["market"] = mkt_bars
+                try:
+                    if wants_bars:
+                        sigs[p] = strat.step_bars(bars[p], ctx)
+                        conv[p] = strat.conviction(bars[p], ctx)
+                    else:
+                        sigs[p] = strat.step(closes, ctx)
+                        conv[p] = sigs[p]
+                except Exception as e:
+                    print(f"  [{name}] {p} signal failed: {e}")
+                    sigs[p] = 0.0
+                finally:
+                    ctx.pop("market", None)
 
         held = set(b["units"])
         for p in list(held):
@@ -478,9 +543,15 @@ def cycle():
                     close_position(b, name, p, qq, now, "signal")
                     held.discard(p)
 
+        # E2.2: order by THIS bot's own conviction, not by the shared
+        # biggest-mover rule. edge_proxy stays exactly where it was --
+        # as the signal-free s4.3 cost GATE below. Ordering != permission.
+        # Epoch 1 seeds return conviction == signal weight, so with a
+        # flat 1.0 signal the fallback key reproduces old behaviour.
         want = sorted([p for p, w in sigs.items()
                        if w > 0 and p not in held],
-                      key=lambda p: (-edge_proxy(data[p][0], hold_h), p))
+                      key=lambda p: (-conv.get(p, sigs[p]),
+                                     -edge_proxy(data[p][0], hold_h), p))
         for p in want:
             if len(b["units"]) >= MAX_POS:
                 log_decision(now, name, p, snaps[p], lastbar[p],
