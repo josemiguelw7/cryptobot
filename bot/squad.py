@@ -526,7 +526,9 @@ def cycle():
                         conv[p] = strat.conviction(bars[p], ctx)
                     else:
                         sigs[p] = strat.step(closes, ctx)
-                        conv[p] = sigs[p]
+                        c = (strat.conviction_closes(closes, ctx)
+                             if sigs[p] > 0 else None)
+                        conv[p] = sigs[p] if c is None else max(c, 0.0)
                 except Exception as e:
                     print(f"  [{name}] {p} signal failed: {e}")
                     sigs[p] = 0.0

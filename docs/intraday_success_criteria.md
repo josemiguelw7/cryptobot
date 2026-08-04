@@ -83,6 +83,7 @@ Over a rolling window of counted days, **all** of:
 5. Max drawdown ≤ 10% of slice
 6. Net-profitable in at least 2 of the 3 consecutive **30-counted-day blocks** measured backward from the window end (Path B: 2 of the 6 blocks must be profitable *and* no 3 consecutive blocks may all be negative). Blocks, not calendar months — calendar months are undefined on a rolling window.
 7. Zero kill-switch breaches (§8)
+8. **Beats buy-and-hold** *(amendment 2026-08-04, §2.1 tightening)* — window equity ≥ the asset-class benchmark (BTC-HOLD for crypto, SPY-HOLD for stocks) over the identical counted window, net of fees. Profitable-but-worse-than-doing-nothing does not graduate.
 
 **DSR is computed and published at every stage but does not gate at v1.0** (§5.7). Promoting it to a gate later is a tightening and is permitted under §2.1; demoting it again is not.
 
@@ -224,3 +225,17 @@ BTC-HOLD, cash, and per-asset-class benchmarks are reported on the portal and in
 **Governing rule applied at commit:** where two readings were defensible, the *less strict* was committed, because §2.1 permits tightening later and forbids loosening. This means v1.0 is deliberately the loosest version this charter will ever have.
 
 *End of charter. Everything below this line in future versions must be stricter than what stands above it.*
+
+
+---
+
+## Amendments
+
+**2026-08-04 — Gate 8 added to §5 (benchmark-relative).** Direction:
+tightening only, permitted by §2.1. Rationale: gates 1–7 were absolute;
+a bot could graduate with +4% while its asset's buy-and-hold did +40%.
+The whole project exists because BTC-HOLD beat the first bot — the
+graduation bar should remember that. Recorded the same day the exam
+gained two recorded (non-gating) metrics: realized-vs-declared holding
+horizon (turnover honesty) and a 2x-slippage stress, both written to
+the ledger per exam. See docs/recert_2026-08-04.md.

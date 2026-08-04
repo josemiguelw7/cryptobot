@@ -1,1 +1,1 @@
-candidate,date,verdict,windows,pairs,stitched,stitched_bh,trades,git_hash,candidates_examined_to_date,data_fingerprint,timeframe
+candidate,date,verdict,windows,pairs,stitched,stitched_bh,trades,git_hash,candidates_examined_to_date,data_fingerprint,timeframe,realized_hold_bars,declared_hold_bars,turnover_flag,slip2x_net\n

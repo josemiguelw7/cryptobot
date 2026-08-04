@@ -58,6 +58,7 @@ GAP_LIMIT_S = 6 * 3600           # windows containing a >6h gap: discarded
 FEE, SLIP = 0.006, 0.0005        # the standard's costs, not the charter's
 PAIRS = SEEDS.PAIRS
 MARKET = _os.environ.get("EXAM_MARKET", "BTC-USD")
+TIMEFRAME = "1h"
 DD_EPS = exam.DD_EPS
 
 
@@ -320,13 +321,17 @@ def ledger_record_1h(name, verdict, sm):
     exam.require_clean_tree(name)
     os.makedirs(RESULTS, exist_ok=True)
     n_examined = len(exam.ledger_names()) + 1
+    s2 = sm.get("slip2x_net")
     with open(LEDGER, "a", newline="") as f:
         csv.writer(f).writerow(
             [name, date.today().isoformat(),
              "PASS" if verdict else "FAIL", sm["windows"], sm["pairs"],
              f"{sm['stitched']:.4f}", f"{sm['stitched_bh']:.4f}",
              sm["trades"], exam.git_hash(), n_examined,
-             fingerprint_1h(), "1h"])
+             fingerprint_1h(), TIMEFRAME,
+             f"{sm.get('realized_hold', 0):.1f}",
+             sm.get("declared_hold", 0), sm.get("turnover_flag", "?"),
+             (f"{s2:.4f}" if s2 == s2 else "")])
 
 
 # ---------------------------------------------------------------- the exam
@@ -423,6 +428,37 @@ def run(name, record, n_iter, screen=False):
             r.pop("curve", None)
         import pandas as pd
         out = os.path.join(RESULTS, f"exam1h_{name}_{date.today()}.csv")
+        # -- recorded metrics (amendment 2026-08-04, non-gating) --------
+        # turnover honesty: the h2_obv failure mode was a seed declaring
+        # a 120h hold while trading every ~28 bars. Realized hold =
+        # 2 * evaluated bars / trades (a round trip is two trades).
+        declared = 0
+        try:
+            declared = SEEDS.SEEDS[name].get("hold_h", 0)
+        except Exception:
+            pass
+        total_bars = sm["windows"] * WIN
+        realized = (2.0 * total_bars / sm["trades"]) if sm["trades"] \
+            else float("inf")
+        flag = "CHURN" if (declared and realized < declared / 3.0) else "OK"
+        sm["realized_hold"], sm["declared_hold"] = realized, declared
+        sm["turnover_flag"] = flag
+        print(f"turnover: realized ~{realized:.0f} bars/round-trip vs "
+              f"declared {declared} -> {flag}"
+              + ("  [WARN: churns >=3x faster than its label]"
+                 if flag == "CHURN" else ""))
+        s2_rows = []
+        for p2 in PAIRS:
+            closes2, ts2 = data[p2]
+            if not closes2:
+                continue
+            r2, _ = windows_for(p2, strat, closes2, ts2, 0,
+                                cutoff_idx[p2], FEE, SLIP * 2)
+            s2_rows += r2
+        sm["slip2x_net"] = stitched(s2_rows) if s2_rows else float("nan")
+        print(f"slip-stress (2x slippage, recorded not gating): "
+              f"stitched {sm['slip2x_net']:+.1%}")
+
         # ledger FIRST: writing the artifact dirties the tree, and
         # ledger_record_1h re-checks for a clean tree. Writing the CSV
         # first made recording impossible for every candidate.

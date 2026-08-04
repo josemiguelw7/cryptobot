@@ -343,5 +343,37 @@ def diversity_api():
     return jsonify({"now": out, "history": hist})
 
 
+@app.get("/api/exam_status")
+def exam_status():
+    """Instrument truthfulness (2026-08-04): K with its breakdown, and
+    whether an exam process is ACTUALLY running right now — the old
+    page asserted "exams in progress" as a static string."""
+    rows = 0
+    lp = os.path.join(ROOT, "backtest", "results", "exam_ledger.csv")
+    if os.path.exists(lp):
+        rows = max(0, sum(1 for _ in open(lp)) - 1)
+    carried = screened = 0
+    off = os.path.join(ROOT, "backtest", "results", "k_offset.json")
+    if os.path.exists(off):
+        try:
+            carried = int(json.load(open(off)).get("carried_ledger_rows", 0))
+        except Exception:
+            pass
+    scr = os.path.join(ROOT, "backtest", "results", "screened_1h.json")
+    if os.path.exists(scr):
+        try:
+            screened = int(json.load(open(scr)).get("count", 0))
+        except Exception:
+            pass
+    try:
+        running = subprocess.run(["pgrep", "-f", "exam_1h"],
+                                 capture_output=True).returncode == 0
+    except Exception:
+        running = False
+    return jsonify({"ledger_rows": rows, "carried": carried,
+                    "screened": screened, "K": rows + carried + screened,
+                    "exam_running": running})
+
+
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=8787, debug=False)

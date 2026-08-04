@@ -88,6 +88,13 @@ class Strategy:
     def step(self, closes, ctx):
         raise NotImplementedError
 
+    def conviction_closes(self, closes, ctx):
+        """Entry-strength for allocation ORDERING only (E2.2). None =
+        no opinion -> engine falls back to the signal weight. Never
+        consulted by the exam (exams grade one pair at a time), so
+        overriding it cannot change any verdict."""
+        return None
+
 
 class Hold(Strategy):
     name, warmup = "hold", 1
@@ -469,6 +476,86 @@ def get(name):
         raise KeyError(f"unknown strategy {name!r}; "
                        f"known: {sorted(REGISTRY)}")
     return REGISTRY[name]
+
+
+# --------------------------------------------------------------------
+# PRE-ADOPTION AMENDMENT 2026-08-04 (docs/recert_2026-08-04.md):
+# per-seed ENTRY CONVICTION for the ten wave-1 families. Ordering-layer
+# only: step() signatures and signal logic above are untouched, so the
+# seed that is examined is still byte-for-byte the seed that trades.
+# Each returns a dimensionless "how strongly does MY OWN signal fire",
+# replacing the shared biggest-mover tie-break that produced the
+# 2026-08-04 clone books. None -> engine falls back to signal weight.
+# --------------------------------------------------------------------
+
+def _cv_trend(self, closes, ctx):
+    m = sma(closes, self.n)
+    return None if m is None else closes[-1] / m - 1
+Trend.conviction_closes = _cv_trend
+
+def _cv_cross(self, closes, ctx):
+    mf, ms = sma(closes, self.f), sma(closes, self.s)
+    return None if (mf is None or ms is None) else mf / ms - 1
+Cross.conviction_closes = _cv_cross
+
+def _cv_tsmom(self, closes, ctx):
+    if len(closes) < self.n + 1:
+        return None
+    return closes[-1] / closes[-self.n - 1] - 1
+TSMom.conviction_closes = _cv_tsmom
+
+def _cv_macd(self, closes, ctx):
+    ef, es = ema_series(closes, self.f), ema_series(closes, self.s)
+    if not ef or not es:
+        return None
+    L = min(len(ef), len(es))
+    macd = [a - b for a, b in zip(ef[-L:], es[-L:])]
+    sg = ema_series(macd, self.sig)
+    return None if not sg else (macd[-1] - sg[-1]) / closes[-1]
+MACDTrend.conviction_closes = _cv_macd
+
+def _cv_donch2(self, closes, ctx):
+    if len(closes) < self.n_in + 1:
+        return None
+    hi = max(closes[-self.n_in - 1:-1])
+    return closes[-1] / hi - 1
+Donchian2.conviction_closes = _cv_donch2
+
+def _cv_volbrk(self, closes, ctx):
+    vf, vs = ret_stdev(closes, self.nf), ret_stdev(closes, self.ns)
+    if vf is None or vs is None or vs == 0:
+        return None
+    return 1 - vf / vs
+VolBreak.conviction_closes = _cv_volbrk
+
+def _cv_rsireg(self, closes, ctx):
+    r = rsi(closes, self.n)
+    return None if r is None else (self.lo - r) / self.lo
+RSIRegime.conviction_closes = _cv_rsireg
+
+def _cv_boll(self, closes, ctx):
+    mid = sma(closes, self.n)
+    if mid is None:
+        return None
+    w = closes[-self.n:]
+    mu = sum(w) / self.n
+    sd = (sum((c - mu) ** 2 for c in w) / self.n) ** 0.5
+    return None if sd == 0 else (mid - closes[-1]) / sd - self.k
+Bollinger.conviction_closes = _cv_boll
+
+def _cv_calm(self, closes, ctx):
+    vf, vs = ret_stdev(closes, self.nf), ret_stdev(closes, self.ns)
+    if vf is None or vs is None or vs == 0:
+        return None
+    return 1 - vf / vs
+CalmRegime.conviction_closes = _cv_calm
+
+def _cv_nearhi(self, closes, ctx):
+    if len(closes) < self.n:
+        return None
+    hi = max(closes[-self.n:])
+    return (closes[-1] / hi - (1 - self.band)) / self.band
+NearHigh.conviction_closes = _cv_nearhi
 
 
 # ====================================================================
@@ -945,3 +1032,44 @@ class SlowClock(BarStrategy):
 
     def conviction(self, bars, ctx):
         return self.inner.conviction(resample(bars, self.k), ctx)
+
+
+class RandomEntry(BarStrategy):
+    """Deterministic random-entry LUCK CONTROL (pre-registered in
+    docs/recert_2026-08-04.md; expected exam verdict: FAIL, and that
+    expectation is the point).
+
+    Enters on a hash coin-flip keyed to (name, bar timestamp, price),
+    holds a fixed bar count, exits. Price enters only as RNG salt, so
+    the strategy is economically blind; its forward record is an
+    empirical luck yardstick with roster-matched turnover, complementing
+    the analytic permutation test. Fully deterministic and stateless
+    given the bar stream: the seed examined is the seed that trades."""
+
+    def __init__(self, hold_bars, p_enter, tag):
+        self.hold, self.p = hold_bars, p_enter
+        self.name = f"rand_{tag}"
+        self.warmup = 5
+
+    def _u(self, ts, px):
+        import hashlib
+        h = hashlib.sha256(
+            f"{self.name}:{int(ts)}:{round(px, 8)}".encode()).digest()
+        return int.from_bytes(h[:8], "big") / 2 ** 64
+
+    def step_bars(self, bars, ctx):
+        ts, px = bars[-1][TS], bars[-1][C]
+        if ctx.get("weight", 0) > 0:
+            if ctx.get("rand_ts") != ts:          # count each bar once
+                ctx["rand_ts"] = ts
+                ctx["rand_held"] = ctx.get("rand_held", 0) + 1
+            return 0.0 if ctx["rand_held"] >= self.hold else 1.0
+        if self._u(ts, px) < self.p:
+            ctx["rand_ts"], ctx["rand_held"] = ts, 0
+            return 1.0
+        return 0.0
+
+    def conviction(self, bars, ctx):
+        # no opinion by design: a fresh hash, so ranking among its own
+        # picks is random rather than volatility-biased
+        return self._u(bars[-1][TS] + 1, bars[-1][C])

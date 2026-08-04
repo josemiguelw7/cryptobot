@@ -130,15 +130,22 @@ X.fingerprint_1h = fingerprint_stk
 
 # --- 9: ledger tag ---------------------------------------------------
 def ledger_record_stk(name, verdict, sm):
+    # same clean-tree guard as the crypto writer: epoch-1 stock rows
+    # recorded as "-dirty" precisely because this guard was missing
+    exam.require_clean_tree(name)
     os.makedirs(X.RESULTS, exist_ok=True)
     n_examined = len(exam.ledger_names()) + 1
+    s2 = sm.get("slip2x_net")
     with open(X.LEDGER, "a", newline="") as f:
         csv.writer(f).writerow(
             [name, date.today().isoformat(),
              "PASS" if verdict else "FAIL", sm["windows"], sm["pairs"],
              f"{sm['stitched']:.4f}", f"{sm['stitched_bh']:.4f}",
              sm["trades"], exam.git_hash(), n_examined,
-             fingerprint_stk(), "1h-stk"])
+             fingerprint_stk(), "1h-stk",
+             f"{sm.get('realized_hold', 0):.1f}",
+             sm.get("declared_hold", 0), sm.get("turnover_flag", "?"),
+             (f"{s2:.4f}" if s2 == s2 else "")])
 
 X.ledger_record_1h = ledger_record_stk
 

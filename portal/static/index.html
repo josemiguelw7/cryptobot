@@ -176,7 +176,7 @@ if(cy){cb.textContent=`cycles ${cy.marked}/${cy.expected}`;
 cb.className="badge "+(cy.marked>=cy.expected-1?"armed":"unarmed");
 cb.title=cy.missing.length?"hours with no cycle (UTC): "+cy.missing.join(", "):"no gaps in 24h"}
 // capital strips + aggregate
-capStrip(cS,"#cEq","#cPnl","#cNote","standby — arms at 10/10");
+capStrip(cS,"#cEq","#cPnl","#cNote","standby — pending exams + fresh owner signature");
 capStrip(sS,"#sEq","#sPnl","#sNote","reserved — pending signature");
 // fee drag + BTC-hold benchmark (derived from logs, per charter costs)
 if(costs){const cc=costs.crypto,cs=costs.stocks,bh=costs.btc_hold;
@@ -223,11 +223,12 @@ $("#xSub").textContent=xc?`· ${xc.n} closed`+((xst&&xst.n)?` · stocks ${xst.n}
 $("#xBody").innerHTML=exitsPanel(xc);
 $("#wBody").innerHTML=worstTable(xc);
 // clock + footer
-$("#clkC").innerHTML="Crypto: <b>"+(aC?"shakedown — 7 consecutive counted days start the clock":"exams in progress, arms on completing 10/10")+"</b>";
-$("#clkS").innerHTML="Stocks: <b>"+(aS?"shakedown — 7 consecutive counted days start the clock (RTH)":"roster proposed — pending owner signature")+"</b>";
 const f1=l1.filter(r=>r.verdict==="FAIL").length,p1=l1.filter(r=>r.verdict==="PASS").length;
 const fS=lS.filter(r=>r.verdict==="FAIL").length,pS=lS.filter(r=>r.verdict==="PASS").length;
-$("#foot").textContent=`global ledger: ${(led||[]).length} exams · crypto 1h: ${p1} PASS / ${f1} control · stocks 1h: ${pS} PASS / ${fS} control · prediction: 0 PASS · K rises with every attempt`;
+$("#clkC").innerHTML="Crypto: <b>"+(aC?"shakedown — 7 consecutive counted days start the clock":`re-certification pending — ${p1+f1}/11 verdicts recorded · arming requires a FRESH owner signature`)+"</b>";
+$("#clkS").innerHTML="Stocks: <b>"+(aS?"shakedown — 7 consecutive counted days start the clock (RTH)":`roster amended 2026-08-04 — ${pS+fS}/11 verdicts recorded · pending fresh owner signature`)+"</b>";
+$("#foot").textContent=`global ledger: ${(led||[]).length} exams · crypto 1h: ${p1} PASS / ${f1} control · stocks 1h: ${pS} PASS / ${fS} control · prediction: 0 PASS`;
+fetch("/api/exam_status").then(r=>r.json()).then(k=>{$("#foot").textContent+=` · K=${k.K} (${k.ledger_rows} recorded + ${k.carried} carried + ${k.screened} screened, rises with every attempt)`+(k.exam_running?" · exam RUNNING now":" · no exam running");}).catch(()=>{});
 }
 setInterval(()=>{$("#clock").textContent=new Date().toUTCString().slice(17,25)+" UTC · "+new Date().toLocaleTimeString("en-US",{timeZone:"America/Chicago",hour12:false})+" CT"},1000);
 refresh();setInterval(refresh,60000);

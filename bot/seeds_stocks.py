@@ -7,6 +7,13 @@ Same contract as seeds_crypto: exam runner and squad import THIS
 module, so the seed examined is byte-for-byte the seed that trades.
 ARMED flips only after owner signature (docs/stocks_standard.md gets
 the verdicts) plus one exam per seed. Once adopted: immortal (s9.3).
+
+AMENDMENT 2026-08-04 (pre-adoption, docs/recert_2026-08-04.md): the
+2026-08-02 signature is VOID per docs/reset_2026-08-04.md. Declared
+below, before any re-certification exam runs: MAX_POS (allocation cap),
+per-seed entry conviction (ordering only), and one deterministic
+random-entry luck control. Arming requires a FRESH owner signature
+dated after 2026-08-04.
 """
 from __future__ import annotations
 import os, sys
@@ -15,6 +22,10 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import strategies as S
 
 ARMED = False          # flips only per the procedure in the docstring
+MAX_POS = 4   # amendment 2026-08-04 (pre-adoption): allocation-layer cap,
+             # 4 of 10 names. Engine default was 2; at 2 the cap, not
+             # the strategy, picked the book (the 2026-08-04 clone finding).
+             # Outside exam scope: exams grade one pair at a time.
 ASSET_CLASS = "stocks"
 
 # Frozen universe, docs/stocks_standard.md (3 ETFs + 7 megacaps;
@@ -69,6 +80,14 @@ SEEDS = {
     "s_nearhi_33":   {"strat": _named(S.NearHigh(33, 0.05), "s_nearhi_33"),
                       "hold_h": 26,
                       "note": "persistence within 5% of the 1-week high"},
+
+    # --- luck yardstick (amendment 2026-08-04, pre-adoption) ---
+    "s_rand_21":     {"strat": _named(S.RandomEntry(21, 1.0 / 28, "s21"),
+                                      "s_rand_21"),
+                      "hold_h": 21,
+                      "note": "deterministic random-entry control, "
+                              "turnover-matched; expected FAIL — "
+                              "empirical luck yardstick"},
 }
 
 
