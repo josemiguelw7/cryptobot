@@ -112,8 +112,34 @@ def load_bars_exam(pair):
 BARS_CACHE = {}
 
 
+def permute_bars(bars, rng):
+    """Criterion-9 permutation for full candles.
+
+    Each bar is decomposed into its shape RELATIVE to the previous close
+    (open/high/low/close ratios + volume), the sequence of shapes is
+    shuffled, and a new path is rebuilt. Every individual candle keeps
+    its geometry -- a hammer is still a hammer -- but the ORDER is
+    destroyed. That is precisely the null criterion 9 tests: is the
+    sequence informative, or would any order have done as well?"""
+    if len(bars) < 2:
+        return list(bars)
+    shapes = []
+    for i in range(1, len(bars)):
+        pc = bars[i - 1][4]
+        shapes.append((bars[i][1] / pc, bars[i][2] / pc, bars[i][3] / pc,
+                       bars[i][4] / pc, bars[i][5]))
+    rng.shuffle(shapes)
+    out = [bars[0]]
+    c = bars[0][4]
+    for i, (ro, rh, rl, rc, v) in enumerate(shapes, start=1):
+        o, h, l = c * ro, c * rh, c * rl
+        c = c * rc
+        out.append((bars[i][0], o, max(h, o, c), min(l, o, c), c, v))
+    return out
+
+
 def windows_for(pair, strat, closes, ts, lo_idx, hi_idx, fee, slip,
-                dates=True):
+                dates=True, bars_map=None):
     """Grade rolling windows whose [a, a+WIN) lies inside [lo_idx,
     hi_idx). Warmup may reach back before lo_idx — history is visible,
     the GRADED span is what's restricted. Windows containing a >6h gap
@@ -126,13 +152,21 @@ def windows_for(pair, strat, closes, ts, lo_idx, hi_idx, fee, slip,
             start += STEP
             continue
         if getattr(strat, "wants_bars", False):
-            bars = BARS_CACHE.setdefault(pair, load_bars_exam(pair))
-            mkt = (BARS_CACHE.setdefault(MARKET, load_bars_exam(MARKET))
-                   if getattr(strat, "wants_market", False) else None)
+            src = bars_map if bars_map is not None else BARS_CACHE
+            if bars_map is None:
+                src.setdefault(pair, load_bars_exam(pair))
+            bars = src[pair]
+            mkt = None
+            if getattr(strat, "wants_market", False):
+                if bars_map is None:
+                    src.setdefault(MARKET, load_bars_exam(MARKET))
+                mkt = src.get(MARKET)
             panel = None
             if getattr(strat, "cross_sectional", False):
-                panel = {p: BARS_CACHE.setdefault(p, load_bars_exam(p))
-                         for p in PAIRS}
+                if bars_map is None:
+                    for p in PAIRS:
+                        src.setdefault(p, load_bars_exam(p))
+                panel = {p: src[p] for p in PAIRS if p in src}
             curve, trades = exam.simulate_window_bars(
                 strat, bars, start, start + WIN, fee, slip,
                 market=mkt, panel=panel, pair=pair)
@@ -231,8 +265,17 @@ def permutation_p(strat, data, cutoff_idx, real_stitched, n_iter, seed=0):
     import random
     rng = random.Random(seed)
     beats = 0
+    bar_mode = getattr(strat, "wants_bars", False)
     for _ in range(n_iter):
         rows = []
+        bmap = None
+        if bar_mode:
+            # every pair (and the market proxy) permuted independently,
+            # so cross-sectional and cross-asset structure dies too
+            bmap = {}
+            for p in set(PAIRS) | {MARKET}:
+                rb = BARS_CACHE.setdefault(p, load_bars_exam(p))
+                bmap[p] = permute_bars(rb, rng) if rb else rb
         for p in PAIRS:
             closes, ts = data[p]
             hi = cutoff_idx[p]
@@ -245,7 +288,7 @@ def permutation_p(strat, data, cutoff_idx, real_stitched, n_iter, seed=0):
                 shuf.append(shuf[-1] * r)
             shuf += closes[hi:]              # holdout untouched, unused
             rws, _ = windows_for(p, strat, shuf, ts, 0, hi, FEE, SLIP,
-                                 dates=False)
+                                 dates=False, bars_map=bmap)
             rows += rws
         if rows and stitched(rows) >= real_stitched:
             beats += 1
@@ -371,8 +414,11 @@ def run(name, record, n_iter, screen=False):
             r.pop("curve", None)
         import pandas as pd
         out = os.path.join(RESULTS, f"exam1h_{name}_{date.today()}.csv")
-        pd.DataFrame(main_rows + holdout_rows).to_csv(out, index=False)
+        # ledger FIRST: writing the artifact dirties the tree, and
+        # ledger_record_1h re-checks for a clean tree. Writing the CSV
+        # first made recording impossible for every candidate.
         ledger_record_1h(name, verdict, sm)
+        pd.DataFrame(main_rows + holdout_rows).to_csv(out, index=False)
         print(f"saved -> {out}\nledger -> {LEDGER} (timeframe=1h)")
     return verdict
 

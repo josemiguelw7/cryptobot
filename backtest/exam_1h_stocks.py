@@ -32,7 +32,8 @@ sys.path.insert(0, os.path.join(ROOT, "bot"))
 import numpy as np
 import exam_1h as X
 import exam
-import seeds_stocks as SS
+_ROSTER = os.environ.get("EXAM_ROSTER_STK", "seeds_stocks")
+SS = __import__(_ROSTER)      # EXAM_ROSTER_STK=seeds_stocks_v2 for epoch 2
 
 STOCKS = os.path.join(ROOT, "data", "stocks")
 ET = ZoneInfo("America/New_York")
@@ -56,6 +57,28 @@ def load_hourly_stk(tk):
     return closes, ts
 
 X.load_hourly = load_hourly_stk
+
+
+# --- E2.1: full RTH candles for epoch-2 bar seeds --------------------
+def load_bars_stk(tk):
+    path = os.path.join(STOCKS, f"{tk}_1h.csv")
+    if not os.path.exists(path):
+        return []
+    with open(path) as f:
+        rows = list(csv.DictReader(f))
+    out = []
+    for r in rows:
+        try:
+            out.append((int(float(r["timestamp"])), float(r["open"]),
+                        float(r["high"]), float(r["low"]),
+                        float(r["close"]), float(r["volume"])))
+        except (KeyError, ValueError):
+            continue
+    return out
+
+X.load_bars_exam = load_bars_stk
+X.MARKET = "SPY"                 # E2.4 stock market proxy
+X.BARS_CACHE = {}
 
 
 # --- 6: session-aware gap policy -------------------------------------
