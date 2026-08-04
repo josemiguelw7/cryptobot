@@ -66,7 +66,11 @@ def build_digest():
     lines = []
     ranked = sorted(latest.items(), key=lambda kv: kv[1], reverse=True)
     for i, (s, eq) in enumerate(ranked, 1):
-        ret = eq / 10000 - 1
+        # baseline from the league's own constant, not a relic of the
+        # $10K epoch: at $3K slices the old literal reported every
+        # member as -70% forever (found 2026-08-04).
+        from league import START as _START
+        ret = eq / _START - 1
         delta = (eq - prev[s]) / prev[s] if s in prev and prev[s] else 0
         peak = float(state.get(s, {}).get("peak_equity", eq))
         # breaker fires when equity < peak*(1-MAXDD). Room = fractional
