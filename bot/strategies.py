@@ -1027,11 +1027,55 @@ class SlowClock(BarStrategy):
         self.warmup = inner.warmup * k + k
         self.wants_market = getattr(inner, "wants_market", False)
 
+    def _inner_call(self, meth, bars, ctx):
+        """El envuelto puede ser de BARRAS (step_bars) o de CIERRES
+        (step). Trend/NearHigh/CalmRegime son de cierres, asi que sin
+        esto SlowClock reventaria con AttributeError. Ademas el proxy de
+        mercado en ctx llega en barras HORARIAS: hay que resamplearlo al
+        mismo reloj o MarketRegime compararia una SMA de 200 dias contra
+        200 horas."""
+        rb = resample(bars, self.k)
+        sub = ctx
+        if ctx.get("market"):
+            sub = dict(ctx)
+            sub["market"] = resample(ctx["market"], self.k)
+        if getattr(self.inner, "wants_bars", False):
+            out = getattr(self.inner, meth)(rb, sub)
+        else:
+            fn = self.inner.step if meth == "step_bars" else \
+                getattr(self.inner, "conviction_closes", None)
+            if fn is None:
+                return None
+            out = fn(closes_of(rb), sub)
+        if sub is not ctx:                  # devolver estado mutado
+            for k2, v2 in sub.items():
+                if k2 != "market":
+                    ctx[k2] = v2
+        return out
+
     def step_bars(self, bars, ctx):
-        return self.inner.step_bars(resample(bars, self.k), ctx)
+        """Decide SOLO al cierre de cada barra lenta (2026-08-08).
+
+        Bug original: resamplear los datos no ralentiza el reloj de
+        DECISION. SlowClock(Trend(20),24) recalculaba la señal las 24
+        horas de cada barra diaria, asi que podia entrar y salir dentro
+        del mismo dia. El pre-check lo midio: d3_calm declaraba 240h y
+        operaba cada 24h; d3_trend, cada 107h.
+
+        Con esto la señal se evalua una vez por barra lenta y se
+        SOSTIENE en el medio, que es lo que "reloj lento" significaba.
+        """
+        n = len(bars)
+        if n < self.k:
+            return ctx.get("slow_sig", 0.0)
+        boundary = (n % self.k == 0)
+        if boundary or "slow_sig" not in ctx:
+            ctx["slow_sig"] = self._inner_call("step_bars", bars, ctx) or 0.0
+        return ctx["slow_sig"]
 
     def conviction(self, bars, ctx):
-        return self.inner.conviction(resample(bars, self.k), ctx)
+        c = self._inner_call("conviction", bars, ctx)
+        return 0.0 if c is None else c
 
 
 class RandomEntry(BarStrategy):
@@ -1073,3 +1117,54 @@ class RandomEntry(BarStrategy):
         # no opinion by design: a fresh hash, so ranking among its own
         # picks is random rather than volatility-biased
         return self._u(bars[-1][TS] + 1, bars[-1][C])
+
+
+class ConfirmedEntry(BarStrategy):
+    """Semilla de cierres + CONFIRMACION POR VELA antes de entrar
+    (plan_v3 F1, h3_crossconf).
+
+    La senal base decide QUE comprar; el patron decide CUANDO. Una vez
+    que la base dispara, espera hasta `window` barras a una vela alcista
+    (engulfing o martillo). Si no aparece, la oportunidad se descarta.
+    La SALIDA la manda la base, sin patrones.
+
+    Fundamento (analysis/mfe_mae.py, 2026-08-07): Cross(24,168) es la
+    UNICA familia con el patron "entra temprano y devuelve" -- MFE
+    mediano +1.53% contra MAE -2.76%. Las demas ni siquiera alcanzan el
+    umbral de 0.84%, asi que confirmarlas no arreglaria nada. Esto NO
+    agrega operaciones: hace las mismas, mas tarde y mas barato.
+    """
+    def __init__(self, inner, window=12, name=None):
+        self.inner, self.window = inner, window
+        self.name = name or f"conf_{inner.name}"
+        self.warmup = inner.warmup + window + 3
+
+    def _bullish(self, bars):
+        a, b = bars[-2], bars[-1]
+        engulf = (a[C] < a[O] and b[C] > b[O] and
+                  b[C] >= a[O] and b[O] <= a[C] and body(b) > body(a))
+        d = body(b) or (b[H] - b[L]) * 0.01
+        hammer = (d > 0 and lower_wick(b) / d >= 2.0 and
+                  lower_wick(b) > upper_wick(b) * 2)
+        return engulf or hammer
+
+    def step_bars(self, bars, ctx):
+        base = self.inner.step(closes_of(bars), ctx)
+        if ctx.get("weight", 0) > 0:
+            ctx["waiting"] = 0
+            return 1.0 if base > 0 else 0.0      # salida: manda la base
+        if base <= 0:
+            ctx["waiting"] = 0                   # se apago: cancelar
+            return 0.0
+        w = ctx.get("waiting", 0) + 1
+        ctx["waiting"] = w
+        if w > self.window:
+            return 0.0                           # caduco sin confirmar
+        if self._bullish(bars):
+            ctx["waiting"] = 0
+            return 1.0
+        return 0.0
+
+    def conviction(self, bars, ctx):
+        c = self.inner.conviction_closes(closes_of(bars), ctx)
+        return 0.0 if c is None else max(c, 0.0)

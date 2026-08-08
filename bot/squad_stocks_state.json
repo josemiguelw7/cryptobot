@@ -1,0 +1,1080 @@
+{
+ "bots": {
+  "s_trend_33": {
+   "cash": 0.0,
+   "units": {
+    "NVDA": 3.4293080845683344,
+    "MSFT": 1.5133577803220901,
+    "META": 1.2096325895979676,
+    "QQQ": 1.0158856285538003
+   },
+   "entries": {
+    "NVDA": {
+     "px": 218.70300990889436,
+     "mid": 218.5500030517578,
+     "ts": 1785936790.89523,
+     "cost_basis": 750.0,
+     "peak_mid": 224.4499969482422,
+     "trough_mid": 218.3249969482422
+    },
+    "MSFT": {
+     "px": 495.5867077515381,
+     "mid": 495.239990234375,
+     "ts": 1785936790.89523,
+     "cost_basis": 750.0,
+     "peak_mid": 504.239990234375,
+     "trough_mid": 488.2699890136719
+    },
+    "META": {
+     "px": 587.4309922469238,
+     "mid": 587.02001953125,
+     "ts": 1785958752.246852,
+     "cost_basis": 710.5756723617501,
+     "peak_mid": 597.260009765625,
+     "trough_mid": 587.02001953125
+    },
+    "QQQ": {
+     "px": 715.0602610128846,
+     "mid": 714.5599975585938,
+     "ts": 1786032931.381147,
+     "cost_basis": 726.4194427129187,
+     "peak_mid": 722.5900268554688,
+     "trough_mid": 714.5599975585938
+    }
+   },
+   "ctx": {
+    "SPY": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "QQQ": {
+     "weight": 0.25,
+     "entry_price": 715.0602610128846
+    },
+    "IWM": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "AAPL": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "MSFT": {
+     "weight": 0.25,
+     "entry_price": 495.5867077515381
+    },
+    "NVDA": {
+     "weight": 0.25,
+     "entry_price": 218.70300990889436
+    },
+    "AMZN": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "GOOGL": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "META": {
+     "weight": 0.25,
+     "entry_price": 587.4309922469238
+    },
+    "TSLA": {
+     "weight": 0.0,
+     "entry_price": null
+    }
+   },
+   "slice_peak": 3000.0,
+   "day_open": 2946.2588346923176,
+   "day_date": "2026-08-07",
+   "eod": [
+    [
+     "2026-08-05",
+     2932.261871131561
+    ],
+    [
+     "2026-08-06",
+     2946.2588346923176
+    ]
+   ],
+   "halt_day": null,
+   "halt_review": false,
+   "benched": false,
+   "data_events": {},
+   "exam": "control",
+   "last_eq": 2976.7606479171363
+  },
+  "s_cross_7_33": {
+   "cash": 0.0,
+   "units": {
+    "MSFT": 1.5133577803220901,
+    "NVDA": 3.4293080845683344,
+    "QQQ": 1.0198382997216855,
+    "META": 1.184167180402677
+   },
+   "entries": {
+    "MSFT": {
+     "px": 495.5867077515381,
+     "mid": 495.239990234375,
+     "ts": 1785936790.89523,
+     "cost_basis": 750.0,
+     "peak_mid": 504.239990234375,
+     "trough_mid": 488.2699890136719
+    },
+    "NVDA": {
+     "px": 218.70300990889436,
+     "mid": 218.5500030517578,
+     "ts": 1785936790.89523,
+     "cost_basis": 750.0,
+     "peak_mid": 224.4499969482422,
+     "trough_mid": 218.3249969482422
+    },
+    "QQQ": {
+     "px": 718.8829427242309,
+     "mid": 718.3800048828125,
+     "ts": 1786029265.994373,
+     "cost_basis": 733.1443580068014,
+     "peak_mid": 722.5900268554688,
+     "trough_mid": 714.5599975585938
+    },
+    "META": {
+     "px": 590.2329403113464,
+     "mid": 589.8200073242188,
+     "ts": 1786029265.994373,
+     "cost_basis": 698.9344767092687,
+     "peak_mid": 597.260009765625,
+     "trough_mid": 588.760498046875
+    }
+   },
+   "ctx": {
+    "SPY": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "QQQ": {
+     "weight": 0.25,
+     "entry_price": 718.8829427242309
+    },
+    "IWM": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "AAPL": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "MSFT": {
+     "weight": 0.25,
+     "entry_price": 495.5867077515381
+    },
+    "NVDA": {
+     "weight": 0.25,
+     "entry_price": 218.70300990889436
+    },
+    "AMZN": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "GOOGL": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "META": {
+     "weight": 0.25,
+     "entry_price": 590.2329403113464
+    },
+    "TSLA": {
+     "weight": 0.0,
+     "entry_price": null
+    }
+   },
+   "slice_peak": 3000.0,
+   "day_open": 2934.0607023607945,
+   "day_date": "2026-08-07",
+   "eod": [
+    [
+     "2026-08-05",
+     2932.2618711315604
+    ],
+    [
+     "2026-08-06",
+     2934.0607023607945
+    ]
+   ],
+   "halt_day": null,
+   "halt_review": false,
+   "benched": false,
+   "data_events": {},
+   "exam": "control",
+   "last_eq": 2964.458268956215
+  },
+  "s_tsmom_21": {
+   "cash": 0.0,
+   "units": {
+    "NVDA": 3.4293080845683344,
+    "MSFT": 1.5133577803220901,
+    "AAPL": 2.3834566271609154,
+    "META": 1.194381582876202
+   },
+   "entries": {
+    "NVDA": {
+     "px": 218.70300990889436,
+     "mid": 218.5500030517578,
+     "ts": 1785936790.89523,
+     "cost_basis": 750.0,
+     "peak_mid": 224.4499969482422,
+     "trough_mid": 218.3249969482422
+    },
+    "MSFT": {
+     "px": 495.5867077515381,
+     "mid": 495.239990234375,
+     "ts": 1785936790.89523,
+     "cost_basis": 750.0,
+     "peak_mid": 504.239990234375,
+     "trough_mid": 488.2699890136719
+    },
+    "AAPL": {
+     "px": 312.5386625613464,
+     "mid": 312.32000732421875,
+     "ts": 1786121404.780378,
+     "cost_basis": 744.9223465258502,
+     "peak_mid": 313.2099914550781,
+     "trough_mid": 312.1099853515625
+    },
+    "META": {
+     "px": 594.2459407184692,
+     "mid": 593.8302001953125,
+     "ts": 1786121404.780378,
+     "cost_basis": 709.756407293083,
+     "peak_mid": 595.260009765625,
+     "trough_mid": 590.6199951171875
+    }
+   },
+   "ctx": {
+    "SPY": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "QQQ": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "IWM": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "AAPL": {
+     "weight": 0.25,
+     "entry_price": 312.5386625613464
+    },
+    "MSFT": {
+     "weight": 0.25,
+     "entry_price": 495.5867077515381
+    },
+    "NVDA": {
+     "weight": 0.25,
+     "entry_price": 218.70300990889436
+    },
+    "AMZN": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "GOOGL": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "META": {
+     "weight": 0.25,
+     "entry_price": 594.2459407184692
+    },
+    "TSLA": {
+     "weight": 0.0,
+     "entry_price": null
+    }
+   },
+   "slice_peak": 3000.0,
+   "day_open": 2949.512010535983,
+   "day_date": "2026-08-07",
+   "eod": [
+    [
+     "2026-08-05",
+     2946.6210534490856
+    ],
+    [
+     "2026-08-06",
+     2949.512010535983
+    ]
+   ],
+   "halt_day": null,
+   "halt_review": false,
+   "benched": false,
+   "data_events": {},
+   "exam": "control",
+   "last_eq": 2980.1359397148467
+  },
+  "s_macd_12_26": {
+   "cash": 1468.2681840471134,
+   "units": {
+    "AAPL": 2.42760750713353,
+    "TSLA": 2.255821138034686
+   },
+   "entries": {
+    "AAPL": {
+     "px": 308.94615286701963,
+     "mid": 308.7300109863281,
+     "ts": 1785936790.89523,
+     "cost_basis": 750.0,
+     "peak_mid": 314.1018981933594,
+     "trough_mid": 306.8599853515625
+    },
+    "TSLA": {
+     "px": 330.7113800420196,
+     "mid": 330.4800109863281,
+     "ts": 1786114085.0384,
+     "cost_basis": 746.0257216874102,
+     "peak_mid": 331.5899963378906,
+     "trough_mid": 327.2250061035156
+    }
+   },
+   "ctx": {
+    "SPY": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "QQQ": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "IWM": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "AAPL": {
+     "weight": 0.25,
+     "entry_price": 308.94615286701963
+    },
+    "MSFT": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "NVDA": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "AMZN": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "GOOGL": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "META": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "TSLA": {
+     "weight": 0.25,
+     "entry_price": 330.7113800420196
+    }
+   },
+   "slice_peak": 3000.0,
+   "day_open": 2979.582905010818,
+   "day_date": "2026-08-07",
+   "eod": [
+    [
+     "2026-08-05",
+     2982.2027468177757
+    ],
+    [
+     "2026-08-06",
+     2979.582905010818
+    ]
+   ],
+   "halt_day": null,
+   "halt_review": false,
+   "benched": false,
+   "data_events": {},
+   "exam": "control",
+   "last_eq": 2967.8952333525554
+  },
+  "s_donch_14_7": {
+   "cash": 0.0,
+   "units": {
+    "AAPL": 2.384210874455437,
+    "MSFT": 1.481207740519388,
+    "TSLA": 2.261400020799299,
+    "NVDA": 3.2742087996118805
+   },
+   "entries": {
+    "AAPL": {
+     "px": 310.16709982740787,
+     "mid": 309.9501037597656,
+     "ts": 1785951429.108866,
+     "cost_basis": 739.5037723068109,
+     "peak_mid": 314.1018981933594,
+     "trough_mid": 308.3599853515625
+    },
+    "MSFT": {
+     "px": 497.70070503615415,
+     "mid": 497.3525085449219,
+     "ts": 1786043927.662371,
+     "cost_basis": 737.1981367615083,
+     "peak_mid": 504.239990234375,
+     "trough_mid": 497.3525085449219
+    },
+    "TSLA": {
+     "px": 326.9387211200958,
+     "mid": 326.7099914550781,
+     "ts": 1786110420.233167,
+     "cost_basis": 739.3392307410808,
+     "peak_mid": 331.5899963378906,
+     "trough_mid": 326.7099914550781
+    },
+    "NVDA": {
+     "px": 222.28551809923093,
+     "mid": 222.1300048828125,
+     "ts": 1786110420.233167,
+     "cost_basis": 727.8091993867878,
+     "peak_mid": 224.4499969482422,
+     "trough_mid": 222.1300048828125
+    }
+   },
+   "ctx": {
+    "SPY": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "QQQ": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "IWM": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "AAPL": {
+     "weight": 0.25,
+     "entry_price": 310.16709982740787
+    },
+    "MSFT": {
+     "weight": 0.25,
+     "entry_price": 497.70070503615415
+    },
+    "NVDA": {
+     "weight": 0.25,
+     "entry_price": 222.28551809923093
+    },
+    "AMZN": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "GOOGL": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "META": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "TSLA": {
+     "weight": 0.25,
+     "entry_price": 326.9387211200958
+    }
+   },
+   "slice_peak": 3001.0519254608553,
+   "day_open": 2948.792547046033,
+   "day_date": "2026-08-07",
+   "eod": [
+    [
+     "2026-08-05",
+     2955.2817668753137
+    ],
+    [
+     "2026-08-06",
+     2948.792547046033
+    ]
+   ],
+   "halt_day": null,
+   "halt_review": false,
+   "benched": false,
+   "data_events": {},
+   "exam": "control",
+   "last_eq": 2959.8149383378072
+  },
+  "s_volbrk_7_33": {
+   "cash": 0.0,
+   "units": {
+    "AAPL": 2.3507587277299047,
+    "MSFT": 1.4781851839841793,
+    "AMZN": 2.6552019878437387,
+    "SPY": 0.93658919592073
+   },
+   "entries": {
+    "AAPL": {
+     "px": 310.16709982740787,
+     "mid": 309.9501037597656,
+     "ts": 1785951429.108866,
+     "cost_basis": 729.1280169739516,
+     "peak_mid": 314.1018981933594,
+     "trough_mid": 308.3599853515625
+    },
+    "MSFT": {
+     "px": 494.2858098371155,
+     "mid": 493.94000244140625,
+     "ts": 1786025599.581695,
+     "cost_basis": 730.6459607548456,
+     "peak_mid": 504.239990234375,
+     "trough_mid": 493.94000244140625
+    },
+    "AMZN": {
+     "px": 276.34332650721126,
+     "mid": 276.1499938964844,
+     "ts": 1786110420.233167,
+     "cost_basis": 733.7473498692987,
+     "peak_mid": 277.4750061035156,
+     "trough_mid": 274.1700134277344
+    },
+    "SPY": {
+     "px": 771.9400815711548,
+     "mid": 771.4000244140625,
+     "ts": 1786110420.233167,
+     "cost_basis": 722.9907402977105,
+     "peak_mid": 773.25,
+     "trough_mid": 771.4000244140625
+    }
+   },
+   "ctx": {
+    "SPY": {
+     "weight": 0.25,
+     "entry_price": 771.9400815711548
+    },
+    "QQQ": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "IWM": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "AAPL": {
+     "weight": 0.25,
+     "entry_price": 310.16709982740787
+    },
+    "MSFT": {
+     "weight": 0.25,
+     "entry_price": 494.2858098371155
+    },
+    "NVDA": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "AMZN": {
+     "weight": 0.25,
+     "entry_price": 276.34332650721126
+    },
+    "GOOGL": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "META": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "TSLA": {
+     "weight": 0.0,
+     "entry_price": null
+    }
+   },
+   "slice_peak": 3000.0,
+   "day_open": 2925.918081705235,
+   "day_date": "2026-08-07",
+   "eod": [
+    [
+     "2026-08-05",
+     2915.178967374926
+    ],
+    [
+     "2026-08-06",
+     2925.918081705235
+    ]
+   ],
+   "halt_day": null,
+   "halt_review": false,
+   "benched": false,
+   "data_events": {},
+   "exam": "control",
+   "last_eq": 2930.50522335173
+  },
+  "s_rsi14_reg33": {
+   "cash": 2993.2976259791017,
+   "units": {},
+   "entries": {},
+   "ctx": {
+    "SPY": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "QQQ": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "IWM": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "AAPL": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "MSFT": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "NVDA": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "AMZN": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "GOOGL": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "META": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "TSLA": {
+     "weight": 0.0,
+     "entry_price": null
+    }
+   },
+   "slice_peak": 3000.0,
+   "day_open": 2993.2976259791017,
+   "day_date": "2026-08-07",
+   "eod": [
+    [
+     "2026-08-05",
+     2989.073350784105
+    ],
+    [
+     "2026-08-06",
+     2993.2976259791017
+    ]
+   ],
+   "halt_day": null,
+   "halt_review": false,
+   "benched": false,
+   "data_events": {},
+   "exam": "control",
+   "last_eq": 2993.2976259791017
+  },
+  "s_boll_14": {
+   "cash": 2260.565542642377,
+   "units": {
+    "GOOGL": 2.0682455136558513
+   },
+   "entries": {
+    "GOOGL": {
+     "px": 362.6261945441345,
+     "mid": 362.37249755859375,
+     "ts": 1785947770.352964,
+     "cost_basis": 750.0,
+     "peak_mid": 362.5299987792969,
+     "trough_mid": 353.8900146484375
+    }
+   },
+   "ctx": {
+    "SPY": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "QQQ": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "IWM": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "AAPL": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "MSFT": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "NVDA": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "AMZN": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "GOOGL": {
+     "weight": 0.25,
+     "entry_price": 362.6261945441345
+    },
+    "META": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "TSLA": {
+     "weight": 0.0,
+     "entry_price": null
+    }
+   },
+   "slice_peak": 3000.0,
+   "day_open": 2989.8301316354573,
+   "day_date": "2026-08-07",
+   "eod": [
+    [
+     "2026-08-05",
+     2999.4701166846157
+    ],
+    [
+     "2026-08-06",
+     2989.8301316354573
+    ]
+   ],
+   "halt_day": null,
+   "halt_review": false,
+   "benched": false,
+   "data_events": {},
+   "exam": "control",
+   "last_eq": 2995.578643384248
+  },
+  "s_calm_7_33": {
+   "cash": 0.0,
+   "units": {
+    "AAPL": 2.42760750713353,
+    "QQQ": 1.031553650732964,
+    "MSFT": 1.5133577803220901,
+    "GOOGL": 2.057918070415401
+   },
+   "entries": {
+    "AAPL": {
+     "px": 308.94615286701963,
+     "mid": 308.7300109863281,
+     "ts": 1785936790.89523,
+     "cost_basis": 750.0,
+     "peak_mid": 314.1018981933594,
+     "trough_mid": 306.8599853515625
+    },
+    "QQQ": {
+     "px": 727.0586454394225,
+     "mid": 726.5499877929688,
+     "ts": 1785936790.89523,
+     "cost_basis": 750.0,
+     "peak_mid": 726.5499877929688,
+     "trough_mid": 714.5599975585938
+    },
+    "MSFT": {
+     "px": 495.5867077515381,
+     "mid": 495.239990234375,
+     "ts": 1785936790.89523,
+     "cost_basis": 750.0,
+     "peak_mid": 504.239990234375,
+     "trough_mid": 488.2699890136719
+    },
+    "GOOGL": {
+     "px": 354.43797086211544,
+     "mid": 354.19000244140625,
+     "ts": 1786128732.102529,
+     "cost_basis": 729.4043050785148,
+     "peak_mid": 355.3800048828125,
+     "trough_mid": 354.19000244140625
+    }
+   },
+   "ctx": {
+    "SPY": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "QQQ": {
+     "weight": 0.25,
+     "entry_price": 727.0586454394225
+    },
+    "IWM": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "AAPL": {
+     "weight": 0.25,
+     "entry_price": 308.94615286701963
+    },
+    "MSFT": {
+     "weight": 0.25,
+     "entry_price": 495.5867077515381
+    },
+    "NVDA": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "AMZN": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "GOOGL": {
+     "weight": 0.25,
+     "entry_price": 354.43797086211544
+    },
+    "META": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "TSLA": {
+     "weight": 0.0,
+     "entry_price": null
+    }
+   },
+   "slice_peak": 3005.0442086769217,
+   "day_open": 2971.1634839954495,
+   "day_date": "2026-08-07",
+   "eod": [
+    [
+     "2026-08-05",
+     2958.2447341853003
+    ],
+    [
+     "2026-08-06",
+     2971.1634839954495
+    ]
+   ],
+   "halt_day": null,
+   "halt_review": false,
+   "benched": false,
+   "data_events": {},
+   "exam": "control",
+   "last_eq": 2994.7543783240144
+  },
+  "s_nearhi_33": {
+   "cash": 0.0,
+   "units": {
+    "NVDA": 3.4293080845683344,
+    "META": 1.2548980386489368,
+    "QQQ": 1.031553650732964,
+    "SPY": 0.9188141757665488
+   },
+   "entries": {
+    "NVDA": {
+     "px": 218.70300990889436,
+     "mid": 218.5500030517578,
+     "ts": 1785936790.89523,
+     "cost_basis": 750.0,
+     "peak_mid": 224.4499969482422,
+     "trough_mid": 218.3249969482422
+    },
+    "META": {
+     "px": 597.6581179515381,
+     "mid": 597.239990234375,
+     "ts": 1785936790.89523,
+     "cost_basis": 750.0,
+     "peak_mid": 597.260009765625,
+     "trough_mid": 582.4650268554688
+    },
+    "QQQ": {
+     "px": 727.0586454394225,
+     "mid": 726.5499877929688,
+     "ts": 1785936790.89523,
+     "cost_basis": 750.0,
+     "peak_mid": 726.5499877929688,
+     "trough_mid": 714.5599975585938
+    },
+    "SPY": {
+     "px": 772.1451811155761,
+     "mid": 771.60498046875,
+     "ts": 1786025599.581695,
+     "cost_basis": 709.4579381588205,
+     "peak_mid": 773.25,
+     "trough_mid": 767.9600219726562
+    }
+   },
+   "ctx": {
+    "SPY": {
+     "weight": 0.25,
+     "entry_price": 772.1451811155761
+    },
+    "QQQ": {
+     "weight": 0.25,
+     "entry_price": 727.0586454394225
+    },
+    "IWM": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "AAPL": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "MSFT": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "NVDA": {
+     "weight": 0.25,
+     "entry_price": 218.70300990889436
+    },
+    "AMZN": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "GOOGL": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "META": {
+     "weight": 0.25,
+     "entry_price": 597.6581179515381
+    },
+    "TSLA": {
+     "weight": 0.0,
+     "entry_price": null
+    }
+   },
+   "slice_peak": 3000.0,
+   "day_open": 2938.1925750179926,
+   "day_date": "2026-08-07",
+   "eod": [
+    [
+     "2026-08-05",
+     2947.6092333803717
+    ],
+    [
+     "2026-08-06",
+     2938.1925750179926
+    ]
+   ],
+   "halt_day": null,
+   "halt_review": false,
+   "benched": false,
+   "data_events": {},
+   "exam": "control",
+   "last_eq": 2967.508277350632
+  },
+  "s_rand_21": {
+   "cash": 12.94589560116583,
+   "units": {
+    "AAPL": 2.42760750713353,
+    "GOOGL": 1.9622854049250966,
+    "TSLA": 2.312924361169112,
+    "SPY": 0.9632624042501859
+   },
+   "entries": {
+    "AAPL": {
+     "px": 308.94615286701963,
+     "mid": 308.7300109863281,
+     "ts": 1785936790.89523,
+     "cost_basis": 750.0,
+     "peak_mid": 314.1018981933594,
+     "trough_mid": 306.8599853515625
+    },
+    "GOOGL": {
+     "px": 382.2073986371155,
+     "mid": 381.94000244140625,
+     "ts": 1785936790.89523,
+     "cost_basis": 750.0,
+     "peak_mid": 381.94000244140625,
+     "trough_mid": 353.8900146484375
+    },
+    "TSLA": {
+     "px": 320.9345205200958,
+     "mid": 320.7099914550781,
+     "ts": 1786025599.581695,
+     "cost_basis": 742.297270851058,
+     "peak_mid": 331.5899963378906,
+     "trough_mid": 318.4100036621094
+    },
+    "SPY": {
+     "px": 773.1609063757691,
+     "mid": 772.6199951171875,
+     "ts": 1786114085.0384,
+     "cost_basis": 744.7568335477762,
+     "peak_mid": 773.25,
+     "trough_mid": 771.4400024414062
+    }
+   },
+   "ctx": {
+    "SPY": {
+     "weight": 0.25,
+     "entry_price": 773.1609063757691,
+     "rand_ts": 1786131000,
+     "rand_held": 5
+    },
+    "QQQ": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "IWM": {
+     "weight": 0.0,
+     "entry_price": null,
+     "rand_ts": 1786123800,
+     "rand_held": 0
+    },
+    "AAPL": {
+     "weight": 0.25,
+     "entry_price": 308.94615286701963,
+     "rand_ts": 1786131000,
+     "rand_held": 19
+    },
+    "MSFT": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "NVDA": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "AMZN": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "GOOGL": {
+     "weight": 0.25,
+     "entry_price": 382.2073986371155,
+     "rand_ts": 1786131000,
+     "rand_held": 19
+    },
+    "META": {
+     "weight": 0.0,
+     "entry_price": null
+    },
+    "TSLA": {
+     "weight": 0.25,
+     "entry_price": 320.9345205200958,
+     "rand_ts": 1786131000,
+     "rand_held": 12
+    }
+   },
+   "slice_peak": 3000.0,
+   "day_open": 2956.2263688926837,
+   "day_date": "2026-08-07",
+   "eod": [
+    [
+     "2026-08-05",
+     2962.6606516267166
+    ],
+    [
+     "2026-08-06",
+     2956.2263688926837
+    ]
+   ],
+   "halt_day": null,
+   "halt_review": false,
+   "benched": false,
+   "data_events": {},
+   "exam": "control",
+   "last_eq": 2973.1493057268
+  }
+ },
+ "squad_day_open": 32532.835266871873,
+ "squad_day_date": "2026-08-07",
+ "squad_halt_review": false,
+ "voided_days": [],
+ "squad_last_eq": 32703.858482395088
+}

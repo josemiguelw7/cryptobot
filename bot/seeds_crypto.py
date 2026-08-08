@@ -42,7 +42,12 @@ import os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import strategies as S
 
-ARMED = False          # flips only per the procedure in the docstring
+ARMED = True           # ARMED 2026-08-05 by owner Jose Santos.
+                       # Conditions met: signature recorded
+                       # 2026-08-04 23:08 UTC (recert_2026-08-04 s7)
+                       # + all 22 exam verdicts recorded (0 PASS,
+                       # every seed a CONTROL: forward demonstration
+                       # only, never eligible for real capital).
 MAX_POS = 3   # amendment 2026-08-04 (pre-adoption): allocation-layer cap,
              # 3 of 8 names. Engine default was 2; at 2 the cap, not
              # the strategy, picked the book (the 2026-08-04 clone finding).

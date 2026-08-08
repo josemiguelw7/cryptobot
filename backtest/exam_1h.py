@@ -217,6 +217,32 @@ def beat_bh_pct(rows):
     return sum(1 for r in rows if r["ret"] > r["bh_net"]) / len(rows)
 
 
+def pct_windows_traded(rows):
+    """C0.1b (2026-08-08): fraccion de ventanas donde la semilla OPERA.
+
+    Encontrado al pre-chequear wave 3: d3_trend no operaba en 24 de 32
+    ventanas, asi que su mediana por ventana daba exactamente +0.00% y
+    "ganaba a B&H" el 100% de las veces -- porque estar en EFECTIVO bate
+    a aguantar cuando el mercado cae, y 30 de 32 ventanas son bajistas.
+    En las 8 ventanas donde si operaba, la mediana era -9.88%.
+
+    La mediana por ventana no distingue "no perdi porque acerte" de "no
+    perdi porque no jugue". Sin esta columna, cualquier semilla
+    suficientemente ausente parece la mejor del roster: el mismo defecto
+    que stitched(), reproducido en su reemplazo.
+    """
+    if not rows:
+        return float("nan")
+    return sum(1 for r in rows if r["trades"] > 0) / len(rows)
+
+
+def median_window_traded(rows):
+    """Mediana neta contando SOLO ventanas con operaciones: que hace la
+    semilla cuando efectivamente juega."""
+    t = [r for r in rows if r["trades"] > 0]
+    return median_window(t) if t else float("nan")
+
+
 def regime_split(rows, band=0.02):
     """C0.2: particiona por signo de B&H. Reporte, NO puerta.
 
@@ -436,6 +462,8 @@ def run(name, record, n_iter, screen=False):
         "3_riskedge (shallower >=60%)": bc["3_riskedge"],
         "4_return   (>= B&H net-to-net)": bc["4_return"],
         "5_activity (>=4 trades)": trades >= 4,
+        "5b_cobertura(opera en >=50% ventanas)":
+            pct_windows_traded(main_rows) >= 0.50,
         "6_feestress(2-4 hold @1.5x)": all(sc.values()),
         "7_beatsdaily(no daily pass -> =4)": bc["4_return"],
         "8_holdout  (2-4 on final 120d)": all(hc.values()),
@@ -463,6 +491,8 @@ def run(name, record, n_iter, screen=False):
         if not screen else ""
     sm = {"windows": n, "pairs": pairs,
           "median_win_net": median_window(main_rows),
+          "pct_traded": pct_windows_traded(main_rows),
+          "median_traded": median_window_traded(main_rows),
           "beat_bh_pct": beat_bh_pct(main_rows),
           "regimes": regime_split(main_rows),
           "stitched": stitched(main_rows),
@@ -479,6 +509,8 @@ def run(name, record, n_iter, screen=False):
           f" | holdout windows {len(holdout_rows)} | trades {trades}")
     print(f"POR VENTANA (C0.1): mediana neta {sm['median_win_net']:+.2%}"
           f" · gana a B&H en {sm['beat_bh_pct']:.0%} de las ventanas")
+    print(f"COBERTURA (C0.1b): opera en {sm['pct_traded']:.0%} de las "
+          f"ventanas · mediana CUANDO OPERA {sm['median_traded']:+.2%}")
     for k, d in (sm.get("regimes") or {}).items():
         print(f"  regimen {k:8s} n={d['n']:3d}  mediana "
               f"{d['median_net']:+7.2%}  gana B&H {d['beat_bh']:4.0%}")
