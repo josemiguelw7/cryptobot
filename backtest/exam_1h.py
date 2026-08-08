@@ -192,6 +192,47 @@ def windows_for(pair, strat, closes, ts, lo_idx, hi_idx, fee, slip,
 
 # ---------------------------------------------------------------- grading
 
+def median_window(rows, key="ret"):
+    """C0.1: mediana del retorno neto POR VENTANA.
+
+    Reemplaza a stitched() como metrica de magnitud. stitched() compone
+    ventanas que se solapan al 50% (WIN=2160, STEP=1080), asi que la
+    misma semana calendario entra dos veces en el producto: en cripto
+    bajista clava todo en el piso de -100%, y en un mercado alcista
+    largo explota a millones de por ciento. Las magnitudes del ledger
+    hasta 2026-08-07 no son interpretables por eso. stitched() se
+    conserva solo para reproducir filas viejas.
+    """
+    if not rows:
+        return float("nan")
+    v = sorted(r[key] for r in rows)
+    n = len(v)
+    return v[n // 2] if n % 2 else (v[n // 2 - 1] + v[n // 2]) / 2
+
+
+def beat_bh_pct(rows):
+    """C0.1: fraccion de ventanas donde la semilla gana a B&H neto."""
+    if not rows:
+        return float("nan")
+    return sum(1 for r in rows if r["ret"] > r["bh_net"]) / len(rows)
+
+
+def regime_split(rows, band=0.02):
+    """C0.2: particiona por signo de B&H. Reporte, NO puerta.
+
+    Responde la pregunta que el total esconde: 6 de 11 semillas le ganan
+    a B&H mientras pierden dinero, o sea son DEFENSIVAS (pierden menos
+    que aguantar). Esto separa defensa de alfa.
+    """
+    g = {"alcista": [], "bajista": [], "lateral": []}
+    for r in rows:
+        k = ("lateral" if abs(r["bh"]) <= band
+             else ("alcista" if r["bh"] > 0 else "bajista"))
+        g[k].append(r)
+    return {k: {"n": len(v), "median_net": median_window(v),
+                "beat_bh": beat_bh_pct(v)} for k, v in g.items() if v}
+
+
 def stitched(rows, key="ret"):
     return float(np.prod([1 + r[key] for r in rows]) - 1)
 
@@ -322,6 +363,10 @@ def ledger_record_1h(name, verdict, sm):
     os.makedirs(RESULTS, exist_ok=True)
     n_examined = len(exam.ledger_names()) + 1
     s2 = sm.get("slip2x_net")
+    rg = sm.get("regimes") or {}
+    def _rg(k):
+        d = rg.get(k)
+        return f"{d['median_net']:.4f}" if d else ""
     with open(LEDGER, "a", newline="") as f:
         csv.writer(f).writerow(
             [name, date.today().isoformat(),
@@ -331,7 +376,11 @@ def ledger_record_1h(name, verdict, sm):
              fingerprint_1h(), TIMEFRAME,
              f"{sm.get('realized_hold', 0):.1f}",
              sm.get("declared_hold", 0), sm.get("turnover_flag", "?"),
-             (f"{s2:.4f}" if s2 == s2 else "")])
+             (f"{s2:.4f}" if s2 == s2 else ""),
+             f"{sm.get('median_win_net', float('nan')):.4f}",
+             f"{sm.get('beat_bh_pct', float('nan')):.4f}",
+             _rg("alcista"), _rg("bajista"),
+             sm.get("dsr_clears", "")])
 
 
 # ---------------------------------------------------------------- the exam
@@ -400,21 +449,41 @@ def run(name, record, n_iter, screen=False):
         checks["9_notluck  (p<0.05 & SR>hurdle)"] = (
             p_val < 0.05 and sr > hurdle)
 
+    if not screen:
+        # C0.3 (plan_v3 F0): Deflated Sharpe como PUERTA explicita, no
+        # como numero informativo. Endurecimiento s2.1. Con K subiendo
+        # en cada intento, el umbral de suerte sube para todos.
+        # deflated_check devuelve un dict: bool(dict) seria SIEMPRE True
+        # y la puerta no filtraria nada. Hay que leer ["clears"].
+        checks["10_dsr     (SR supera umbral de suerte @ K)"] = bool(
+            validation.deflated_check(sr, K, var_sharpe=0.25)["clears"])
+
     verdict = all(checks.values())
-    sm = {"windows": n, "pairs": pairs, "stitched": stitched(main_rows),
+    sm_dsr = validation.deflated_check(sr, K, var_sharpe=0.25)["clears"] \
+        if not screen else ""
+    sm = {"windows": n, "pairs": pairs,
+          "median_win_net": median_window(main_rows),
+          "beat_bh_pct": beat_bh_pct(main_rows),
+          "regimes": regime_split(main_rows),
+          "stitched": stitched(main_rows),
           "stitched_bh": stitched(main_rows, "bh"),
           "stitched_bhn": stitched(main_rows, "bh_net"),
           "trades": trades, "sharpe": sr, "luck_hurdle": hurdle,
           "K_trials": K, "p_value": p_val, "dropped_gap_windows": dropped,
           "holdout_windows": len(holdout_rows),
-          "shallower_pct": bd["shallower_pct"]}
+          "shallower_pct": bd["shallower_pct"], "dsr_clears": sm_dsr}
 
     label = "SCREEN (unrecorded, counted)" if screen else "HOURLY EXAM"
     print(f"\n=== {label}: {name} ===")
     print(f"main windows {n} ({pairs} pairs, {dropped} dropped for gaps)"
           f" | holdout windows {len(holdout_rows)} | trades {trades}")
-    print(f"stitched {sm['stitched']:+.1%} vs B&H {sm['stitched_bh']:+.1%}"
-          f" (net {sm['stitched_bhn']:+.1%})")
+    print(f"POR VENTANA (C0.1): mediana neta {sm['median_win_net']:+.2%}"
+          f" · gana a B&H en {sm['beat_bh_pct']:.0%} de las ventanas")
+    for k, d in (sm.get("regimes") or {}).items():
+        print(f"  regimen {k:8s} n={d['n']:3d}  mediana "
+              f"{d['median_net']:+7.2%}  gana B&H {d['beat_bh']:4.0%}")
+    print(f"[legacy, no interpretable] stitched {sm['stitched']:+.1%} "
+          f"vs B&H {sm['stitched_bh']:+.1%} (net {sm['stitched_bhn']:+.1%})")
     print(f"Sharpe {sr:.2f} vs luck hurdle {hurdle:.2f} (K={K} trials)"
           + (f" | permutation p={p_val:.4f}" if p_val is not None else ""))
     for lbl, ok in checks.items():

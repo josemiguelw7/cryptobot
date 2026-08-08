@@ -136,6 +136,10 @@ def ledger_record_stk(name, verdict, sm):
     os.makedirs(X.RESULTS, exist_ok=True)
     n_examined = len(exam.ledger_names()) + 1
     s2 = sm.get("slip2x_net")
+    rg = sm.get("regimes") or {}
+    def _rg(k):
+        d = rg.get(k)
+        return f"{d['median_net']:.4f}" if d else ""
     with open(X.LEDGER, "a", newline="") as f:
         csv.writer(f).writerow(
             [name, date.today().isoformat(),
@@ -145,7 +149,11 @@ def ledger_record_stk(name, verdict, sm):
              fingerprint_stk(), "1h-stk",
              f"{sm.get('realized_hold', 0):.1f}",
              sm.get("declared_hold", 0), sm.get("turnover_flag", "?"),
-             (f"{s2:.4f}" if s2 == s2 else "")])
+             (f"{s2:.4f}" if s2 == s2 else ""),
+             f"{sm.get('median_win_net', float('nan')):.4f}",
+             f"{sm.get('beat_bh_pct', float('nan')):.4f}",
+             _rg("alcista"), _rg("bajista"),
+             sm.get("dsr_clears", "")])
 
 X.ledger_record_1h = ledger_record_stk
 

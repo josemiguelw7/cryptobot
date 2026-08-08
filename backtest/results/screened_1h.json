@@ -1,10 +1,18 @@
 {
-  "count": 31,
+  "count": 33,
   "note": "baseline from docs/intraday_standard.md criterion 9: '10 recorded + ~30 screened' at time of writing. Every --screen run appends to log and increments count.",
   "log": [
     {
       "name": "h2_obv",
       "utc": "2026-08-04T20:14Z"
+    },
+    {
+      "name": "h_boll_48",
+      "utc": "2026-08-08T04:16Z"
+    },
+    {
+      "name": "h_boll_48",
+      "utc": "2026-08-08T04:18Z"
     }
   ]
 }

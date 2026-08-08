@@ -94,4 +94,8 @@ mutacion de este.
 
 ## Firma (sabado)
 
-    Owner: ______________________  Fecha: ____________
+    Owner: Jose Santos            Fecha: 2026-08-08 04:15 UTC
+    Firmado en sesion. Autoriza implementar F0, F1, F2 y F3 tal como
+    estan escritos arriba. NO autoriza armar el escuadron v3: eso
+    requiere veredictos F1 registrados + firma aparte (mismo patron
+    que 2026-08-04).
