@@ -1,0 +1,39 @@
+{
+  "latest": {
+    "utc": "2026-08-08T01:14:06Z",
+    "audit_exit": 1,
+    "execution_data": false,
+    "fetch_failures": [],
+    "gapped": 19
+  },
+  "history": [
+    {
+      "utc": "2026-08-05T00:29:00Z",
+      "audit_exit": 1,
+      "execution_data": false,
+      "fetch_failures": [],
+      "gapped": 21
+    },
+    {
+      "utc": "2026-08-06T01:06:40Z",
+      "audit_exit": 1,
+      "execution_data": false,
+      "fetch_failures": [],
+      "gapped": 21
+    },
+    {
+      "utc": "2026-08-07T00:40:27Z",
+      "audit_exit": 1,
+      "execution_data": false,
+      "fetch_failures": [],
+      "gapped": 21
+    },
+    {
+      "utc": "2026-08-08T01:14:06Z",
+      "audit_exit": 1,
+      "execution_data": false,
+      "fetch_failures": [],
+      "gapped": 19
+    }
+  ]
+}

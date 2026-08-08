@@ -99,3 +99,54 @@ mutacion de este.
     estan escritos arriba. NO autoriza armar el escuadron v3: eso
     requiere veredictos F1 registrados + firma aparte (mismo patron
     que 2026-08-04).
+
+---
+
+## ADENDA 2026-08-08 — hallazgo estructural y muestra ampliada
+
+**El problema no eran (solo) las semillas: era la MUESTRA.**
+
+Medido al pre-chequear F1:
+
+- La muestra de examen cubria 1 año (2025-07 a 2026-08). BTC cayo -45%.
+- De las 32 ventanas: **31 bajistas (97%), 1 lateral, CERO alcistas.**
+- Criterio 4 exige ganar a B&H -> en bajista eso significa estar FUERA.
+- Criterio 5b exige operar en >=50% de las ventanas -> estar DENTRO.
+- Las dos reglas juntas eran casi insatisfacibles para una semilla
+  solo-compra. Los 22 FAIL de la ola 1 se produjeron en una muestra
+  donde una estrategia long-only no podia demostrar alfa.
+
+**Accion (no toca charter, no gasta K): historia completa descargada.**
+
+| par | barras | desde |
+|---|---|---|
+| BTC-USD | 87,550 | 2016-08-10 |
+| ETH-USD | 87,561 | 2016-08-10 |
+| LTC-USD | 86,345 | 2016-08-17 |
+| LINK-USD | 62,349 | 2019-06-27 |
+| ADA-USD | 47,235 | 2021-03-18 |
+| DOGE-USD | 45,387 | 2021-06-03 |
+| SOL-USD | 45,051 | 2021-06-17 |
+| XRP-USD | 43,537 | 2019-02-26 |
+
+Regimen de ventanas tras la ampliacion (BTC): **59% alcista, 40%
+bajista, 1% lateral** (antes 0/97/3). Ventanas por par: 80 contra 4.
+Backup de la muestra vieja en `data/candles.bak_1y/`.
+
+**Consecuencias registradas:**
+
+1. `data_fingerprint` cambia. Las 22 filas del ledger anteriores al
+   2026-08-08 apuntan a una huella que ya no existe en disco. Son una
+   POBLACION DISTINTA y no son comparables con veredictos futuros. No
+   se re-examinan: un FAIL registrado es permanente (una semilla por
+   nombre, para siempre).
+2. `d3_cash` vuelve a ser viable: su warmup de 4,872 barras (SMA 200d)
+   no cabia en 2,160; con 87k barras si, sin tocar la geometria del
+   examen. Recupera "efectivo como posicion activa" sin cambio de
+   charter.
+3. Huecos: 229 en total, 193 de ellos en LTC (iliquidez 2016-2018). La
+   politica de descarte de ventanas con hueco ya los maneja.
+
+**Lo que NO cambia:** K sigue en 93. Ninguna semilla de wave 3 ha
+gastado un nombre. El pre-check de admision (C0.4 + C0.1b) sigue siendo
+la puerta antes del examen.
