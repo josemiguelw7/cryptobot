@@ -375,5 +375,71 @@ def exam_status():
                     "exam_running": running})
 
 
+@app.get("/api/waves")
+def waves():
+    """Comparacion ENTRE OLAS (2026-08-08).
+
+    Antes no habia forma de ver si el metodo mejoraba: el portal solo
+    mostraba rosters ARMADOS, y las semillas en examen son invisibles.
+
+    ADVERTENCIA que la vista debe mostrar: las olas 1-2 se examinaron
+    sobre 1 año de datos (97% ventanas bajistas, 0% alcistas) y la ola 3
+    sobre 10 años (59% alcistas). Son POBLACIONES DISTINTAS. Esto mide
+    progreso del METODO, no que una semilla le gane a otra.
+    """
+    L = os.path.join(ROOT, "backtest", "results", "exam_ledger.csv")
+    rows = list(csv.DictReader(open(L))) if os.path.exists(L) else []
+
+    def wave_of(name):
+        if name.startswith(("d3_", "h3_", "s3_")):
+            return "ola 3 (10 años, relojes lentos)"
+        if name.startswith(("h2_", "s2_")):
+            return "ola 2 (descartada)"
+        return "ola 1 (1 año)"
+
+    def num(v):
+        try:
+            return float(v)
+        except (TypeError, ValueError):
+            return None
+
+    out, groups = [], {}
+    for r in rows:
+        w = wave_of(r["candidate"])
+        g = groups.setdefault(w, {"n": 0, "pass": 0, "cov": [], "med": []})
+        g["n"] += 1
+        g["pass"] += 1 if r["verdict"] == "PASS" else 0
+        c, m = num(r.get("pct_traded")), num(r.get("median_traded"))
+        if c is not None:
+            g["cov"].append(c)
+        if m is not None:
+            g["med"].append(m)
+        out.append({
+            "wave": w, "name": r["candidate"], "verdict": r["verdict"],
+            "date": r["date"], "windows": r.get("windows"),
+            "trades": r.get("trades"), "turnover": r.get("turnover_flag"),
+            "coverage": c, "median_traded": m,
+            "regime_up": num(r.get("regime_up")),
+            "regime_down": num(r.get("regime_down")),
+            "dsr": r.get("dsr_clears", ""),
+        })
+
+    def avg(v):
+        return round(sum(v) / len(v), 4) if v else None
+
+    summary = [{"wave": k, "examined": v["n"], "passed": v["pass"],
+                "avg_coverage": avg(v["cov"]),
+                "avg_median_traded": avg(v["med"])}
+               for k, v in groups.items()]
+    return jsonify({
+        "summary": sorted(summary, key=lambda x: x["wave"]),
+        "seeds": out,
+        "caveat": ("Olas 1-2: 1 año de datos, 97% ventanas bajistas, 0% "
+                   "alcistas. Ola 3: 10 años, 59% alcistas. Poblaciones "
+                   "distintas: mide progreso del metodo, no de una "
+                   "semilla contra otra."),
+    })
+
+
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=8787, debug=False)

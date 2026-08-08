@@ -406,7 +406,12 @@ def ledger_record_1h(name, verdict, sm):
              f"{sm.get('median_win_net', float('nan')):.4f}",
              f"{sm.get('beat_bh_pct', float('nan')):.4f}",
              _rg("alcista"), _rg("bajista"),
-             sm.get("dsr_clears", "")])
+             sm.get("dsr_clears", ""),
+             # 2026-08-08: estas dos se agregaron al ENCABEZADO pero no
+             # a la fila, asi que se leian como None. Los numeros salian
+             # por pantalla y no llegaban al archivo.
+             f"{sm.get('pct_traded', float('nan')):.4f}",
+             f"{sm.get('median_traded', float('nan')):.4f}"])
 
 
 # ---------------------------------------------------------------- the exam
