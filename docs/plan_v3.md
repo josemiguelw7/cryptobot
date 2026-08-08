@@ -150,3 +150,42 @@ Backup de la muestra vieja en `data/candles.bak_1y/`.
 **Lo que NO cambia:** K sigue en 93. Ninguna semilla de wave 3 ha
 gastado un nombre. El pre-check de admision (C0.4 + C0.1b) sigue siendo
 la puerta antes del examen.
+
+---
+
+## F1 EJECUCION — 2026-08-08 10:57 UTC
+
+Pre-check de admision sobre la muestra de 10 años (analysis/admission.py):
+
+| semilla | cobertura | mediana al operar | breakeven | admision |
+|---|---|---|---|---|
+| d3_trend | 51% | +5.89% | 0.420% | **ADMITIDA** |
+| d3_calm | 67% | +1.50% | 0.420% | **ADMITIDA** |
+| d3_rand | 100% | -4.55% | 0.100% | **ADMITIDA (control)** |
+| d3_nearhi | 18% | +12.24% | 0.420% | RECHAZADA: ausente |
+| d3_cash | 41% | +5.73% | 0.420% | RECHAZADA: ausente |
+| h3_crossconf | 100% | -9.67% | 0.050% | RECHAZADA: exige coste institucional |
+
+**Se examinan 3 nombres. K 93 -> 96.** Los tres nombres quedan quemados
+para siempre al registrarse el veredicto.
+
+**Expectativa PRE-REGISTRADA, escrita antes de correr:**
+
+- El pre-check midio sobre el MISMO periodo que usara el examen. No es
+  evidencia fuera de muestra: es un filtro de admision, no un veredicto.
+- Con K=96 el umbral de suerte exige Sharpe > ~1.25. Una mediana de
+  +5.89% por ventana NO implica eso.
+- Expectativa declarada: **d3_rand FAIL** (control). d3_trend y d3_calm
+  probablemente FAIL tambien, muy posiblemente en criterio 8 (holdout
+  120d) o en la nueva puerta 10 (DSR).
+- Si d3_rand PASA, el resultado invalida la ola completa y se investiga
+  la plomeria antes de celebrar nada (precedente: 4 bugs en 2 semanas).
+- Si d3_trend pasa y d3_calm no, NO se rediseña d3_calm para que pase:
+  se acepta el veredicto.
+
+**Los 3 nombres rechazados NO se examinaron, asi que siguen libres.**
+Rediseñarlos es legitimo, pero el parametro nuevo debe derivarse de una
+regla declarada de antemano, no de probar hasta que la cobertura llegue
+a 51%. h3_crossconf se retira: ningun parametro la salva a coste retail.
+Con ella se retira el uso de patrones de velas en esta ola — los datos
+la rechazaron.
