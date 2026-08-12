@@ -91,3 +91,37 @@ originales, entonces el sesgo de barra en formación no era el factor
 dominante y esta anulación fue una sobrerreacción — quedaría registrado.
 Effective: inmediato (§4.2 no exige espera para VOID con bug documentado).
 Bug ref: docs/review/2026-08-08_external_review.md#C-4
+
+**2026-08-11 · T2 · PROPUESTA: tope de posiciones CRIPTO 3 → 2. Efectivo 2026-08-12 (§3.1, una noche).**
+Cierra la mitad cripto de la pregunta abierta del 2026-08-08. Qué cambia:
+`seeds_crypto.py MAX_POS 3 → 2`, alineado con charter §3 y con
+`squad.py` (que ya tiene 2). Why: la medición del 2026-08-11
+(`docs/review/2026-08-11_correlacion_universo.md`) muestra que en los
+últimos 365 días solo 1 de 28 pares de cripto cumple MAX_CORR=0.70 y
+CERO carteras de tamaño ≥3 son legales — el tope de 3 estaba autorizando
+carteras que la regla de correlación prohíbe. Dirección: **tightening**
+(vuelve al número del charter, no lo supera). Falsifier: si a 2 posiciones
+los bots de cripto quedan en efectivo >90% del tiempo durante 60 días
+seguidos, el problema no es el tope sino el universo, y la respuesta
+correcta es un universo point-in-time con filtro de liquidez — NO subir
+MAX_CORR. Consecuencia aceptada: discontinuidad administrativa en las
+curvas de equity el día que entre (los bots cierran el exceso al precio
+que haya); anotarla para no leerla como señal.
+Propuesta redactada por Claude a partir de la medición; el propietario
+tiene hasta el 2026-08-12 para cancelarla antes de que toque el código.
+
+**2026-08-11 · T1-adjacent · PROPUESTA: tope de posiciones ACCIONES 2 (charter) → 4 (lo que ya corre). Efectivo 2026-08-18 (§3.3, una semana).**
+Why: la medición muestra que acciones NO tiene conflicto de correlación
+(mediana 0.446, 52.4% de las carteras de tamaño 4 son legales), así que
+el 4 es defendible sobre la evidencia. Dirección: **loosening** — sube un
+tope por encima del charter. Por §3.3 esto es Tier 1-adyacente porque
+hace más fácil que una estrategia pase el examen, y necesita una semana,
+no una noche. **Quién se beneficia si la decisión es errónea:** cualquier
+semilla de acciones que hubiera sido rechazada por concentración. Ese es
+el riesgo y queda escrito. Falsifier: si las semillas que pasen a 4
+posiciones no superan a las mismas semillas a 2 en un reexamen
+comparativo, el tope alto no aportó nada y se revierte a 2.
+NOTA: los bots de acciones llevan semanas corriendo con 4 fuera del
+charter. Esta entrada legaliza el hecho consumado; el propietario debe
+decidir conscientemente si eso es lo que quiere, o si la respuesta
+correcta es bajar los bots a 2 y no mover el charter.
