@@ -206,10 +206,21 @@ def data_fingerprint(pairs):
 
 
 def ledger_names():
+    """Names whose exam stands. Charter v2 (2026-08-08): a verdict can
+    be VOIDED when a documented code bug affected it -- the VOID row is
+    appended (the ledger is never rewritten), the name returns to the
+    pool, and the re-exam is a NEW trial (K still counts every row,
+    including VOID: the compute was spent and the hurdle only rises).
+    A name's status is its LATEST row. Real verdicts on working code
+    remain permanent: VOID requires a bug reference, not an opinion.
+    See ops/void_verdict.py for the only sanctioned writer."""
     if not os.path.exists(LEDGER):
         return set()
+    last = {}
     with open(LEDGER) as f:
-        return {row["candidate"] for row in csv.DictReader(f)}
+        for row in csv.DictReader(f):
+            last[row["candidate"]] = row.get("verdict", "")
+    return {n for n, v in last.items() if v != "VOID"}
 
 
 def dirty_paths():
@@ -422,10 +433,13 @@ def simulate_window_bars(strat, bars, a, b, fee, slip, market=None,
             for p in sl:
                 pctx.setdefault(p, {"weight": 0.0, "entry_price": None})
             pctx[pair]["weight"] = ctx["weight"]
-            try:
-                w = strat.step_all(sl, pctx)
-            except Exception:
-                return 0.0
+            # 2026-08-08b (M-4): NO try/except here. A strategy that
+            # crashes must crash the exam, not silently go flat -- a
+            # silent 0.0 trades zero times, FAILs criterion 5b, and
+            # burns a name forever on a plumbing bug, indistinguishable
+            # in the ledger from a real verdict. A crashed exam costs
+            # one commit; a silent FAIL costs a name.
+            w = strat.step_all(sl, pctx)
             return float(w.get(pair, 0.0))
         if market is not None:
             t = bars[i][0]

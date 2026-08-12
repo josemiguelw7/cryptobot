@@ -33,7 +33,7 @@ Usage:
     python backtest/exam_1h.py --screen h_trend_168
     python backtest/exam_1h.py --candidate h_trend_168 --iters 200
 """
-import argparse, csv, hashlib, json, os, sys
+import argparse, csv, hashlib, json, math, os, sys
 from datetime import date, datetime, timezone
 import numpy as np
 
@@ -218,28 +218,26 @@ def beat_bh_pct(rows):
 
 
 def pct_windows_traded(rows):
-    """C0.1b (2026-08-08): fraccion de ventanas donde la semilla OPERA.
+    """C0.1b (2026-08-08, endurecida 2026-08-08b): fraccion de ventanas
+    con al menos una IDA Y VUELTA completa.
 
-    Encontrado al pre-chequear wave 3: d3_trend no operaba en 24 de 32
-    ventanas, asi que su mediana por ventana daba exactamente +0.00% y
-    "ganaba a B&H" el 100% de las veces -- porque estar en EFECTIVO bate
-    a aguantar cuando el mercado cae, y 30 de 32 ventanas son bajistas.
-    En las 8 ventanas donde si operaba, la mediana era -9.88%.
-
-    La mediana por ventana no distingue "no perdi porque acerte" de "no
-    perdi porque no jugue". Sin esta columna, cualquier semilla
-    suficientemente ausente parece la mejor del roster: el mismo defecto
-    que stitched(), reproducido en su reemplazo.
+    Version original contaba `trades > 0`. Pero `trades` cuenta CAMBIOS
+    DE PESO, y una ida y vuelta son dos. `trades == 1` significa "entro
+    y nunca salio": un clon de buy-and-hold, no actividad. Medido en
+    d3_trend: 48% ventanas en efectivo, 50% con trades==1 (clones B&H),
+    1.4% con ida y vuelta real -- y la metrica original reportaba 51%
+    de "cobertura". El mismo agujero que intentaba tapar, un nivel mas
+    abajo (revision externa 2026-08-08, H-2).
     """
     if not rows:
         return float("nan")
-    return sum(1 for r in rows if r["trades"] > 0) / len(rows)
+    return sum(1 for r in rows if r["trades"] >= 2) / len(rows)
 
 
 def median_window_traded(rows):
-    """Mediana neta contando SOLO ventanas con operaciones: que hace la
-    semilla cuando efectivamente juega."""
-    t = [r for r in rows if r["trades"] > 0]
+    """Mediana neta contando SOLO ventanas con ida y vuelta: que hace
+    la semilla cuando efectivamente juega."""
+    t = [r for r in rows if r["trades"] >= 2]
     return median_window(t) if t else float("nan")
 
 
@@ -264,30 +262,93 @@ def stitched(rows, key="ret"):
 
 
 def base_checks(rows):
-    """Criteria 2-4 on a row set (used for main, stress, and holdout)."""
+    """Criteria 2-4 on a row set (used for main, stress, and holdout).
+
+    2026-08-08b (revision externa, C-3 y H-2):
+
+    * Criterio 4 se decide con la MEDIANA POR VENTANA, no con stitched().
+      C0.1 retiro stitched() como "no interpretable" pero seguia
+      decidiendo los criterios 4/6/7/8/9 -- el retiro cambio lo impreso,
+      no lo que puertea. Las magnitudes de orden 10^12 en el ledger del
+      2026-08-08 salen de ahi.
+    * Criterio 3 excluye ventanas SIN ida y vuelta: el 96% del credito
+      de "drawdown mas superficial" de d3_trend venia de ventanas donde
+      la semilla no hizo nada. Abstenerse no puede puntuar como acierto.
+    """
     n = len(rows)
     worse = sum(1 for r in rows if r["dd"] < r["bh_dd"] - DD_EPS)
-    shallow = sum(1 for r in rows if r["dd"] > r["bh_dd"] + DD_EPS)
+    active = [r for r in rows if r["trades"] >= 2]
+    shallow = sum(1 for r in active if r["dd"] > r["bh_dd"] + DD_EPS)
     return {
         "2_safety": n > 0 and worse == 0,
-        "3_riskedge": n > 0 and shallow / n >= 0.60,
-        "4_return": stitched(rows) >= stitched(rows, "bh_net"),
-    }, {"worse_dd": worse, "shallower_pct": (shallow / n) if n else 0.0}
+        "3_riskedge": len(active) > 0 and shallow / len(active) >= 0.60,
+        "4_return": median_window(rows) >= median_window(rows, "bh_net"),
+    }, {"worse_dd": worse,
+        "shallower_pct": (shallow / len(active)) if active else 0.0,
+        "active_windows": len(active)}
+
+
+def daily_returns_from_rows(rows):
+    """Per-window hourly equity curves -> daily returns, aggregated
+    WITHIN each window (2026-08-08b, M-8: the old version concatenated
+    all curves into one stream and folded blocks of 24 across window
+    and even PAIR boundaries -- some "days" were 14 hours of BTC plus
+    10 of ETH). Leftover hours shorter than a day are dropped."""
+    daily = []
+    for r in rows:
+        c = r["curve"]
+        hourly = [c[0] - 1] + [c[i] / c[i - 1] - 1
+                               for i in range(1, len(c))]
+        daily += [float(np.prod([1 + x for x in hourly[i:i + 24]]) - 1)
+                  for i in range(0, len(hourly) - 23, 24)]
+    return daily
+
+
+def nonoverlap_rows(rows):
+    """Every other window PER PAIR (windows overlap 50%: WIN=2160,
+    STEP=1080). This is the series the statistical gates run on, so
+    the same calendar hour is never counted twice."""
+    by_pair = {}
+    for r in rows:
+        by_pair.setdefault(r["pair"], []).append(r)
+    out = []
+    for p in sorted(by_pair):
+        out += by_pair[p][::2]
+    return out
+
+
+# Cross-pair correlation of the examined universe, measured by
+# analysis/engine_sim.py on 2026-08-07 (median pairwise 0.77). Eight
+# pairs this correlated carry roughly the information of 1.3
+# independent ones; the effective sample size for the luck hurdle is
+# discounted accordingly. Re-measure when the universe changes.
+UNIVERSE_RHO = 0.77
+
+
+def effective_daily_obs(rows):
+    """Effective number of independent daily observations backing the
+    Sharpe estimate: non-overlapping windows only, discounted for
+    cross-pair correlation via n_eff = n / (1 + (n-1)*rho).
+
+    This replaces the hardcoded var_sharpe=0.25 (2026-08-08b, H-3): the
+    old hurdle assumed a Sharpe dispersion that corresponded to no
+    sample size the exam actually uses. Now the dispersion is derived
+    from the data actually graded: var(annualized SR) ~= 365 / T_eff."""
+    nov = nonoverlap_rows(rows)
+    daily = daily_returns_from_rows(nov)
+    pairs = len({r["pair"] for r in nov})
+    if not daily or pairs == 0:
+        return 0.0
+    n_eff_pairs = pairs / (1.0 + (pairs - 1) * UNIVERSE_RHO)
+    return len(daily) * (n_eff_pairs / pairs)
 
 
 def sharpe_annualized_from_rows(rows):
-    """Annualized Sharpe of the stitched simulation: per-window hourly
-    equity curves -> hourly returns -> 24-bar daily aggregation ->
-    sqrt(365). Hourly bars are NOT independent observations (see the
-    standard's statistical warning); daily aggregation removes the
-    worst of the sample-size inflation before annualizing."""
-    hourly = []
-    for r in rows:
-        c = r["curve"]
-        hourly += [c[0] - 1] + [c[i] / c[i - 1] - 1
-                                for i in range(1, len(c))]
-    daily = [float(np.prod([1 + x for x in hourly[i:i + 24]]) - 1)
-             for i in range(0, len(hourly) - 23, 24)]
+    """Annualized Sharpe of daily net returns over NON-OVERLAPPING
+    windows (2026-08-08b: the overlapping set double-counts calendar
+    time, inflating nominal sample size ~2x on top of the pair
+    correlation)."""
+    daily = daily_returns_from_rows(nonoverlap_rows(rows))
     if len(daily) < 30:
         return 0.0
     mu, sd = float(np.mean(daily)), float(np.std(daily, ddof=1))
@@ -335,10 +396,21 @@ def bump_screened(name):
     return st["count"]
 
 
-def permutation_p(strat, data, cutoff_idx, real_stitched, n_iter, seed=0):
+def permutation_p(strat, data, cutoff_idx, real_stat, n_iter, seed=0):
     """Shuffle each pair's hourly returns inside the main region (keeps
     the timestamp skeleton, so the gap policy bites identically), regrade,
-    count how often chance matches the real stitched return."""
+    count how often chance matches the real result.
+
+    2026-08-08b: the test statistic is the PER-WINDOW MEDIAN net return
+    (C0.1), not stitched() -- stitched compounds 50%-overlapping windows
+    and was formally retired as uninterpretable. Both the real and
+    permuted sides travel identical geometry, so overlap does not bias
+    the p-value; the statistic just has to mean something.
+
+    Known limitation (M-5, documented not fixed): permute_bars clamps
+    high/low after reshuffling, so wick geometry is distorted. For
+    candle-PATTERN seeds this null tests order AND shape, not order
+    alone. No current seed reads wicks; re-open before examining one."""
     import random
     rng = random.Random(seed)
     beats = 0
@@ -367,7 +439,7 @@ def permutation_p(strat, data, cutoff_idx, real_stitched, n_iter, seed=0):
             rws, _ = windows_for(p, strat, shuf, ts, 0, hi, FEE, SLIP,
                                  dates=False, bars_map=bmap)
             rows += rws
-        if rows and stitched(rows) >= real_stitched:
+        if rows and median_window(rows) >= real_stat:
             beats += 1
     return (beats + 1) / (n_iter + 1)
 
@@ -393,12 +465,14 @@ def ledger_record_1h(name, verdict, sm):
     def _rg(k):
         d = rg.get(k)
         return f"{d['median_net']:.4f}" if d else ""
+    # H-4: the hash pinned at run START, never re-read at write time.
+    ghash = sm.get("git_hash_start") or exam.git_hash()
     with open(LEDGER, "a", newline="") as f:
         csv.writer(f).writerow(
             [name, date.today().isoformat(),
              "PASS" if verdict else "FAIL", sm["windows"], sm["pairs"],
              f"{sm['stitched']:.4f}", f"{sm['stitched_bh']:.4f}",
-             sm["trades"], exam.git_hash(), n_examined,
+             sm["trades"], ghash, n_examined,
              fingerprint_1h(), TIMEFRAME,
              f"{sm.get('realized_hold', 0):.1f}",
              sm.get("declared_hold", 0), sm.get("turnover_flag", "?"),
@@ -416,7 +490,33 @@ def ledger_record_1h(name, verdict, sm):
 
 # ---------------------------------------------------------------- the exam
 
+def source_fingerprint():
+    """SHA-256 of the code actually LOADED for this exam: the runner,
+    the shared simulator, the strategies, and the roster module. This
+    pins provenance to what executed, not to what HEAD said at write
+    time (2026-08-08b, H-4: d3_calm's row carried the hash of a fix
+    committed 14 minutes into its run, while the row itself was written
+    by the pre-fix code -- 21 fields against a 23-field header)."""
+    h = hashlib.sha256()
+    mods = [os.path.abspath(__file__), exam.__file__,
+            os.path.join(ROOT, "bot", "strategies.py"), SEEDS.__file__]
+    for m in mods:
+        try:
+            with open(m.rstrip("c"), "rb") as f:
+                h.update(f.read())
+        except OSError:
+            h.update(b"?")
+    return h.hexdigest()[:12]
+
+
 def run(name, record, n_iter, screen=False):
+    # H-4: provenance is captured ONCE, before any simulation. A long
+    # permutation run can straddle a commit; the row must pin the code
+    # that produced it, not the code that existed when it finished.
+    provenance = {"git_hash_start": exam.git_hash(),
+                  "src_sha": source_fingerprint(),
+                  "started_utc":
+                      f"{datetime.now(timezone.utc):%Y-%m-%dT%H:%M:%SZ}"}
     strat = SEEDS.get(name)
     data = {p: load_hourly(p) for p in PAIRS}
     cutoff = holdout_cutoff({p: data[p][1] for p in PAIRS})
@@ -459,15 +559,20 @@ def run(name, record, n_iter, screen=False):
 
     sr = sharpe_annualized_from_rows(main_rows)
     K = n_trials()
-    hurdle = validation.expected_max_sharpe(K, var_sharpe=0.25)
+    # 2026-08-08b (H-3): the luck hurdle's dispersion is DERIVED from
+    # the effective sample actually graded, not hardcoded. The old
+    # var_sharpe=0.25 corresponded to no sample size the exam uses.
+    T_eff = effective_daily_obs(main_rows)
+    var_sr = (365.0 / T_eff) if T_eff > 0 else 4.0
+    hurdle = validation.expected_max_sharpe(K, var_sharpe=var_sr)
 
     checks = {
         "1_sample   (>=24 win, >=4 pairs)": n >= 24 and pairs >= 4,
         "2_safety   (DD never worse)": bc["2_safety"],
-        "3_riskedge (shallower >=60%)": bc["3_riskedge"],
-        "4_return   (>= B&H net-to-net)": bc["4_return"],
+        "3_riskedge (shallower >=60% activas)": bc["3_riskedge"],
+        "4_return   (mediana >= B&H net)": bc["4_return"],
         "5_activity (>=4 trades)": trades >= 4,
-        "5b_cobertura(opera en >=50% ventanas)":
+        "5b_cobertura(ida+vuelta en >=50% ventanas)":
             pct_windows_traded(main_rows) >= 0.50,
         "6_feestress(2-4 hold @1.5x)": all(sc.values()),
         "7_beatsdaily(no daily pass -> =4)": bc["4_return"],
@@ -478,22 +583,32 @@ def run(name, record, n_iter, screen=False):
         print(f"[criterion 9] permutation x{n_iter} ... (minutes)",
               flush=True)
         p_val = permutation_p(strat, data, cutoff_idx,
-                              stitched(main_rows), n_iter)
+                              median_window(main_rows), n_iter)
         checks["9_notluck  (p<0.05 & SR>hurdle)"] = (
             p_val < 0.05 and sr > hurdle)
 
+    dsr_prob = float("nan")
     if not screen:
-        # C0.3 (plan_v3 F0): Deflated Sharpe como PUERTA explicita, no
-        # como numero informativo. Endurecimiento s2.1. Con K subiendo
-        # en cada intento, el umbral de suerte sube para todos.
-        # deflated_check devuelve un dict: bool(dict) seria SIEMPRE True
-        # y la puerta no filtraria nada. Hay que leer ["clears"].
-        checks["10_dsr     (SR supera umbral de suerte @ K)"] = bool(
-            validation.deflated_check(sr, K, var_sharpe=0.25)["clears"])
+        # C0.3 (plan_v3 F0), reconstruida 2026-08-08b (C-2): la version
+        # anterior era LITERALMENTE la segunda mitad del criterio 9
+        # (misma llamada, mismos argumentos) -- una puerta que no
+        # filtraba nada. Ahora es el DSR real de Bailey & Lopez de
+        # Prado (bot/stats.py, el archivo que el charter s5.7 nombra):
+        # probabilidad, ajustada por sesgo y curtosis de la serie
+        # diaria, de que el Sharpe verdadero supere al maximo esperado
+        # de K intentos sin ventaja. Unidades POR PERIODO, como exige
+        # stats.py. Umbral de referencia del charter: 0.95.
+        import stats as _stats
+        daily = daily_returns_from_rows(nonoverlap_rows(main_rows))
+        if len(daily) >= 30 and T_eff > 0:
+            sr0_daily = _stats.expected_max_sharpe(
+                1.0 / math.sqrt(T_eff), K)
+            dsr_prob = _stats.probabilistic_sharpe(daily, sr0_daily)
+        checks["10_dsr     (DSR >= 0.95 @ K)"] = (
+            dsr_prob == dsr_prob and dsr_prob >= 0.95)
 
     verdict = all(checks.values())
-    sm_dsr = validation.deflated_check(sr, K, var_sharpe=0.25)["clears"] \
-        if not screen else ""
+    sm_dsr = "" if (screen or dsr_prob != dsr_prob) else (dsr_prob >= 0.95)
     sm = {"windows": n, "pairs": pairs,
           "median_win_net": median_window(main_rows),
           "pct_traded": pct_windows_traded(main_rows),
@@ -504,9 +619,14 @@ def run(name, record, n_iter, screen=False):
           "stitched_bh": stitched(main_rows, "bh"),
           "stitched_bhn": stitched(main_rows, "bh_net"),
           "trades": trades, "sharpe": sr, "luck_hurdle": hurdle,
+          "T_eff_daily": T_eff, "var_sharpe_used": var_sr,
+          "dsr_prob": dsr_prob,
           "K_trials": K, "p_value": p_val, "dropped_gap_windows": dropped,
           "holdout_windows": len(holdout_rows),
-          "shallower_pct": bd["shallower_pct"], "dsr_clears": sm_dsr}
+          "shallower_pct": bd["shallower_pct"],
+          "active_windows": bd.get("active_windows", 0),
+          "dsr_clears": sm_dsr}
+    sm.update(provenance)
 
     label = "SCREEN (unrecorded, counted)" if screen else "HOURLY EXAM"
     print(f"\n=== {label}: {name} ===")
@@ -521,8 +641,12 @@ def run(name, record, n_iter, screen=False):
               f"{d['median_net']:+7.2%}  gana B&H {d['beat_bh']:4.0%}")
     print(f"[legacy, no interpretable] stitched {sm['stitched']:+.1%} "
           f"vs B&H {sm['stitched_bh']:+.1%} (net {sm['stitched_bhn']:+.1%})")
-    print(f"Sharpe {sr:.2f} vs luck hurdle {hurdle:.2f} (K={K} trials)"
+    print(f"Sharpe {sr:.2f} vs luck hurdle {hurdle:.2f} "
+          f"(K={K}, T_eff={T_eff:.0f}d, var_sr={var_sr:.3f})"
           + (f" | permutation p={p_val:.4f}" if p_val is not None else ""))
+    if dsr_prob == dsr_prob:
+        print(f"DSR (B&LdP, per-period, skew/kurtosis-adjusted): "
+              f"{dsr_prob:.4f} vs 0.95")
     for lbl, ok in checks.items():
         print(f"  [{'PASS' if ok else 'FAIL'}] {lbl}")
     print(f"VERDICT: "
@@ -570,6 +694,15 @@ def run(name, record, n_iter, screen=False):
         # first made recording impossible for every candidate.
         ledger_record_1h(name, verdict, sm)
         pd.DataFrame(main_rows + holdout_rows).to_csv(out, index=False)
+        # sidecar metrics (2026-08-08b, H-3): full statistical record
+        # per exam, JSON-per-line, no ledger schema migration. Future
+        # exams estimate the empirical Sharpe dispersion from here.
+        metrics = {k: v for k, v in sm.items() if k != "regimes"}
+        metrics.update({"candidate": name, "date": date.today().isoformat(),
+                        "verdict": "PASS" if verdict else "FAIL",
+                        "regimes": sm.get("regimes")})
+        with open(os.path.join(RESULTS, "exam_metrics.jsonl"), "a") as f:
+            f.write(json.dumps(metrics, default=str) + "\n")
         print(f"saved -> {out}\nledger -> {LEDGER} (timeframe=1h)")
     return verdict
 
