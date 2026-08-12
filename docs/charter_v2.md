@@ -1,6 +1,6 @@
 # Charter v2 — two tiers, one owner
 
-**Status:** PROPOSAL — takes effect when Jose signs at the bottom.
+**Status:** ADOPTED — signed 2026-08-11 (see Signature at the bottom).
 **Replaces:** the governance sections (§2) of `docs/intraday_success_criteria.md`.
 Everything v1.0 says that this document does not contradict stays in force.
 **Written:** 2026-08-08, after the external review found that the one-way
@@ -172,7 +172,13 @@ direction · what would prove it wrong · effective date. Tier 1 changes
 
 ## Signature
 
-    Owner: ____________________            Date: ____________
+    Owner: Jose Miguel                     Date: 2026-08-11
+    Signature entered by Claude on 2026-08-11 at the owner's explicit
+    instruction in session, after the owner was told in plain language
+    what section 3 gives up (the one-way ratchet on Tier 2). Recorded
+    this way rather than as a bare name so the provenance of the
+    signature itself is auditable, per the project's own standard.
+
     Signing adopts sections 1-8 above. Tier 1 is copied verbatim from
     v1.0 where indicated and remains one-way. This signature does not
     arm any squad, fund any bot, or alter any recorded verdict.
