@@ -21,7 +21,7 @@ Overrides, each pre-registered in docs/stocks_standard.md:
   ledger    timeframe tag "1h-stk"; SAME global ledger and K counter
 """
 import csv, os, sys
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 from zoneinfo import ZoneInfo
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -46,12 +46,23 @@ X.FEE, X.SLIP = 0.0, 0.0005
 
 
 # --- 5: data loader --------------------------------------------------
+# 2026-08-08b: same completeness rule as everywhere else (s4.5b). The
+# yfinance store contains the still-forming bar as its last row; the
+# live stock loaders had no filter (534/541 decisions read a forming
+# bar) and these exam loaders had none either. A bar is visible only
+# once t + 3600 <= now -- late for the short 15:30 ET bar, never early.
+def _closed_rows_stk(rows):
+    now = datetime.now(timezone.utc).timestamp()
+    return [r for r in rows
+            if int(float(r["timestamp"])) + 3600 <= now]
+
+
 def load_hourly_stk(tk):
     path = os.path.join(STOCKS, f"{tk}_1h.csv")
     if not os.path.exists(path):
         return [], []
     with open(path) as f:
-        rows = list(csv.DictReader(f))
+        rows = _closed_rows_stk(list(csv.DictReader(f)))
     closes = [float(r["close"]) for r in rows]
     ts = [int(float(r["timestamp"])) for r in rows]
     return closes, ts
@@ -65,7 +76,7 @@ def load_bars_stk(tk):
     if not os.path.exists(path):
         return []
     with open(path) as f:
-        rows = list(csv.DictReader(f))
+        rows = _closed_rows_stk(list(csv.DictReader(f)))
     out = []
     for r in rows:
         try:

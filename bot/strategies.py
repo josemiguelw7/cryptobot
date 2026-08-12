@@ -1033,12 +1033,23 @@ class SlowClock(BarStrategy):
         esto SlowClock reventaria con AttributeError. Ademas el proxy de
         mercado en ctx llega en barras HORARIAS: hay que resamplearlo al
         mismo reloj o MarketRegime compararia una SMA de 200 dias contra
-        200 horas."""
-        rb = resample(bars, self.k)
+        200 horas.
+
+        ALINEACION (2026-08-08b): resample() pliega desde el INDICE 0 del
+        slice y descarta el resto final. Con un slice acotado por tail,
+        eso significaba que la barra lenta mas RECIENTE podia quedar
+        descartada y los pliegues se desplazaban con el largo del slice.
+        Ahora se recorta el frente (len % k) para que el ultimo pliegue
+        termine exactamente en bars[-1]: la semilla decide sobre la barra
+        lenta que acaba de cerrar, no sobre una ventana desplazada."""
+        off = len(bars) % self.k
+        rb = resample(bars[off:] if off else bars, self.k)
         sub = ctx
         if ctx.get("market"):
+            m = ctx["market"]
+            moff = len(m) % self.k
             sub = dict(ctx)
-            sub["market"] = resample(ctx["market"], self.k)
+            sub["market"] = resample(m[moff:] if moff else m, self.k)
         if getattr(self.inner, "wants_bars", False):
             out = getattr(self.inner, meth)(rb, sub)
         else:
@@ -1054,22 +1065,34 @@ class SlowClock(BarStrategy):
         return out
 
     def step_bars(self, bars, ctx):
-        """Decide SOLO al cierre de cada barra lenta (2026-08-08).
+        """Decide SOLO al cierre de cada barra lenta.
 
-        Bug original: resamplear los datos no ralentiza el reloj de
-        DECISION. SlowClock(Trend(20),24) recalculaba la señal las 24
-        horas de cada barra diaria, asi que podia entrar y salir dentro
-        del mismo dia. El pre-check lo midio: d3_calm declaraba 240h y
-        operaba cada 24h; d3_trend, cada 107h.
+        Bug original (2026-08-08a): resamplear los datos no ralentiza el
+        reloj de DECISION. SlowClock(Trend(20),24) recalculaba la señal
+        las 24 horas de cada barra diaria.
 
-        Con esto la señal se evalua una vez por barra lenta y se
-        SOSTIENE en el medio, que es lo que "reloj lento" significaba.
+        Bug del arreglo (2026-08-08b, hallado en revision externa): la
+        condicion `len(bars) % k == 0` NUNCA vuelve a ser cierta una vez
+        que el slice de historia se satura en `tail` barras, porque
+        entonces len(bars) es CONSTANTE — y tail % 24 == 10 para toda
+        semilla lenta por construccion (warmup*3+10). La señal quedaba
+        CONGELADA en su primer valor: una decision por ventana de 90
+        dias. Los veredictos de d3_trend y d3_calm se registraron sobre
+        ese congelamiento y fueron anulados (VOID).
+
+        Arreglo: la frontera se deriva del TIMESTAMP UTC de la barra
+        recien cerrada, nunca de len(). Se recalcula cuando el numero de
+        barras lentas COMPLETADAS cambia — asi tambien se recupera de
+        ciclos perdidos (Mac dormido) recalculando tarde en vez de
+        nunca. La primera llamada calcula una estimacion inicial y se
+        corrige sola en la primera frontera real.
         """
-        n = len(bars)
-        if n < self.k:
+        if not bars or len(bars) < self.k:
             return ctx.get("slow_sig", 0.0)
-        boundary = (n % self.k == 0)
-        if boundary or "slow_sig" not in ctx:
+        period = self.k * 3600
+        done = (bars[-1][TS] + 3600) // period   # barras lentas completas
+        if done != ctx.get("slow_done") or "slow_sig" not in ctx:
+            ctx["slow_done"] = done
             ctx["slow_sig"] = self._inner_call("step_bars", bars, ctx) or 0.0
         return ctx["slow_sig"]
 

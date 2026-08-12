@@ -495,10 +495,20 @@ def cycle():
         cross = getattr(strat, "cross_sectional", False)
         wants_bars = getattr(strat, "wants_bars", False)
         wants_mkt = getattr(strat, "wants_market", False)
+        # W1.1 (revision externa 2026-08-08, H-1): el examen acota la
+        # historia a strat.tail; el motor entregaba el archivo COMPLETO
+        # de disco. Para semillas acumulativas (OBV, resampleadas) la
+        # señal dependia de cuanta historia hubiera en disco ese dia —
+        # exactamente lo que el docstring de tail prohibe. Mismo recorte
+        # aqui que en exam.py: bars[-tail:].
+        tail = getattr(strat, "tail", None)
+
+        def _bounded(bs):
+            return bs[-tail:] if tail and len(bs) > tail else bs
 
         if cross:
             # E2.5: strategy ranks the names against EACH OTHER.
-            elig = {p: bars[p] for p in SEEDS.PAIRS
+            elig = {p: _bounded(bars[p]) for p in SEEDS.PAIRS
                     if len(bars[p]) >= strat.warmup + 1}
             try:
                 allw = strat.step_all(elig, b["ctx"])
@@ -519,11 +529,12 @@ def cycle():
                 ctx = b["ctx"].setdefault(p, {"weight": 0.0,
                                               "entry_price": None})
                 if wants_mkt:
-                    ctx["market"] = mkt_bars
+                    ctx["market"] = _bounded(mkt_bars)
                 try:
                     if wants_bars:
-                        sigs[p] = strat.step_bars(bars[p], ctx)
-                        conv[p] = strat.conviction(bars[p], ctx)
+                        bb = _bounded(bars[p])
+                        sigs[p] = strat.step_bars(bb, ctx)
+                        conv[p] = strat.conviction(bb, ctx)
                     else:
                         sigs[p] = strat.step(closes, ctx)
                         c = (strat.conviction_closes(closes, ctx)

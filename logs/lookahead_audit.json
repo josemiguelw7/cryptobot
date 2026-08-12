@@ -1,0 +1,45 @@
+{
+  "utc": "2026-08-12T00:17:29Z",
+  "window_days": "all",
+  "invariant": "last_closed + 3600 <= utc_ms (charter 4.5b)",
+  "checked": 3388,
+  "violations": 792,
+  "verdict": "FAIL",
+  "detail": [
+    {
+      "file": "squad_decisions.csv",
+      "checked": 2589,
+      "violations": 0,
+      "lag_after_close_s": {
+        "median": 1673,
+        "min": 0,
+        "max": 3567
+      }
+    },
+    {
+      "file": "squad_stocks_decisions.csv",
+      "checked": 799,
+      "violations": 792,
+      "lag_after_close_s": {
+        "median": -2580,
+        "min": -3446,
+        "max": 67466
+      },
+      "worst": {
+        "lag_s": -3446.45,
+        "row": {
+          "utc_ms": "2026-08-10T13:32:33.550Z",
+          "bot": "s_trend_33",
+          "pair": "TSLA",
+          "snapshot_sha": "d38cb7a056c7a211",
+          "last_closed": "2026-08-10T13:30Z",
+          "signal_w": "1.000",
+          "action": "SKIP-cap",
+          "edge_proxy": "0.00000",
+          "rt_cost": "0.00000",
+          "gate": "block"
+        }
+      }
+    }
+  ]
+}

@@ -70,12 +70,31 @@ def session_open(now=None):
 
 
 # --- data -----------------------------------------------------------
+# 2026-08-08b (lookahead audit, first run): yfinance's download includes
+# the CURRENT, STILL-FORMING bar as its last row, and these loaders had
+# no completeness filter -- unlike crypto's load_hourly (t+3600<=now).
+# Result: 534 of 541 logged stock decisions read a forming bar (median
+# 42 min into it), violating s4.5b for the track's entire armed history.
+# quote_stk() also filled off that partial close. Charter s4.5f: the
+# affected counted days are void.
+#
+# Fix: same completeness rule as crypto. Deliberately conservative for
+# the short 15:30 ET bar (it truly closes at 16:00 but becomes visible
+# here at 16:30): s2.5 says the strict reading governs -- a bar may be
+# seen LATE, never EARLY.
+
+def _closed_rows(rows, now=None):
+    now = now or datetime.now(timezone.utc).timestamp()
+    return [r for r in rows
+            if int(float(r["timestamp"])) + 3600 <= now]
+
+
 def load_stk(tk):
     path = os.path.join(STOCKS, f"{tk}_1h.csv")
     if not os.path.exists(path):
         return [], []
     with open(path) as f:
-        rows = list(csv.DictReader(f))
+        rows = _closed_rows(list(csv.DictReader(f)))
     return ([float(r["close"]) for r in rows],
             [int(float(r["timestamp"])) for r in rows])
 
@@ -83,13 +102,12 @@ Q.load_hourly = load_stk
 
 
 def load_bars_stk(tk):
-    """E2.1 full RTH candles. yfinance gives o/h/l/c/v; the store has
-    always had them."""
+    """E2.1 full RTH candles, COMPLETED bars only (s4.5b)."""
     path = os.path.join(STOCKS, f"{tk}_1h.csv")
     if not os.path.exists(path):
         return []
     with open(path) as f:
-        rows = list(csv.DictReader(f))
+        rows = _closed_rows(list(csv.DictReader(f)))
     out = []
     for r in rows:
         try:
