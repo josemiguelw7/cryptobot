@@ -1,0 +1,3 @@
+candidate,date,original_date,original_verdict,bug_ref,reason
+d3_trend,2026-08-08,2026-08-08,FAIL,docs/review/2026-08-08_external_review.md#C-1,SlowClock frozen by len%k boundary (tail%24==10): 1 decision per 90d window; 98.6% of windows had no round trip
+d3_calm,2026-08-08,2026-08-08,FAIL,docs/review/2026-08-08_external_review.md#C-1,same freeze; row also written by pre-fix ledger writer (21 fields vs 23-field header)
