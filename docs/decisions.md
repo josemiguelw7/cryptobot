@@ -74,3 +74,20 @@ Needs ONE owner decision: pick the number per track, record it here,
 update charter §3, roster, and tests to agree. Interaction to respect:
 the 0.70 correlation cap is unsatisfiable at 6 positions in a
 0.77-correlated universe (28/28 six-coin portfolios illegal).
+
+**2026-08-11 · T1-adjacent · RESUELTA: las 11 filas `1h-stk` quedan ANULADAS y el reloj de la pista de acciones se reinicia.**
+Cierra la pregunta abierta del 2026-08-08 (opción (a), precedente del
+2026-08-04). Why: `ops/lookahead_audit.py` midió 792 violaciones en 799
+decisiones de acciones (mediana −2580s: se decidía 43 minutos dentro de
+una barra viva). Los 11 exámenes corrieron por los mismos cargadores sin
+filtro, así que sus veredictos están comprometidos en dirección
+optimista. Dirección: conservadora — se descarta evidencia favorable, no
+se admite ninguna. K NO baja: las 11 filas VOID son filas de ledger y el
+recuento sube de 27 a 38, así que la barrera de suerte de todo examen
+futuro es más alta, no más baja. Los 11 nombres quedan libres para UN
+reexamen sobre cargadores arreglados. Falsifier: si un reexamen de estos
+nombres sobre código arreglado produce métricas parecidas a las
+originales, entonces el sesgo de barra en formación no era el factor
+dominante y esta anulación fue una sobrerreacción — quedaría registrado.
+Effective: inmediato (§4.2 no exige espera para VOID con bug documentado).
+Bug ref: docs/review/2026-08-08_external_review.md#C-4
