@@ -1,0 +1,6 @@
+detected_utc,last_cycle_utc,gap_h,cycles_missed,note
+2026-08-18T23:45:13.480938+00:00,2026-08-18T21:43:32.521789+00:00,2.03,1,launchd did not fire (likely system sleep)
+2026-08-19T10:53:37.167626+00:00,2026-08-19T08:51:02.042527+00:00,2.04,1,launchd did not fire (likely system sleep)
+2026-08-20T12:19:28.760875+00:00,2026-08-19T21:01:52.644186+00:00,15.29,14,launchd did not fire (likely system sleep)
+2026-08-20T20:28:40.510799+00:00,2026-08-20T16:22:38.598057+00:00,4.10,3,launchd did not fire (likely system sleep)
+2026-08-21T21:03:32.805864+00:00,2026-08-21T19:02:22.241840+00:00,2.02,1,launchd did not fire (likely system sleep)

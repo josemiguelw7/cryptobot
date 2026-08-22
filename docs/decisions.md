@@ -125,3 +125,129 @@ NOTA: los bots de acciones llevan semanas corriendo con 4 fuera del
 charter. Esta entrada legaliza el hecho consumado; el propietario debe
 decidir conscientemente si eso es lo que quiere, o si la respuesta
 correcta es bajar los bots a 2 y no mover el charter.
+
+
+---
+
+**2026-08-22 · MEDICIÓN (no es decisión): diagnóstico de "curvas paralelas".**
+Origen: el propietario reportó que el dashboard mostraba bots sosteniendo
+una sola posición sin operar, y curvas indistinguibles entre sí.
+La medición NO confirma esa lectura, pero encuentra algo peor.
+Ventana cripto: 2026-08-05 → 2026-08-22 (17 días, 387 ventanas).
+Acciones: 80 ventanas.
+- Los bots SÍ operan: 319 trades cripto, 361 acciones.
+- Las curvas NO son paralelas: corr. de retornos cripto mediana 0.271
+  (1 de 55 pares >0.9); acciones mediana 0.479 (3 de 55). Rango de
+  retorno total cripto: 33.76 pp entre mejor y peor.
+- Lo que se vio como "sosteniendo" son 8 de 11 bots cripto en 100%
+  efectivo. Una línea de efectivo se ve igual que una posición dormida.
+- CERO de 11 bots cripto superan comprar-y-sostener equiponderado
+  (+29.57% en la ventana). Mejor bot: +26.19%. Mediana: +11.77%.
+- El bot ALEATORIO (`h_rand_72`) es el #1 de cripto y el #3 de acciones.
+- Acciones: los 11 bots negativos (−0.22% a −4.73%).
+- Concentración real SÍ existe, pero en acciones: 6 de 11 bots tienen
+  TSLA, 5 tienen META. En cripto está disperso solo porque están en caja.
+- 3,828 de 4,359 decisiones son `SKIP-cap` (88%): el tope de posiciones,
+  no la falta de señal, es lo que limita la actividad.
+ADVERTENCIA: 17 días. Por §P2 del charter (10 bots × 7 días ⇒ 99.9% de
+que uno se vea positivo por azar), NADA de lo anterior es veredicto.
+Se registra como medición, no como evidencia de aprobación o rechazo.
+
+**2026-08-22 · MEDICIÓN (no es decisión): anatomía de las salidas.**
+Segunda pasada sobre `logs/squad_trades.csv` y `squad_stocks_trades.csv`
+(columnas `exit_kind`, `loss_cause`, `mfe_pct`, `mae_pct` — nunca
+analizadas hasta hoy). Hallazgos:
+- CRIPTO, P&L neto por tipo de salida: `signal` = −102.26 sobre 131
+  cierres; `stop` = +2,435.94 sobre 25 cierres. Las salidas por señal
+  son netamente destructivas y 9 de 11 bots tienen P&L de salida-por-
+  señal negativo. TODA la ganancia cripto viene de 25 salidas por stop.
+- ACCIONES: 166 cierres, el 100% por `signal`. CERO salidas por stop.
+  No existe mecanismo de stop en la pista de acciones.
+- ACCIONES modela `fee = 0.00` en las 361 operaciones. Es decir: la
+  pista de acciones pierde −965.74 en un mundo SIN fricción. Con
+  spread/slippage realista el resultado sería peor, no mejor.
+- Perfil win-rate / R:R — cripto: 26.3% aciertos, R:R real 6.41
+  (perfil de seguimiento de tendencia, coherente y viable).
+  Acciones: 25.9% aciertos, R:R real 0.58 (pierde en ambas dimensiones
+  simultáneamente; esa combinación no tiene aritmética de rescate).
+- Comisiones cripto: 1,248.35, el 32.6% del P&L bruto.
+- `mfe_pct`/`mae_pct` están almacenadas como FRACCIÓN, no porcentaje
+  (máx. 0.6236 = 62.4%). El nombre de la columna induce a error; no es
+  un bug de datos pero sí de etiquetado.
+NOTA ANTI-SOBREAJUSTE: el hallazgo "las salidas por señal destruyen
+valor" es la observación más tentadora de toda la medición y NO se
+propone actuar sobre ella. Sobre 17 días y 131 cierres, quitar el
+mecanismo que perdió dinero en la muestra observada es exactamente el
+procedimiento que produjo el +354% falso. Queda como hipótesis a
+pre-registrar y probar hacia adelante, no como cambio.
+
+**2026-08-22 · T3 · PROPUESTA: registrar `bench_bh` — bot de comprar-y-sostener equiponderado, en ambas pistas. Efectivo inmediato (§3.x, medición pura).**
+Qué cambia: se añade un bot no-operativo que compra el universo
+equiponderado en su primer ciclo y no vuelve a operar. Aparece en
+`squad_equity.csv` y en el dashboard como una curva más.
+Why: hoy la comparación contra comprar-y-sostener se calculó a mano y
+fuera de banda. Sin un bench permanente, ningún resultado positivo es
+interpretable — un bot que hace +11% en un mercado que hizo +29% está
+destruyendo valor y la curva sola no lo muestra. Es la pieza que hace
+honesto todo lo demás.
+Dirección: **tightening** — sube la barra que cualquier semilla debe
+superar; no autoriza nada nuevo. No modifica el comportamiento de
+ningún bot existente, así que no hay discontinuidad de equity.
+Falsifier: si tras 120 días el bench y la mediana de los bots quedan
+dentro del ruido de la comisión, la conclusión no es "el bench está
+mal" sino que la familia de estrategias no aporta y debe retirarse.
+Consecuencia aceptada: el bench va a ganarle a casi todo casi siempre.
+Eso es información, no un fallo del bench.
+
+**2026-08-22 · T3 · PROPUESTA: completar el registro contrafactual de señales rechazadas. Efectivo inmediato (§3.x, medición pura).**
+Qué cambia: `squad_decisions.csv` ya registra QUÉ se rechazó (3,828
+`SKIP-cap`, 238 `SKIP-gate`) pero no QUÉ HABRÍA PASADO. Se añade el
+retorno hipotético a horizonte fijo de cada señal rechazada, en un log
+paralelo. No altera ninguna decisión de ningún bot.
+Why: es el mayor rendimiento estadístico por unidad de riesgo de toda
+la lista. Multiplica la muestra por ~25× (4,066 señales bloqueadas
+contra 162 entradas reales) sin mover un solo parámetro ni arriesgar
+capital. Y responde directamente si el tope de posiciones está
+protegiendo o estorbando — pregunta hoy sin evidencia.
+Dirección: **neutra** — puramente aditiva, sin efecto sobre veredictos.
+Falsifier: si las señales rechazadas rinden igual o peor que las
+ejecutadas, el tope está haciendo su trabajo y las dos propuestas de
+tope pendientes (2026-08-11) deben resolverse en dirección estricta.
+
+**2026-08-22 · T2 · PROPUESTA: modelar fricción no-nula en la pista de ACCIONES. Efectivo 2026-08-23 (§3.1, una noche).**
+Qué cambia: `fee` en acciones pasa de 0.00 a un modelo de spread +
+slippage no nulo (parámetro concreto a fijar antes de aplicar, por
+razonamiento y escrito, NO buscado sobre resultados).
+Why: las 361 operaciones de acciones se ejecutaron con fricción cero.
+Comisión cero es realista en muchos brokers; spread y slippage cero no
+lo es en ninguno. Todos los resultados de la pista de acciones están
+sesgados en dirección optimista, y aun así son negativos en los 11
+bots. La corrección empeora un resultado ya malo — por eso es segura.
+Dirección: **tightening** — hace más difícil, nunca más fácil, que una
+semilla de acciones apruebe. Admisible por ratchet sin debate.
+Falsifier: si al introducir fricción realista los resultados de
+acciones NO empeoran, el modelo de fricción no está conectado al motor
+de ejecución y hay un bug que buscar.
+Consecuencia aceptada: discontinuidad en las curvas de equity de
+acciones el día que entre. Anotarla para no leerla como señal.
+
+**2026-08-22 · PREGUNTA ABIERTA (no propuesta): mecanismo de salida en ACCIONES.**
+Hecho: cripto tiene salidas por stop y son el 100% de su ganancia neta;
+acciones no tiene ninguna y pierde en los 11 bots. Existen las clases
+`Bracket` y `TrailStop`, escritas y NO registradas.
+Por qué NO se propone registrarlas hoy: (a) la asimetría cripto/acciones
+se observó sobre 17 y 80 ventanas respectivamente — actuar sobre eso es
+ajustar a la muestra vista; (b) sigue sin resolverse si un mecanismo
+nuevo de salida cuenta como "mutación de parámetro" bajo §9.6, y esa
+pregunta es previa a cualquier implementación; (c) el propietario
+pre-registró en P5 que querría moverse más rápido que las reglas.
+Requiere decisión explícita del propietario sobre §9.6 antes de que se
+redacte propuesta alguna. Se registra la pregunta, no la respuesta.
+
+**2026-08-22 · RECORDATORIO: pendientes que este diagnóstico NO cierra.**
+(1) Las dos propuestas de tope de posiciones del 2026-08-11 siguen sin
+resolver, y el hallazgo de 88% `SKIP-cap` las hace más urgentes, no
+menos. (2) `MAX_CORR=0.70` vs `MAX_POS=6` sigue siendo matemáticamente
+incompatible. (3) La revisión independiente NO-Claude sigue pendiente:
+este diagnóstico lo hizo Claude, las propuestas las redactó Claude, y
+`REVIEW.md` ya dice que eso no constituye control independiente.
