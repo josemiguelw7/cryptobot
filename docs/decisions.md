@@ -313,3 +313,37 @@ decidir. Insumo requerido en esa fecha: contrafactual con >=80% resuelto.
 La direccion sigue siendo ratchet — el numero de acciones (4) esta por
 encima del charter y la carga de la prueba la tiene quien quiera
 mantenerlo, no quien quiera bajarlo.
+
+**2026-08-22 · APLICADO: `ops/selfcheck.py` + cableado al ciclo diario.**
+Los smoke tests ahora corren cada ciclo y dejan `logs/selfcheck.csv`.
+Estado actual: 2/4 PASS — los dos fallos de tope siguen ahi, ahora
+VISIBLES en cada corrida en vez de en silencio. NO es fatal por diseno:
+un test que falla por una discrepancia de gobernanza ya documentada no
+debe detener el registro forward, porque eso destruiria evidencia por un
+problema que no es de datos. Cuando se resuelvan los topes, hacerlo
+bloqueante es cambiar `fatal=False` a `True` en `bot/daily.py`.
+`pytest 9.1.1` instalado en el `.venv` (antes ausente — esa era la razon
+mecanica de que nadie viera los fallos).
+Cableado tambien: `ops/bench_bh.py` y `ops/counterfactual.py`, ambos
+`fatal=False`, junto a `bot/diversity.py`.
+Bug corregido antes de cablear: `bench_bh` usaba modo APPEND y recalcula
+la serie entera en cada corrida — al ejecutarse cada hora habria
+duplicado filas indefinidamente. Ahora reescribe de forma idempotente por
+pista. Verificado: 3 corridas seguidas -> 506 filas, 0 duplicados.
+Ciclo completo `bot/daily.py` ejecutado end-to-end: salida 0, motor
+intacto (`squad.py` y `squad_stocks.py` sin una linea modificada).
+
+**2026-08-22 · OPERATIVO: el portal estaba muerto otra vez.**
+`ps aux | grep portal/app.py` -> 0 procesos, curl sin respuesta.
+Relanzado; HTTP 200 confirmado. Es la segunda vez documentada. Un
+proceso que se muere en silencio y que ademas es la unica ventana del
+propietario al sistema deberia tener supervision automatica, no una
+comprobacion manual que depende de que alguien se acuerde. Pendiente.
+
+**2026-08-22 · APLICADO: `docs/REVISION_INDEPENDIENTE.md`.**
+Paquete para revisor NO-Claude, con 5 preguntas concretas ordenadas por
+dano potencial, materiales, y una declaracion de conflicto de interes:
+el documento lo redacto el sujeto de la revision. Sustituye y amplia la
+peticion de `REVIEW.md`, sin respuesta desde el 2026-08-08.
+Sigue SIN revisor asignado. Esto no cierra el hueco; solo lo documenta
+mejor. Conseguir el revisor es una accion del propietario.

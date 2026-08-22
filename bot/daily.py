@@ -169,6 +169,17 @@ run("bot/squad_stocks.py",   fatal=True)
 # eight of ten stock bots held identical books and nothing said so.
 run("bot/diversity.py",      fatal=False, args=("--log",))
 
+# Medicion T3 (docs/decisions.md 2026-08-22). Las tres son SOLO LECTURA:
+# no importan el motor, no tocan estado, escriben a logs propios y no
+# pueden influir en una decision. Por eso son seguras dentro de una
+# epoca viva y NO son fatales.
+run("ops/bench_bh.py",       fatal=False)   # comprar-y-sostener
+run("ops/counterfactual.py", fatal=False)   # senales rechazadas
+# Cable trampa. Existe porque el 2026-08-22 se descubrio que dos smoke
+# tests llevaban semanas fallando en silencio (cap breach), y solo
+# corrian invocandolos a mano. No fatal: ver cabecera de selfcheck.py.
+run("ops/selfcheck.py",      fatal=False)
+
 run("portal/build_site.py",  fatal=True)     # public page
 run("ops/backup.py",         fatal=False)    # snapshot the record
 run("bot/digest.py",         fatal=False)    # standings email/print

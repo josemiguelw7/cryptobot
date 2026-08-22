@@ -122,12 +122,18 @@ def run(track):
             rows.append([iso, f"bench_bh_{track}", f"{eq:.2f}", "0.00",
                          " ".join(sorted(series))])
 
-    new = not os.path.exists(OUT)
-    with open(OUT, "a", newline="") as f:
+    # Reescritura idempotente por pista: la serie se recalcula entera
+    # desde el ancla en cada corrida, asi que APPEND duplicaria filas al
+    # correr cada hora. Se conservan las otras pistas del fichero.
+    prev = []
+    if os.path.exists(OUT):
+        with open(OUT) as f:
+            prev = [r for r in csv.reader(f)
+                    if r and r[0] != "time" and r[1] != f"bench_bh_{track}"]
+    with open(OUT, "w", newline="") as f:
         w = csv.writer(f)
-        if new:
-            w.writerow(["time", "bot", "equity", "cash", "holdings"])
-        w.writerows(rows)
+        w.writerow(["time", "bot", "equity", "cash", "holdings"])
+        w.writerows(sorted(prev + rows))
 
     ret = (rows[-1][2] and float(rows[-1][2]) / eq0 - 1) * 100
     print(f"  {track}: {len(series)} activos · {len(rows)} puntos · "
