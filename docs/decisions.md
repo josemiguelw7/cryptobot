@@ -251,3 +251,65 @@ menos. (2) `MAX_CORR=0.70` vs `MAX_POS=6` sigue siendo matemáticamente
 incompatible. (3) La revisión independiente NO-Claude sigue pendiente:
 este diagnóstico lo hizo Claude, las propuestas las redactó Claude, y
 `REVIEW.md` ya dice que eso no constituye control independiente.
+
+**2026-08-22 · APLICADO: `ops/bench_bh.py` y `ops/counterfactual.py` (las dos propuestas T3 de medicion pura).**
+Ambos modulos son SOLO LECTURA por diseno: no importan `squad.py` ni
+`squad_stocks.py`, no tocan estado, no alteran ninguna decision, y
+escriben a logs propios (`logs/bench_equity.csv`, `logs/counterfactual.csv`).
+Un bench que puede romper el motor de trading no es medicion, es riesgo.
+Verificado: `git diff HEAD -- bot/` vacio. Cero lineas del motor tocadas.
+
+RESULTADO 1 — bench comprar-y-sostener (con friccion de entrada):
+  cripto  +28.60%  ·  acciones  −1.65%
+Correccion a la medicion de hoy: en ACCIONES, 2 de 11 bots SI superan
+comprar-y-sostener (`s_rsi14_reg33` −0.22%, `s_boll_14` −0.67% contra
+−1.65% del bench). El resumen previo de "los 11 negativos" era cierto en
+nivel absoluto pero enganoso en nivel relativo. En CRIPTO se confirma:
+0 de 11 superan el bench.
+
+RESULTADO 2 — contrafactual de senales rechazadas (n=4,514 resueltas):
+  cripto   ENTER      n=151   mediana −0.677%  media +0.688%  pos 41.1%
+  cripto   SKIP-cap   n=2897  mediana −0.724%  media +2.423%  pos 41.6%
+  cripto   SKIP-gate  n=230   mediana −0.547%  media −0.441%  pos 31.3%
+  acciones ENTER      n=191   mediana −0.048%  media −0.194%  pos 44.0%
+  acciones SKIP-cap   n=1245  mediana +0.000%  media +0.041%  pos 48.4%
+Lectura: el GATE DE COSTE funciona — lo que filtra rinde peor que lo que
+deja pasar (media −0.441%, solo 31.3% positivas). El TOPE DE POSICIONES
+es otra historia: las bloqueadas tienen media +2.423% contra +0.688% de
+las ejecutadas, pero MEDIANA casi identica. Media >> mediana significa
+cola derecha gorda: el tope no bloquea senales mejores en promedio,
+bloquea el acceso a unos pocos aciertos grandes.
+NO SE ACTUA SOBRE ESTO. Es descriptivo sobre datos ya vistos, y mover el
+tope por este numero es ajustar a la muestra observada. Queda como
+insumo pre-registrado para la decision de topes, no como su respuesta.
+955 filas PENDING; se resuelven solas en corridas futuras.
+
+**2026-08-22 · HALLAZGO NO BUSCADO: los smoke tests llevan tiempo FALLANDO.**
+Al verificar que los modulos nuevos no rompieran nada se ejecutaron los
+tests existentes. Dos fallan, y NO por los cambios de hoy
+(`git diff HEAD -- bot/` vacio — el motor no se toco):
+  bot/test_squad_smoke.py:50        AssertionError: cap!
+  bot/test_squad_stocks_smoke.py:43 AssertionError: cap breach
+Ambos afirman `len(units) <= 2` — el valor del CHARTER. El codigo corre
+con `seeds_crypto.MAX_POS = 3` y `seeds_stocks.MAX_POS = 4`. Estado
+actual: `h_nearhi_168` tiene 3 posiciones; `s_macd_12_26`, `s_calm_7_33`,
+`s_nearhi_33` y `s_rand_21` tienen 4 cada uno.
+Los tests son un cable trampa que codifica el charter y lleva semanas
+disparandose sin que nadie lo viera. Esto es exactamente el "hecho
+consumado" que la entrada del 2026-08-11 dejo por escrito, ahora con
+evidencia mecanica de que el sistema se sabe fuera de norma.
+Ademas: `pytest` NO esta instalado en el `.venv`, asi que los tests solo
+corren invocando cada archivo a mano. Eso explica que nadie los viera.
+Accion propuesta (T3, higiene, sin efecto sobre veredictos): anadir la
+ejecucion de los smoke tests al ciclo diario para que un fallo sea
+visible el mismo dia, en vez de acumularse en silencio.
+
+**2026-08-22 · CALENDARIO: decision de topes de posicion fijada al 2026-09-21 (30 dias).**
+Las dos propuestas del 2026-08-11 (cripto 3→2, acciones 2→4) siguen sin
+resolver. No se resuelven hoy: `ops/counterfactual.py` acaba de empezar a
+producir el unico dato que las responde de verdad, y 955 filas siguen
+PENDING. Decidir hoy es adivinar; decidir con el contrafactual maduro es
+decidir. Insumo requerido en esa fecha: contrafactual con >=80% resuelto.
+La direccion sigue siendo ratchet — el numero de acciones (4) esta por
+encima del charter y la carga de la prueba la tiene quien quiera
+mantenerlo, no quien quiera bajarlo.
