@@ -15,3 +15,4 @@ backups/
 credentials.json
 secrets.json
 .DS_Store
+audit_chatgpt.zip
