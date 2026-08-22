@@ -1,235 +1,483 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CRYPTOBOT · 20 bots · mission control</title>
+<title>CRYPTOBOT · 22 bots · mission control</title>
 <style>
+/* ---------------------------------------------------------------------
+   Rediseno 2026-08-22. El problema original NO era estetico: el grid era
+   de altura fija con overflow:hidden en cada panel, asi que una tabla de
+   11 filas se CORTABA EN SILENCIO. El propietario veia datos incompletos
+   sin ninguna senal de que faltaba algo. Todo lo de abajo sale de ahi.
+   Copia del original: index.html.bak-2026-08-22
+   --------------------------------------------------------------------- */
 :root{--bg:#0b0f14;--panel:#111820;--line:#1e2a36;--tx:#d7dee6;--dim:#71808f;
---up:#3fd08b;--dn:#ff6b6b;--amb:#e8b63f;--acc:#4db8ff;--vio:#b78bff}
+--up:#3fd08b;--dn:#ff6b6b;--amb:#e8b63f;--acc:#4db8ff;--vio:#b78bff;
+--bench:#ffffff;--fs:13px}
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--tx);
-font:12px/1.35 "SF Mono",Menlo,Consolas,monospace}
-#app{display:grid;height:100vh;gap:8px;padding:8px 8px 0;
-grid-template-rows:38px 1fr 1fr 0.85fr 20px;grid-template-columns:1fr 1fr}
-/* macOS dock clearance: the footer is the lowest element, so the whole
-   grid reserves dock height at the bottom instead of hiding under it.
-   env(safe-area-inset-bottom) covers iPad/notch clients too. */
-footer{margin-bottom:calc(74px + env(safe-area-inset-bottom,0px))}
-@media (max-height:820px){#app{grid-template-rows:38px 1fr 1fr 0.7fr 20px}}
-header,footer{grid-column:1/3;display:flex;align-items:center;gap:14px;
-background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:0 12px}
+html,body{min-height:100%;background:var(--bg);color:var(--tx);
+font:var(--fs)/1.45 "SF Mono",Menlo,Consolas,monospace}
+body[data-density="compact"]{--fs:11px}
+body[data-density="large"]{--fs:15px}
+#app{display:grid;gap:8px;padding:8px;
+grid-template-columns:repeat(auto-fit,minmax(430px,1fr))}
+header,footer{grid-column:1/-1;display:flex;align-items:center;gap:12px;
+background:var(--panel);border:1px solid var(--line);border-radius:8px;
+padding:8px 12px;flex-wrap:wrap}
 header b.logo{color:var(--acc);letter-spacing:.12em}
-#agg{font-size:15px;font-weight:700}
-#agg small{font-weight:400;color:var(--dim);font-size:11px}
-.badge{padding:2px 8px;border-radius:10px;font-weight:700;font-size:11px}
+#agg{font-size:calc(var(--fs) + 3px);font-weight:700}
+#agg small{font-weight:400;color:var(--dim);font-size:calc(var(--fs) - 2px)}
+.badge{padding:2px 8px;border-radius:10px;font-weight:700;
+font-size:calc(var(--fs) - 2px);white-space:nowrap}
 .armed{background:#0e3a24;color:var(--up)}.unarmed{background:#3a2f0e;color:var(--amb)}
 .closed{background:#231a2e;color:var(--vio)}
+.bad{background:#3a1414;color:var(--dn)}
 .sp{flex:1}.dim{color:var(--dim)}
+
+/* MEJORA 2: los paneles hacen scroll en vez de cortar. Nada se oculta. */
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;
-padding:8px 10px;overflow:hidden;display:flex;flex-direction:column;min-height:0}
-.panel h2{font-size:11px;color:var(--dim);letter-spacing:.14em}
+padding:8px 10px;display:flex;flex-direction:column;min-height:0;
+max-height:46vh;position:relative}
+.panel > .scroll{flex:1;min-height:0;overflow:auto}
+.panel h2{font-size:calc(var(--fs) - 2px);color:var(--dim);letter-spacing:.12em;
+display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding-right:30px}
 .panel h2 b{color:var(--tx)}
-.cap{display:flex;align-items:baseline;gap:10px;margin:4px 0 6px}
-.cap .eq{font-size:20px;font-weight:700}
-.cap .pnl{font-size:13px;font-weight:700}
-table{width:100%;border-collapse:collapse;font-size:12px}
-th{text-align:left;color:var(--dim);font-weight:400;border-bottom:1px solid var(--line);padding:1px 4px}
-td{padding:2px 4px;border-bottom:1px solid #131c26;white-space:nowrap}
+
+/* MEJORA 1: cualquier panel se expande a pantalla completa al pulsar. */
+.zoom{position:absolute;top:6px;right:8px;background:#16202b;color:var(--dim);
+border:1px solid var(--line);border-radius:5px;cursor:pointer;
+font:inherit;font-size:calc(var(--fs) - 2px);padding:1px 7px;z-index:5}
+.zoom:hover{color:var(--acc);border-color:var(--acc)}
+.panel.big{position:fixed;inset:12px;max-height:none;z-index:60;
+box-shadow:0 0 0 9999px rgba(0,0,0,.72)}
+
+/* MEJORA 6: cabeceras de tabla ordenables. */
+table{width:100%;border-collapse:collapse;font-size:var(--fs)}
+th{text-align:left;color:var(--dim);font-weight:400;
+border-bottom:1px solid var(--line);padding:3px 5px;
+position:sticky;top:0;background:var(--panel);cursor:pointer;user-select:none}
+th:hover{color:var(--acc)}
+th.sorted::after{content:" \2193";color:var(--acc)}
+th.sorted.asc::after{content:" \2191"}
+td{padding:3px 5px;border-bottom:1px solid #131c26;white-space:nowrap}
 td.r,th.r{text-align:right}
-.up{color:var(--up)}.dn{color:var(--dn)}.amb{color:var(--amb)}
-svg.spark{width:64px;height:15px;display:block}
-.chips{display:grid;grid-template-columns:1fr 1fr;gap:5px;overflow:hidden}
-.chip{border:1px solid var(--line);border-radius:6px;padding:3px 8px;display:flex;justify-content:space-between;align-items:center}
+tbody tr:hover{background:#16202b}
+svg.spark{width:70px;height:16px;display:block}
+
+/* MEJORA 7: glosario. Punteado = pasa el raton para la definicion. */
+.g{border-bottom:1px dotted var(--dim);cursor:help}
+
+.chips{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:5px}
+.chip{border:1px solid var(--line);border-radius:6px;padding:3px 8px;
+display:flex;justify-content:space-between;align-items:center;gap:6px}
 .v-PASS{color:var(--up)}.v-FAIL{color:var(--amb)}
 .v-WAIT{color:var(--dim);animation:pulse 1.6s infinite}
 .v-PROP{color:var(--vio)}
 @keyframes pulse{50%{opacity:.35}}
-#chartWrap{flex:1;min-height:0;position:relative}
+.up{color:var(--up)}.dn{color:var(--dn)}.amb{color:var(--amb)}
+.cap{display:flex;align-items:baseline;gap:10px;margin:4px 0 6px;flex-wrap:wrap}
+.cap .eq{font-size:calc(var(--fs) + 8px);font-weight:700}
+.cap .pnl{font-size:calc(var(--fs) + 1px);font-weight:700}
+#chartWrap{flex:1;min-height:230px;position:relative}
 #chart{width:100%;height:100%}
-#chartEmpty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--dim)}
-#charter p{margin:3px 0;color:var(--dim)}#charter b{color:var(--tx)}
-.legend{display:flex;gap:9px;font-size:10px;color:var(--dim);flex-wrap:wrap}
+.panel.big #chartWrap{min-height:60vh}
+#chartEmpty{position:absolute;inset:0;display:flex;align-items:center;
+justify-content:center;color:var(--dim)}
+#charter p{margin:4px 0;color:var(--dim)}#charter b{color:var(--tx)}
+
+/* MEJORA 5: leyenda clicable. Con 22 curvas superpuestas es ilegible. */
+.legend{display:flex;gap:8px;font-size:calc(var(--fs) - 3px);color:var(--dim);
+flex-wrap:wrap;padding-top:6px;max-height:76px;overflow:auto}
+.legend span{cursor:pointer;padding:1px 4px;border-radius:4px}
+.legend span:hover{background:#16202b;color:var(--tx)}
+.legend span.off{opacity:.28}
+.legend span.solo{background:#16202b;color:var(--tx);outline:1px solid var(--line)}
 .legend i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:3px}
-.ylab{fill:#71808f;font-size:9px}
-/* exits panel */
-.mrow{display:flex;gap:14px;flex-wrap:wrap;margin:5px 0 7px}
+.ylab{fill:#71808f;font-size:10px}
+.mrow{display:flex;gap:16px;flex-wrap:wrap;margin:5px 0 7px}
 .met{display:flex;flex-direction:column}
-.met b{font-size:15px}.met span{font-size:10px;color:var(--dim);letter-spacing:.08em}
-.bar{height:7px;border-radius:4px;background:#16202b;position:relative;margin-top:3px;overflow:hidden}
+.met b{font-size:calc(var(--fs) + 3px)}
+.met span{font-size:calc(var(--fs) - 3px);color:var(--dim);letter-spacing:.08em}
+.bar{height:8px;border-radius:4px;background:#16202b;position:relative;
+margin-top:3px;overflow:hidden}
 .bar i{position:absolute;top:0;bottom:0;left:0;border-radius:4px}
-.hint{font-size:10px;color:var(--dim);margin-top:auto;padding-top:5px;border-top:1px solid var(--line)}
-</style></head><body><div id="app">
-<header><b class="logo">CRYPTOBOT·20</b>
-<span id="agg">$60,000 <small>paper capital</small></span>
+.hint{font-size:calc(var(--fs) - 2px);color:var(--dim);margin-top:8px;
+padding-top:6px;border-top:1px solid var(--line)}
+.warnbox{background:#2a1616;border:1px solid #5c2a2a;border-radius:6px;
+padding:6px 9px;margin-bottom:6px;font-size:calc(var(--fs) - 1px)}
+.ctl{background:#16202b;color:var(--dim);border:1px solid var(--line);
+border-radius:5px;cursor:pointer;font:inherit;
+font-size:calc(var(--fs) - 2px);padding:2px 8px}
+.ctl:hover{color:var(--acc)}
+.ctl.on{color:var(--acc);border-color:var(--acc)}
+@media(max-width:900px){#app{grid-template-columns:1fr}.panel{max-height:none}}
+</style></head><body data-density="normal"><div id="app">
+
+<header><b class="logo">CRYPTOBOT&middot;22</b>
+<span id="agg">$66,000 <small>paper capital</small></span>
 <span id="aggP" class="dim"></span>
 <span class="sp"></span>
-<span id="bC" class="badge unarmed">crypto …</span>
-<span id="bS" class="badge unarmed">stocks …</span>
-<span id="mkt" class="badge closed">NYSE –</span>
-<span id="cyc" class="badge closed" title="">cycles –</span>
+<span id="bC" class="badge unarmed">crypto &hellip;</span>
+<span id="bS" class="badge unarmed">stocks &hellip;</span>
+<span id="mkt" class="badge closed">NYSE &ndash;</span>
+<span id="cyc" class="badge closed" title="">cycles &ndash;</span>
+<span id="chk" class="badge closed" title="">tests &ndash;</span>
+<button class="ctl" id="dens" title="Cambia el tamano de letra">A</button>
 <span id="clock" class="dim"></span></header>
 
-<div class="panel"><h2>SQUAD <b>CRYPTO</b> · 10 × $3,000 · 24/7 <span id="cSub" class="dim"></span></h2>
-<div class="cap"><span class="eq" id="cEq">$30,000</span><span class="pnl" id="cPnl"></span><span class="dim" id="cNote"></span></div>
-<div id="cBody" style="flex:1;min-height:0;overflow:hidden"></div></div>
+<div class="panel" id="pC"><h2>SQUAD <b>CRYPTO</b> &middot; 11 &times; $3,000 &middot; 24/7
+<span id="cSub" class="dim"></span></h2>
+<div class="cap"><span class="eq" id="cEq">$33,000</span>
+<span class="pnl" id="cPnl"></span></div>
+<div class="dim" id="cNote" style="font-size:calc(var(--fs) - 2px);margin-bottom:5px"></div>
+<div class="scroll" id="cBody"></div></div>
 
-<div class="panel"><h2>SQUAD <b>STOCKS</b> · 10 × $3,000 · RTH <span id="sSub" class="dim"></span></h2>
-<div class="cap"><span class="eq" id="sEq">$30,000</span><span class="pnl" id="sPnl"></span><span class="dim" id="sNote"></span></div>
-<div id="sBody" style="flex:1;min-height:0;overflow:hidden"></div></div>
+<div class="panel" id="pS"><h2>SQUAD <b>STOCKS</b> &middot; 11 &times; $3,000 &middot; RTH
+<span id="sSub" class="dim"></span></h2>
+<div class="cap"><span class="eq" id="sEq">$33,000</span>
+<span class="pnl" id="sPnl"></span></div>
+<div class="dim" id="sNote" style="font-size:calc(var(--fs) - 2px);margin-bottom:5px"></div>
+<div class="scroll" id="sBody"></div></div>
 
-<div class="panel"><h2>EQUITY IN DOLLARS · each bot from $3,000</h2>
+<div class="panel" id="pChart"><h2>EQUITY &middot; cada bot desde $3,000 &middot;
+<b>la linea blanca es comprar-y-sostener</b>
+<button class="ctl on" id="btnBench" title="Mostrar/ocultar el benchmark">bench</button>
+<span class="dim" id="chSub"></span></h2>
 <div id="chartWrap"><svg id="chart" preserveAspectRatio="none"></svg>
-<div id="chartEmpty">curves begin once a squad arms and marks its first hour</div></div>
+<div id="chartEmpty">las curvas empiezan cuando un escuadron se arma</div></div>
 <div id="legend" class="legend"></div></div>
 
-<div class="panel" id="charter"><h2>CHARTER CLOCK</h2>
-<p><b>$3,000 = initial allocation per bot</b>, not a ceiling. Live: ladder $500→$1.5K→$3K; above that, its own profits only.</p>
-<p>Stage 1: <b>90 counted days</b> · Sharpe ≥ 1.0 · LCB &gt; 0 · maxDD ≤ 10% → Stage 2: 60d → pilot</p>
-<p id="clkC">Crypto: <b>–</b></p><p id="clkS">Stocks: <b>–</b></p>
-<p>Exams: crypto <b id="exC">0</b>/10 · stocks <b id="exS">0</b>/10 · review Sat 09:00 CT</p></div>
+<div class="panel" id="pCF"><h2>SENALES RECHAZADAS &middot;
+<b>&iquest;el tope protege o estorba?</b> <span id="cfSub" class="dim"></span></h2>
+<div class="scroll" id="cfBody"></div></div>
 
-<div class="panel" id="exits"><h2>EXCURSIONS · <b>did we run up and give it back?</b> <span id="xSub" class="dim"></span></h2>
-<div id="xBody" style="flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column"></div></div>
+<div class="panel" id="pX"><h2>EXCURSIONES &middot;
+<b>&iquest;subimos y lo devolvimos?</b> <span id="xSub" class="dim"></span></h2>
+<div class="scroll" id="xBody"></div></div>
 
-<div class="panel" id="worst"><h2>WORST EXITS · <b>frozen cause s12.1</b></h2>
-<div id="wBody" style="flex:1;min-height:0;overflow:hidden"></div></div>
+<div class="panel" id="pW"><h2>PEORES SALIDAS &middot;
+<b>causa congelada &sect;12.1</b></h2>
+<div class="scroll" id="wBody"></div></div>
+
+<div class="panel" id="charter"><h2>RELOJ DEL CHARTER</h2>
+<div class="scroll">
+<p><b>$3,000 = asignacion inicial por bot</b>, no un techo. En vivo:
+escalera $500&rarr;$1.5K&rarr;$3K; por encima, solo sus propias ganancias.</p>
+<p>Etapa 1: <b>90 dias contados</b> &middot; Sharpe &ge; 1.0 &middot;
+<span class="g" data-g="LCB">LCB</span> &gt; 0 &middot;
+<span class="g" data-g="maxDD">maxDD</span> &le; 10% &rarr; Etapa 2: 60d &rarr; piloto</p>
+<p id="clkC">Crypto: <b>&ndash;</b></p><p id="clkS">Stocks: <b>&ndash;</b></p>
+<p>Examenes: crypto <b id="exC">0</b>/11 &middot; stocks <b id="exS">0</b>/11 &middot;
+revision sabado 09:00 CT</p>
+<div id="pend"></div></div></div>
 
 <footer><span id="foot" class="dim"></span><span class="sp"></span>
-<span class="dim">league (controls) → /public · refresh 60s</span></footer>
-</div><script>
-const $=q=>document.querySelector(q);
-const pal=["#4db8ff","#3fd08b","#ff6b6b","#e8b63f","#b78bff","#5fe0d8","#ff9d5c","#8fd14f","#f76bd0","#9aa7ff"];
-const CR=["h_trend_168","h_cross_24_168","h_tsmom_72","h_macd_12_26","h_donch_48_24","h_volbrk_24_96","h_rsi14_reg168","h_boll_48","h_calm_24_168","h_nearhi_168"];
-const ST=["s_trend_33","s_cross_7_33","s_tsmom_21","s_macd_12_26","s_donch_14_7","s_volbrk_7_33","s_rsi14_reg33","s_boll_14","s_calm_7_33","s_nearhi_33"];
+<span class="dim">liga (controles) &rarr; /public &middot; refresco 60s</span></footer>
+</div>
+<script>
+const $=q=>document.querySelector(q),$$=q=>[...document.querySelectorAll(q)];
+const pal=["#4db8ff","#3fd08b","#ff6b6b","#e8b63f","#b78bff","#5fe0d8",
+"#ff9d5c","#8fd14f","#f76bd0","#9aa7ff","#c0c0c0"];
 const money=n=>"$"+Number(n).toLocaleString("en-US",{maximumFractionDigits:0});
-const money2=n=>(n>=0?"+$":"−$")+Math.abs(n).toLocaleString("en-US",{maximumFractionDigits:0});
+const money2=n=>(n>=0?"+$":"-$")+Math.abs(n).toLocaleString("en-US",{maximumFractionDigits:0});
 const pct=(n,d=2)=>(n>=0?"+":"")+(100*n).toFixed(d)+"%";
-function series(rows,key){const m={};for(const r of rows){(m[r[key]]??=[]).push(+r.equity)}return m}
-function spark(v,c){if(v.length<2)return"";const n=v.slice(-150),mn=Math.min(...n),mx=Math.max(...n),s=mx-mn||1;
-const p=n.map((y,i)=>`${(64*i/(n.length-1)).toFixed(1)},${(14-13*(y-mn)/s).toFixed(1)}`).join(" ");
-return`<svg class="spark" viewBox="0 0 64 15"><polyline fill="none" stroke="${c}" stroke-width="1.2" points="${p}"/></svg>`}
+
+/* MEJORA 7 - glosario. La jerga era opaca para quien no escribio el
+   motor, que es justo quien tiene que juzgar los resultados. */
+const GLOS={
+MFE:"Maximum Favourable Excursion: cuanto llego a subir una operacion por encima de la entrada antes de cerrarse. Mide lo que hubo disponible.",
+MAE:"Maximum Adverse Excursion: cuanto llego a bajar antes de cerrarse. Mide el dolor soportado.",
+LCB:"Lower Confidence Bound: el borde pesimista del intervalo de confianza. Exigir LCB>0 significa que el resultado debe ser positivo incluso en la lectura mas desfavorable.",
+maxDD:"Maxima caida desde un pico hasta el valle siguiente. Mide el peor momento, no el resultado final.",
+K:"Contador global de intentos. Cada examen realizado sube K y el liston se endurece con el. Impide aprobar por probar muchas veces.",
+drag:"Friccion: lo que las comisiones se llevan del resultado bruto. Bruto menos friccion = neto.",
+"SKIP-cap":"Senal descartada porque el bot ya estaba en su tope de posiciones. No es un juicio sobre la senal.",
+"SKIP-gate":"Senal descartada porque su ganancia esperada no cubria el coste de ida y vuelta.",
+ENTER:"Senal que si se ejecuto.",
+bench:"Comprar-y-sostener equiponderado: comprar todo el dia uno y no tocarlo. Es el liston minimo. Una estrategia que no lo supera esta destruyendo valor.",
+conc:"Concentracion: cuantos bots tienen el mismo simbolo AHORA. Los topes por bot no impiden que 8 de 11 se amontonen en la misma moneda."};
+function tips(){$$(".g").forEach(e=>{const k=e.dataset.g;if(GLOS[k])e.title=GLOS[k]})}
+const G=(k,t)=>`<span class="g" data-g="${k}">${t||k}</span>`;
+
+/* MEJORA 1 - expandir cualquier panel a pantalla completa. */
+function zoomable(){$$(".panel").forEach(p=>{
+  if(p.querySelector(".zoom"))return;
+  const b=document.createElement("button");
+  b.className="zoom";b.textContent="\u2922";b.title="Ampliar (Esc para cerrar)";
+  b.onclick=ev=>{ev.stopPropagation();
+    const on=p.classList.contains("big");
+    closeBig();
+    if(!on){p.classList.add("big");b.textContent="\u2921"}
+    drawChart()};
+  p.appendChild(b)})}
+function closeBig(){$$(".panel.big").forEach(x=>{x.classList.remove("big");
+  const z=x.querySelector(".zoom");if(z)z.textContent="\u2922"})}
+addEventListener("keydown",e=>{if(e.key==="Escape"){closeBig();drawChart()}});
+
+/* MEJORA 3 - densidad. El original era 12px fijo. */
+const DENS=["compact","normal","large"],DLAB=["a","A","A+"];
+$("#dens").onclick=()=>{const b=document.body;
+  const i=(DENS.indexOf(b.dataset.density)+1)%3;
+  b.dataset.density=DENS[i];$("#dens").textContent=DLAB[i];
+  try{localStorage.setItem("dens",DENS[i])}catch(e){}};
+try{const d=localStorage.getItem("dens");
+  if(d&&DENS.includes(d)){document.body.dataset.density=d;
+    $("#dens").textContent=DLAB[DENS.indexOf(d)]}}catch(e){}
+
+/* MEJORA 6 - ordenar tablas pulsando la cabecera. */
+function sortable(host){const t=host.querySelector("table");if(!t)return;
+  t.querySelectorAll("th").forEach((th,i)=>{th.onclick=()=>{
+    const tb=t.tBodies[0],rows=[...tb.rows];
+    const asc=!(th.classList.contains("sorted")&&!th.classList.contains("asc"));
+    t.querySelectorAll("th").forEach(x=>x.classList.remove("sorted","asc"));
+    th.classList.add("sorted");if(asc)th.classList.add("asc");
+    const val=r=>{const s=(r.cells[i]?r.cells[i].textContent:"")
+      .replace(/[$,%+\u00d7]/g,"").replace(/\u2212/g,"-").trim();
+      const n=parseFloat(s);return isNaN(n)?s.toLowerCase():n};
+    rows.sort((a,b)=>{const x=val(a),y=val(b);
+      return (typeof x==="number"&&typeof y==="number")?(asc?x-y:y-x)
+        :(asc?String(x).localeCompare(y):String(y).localeCompare(x))});
+    rows.forEach(r=>tb.appendChild(r))}})}
+
+function series(rows,key){const m={};
+  for(const r of rows){(m[r[key]]=m[r[key]]||[]).push(+r.equity)}return m}
+function spark(v,c){if(v.length<2)return"";
+  const n=v.slice(-150),mn=Math.min.apply(null,n),mx=Math.max.apply(null,n),s=mx-mn||1;
+  const p=n.map((y,i)=>`${(70*i/(n.length-1)).toFixed(1)},${(15-13*(y-mn)/s).toFixed(1)}`).join(" ");
+  return`<svg class="spark" viewBox="0 0 70 16"><polyline fill="none" stroke="${c}" stroke-width="1.3" points="${p}"/></svg>`}
 function nyseOpen(){const et=new Date(new Date().toLocaleString("en-US",{timeZone:"America/New_York"}));
-const d=et.getDay(),m=et.getHours()*60+et.getMinutes();return d>0&&d<6&&m>=570&&m<960}
-function capStrip(ss,eqEl,pnlEl,noteEl,note0){const bots=Object.keys(ss);
-if(!bots.length){$(eqEl).textContent="$30,000";$(pnlEl).textContent="";$(noteEl).textContent=note0;return}
-const tot=bots.reduce((a,n)=>a+ss[n].at(-1),0),base=bots.length*3000,d=tot-base;
-$(eqEl).textContent=money(tot);
-const p=$(pnlEl);p.textContent=`${money2(d)} (${pct(d/base)})`;p.className="pnl "+(d>=0?"up":"dn");
-$(noteEl).textContent=""}
-function chips(names,vmap,pending){return`<div class="chips">`+names.map(s=>{
-const v=vmap[s];const cls=v==="PASS"?"v-PASS":v?"v-FAIL":pending;
-const lab=v==="PASS"?"CANDIDATE":v?"CONTROL":(pending==="v-WAIT"?"exam…":"proposed");
-return`<div class="chip"><span>${s.replace(/^[hs]_/,"")}</span><small class="${cls}">${lab}</small></div>`}).join("")+`</div>`}
-function squadTable(ss,sst){let h=`<table><thead><tr><th>bot</th><th class="r">equity</th><th class="r">P&L $</th><th class="r">ret</th><th>pos</th><th></th></tr></thead><tbody>`;
-Object.keys(ss).forEach((n,i)=>{const v=ss[n],e=v.at(-1),d=e-v[0],r=e/v[0]-1;
-const u=Object.keys((sst[n]||{}).units||{}).map(p=>p.replace("-USD","")).join(",")||"cash";
-const halt=(sst[n]||{}).halt_day?` <span class="dn">⛔</span>`:"";
-h+=`<tr><td style="color:${pal[i%10]}">${n.replace(/^[hs]_/,"")}${halt}</td><td class="r">${money(e)}</td>
-<td class="r ${d>=0?"up":"dn"}">${money2(d)}</td><td class="r ${r>=0?"up":"dn"}">${pct(r)}</td>
-<td class="dim">${u}</td><td>${spark(v,pal[i%10])}</td></tr>`});
-return h+"</tbody></table>"}
+  const d=et.getDay(),m=et.getHours()*60+et.getMinutes();return d>0&&d<6&&m>=570&&m<960}
+
+/* MEJORA 4 + 10 - la tabla ahora compara cada bot contra el benchmark
+   (columna "vs B&H") y muestra TODOS los bots, incluidos los aleatorios
+   que el dashboard anterior omitia de su lista fija de 10 nombres.
+   Que el bot aleatorio vaya primero en cripto es el dato mas importante
+   del sistema y era invisible. */
+function squadTable(ss,sst,benchRet){
+  let h=`<table><thead><tr><th>bot</th><th class="r">equity</th>
+<th class="r">P&amp;L $</th><th class="r">ret</th><th class="r">vs B&amp;H</th>
+<th>pos</th><th>curva</th></tr></thead><tbody>`;
+  Object.keys(ss).forEach((n,i)=>{const v=ss[n],e=v[v.length-1],d=e-v[0],r=e/v[0]-1;
+    const st=sst[n]||{};
+    const u=Object.keys(st.units||{}).filter(k=>st.units[k]>1e-9)
+      .map(p=>p.replace("-USD","")).join(",")||"efectivo";
+    const halt=st.halt_day?` <span class="dn" title="detenido">!</span>`:"";
+    const rand=/_rand_/.test(n)?` <span class="amb" title="${GLOS.bench?'':''}bot de control: decide al AZAR">AZAR</span>`:"";
+    const vs=benchRet==null?"":r-benchRet;
+    h+=`<tr><td style="color:${pal[i%11]}">${n.replace(/^[hs]_/,"")}${halt}${rand}</td>
+<td class="r">${money(e)}</td>
+<td class="r ${d>=0?"up":"dn"}">${money2(d)}</td>
+<td class="r ${r>=0?"up":"dn"}">${pct(r)}</td>
+<td class="r ${vs===""?"dim":(vs>=0?"up":"dn")}">${vs===""?"-":pct(vs)}</td>
+<td class="dim">${u}</td><td>${spark(v,pal[i%11])}</td></tr>`});
+  return h+"</tbody></table>"}
+
+function conc(sst){const m={};
+  Object.values(sst||{}).forEach(b=>Object.keys(b.units||{}).forEach(p=>{
+    if(b.units[p]>1e-9){const k=p.replace(/-USD$/,"");m[k]=(m[k]||0)+1}}));
+  const e=Object.entries(m).sort((a,b)=>b[1]-a[1]);if(!e.length)return"";
+  const tot=Object.keys(sst||{}).length||11,warn=e[0][1]>=Math.ceil(tot*0.7);
+  return`<div class="${warn?"warnbox":"dim"}" style="font-size:calc(var(--fs) - 2px);margin:0 0 5px">
+${G("conc","concentracion")}: ${e.map(x=>`${x[0]}&times;${x[1]}`).join(" \u00b7 ")}
+${warn?" \u2014 libro correlacionado":""}</div>`}
+
+/* MEJORA 9 - panel de senales rechazadas. El contrafactual existia desde
+   hoy pero no era visible en ninguna parte. */
+function cfPanel(cf){
+  if(!cf||!Object.keys(cf).length)
+    return`<div class="dim">sin datos resueltos todavia</div>`;
+  let h=`<table><thead><tr><th>pista</th><th>accion</th><th class="r">n</th>
+<th class="r">mediana</th><th class="r">media</th><th class="r">% positivas</th>
+</tr></thead><tbody>`;
+  for(const tr of Object.keys(cf)){
+    for(const ac of ["ENTER","SKIP-cap","SKIP-gate"]){
+      const d=cf[tr][ac];if(!d)continue;
+      h+=`<tr><td class="dim">${tr}</td><td>${G(ac)}</td>
+<td class="r">${d.n}</td>
+<td class="r ${d.median>=0?"up":"dn"}">${d.median.toFixed(3)}%</td>
+<td class="r ${d.mean>=0?"up":"dn"}">${d.mean.toFixed(3)}%</td>
+<td class="r">${d.pos_pct.toFixed(1)}%</td></tr>`}}
+  return h+`</tbody></table>
+<div class="hint">Compara lo ejecutado (${G("ENTER")}) contra lo descartado.
+Si ${G("SKIP-gate")} rinde peor que ${G("ENTER")}, el filtro de coste
+funciona. La media muy por encima de la mediana significa cola derecha
+gorda: pocos aciertos grandes, no mejor rendimiento tipico.
+<b>Descriptivo sobre datos ya vistos &mdash; no autoriza mover ningun tope.</b></div>`}
+
 function exitsPanel(x){
-// the whole take-profit question in one panel: how far did trades get
-// above entry (MFE) vs the round-trip cost floor they must clear?
-if(!x||!x.n){return`<div class="dim" style="margin:auto">no closed trades yet</div>`}
-const p=v=>v==null?"–":(v>=0?"+":"")+(100*v).toFixed(2)+"%";
-const rt=x.rt_cost,scale=Math.max(rt*1.6,Math.abs(x.mfe_max||0)*1.2,0.02);
-const w=v=>Math.min(100,100*Math.abs(v||0)/scale);
-return`<div class="mrow">
-<div class="met"><b class="${x.mfe_max>=rt?"up":"amb"}">${p(x.mfe_max)}</b><span>MFE MAX</span></div>
-<div class="met"><b>${p(x.mfe_med)}</b><span>MFE MEDIAN</span></div>
-<div class="met"><b>${p(x.mfe_p75)}</b><span>MFE P75</span></div>
-<div class="met"><b class="dn">${p(x.mae_min)}</b><span>MAE WORST</span></div>
-<div class="met"><b class="${x.above_cost?"up":"dn"}">${x.above_cost}/${x.n}</b><span>ABOVE COST</span></div></div>
-<div style="font-size:10px;color:var(--dim)">peak gain reached (MFE max) vs round-trip cost ${p(rt)}</div>
+  if(!x||!x.n)return`<div class="dim">aun no hay operaciones cerradas</div>`;
+  const p=v=>v==null?"-":(v>=0?"+":"")+(100*v).toFixed(2)+"%";
+  const rt=x.rt_cost,scale=Math.max(rt*1.6,Math.abs(x.mfe_max||0)*1.2,0.02);
+  const w=v=>Math.min(100,100*Math.abs(v||0)/scale);
+  return`<div class="mrow">
+<div class="met"><b class="${x.mfe_max>=rt?"up":"amb"}">${p(x.mfe_max)}</b><span>${G("MFE")} MAX</span></div>
+<div class="met"><b>${p(x.mfe_med)}</b><span>${G("MFE")} MEDIANA</span></div>
+<div class="met"><b>${p(x.mfe_p75)}</b><span>${G("MFE")} P75</span></div>
+<div class="met"><b class="dn">${p(x.mae_min)}</b><span>${G("MAE")} PEOR</span></div>
+<div class="met"><b class="${x.above_cost?"up":"dn"}">${x.above_cost}/${x.n}</b><span>SOBRE COSTE</span></div></div>
+<div style="font-size:calc(var(--fs) - 2px);color:var(--dim)">pico alcanzado
+frente al ${G("round-trip","coste de ida y vuelta")} ${p(rt)}</div>
 <div class="bar"><i style="width:${w(x.mfe_max)}%;background:${x.mfe_max>=rt?"var(--up)":"var(--amb)"}"></i>
 <i style="left:${w(rt)}%;width:2px;background:var(--dn)"></i></div>
 <div class="hint">${x.above_cost?
-`${x.above_cost} of ${x.n} trades cleared the cost — review brackets on Saturday.`:
-`no trade reached the round-trip cost (${p(rt)}). A take-profit would have nothing to harvest: the wall is the cost, not the exit.`}</div>`}
+`${x.above_cost} de ${x.n} operaciones superaron el coste.`:
+`ninguna operacion alcanzo el coste de ida y vuelta (${p(rt)}). Un take-profit
+no tendria nada que cosechar: el muro es el coste, no la salida.`}</div>`}
+
 function worstTable(x){const rows=(x&&x.worst)||[];
-if(!rows.length){return`<div class="dim">no closed trades</div>`}
-let h=`<table><thead><tr><th>bot</th><th>par</th><th class="r">MFE</th><th class="r">MAE</th><th class="r">net</th><th>cause</th></tr></thead><tbody>`;
-for(const r of rows){h+=`<tr><td>${r.bot.replace(/^[hs]_/,"")}</td><td class="dim">${r.pair.replace("-USD","")}</td>
+  if(!rows.length)return`<div class="dim">sin operaciones cerradas</div>`;
+  let h=`<table><thead><tr><th>bot</th><th>par</th><th class="r">${G("MFE")}</th>
+<th class="r">${G("MAE")}</th><th class="r">neto</th><th>causa</th></tr></thead><tbody>`;
+  for(const r of rows){h+=`<tr><td>${r.bot.replace(/^[hs]_/,"")}</td>
+<td class="dim">${r.pair.replace("-USD","")}</td>
 <td class="r ${r.mfe>=0?"up":"dn"}">${(100*r.mfe).toFixed(2)}%</td>
 <td class="r dn">${(100*r.mae).toFixed(2)}%</td>
 <td class="r dn">${money2(r.net)}</td><td class="amb">${r.cause||r.exit}</td></tr>`}
-return h+"</tbody></table>"}
-function conc(sst){
-// book concentration: how many bots hold each symbol right now.
-// per-bot caps (s3) don't stop 8/10 bots piling into the same coin —
-// found 2026-08-03 with ADA. Not a rule breach; must be visible.
-const m={};Object.values(sst||{}).forEach(b=>Object.keys(b.units||{}).forEach(p=>{const k=p.replace(/-USD$/,"");m[k]=(m[k]||0)+1}));
-const e=Object.entries(m).sort((a,b)=>b[1]-a[1]);if(!e.length)return"";
-const tot=Object.keys(sst||{}).length||10,warn=e[0][1]>=Math.ceil(tot*0.7);
-return`<div class="${warn?"amb":"dim"}" style="font-size:10px;margin:0 0 4px">concentration: ${e.map(([k,v])=>`${k}×${v}`).join(" · ")}${warn?" — ⚠ correlated book":""}</div>`}
-async function j(u){try{const r=await fetch(u);return await r.json()}catch(e){return null}}
-async function refresh(){
-const[meta,sq,seq,sqS,seqS,led,costs,xs]=await Promise.all(["/api/meta","/api/squad","/api/squad_equity","/api/squad_stocks","/api/squad_stocks_equity","/api/exam_ledger","/api/squad_costs","/api/exits"].map(j));
-const aC=meta&&meta.armed_crypto,aS=meta&&meta.armed_stocks;
-const cS=seq?series(seq,"bot"):{},sS=seqS?series(seqS,"bot"):{};
-const bC=$("#bC");bC.textContent="crypto "+(aC?"ARMED":"UNARMED");bC.className="badge "+(aC?"armed":"unarmed");
-const bS=$("#bS");bS.textContent="stocks "+(aS?"ARMED":"PROPOSED");bS.className="badge "+(aS?"armed":"unarmed");
-const open=nyseOpen(),mk=$("#mkt");mk.textContent="NYSE "+(open?"OPEN":"CLOSED");
-mk.className="badge "+(open?"armed":"closed");
-// missed-cycle badge (launchd sleeps when the Mac does)
-const cy=meta&&meta.cycles,cb=$("#cyc");
-if(cy){cb.textContent=`cycles ${cy.marked}/${cy.expected}`;
-cb.className="badge "+(cy.marked>=cy.expected-1?"armed":"unarmed");
-cb.title=cy.missing.length?"hours with no cycle (UTC): "+cy.missing.join(", "):"no gaps in 24h"}
-// capital strips + aggregate
-capStrip(cS,"#cEq","#cPnl","#cNote","standby — pending exams + fresh owner signature");
-capStrip(sS,"#sEq","#sPnl","#sNote","reserved — pending signature");
-// fee drag + BTC-hold benchmark (derived from logs, per charter costs)
-if(costs){const cc=costs.crypto,cs=costs.stocks,bh=costs.btc_hold;
-if(cc&&cc.fees){let t=`drag: fees ${money2(-cc.fees)} · ${cc.closed} closed gross ${money2(cc.gross)} → net ${money2(cc.net)}`;
-if(bh&&bh.equity){const d=bh.equity-30000;t+=` · BTC-HOLD ${money(bh.equity)} (${pct(d/30000)})`}
-$("#cNote").textContent=t}
-if(cs&&cs.closed>0){$("#sNote").textContent=`drag: fees ${money2(-cs.fees)} · ${cs.closed} closed gross ${money2(cs.gross)} → net ${money2(cs.net)}`}}
-const tc=Object.values(cS).reduce((a,v)=>a+v.at(-1),0)||30000;
-const ts=Object.values(sS).reduce((a,v)=>a+v.at(-1),0)||30000;
-$("#agg").innerHTML=money(tc+ts)+" <small>paper capital</small>";
-const dA=tc+ts-60000,pA=$("#aggP");
-pA.textContent=dA?`${money2(dA)} (${pct(dA/60000)})`:"";pA.className=dA>=0?"up":"dn";
-// panels
-const l1=(led||[]).filter(r=>r.timeframe==="1h"),lS=(led||[]).filter(r=>r.timeframe==="1h-stk");
-$("#exC").textContent=l1.length;$("#exS").textContent=lS.length;
-const vC={},vS={};l1.forEach(r=>vC[r.candidate]=r.verdict);lS.forEach(r=>vS[r.candidate]=r.verdict);
-if(aC&&seq&&seq.length){$("#cSub").textContent="· forward record";$("#cBody").innerHTML=conc((sq&&sq.bots)||{})+squadTable(cS,(sq&&sq.bots)||{})}
-else{$("#cSub").textContent=`· exams ${l1.length}/10`;$("#cBody").innerHTML=chips(CR,vC,"v-WAIT")}
-if(aS&&seqS&&seqS.length){$("#sSub").textContent="· forward record";$("#sBody").innerHTML=conc((sqS&&sqS.bots)||{})+squadTable(sS,(sqS&&sqS.bots)||{})}
-else{$("#sSub").textContent=lS.length?`· exams ${lS.length}/10`:"· pending signature";
-$("#sBody").innerHTML=chips(ST,vS,lS.length?"v-WAIT":"v-PROP")}
-// dollar curves
-const all={};Object.entries(cS).forEach(([k,v])=>all["c:"+k.replace(/^h_/,"")]=v);
-Object.entries(sS).forEach(([k,v])=>all["s:"+k.replace(/^s_/,"")]=v);
-const names=Object.keys(all).filter(n=>all[n].length>1);
-const svg=$("#chart"),empty=$("#chartEmpty");
-if(!names.length){svg.innerHTML="";$("#legend").innerHTML="";empty.style.display="flex"}
-else{empty.style.display="none";
-const W=600,H=190;svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
-let mn=1e9,mx=-1e9;names.forEach(n=>{mn=Math.min(mn,...all[n]);mx=Math.max(mx,...all[n])});
-mn=Math.min(mn,2990);mx=Math.max(mx,3010);const s=mx-mn||1,y=v=>H-6-(H-14)*(v-mn)/s;
-let out=`<line x1="30" x2="${W}" y1="${y(3000)}" y2="${y(3000)}" stroke="#1e2a36" stroke-dasharray="3 3"/>
+  return h+"</tbody></table>"}
+
+/* MEJORA 4 + 5 - el grafico. Dos cambios grandes:
+   (a) se dibuja la curva del benchmark comprar-y-sostener en blanco y
+       grueso. Sin ella, un bot con +11% parece exito cuando el mercado
+       hizo +29% y en realidad esta destruyendo valor.
+   (b) la leyenda aisla curvas al pulsar. 22 lineas superpuestas en un
+       lienzo de 190px eran, literalmente, una mancha. */
+let CURVES={},SOLO=null,SHOW_BENCH=true;
+$("#btnBench").onclick=()=>{SHOW_BENCH=!SHOW_BENCH;
+  $("#btnBench").classList.toggle("on",SHOW_BENCH);drawChart()};
+function drawChart(){
+  const svg=$("#chart"),empty=$("#chartEmpty");
+  const names=Object.keys(CURVES).filter(n=>CURVES[n].v.length>1)
+    .filter(n=>SHOW_BENCH||!CURVES[n].bench);
+  if(!names.length){svg.innerHTML="";$("#legend").innerHTML="";
+    empty.style.display="flex";return}
+  empty.style.display="none";
+  const vis=SOLO?names.filter(n=>n===SOLO||CURVES[n].bench):names;
+  const W=760,H=$("#pChart").classList.contains("big")?420:230;
+  svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
+  let mn=1e12,mx=-1e12;
+  vis.forEach(n=>{const v=CURVES[n].v;
+    mn=Math.min(mn,Math.min.apply(null,v));mx=Math.max(mx,Math.max.apply(null,v))});
+  mn=Math.min(mn,2990);mx=Math.max(mx,3010);
+  const s=mx-mn||1,y=v=>H-8-(H-20)*(v-mn)/s;
+  let out=`<line x1="46" x2="${W}" y1="${y(3000)}" y2="${y(3000)}"
+stroke="#1e2a36" stroke-dasharray="3 3"/>
 <text class="ylab" x="2" y="${y(3000)+3}">$3,000</text>
 <text class="ylab" x="2" y="12">${money(mx)}</text>
 <text class="ylab" x="2" y="${H-2}">${money(mn)}</text>`;
-names.forEach((n,i)=>{const v=all[n];
-const p=v.map((q,k)=>`${(30+(W-32)*k/(v.length-1||1)).toFixed(1)},${y(q).toFixed(1)}`).join(" ");
-out+=`<polyline fill="none" stroke="${pal[i%10]}" stroke-width="1.3" points="${p}"/>`});
-svg.innerHTML=out;
-$("#legend").innerHTML=names.map((n,i)=>`<span><i style="background:${pal[i%10]}"></i>${n}</span>`).join("")}
-// exits / excursions (crypto has the closed trades; stocks joins when it closes any)
+  vis.forEach(n=>{const c=CURVES[n],v=c.v;
+    const p=v.map((q,k)=>`${(46+(W-48)*k/(v.length-1||1)).toFixed(1)},${y(q).toFixed(1)}`).join(" ");
+    out+=`<polyline fill="none" stroke="${c.col}" stroke-width="${c.bench?2.6:1.3}"
+${c.bench?'stroke-dasharray="6 3"':""} points="${p}"><title>${n}</title></polyline>`});
+  svg.innerHTML=out;
+  $("#legend").innerHTML=names.map(n=>{
+    const c=CURVES[n],cls=SOLO===n?"solo":(SOLO&&!c.bench?"off":"");
+    return`<span class="${cls}" data-n="${n}" title="Pulsa para aislar esta curva">
+<i style="background:${c.col}"></i>${n}</span>`}).join("");
+  $$("#legend span").forEach(el=>{el.onclick=()=>{
+    SOLO=(SOLO===el.dataset.n)?null:el.dataset.n;drawChart()}});
+  $("#chSub").textContent=SOLO?`aislado: ${SOLO} \u00b7 pulsa de nuevo para ver todo`:"";
+}
+
+async function j(u){try{const r=await fetch(u);return await r.json()}catch(e){return null}}
+
+async function refresh(){
+const[meta,sq,seq,sqS,seqS,led,costs,xs,bench,cf,chk]=await Promise.all(
+["/api/meta","/api/squad","/api/squad_equity","/api/squad_stocks",
+"/api/squad_stocks_equity","/api/exam_ledger","/api/squad_costs","/api/exits",
+"/api/bench","/api/counterfactual","/api/selfcheck"].map(j));
+
+const aC=meta&&meta.armed_crypto,aS=meta&&meta.armed_stocks;
+const cS=seq?series(seq,"bot"):{},sS=seqS?series(seqS,"bot"):{};
+const bAll=bench?series(bench,"bot"):{};
+const bRet=k=>{const v=bAll[k];return (v&&v.length>1)?(v[v.length-1]/v[0]-1):null};
+const bRetC=bRet("bench_bh_crypto"),bRetS=bRet("bench_bh_stocks");
+
+const bC=$("#bC");bC.textContent="crypto "+(aC?"ARMED":"UNARMED");
+bC.className="badge "+(aC?"armed":"unarmed");
+const bS=$("#bS");bS.textContent="stocks "+(aS?"ARMED":"PROPOSED");
+bS.className="badge "+(aS?"armed":"unarmed");
+const open=nyseOpen(),mk=$("#mkt");mk.textContent="NYSE "+(open?"OPEN":"CLOSED");
+mk.className="badge "+(open?"armed":"closed");
+const cy=meta&&meta.cycles,cb=$("#cyc");
+if(cy){cb.textContent=`cycles ${cy.marked}/${cy.expected}`;
+  cb.className="badge "+(cy.marked>=cy.expected-1?"armed":"unarmed");
+  cb.title=cy.missing.length?"horas sin ciclo (UTC): "+cy.missing.join(", "):"sin huecos en 24h"}
+
+/* MEJORA 8 - el cable trampa en la cabecera. Dos smoke tests llevaban
+   SEMANAS fallando sin que nadie los viera. Ahora es imposible no verlo. */
+const ck=$("#chk");
+if(chk&&chk.total){const ok=chk.pass===chk.total;
+  ck.textContent=`tests ${chk.pass}/${chk.total}`;
+  ck.className="badge "+(ok?"armed":"bad");
+  ck.title=ok?"todos los invariantes del charter pasan":
+    "FALLAN: "+chk.tests.filter(t=>t.status!=="PASS")
+      .map(t=>t.test.split("/").pop()+" \u2014 "+t.detail).join(" | ")}
+
+function capStrip(ss,eqEl,pnlEl){const bots=Object.keys(ss);
+  if(!bots.length){$(eqEl).textContent="$33,000";$(pnlEl).textContent="";return}
+  const tot=bots.reduce((a,n)=>a+ss[n][ss[n].length-1],0),base=bots.length*3000,d=tot-base;
+  $(eqEl).textContent=money(tot);
+  const p=$(pnlEl);p.textContent=`${money2(d)} (${pct(d/base)})`;
+  p.className="pnl "+(d>=0?"up":"dn")}
+capStrip(cS,"#cEq","#cPnl");capStrip(sS,"#sEq","#sPnl");
+
+if(costs){const cc=costs.crypto,cs=costs.stocks;
+  if(cc&&cc.fees){let t=`${G("drag","friccion")}: comisiones ${money2(-cc.fees)} \u00b7
+${cc.closed} cerradas bruto ${money2(cc.gross)} \u2192 neto ${money2(cc.net)}`;
+    if(bRetC!=null)t+=` \u00b7 ${G("bench","B&amp;H")} ${pct(bRetC)}`;
+    $("#cNote").innerHTML=t}
+  if(cs&&cs.closed>0){let t=`${G("drag","friccion")}: comisiones ${money2(-cs.fees)} \u00b7
+${cs.closed} cerradas bruto ${money2(cs.gross)} \u2192 neto ${money2(cs.net)}`;
+    if(bRetS!=null)t+=` \u00b7 ${G("bench","B&amp;H")} ${pct(bRetS)}`;
+    $("#sNote").innerHTML=t}}
+
+const tc=Object.values(cS).reduce((a,v)=>a+v[v.length-1],0)||33000;
+const ts=Object.values(sS).reduce((a,v)=>a+v[v.length-1],0)||33000;
+$("#agg").innerHTML=money(tc+ts)+" <small>paper capital</small>";
+const dA=tc+ts-66000,pA=$("#aggP");
+pA.textContent=dA?`${money2(dA)} (${pct(dA/66000)})`:"";pA.className=dA>=0?"up":"dn";
+
+const l1=(led||[]).filter(r=>r.timeframe==="1h"),lS=(led||[]).filter(r=>r.timeframe==="1h-stk");
+$("#exC").textContent=l1.length;$("#exS").textContent=lS.length;
+$("#cSub").textContent=`\u00b7 registro forward \u00b7 ${Object.keys(cS).length} bots`;
+$("#sSub").textContent=`\u00b7 registro forward \u00b7 ${Object.keys(sS).length} bots`;
+$("#cBody").innerHTML=conc((sq&&sq.bots)||{})+squadTable(cS,(sq&&sq.bots)||{},bRetC);
+$("#sBody").innerHTML=conc((sqS&&sqS.bots)||{})+squadTable(sS,(sqS&&sqS.bots)||{},bRetS);
+sortable($("#cBody"));sortable($("#sBody"));
+
+CURVES={};let i=0;
+Object.keys(cS).forEach(k=>{CURVES["c:"+k.replace(/^h_/,"")]={v:cS[k],col:pal[i++%11]}});
+Object.keys(sS).forEach(k=>{CURVES["s:"+k.replace(/^s_/,"")]={v:sS[k],col:pal[i++%11]}});
+Object.keys(bAll).forEach(k=>{const v=bAll[k];if(v.length<2)return;
+  const per=v.map(x=>x/v[0]*3000);
+  CURVES["B&H "+k.replace("bench_bh_","")]={v:per,col:"#ffffff",bench:true}});
+drawChart();
+
+$("#cfBody").innerHTML=cfPanel(cf);sortable($("#cfBody"));
+if(cf&&cf.crypto){const t=Object.values(cf.crypto).reduce((a,d)=>a+d.n,0);
+  $("#cfSub").textContent=`\u00b7 ${t} resueltas`}
 const xc=xs&&xs.crypto,xst=xs&&xs.stocks;
-$("#xSub").textContent=xc?`· ${xc.n} closed`+((xst&&xst.n)?` · stocks ${xst.n}`:""):"";
+$("#xSub").textContent=xc?`\u00b7 ${xc.n} cerradas`+((xst&&xst.n)?` \u00b7 stocks ${xst.n}`:""):"";
 $("#xBody").innerHTML=exitsPanel(xc);
-$("#wBody").innerHTML=worstTable(xc);
-// clock + footer
+$("#wBody").innerHTML=worstTable(xc);sortable($("#wBody"));
+
 const f1=l1.filter(r=>r.verdict==="FAIL").length,p1=l1.filter(r=>r.verdict==="PASS").length;
 const fS=lS.filter(r=>r.verdict==="FAIL").length,pS=lS.filter(r=>r.verdict==="PASS").length;
-$("#clkC").innerHTML="Crypto: <b>"+(aC?"shakedown — 7 consecutive counted days start the clock":`re-certification pending — ${p1+f1}/11 verdicts recorded · arming requires a FRESH owner signature`)+"</b>";
-$("#clkS").innerHTML="Stocks: <b>"+(aS?"shakedown — 7 consecutive counted days start the clock (RTH)":`roster amended 2026-08-04 — ${pS+fS}/11 verdicts recorded · pending fresh owner signature`)+"</b>";
-$("#foot").textContent=`global ledger: ${(led||[]).length} exams · crypto 1h: ${p1} PASS / ${f1} control · stocks 1h: ${pS} PASS / ${fS} control · prediction: 0 PASS`;
-fetch("/api/exam_status").then(r=>r.json()).then(k=>{$("#foot").textContent+=` · K=${k.K} (${k.ledger_rows} recorded + ${k.carried} carried + ${k.screened} screened, rises with every attempt)`+(k.exam_running?" · exam RUNNING now":" · no exam running");}).catch(()=>{});
+$("#clkC").innerHTML="Crypto: <b>"+(aC?"shakedown \u2014 7 dias contados consecutivos arrancan el reloj":
+`re-certificacion pendiente \u2014 ${p1+f1}/11 veredictos`)+"</b>";
+$("#clkS").innerHTML="Stocks: <b>"+(aS?"shakedown \u2014 7 dias contados consecutivos (RTH)":
+`roster enmendado \u2014 ${pS+fS}/11 veredictos`)+"</b>";
+$("#pend").innerHTML=`<div class="hint">Pendientes abiertos:
+friccion acciones (manual, 08-23) \u00b7 topes de posicion (09-21) \u00b7
+pre-registro H1 (11-21) \u00b7 <b>revision independiente sin asignar</b></div>`;
+$("#foot").textContent=`ledger global: ${(led||[]).length} examenes \u00b7 `+
+`crypto ${p1} PASS / ${f1} control \u00b7 stocks ${pS} PASS / ${fS} control`;
+j("/api/exam_status").then(k=>{if(k)$("#foot").textContent+=
+` \u00b7 K=${k.K} (${k.ledger_rows} registrados + ${k.carried} arrastrados + ${k.screened} cribados)`+
+(k.exam_running?" \u00b7 EXAMEN EN CURSO":"")});
+
+zoomable();tips();
 }
-setInterval(()=>{$("#clock").textContent=new Date().toUTCString().slice(17,25)+" UTC · "+new Date().toLocaleTimeString("en-US",{timeZone:"America/Chicago",hour12:false})+" CT"},1000);
-refresh();setInterval(refresh,60000);
+setInterval(()=>{$("#clock").textContent=new Date().toUTCString().slice(17,25)+
+" UTC \u00b7 "+new Date().toLocaleTimeString("en-US",{timeZone:"America/Chicago",hour12:false})+" CT"},1000);
+zoomable();refresh();setInterval(refresh,60000);
+addEventListener("resize",()=>drawChart());
 </script></body></html>

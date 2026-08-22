@@ -260,6 +260,71 @@ def exam_ledger():
         return jsonify(list(csv.DictReader(f)))
 
 
+@app.get("/api/bench")
+def bench():
+    """Curva del benchmark comprar-y-sostener (ops/bench_bh.py).
+
+    Es la comparacion que hace honesto todo lo demas: un bot que hace
+    +11% en un mercado que hizo +29% esta destruyendo valor, y la curva
+    sola no lo muestra. Ver docs/decisions.md 2026-08-22."""
+    p = os.path.join(LOGS, "bench_equity.csv")
+    if not os.path.exists(p):
+        return jsonify([])
+    with open(p) as f:
+        return jsonify(list(csv.DictReader(f))[-4000:])
+
+
+@app.get("/api/counterfactual")
+def counterfactual():
+    """Resumen de senales rechazadas (ops/counterfactual.py).
+
+    Agrega por pista y accion. No devuelve las ~6k filas crudas: el
+    dashboard solo necesita el resumen."""
+    p = os.path.join(LOGS, "counterfactual.csv")
+    if not os.path.exists(p):
+        return jsonify({})
+    agg = {}
+    with open(p) as f:
+        for r in csv.DictReader(f):
+            if r.get("status") != "RESOLVED":
+                continue
+            try:
+                agg.setdefault((r["track"], r["action"]), []).append(
+                    float(r["net_pct"]))
+            except (ValueError, KeyError):
+                pass
+    out = {}
+    for (track, action), vals in agg.items():
+        v = sorted(vals)
+        if not v:
+            continue
+        n = len(v)
+        out.setdefault(track, {})[action] = {
+            "n": n, "median": v[n // 2], "mean": sum(v) / n,
+            "pos_pct": 100.0 * sum(1 for x in v if x > 0) / n}
+    return jsonify(out)
+
+
+@app.get("/api/selfcheck")
+def selfcheck():
+    """Ultimo resultado de los smoke tests (ops/selfcheck.py).
+
+    Existe porque dos tests llevaban SEMANAS fallando sin que nadie los
+    viera. Un cable trampa que no es visible no es un cable trampa."""
+    p = os.path.join(LOGS, "selfcheck.csv")
+    if not os.path.exists(p):
+        return jsonify({"tests": [], "utc": None})
+    with open(p) as f:
+        rows = list(csv.DictReader(f))
+    if not rows:
+        return jsonify({"tests": [], "utc": None})
+    last = rows[-1]["utc"]
+    tests = [r for r in rows if r["utc"] == last]
+    return jsonify({"utc": last, "tests": tests,
+                    "pass": sum(1 for t in tests if t["status"] == "PASS"),
+                    "total": len(tests)})
+
+
 def _armed(mod):
     """Read the ARMED assignment, not prose. The docstrings of both
     seed modules contain lines that BEGIN with 'ARMED' ("ARMED flips
