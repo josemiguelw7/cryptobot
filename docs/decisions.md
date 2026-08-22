@@ -432,3 +432,47 @@ NOTA: esto NO fija el valor del parámetro. El número concreto debe
 elegirse por razonamiento sobre el broker real, escrito antes de
 aplicarlo — no seleccionando de esta tabla el que produzca el resultado
 más cómodo. Elegir de la tabla sería ajustar a la muestra.
+
+---
+
+**2026-08-22 · DECISIONES DEL PROPIETARIO (Jose Miguel).**
+
+**D1 — Fricción en ACCIONES: APROBADA (opción a).** Parámetro declarado
+AHORA, antes de aplicar: **10 bps por pata**. Elegido por razonamiento
+(conservador para acciones líquidas de gran capitalización), NO
+seleccionado de la tabla de reproceso del 2026-08-22 — elegir de esa
+tabla habría sido ajustar a la muestra. Entra el 2026-08-23 según la
+espera de §3.1. Dirección: tightening. Consecuencia aceptada:
+discontinuidad en las curvas de acciones el día que entre.
+
+**D2 — §9.6: un mecanismo nuevo de salida SÍ es mutación de parámetro
+(opción a).** Lectura estricta. Consecuencias vinculantes:
+  - `Bracket` y `TrailStop` NO pueden añadirse a bots existentes.
+  - Cualquier bot con mecanismo de salida nuevo requiere NOMBRE NUEVO,
+    pre-registro, y examen propio contra el contador K global.
+  - Un nombre ya examinado no puede reexaminarse (charter).
+Dirección: tightening. Justificación registrada: si esta lectura resulta
+demasiado rígida, aflojarla después es un cambio deliberado con espera;
+al revés no se puede deshacer.
+
+**D3 — Pista de ACCIONES: REDISEÑO (opción c).** Queda DESBLOQUEADA por
+D2 pero ESTRICTAMENTE CONSTREÑIDA por ella: todo bot del rediseño es un
+nombre nuevo con pre-registro y examen propio. No se recicla ningún
+nombre existente, no se "arregla" ningún bot actual.
+REQUISITO PREVIO: especificación escrita antes de tocar código —
+familias, número de bots por familia, universo, mecanismo de salida,
+riesgo/beneficio, partición de datos. Sin spec no se escribe código;
+esa es precisamente la falla que produjo 20 variantes de una sola idea.
+Los 11 bots actuales de acciones siguen corriendo como línea base hasta
+que el rediseño tenga veredicto propio. No se apagan.
+
+**D4 — Revisor independiente: PENDIENTE.** El propietario propuso usar
+Claude Fable como revisor. ADVERTENCIA REGISTRADA: Fable es un modelo de
+Anthropic, del mismo linaje que la instancia que produjo todo el trabajo
+del 2026-08-22. Usarlo NO resuelve la circularidad — es el mismo sistema
+con más capacidad, y `REVIEW.md` ya rechazó exactamente esta sustitución
+el 2026-08-08. Puede encontrar errores técnicos reales (lookahead, sesgo
+en el contrafactual, bugs) y por eso se procede, pero se registra como
+**segunda opinión**, NO como revisión independiente. El hueco de
+gobernanza sigue ABIERTO. Cualquier veredicto que produzca Fable debe
+anotarse en el ledger con la etiqueta `NO-INDEPENDIENTE`.
