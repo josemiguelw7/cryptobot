@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+ "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Supervision del portal Flask (127.0.0.1:8787).
+
+  POR QUE EXISTE: el portal se ha muerto en silencio al menos dos veces
+  documentadas (2026-08-xx y 2026-08-22). Es la UNICA ventana del
+  propietario al sistema, y su muerte no produce ninguna senal: los bots
+  siguen operando, los logs siguen creciendo, y el dashboard simplemente
+  deja de responder. Depender de que alguien se acuerde de hacer curl no
+  es supervision.
+
+  KeepAlive=true -> launchd lo relanza solo si el proceso muere.
+  ThrottleInterval=30 -> si entra en bucle de arranque/caida, no quema CPU.
+
+  DELIBERADO: esto NO toca el motor de trading. Si el portal cae, los
+  bots siguen operando y el registro forward no se interrumpe. El portal
+  es observacion, no ejecucion.
+
+  Instalar:
+    cp ops/com.cryptobot.portal.plist ~/Library/LaunchAgents/
+    launchctl unload ~/Library/LaunchAgents/com.cryptobot.portal.plist 2>/dev/null
+    launchctl load  ~/Library/LaunchAgents/com.cryptobot.portal.plist
+  Verificar:
+    launchctl list | grep cryptobot.portal
+    curl -s -o /dev/null -w "%{http_code}\n" http://127.0.0.1:8787
+-->
+<plist version="1.0"><dict>
+  <key>Label</key><string>com.cryptobot.portal</string>
+  <key>ProgramArguments</key><array>
+    <string>/Users/haroonrasheed/Projects/cryptobot/.venv/bin/python</string>
+    <string>/Users/haroonrasheed/Projects/cryptobot/portal/app.py</string>
+  </array>
+  <key>KeepAlive</key><true/>
+  <key>RunAtLoad</key><true/>
+  <key>ThrottleInterval</key><integer>30</integer>
+  <key>WorkingDirectory</key>
+  <string>/Users/haroonrasheed/Projects/cryptobot</string>
+  <key>StandardOutPath</key>
+  <string>/Users/haroonrasheed/Projects/cryptobot/logs/portal.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/haroonrasheed/Projects/cryptobot/logs/portal.log</string>
+</dict></plist>

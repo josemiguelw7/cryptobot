@@ -347,3 +347,88 @@ el documento lo redacto el sujeto de la revision. Sustituye y amplia la
 peticion de `REVIEW.md`, sin respuesta desde el 2026-08-08.
 Sigue SIN revisor asignado. Esto no cierra el hueco; solo lo documenta
 mejor. Conseguir el revisor es una accion del propietario.
+
+---
+
+**2026-08-22 · PRE-REGISTRO H1: las salidas por señal destruyen valor.**
+Escrito HOY, antes de cualquier cambio, precisamente porque es el
+hallazgo más tentador de la medición del 2026-08-22 y el que más
+fácilmente se convertiría en racionalización si se dejara para después.
+
+**Hipótesis:** en la pista de CRIPTO, las salidas por `exit_kind=signal`
+tienen esperanza negativa, y el P&L positivo del escuadrón proviene
+sustancialmente de las salidas por `exit_kind=stop`.
+
+**Evidencia que la origina (muestra ya vista, NO cuenta como prueba):**
+131 cierres por señal → −102.26 neto. 25 cierres por stop → +2,435.94.
+9 de 11 bots con P&L de salida-por-señal negativo. Ventana: 17 días.
+
+**Predicción falsable, fijada AHORA:**
+En la ventana 2026-08-23 → 2026-11-21 (90 días, evidencia estrictamente
+posterior a esta entrada), sobre un mínimo de **150 cierres nuevos por
+señal** en cripto, el P&L neto agregado de `exit_kind=signal` será
+**negativo**, y el ratio
+`P&L(stop) / (|P&L(signal)| + P&L(stop))` será **> 0.60**.
+
+**Qué la falsifica:**
+- Si el P&L de salidas por señal resulta ≥ 0 → H1 es FALSA. El resultado
+  de 17 días fue ruido y no se toca el mecanismo de salida.
+- Si se acumulan < 150 cierres en 90 días → INCONCLUSA. NO se extiende
+  la ventana ni se baja el umbral para forzar un veredicto; se registra
+  como inconclusa y se decide entonces si vale una segunda ventana.
+- Si el ratio queda entre 0.40 y 0.60 → INCONCLUSA, misma regla.
+
+**Compromisos que se aceptan por escrito, para que no se puedan
+renegociar cuando llegue el resultado:**
+1. Los umbrales (150 cierres, ratio 0.60, 90 días) quedan CONGELADOS.
+   Cambiarlos después de ver el resultado invalida el pre-registro
+   entero, y así debe registrarse si ocurre.
+2. NO se modifica ningún mecanismo de salida durante la ventana. Un
+   cambio a mitad de camino destruye la comparación.
+3. Confirmar H1 **no autoriza** eliminar las salidas por señal. Autoriza
+   proponer un experimento con nombre nuevo bajo §9.6 — sujeto a la
+   declaración del propietario, todavía pendiente.
+4. Este pre-registro es de CRIPTO. Acciones no tiene mecanismo de stop,
+   así que la hipótesis no es comprobable allí y no se extiende.
+
+**Por qué se pre-registra en vez de actuar:** quitar el mecanismo que
+perdió dinero en la muestra observada es, procedimentalmente, idéntico
+al camino que produjo el +354% falso. La diferencia entre ciencia y
+ajuste no está en la hipótesis, está en si el criterio se fijó antes o
+después de ver el resultado. Aquí se fija antes.
+
+**Evaluación:** 2026-11-21. Insumo: `logs/squad_trades.csv` filtrado a
+`utc > 2026-08-22`, agrupado por `exit_kind`.
+
+**2026-08-22 · APLICADO: supervisión automática del portal (`ops/com.cryptobot.portal.plist`).**
+LaunchAgent con `KeepAlive=true` y `ThrottleInterval=30`. Instalado y
+cargado. Verificado empíricamente, no solo por configuración: se mató el
+proceso con `pkill -9` y launchd lo relanzó solo (PID 44525 → 44622,
+HTTP 200 restaurado en <40s).
+Why: el portal se murió en silencio al menos dos veces documentadas, y
+es la única ventana del propietario al sistema. Su muerte no produce
+ninguna señal — los bots siguen operando y los logs siguen creciendo,
+solo que nadie puede verlo. Depender de que alguien se acuerde de hacer
+curl no es supervisión.
+DELIBERADO: no toca el motor. Si el portal cae, el registro forward
+continúa. El portal es observación, no ejecución.
+
+**2026-08-22 · MEDICIÓN: cuánto de los −965.74 de ACCIONES era ficción contable.**
+Cálculo hipotético sobre las 361 operaciones ya ejecutadas. NO aplica la
+propuesta de fricción (efectiva 2026-08-23) ni adelanta su espera — solo
+dimensiona el daño para que la decisión de mañana no sea a ciegas.
+Notional total movido (ambas patas): $263,187.31.
+   2 bps/pata → coste $52.64    → P&L ajustado  −1,018.38
+   5 bps/pata → coste $131.59   → P&L ajustado  −1,097.33
+  10 bps/pata → coste $263.19   → P&L ajustado  −1,228.93
+  20 bps/pata → coste $526.37   → P&L ajustado  −1,492.11
+Lectura: la fricción cero NO era el problema principal de la pista de
+acciones. Aun a 20 bps por pata, el coste ($526) es la mitad de la
+pérdida ya existente ($966). La pista pierde por la estrategia, no por
+el modelo de costes. La corrección de mañana empeora el número entre un
+5% y un 55%, pero no cambia el diagnóstico: 25.9% de aciertos con R:R
+0.58 no se arregla con un parámetro de fricción.
+NOTA: esto NO fija el valor del parámetro. El número concreto debe
+elegirse por razonamiento sobre el broker real, escrito antes de
+aplicarlo — no seleccionando de esta tabla el que produzca el resultado
+más cómodo. Elegir de la tabla sería ajustar a la muestra.
