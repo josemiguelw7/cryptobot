@@ -11,3 +11,7 @@ utc,test,status,detail
 2026-08-22T21:55:56.828899+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
 2026-08-22T21:55:56.828899+00:00,bot/test_stats.py,PASS,
 2026-08-22T21:55:56.828899+00:00,bot/test_slowclock.py,PASS,
+2026-08-22T22:35:42.928913+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-22T22:35:42.928913+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-22T22:35:42.928913+00:00,bot/test_stats.py,PASS,
+2026-08-22T22:35:42.928913+00:00,bot/test_slowclock.py,PASS,

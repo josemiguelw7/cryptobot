@@ -476,3 +476,43 @@ en el contrafactual, bugs) y por eso se procede, pero se registra como
 **segunda opinión**, NO como revisión independiente. El hueco de
 gobernanza sigue ABIERTO. Cualquier veredicto que produzca Fable debe
 anotarse en el ledger con la etiqueta `NO-INDEPENDIENTE`.
+
+---
+
+**2026-08-22 · PENDIENTES ABIERTOS AL CERRAR LA SESIÓN. No se pierden por esperar.**
+
+**PEND-1 — D1 NO ESTÁ IMPLEMENTADA. Requiere acción manual el 2026-08-23.**
+Error de comunicación registrado: se le dijo al propietario que la
+fricción "entra sola mañana si no la cancelas". **Es falso.**
+`bot/squad_stocks.py:47` sigue diciendo `Q.FEE_TAKER = 0.0` y no existe
+ningún mecanismo programado que lo cambie. Una decisión escrita no es
+una implementación.
+Acción requerida el 2026-08-23: `Q.FEE_TAKER = 0.0010` (10 bps/pata,
+declarados en D1 antes de conocer su efecto). Y actualizar en paralelo
+`FEE["stocks"]` en `ops/bench_bh.py`, o el benchmark queda con ventaja
+sobre los bots — comparación inválida.
+NO se aplica hoy: la espera de §3.1 vence mañana, y saltarla el mismo
+día que se escribió es precisamente la P5 pre-registrada.
+
+**PEND-2 — `MAX_CORR=0.70` vs `MAX_POS=6` sigue sin resolver.**
+Cero carteras válidas de 6 activos existen bajo ambas reglas
+simultáneamente. Arrastrado desde 2026-08-11, no se tocó hoy. No es
+urgente en la práctica (`MAX_POS` real es 3 en cripto y 4 en acciones),
+pero es una regla del charter que el sistema no puede satisfacer, y una
+regla insatisfacible es una regla muerta.
+
+**PEND-3 — La especificación del rediseño de acciones (D3) no existe.**
+D3 aprobó el rediseño; no aprobó ningún diseño concreto. Falta: qué
+familias, cuántos bots por familia, qué universo, qué mecanismo de
+salida (constreñido por D2: nombre nuevo + examen propio), qué
+riesgo/beneficio, qué partición de datos.
+ORDEN RECOMENDADO: escribir la spec DESPUÉS de la auditoría de ChatGPT.
+Si esa auditoría encuentra un problema estructural en el contrafactual o
+en el lookahead, la spec cambia de forma. Diseñar 20 bots nuevos antes
+de saberlo sería trabajo tirado.
+
+**ESTADO OPERATIVO al cerrar:** bench, contrafactual, selfcheck y
+diversity corriendo cada ciclo. Portal bajo `KeepAlive`, relanzamiento
+verificado empíricamente. Selfcheck en 2/4 PASS — los dos fallos de tope
+son reales y esperados, se resuelven el 2026-09-21. Árbol limpio.
+Nada más requiere acción hasta que vuelva la auditoría externa.

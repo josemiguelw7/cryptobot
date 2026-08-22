@@ -60421,3 +60421,117 @@ Subject: Cryptobot league — 2026-08-22
 5. DONCH-BTC  $  3,209.10   +6.97%  today -0.16%  breaker room 19%
 6. RSI-BTC    $  3,000.00   +0.00%  today +0.00%  breaker room 20%
 daily run complete.
+=== data/refresh_daily.py  ===
+  BTC-USD: +0 new, 1489 total
+  ETH-USD: +0 new, 1489 total
+  SOL-USD: +0 new, 1489 total
+  XRP-USD: +0 new, 1137 total
+  ADA-USD: +0 new, 1489 total
+  DOGE-USD: +0 new, 1489 total
+  LINK-USD: +0 new, 1489 total
+  LTC-USD: +0 new, 1489 total
+refresh complete.
+=== data/refresh_intraday.py === already ran today (2026-08-22 UTC); skipping.
+=== ops/stamp.py  ===
+
+confirmed on Bitcoin ..... 4: intraday_standard.md, success_criteria.md, entrance_exam.md, exam_amendment_001.md
+
+!!! RECEIPT MISMATCH on 1 document(s):
+  intraday_success_criteria.md
+    receipt commits to 072b78c7dced2b6a9960323b55f0ddb268a10542fc1c3225cd39c49ebca97cd5
+    file on disk is    6e5627e12d49cfcb48d912ec84fa8a5fb7c82e1c546ffda69a86c07a4e90768b
+  The document was edited after it was stamped. Under the
+  ratchet this is only legitimate if the change makes the
+  criteria STRICTER. Record which, then re-stamp.
+WARNING: ops/stamp.py exited 2 (non-fatal); continuing.
+
+!!! CRITERIA RECEIPT MISMATCH. A pre-registered document was edited after stamping. Under the ratchet this is legitimate only if the change makes the criteria STRICTER.
+
+=== bot/league.py  ===
+[2026-08-22 22:35 UTC] league cycle
+  [BTC-HOLD] equity $3,575.45 holding ['BTC-USD'] -> target ['BTC-USD']
+  [BTC-TREND] equity $3,202.21 holding ['BTC-USD'] -> target ['BTC-USD']
+  [MOM-ROT] equity $4,164.98 holding ['PUMP-USD', 'VVV-USD', 'LINK-USD'] -> target ['PUMP-USD', 'ENA-USD', 'ZEC-USD']
+  [CROSS-BTC] equity $3,575.45 holding ['BTC-USD'] -> target ['BTC-USD']
+  [DONCH-BTC] equity $3,202.21 holding ['BTC-USD'] -> target ['BTC-USD']
+  [RSI-BTC] equity $3,000.00 holding cash -> target cash
+league state saved.
+=== bot/squad.py  ===
+[2026-08-22 22:35 UTC] squad cycle (ARMED)
+  [h_trend_168] $3,592.01 cash  halt-day
+  [h_cross_24_168] $3,711.31 cash  halt-day
+  [h_tsmom_72] $2,773.04 cash  halt->review
+  [h_macd_12_26] $2,782.37 cash  halt->review
+  [h_donch_48_24] $3,522.21 cash  halt-day
+  [h_volbrk_24_96] $3,353.24 cash  halt-day
+  [h_rsi14_reg168] $2,976.92 ['ADA-USD']
+  [h_boll_48] $2,900.55 cash
+  [h_calm_24_168] $2,778.74 cash  halt->review
+  [h_nearhi_168] $3,646.64 ['BTC-USD', 'ETH-USD', 'LTC-USD']
+  [h_nearhi_168] SELL LTC-USD @ 52.5574 net -11.14 (signal, signal_reversal)
+  [h_rand_72] $3,774.23 ['SOL-USD', 'BTC-USD']
+  squad total $35,811.26 · state saved
+=== bot/squad_stocks.py  ===
+[2026-08-22 22:35 UTC / 18:35 ET] market CLOSED - no signals, no counted cycle
+=== bot/diversity.py --log ===
+crypto · 3/11 bots invested
+  mean pairwise overlap (invested only): 0.11   distinct books: 3   effective diversity: 100%
+    [1] BTC-USD ETH-USD  :: h_nearhi_168
+    [1] BTC-USD SOL-USD  :: h_rand_72
+    [1] ADA-USD  :: h_rsi14_reg168
+
+stocks · 10/11 bots invested
+  mean pairwise overlap (invested only): 0.22   distinct books: 9   effective diversity: 90%
+    [2] GOOGL TSLA  :: s_donch_14_7, s_trend_33  <-- CLONE SET
+    [1] NVDA  :: s_boll_14
+    [1] META MSFT NVDA QQQ  :: s_calm_7_33
+    [1] MSFT TSLA  :: s_cross_7_33
+    [1] GOOGL META MSFT TSLA  :: s_macd_12_26
+    [1] IWM QQQ SPY TSLA  :: s_nearhi_33
+    [1] AMZN GOOGL META QQQ  :: s_rand_21
+    [1] META TSLA  :: s_tsmom_21
+    [1] IWM META QQQ  :: s_volbrk_7_33
+  WARNING: 2 bots hold an identical book. That is 1 slice(s) of capital buying an opinion already owned.
+
+logged -> /Users/haroonrasheed/Projects/cryptobot/logs/diversity.csv
+=== ops/bench_bh.py  ===
+bench comprar-y-sostener (medicion, no opera)
+  crypto: 8 activos · 417 puntos · desde $33,000 (11 bots) · retorno +26.02%
+  stocks: 10 activos · 89 puntos · desde $33,000 (11 bots) · retorno -1.65%
+=== ops/counterfactual.py  ===
+contrafactual de senales rechazadas (medicion, no opera)
+  crypto: 4364 decisiones registradas
+  stocks: 1605 decisiones registradas
+
+  --- resumen (net %, horizonte = hold_h declarado) ---
+  crypto:
+    ENTER      n=  151  mediana  -0.677%  media  +0.688%  positivas  41.1%
+    SKIP-cap   n= 2901  mediana  -0.722%  media  +2.454%  positivas  41.6%
+    SKIP-gate  n=  230  mediana  -0.547%  media  -0.441%  positivas  31.3%
+  stocks:
+    ENTER      n=  191  mediana  -0.048%  media  -0.194%  positivas  44.0%
+    SKIP-cap   n= 1245  mediana  +0.000%  media  +0.041%  positivas  48.4%
+
+  953 filas PENDING (horizonte sin vencer); se recalculan en la proxima corrida.
+  NOTA: esto es descriptivo sobre datos ya vistos. NO es autorizacion para
+  mover el tope ni el gate -- eso seria ajustar a la muestra observada.
+=== ops/selfcheck.py  ===
+  selfcheck: 2/4 PASS
+  [FAIL] bot/test_squad_smoke.py: AssertionError: cap!
+  [FAIL] bot/test_squad_stocks_smoke.py: AssertionError: cap breach
+  ^ NO detiene el ciclo por diseno. Ver docs/decisions.md 2026-08-22 (topes sin resolver).
+=== portal/build_site.py  ===
+site/index.html built (2432 equity rows, 13 trades, 38 exams)
+=== ops/backup.py  ===
+backup -> /Users/haroonrasheed/Projects/cryptobot/backups/2026-08-22.zip (30 snapshots kept)
+=== bot/digest.py  ===
+[digest: email not configured, printing]
+Subject: Cryptobot league — 2026-08-22
+
+1. MOM-ROT    $  4,164.98  +38.83%  today +2.03%  breaker room 20%
+2. BTC-HOLD   $  3,575.45  +19.18%  today +0.08%  breaker room 18%
+3. CROSS-BTC  $  3,575.45  +19.18%  today +0.08%  breaker room 18%
+4. BTC-TREND  $  3,202.21   +6.74%  today +0.08%  breaker room 18%
+5. DONCH-BTC  $  3,202.21   +6.74%  today +0.08%  breaker room 18%
+6. RSI-BTC    $  3,000.00   +0.00%  today +0.00%  breaker room 20%
+daily run complete.
