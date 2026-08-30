@@ -516,3 +516,23 @@ diversity corriendo cada ciclo. Portal bajo `KeepAlive`, relanzamiento
 verificado empíricamente. Selfcheck en 2/4 PASS — los dos fallos de tope
 son reales y esperados, se resuelven el 2026-09-21. Árbol limpio.
 Nada más requiere acción hasta que vuelva la auditoría externa.
+
+---
+
+**2026-08-30 · PEND-1 IMPLEMENTADA (con 7 días de retraso, documentado).**
+
+D1 (fricción realista en acciones) quedó firmada el 2026-08-22 con
+espera venciendo el 2026-08-23. No se implementó ese día: no hubo
+sesión entre el 22 y el 30. Hoy se aplicó:
+
+- `bot/squad_stocks.py`: `Q.FEE_TAKER` 0.0 → 0.0010 (10 bps/pata).
+- `ops/bench_bh.py`: `FEE["stocks"]` 0.0 → 0.0015 (fee + slippage,
+  en espejo con el bot, como exigía la propia nota del archivo).
+
+REGISTRO DE HONESTIDAD: los datos de acciones del 2026-08-23 al
+2026-08-30 corrieron con fee=0, en contra de la decisión ya firmada.
+No se anulan (la comparación bot-vs-bench fue internamente coherente,
+ambos a fee cero), pero cualquier lectura de ese tramo debe saber que
+subestima costes. A partir de hoy la serie corre con D1 activa.
+
+Verificación: ambos módulos importan sin error tras el cambio.

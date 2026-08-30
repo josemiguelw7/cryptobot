@@ -1,0 +1,165 @@
+================================================================
+AUDITORIA INDEPENDIENTE CON CHATGPT - GUIA COMPLETA
+Fecha de esta guia: 2026-08-30
+Paquete: audit_chatgpt.zip (163 KB, en la raiz del proyecto,
+generado 2026-08-22, sin credenciales)
+================================================================
+
+POR QUE ESTO IMPORTA
+Todo el sistema lo diseño, midio y reviso Claude. Una revision de
+Claude por Claude no es independiente (REVIEW.md, 2026-08-08).
+ChatGPT es de otro laboratorio y otra arquitectura: esta ES la
+revision independiente que el proyecto lleva pidiendo desde agosto 8.
+
+NOTA: el zip y los numeros del prompt son del 2026-08-22. No los
+actualices - el auditor debe ver exactamente el paquete congelado.
+
+----------------------------------------------------------------
+PASO 1 - SUBIR EL PAQUETE
+----------------------------------------------------------------
+1. Abre chatgpt.com (idealmente con un modelo de razonamiento,
+   el mas capaz que tengas disponible).
+2. Adjunta el archivo: audit_chatgpt.zip
+   (esta en /Users/haroonrasheed/Projects/cryptobot/)
+3. Pega el prompt completo del PASO 2 tal cual, sin editar.
+
+----------------------------------------------------------------
+PASO 2 - PROMPT (copiar desde la linea siguiente hasta FIN)
+----------------------------------------------------------------
+
+Eres un auditor independiente. Te adjunto el codigo y los registros
+de un sistema de trading algoritmico EN PAPEL (sin dinero real).
+Quiero que busques razones por las que sus conclusiones podrian ser
+falsas.
+
+Contexto importante sobre por que te contrato a ti: todo este
+sistema fue disenado, medido, revisado e implementado por Claude
+(Anthropic). Una "revision externa" previa tambien la hizo Claude,
+lo cual no es una revision. Tu eres de otro laboratorio y otra
+arquitectura. Ese es exactamente el punto: necesito a alguien que
+no comparta sus puntos ciegos.
+
+No aceptes ninguna afirmacion de los documentos como evidencia. Si
+un comentario dice "este modulo es solo lectura", verificalo en el
+codigo. Si un documento reporta un numero, recalculalo desde los
+CSV crudos. Los comentarios son afirmaciones, no pruebas. Asume que
+quien los escribio estaba motivado a que su trabajo pareciera
+correcto.
+
+Lo que NO quiero: estrategias de trading, optimizacion de
+parametros, ideas para mejorar el rendimiento, o animo.
+
+Lo que SI quiero: puede este aparato producir un veredicto falso?
+
+CONTEXTO DEL PROYECTO
+
+Sistema de paper trading con 22 bots (11 cripto por hora, 11
+acciones swing), $3,000 cada uno. El principio rector es honestidad
+epistemica: no entra capital real hasta que una estrategia se lo
+gane en pruebas hacia adelante. Nacio de una leccion concreta: un
+backtest ingenuo dio +354% mientras la version honesta del mismo
+sistema dio -90%, por sesgo de supervivencia y lookahead.
+
+Historial relevante: el 2026-08-11 se anularon 11 veredictos de
+acciones tras detectar 792 violaciones de lookahead en 799
+decisiones (se decidia 43 minutos dentro de una barra aun viva).
+
+Resultados al 2026-08-22 (17 dias cripto, 80 ventanas acciones):
+- Cripto: 0 de 11 bots superan comprar-y-sostener (+28.6%). El bot
+  que decide AL AZAR es el #1 con +26.2%.
+- Acciones: los 11 pierden en absoluto; 2 superan el indice (-1.65%).
+- Cripto: salidas por senal -102 neto (131 ops); por stop +2,436
+  (25 ops).
+- Acciones: sin mecanismo de stop, y modelaba friccion CERO.
+
+PREGUNTAS, EN ORDEN DE DANO POTENCIAL
+
+P1 - Lookahead residual. Revisa bot/squad.py y
+ops/lookahead_audit.py: como se determina que barra esta cerrada?
+Puede alguna ruta usar informacion no disponible en el momento de
+la decision? Presta atencion a snapshot_hash, last_closed, y a como
+se cargan las velas.
+
+P2 - Son inocuos los modulos nuevos? ops/bench_bh.py y
+ops/counterfactual.py se declaran "solo lectura" y se cablearon al
+ciclo de produccion (bot/daily.py) con fatal=False. Verifica si
+pueden escribir estado de trading, corromper un log que el motor
+lee, o influir en decisiones por cualquier ruta. Su fallo puede
+romper el ciclo?
+
+P3 - El contrafactual es valido? ops/counterfactual.py calcula el
+retorno a horizonte hold_h de cada senal rechazada, y concluye que
+las bloqueadas rinden media +2.42% contra +0.69% de las ejecutadas,
+pero con mediana casi identica. Busca sesgo de supervivencia, de
+horizonte, lookahead en px_at(), y si comparar con el hold_h
+DECLARADO en vez del tiempo de tenencia REAL invalida la
+comparacion. Los datos crudos estan en logs/counterfactual.csv.
+
+P4 - El pre-registro H1 es falsable de verdad? Esta en
+docs/decisions.md, entrada del 2026-08-22. Predice que las salidas
+por senal seran negativas en 90 dias, con umbrales que se declaran
+congelados. Estan elegidos de forma que sea facil confirmarlos?
+Que grados de libertad quedan para racionalizar el resultado a
+posteriori?
+
+P5 - El sistema de examenes. Contador K global compartido, examenes
+de un solo disparo, prohibicion de reexaminar nombres, holdout de
+120 dias, estres de comisiones 1.5x. Ver
+docs/intraday_success_criteria.md y backtest/exam_ledger.csv. Se
+puede extraer un aprobado de ahi sin habilidad real? Esta bien
+calibrada la correccion por comparaciones multiples?
+
+P6 - La pregunta incomoda. El bot aleatorio gana en cripto. Ninguna
+estrategia supera comprar-y-sostener. Si tu lectura de la evidencia
+es que esto no funciona y no puede funcionar a estos costes de
+transaccion (~1.30% ida y vuelta en cripto), dilo con claridad. Es
+un resultado legitimo y quiero oirlo.
+
+P7 - Gobernanza. El charter esta bloqueado y solo admite cambios
+mas estrictos. Pero cada regla, cada medicion y cada propuesta las
+escribio el mismo agente. Ves senales de que las reglas se hayan
+interpretado de forma conveniente? Hay decisiones presentadas como
+"conservadoras" que en realidad favorezcan un resultado?
+
+FORMATO
+
+Por cada hallazgo: severidad (critica / alta / media / baja), la
+evidencia exacta (archivo, linea, o el calculo que lo demuestra),
+y que habria que cambiar. Si en alguna pregunta no encuentras nada,
+dilo - no rellenes.
+
+Y al final, por separado: que deberia haber preguntado y no esta en
+esta lista? Estas preguntas las redacto el mismo sistema que
+produjo el trabajo auditado, asi que los huecos de la lista son
+probablemente sus puntos ciegos.
+
+FIN DEL PROMPT
+
+----------------------------------------------------------------
+PASO 3 - DURANTE LA CONVERSACION CON CHATGPT
+----------------------------------------------------------------
+- Si pide ver un archivo especifico que no esta en el zip, dile el
+  nombre y traeme la peticion: yo genero el extracto y tu se lo
+  pegas. No le des acceso a nada con credenciales.
+- Si responde con consejos de trading o animo, recuerdale: "solo
+  hallazgos con evidencia, formato del prompt".
+- Pidele al final: "resume tus hallazgos en una tabla: ID,
+  severidad, archivo/linea, descripcion en una frase".
+
+----------------------------------------------------------------
+PASO 4 - QUE HACER CON EL RESULTADO
+----------------------------------------------------------------
+1. Copia la respuesta COMPLETA de ChatGPT (no solo el resumen).
+2. Pegamela en una sesion de Claude tal cual, o guardala en:
+   docs/review/2026-XX-XX_auditoria_chatgpt_RESPUESTA.txt
+3. Con eso haremos triage juntos: cada hallazgo se clasifica en
+   (a) confirmado - se arregla, (b) refutado - se documenta por
+   que, (c) requiere mas datos. NADA se descarta sin escribir la
+   razon en decisions.md.
+4. Regla de honestidad: si Claude dice que un hallazgo de ChatGPT
+   es falso, la carga de la prueba es de Claude, con codigo o
+   numeros reproducibles - no con argumentos.
+5. La spec del rediseno de acciones (PEND-3) se escribe DESPUES
+   de este triage, no antes.
+
+FIN DE LA GUIA

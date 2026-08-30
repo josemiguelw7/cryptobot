@@ -15,3 +15,711 @@ utc,test,status,detail
 2026-08-22T22:35:42.928913+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
 2026-08-22T22:35:42.928913+00:00,bot/test_stats.py,PASS,
 2026-08-22T22:35:42.928913+00:00,bot/test_slowclock.py,PASS,
+2026-08-22T23:36:16.272558+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-22T23:36:16.272558+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-22T23:36:16.272558+00:00,bot/test_stats.py,PASS,
+2026-08-22T23:36:16.272558+00:00,bot/test_slowclock.py,PASS,
+2026-08-23T00:55:37.990218+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-23T00:55:37.990218+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-23T00:55:37.990218+00:00,bot/test_stats.py,PASS,
+2026-08-23T00:55:37.990218+00:00,bot/test_slowclock.py,PASS,
+2026-08-23T01:56:15.880032+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-23T01:56:15.880032+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-23T01:56:15.880032+00:00,bot/test_stats.py,PASS,
+2026-08-23T01:56:15.880032+00:00,bot/test_slowclock.py,PASS,
+2026-08-23T02:56:54.278325+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-23T02:56:54.278325+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-23T02:56:54.278325+00:00,bot/test_stats.py,PASS,
+2026-08-23T02:56:54.278325+00:00,bot/test_slowclock.py,PASS,
+2026-08-23T03:57:32.924534+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-23T03:57:32.924534+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-23T03:57:32.924534+00:00,bot/test_stats.py,PASS,
+2026-08-23T03:57:32.924534+00:00,bot/test_slowclock.py,PASS,
+2026-08-23T04:58:11.398446+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-23T04:58:11.398446+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-23T04:58:11.398446+00:00,bot/test_stats.py,PASS,
+2026-08-23T04:58:11.398446+00:00,bot/test_slowclock.py,PASS,
+2026-08-23T05:58:48.880549+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-23T05:58:48.880549+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-23T05:58:48.880549+00:00,bot/test_stats.py,PASS,
+2026-08-23T05:58:48.880549+00:00,bot/test_slowclock.py,PASS,
+2026-08-23T06:59:26.103096+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-23T06:59:26.103096+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-23T06:59:26.103096+00:00,bot/test_stats.py,PASS,
+2026-08-23T06:59:26.103096+00:00,bot/test_slowclock.py,PASS,
+2026-08-23T08:00:03.445116+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-23T08:00:03.445116+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-23T08:00:03.445116+00:00,bot/test_stats.py,PASS,
+2026-08-23T08:00:03.445116+00:00,bot/test_slowclock.py,PASS,
+2026-08-23T09:00:40.262496+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-23T09:00:40.262496+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-23T09:00:40.262496+00:00,bot/test_stats.py,PASS,
+2026-08-23T09:00:40.262496+00:00,bot/test_slowclock.py,PASS,
+2026-08-23T10:01:18.349388+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-23T10:01:18.349388+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-23T10:01:18.349388+00:00,bot/test_stats.py,PASS,
+2026-08-23T10:01:18.349388+00:00,bot/test_slowclock.py,PASS,
+2026-08-23T11:01:55.917207+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-23T11:01:55.917207+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-23T11:01:55.917207+00:00,bot/test_stats.py,PASS,
+2026-08-23T11:01:55.917207+00:00,bot/test_slowclock.py,PASS,
+2026-08-23T12:02:33.725310+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-23T12:02:33.725310+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-23T12:02:33.725310+00:00,bot/test_stats.py,PASS,
+2026-08-23T12:02:33.725310+00:00,bot/test_slowclock.py,PASS,
+2026-08-23T13:03:11.850422+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-23T13:03:11.850422+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-23T13:03:11.850422+00:00,bot/test_stats.py,PASS,
+2026-08-23T13:03:11.850422+00:00,bot/test_slowclock.py,PASS,
+2026-08-23T14:03:49.407657+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-23T14:03:49.407657+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-23T14:03:49.407657+00:00,bot/test_stats.py,PASS,
+2026-08-23T14:03:49.407657+00:00,bot/test_slowclock.py,PASS,
+2026-08-23T15:04:26.977643+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-23T15:04:26.977643+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-23T15:04:26.977643+00:00,bot/test_stats.py,PASS,
+2026-08-23T15:04:26.977643+00:00,bot/test_slowclock.py,PASS,
+2026-08-23T16:05:04.610480+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-23T16:05:04.610480+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-23T16:05:04.610480+00:00,bot/test_stats.py,PASS,
+2026-08-23T16:05:04.610480+00:00,bot/test_slowclock.py,PASS,
+2026-08-23T17:05:42.070499+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-23T17:05:42.070499+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-23T17:05:42.070499+00:00,bot/test_stats.py,PASS,
+2026-08-23T17:05:42.070499+00:00,bot/test_slowclock.py,PASS,
+2026-08-23T18:06:19.757517+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-23T18:06:19.757517+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-23T18:06:19.757517+00:00,bot/test_stats.py,PASS,
+2026-08-23T18:06:19.757517+00:00,bot/test_slowclock.py,PASS,
+2026-08-23T19:06:57.303124+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-23T19:06:57.303124+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-23T19:06:57.303124+00:00,bot/test_stats.py,PASS,
+2026-08-23T19:06:57.303124+00:00,bot/test_slowclock.py,PASS,
+2026-08-23T20:07:35.062776+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-23T20:07:35.062776+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-23T20:07:35.062776+00:00,bot/test_stats.py,PASS,
+2026-08-23T20:07:35.062776+00:00,bot/test_slowclock.py,PASS,
+2026-08-23T21:08:13.211637+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-23T21:08:13.211637+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-23T21:08:13.211637+00:00,bot/test_stats.py,PASS,
+2026-08-23T21:08:13.211637+00:00,bot/test_slowclock.py,PASS,
+2026-08-23T22:08:50.870599+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-23T22:08:50.870599+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-23T22:08:50.870599+00:00,bot/test_stats.py,PASS,
+2026-08-23T22:08:50.870599+00:00,bot/test_slowclock.py,PASS,
+2026-08-23T23:09:28.144787+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-23T23:09:28.144787+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-23T23:09:28.144787+00:00,bot/test_stats.py,PASS,
+2026-08-23T23:09:28.144787+00:00,bot/test_slowclock.py,PASS,
+2026-08-24T00:28:55.302863+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-24T00:28:55.302863+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-24T00:28:55.302863+00:00,bot/test_stats.py,PASS,
+2026-08-24T00:28:55.302863+00:00,bot/test_slowclock.py,PASS,
+2026-08-24T01:29:32.907081+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-24T01:29:32.907081+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-24T01:29:32.907081+00:00,bot/test_stats.py,PASS,
+2026-08-24T01:29:32.907081+00:00,bot/test_slowclock.py,PASS,
+2026-08-24T02:30:10.882307+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-24T02:30:10.882307+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-24T02:30:10.882307+00:00,bot/test_stats.py,PASS,
+2026-08-24T02:30:10.882307+00:00,bot/test_slowclock.py,PASS,
+2026-08-24T03:30:49.328783+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-24T03:30:49.328783+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-24T03:30:49.328783+00:00,bot/test_stats.py,PASS,
+2026-08-24T03:30:49.328783+00:00,bot/test_slowclock.py,PASS,
+2026-08-24T04:31:26.735140+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-24T04:31:26.735140+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-24T04:31:26.735140+00:00,bot/test_stats.py,PASS,
+2026-08-24T04:31:26.735140+00:00,bot/test_slowclock.py,PASS,
+2026-08-24T05:32:04.092595+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-24T05:32:04.092595+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-24T05:32:04.092595+00:00,bot/test_stats.py,PASS,
+2026-08-24T05:32:04.092595+00:00,bot/test_slowclock.py,PASS,
+2026-08-24T06:32:41.605663+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-24T06:32:41.605663+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-24T06:32:41.605663+00:00,bot/test_stats.py,PASS,
+2026-08-24T06:32:41.605663+00:00,bot/test_slowclock.py,PASS,
+2026-08-24T07:33:19.305861+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-24T07:33:19.305861+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-24T07:33:19.305861+00:00,bot/test_stats.py,PASS,
+2026-08-24T07:33:19.305861+00:00,bot/test_slowclock.py,PASS,
+2026-08-24T08:33:56.689472+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-24T08:33:56.689472+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-24T08:33:56.689472+00:00,bot/test_stats.py,PASS,
+2026-08-24T08:33:56.689472+00:00,bot/test_slowclock.py,PASS,
+2026-08-24T09:34:33.735018+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-24T09:34:33.735018+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-24T09:34:33.735018+00:00,bot/test_stats.py,PASS,
+2026-08-24T09:34:33.735018+00:00,bot/test_slowclock.py,PASS,
+2026-08-24T10:35:11.185805+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-24T10:35:11.185805+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-24T10:35:11.185805+00:00,bot/test_stats.py,PASS,
+2026-08-24T10:35:11.185805+00:00,bot/test_slowclock.py,PASS,
+2026-08-24T11:35:48.672289+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-24T11:35:48.672289+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-24T11:35:48.672289+00:00,bot/test_stats.py,PASS,
+2026-08-24T11:35:48.672289+00:00,bot/test_slowclock.py,PASS,
+2026-08-24T12:36:26.037929+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-24T12:36:26.037929+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-24T12:36:26.037929+00:00,bot/test_stats.py,PASS,
+2026-08-24T12:36:26.037929+00:00,bot/test_slowclock.py,PASS,
+2026-08-24T13:37:37.830367+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-24T13:37:37.830367+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-24T13:37:37.830367+00:00,bot/test_stats.py,PASS,
+2026-08-24T13:37:37.830367+00:00,bot/test_slowclock.py,PASS,
+2026-08-24T14:38:49.846721+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-24T14:38:49.846721+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-24T14:38:49.846721+00:00,bot/test_stats.py,PASS,
+2026-08-24T14:38:49.846721+00:00,bot/test_slowclock.py,PASS,
+2026-08-24T15:40:01.054590+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-24T15:40:01.054590+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-24T15:40:01.054590+00:00,bot/test_stats.py,PASS,
+2026-08-24T15:40:01.054590+00:00,bot/test_slowclock.py,PASS,
+2026-08-24T16:41:13.436337+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-24T16:41:13.436337+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-24T16:41:13.436337+00:00,bot/test_stats.py,PASS,
+2026-08-24T16:41:13.436337+00:00,bot/test_slowclock.py,PASS,
+2026-08-24T17:42:25.592339+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-24T17:42:25.592339+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-24T17:42:25.592339+00:00,bot/test_stats.py,PASS,
+2026-08-24T17:42:25.592339+00:00,bot/test_slowclock.py,PASS,
+2026-08-24T18:43:37.455833+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-24T18:43:37.455833+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-24T18:43:37.455833+00:00,bot/test_stats.py,PASS,
+2026-08-24T18:43:37.455833+00:00,bot/test_slowclock.py,PASS,
+2026-08-24T19:44:50.403919+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-24T19:44:50.403919+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-24T19:44:50.403919+00:00,bot/test_stats.py,PASS,
+2026-08-24T19:44:50.403919+00:00,bot/test_slowclock.py,PASS,
+2026-08-24T20:45:29.250138+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-24T20:45:29.250138+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-24T20:45:29.250138+00:00,bot/test_stats.py,PASS,
+2026-08-24T20:45:29.250138+00:00,bot/test_slowclock.py,PASS,
+2026-08-24T21:46:06.714619+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-24T21:46:06.714619+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-24T21:46:06.714619+00:00,bot/test_stats.py,PASS,
+2026-08-24T21:46:06.714619+00:00,bot/test_slowclock.py,PASS,
+2026-08-24T22:46:44.678802+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-24T22:46:44.678802+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-24T22:46:44.678802+00:00,bot/test_stats.py,PASS,
+2026-08-24T22:46:44.678802+00:00,bot/test_slowclock.py,PASS,
+2026-08-24T23:47:22.476312+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-24T23:47:22.476312+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-24T23:47:22.476312+00:00,bot/test_stats.py,PASS,
+2026-08-24T23:47:22.476312+00:00,bot/test_slowclock.py,PASS,
+2026-08-25T01:37:51.904973+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-25T01:37:51.904973+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-25T01:37:51.904973+00:00,bot/test_stats.py,PASS,
+2026-08-25T01:37:51.904973+00:00,bot/test_slowclock.py,PASS,
+2026-08-25T02:38:25.902456+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-25T02:38:25.902456+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-25T02:38:25.902456+00:00,bot/test_stats.py,PASS,
+2026-08-25T02:38:25.902456+00:00,bot/test_slowclock.py,PASS,
+2026-08-25T03:39:03.823208+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-25T03:39:03.823208+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-25T03:39:03.823208+00:00,bot/test_stats.py,PASS,
+2026-08-25T03:39:03.823208+00:00,bot/test_slowclock.py,PASS,
+2026-08-25T04:39:41.791616+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-25T04:39:41.791616+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-25T04:39:41.791616+00:00,bot/test_stats.py,PASS,
+2026-08-25T04:39:41.791616+00:00,bot/test_slowclock.py,PASS,
+2026-08-25T05:40:19.346616+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-25T05:40:19.346616+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-25T05:40:19.346616+00:00,bot/test_stats.py,PASS,
+2026-08-25T05:40:19.346616+00:00,bot/test_slowclock.py,PASS,
+2026-08-25T06:40:57.131833+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-25T06:40:57.131833+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-25T06:40:57.131833+00:00,bot/test_stats.py,PASS,
+2026-08-25T06:40:57.131833+00:00,bot/test_slowclock.py,PASS,
+2026-08-25T07:41:34.777877+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-25T07:41:34.777877+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-25T07:41:34.777877+00:00,bot/test_stats.py,PASS,
+2026-08-25T07:41:34.777877+00:00,bot/test_slowclock.py,PASS,
+2026-08-25T08:42:12.967187+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-25T08:42:12.967187+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-25T08:42:12.967187+00:00,bot/test_stats.py,PASS,
+2026-08-25T08:42:12.967187+00:00,bot/test_slowclock.py,PASS,
+2026-08-25T09:42:50.504439+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-25T09:42:50.504439+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-25T09:42:50.504439+00:00,bot/test_stats.py,PASS,
+2026-08-25T09:42:50.504439+00:00,bot/test_slowclock.py,PASS,
+2026-08-25T10:43:28.132061+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-25T10:43:28.132061+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-25T10:43:28.132061+00:00,bot/test_stats.py,PASS,
+2026-08-25T10:43:28.132061+00:00,bot/test_slowclock.py,PASS,
+2026-08-25T11:44:05.753141+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-25T11:44:05.753141+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-25T11:44:05.753141+00:00,bot/test_stats.py,PASS,
+2026-08-25T11:44:05.753141+00:00,bot/test_slowclock.py,PASS,
+2026-08-25T12:44:43.712247+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-25T12:44:43.712247+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-25T12:44:43.712247+00:00,bot/test_stats.py,PASS,
+2026-08-25T12:44:43.712247+00:00,bot/test_slowclock.py,PASS,
+2026-08-25T13:45:55.951208+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-25T13:45:55.951208+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-25T13:45:55.951208+00:00,bot/test_stats.py,PASS,
+2026-08-25T13:45:55.951208+00:00,bot/test_slowclock.py,PASS,
+2026-08-25T14:47:08.221760+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-25T14:47:08.221760+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-25T14:47:08.221760+00:00,bot/test_stats.py,PASS,
+2026-08-25T14:47:08.221760+00:00,bot/test_slowclock.py,PASS,
+2026-08-25T15:48:21.573351+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-25T15:48:21.573351+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-25T15:48:21.573351+00:00,bot/test_stats.py,PASS,
+2026-08-25T15:48:21.573351+00:00,bot/test_slowclock.py,PASS,
+2026-08-25T16:49:34.283385+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-25T16:49:34.283385+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-25T16:49:34.283385+00:00,bot/test_stats.py,PASS,
+2026-08-25T16:49:34.283385+00:00,bot/test_slowclock.py,PASS,
+2026-08-25T17:50:47.246199+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-25T17:50:47.246199+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-25T17:50:47.246199+00:00,bot/test_stats.py,PASS,
+2026-08-25T17:50:47.246199+00:00,bot/test_slowclock.py,PASS,
+2026-08-25T18:51:59.416970+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-25T18:51:59.416970+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-25T18:51:59.416970+00:00,bot/test_stats.py,PASS,
+2026-08-25T18:51:59.416970+00:00,bot/test_slowclock.py,PASS,
+2026-08-25T19:53:12.558748+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-25T19:53:12.558748+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-25T19:53:12.558748+00:00,bot/test_stats.py,PASS,
+2026-08-25T19:53:12.558748+00:00,bot/test_slowclock.py,PASS,
+2026-08-25T20:53:50.402450+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-25T20:53:50.402450+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-25T20:53:50.402450+00:00,bot/test_stats.py,PASS,
+2026-08-25T20:53:50.402450+00:00,bot/test_slowclock.py,PASS,
+2026-08-25T21:54:28.321829+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-25T21:54:28.321829+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-25T21:54:28.321829+00:00,bot/test_stats.py,PASS,
+2026-08-25T21:54:28.321829+00:00,bot/test_slowclock.py,PASS,
+2026-08-25T22:55:02.918056+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-25T22:55:02.918056+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-25T22:55:02.918056+00:00,bot/test_stats.py,PASS,
+2026-08-25T22:55:02.918056+00:00,bot/test_slowclock.py,PASS,
+2026-08-25T23:55:36.778853+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-25T23:55:36.778853+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-25T23:55:36.778853+00:00,bot/test_stats.py,PASS,
+2026-08-25T23:55:36.778853+00:00,bot/test_slowclock.py,PASS,
+2026-08-26T01:14:44.778032+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-26T01:14:44.778032+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-26T01:14:44.778032+00:00,bot/test_stats.py,PASS,
+2026-08-26T01:14:44.778032+00:00,bot/test_slowclock.py,PASS,
+2026-08-26T02:15:22.987322+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-26T02:15:22.987322+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-26T02:15:22.987322+00:00,bot/test_stats.py,PASS,
+2026-08-26T02:15:22.987322+00:00,bot/test_slowclock.py,PASS,
+2026-08-26T03:16:01.255260+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-26T03:16:01.255260+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-26T03:16:01.255260+00:00,bot/test_stats.py,PASS,
+2026-08-26T03:16:01.255260+00:00,bot/test_slowclock.py,PASS,
+2026-08-26T04:16:38.467334+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-26T04:16:38.467334+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-26T04:16:38.467334+00:00,bot/test_stats.py,PASS,
+2026-08-26T04:16:38.467334+00:00,bot/test_slowclock.py,PASS,
+2026-08-26T05:17:13.001814+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-26T05:17:13.001814+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-26T05:17:13.001814+00:00,bot/test_stats.py,PASS,
+2026-08-26T05:17:13.001814+00:00,bot/test_slowclock.py,PASS,
+2026-08-26T06:17:50.721437+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-26T06:17:50.721437+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-26T06:17:50.721437+00:00,bot/test_stats.py,PASS,
+2026-08-26T06:17:50.721437+00:00,bot/test_slowclock.py,PASS,
+2026-08-26T07:18:28.424627+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-26T07:18:28.424627+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-26T07:18:28.424627+00:00,bot/test_stats.py,PASS,
+2026-08-26T07:18:28.424627+00:00,bot/test_slowclock.py,PASS,
+2026-08-26T08:19:08.164853+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-26T08:19:08.164853+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-26T08:19:08.164853+00:00,bot/test_stats.py,PASS,
+2026-08-26T08:19:08.164853+00:00,bot/test_slowclock.py,PASS,
+2026-08-26T09:19:46.069608+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-26T09:19:46.069608+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-26T09:19:46.069608+00:00,bot/test_stats.py,PASS,
+2026-08-26T09:19:46.069608+00:00,bot/test_slowclock.py,PASS,
+2026-08-26T10:20:24.237805+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-26T10:20:24.237805+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-26T10:20:24.237805+00:00,bot/test_stats.py,PASS,
+2026-08-26T10:20:24.237805+00:00,bot/test_slowclock.py,PASS,
+2026-08-26T11:21:02.710283+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-26T11:21:02.710283+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-26T11:21:02.710283+00:00,bot/test_stats.py,PASS,
+2026-08-26T11:21:02.710283+00:00,bot/test_slowclock.py,PASS,
+2026-08-26T12:21:41.353777+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-26T12:21:41.353777+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-26T12:21:41.353777+00:00,bot/test_stats.py,PASS,
+2026-08-26T12:21:41.353777+00:00,bot/test_slowclock.py,PASS,
+2026-08-26T13:22:19.644168+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-26T13:22:19.644168+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-26T13:22:19.644168+00:00,bot/test_stats.py,PASS,
+2026-08-26T13:22:19.644168+00:00,bot/test_slowclock.py,PASS,
+2026-08-26T14:23:34.446824+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-26T14:23:34.446824+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-26T14:23:34.446824+00:00,bot/test_stats.py,PASS,
+2026-08-26T14:23:34.446824+00:00,bot/test_slowclock.py,PASS,
+2026-08-26T15:24:47.708320+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-26T15:24:47.708320+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-26T15:24:47.708320+00:00,bot/test_stats.py,PASS,
+2026-08-26T15:24:47.708320+00:00,bot/test_slowclock.py,PASS,
+2026-08-26T16:26:00.873941+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-26T16:26:00.873941+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-26T16:26:00.873941+00:00,bot/test_stats.py,PASS,
+2026-08-26T16:26:00.873941+00:00,bot/test_slowclock.py,PASS,
+2026-08-26T17:27:13.871682+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-26T17:27:13.871682+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-26T17:27:13.871682+00:00,bot/test_stats.py,PASS,
+2026-08-26T17:27:13.871682+00:00,bot/test_slowclock.py,PASS,
+2026-08-26T18:28:26.420640+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-26T18:28:26.420640+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-26T18:28:26.420640+00:00,bot/test_stats.py,PASS,
+2026-08-26T18:28:26.420640+00:00,bot/test_slowclock.py,PASS,
+2026-08-26T19:29:40.033160+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-26T19:29:40.033160+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-26T19:29:40.033160+00:00,bot/test_stats.py,PASS,
+2026-08-26T19:29:40.033160+00:00,bot/test_slowclock.py,PASS,
+2026-08-26T20:30:18.445960+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-26T20:30:18.445960+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-26T20:30:18.445960+00:00,bot/test_stats.py,PASS,
+2026-08-26T20:30:18.445960+00:00,bot/test_slowclock.py,PASS,
+2026-08-26T21:30:57.112503+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-26T21:30:57.112503+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-26T21:30:57.112503+00:00,bot/test_stats.py,PASS,
+2026-08-26T21:30:57.112503+00:00,bot/test_slowclock.py,PASS,
+2026-08-26T22:31:36.983684+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-26T22:31:36.983684+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-26T22:31:36.983684+00:00,bot/test_stats.py,PASS,
+2026-08-26T22:31:36.983684+00:00,bot/test_slowclock.py,PASS,
+2026-08-26T23:33:02.432792+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-26T23:33:02.432792+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-26T23:33:02.432792+00:00,bot/test_stats.py,PASS,
+2026-08-26T23:33:02.432792+00:00,bot/test_slowclock.py,PASS,
+2026-08-27T00:52:56.612317+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-27T00:52:56.612317+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-27T00:52:56.612317+00:00,bot/test_stats.py,PASS,
+2026-08-27T00:52:56.612317+00:00,bot/test_slowclock.py,PASS,
+2026-08-27T01:53:35.441722+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-27T01:53:35.441722+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-27T01:53:35.441722+00:00,bot/test_stats.py,PASS,
+2026-08-27T01:53:35.441722+00:00,bot/test_slowclock.py,PASS,
+2026-08-27T02:54:09.458882+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-27T02:54:09.458882+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-27T02:54:09.458882+00:00,bot/test_stats.py,PASS,
+2026-08-27T02:54:09.458882+00:00,bot/test_slowclock.py,PASS,
+2026-08-27T03:54:47.718166+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-27T03:54:47.718166+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-27T03:54:47.718166+00:00,bot/test_stats.py,PASS,
+2026-08-27T03:54:47.718166+00:00,bot/test_slowclock.py,PASS,
+2026-08-27T04:55:25.842138+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-27T04:55:25.842138+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-27T04:55:25.842138+00:00,bot/test_stats.py,PASS,
+2026-08-27T04:55:25.842138+00:00,bot/test_slowclock.py,PASS,
+2026-08-27T05:56:03.140646+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-27T05:56:03.140646+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-27T05:56:03.140646+00:00,bot/test_stats.py,PASS,
+2026-08-27T05:56:03.140646+00:00,bot/test_slowclock.py,PASS,
+2026-08-27T06:56:41.109406+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-27T06:56:41.109406+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-27T06:56:41.109406+00:00,bot/test_stats.py,PASS,
+2026-08-27T06:56:41.109406+00:00,bot/test_slowclock.py,PASS,
+2026-08-27T07:57:18.717797+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-27T07:57:18.717797+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-27T07:57:18.717797+00:00,bot/test_stats.py,PASS,
+2026-08-27T07:57:18.717797+00:00,bot/test_slowclock.py,PASS,
+2026-08-27T08:57:56.240825+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-27T08:57:56.240825+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-27T08:57:56.240825+00:00,bot/test_stats.py,PASS,
+2026-08-27T08:57:56.240825+00:00,bot/test_slowclock.py,PASS,
+2026-08-27T09:58:33.330616+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-27T09:58:33.330616+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-27T09:58:33.330616+00:00,bot/test_stats.py,PASS,
+2026-08-27T09:58:33.330616+00:00,bot/test_slowclock.py,PASS,
+2026-08-27T10:59:11.154107+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-27T10:59:11.154107+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-27T10:59:11.154107+00:00,bot/test_stats.py,PASS,
+2026-08-27T10:59:11.154107+00:00,bot/test_slowclock.py,PASS,
+2026-08-27T11:59:47.752380+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-27T11:59:47.752380+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-27T11:59:47.752380+00:00,bot/test_stats.py,PASS,
+2026-08-27T11:59:47.752380+00:00,bot/test_slowclock.py,PASS,
+2026-08-27T13:00:24.825701+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-27T13:00:24.825701+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-27T13:00:24.825701+00:00,bot/test_stats.py,PASS,
+2026-08-27T13:00:24.825701+00:00,bot/test_slowclock.py,PASS,
+2026-08-27T14:01:37.720765+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-27T14:01:37.720765+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-27T14:01:37.720765+00:00,bot/test_stats.py,PASS,
+2026-08-27T14:01:37.720765+00:00,bot/test_slowclock.py,PASS,
+2026-08-27T15:02:49.762286+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-27T15:02:49.762286+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-27T15:02:49.762286+00:00,bot/test_stats.py,PASS,
+2026-08-27T15:02:49.762286+00:00,bot/test_slowclock.py,PASS,
+2026-08-27T16:04:08.799632+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-27T16:04:08.799632+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-27T16:04:08.799632+00:00,bot/test_stats.py,PASS,
+2026-08-27T16:04:08.799632+00:00,bot/test_slowclock.py,PASS,
+2026-08-27T17:05:21.721836+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-27T17:05:21.721836+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-27T17:05:21.721836+00:00,bot/test_stats.py,PASS,
+2026-08-27T17:05:21.721836+00:00,bot/test_slowclock.py,PASS,
+2026-08-27T18:06:33.618743+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-27T18:06:33.618743+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-27T18:06:33.618743+00:00,bot/test_stats.py,PASS,
+2026-08-27T18:06:33.618743+00:00,bot/test_slowclock.py,PASS,
+2026-08-27T19:07:45.396444+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-27T19:07:45.396444+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-27T19:07:45.396444+00:00,bot/test_stats.py,PASS,
+2026-08-27T19:07:45.396444+00:00,bot/test_slowclock.py,PASS,
+2026-08-27T20:08:23.362262+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-27T20:08:23.362262+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-27T20:08:23.362262+00:00,bot/test_stats.py,PASS,
+2026-08-27T20:08:23.362262+00:00,bot/test_slowclock.py,PASS,
+2026-08-27T21:09:00.442307+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-27T21:09:00.442307+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-27T21:09:00.442307+00:00,bot/test_stats.py,PASS,
+2026-08-27T21:09:00.442307+00:00,bot/test_slowclock.py,PASS,
+2026-08-27T22:09:38.224874+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-27T22:09:38.224874+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-27T22:09:38.224874+00:00,bot/test_stats.py,PASS,
+2026-08-27T22:09:38.224874+00:00,bot/test_slowclock.py,PASS,
+2026-08-27T23:10:15.911746+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-27T23:10:15.911746+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-27T23:10:15.911746+00:00,bot/test_stats.py,PASS,
+2026-08-27T23:10:15.911746+00:00,bot/test_slowclock.py,PASS,
+2026-08-28T00:29:54.076364+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-28T00:29:54.076364+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-28T00:29:54.076364+00:00,bot/test_stats.py,PASS,
+2026-08-28T00:29:54.076364+00:00,bot/test_slowclock.py,PASS,
+2026-08-28T01:30:31.292022+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-28T01:30:31.292022+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-28T01:30:31.292022+00:00,bot/test_stats.py,PASS,
+2026-08-28T01:30:31.292022+00:00,bot/test_slowclock.py,PASS,
+2026-08-28T02:31:08.903188+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-28T02:31:08.903188+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-28T02:31:08.903188+00:00,bot/test_stats.py,PASS,
+2026-08-28T02:31:08.903188+00:00,bot/test_slowclock.py,PASS,
+2026-08-28T03:31:46.300428+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-28T03:31:46.300428+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-28T03:31:46.300428+00:00,bot/test_stats.py,PASS,
+2026-08-28T03:31:46.300428+00:00,bot/test_slowclock.py,PASS,
+2026-08-28T04:32:24.701916+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-28T04:32:24.701916+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-28T04:32:24.701916+00:00,bot/test_stats.py,PASS,
+2026-08-28T04:32:24.701916+00:00,bot/test_slowclock.py,PASS,
+2026-08-28T05:33:01.938192+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-28T05:33:01.938192+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-28T05:33:01.938192+00:00,bot/test_stats.py,PASS,
+2026-08-28T05:33:01.938192+00:00,bot/test_slowclock.py,PASS,
+2026-08-28T06:33:39.959126+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-28T06:33:39.959126+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-28T06:33:39.959126+00:00,bot/test_stats.py,PASS,
+2026-08-28T06:33:39.959126+00:00,bot/test_slowclock.py,PASS,
+2026-08-28T07:34:17.853050+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-28T07:34:17.853050+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-28T07:34:17.853050+00:00,bot/test_stats.py,PASS,
+2026-08-28T07:34:17.853050+00:00,bot/test_slowclock.py,PASS,
+2026-08-28T08:34:54.972258+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-28T08:34:54.972258+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-28T08:34:54.972258+00:00,bot/test_stats.py,PASS,
+2026-08-28T08:34:54.972258+00:00,bot/test_slowclock.py,PASS,
+2026-08-28T09:35:32.885599+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-28T09:35:32.885599+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-28T09:35:32.885599+00:00,bot/test_stats.py,PASS,
+2026-08-28T09:35:32.885599+00:00,bot/test_slowclock.py,PASS,
+2026-08-28T10:36:10.134178+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-28T10:36:10.134178+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-28T10:36:10.134178+00:00,bot/test_stats.py,PASS,
+2026-08-28T10:36:10.134178+00:00,bot/test_slowclock.py,PASS,
+2026-08-28T11:36:47.564958+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-28T11:36:47.564958+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-28T11:36:47.564958+00:00,bot/test_stats.py,PASS,
+2026-08-28T11:36:47.564958+00:00,bot/test_slowclock.py,PASS,
+2026-08-28T12:37:25.507095+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-28T12:37:25.507095+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-28T12:37:25.507095+00:00,bot/test_stats.py,PASS,
+2026-08-28T12:37:25.507095+00:00,bot/test_slowclock.py,PASS,
+2026-08-28T13:38:38.847050+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-28T13:38:38.847050+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-28T13:38:38.847050+00:00,bot/test_stats.py,PASS,
+2026-08-28T13:38:38.847050+00:00,bot/test_slowclock.py,PASS,
+2026-08-28T14:39:51.837022+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-28T14:39:51.837022+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-28T14:39:51.837022+00:00,bot/test_stats.py,PASS,
+2026-08-28T14:39:51.837022+00:00,bot/test_slowclock.py,PASS,
+2026-08-28T15:41:03.809361+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-28T15:41:03.809361+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-28T15:41:03.809361+00:00,bot/test_stats.py,PASS,
+2026-08-28T15:41:03.809361+00:00,bot/test_slowclock.py,PASS,
+2026-08-28T16:42:16.367202+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-28T16:42:16.367202+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-28T16:42:16.367202+00:00,bot/test_stats.py,PASS,
+2026-08-28T16:42:16.367202+00:00,bot/test_slowclock.py,PASS,
+2026-08-28T17:43:29.585327+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-28T17:43:29.585327+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-28T17:43:29.585327+00:00,bot/test_stats.py,PASS,
+2026-08-28T17:43:29.585327+00:00,bot/test_slowclock.py,PASS,
+2026-08-28T18:44:41.705414+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-28T18:44:41.705414+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-28T18:44:41.705414+00:00,bot/test_stats.py,PASS,
+2026-08-28T18:44:41.705414+00:00,bot/test_slowclock.py,PASS,
+2026-08-28T19:45:54.554540+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-28T19:45:54.554540+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-28T19:45:54.554540+00:00,bot/test_stats.py,PASS,
+2026-08-28T19:45:54.554540+00:00,bot/test_slowclock.py,PASS,
+2026-08-28T20:46:31.904419+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-28T20:46:31.904419+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-28T20:46:31.904419+00:00,bot/test_stats.py,PASS,
+2026-08-28T20:46:31.904419+00:00,bot/test_slowclock.py,PASS,
+2026-08-28T21:47:08.762236+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-28T21:47:08.762236+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-28T21:47:08.762236+00:00,bot/test_stats.py,PASS,
+2026-08-28T21:47:08.762236+00:00,bot/test_slowclock.py,PASS,
+2026-08-28T22:47:45.702207+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-28T22:47:45.702207+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-28T22:47:45.702207+00:00,bot/test_stats.py,PASS,
+2026-08-28T22:47:45.702207+00:00,bot/test_slowclock.py,PASS,
+2026-08-28T23:48:21.096798+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-28T23:48:21.096798+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-28T23:48:21.096798+00:00,bot/test_stats.py,PASS,
+2026-08-28T23:48:21.096798+00:00,bot/test_slowclock.py,PASS,
+2026-08-29T01:07:47.860324+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-29T01:07:47.860324+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-29T01:07:47.860324+00:00,bot/test_stats.py,PASS,
+2026-08-29T01:07:47.860324+00:00,bot/test_slowclock.py,PASS,
+2026-08-29T02:08:24.854669+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-29T02:08:24.854669+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-29T02:08:24.854669+00:00,bot/test_stats.py,PASS,
+2026-08-29T02:08:24.854669+00:00,bot/test_slowclock.py,PASS,
+2026-08-29T03:09:01.355104+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-29T03:09:01.355104+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-29T03:09:01.355104+00:00,bot/test_stats.py,PASS,
+2026-08-29T03:09:01.355104+00:00,bot/test_slowclock.py,PASS,
+2026-08-29T04:09:34.241145+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-29T04:09:34.241145+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-29T04:09:34.241145+00:00,bot/test_stats.py,PASS,
+2026-08-29T04:09:34.241145+00:00,bot/test_slowclock.py,PASS,
+2026-08-29T05:10:10.342482+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-29T05:10:10.342482+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-29T05:10:10.342482+00:00,bot/test_stats.py,PASS,
+2026-08-29T05:10:10.342482+00:00,bot/test_slowclock.py,PASS,
+2026-08-29T06:10:46.088494+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-29T06:10:46.088494+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-29T06:10:46.088494+00:00,bot/test_stats.py,PASS,
+2026-08-29T06:10:46.088494+00:00,bot/test_slowclock.py,PASS,
+2026-08-29T07:11:22.427854+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-29T07:11:22.427854+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-29T07:11:22.427854+00:00,bot/test_stats.py,PASS,
+2026-08-29T07:11:22.427854+00:00,bot/test_slowclock.py,PASS,
+2026-08-29T08:11:58.495641+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-29T08:11:58.495641+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-29T08:11:58.495641+00:00,bot/test_stats.py,PASS,
+2026-08-29T08:11:58.495641+00:00,bot/test_slowclock.py,PASS,
+2026-08-29T09:12:35.321654+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-29T09:12:35.321654+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-29T09:12:35.321654+00:00,bot/test_stats.py,PASS,
+2026-08-29T09:12:35.321654+00:00,bot/test_slowclock.py,PASS,
+2026-08-29T10:13:12.037174+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-29T10:13:12.037174+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-29T10:13:12.037174+00:00,bot/test_stats.py,PASS,
+2026-08-29T10:13:12.037174+00:00,bot/test_slowclock.py,PASS,
+2026-08-29T11:13:48.521889+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-29T11:13:48.521889+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-29T11:13:48.521889+00:00,bot/test_stats.py,PASS,
+2026-08-29T11:13:48.521889+00:00,bot/test_slowclock.py,PASS,
+2026-08-29T12:14:24.699402+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-29T12:14:24.699402+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-29T12:14:24.699402+00:00,bot/test_stats.py,PASS,
+2026-08-29T12:14:24.699402+00:00,bot/test_slowclock.py,PASS,
+2026-08-29T13:15:01.336965+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-29T13:15:01.336965+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-29T13:15:01.336965+00:00,bot/test_stats.py,PASS,
+2026-08-29T13:15:01.336965+00:00,bot/test_slowclock.py,PASS,
+2026-08-29T14:15:38.352563+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-29T14:15:38.352563+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-29T14:15:38.352563+00:00,bot/test_stats.py,PASS,
+2026-08-29T14:15:38.352563+00:00,bot/test_slowclock.py,PASS,
+2026-08-29T15:16:15.628194+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-29T15:16:15.628194+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-29T15:16:15.628194+00:00,bot/test_stats.py,PASS,
+2026-08-29T15:16:15.628194+00:00,bot/test_slowclock.py,PASS,
+2026-08-29T16:16:52.300509+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-29T16:16:52.300509+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-29T16:16:52.300509+00:00,bot/test_stats.py,PASS,
+2026-08-29T16:16:52.300509+00:00,bot/test_slowclock.py,PASS,
+2026-08-29T17:17:25.189950+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-29T17:17:25.189950+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-29T17:17:25.189950+00:00,bot/test_stats.py,PASS,
+2026-08-29T17:17:25.189950+00:00,bot/test_slowclock.py,PASS,
+2026-08-29T18:17:58.315528+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-29T18:17:58.315528+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-29T18:17:58.315528+00:00,bot/test_stats.py,PASS,
+2026-08-29T18:17:58.315528+00:00,bot/test_slowclock.py,PASS,
+2026-08-29T19:18:31.600950+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-29T19:18:31.600950+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-29T19:18:31.600950+00:00,bot/test_stats.py,PASS,
+2026-08-29T19:18:31.600950+00:00,bot/test_slowclock.py,PASS,
+2026-08-29T20:19:08.162063+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-29T20:19:08.162063+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-29T20:19:08.162063+00:00,bot/test_stats.py,PASS,
+2026-08-29T20:19:08.162063+00:00,bot/test_slowclock.py,PASS,
+2026-08-29T21:19:45.786794+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-29T21:19:45.786794+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-29T21:19:45.786794+00:00,bot/test_stats.py,PASS,
+2026-08-29T21:19:45.786794+00:00,bot/test_slowclock.py,PASS,
+2026-08-29T22:20:22.736186+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-29T22:20:22.736186+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-29T22:20:22.736186+00:00,bot/test_stats.py,PASS,
+2026-08-29T22:20:22.736186+00:00,bot/test_slowclock.py,PASS,
+2026-08-29T23:21:02.749709+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-29T23:21:02.749709+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-29T23:21:02.749709+00:00,bot/test_stats.py,PASS,
+2026-08-29T23:21:02.749709+00:00,bot/test_slowclock.py,PASS,
+2026-08-30T00:40:29.676030+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-30T00:40:29.676030+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-30T00:40:29.676030+00:00,bot/test_stats.py,PASS,
+2026-08-30T00:40:29.676030+00:00,bot/test_slowclock.py,PASS,
+2026-08-30T01:41:07.164255+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-30T01:41:07.164255+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-30T01:41:07.164255+00:00,bot/test_stats.py,PASS,
+2026-08-30T01:41:07.164255+00:00,bot/test_slowclock.py,PASS,
+2026-08-30T02:41:44.328811+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-30T02:41:44.328811+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-30T02:41:44.328811+00:00,bot/test_stats.py,PASS,
+2026-08-30T02:41:44.328811+00:00,bot/test_slowclock.py,PASS,
+2026-08-30T03:42:21.050958+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-30T03:42:21.050958+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-30T03:42:21.050958+00:00,bot/test_stats.py,PASS,
+2026-08-30T03:42:21.050958+00:00,bot/test_slowclock.py,PASS,
+2026-08-30T04:42:57.610181+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-30T04:42:57.610181+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-30T04:42:57.610181+00:00,bot/test_stats.py,PASS,
+2026-08-30T04:42:57.610181+00:00,bot/test_slowclock.py,PASS,
+2026-08-30T05:43:34.213362+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-30T05:43:34.213362+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-30T05:43:34.213362+00:00,bot/test_stats.py,PASS,
+2026-08-30T05:43:34.213362+00:00,bot/test_slowclock.py,PASS,
+2026-08-30T06:44:10.643018+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-30T06:44:10.643018+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-30T06:44:10.643018+00:00,bot/test_stats.py,PASS,
+2026-08-30T06:44:10.643018+00:00,bot/test_slowclock.py,PASS,
+2026-08-30T07:44:46.834587+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-30T07:44:46.834587+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-30T07:44:46.834587+00:00,bot/test_stats.py,PASS,
+2026-08-30T07:44:46.834587+00:00,bot/test_slowclock.py,PASS,
+2026-08-30T08:45:22.738277+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-30T08:45:22.738277+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-30T08:45:22.738277+00:00,bot/test_stats.py,PASS,
+2026-08-30T08:45:22.738277+00:00,bot/test_slowclock.py,PASS,
+2026-08-30T09:45:59.311129+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-30T09:45:59.311129+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-30T09:45:59.311129+00:00,bot/test_stats.py,PASS,
+2026-08-30T09:45:59.311129+00:00,bot/test_slowclock.py,PASS,
+2026-08-30T10:46:35.348498+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-30T10:46:35.348498+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-30T10:46:35.348498+00:00,bot/test_stats.py,PASS,
+2026-08-30T10:46:35.348498+00:00,bot/test_slowclock.py,PASS,
+2026-08-30T11:47:11.287802+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-30T11:47:11.287802+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-30T11:47:11.287802+00:00,bot/test_stats.py,PASS,
+2026-08-30T11:47:11.287802+00:00,bot/test_slowclock.py,PASS,
+2026-08-30T12:47:47.872171+00:00,bot/test_squad_smoke.py,FAIL,AssertionError: cap!
+2026-08-30T12:47:47.872171+00:00,bot/test_squad_stocks_smoke.py,FAIL,AssertionError: cap breach
+2026-08-30T12:47:47.872171+00:00,bot/test_stats.py,PASS,
+2026-08-30T12:47:47.872171+00:00,bot/test_slowclock.py,PASS,

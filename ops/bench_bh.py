@@ -23,10 +23,11 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "logs", "bench_equity.csv")
 
 # Friccion de entrada. Espeja squad.py s4.1 (FEE_TAKER 0.004 + slippage).
-# Acciones: 0.0 hoy, coherente con squad_stocks.py. La propuesta de
-# friccion realista (efectiva 2026-08-23) cambiara este numero; cuando
-# lo haga, ESTE valor debe moverse con el, o el bench queda con ventaja.
-FEE = {"crypto": 0.004 + 0.0010, "stocks": 0.0}
+# Acciones: 0.0010 + 0.0005 slippage, en espejo con squad_stocks.py
+# Q.FEE_TAKER (D1, implementada 2026-08-30 junto con el bot - PEND-1).
+# Regla viva: si Q.FEE_TAKER cambia, ESTE valor se mueve con el,
+# o el bench queda con ventaja y la comparacion es invalida.
+FEE = {"crypto": 0.004 + 0.0010, "stocks": 0.0010 + 0.0005}
 
 TRACKS = {
     "crypto": {

@@ -43,8 +43,10 @@ Q.TRLOG = os.path.join(ROOT, "logs", "squad_stocks_trades.csv")
 Q.DECLOG = os.path.join(ROOT, "logs", "squad_stocks_decisions.csv")
 Q.DAYLOG = os.path.join(ROOT, "logs", "squad_stocks_daily.csv")
 
-# --- costs: zero commission, flat 5bps slippage ---------------------
-Q.FEE_TAKER = 0.0
+# --- costs: 10bps/pata (D1, decisions.md 2026-08-22) + 5bps slippage
+# Implementado 2026-08-30 (PEND-1; la espera de s3.1 vencio 2026-08-23,
+# datos del 23 al 30 corrieron con fee=0 - ver decisions.md).
+Q.FEE_TAKER = 0.0010
 Q.slip_for = lambda t: 0.0005
 
 # --- vol sizing on session scale (7 RTH bars, not 24) ---------------
