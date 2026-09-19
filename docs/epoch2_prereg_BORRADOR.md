@@ -11,7 +11,7 @@ aleatorio encabeza cripto; desde el 2026-09-02 la pista cripto está
 NO se apaga ni se reescribe: sigue como línea base hasta H1 (2026-11-21).
 
 ## 1. Principios de diseño (lo que cambia respecto a Época 1)
-1. POCOS bots (4 + control), cada uno con una hipótesis escrita de
+1. POCOS bots (3 hipótesis = 4 bots, + control), cada uno con una hipótesis escrita de
    *quién pierde el dinero que el bot gana*. Sin esa frase no entra.
 2. Marco DIARIO. Máximo ~2 decisiones por bot por semana. La fricción
    deja de ser el factor dominante.
@@ -38,6 +38,33 @@ salida por señal. Es H1 en forma de experimento controlado.
 - Me equivoco si: tras ≥40 operaciones por gemelo, la diferencia de
   expectativa por operación no es distinguible de cero.
 
+### E2-INS · compras agrupadas de insiders (Form 4)
+Afirmación: cuando ≥3 directivos DISTINTOS de una empresa compran en
+mercado abierto (código P) dentro de 30 días, comprar a la apertura
+siguiente a la PUBLICACIÓN del tercer Form 4 y mantener 126 sesiones
+bate a SPY neto de costes.
+- Quién pierde: vendedores que ignoran información pública que se
+  difunde despacio. Retraso legal: 2 días hábiles (no 45).
+- Universo: capitalización ≥ $500M (en micro-caps el efecto es mayor
+  pero el llenado en papel sería ficción). Fuente: SEC EDGAR, gratuita.
+- Se excluyen ventas, opciones ejercidas y planes 10b5-1.
+- Control: mismas fechas, ticker al azar del mismo universo.
+- Expectativa pre-registrada: ventaja pequeña e incierta; resultado más
+  probable, indistinguible de SPY. Me equivoco si tras ≥40 señales el
+  exceso medio sobre el control no es distinguible de cero.
+
+### E2-RISK · benchmark con gestión de riesgo
+Afirmación: comprar-y-sostener (BTC+ETH / SPY) con filtro de tendencia
+de 200 días y objetivo de volatilidad reduce el drawdown máximo ≥1/3
+cediendo <1/4 del retorno. No pretende batir al benchmark en retorno.
+
+### E2-RAND · control aleatorio
+Mismas frecuencia y tamaño que el promedio de los demás. Si queda en la
+mitad superior, la época no demostró nada. Esa frase aparece literal.
+
+## 2b. Segunda tanda (NO entran ahora; se deciden tras la primera)
+Motivo: no repetir el error de 22 bots a la vez.
+
 ### E2-CONG · copia de divulgaciones del Congreso (acciones)
 Afirmación: comprar en la FECHA DE PUBLICACIÓN (nunca la de transacción:
 eso es lookahead) las compras divulgadas, mantener 90 días, bate a SPY.
@@ -56,15 +83,6 @@ rebalanceo trimestral en fecha de publicación del 13F, baten a SPY.
 - Lista de gestores fijada ANTES de mirar resultados (sesgo de
   supervivencia: elegir hoy a los que ya ganaron es el +354%).
 
-### E2-RISK · benchmark con gestión de riesgo
-Afirmación: comprar-y-sostener (BTC+ETH / SPY) con filtro de tendencia
-de 200 días y objetivo de volatilidad reduce el drawdown máximo ≥1/3
-cediendo <1/4 del retorno. No pretende batir al benchmark en retorno.
-
-### E2-RAND · control aleatorio
-Mismas frecuencia y tamaño que el promedio de los demás. Si queda en la
-mitad superior, la época no demostró nada. Esa frase aparece literal.
-
 ## 3. Lo que NO se hace
 - No se reanuda, renombra ni "arregla" ningún bot de Época 1.
 - No se acorta ninguna ventana de evaluación. 10 bots sin ventaja dan
@@ -75,4 +93,5 @@ mitad superior, la época no demostró nada. Esa frase aparece literal.
 [ ] Auditoría no-Claude (D4) hecha o formalmente retirada como bloqueo
 [ ] Jose Miguel explica con sus palabras cada candidato (§6.1)
 [ ] Horizonte y nº mínimo de operaciones por candidato
-[ ] Fuente de datos concreta para E2-CONG y E2-13F
+[ ] Descargador EDGAR Form 4 con fecha de PUBLICACIÓN y auditoría de lookahead
+[ ] Selección recomendada por Claude 2026-09-18: E2-SF, E2-INS, E2-RISK, E2-RAND
