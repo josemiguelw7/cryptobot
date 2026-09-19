@@ -536,3 +536,52 @@ ambos a fee cero), pero cualquier lectura de ese tramo debe saber que
 subestima costes. A partir de hoy la serie corre con D1 activa.
 
 Verificación: ambos módulos importan sin error tras el cambio.
+
+
+---
+
+**2026-09-18 · HALLAZGO: la pista CRIPTO lleva ~17 días prácticamente apagada.**
+9 de 11 bots fuera: 5 en halt->review (macd 08-11, tsmom 08-12, calm
+08-13, donch 08-28, rand 08-31) y 4 BENCHED por −10% desde pico (volbrk
+08-24, trend 08-31, nearhi 09-01, cross 09-05). Capital invertido: 89%
+(08-09) → 35% (08-29) → 0-9% desde 09-02. Consecuencias:
+- El "+4.9% vs +34.1% bench" desde septiembre compara efectivo contra
+  mercado, no estrategias contra mercado. Debe leerse así.
+- H1 (2026-11-21) se evaluará con muy pocas salidas nuevas si nada cambia.
+- Que el control ALEATORIO haya sido detenido por −6%/7d indica que los
+  interruptores disparan por ruido al tamaño actual (TV_DAY 2%, altcoins
+  con 4-5% de vol diaria). Los interruptores son Tier 1 (solo más
+  estrictos): NO se proponen cambios a sus números.
+- Se deben 4 autopsias de retiro (charter s8). Ninguna escrita.
+- No hubo revisión de sábado entre 08-30 y 09-18 (sin commits).
+
+**2026-09-18 · REPARACIÓN (§3.2, sin entrada previa requerida): `ops/review.py`.**
+`bot/squad.py` documenta "resumes at review" pero no existía ningún
+camino de código que reanudara: un halt temporal era permanente. Se
+añade la herramienta de revisión. No cambia ningún umbral. Guardas con
+test de fallo (`ops/test_review.py`, §5.1): solo sábado America/Chicago;
+nunca reanuda un BENCHED; todo resume queda en `logs/review_log.csv`.
+Añadido a `ops/selfcheck.py`. La reanudación la ejecuta el propietario,
+no un LLM. Qué cede Jose Miguel al aceptarla: nada en reglas; asume que
+reanudar bots sin ventaja demostrada volverá a pagar comisiones.
+
+**2026-09-18 · REGISTRO P5.** El propietario pidió "hacer todos los
+cambios ya". Se aplicó solo lo que §3.2 permite el mismo día (reparación
++ documentos sin efecto). Todo lo demás queda como borrador o propuesta
+con su espera. Predicción 5 del charter, funcionando como fue escrita.
+
+**2026-09-18 · INSUMO para la decisión de topes del 2026-09-21.**
+Contrafactual ≥98% resuelto (167 PENDING de 9,899). Cripto: ENTER media
++0.82% / mediana −0.68%; SKIP-cap media +3.16% / mediana −0.40%.
+Acciones: ENTER −0.08% / SKIP-cap +0.02%. Lectura: el tope no selecciona
+mejores señales y las medianas son negativas con o sin tope. No hay
+evidencia que sostenga MAX_POS 3/4 por encima del valor del charter (2);
+la carga de la prueba (entrada 08-22) no se cumple. Decide el propietario
+el 09-21. Advertencia: es descriptivo sobre muestra ya vista.
+
+**2026-09-18 · BORRADOR SIN FIRMAR: `docs/epoch2_prereg_BORRADOR.md`.**
+Época 2: 4 candidatos + control, marco diario, tamaño reducido en vez de
+interruptores aflojados. Incluye la hipótesis "Set and Forget" como
+experimento de gemelos (salida bracket vs señal) y copia de
+divulgaciones del Congreso con expectativa pre-registrada de NO batir a
+SPY. Sin efecto hasta firma en revisión de sábado.

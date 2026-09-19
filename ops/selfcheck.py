@@ -28,7 +28,8 @@ PY = sys.executable
 LOG = os.path.join(ROOT, "logs", "selfcheck.csv")
 
 TESTS = ["bot/test_squad_smoke.py", "bot/test_squad_stocks_smoke.py",
-         "bot/test_stats.py", "bot/test_slowclock.py"]
+         "bot/test_stats.py", "bot/test_slowclock.py",
+         "ops/test_review.py"]
 
 
 def last_line(txt):
