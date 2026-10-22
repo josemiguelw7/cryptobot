@@ -585,3 +585,17 @@ interruptores aflojados. Incluye la hipótesis "Set and Forget" como
 experimento de gemelos (salida bracket vs señal) y copia de
 divulgaciones del Congreso con expectativa pre-registrada de NO batir a
 SPY. Sin efecto hasta firma en revisión de sábado.
+
+
+**2026-10-22 · DECISIÓN DEL PROPIETARIO: cierre de cripto y acciones; el proyecto pasa a futuros.**
+Jose Miguel decide detener ambos escuadrones (cripto horario y acciones) y
+reorientar el proyecto a futuros (NQ/MNQ, flujo de volumen). Motivo: los
+datos y estrategias actuales no son relevantes para futuros. Nada se borra:
+estado final congelado en git con la etiqueta `archivo-cripto-acciones-2026-10-22`
+y copia de datos no versionados en `~/Projects/archivo/cryptobot-2026-10-22.tgz`.
+El job `com.cryptobot.daily` se descarga de launchd (plist movido a
+`ops/disabled/`). El portal sigue en pie. Se conserva la infraestructura de
+gobernanza (charter, libro de exámenes, bóveda) para reutilizarla en futuros.
+Estado al cierre: sin operaciones desde 2026-10-04; el bot aleatorio
+lideraba el escuadrón cripto. Datos de futuros: Databento (GLBX.MDP3,
+trades con lado agresor), probado el 2026-10-22 con un día de ES por ~$0.62.
