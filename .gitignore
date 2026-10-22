@@ -16,3 +16,6 @@ credentials.json
 secrets.json
 .DS_Store
 audit_chatgpt.zip
+
+# Futures tick data (large, re-downloadable from Databento)
+data/futures/
