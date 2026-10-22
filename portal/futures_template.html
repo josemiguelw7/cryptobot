@@ -52,8 +52,8 @@ a{color:var(--accent)}
 .pipe{grid-template-columns:repeat(5,minmax(0,1fr))}.step{font-size:10.5px;padding:8px 3px}.step b{font-size:11.5px}}
 </style></head><body>
 <h1>Liga de Futuros · NQ</h1>
-<div class="sub">Diez bots compiten con dinero simulado sobre datos tick del Nasdaq-100.
-Uno sigue la regla de Oscar, otro entra al azar como control, y ocho leen el flujo de órdenes.
+<div class="sub">Laboratorio de order flow sobre datos tick del Nasdaq-100: solo volumen real y operaciones reales,
+sin velas ni indicadores clásicos. Cada estrategia tiene que ganarle a un bot que entra al azar.
 Nada de esto toca dinero real.</div>
 
 <div class="card"><h2>En qué etapa vamos</h2>
@@ -69,7 +69,7 @@ Nada de esto toca dinero real.</div>
   <div class="seal" id="seal"></div>
 </div>
 
-<div class="card"><h2>El escuadrón · 10 bots</h2>
+<div class="card"><h2 id="squadTitle">Estrategias en estudio</h2>
   <div class="grid" id="bots"></div>
   <div class="note">Para pasar, un bot tiene que ganarle al <b>aleatorio</b> después de comisiones,
   en datos que no usó para diseñarse, y aprobar el examen final sellado.</div>
@@ -128,9 +128,10 @@ const esc = s => String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>'
   document.getElementById('seal').innerHTML =
     `🔒 <b>Examen final desde ${esc(ds.exam_holdout_from||'?')}.</b> ${esc(ds.exam_holdout_note||'')}`;
 
+  document.getElementById('squadTitle').textContent='Estrategias en estudio · '+bots.length+' (lista abierta)';
   document.getElementById('bots').innerHTML = bots.map(b=>{
-    const cls = b.kind==='control'?'b-ctl':(b.id==='OSC'?'b-osc':'b-st');
-    const lab = b.kind==='control'?'CONTROL':(b.id==='OSC'?'OSCAR':'ORDER FLOW');
+    const cls = b.kind==='control'?'b-ctl':'b-st';
+    const lab = b.kind==='control'?'CONTROL':'ORDER FLOW';
     const n = (D.runs_by_bot||{})[b.id]||0;
     return `<div class="bot"><div class="top"><span class="id">${esc(b.id)}</span>
       <span class="badge ${cls}">${lab}</span></div>
