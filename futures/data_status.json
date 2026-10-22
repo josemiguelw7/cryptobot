@@ -1,0 +1,19 @@
+{
+  "snapshot_utc": "2026-10-22T23:11:00Z",
+  "source": "ATAS X vía Rithmic · Radtak Tick Downloader V3.2 · laptop GL-F5X73GK70V",
+  "symbol": "NQ",
+  "job_from": "2024-01-01",
+  "job_to": "2026-10-22",
+  "sessions_target": 723,
+  "sessions_ok": 128,
+  "sessions_no_data": 2,
+  "first_session": "2024-01-02",
+  "downloading_now": "2024-06-14",
+  "contracts_seen": ["NQH4", "NQM4", "NQU6", "NQZ6"],
+  "trades": 37391764,
+  "volume": 77898407,
+  "size_gb": 0.83,
+  "test_sessions_note": "Incluye 11 sesiones de prueba (08 al 22 de septiembre de 2026) usadas para validar el cambio de contrato NQU6 → NQZ6.",
+  "exam_holdout_from": "2026-04-22",
+  "exam_holdout_note": "Los últimos 6 meses quedan sellados como examen final: no se usan para diseñar ni ajustar ninguna estrategia."
+}

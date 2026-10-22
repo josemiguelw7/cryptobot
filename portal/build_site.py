@@ -108,7 +108,9 @@ def build():
     }
     os.makedirs(OUT, exist_ok=True)
     html = TEMPLATE.replace("__DATA__", json.dumps(data))
-    with open(os.path.join(OUT, "index.html"), "w") as f:
+    # 2026-10-22: liga cerrada; index.html ahora es la Liga de Futuros
+    # (portal/build_futures_site.py). Este generador solo actualiza el archivo.
+    with open(os.path.join(OUT, "archivo", "cripto-acciones-2026-10-22.html"), "w") as f:
         f.write(html)
     print(f"site/index.html built ({len(data['equity'])} equity rows, "
           f"{len(data['trades'])} trades, {data['examined']} exams)")

@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Liga de Futuros · NQ</title>
+<style>
+:root{--bg:#F6F5F1;--card:#FFFFFF;--line:#E4E2DA;--txt:#181C22;--dim:#7E838C;
+--accent:#2B4C7E;--accent-bg:#E7EDF6;--ok:#0E8F5B;--ok-bg:#E3F3EA;--warn:#9A6B15;
+--warn-bg:#F7EEDB;--bad:#C0392B;--bar:#E9E7E0;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#111316;--card:#191C21;--line:#2A2E35;
+--txt:#E8EAED;--dim:#8B919B;--accent:#7FA4DB;--accent-bg:#1E2A3B;--ok:#4CC38A;
+--ok-bg:#16291F;--warn:#E0B062;--warn-bg:#2C2416;--bad:#E07A6E;--bar:#262A31;color-scheme:dark}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);max-width:820px;margin:0 auto;
+padding:calc(28px + env(safe-area-inset-top,0px)) 16px calc(60px + env(safe-area-inset-bottom,0px));
+font:15px/1.55 -apple-system,"Segoe UI",Roboto,sans-serif}
+h1{font-size:23px;letter-spacing:-.01em}
+.sub{color:var(--dim);font-size:13.5px;margin:4px 0 22px;max-width:620px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:16px}
+.card h2{font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim);margin-bottom:14px}
+.note{color:var(--dim);font-size:12.5px;line-height:1.6;margin-top:10px}
+.pipe{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.step{border:1px solid var(--line);border-radius:10px;padding:10px 6px;text-align:center;font-size:12px;color:var(--dim)}
+.step b{display:block;font-size:13px;color:var(--txt);margin-bottom:2px}
+.step.now{border-color:var(--accent);background:var(--accent-bg)}
+.step.now span{color:var(--accent);font-weight:650}
+.bar{height:10px;background:var(--bar);border-radius:6px;overflow:hidden;margin:6px 0 4px}
+.bar i{display:block;height:100%;background:var(--accent);border-radius:6px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+.stat b{display:block;font-size:19px;font-variant-numeric:tabular-nums}
+.stat span{font-size:11.5px;color:var(--dim)}
+.seal{margin-top:14px;padding:10px 12px;border-radius:10px;background:var(--warn-bg);color:var(--warn);font-size:12.5px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bot{border:1px solid var(--line);border-radius:12px;padding:12px 13px}
+.bot .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.bot .id{font:600 11px/1 ui-monospace,Menlo,monospace;color:var(--dim)}
+.bot .nm{font-weight:650;font-size:15px;margin-top:4px}
+.bot .fam{font-size:11.5px;color:var(--dim)}
+.bot .idea{font-size:13px;margin-top:6px}
+.bot .guard{font-size:12px;margin-top:8px;color:var(--warn)}
+.bot .foot{display:flex;justify-content:space-between;margin-top:10px;font-size:11.5px;color:var(--dim)}
+.badge{font-size:10.5px;font-weight:650;letter-spacing:.04em;padding:2px 8px;border-radius:20px;white-space:nowrap}
+.b-ctl{background:var(--accent-bg);color:var(--accent)}
+.b-osc{background:var(--warn-bg);color:var(--warn)}
+.b-st{background:var(--ok-bg);color:var(--ok)}
+.rules li{margin:0 0 8px 18px;font-size:13.5px}
+details summary{cursor:pointer;color:var(--dim);font-size:12.5px}
+.hash{font:11px/1.5 ui-monospace,Menlo,monospace;color:var(--dim);overflow-wrap:anywhere;margin-top:6px}
+a{color:var(--accent)}
+.foot-note{color:var(--dim);font-size:12px;text-align:center;margin-top:24px}
+@media (max-width:620px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}
+.pipe{grid-template-columns:repeat(5,minmax(0,1fr))}.step{font-size:10.5px;padding:8px 3px}.step b{font-size:11.5px}}
+</style></head><body>
+<h1>Liga de Futuros · NQ</h1>
+<div class="sub">Diez bots compiten con dinero simulado sobre datos tick del Nasdaq-100.
+Uno sigue la regla de Oscar, otro entra al azar como control, y ocho leen el flujo de órdenes.
+Nada de esto toca dinero real.</div>
+
+<div class="card"><h2>En qué etapa vamos</h2>
+  <div class="pipe" id="pipe"></div>
+  <div class="note" id="stageNote"></div>
+</div>
+
+<div class="card"><h2>Datos tick del NQ</h2>
+  <div id="dl"></div>
+  <div class="bar"><i id="dlbar"></i></div>
+  <div class="note" id="dlnote"></div>
+  <div class="stats" id="stats"></div>
+  <div class="seal" id="seal"></div>
+</div>
+
+<div class="card"><h2>El escuadrón · 10 bots</h2>
+  <div class="grid" id="bots"></div>
+  <div class="note">Para pasar, un bot tiene que ganarle al <b>aleatorio</b> después de comisiones,
+  en datos que no usó para diseñarse, y aprobar el examen final sellado.</div>
+</div>
+
+<div class="card"><h2>Reglas para que las pruebas sean limpias</h2>
+  <ul class="rules">
+    <li><b>Datos congelados:</b> cada sesión tiene su huella digital (SHA-256); el backtest los lee en solo lectura.</li>
+    <li><b>Parámetros antes del resultado:</b> se escriben y se guardan en git antes de correr la prueba.</li>
+    <li><b>Todas las corridas cuentan:</b> buenas y malas van al libro de exámenes, para saber cuántos intentos hubo.</li>
+    <li><b>Examen final sellado:</b> los últimos 6 meses no se tocan hasta el veredicto.</li>
+    <li><b>Costos reales:</b> comisión y deslizamiento en cada operación, y una prueba extra al doble de deslizamiento.</li>
+  </ul>
+  <details><summary>Documentos sellados (huellas SHA-256)</summary><div id="hashes"></div></details>
+</div>
+
+<div class="foot-note">
+  <a href="archivo/cripto-acciones-2026-10-22.html">Liga anterior: cripto y acciones (cerrada el 22/10/2026)</a><br>
+  <span id="gen"></span>
+</div>
+
+<script>
+const D = __DATA__;
+const fmt = n => (n==null?'—':Number(n).toLocaleString('es-MX'));
+const esc = s => String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+</script>
+<script>
+(function(){
+  const ds = D.dataset||{}, bots=(D.roster&&D.roster.bots)||[];
+  const pct = ds.sessions_target ? Math.min(100, 100*ds.sessions_ok/ds.sessions_target) : 0;
+  const dataDone = pct >= 99.5, designed = bots.length && bots.every(b=>b.params);
+  const steps = [
+    ['Datos', dataDone?'listo':'en curso', !dataDone],
+    ['Diseño', designed?'listo':'en curso', !designed],
+    ['Backtest', D.runs? D.runs+' corridas':'pendiente', D.runs>0],
+    ['Examen final', 'sellado', false],
+    ['Papel en vivo', 'pendiente', false]];
+  document.getElementById('pipe').innerHTML = steps.map(s=>
+    `<div class="step${s[2]?' now':''}"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('');
+  document.getElementById('stageNote').innerHTML = D.runs
+    ? `Hay <b>${D.runs}</b> corridas registradas en el libro de exámenes de futuros.`
+    : 'Todavía <b>no hay ninguna prueba corrida</b>. Se publica así a propósito, para que nadie pueda decir después que las pruebas empezaron antes.';
+
+  document.getElementById('dl').innerHTML =
+    `<b>${fmt(ds.sessions_ok)}</b> de ~${fmt(ds.sessions_target)} sesiones · ${pct.toFixed(0)}%` +
+    (ds.downloading_now? ` · bajando ahora <b>${esc(ds.downloading_now)}</b>`:'');
+  document.getElementById('dlbar').style.width = pct+'%';
+  document.getElementById('dlnote').textContent =
+    `Rango pedido: ${ds.job_from||'?'} a ${ds.job_to||'?'}. ${ds.source||''}. ` +
+    `Instantánea del ${ds.snapshot_utc? new Date(ds.snapshot_utc).toLocaleString('es-MX'):'?'}; ` +
+    `el progreso en vivo está en el tablero local de la laptop.`;
+  document.getElementById('stats').innerHTML = [
+    [fmt(ds.trades),'operaciones'],[fmt(ds.volume),'contratos'],
+    [(ds.contracts_seen||[]).length,'contratos trimestrales'],[(ds.size_gb??'—')+' GB','comprimido']]
+    .map(s=>`<div class="stat"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('');
+  document.getElementById('seal').innerHTML =
+    `🔒 <b>Examen final desde ${esc(ds.exam_holdout_from||'?')}.</b> ${esc(ds.exam_holdout_note||'')}`;
+
+  document.getElementById('bots').innerHTML = bots.map(b=>{
+    const cls = b.kind==='control'?'b-ctl':(b.id==='OSC'?'b-osc':'b-st');
+    const lab = b.kind==='control'?'CONTROL':(b.id==='OSC'?'OSCAR':'ORDER FLOW');
+    const n = (D.runs_by_bot||{})[b.id]||0;
+    return `<div class="bot"><div class="top"><span class="id">${esc(b.id)}</span>
+      <span class="badge ${cls}">${lab}</span></div>
+      <div class="nm">${esc(b.name)}</div><div class="fam">${esc(b.family)}</div>
+      <div class="idea">${esc(b.idea)}</div>
+      ${b.guard?`<div class="guard">⚠ ${esc(b.guard)}</div>`:''}
+      <div class="foot"><span>${b.params?'parámetros fijados':'en diseño'}</span>
+      <span>${n} ${n===1?'prueba':'pruebas'}</span></div></div>`;}).join('');
+
+  document.getElementById('hashes').innerHTML = Object.entries(D.integrity||{}).map(([k,v])=>
+    `<div class="hash"><b>${esc(v.path)}</b><br>${esc(v.sha256||v.status)}</div>`).join('');
+  document.getElementById('gen').textContent =
+    'Página generada el ' + new Date(D.generated).toLocaleString('es-MX');
+})();
+</script>
+</body></html>
