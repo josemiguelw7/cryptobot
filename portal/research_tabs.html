@@ -62,6 +62,8 @@
  <h3>Fase 2 · Pruebas de estrategias</h3>
  <div id="rx-tests"></div>
  <div id="rx-compare"></div>
+ <h3>Estudio de salidas · pedido de Oscar</h3>
+ <div id="rx-salidas"></div>
  <h3>Fase 1 · Mapa de señales</h3>
  <div id="rx-mapa"></div>
  <h3>Cementerio · lo que ya no sigue</h3>
@@ -221,6 +223,19 @@ function renderBacklog(){
  el.innerHTML=`<div class="card"><p class="note" style="margin-bottom:8px">Propuesta → aprobada (Oscar y Jose Miguel) → congelada (reglas con huella y sello) → corrida. El orquestador arranca solo las congeladas, dos veces en contenedores limpios sin red, y publica solo si el resultado se reproduce bit a bit.</p>${B.map(it=>`<div class="q"><div class="head"><b>${esc(it.id)} · ${esc(it.nombre)}</b><span class="pill ${(BS[it.estado]||['?',''])[1]}">${(BS[it.estado]||[it.estado])[0]}${it.test_id?' → '+it.test_id:''}</span></div><div style="margin-top:4px">${esc(it.hipotesis)}</div><small>Origen: ${esc(it.origen||'')}${it.requisitos?' · Falta: '+esc(it.requisitos.join('; ')):''}${it.ultimo_error?' · <span class="r">'+esc(it.ultimo_error)+'</span>':''}</small></div>`).join('')}</div>`;
 }
 
+/* ---------- SALIDAS ---------- */
+function renderSalidas(){
+ const S=R.salidas||{},el=document.getElementById('rx-salidas');const ids=Object.keys(S);
+ if(!ids.length){el.innerHTML='';return}
+ const heatT=(d,tm)=>{const g=d.superficie[tm];const mx=Math.max(1,...g.flat().map(c=>Math.abs(c.neto)));
+  const col=v=>v>0?`rgba(74,222,128,${0.15+0.65*Math.abs(v)/mx})`:v<0?`rgba(248,113,113,${0.15+0.65*Math.abs(v)/mx})`:'#161616';
+  return `<table class="heat"><tr><th>TP ↓ · SL →</th>${d.sl_puntos.map(x=>`<th>${x==='v1'?'stop v1':x+' pts'}</th>`).join('')}</tr>${d.tp_puntos.map((tp,i)=>`<tr><th>${tp==='v1'?'TP v1':tp+' pts'}</th>${g[i].map(c=>`<td style="background:${col(c.neto)}">${money(c.neto)}<br><span class="note">${c.operaciones} op · ${c.aciertos??'—'}%${c.anios_positivos<c.anios?' · pierde '+(c.anios-c.anios_positivos)+' año':''}</span></td>`).join('')}</tr>`).join('')}</table>`};
+ el.innerHTML=`<div class="card"><p class="note" style="margin-bottom:8px">Mismas señales v1, variando solo la salida: take profit fijo en puntos (NQ: 1 punto = 4 ticks = $20), stop fijo en puntos, tiempo máximo (el de la v1 o hasta el cierre de las 11:45) y piramidar (agregar 1 contrato cada 8 o 16 ticks a favor con stop a breakeven). <b>Cada celda es un intento registrado (estudio salidas_v1, 159 declarados).</b> Se busca una meseta de celdas vecinas que ganan, no la mejor celda; un pico aislado es suerte. Lo que se adopte será versión nueva y pasará por RAND, costos al doble, Topstep y placebos: estas celdas NO tienen nada de eso todavía.</p>
+ ${ids.map(sid=>{const d=S[sid];return `<h4>${sid} v1 · base ${money(d.base.neto)} (${d.base.operaciones} operaciones)</h4>
+  <div class="two"><div><p class="note">Tiempo máximo de la v1</p><div class="tw">${heatT(d,'v1')}</div></div><div><p class="note">Hasta el cierre (11:45)</p><div class="tw">${heatT(d,'cierre')}</div></div></div>
+  <p class="note" style="margin-top:6px">Piramidar (sobre salidas v1): ${d.piramidar.map(p=>`<span class="pill ${p.neto>0?'ok':'no'}" style="margin:2px">+1 cada ${p.regla.add_ticks} t × ${p.regla.max_adds} → ${money(p.neto)} (${p.contratos_prom} contr. prom.)</span>`).join(' ')}</p>`}).join('')}</div>`;
+}
+
 /* ---------- MAPA · CEMENTERIO · REGISTRO · DATOS ---------- */
 function renderMapa(){
  const M=R.mapa||{},S=M.senales||[],el=document.getElementById('rx-mapa');
@@ -323,6 +338,6 @@ document.addEventListener('click',e=>{
  const a=e.target.closest('[data-goto],[data-goto-est]');if(!a)return;
  const id=a.dataset.goto?'prueba-'+a.dataset.goto:'est-'+a.dataset.gotoEst;setTimeout(()=>document.getElementById(id)?.scrollIntoView({behavior:'smooth'}),80)});
 document.addEventListener('toggle',e=>{const d=e.target;if(d.matches&&d.matches('details[data-full]')&&d.open)loadFull(d.dataset.full)},true);
-fetch('data/research.json').then(r=>r.json()).then(j=>{R=j;renderKpis();renderBacklog();renderTests();renderCompare();renderMapa();renderGrave();renderReg();renderData();renderStrats();renderPlan();renderProto();renderCosts();renderQ();renderSeal()}).catch(err=>{console.error(err)});
+fetch('data/research.json').then(r=>r.json()).then(j=>{R=j;renderKpis();renderBacklog();renderTests();renderCompare();renderSalidas();renderMapa();renderGrave();renderReg();renderData();renderStrats();renderPlan();renderProto();renderCosts();renderQ();renderSeal()}).catch(err=>{console.error(err)});
 })();
 </script>

@@ -16,14 +16,32 @@
    "nombre": "Estudio de salidas (TP fijo, SL fijo, tiempo, piramidar) sobre las v1",
    "hipotesis": "Pedido de Oscar: explorar take profit fijo de 20/30/40/50 puntos, distintos stops, y agregar contratos cuando la operación va a favor, con las mismas señales v1.",
    "origen": "Oscar · 23/10/2026",
-   "estado": "aprobada",
+   "estado": "corrida",
    "estrategia": null,
    "version": null,
    "estudio": "salidas_v1",
    "requisitos": [
     "estudio salidas_v1 registrado con 159 intentos declarados"
    ],
-   "notas": "No es una estrategia nueva: es una superficie. Lo que se adopte será v2 con protocolo completo."
+   "notas": "No es una estrategia nueva: es una superficie. Lo que se adopte será v2 con protocolo completo.",
+   "test_id": "salidas_v1",
+   "veredicto": "superficie publicada"
+  },
+  {
+   "id": "T2-ABS-RUN",
+   "nombre": "ABS v2: dejar correr al ganador 15 min (TP ≥ 40 puntos o sin TP), stop v1",
+   "hipotesis": "En el estudio de salidas, ABS con el stop de la v1 y TP de 40–50 puntos sube de +$4,641 a +$8,569–$9,928 con 15 min de tenencia; el TP casi nunca se toca: trabaja la salida por tiempo. Hay meseta en TP 30–50 × stop v1/8 pts. Falta todo el protocolo (RAND, costos al doble, Topstep, placebos, por año).",
+   "origen": "estudio de salidas · pedido de Oscar",
+   "estado": "propuesta",
+   "estrategia": "ABS",
+   "version": 2,
+   "estudio": "tanda2",
+   "requisitos": [
+    "aprobación de Oscar y Jose Miguel",
+    "cuenta como versión 2 de 3 de ABS",
+    "aciertos bajan a 25–30%: revisar concentración en pocos días"
+   ],
+   "notas": "Se puede combinar con T2-ABS-EARLY/HOURS en una sola v2 (máximo 3 versiones)."
   },
   {
    "id": "T2-FADE",

@@ -1,0 +1,676 @@
+{
+ "estrategia": "ABS",
+ "tp_puntos": [
+  "v1",
+  20,
+  30,
+  40,
+  50
+ ],
+ "sl_puntos": [
+  "v1",
+  3,
+  4,
+  6,
+  8
+ ],
+ "tiempos": [
+  "v1",
+  "cierre"
+ ],
+ "superficie": {
+  "v1": [
+   [
+    {
+     "neto": 4641.16,
+     "operaciones": 128,
+     "aciertos": 42.2,
+     "factor": 1.38,
+     "drawdown": -2093.64,
+     "anios_positivos": 2,
+     "anios": 3,
+     "top5_dias_pct": 67.7,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": -2565.18,
+     "operaciones": 131,
+     "aciertos": 13.0,
+     "factor": 0.67,
+     "drawdown": -3742.64,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": null,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": -1921.4,
+     "operaciones": 130,
+     "aciertos": 18.5,
+     "factor": 0.8,
+     "drawdown": -3723.74,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": null,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": 1748.6,
+     "operaciones": 130,
+     "aciertos": 32.3,
+     "factor": 1.15,
+     "drawdown": -2738.76,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": 174.0,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": 4821.16,
+     "operaciones": 128,
+     "aciertos": 43.0,
+     "factor": 1.39,
+     "drawdown": -2098.64,
+     "anios_positivos": 2,
+     "anios": 3,
+     "top5_dias_pct": 65.2,
+     "contratos_prom": 1.0
+    }
+   ],
+   [
+    {
+     "neto": 5364.94,
+     "operaciones": 127,
+     "aciertos": 37.0,
+     "factor": 1.4,
+     "drawdown": -1504.62,
+     "anios_positivos": 3,
+     "anios": 3,
+     "top5_dias_pct": 66.5,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": -2896.4,
+     "operaciones": 130,
+     "aciertos": 10.0,
+     "factor": 0.64,
+     "drawdown": -4019.22,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": null,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": -3207.62,
+     "operaciones": 129,
+     "aciertos": 13.2,
+     "factor": 0.68,
+     "drawdown": -4335.44,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": null,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": 187.38,
+     "operaciones": 129,
+     "aciertos": 24.8,
+     "factor": 1.02,
+     "drawdown": -2902.66,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": 1903.1,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": 5684.94,
+     "operaciones": 127,
+     "aciertos": 37.8,
+     "factor": 1.43,
+     "drawdown": -1504.62,
+     "anios_positivos": 2,
+     "anios": 3,
+     "top5_dias_pct": 69.7,
+     "contratos_prom": 1.0
+    }
+   ],
+   [
+    {
+     "neto": 6673.72,
+     "operaciones": 126,
+     "aciertos": 29.4,
+     "factor": 1.46,
+     "drawdown": -1834.62,
+     "anios_positivos": 3,
+     "anios": 3,
+     "top5_dias_pct": 71.5,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": -3552.62,
+     "operaciones": 129,
+     "aciertos": 6.2,
+     "factor": 0.57,
+     "drawdown": -4814.22,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": null,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": -3143.84,
+     "operaciones": 128,
+     "aciertos": 9.4,
+     "factor": 0.69,
+     "drawdown": -4590.44,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": null,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": -348.84,
+     "operaciones": 128,
+     "aciertos": 18.0,
+     "factor": 0.97,
+     "drawdown": -3729.72,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": null,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": 6838.72,
+     "operaciones": 126,
+     "aciertos": 30.2,
+     "factor": 1.46,
+     "drawdown": -1834.62,
+     "anios_positivos": 3,
+     "anios": 3,
+     "top5_dias_pct": 69.7,
+     "contratos_prom": 1.0
+    }
+   ],
+   [
+    {
+     "neto": 8568.72,
+     "operaciones": 126,
+     "aciertos": 27.0,
+     "factor": 1.56,
+     "drawdown": -2259.5,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": 74.3,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": -3682.62,
+     "operaciones": 129,
+     "aciertos": 4.7,
+     "factor": 0.56,
+     "drawdown": -5944.22,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": null,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": -2513.84,
+     "operaciones": 128,
+     "aciertos": 7.8,
+     "factor": 0.76,
+     "drawdown": -5160.44,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": null,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": 1341.16,
+     "operaciones": 128,
+     "aciertos": 16.4,
+     "factor": 1.1,
+     "drawdown": -4026.8,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": 415.6,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": 8733.72,
+     "operaciones": 126,
+     "aciertos": 27.8,
+     "factor": 1.57,
+     "drawdown": -2264.5,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": 72.9,
+     "contratos_prom": 1.0
+    }
+   ],
+   [
+    {
+     "neto": 9927.5,
+     "operaciones": 125,
+     "aciertos": 25.6,
+     "factor": 1.65,
+     "drawdown": -2244.74,
+     "anios_positivos": 2,
+     "anios": 3,
+     "top5_dias_pct": 69.4,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": -3632.62,
+     "operaciones": 129,
+     "aciertos": 3.9,
+     "factor": 0.57,
+     "drawdown": -5829.22,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": null,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": -1683.84,
+     "operaciones": 128,
+     "aciertos": 7.0,
+     "factor": 0.84,
+     "drawdown": -4553.86,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": null,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": 1849.94,
+     "operaciones": 127,
+     "aciertos": 15.0,
+     "factor": 1.13,
+     "drawdown": -4660.94,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": 323.1,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": 10092.5,
+     "operaciones": 125,
+     "aciertos": 26.4,
+     "factor": 1.65,
+     "drawdown": -2249.74,
+     "anios_positivos": 2,
+     "anios": 3,
+     "top5_dias_pct": 68.3,
+     "contratos_prom": 1.0
+    }
+   ]
+  ],
+  "cierre": [
+   [
+    {
+     "neto": 4641.16,
+     "operaciones": 128,
+     "aciertos": 42.2,
+     "factor": 1.38,
+     "drawdown": -2093.64,
+     "anios_positivos": 2,
+     "anios": 3,
+     "top5_dias_pct": 67.7,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": -2565.18,
+     "operaciones": 131,
+     "aciertos": 13.0,
+     "factor": 0.67,
+     "drawdown": -3742.64,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": null,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": -1921.4,
+     "operaciones": 130,
+     "aciertos": 18.5,
+     "factor": 0.8,
+     "drawdown": -3723.74,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": null,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": 1748.6,
+     "operaciones": 130,
+     "aciertos": 32.3,
+     "factor": 1.15,
+     "drawdown": -2738.76,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": 174.0,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": 4821.16,
+     "operaciones": 128,
+     "aciertos": 43.0,
+     "factor": 1.39,
+     "drawdown": -2098.64,
+     "anios_positivos": 2,
+     "anios": 3,
+     "top5_dias_pct": 65.2,
+     "contratos_prom": 1.0
+    }
+   ],
+   [
+    {
+     "neto": 5364.94,
+     "operaciones": 127,
+     "aciertos": 37.0,
+     "factor": 1.4,
+     "drawdown": -1504.62,
+     "anios_positivos": 3,
+     "anios": 3,
+     "top5_dias_pct": 66.5,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": -2896.4,
+     "operaciones": 130,
+     "aciertos": 10.0,
+     "factor": 0.64,
+     "drawdown": -4019.22,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": null,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": -3207.62,
+     "operaciones": 129,
+     "aciertos": 13.2,
+     "factor": 0.68,
+     "drawdown": -4335.44,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": null,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": 187.38,
+     "operaciones": 129,
+     "aciertos": 24.8,
+     "factor": 1.02,
+     "drawdown": -2902.66,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": 1903.1,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": 5684.94,
+     "operaciones": 127,
+     "aciertos": 37.8,
+     "factor": 1.43,
+     "drawdown": -1504.62,
+     "anios_positivos": 2,
+     "anios": 3,
+     "top5_dias_pct": 69.7,
+     "contratos_prom": 1.0
+    }
+   ],
+   [
+    {
+     "neto": 6518.72,
+     "operaciones": 126,
+     "aciertos": 28.6,
+     "factor": 1.44,
+     "drawdown": -1834.62,
+     "anios_positivos": 3,
+     "anios": 3,
+     "top5_dias_pct": 73.2,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": -3552.62,
+     "operaciones": 129,
+     "aciertos": 6.2,
+     "factor": 0.57,
+     "drawdown": -4814.22,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": null,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": -3143.84,
+     "operaciones": 128,
+     "aciertos": 9.4,
+     "factor": 0.69,
+     "drawdown": -4590.44,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": null,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": -533.84,
+     "operaciones": 128,
+     "aciertos": 17.2,
+     "factor": 0.96,
+     "drawdown": -3729.72,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": null,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": 7038.72,
+     "operaciones": 126,
+     "aciertos": 29.4,
+     "factor": 1.47,
+     "drawdown": -1834.62,
+     "anios_positivos": 3,
+     "anios": 3,
+     "top5_dias_pct": 67.8,
+     "contratos_prom": 1.0
+    }
+   ],
+   [
+    {
+     "neto": 6988.72,
+     "operaciones": 126,
+     "aciertos": 23.0,
+     "factor": 1.43,
+     "drawdown": -2259.5,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": 91.1,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": -3682.62,
+     "operaciones": 129,
+     "aciertos": 4.7,
+     "factor": 0.56,
+     "drawdown": -5944.22,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": null,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": -2513.84,
+     "operaciones": 128,
+     "aciertos": 7.8,
+     "factor": 0.76,
+     "drawdown": -5160.44,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": null,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": 166.16,
+     "operaciones": 128,
+     "aciertos": 14.1,
+     "factor": 1.01,
+     "drawdown": -4026.8,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": 3354.3,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": 6718.72,
+     "operaciones": 126,
+     "aciertos": 23.0,
+     "factor": 1.41,
+     "drawdown": -2311.44,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": 94.8,
+     "contratos_prom": 1.0
+    }
+   ],
+   [
+    {
+     "neto": 7057.5,
+     "operaciones": 125,
+     "aciertos": 19.2,
+     "factor": 1.42,
+     "drawdown": -2731.32,
+     "anios_positivos": 2,
+     "anios": 3,
+     "top5_dias_pct": 84.7,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": -4612.62,
+     "operaciones": 129,
+     "aciertos": 3.1,
+     "factor": 0.46,
+     "drawdown": -6809.22,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": null,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": -2683.84,
+     "operaciones": 128,
+     "aciertos": 6.2,
+     "factor": 0.75,
+     "drawdown": -5553.86,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": null,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": -605.06,
+     "operaciones": 127,
+     "aciertos": 11.0,
+     "factor": 0.96,
+     "drawdown": -5416.06,
+     "anios_positivos": 1,
+     "anios": 3,
+     "top5_dias_pct": null,
+     "contratos_prom": 1.0
+    },
+    {
+     "neto": 6787.5,
+     "operaciones": 125,
+     "aciertos": 19.2,
+     "factor": 1.4,
+     "drawdown": -2766.32,
+     "anios_positivos": 2,
+     "anios": 3,
+     "top5_dias_pct": 88.1,
+     "contratos_prom": 1.0
+    }
+   ]
+  ]
+ },
+ "piramidar": [
+  {
+   "neto": -2768.06,
+   "operaciones": 130,
+   "aciertos": 10.8,
+   "factor": 0.74,
+   "drawdown": -4165.9,
+   "anios_positivos": 1,
+   "anios": 3,
+   "top5_dias_pct": null,
+   "contratos_prom": 1.75,
+   "regla": {
+    "add_ticks": 8,
+    "max_adds": 1,
+    "stop_breakeven": true
+   }
+  },
+  {
+   "neto": -1388.8,
+   "operaciones": 128,
+   "aciertos": 18.0,
+   "factor": 0.9,
+   "drawdown": -5122.26,
+   "anios_positivos": 2,
+   "anios": 3,
+   "top5_dias_pct": null,
+   "contratos_prom": 1.64,
+   "regla": {
+    "add_ticks": 16,
+    "max_adds": 1,
+    "stop_breakeven": true
+   }
+  },
+  {
+   "neto": -4062.3,
+   "operaciones": 130,
+   "aciertos": 10.8,
+   "factor": 0.73,
+   "drawdown": -6385.88,
+   "anios_positivos": 1,
+   "anios": 3,
+   "top5_dias_pct": null,
+   "contratos_prom": 2.19,
+   "regla": {
+    "add_ticks": 8,
+    "max_adds": 2,
+    "stop_breakeven": true
+   }
+  },
+  {
+   "neto": -1116.22,
+   "operaciones": 128,
+   "aciertos": 18.0,
+   "factor": 0.93,
+   "drawdown": -5778.96,
+   "anios_positivos": 2,
+   "anios": 3,
+   "top5_dias_pct": null,
+   "contratos_prom": 1.95,
+   "regla": {
+    "add_ticks": 16,
+    "max_adds": 2,
+    "stop_breakeven": true
+   }
+  }
+ ],
+ "base": {
+  "neto": 4641.16,
+  "operaciones": 128,
+  "aciertos": 42.2,
+  "factor": 1.38,
+  "drawdown": -2093.64,
+  "anios_positivos": 2,
+  "anios": 3,
+  "top5_dias_pct": 67.7,
+  "contratos_prom": 1.0
+ },
+ "sesiones": 576,
+ "fecha": "2026-10-23"
+}

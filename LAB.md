@@ -1,13 +1,13 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-23 12:30 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-23 17:27 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga-radtak-projects.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
 ## En una línea
 
 - Sesiones válidas de diseño: **576** (examen sellado desde 2026-04-22, cerrado).
-- Intentos registrados: **109** · pruebas publicadas: **4** (error 1, no_pasa 3).
+- Intentos registrados: **268** · pruebas publicadas: **4** (error 1, no_pasa 3).
 - Estrategias aprobadas por el comité: **0**. Nada toca dinero real.
 
 ## Pruebas corridas
@@ -25,6 +25,8 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 
 | Id | Prueba | Estado | Origen | Falta |
 |---|---|---|---|---|
+| S-SALIDAS | Estudio de salidas (TP fijo, SL fijo, tiempo, piramidar) sobre las v1 | **corrida** → salidas_v1 | Oscar · 23/10/2026 | estudio salidas_v1 registrado con 159 intentos declarados |
+| T2-ABS-RUN | ABS v2: dejar correr al ganador 15 min (TP ≥ 40 puntos o sin TP), stop v1 | **propuesta** | estudio de salidas · pedido de Oscar | aprobación de Oscar y Jose Miguel; cuenta como versión 2 de 3 de ABS; aciertos bajan a 25–30%: revisar concentración en  |
 | T2-FADE | Desvanecer órdenes grandes | **propuesta** | mapa v1 · hipótesis inversa de BIG | reglas congeladas en strategies/v2.json; estudio tanda2 registrado con N declarado |
 | T2-HVN | Rechazo de zonas HVN del día anterior | **propuesta** | mapa v1 · estilo Profit Pro | definir confirmación y stop en percentiles medidos, no inventados; reglas congeladas |
 | T2-ABS-EARLY | ABS con entrada temprana | **propuesta** | P003 + placebo del Red Team | cuenta como versión 2 de 3 de ABS; aprobación de Oscar |
@@ -37,6 +39,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 
 - **tanda1**: Las estrategias BIG, ABS y POC v1 (reglas de los videos con números propuestos sin medir) ganan a RAND emparejado después de costos. · declarados 51, usados 67 ⚠ excedido
 - **mapa_v1**: Alguna de las 12 señales de order flow mueve el precio en la dirección predicha a 1, 5, 15 o 30 min más de lo que lo hacen momentos al azar  · declarados 48, usados 38
+- **salidas_v1**: Pedido de Oscar (23/10/2026): con las mismas señales v1, un take profit fijo (20/30/40/50 puntos), otro stop fijo (3/4/6/8 puntos), más tiem · declarados 159, usados 159
 
 ## Mapa de señales (resumen)
 

@@ -113,6 +113,12 @@ def copy_results(tests):
                 os.makedirs(os.path.join(OUT, "data", "days"), exist_ok=True)
                 for f in os.listdir(days):
                     shutil.copy2(os.path.join(days, f), os.path.join(OUT, "data", "days", f))
+    for study in ("salidas_v1",):
+        src = os.path.join(FUT, "lab", "results", study)
+        if os.path.isdir(src):
+            dst = os.path.join(OUT, "data", study); os.makedirs(dst, exist_ok=True)
+            for f in os.listdir(src):
+                if f.endswith(".json"): shutil.copy2(os.path.join(src, f), os.path.join(dst, f))
     days_dir = os.path.join(OUT, "data", "days")
     idx = sorted(f[:-5] for f in os.listdir(days_dir) if f.endswith(".json") and f != "index.json") if os.path.isdir(days_dir) else []
     json.dump(idx, open(os.path.join(days_dir, "index.json"), "w")) if idx else None
@@ -137,7 +143,8 @@ def research_export():
     reg = registry_export()
     ups = load("updates.json", {"entries": []}).get("entries", [])
     week = (datetime.now(timezone.utc) - timedelta(days=7)).strftime("%Y-%m-%d")
-    data = {"plan": plan, "protocolo": proto, "versiones": vers, "pruebas": tests, "mapa": mapa, "registro": reg, "backlog": load("backlog.json", {"pruebas": []}),
+    sal = {sid: load(f"lab/results/salidas_v1/{sid}.json", None) for sid in ("BIG", "ABS", "POC")}
+    data = {"plan": plan, "protocolo": proto, "versiones": vers, "pruebas": tests, "mapa": mapa, "registro": reg, "backlog": load("backlog.json", {"pruebas": []}), "salidas": {k: v for k, v in sal.items() if v},
             "cementerio": graveyard(tests, reg["intentos"]), "sesiones": sessions_export(), "costos": load("costs.json", {}),
             "topstep": load("topstep_rules.json", {}), "glosario": load("glossary.json", {}), "sellos": integrity(),
             "cambios_semana": [u for u in ups if u.get("date", "") >= week], "generado": datetime.now(timezone.utc).isoformat(timespec="minutes")}

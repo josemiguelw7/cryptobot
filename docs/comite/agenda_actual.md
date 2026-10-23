@@ -15,6 +15,7 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 - P004 · POC v1: pierde con costos base; no gana a RAND (p=0.5794); muere con costos al doble; pierde en 2024, 2026; pasa Topstep solo 12.0%
 
 ## 3. Qué está propuesto (decidir: aprobar / descartar / pedir más datos)
+- [ ] **T2-ABS-RUN** ABS v2: dejar correr al ganador 15 min (TP ≥ 40 puntos o sin TP), stop v1 — En el estudio de salidas, ABS con el stop de la v1 y TP de 40–50 puntos sube de +$4,641 a +$8,569–$9,928 con 15 min de tenencia; el TP casi nunca se toca: traba
 - [ ] **T2-FADE** Desvanecer órdenes grandes — Entrar EN CONTRA de una orden agresiva ≥ p99 (10+ contratos) que barre ≥ 2 niveles, porque el mapa muestra 6–7 ticks en contra de la orden a 5, 15 y 30 min (19,
 - [ ] **T2-HVN** Rechazo de zonas HVN del día anterior — Cuando el precio llega a un nodo de alto volumen del perfil de Nueva York del día anterior después de moverse ≥ 20 ticks, rebota: +9 ticks a 15 min y +17 a 30 m
 - [ ] **T2-ABS-EARLY** ABS con entrada temprana — ABS v1 gana a RAND (p 0.002) y el placebo desplazado 5 min antes gana más: entrar al detectar la absorción (sin esperar la confirmación) debería ganar más con e

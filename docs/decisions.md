@@ -722,3 +722,11 @@ Jose Miguel pidió: un MD del proyecto que se mantenga al día, una lista de pru
 - **README del motor** (`futures/lab/engine/README.md`): cada decisión de diseño con su motivo.
 - **Avisos** (`engine/notify.py`): correo por Resend al terminar cada prueba del orquestador; requiere `/srv/lab/notify.json` en la VM con llave, remitente y destinatarios (pendiente: Jose Miguel decide a qué correos).
 - **Estabilidad del mapa** (2024 vs 2025 por señal) queda programada para la próxima corrida del mapa (mapa_v2).
+
+## 2026-10-23 · Estudio de salidas (pedido de Oscar) · 159 intentos registrados
+
+Oscar pidió explorar take profit fijo (20/30/40/50 puntos), distintos stops, y agregar contratos cuando la operación va a favor. Se corrió como estudio registrado `salidas_v1` sobre las mismas señales v1 (el simulador ahora sabe piramidar: `Rules.pyramid`, con prueba sintética). Resultados (superficie completa en la pestaña Pruebas):
+- **ABS**: con el stop v1 (o 8 pts), el neto sube de forma monótona con el TP: +$4,641 → +$6,674 (30) → +$8,569 (40) → +$9,928 (50) con 15 min de tenencia. El TP casi no se toca: **trabaja la salida por tiempo**. Aguantar hasta las 11:45 empeora (+$7,058 con TP 50). Stops de 3–4 pts la matan. Piramidar pierde (−$1,116 a −$4,062): es reversión, no tendencia. Hay meseta TP 30–50 × stop v1/8 → candidata **T2-ABS-RUN** (propuesta, requiere protocolo completo; aciertos caen a 25–30%, vigilar concentración).
+- **BIG**: solo TP 40 gana (+$835 a +$2,125); 30 y 50 pierden → pico aislado. Piramidar ayuda poco (+$676 / +$1,247).
+- **POC**: negativa casi en todo; celdas positivas aisladas (TP 50 con stop 3–4; v1 hasta el cierre +$2,136).
+Regla aplicada: nada de esto es un veredicto. Las celdas no tienen RAND, costos al doble, Topstep ni placebos. El DSR de cualquier v2 descontará estos 159 intentos.
