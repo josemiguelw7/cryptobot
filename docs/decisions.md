@@ -730,3 +730,10 @@ Oscar pidió explorar take profit fijo (20/30/40/50 puntos), distintos stops, y 
 - **BIG**: solo TP 40 gana (+$835 a +$2,125); 30 y 50 pierden → pico aislado. Piramidar ayuda poco (+$676 / +$1,247).
 - **POC**: negativa casi en todo; celdas positivas aisladas (TP 50 con stop 3–4; v1 hasta el cierre +$2,136).
 Regla aplicada: nada de esto es un veredicto. Las celdas no tienen RAND, costos al doble, Topstep ni placebos. El DSR de cualquier v2 descontará estos 159 intentos.
+
+## 2026-10-23 · "Adelante": mapa v2 y tanda 2 escrita y sellada
+
+- **Mapa v2** (estudio `mapa_v2`, 72 intentos declarados, aprobado por Jose Miguel como cambio de método): azar con dirección aleatoria (¿la dirección es rentable por sí sola?), estabilidad 2024 vs 2025 por señal, partición por régimen (tendencia/balance, 24 pruebas con Holm aparte) y desglose descriptivo por media hora. El mapa v1 queda guardado en `futures/signal_map_v1.json`. Una corrida de humo (30 sesiones, 200 sorteos) registró 12 intentos por error; quedan marcados con línea de corrección y se agregó `--dry`.
+- **Tanda 2 escrita y sellada** (`futures/strategies/v2.json`, SHA-256 `d2145d6d…44fd`, OTS; código `engine/strategies/v2.py`): FADE v1 (desvanecer órdenes grandes: stop 16 ticks, sin objetivo, 15 min), HVN v1 (rechazo de nodos ≥ p90 de ayer tras ≥ 20 ticks lejos: stop 12, objetivo 16, 30 min), ABS v2 (objetivo 40 puntos = salida por tiempo). Los números salen del mapa v1 y del estudio de salidas. En el backlog quedan como **propuesta**: el orquestador no las corre hasta que el comité las pase a congelada. Estudio `tanda2` registrado (51 intentos declarados).
+- El motor ahora resuelve (estrategia, versión) → archivo y código; el orquestador busca la versión en cualquier `v*.json` sellado.
+- **Humo de la tanda 2** (60 sesiones, `--dry`, sin registrar): FADE −$13,518 (194 op.), HVN −$2,288 (145 op.), ABS v2 +$1,639 (20 op.). FADE preocupa: el efecto promedio del mapa (6–7 ticks) no cubre stop + costos; se avisa al comité antes de aprobar. Cambiar sus números sería FADE v2.

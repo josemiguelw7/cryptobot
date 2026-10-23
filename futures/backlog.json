@@ -40,7 +40,7 @@
     "reglas escritas y selladas en strategies/v2.json como ABS v2 (listo)",
     "aprobación de Oscar y Jose Miguel → pasar a congelada"
    ],
-   "notas": "Se puede combinar con T2-ABS-EARLY/HOURS en una sola v2 (máximo 3 versiones)."
+   "notas": "Se puede combinar con T2-ABS-EARLY/HOURS en una sola v2 (máximo 3 versiones). · Humo (60 sesiones, sin registrar): +$1,639 en 20 operaciones, p 0.03, placebo desplazado sospechoso como en v1 (valor en el nivel)."
   },
   {
    "id": "T2-FADE",
@@ -55,7 +55,7 @@
     "reglas escritas y selladas en strategies/v2.json (listo)",
     "aprobación de Oscar y Jose Miguel → pasar a congelada"
    ],
-   "notas": "Riesgo conocido: parte de la reversión inmediata es el rebote bid-ask; la prueba con costos lo descuenta."
+   "notas": "Riesgo conocido: parte de la reversión inmediata es el rebote bid-ask; la prueba con costos lo descuenta. · Humo (60 sesiones, sin registrar): −$13,518 en 194 operaciones, p 1.0. El efecto promedio del mapa (6–7 ticks) no cubre stop de 16 ticks + costos de ~2.8 ticks. Antes de aprobar: mirar en el mapa v2 el efecto a 1–5 min por régimen y considerar objetivo corto (8 ticks) y stop corto, lo cual cambia la regla sellada (sería FADE v2)."
   },
   {
    "id": "T2-HVN",
@@ -70,7 +70,7 @@
     "reglas escritas y selladas en strategies/v2.json (listo)",
     "aprobación de Oscar y Jose Miguel → pasar a congelada"
    ],
-   "notas": "Es la señal con mejor relación eventos/efecto del mapa."
+   "notas": "Es la señal con mejor relación eventos/efecto del mapa. · Humo (60 sesiones, sin registrar): −$2,288 en 145 operaciones, p 0.26. No concluyente."
   },
   {
    "id": "T2-ABS-EARLY",
