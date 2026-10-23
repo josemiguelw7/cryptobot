@@ -166,7 +166,7 @@ def baseline(s, secs, dirs, n=1000, rng=None, groups=None, ngroups=0):
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--study", required=True); ap.add_argument("--limit", type=int, default=0)
-    ap.add_argument("--draws", type=int, default=5000); ap.add_argument("--only", default="")
+    ap.add_argument("--draws", type=int, default=5000); ap.add_argument("--only", default=""); ap.add_argument("--dry", action="store_true", help="humo: no escribe signal_map.json ni el registro")
     a = ap.parse_args(); only = set(a.only.split(",")) - {""}
     if not any(s["study_id"] == a.study for s in registry.read(registry.STUDIES)):
         raise SystemExit("estudio no registrado")
@@ -284,6 +284,8 @@ def main():
             v["significativa"] = (r["id"], g) in sigr
     out = {"titulo": "Mapa de señales v2 (azar misma dirección + dirección aleatoria + régimen + media hora + estabilidad 2024/2025)", "fecha": time.strftime("%Y-%m-%d"), "sesiones": len(dates), "sorteos": a.draws,
            "pruebas": m, "pruebas_regimen": mr, "correccion": "Holm 5% (48 principales; 24 de régimen aparte)", "sesiones_sha256": sess_sha, "senales": rows}
+    if a.dry:
+        print(f"humo: {m} pruebas, {len(sig)} significativas · {time.time()-t0:.0f}s (sin registrar)"); return
     json.dump(out, open(os.path.join(config.FUT, "signal_map.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     for r in rows:
         if only and r["id"] not in only: continue
