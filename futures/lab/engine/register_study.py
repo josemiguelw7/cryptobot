@@ -7,6 +7,13 @@ import sys
 from . import registry, config
 
 STUDIES = {
+    "tanda2": {
+        "hypothesis": "FADE v1 (desvanecer órdenes grandes), HVN v1 (rechazo de nodos de ayer) y ABS v2 (dejar correr al ganador), con números medidos en el mapa v1 y el estudio de salidas, ganan a RAND después de costos y pasan Topstep.",
+        "n_declared": 3 + 48,
+        "kill": ["ganancia neta <= 0 con costos base", "p vs RAND > 0.20", "pierde en 2 de 3 años", "rompe MLL en > 50% de arranques"],
+        "strategies": ["FADE v1", "HVN v1", "ABS v2"],
+        "notes": "3 pruebas + 48 de sensibilidad. Arranca solo cuando el comité pase las pruebas a 'congelada' en el backlog.",
+    },
     "mapa_v2": {
         "hypothesis": "Las 12 señales, además del azar de la misma dirección, se comparan contra un azar con dirección aleatoria (¿la dirección es rentable?), se parten por régimen (tendencia/balance) y por media hora, y se exige que el signo del efecto a 15 min sea el mismo en 2024 y en 2025.",
         "n_declared": 48 + 24,

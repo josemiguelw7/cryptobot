@@ -37,9 +37,8 @@
    "version": 2,
    "estudio": "tanda2",
    "requisitos": [
-    "aprobación de Oscar y Jose Miguel",
-    "cuenta como versión 2 de 3 de ABS",
-    "aciertos bajan a 25–30%: revisar concentración en pocos días"
+    "reglas escritas y selladas en strategies/v2.json como ABS v2 (listo)",
+    "aprobación de Oscar y Jose Miguel → pasar a congelada"
    ],
    "notas": "Se puede combinar con T2-ABS-EARLY/HOURS en una sola v2 (máximo 3 versiones)."
   },
@@ -53,8 +52,8 @@
    "version": 1,
    "estudio": "tanda2",
    "requisitos": [
-    "reglas congeladas en strategies/v2.json",
-    "estudio tanda2 registrado con N declarado"
+    "reglas escritas y selladas en strategies/v2.json (listo)",
+    "aprobación de Oscar y Jose Miguel → pasar a congelada"
    ],
    "notas": "Riesgo conocido: parte de la reversión inmediata es el rebote bid-ask; la prueba con costos lo descuenta."
   },
@@ -68,8 +67,8 @@
    "version": 1,
    "estudio": "tanda2",
    "requisitos": [
-    "definir confirmación y stop en percentiles medidos, no inventados",
-    "reglas congeladas"
+    "reglas escritas y selladas en strategies/v2.json (listo)",
+    "aprobación de Oscar y Jose Miguel → pasar a congelada"
    ],
    "notas": "Es la señal con mejor relación eventos/efecto del mapa."
   },

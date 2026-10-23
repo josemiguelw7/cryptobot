@@ -69,7 +69,7 @@ def cost_curve(signals_by_date, rules, commission_rt, slips=(0, 1, 2, 3, 4)):
     return [{"slip_ticks": sl, "neto": round(tot[sl], 2), "operaciones": n[sl]} for sl in slips]
 
 
-def sensitivity(gen, dates, levels, params, steps, rules, slip, commission_rt, open_in_value=None):
+def sensitivity(gen, dates, levels, params, steps, rules, slip, commission_rt, open_in_value=None, kw_fn=None):
     """Superficie: cada parámetro numérico ±2 pasos, el resto fijo. gen(session, ref, thr, p[, open_in_value]) -> señales."""
     variants = []
     for name, step in steps.items():
@@ -82,7 +82,7 @@ def sensitivity(gen, dates, levels, params, steps, rules, slip, commission_rt, o
         if not ref or not thr:
             continue
         s = load(d, ny_only=True)
-        kw = {"open_in_value": open_in_value(d)} if open_in_value else {}
+        kw = kw_fn(d) if kw_fn else ({"open_in_value": open_in_value(d)} if open_in_value else {})
         for i, (name, m, p) in enumerate(variants):
             if p[name] <= 0:
                 continue

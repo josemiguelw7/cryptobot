@@ -1,5 +1,5 @@
 """Rutas, costos y reglas congeladas. Nada aquí se calcula: todo se lee de los JSON del repo."""
-import hashlib, json, os, subprocess
+import hashlib, json, os, re, subprocess
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 LAB = os.path.dirname(HERE)                      # futures/lab
@@ -36,6 +36,19 @@ def protocol():
 
 def strategies(version=1):
     return _load(f"strategies/v{version}.json")
+
+
+def strategy_file(strategy, version):
+    """Archivo strategies/v*.json donde está registrada (estrategia, versión). (nombre, dict, sha) o None."""
+    import glob
+    for f in sorted(glob.glob(os.path.join(FUT, "strategies", "v*.json"))):
+        if not re.fullmatch(r"v\d+\.json", os.path.basename(f)):
+            continue
+        d, h = _load("strategies/" + os.path.basename(f))
+        for e in d.get("estrategias", []):
+            if e["id"] == strategy and int(e.get("version", 1)) == int(version):
+                return os.path.basename(f), d, h
+    return None
 
 
 def sessions_manifest():

@@ -18,13 +18,31 @@ from .data import load
 from .levels import Levels, precompute_stats
 from .rand import run_rand, summarize as rand_summary
 from .sim import Rules, simulate
-from .strategies import v1 as S1
+from .strategies import v1 as S1, v2 as S2
+import polars as pl
+
+MODULES = {("BIG", 1): S1, ("ABS", 1): S1, ("POC", 1): S1, ("FADE", 1): S2, ("HVN", 1): S2, ("ABS", 2): S2}
 
 SENS_STEPS = {
-    "BIG": {"stop": 4, "target": 8, "confirm_s": 10, "near_ticks": 1},
-    "ABS": {"near_ticks": 1, "stop_min": 4, "rr": 0.5, "confirm_s": 10},
-    "POC": {"touch_ticks": 1, "back_ticks": 1, "stop_min": 4, "confirm_s": 30},
+    ("BIG", 1): {"stop": 4, "target": 8, "confirm_s": 10, "near_ticks": 1},
+    ("ABS", 1): {"near_ticks": 1, "stop_min": 4, "rr": 0.5, "confirm_s": 10},
+    ("POC", 1): {"touch_ticks": 1, "back_ticks": 1, "stop_min": 4, "confirm_s": 30},
+    ("FADE", 1): {"stop": 4, "cooldown_s": 30, "min_levels": 1, "max_min": 5},
+    ("HVN", 1): {"stop": 4, "target": 4, "far_ticks": 4, "hvn_pct": 2},
+    ("ABS", 2): {"near_ticks": 1, "stop_min": 4, "target_fixed": 40, "max_min": 5},
 }
+
+
+def strat_kwargs(strategy, version, L, d):
+    """Argumentos extra que necesita una estrategia (siempre del pasado)."""
+    if (strategy, version) == ("POC", 1):
+        return {"open_in_value": L.open_in_value(d)}
+    if strategy == "HVN":
+        prev = L.prev_date(d); pp = os.path.join(config.FEAT, "profile", "NQ", f"{prev}.parquet") if prev else None
+        if pp and os.path.exists(pp):
+            pr = pl.read_parquet(pp).filter(pl.col("seg") == "ny"); return {"prof": np.c_[pr["price_t"].to_numpy(), pr["vol"].to_numpy()]}
+        return {"prof": None}
+    return {}
 
 
 def news_windows(date):
@@ -38,9 +56,10 @@ def news_windows(date):
 
 
 def gen_for(strategy, version):
-    if version != 1:
-        raise SystemExit("solo v1 implementada en el motor; una v2 requiere código nuevo registrado")
-    return S1.REGISTRY[strategy], dict(S1.PARAMS[strategy])
+    m = MODULES.get((strategy, int(version)))
+    if m is None:
+        raise SystemExit(f"{strategy} v{version} no tiene código registrado en el motor")
+    return m.REGISTRY[strategy], dict(m.PARAMS[strategy])
 
 
 def verdict(res, protocol_ok):
@@ -96,7 +115,7 @@ def main():
             continue
         possible += 1
         s = load(d, ny_only=True)
-        kw = {"open_in_value": L.open_in_value(d)} if a.strategy == "POC" else {}
+        kw = strat_kwargs(a.strategy, a.version, L, d)
         sigs = gen(s, ref, thr, params, **kw)
         r = Rules(news=news_windows(d))
         sig_by_date[d] = sigs
@@ -135,8 +154,8 @@ def main():
     print(f"  Topstep {ts['pct_pasan']}% (RAND {ts['rand_pct_pasan']}%) · placebo desplazado {rt['placebo_desplazado']['neto']:.0f} · {time.time()-t0:.0f}s", flush=True)
     extra = {}
     if a.sens:
-        oiv = (lambda d: L.open_in_value(d)) if a.strategy == "POC" else None
-        extra["sensibilidad"] = redteam.sensitivity(gen, dates, L, params, SENS_STEPS[a.strategy], rules, slip, comm, oiv)
+        extra["sensibilidad"] = redteam.sensitivity(gen, dates, L, params, SENS_STEPS[(a.strategy, a.version)], rules, slip, comm,
+                                                     kw_fn=lambda d: strat_kwargs(a.strategy, a.version, L, d))
         print(f"  sensibilidad lista · {time.time()-t0:.0f}s", flush=True)
     sm = stats.summary(trades, daily, dates)
     res = {"operaciones": len(trades), "ganancia_neta": round(net, 2), "p_rand": rs["p_valor"], "estres_neto": round(stress_net, 2),
@@ -155,7 +174,7 @@ def main():
     meta = {"estrategia": a.strategy, "version": a.version, "fecha": time.strftime("%Y-%m-%d"), "tanda": a.study,
             "periodo": f"{dates[0]} a {dates[-1]} · {len(dates)} sesiones válidas", "veredicto": v, "notas": a.notas,
             "receta": {"git_commit": config.git_commit(), "motor": "1.0.0", "sesiones_sha256": sess_sha, "costos": c.as_dict(),
-                       "parametros": params, "protocol_sha256": config.protocol()[1], "estrategias_sha256": config.strategies(a.version)[1],
+                       "parametros": params, "protocol_sha256": config.protocol()[1], "estrategias_sha256": (config.strategy_file(a.strategy, a.version) or ("", {}, None))[2],
                        "rand_corridas": a.rand, "semilla": f"sha256({test_id}:<fecha>:k)"},
             "estres": {"neto": round(stress_net, 2), "p_rand": p_stress, "operaciones": len(stress_tr)},
             "dsr": res["dsr"], "min_btl_anios": res["min_btl_anios"], "intentos_totales": n_trials,

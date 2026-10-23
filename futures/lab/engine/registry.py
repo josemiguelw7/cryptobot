@@ -85,7 +85,7 @@ def record_trial(test_id, study_id, strategy, version, kind, params, sessions_sh
            "parametros": params, "receta": {"git_commit": config.git_commit(), "git_sucio": config.git_dirty(),
                                             "motor": ENGINE_VERSION, "sesiones_sha256": sessions_sha, "sesiones_n": sessions_n,
                                             "semilla": seed, "costos": costs, "protocol_sha256": config.protocol()[1],
-                                            "estrategias_sha256": config.strategies(version)[1] if kind != "senal" else None},
+                                            "estrategias_sha256": ((config.strategy_file(strategy, version) or ("", {}, None))[2] if kind not in ("senal",) and version else None)},
            "resultado": result, "veredicto": verdict, "notas": notes, "error": error}
     return _append(TRIALS, rec)
 

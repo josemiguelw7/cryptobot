@@ -1,0 +1,67 @@
+{
+ "version": 2,
+ "fecha_registro": "2026-10-23",
+ "titulo": "Estrategias de la tanda 2 · reglas con números medidos en el mapa de señales v1 y en el estudio de salidas",
+ "estado": "Escritas y selladas. En el backlog quedan como PROPUESTA hasta que Oscar y Jose Miguel aprueben; entonces pasan a congeladas y el orquestador las corre.",
+ "comun": {
+  "instrumento": "NQ (contrato del frente), 1 contrato por operación en la v1",
+  "horario": "Nueva York 09:30–11:30 ET (los traders estudiados operan casi solo la primera hora u hora y media)",
+  "cierre_forzado": "cualquier posición abierta se cierra a mercado a las 11:45 ET",
+  "noticias": "no se abre de −2 a +5 min de CPI, NFP y Fed",
+  "costos": "comisión Topstep + 1 tick de deslizamiento por lado; prueba extra al doble",
+  "limites_dia": "máximo 6 operaciones por estrategia por día; se detiene tras 3 pérdidas seguidas",
+  "una_posicion": "nunca más de una posición abierta por estrategia",
+  "niveles_de_referencia": "del día anterior (perfil de Nueva York): POC, VAH, VAL (70%), máximo y mínimo; de la noche (18:00–09:30 ET): máximo y mínimo; VWAP del día desde las 09:30",
+  "umbrales_relativos": "todo umbral en percentiles se calcula con las 20 sesiones ANTERIORES, tramo de Nueva York; nunca con el mismo día ni con el futuro",
+  "datos": "solo periodo de diseño 2024-01-02 a 2026-04-21; el examen sellado no se abre",
+  "control": "RAND emparejado: mismas cantidades de operaciones por día, misma dirección al azar, misma duración y mismo horario"
+ },
+ "estrategias": [
+  {
+   "id": "FADE",
+   "version": 1,
+   "nombre": "Desvanecer órdenes grandes",
+   "idea": "El mapa de señales (19,255 eventos, z ≈ −28) muestra que después de una orden agresiva grande el precio va 6–7 ticks EN CONTRA de la orden a 5, 15 y 30 minutos: la orden grande marca el peor momento de su media hora. Se entra en contra.",
+   "contexto": "Cualquier día; sin filtro de régimen (el efecto se midió sin condicionar).",
+   "disparador": "Una orden agresiva de tamaño ≥ percentil 99 de las órdenes de 10+ contratos de las 20 sesiones válidas anteriores, que barre ≥ 2 niveles de precio.",
+   "ubicacion": "Sin filtro de nivel.",
+   "confirmacion": "Ninguna: el mapa mide el efecto desde el primer minuto. Se entra al terminar la orden.",
+   "entrada": "A mercado, en contra de la orden (si fue compra, se vende). Mínimo 120 s entre señales.",
+   "stop": "16 ticks desde la entrada (mayor que el efecto medido de 6–7 ticks, para no morir en el ruido).",
+   "objetivo": "Sin objetivo: salida por tiempo (lección del estudio de salidas).",
+   "tiempo_maximo": "15 minutos.",
+   "filtros": "Reglas comunes (horario 09:30–11:30, cierre 11:45, máximo 6 operaciones, parar tras 3 pérdidas, noticias)."
+  },
+  {
+   "id": "HVN",
+   "version": 1,
+   "nombre": "Rechazo de nodos de alto volumen del día anterior",
+   "idea": "El mapa (2,561 eventos, z ≈ 19) muestra que cuando el precio llega a un nodo de alto volumen del perfil de Nueva York del día anterior después de haber estado lejos, rebota: +9 ticks a 15 min y +17 a 30 min.",
+   "contexto": "Perfil de Nueva York del día válido anterior; nodos = precios con volumen ≥ percentil 90 del perfil.",
+   "disparador": "El precio toca un nodo (celda de 10 s que lo contiene) después de haber estado ≥ 20 ticks lejos de él en la última hora.",
+   "ubicacion": "El nodo mismo.",
+   "confirmacion": "Ninguna: el mapa mide desde el toque.",
+   "entrada": "A mercado al terminar la celda del toque, de vuelta hacia donde venía el precio (si venía de arriba, compra). Cada nodo una vez por día y por lado.",
+   "stop": "12 ticks desde la entrada (del otro lado del nodo).",
+   "objetivo": "16 ticks (efecto medido a 30 min: +17).",
+   "tiempo_maximo": "30 minutos.",
+   "filtros": "Reglas comunes."
+  },
+  {
+   "id": "ABS",
+   "version": 2,
+   "nombre": "Absorción · reversión en nivel",
+   "idea": "Mucho volumen agresivo contra un nivel que no logra moverlo: alguien está absorbiendo del otro lado. Se opera la vuelta.",
+   "disparador": "en una ventana móvil de 60 s, volumen agresivo de un lado ≥ percentil 95 de las ventanas de 60 s de las 20 sesiones anteriores, mientras el precio no avanza más de 2 ticks más allá del extremo que tenía al comenzar la ventana",
+   "ubicacion": "el extremo de la ventana queda a ≤ 4 ticks de algún nivel de referencia",
+   "confirmacion": "en los 60 s siguientes el delta de esa ventana cambia de signo (el otro lado domina) y el precio se aleja 4 ticks del extremo absorbido",
+   "entrada": "a mercado en el momento de la confirmación, en contra del volumen absorbido",
+   "stop": "4 ticks más allá del extremo absorbido, con mínimo de 12 y máximo de 32 ticks de distancia",
+   "objetivo": "Objetivo fijo de 40 puntos (160 ticks). En la práctica casi nunca se toca en 15 minutos: la salida real es por tiempo, dejando correr al ganador. Viene del estudio de salidas (meseta TP 30–50 × stop v1: +$6,674 a +$9,928 contra +$4,641 de la v1).",
+   "tiempo_maximo": "15 minutos",
+   "filtros": "un mismo nivel solo puede dar una señal ABS por día",
+   "motivo_cambio": "Estudio de salidas salidas_v1 (pedido de Oscar, 23/10/2026): con el stop de la v1 el neto sube de forma monótona con el TP y hay meseta; stops más cortos la matan y piramidar la perjudica. Solo cambia el objetivo. Versión 2 de 3."
+  }
+ ],
+ "nota": "FADE y HVN son versión 1 (estrategias nuevas); ABS es versión 2 de 3. Los parámetros numéricos viven en futures/lab/engine/strategies/v2.py::PARAMS y coinciden con este texto."
+}

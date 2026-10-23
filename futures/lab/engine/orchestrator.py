@@ -78,15 +78,17 @@ def preflight(item, commit, wd):
     if not (sid and v and st):
         fails.append("la prueba no tiene estrategia/version/estudio")
         return fails
-    vf = os.path.join(fut, "strategies", f"v{v}.json")
-    if not os.path.exists(vf):
-        fails.append(f"falta strategies/v{v}.json en el commit {commit[:8]}")
-    elif not os.path.exists(vf + ".ots"):
-        fails.append(f"strategies/v{v}.json no tiene sello .ots")
-    else:
-        ids = [s["id"] for s in json.load(open(vf, encoding="utf-8"))["estrategias"]]
-        if sid not in ids:
-            fails.append(f"{sid} no está en v{v}.json")
+    import glob
+    found = None
+    for vf in sorted(glob.glob(os.path.join(fut, "strategies", "v*.json"))):
+        if not os.path.basename(vf)[1:-5].isdigit():
+            continue
+        if any(e["id"] == sid and int(e.get("version", 1)) == int(v) for e in json.load(open(vf, encoding="utf-8")).get("estrategias", [])):
+            found = vf; break
+    if not found:
+        fails.append(f"{sid} v{v} no está registrada en ningún strategies/v*.json del commit {commit[:8]}")
+    elif not os.path.exists(found + ".ots"):
+        fails.append(f"{os.path.basename(found)} no tiene sello .ots")
     studies = os.path.join(REPO, "futures", "lab", "registry", "studies.jsonl")
     if not os.path.exists(studies) or not any(json.loads(l)["study_id"] == st for l in open(studies) if l.strip()):
         fails.append(f"estudio {st} no registrado")
