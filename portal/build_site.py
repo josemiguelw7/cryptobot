@@ -33,11 +33,11 @@ def charter_integrity():
     between a published hash and the committed file is itself a finding and
     gets disclosed rather than quietly corrected."""
     docs = {
-        "intraday_charter": "docs/intraday_success_criteria.md",
-        "league_criteria": "docs/success_criteria.md",
-        "intraday_exam_bar": "docs/intraday_standard.md",
-        "entrance_exam": "docs/entrance_exam.md",
-        "exam_amendment_001": "docs/exam_amendment_001.md",
+        "intraday_charter": "docs/archivo/intraday_success_criteria.md",
+        "league_criteria": "docs/archivo/success_criteria.md",
+        "intraday_exam_bar": "docs/archivo/intraday_standard.md",
+        "entrance_exam": "docs/archivo/entrance_exam.md",
+        "exam_amendment_001": "docs/archivo/exam_amendment_001.md",
     }
     out = {}
     for label, rel in docs.items():

@@ -1,10 +1,10 @@
 <section class="tf" id="trading-floor">
 <style>
-.tf{background:#000;color:#f2f2f2;padding:34px 20px 40px;font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+.tf{background:#000;color:#f2f2f2;padding:26px 20px 40px;font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
 .tf *{box-sizing:border-box}
 .tf .in{max-width:1180px;margin:0 auto}
 .tf h2{font-size:26px;margin:0 0 4px;font-weight:600}
-.tf .sub{color:#9a9a9a;margin:0 0 22px}
+.tf .sub{color:#9a9a9a;margin:0 0 18px}
 .tf .frame{border:1px solid #2a2a2a;border-radius:22px;padding:22px}
 .tf .lbl{color:#bdbdbd;font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px}
 .tf .box{background:#1b1b1b;border-radius:16px;padding:16px 18px}
@@ -29,43 +29,52 @@
 .tf .verd span{background:#1b1b1b;border-radius:10px;padding:6px 12px;font-size:13px;color:#cfcfcf}
 .tf .verd b{color:#fff;margin-left:4px}
 .tf .foot{color:#8a8a8a;font-size:13px;margin-top:16px;text-align:center}
-.tf .foot a{color:#38bdf8;text-decoration:none}
+.tf .foot a,.tf a{color:#38bdf8;text-decoration:none}
+.tf .week{background:#0d1a26;border:1px solid #16344a;border-radius:16px;padding:14px 16px;margin-bottom:16px}
+.tf .week h3{margin:0 0 8px;font-size:12px;color:#38bdf8;text-transform:uppercase;letter-spacing:.8px}
+.tf .week li{margin:4px 0;font-size:14px;color:#dfe6ee}.tf .week ul{margin:0;padding-left:18px}
+.tf .week .k{color:#8a94a8;font-size:12px;margin-right:6px}
+.tf .nums{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
+.tf .n{background:#121212;border:1px solid #262626;border-radius:12px;padding:10px 12px}
+.tf .n b{display:block;font-size:20px;font-variant-numeric:tabular-nums}.tf .n small{color:#9a9a9a;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
 @media(max-width:820px){.tf .grid{grid-template-columns:1fr 1fr}}
-@media(max-width:520px){.tf .grid{grid-template-columns:1fr}.tf .frame{padding:14px}}
+@media(max-width:520px){.tf .grid{grid-template-columns:1fr}.tf .frame{padding:14px}.tf .nums{grid-template-columns:1fr 1fr}.tf h2{font-size:22px}}
 </style>
 <div class="in">
   <h2>Research Trading Floor</h2>
   <p class="sub">Así está organizado el laboratorio. Toca cualquier mesa para ver qué está listo y qué falta.</p>
+  <div class="week" id="tf-week"><h3>Qué cambió esta semana</h3><ul><li>Cargando…</li></ul></div>
+  <div class="nums" id="tf-nums"></div>
   <div class="frame">
-    <div class="lbl">Estado actual · actualizado el 22 oct 2026</div>
+    <div class="lbl">Estado actual · <span id="tf-upd">actualizado el 22 oct 2026</span></div>
 
     <details class="box head"><summary>
       <div style="font-size:24px">🧠</div>
       <div class="name">01 · Head of Research</div>
       <div style="color:#bdbdbd">Coordinación, prioridades y decisiones</div>
       <span class="pill ok">activo</span><span class="who">Jose Miguel y Oscar · Claude coordina</span>
-    </summary><div class="det">Las prioridades se definen en las conversaciones por audio y quedan escritas en la bitácora. <b>Prioridad actual:</b> construir el motor de pruebas con las reglas de Topstep.</div></details>
+    </summary><div class="det">Las prioridades se definen en las conversaciones y quedan escritas en la bitácora y en <code>docs/decisions.md</code>. <b>Prioridad actual:</b> correr el mapa de señales y la tanda 1 con toda la infraestructura ya lista (registro, protocolo, Red Team, Topstep).</div></details>
 
     <div class="arrow">↓</div>
     <div class="grid">
-      <details class="box"><summary><div class="num">02</div><div class="name">Data Engineering</div><span class="pill ok">listo</span><span class="who">programa</span></summary>
-        <div class="det"><b>Listo:</b> 727 sesiones descargadas y verificadas, validadas contra Databento. Las 595 de diseño están en formato del laboratorio y cuadran exacto con el manifiesto. Examen final sellado.<br><b>Falta:</b> el segundo contrato de los 12 días de rollo y separar las pausas normales de los huecos del feed.</div></details>
+      <details class="box"><summary><div class="num">02</div><div class="name">Data Engineering</div><span class="pill ok">listo con pendientes</span><span class="who">programa</span></summary>
+        <div class="det"><b>Listo:</b> 727 sesiones descargadas y verificadas, validadas contra Databento; 595 de diseño en formato del laboratorio; auditoría de huecos y horario de verano; lista congelada de <b>576 sesiones válidas</b>. Examen final sellado.<br><b>Pendiente:</b> segundo contrato de los 9 días de rollo (hoy excluidos), respaldo de la VM y copia de la llave del sello fuera de la Mac.</div></details>
       <details class="box"><summary><div class="num">03</div><div class="name">Market Regime</div><span class="pill wait">pendiente</span><span class="who">programa</span></summary>
-        <div class="det">Clasificar cada día como balance o tendencia según cómo migra el área de valor de un día al siguiente. Es el paso de <b>contexto</b> del esquema contexto, ubicación y confirmación.</div></details>
+        <div class="det">Clasificar cada día como balance o tendencia según cómo migra el área de valor. Por ahora el único contexto en uso es "abre dentro del valor de ayer" (lo usa POC).</div></details>
       <details class="box"><summary><div class="num">04</div><div class="name">Volume Profile</div><span class="pill wip">en curso</span><span class="who">programa</span></summary>
-        <div class="det"><b>Listo:</b> perfil por nivel, POC, VAH, VAL y VWAP de Asia, Londres, Nueva York y post en las 595 sesiones.<br><b>Falta:</b> perfiles compuestos de la noche y la semana, nodos de alto y bajo volumen, y POC sin tocar de días anteriores.</div></details>
-      <details class="box"><summary><div class="num">05</div><div class="name">Order Flow</div><span class="pill wip">en curso</span><span class="who">programa</span></summary>
-        <div class="det"><b>Listo:</b> delta por nivel y órdenes agresivas agrupadas, con tamaño y niveles barridos. En una sesión típica de Nueva York hay unas 65 órdenes de 70 contratos o más.<br><b>Falta:</b> detectar absorción, icebergs y agotamiento.</div></details>
-      <details class="box"><summary><div class="num">06</div><div class="name">Strategy Discovery</div><span class="pill wait">pendiente</span><span class="who">IA + ustedes</span></summary>
-        <div class="det">Propone hipótesis a partir de los videos estudiados y de lo que traiga Oscar. Cada una se escribe y se guarda <b>antes</b> de probarla. Hipótesis registradas: <b>0</b>.</div></details>
-      <details class="box"><summary><div class="num">07</div><div class="name">Quant / Backtesting</div><span class="pill next">siguiente</span><span class="who">programa</span></summary>
-        <div class="det">El motor que simula cada operación contra la cinta real, con comisiones y 1 tick de deslizamiento por lado, y cuentas Topstep que arrancan en fechas distintas. Es la pieza que sigue.</div></details>
-      <details class="box"><summary><div class="num">08</div><div class="name">Statistics</div><span class="pill wait">pendiente</span><span class="who">programa</span></summary>
-        <div class="det">Compara cada estrategia contra el bot aleatorio con la misma frecuencia, duración y horario. Cuenta todas las pruebas hechas, incluidas las fallidas, para no confundir suerte con ventaja.</div></details>
-      <details class="box"><summary><div class="num">09</div><div class="name">Red Team</div><span class="pill wait">pendiente</span><span class="who">IA</span></summary>
-        <div class="det">Su único trabajo es intentar destruir cada estrategia candidata: revisa el código, busca datos del futuro filtrados, costos irreales y resultados que dependen de pocos días.</div></details>
+        <div class="det"><b>Listo:</b> perfil por nivel, POC, VAH, VAL y VWAP de Asia, Londres, Nueva York y post en las 595 sesiones; nodos HVN del día anterior para el mapa.<br><b>Falta:</b> perfiles compuestos de la noche y la semana, POC sin tocar de días anteriores.</div></details>
+      <details class="box"><summary><div class="num">05</div><div class="name">Order Flow</div><span class="pill ok">listo para el mapa</span><span class="who">programa</span></summary>
+        <div class="det"><b>Listo:</b> órdenes agresivas agrupadas con tamaño y niveles barridos, umbrales en percentiles solo del pasado, ventanas de absorción, desequilibrios, divergencia de delta, icebergs, ráfagas y desequilibrio del libro. Son los 12 detectores del mapa de señales.</div></details>
+      <details class="box"><summary><div class="num">06</div><div class="name">Strategy Discovery</div><span class="pill ok">3 hipótesis registradas</span><span class="who">IA + ustedes</span></summary>
+        <div class="det">BIG, ABS y POC v1 escritas y congeladas antes de probar (huella y sello de fecha). Son el <b>intento ingenuo</b>: los números no salen de los datos. Las tandas siguientes salen del mapa de señales.</div></details>
+      <details class="box"><summary><div class="num">07</div><div class="name">Quant / Backtesting</div><span class="pill ok">motor listo</span><span class="who">programa</span></summary>
+        <div class="det">Simula cada operación contra la cinta real: entrada en la mejor oferta contraria + 1 tick, stop de mercado con deslizamiento, objetivo solo si la cinta pasa de largo, cola para órdenes límite, límites del día, cierre forzado. Costos exactos de Topstep ($3.78). 9 pruebas unitarias.</div></details>
+      <details class="box"><summary><div class="num">08</div><div class="name">Statistics</div><span class="pill ok">protocolo fijo</span><span class="who">programa</span></summary>
+        <div class="det">RAND emparejado (1000 corridas, p ≤ 0.05), largo mínimo, PSR y Sharpe deflactado con la cuenta total de intentos, CPCV (15 caminos), corrección de Holm en el mapa. Todo escrito en <code>protocol.json</code> antes de la primera prueba.</div></details>
+      <details class="box"><summary><div class="num">09</div><div class="name">Red Team</div><span class="pill ok">automático</span><span class="who">programa + IA</span></summary>
+        <div class="det">En cada prueba: placebo desplazado 5 min (fuga de futuro), direcciones barajadas 200 veces, curva de costos 0–4 ticks, concentración en pocos días, superficie de sensibilidad. La revisión de código con IA se agrega antes del comité.</div></details>
       <details class="box"><summary><div class="num">10</div><div class="name">Risk &amp; Portfolio</div><span class="pill ok">reglas fijas</span><span class="who">programa</span></summary>
-        <div class="det">Cuenta Topstep $50K: meta $3,000, pérdida máxima $2,000, límite diario $1,000, hasta 5 contratos y consistencia del 50%. No se opera de 2 minutos antes a 5 después de CPI, NFP y la Fed. Ningún agente puede cambiar estas reglas.</div></details>
+        <div class="det">Cuenta Topstep $50K (reglas verificadas el 22/10/2026): meta $3,000, MLL $2,000 trailing al cierre vigilado en tiempo real, DLL $1,000, hasta 5 contratos, consistencia 50% (oficial 55%). Cuentas que arrancan en cada sesión. Ningún agente puede cambiar estas reglas.</div></details>
     </div>
     <div class="arrow">↓</div>
 
@@ -73,9 +82,25 @@
       <div class="name">Strategy Committee</div>
       <div style="color:#bdbdbd">Jose Miguel + Oscar · con los informes de Estadística, Red Team y Riesgo</div>
       <div style="color:#9a9a9a;font-size:14px">Aprueba, devuelve a investigación o rechaza una estrategia. Solo una aprobada puede abrir el examen final sellado.</div>
-      <div class="verd"><span>Aprobadas<b>0</b></span><span>Devueltas<b>0</b></span><span>Rechazadas<b>0</b></span><span>En revisión<b>0</b></span></div>
+      <div class="verd" id="tf-verd"><span>Aprobadas<b>0</b></span><span>Devueltas<b>0</b></span><span>Rechazadas<b>0</b></span><span>En revisión<b>0</b></span></div>
     </div>
-    <p class="foot">Mira los datos de un día real en el <a href="explorador.html">Explorador de sesiones →</a></p>
+    <p class="foot">Mira los datos de un día real en el <a href="#explorador">Explorador de sesiones →</a> · Resultados en <a href="#pruebas">Pruebas →</a></p>
   </div>
 </div>
 </section>
+<script>
+(function(){
+const esc=s=>String(s??'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+fetch('data/research.json').then(r=>r.json()).then(R=>{
+  const w=R.cambios_semana||[];
+  document.querySelector('#tf-week ul').innerHTML=w.length?w.slice(0,8).map(u=>`<li><span class="k">${esc(u.date)} · ${esc(u.kind)}</span>${esc(u.title)}</li>`).join(''):'<li>Sin cambios en los últimos 7 días.</li>';
+  const T=R.pruebas||[],reg=R.registro||{},ses=R.sesiones||{};
+  const pasa=T.filter(t=>t.veredicto==='pasa').length;
+  document.getElementById('tf-nums').innerHTML=[
+    ['Sesiones válidas',(ses.resumen||{}).diseno_validas??'—'],['Intentos registrados',reg.total_intentos??0],
+    ['Pruebas publicadas',T.length],['Pasan todo',pasa]].map(([a,b])=>`<div class="n"><small>${a}</small><b>${b}</b></div>`).join('');
+  document.getElementById('tf-verd').innerHTML=[['Aprobadas',0],['Devueltas',0],['Rechazadas',T.filter(t=>t.veredicto==='no_pasa').length],['En revisión',pasa]].map(([a,b])=>`<span>${a}<b>${b}</b></span>`).join('');
+  if(R.generado)document.getElementById('tf-upd').textContent='actualizado '+new Date(R.generado).toLocaleString('es-MX',{dateStyle:'medium',timeStyle:'short'});
+}).catch(()=>{});
+})();
+</script>

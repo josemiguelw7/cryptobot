@@ -647,3 +647,18 @@ Archivo `futures/strategies/v1.json`, SHA-256 `73abb571d6bab88af6775e65c925157e5
 ## 2026-10-22 · Plan de investigación NQ v1 registrado
 
 Archivo `futures/research_plan.json`, SHA-256 `5387f568a734f5eda8ac2f2d400a888486284ca89b8ccd067dd262c6cc26ac22`. Fase 1 mapa de 12 señales contra momentos al azar; Fase 2 estrategias de 3 en 3 (tanda 1 = BIG, ABS, POC v1); Fase 3 comité y examen sellado. Máximo 3 versiones por estrategia; toda prueba numerada y publicada. Registro de pruebas en `futures/tests.json`.
+
+## 2026-10-22 · Infraestructura completa antes de la primera prueba (sesión Fable)
+
+Jose Miguel aprobó construir toda la infraestructura del laboratorio antes de correr una sola prueba, para que ningún resultado llegue sin su receta, su registro y su hoja. Quedó así:
+
+- **Costos fijados con cifra** (`futures/costs.json`): NQ $3.78 por ida y vuelta (verificado en el centro de ayuda de Topstep el 22/10/2026) + 1 tick por lado; estrés 2 ticks; curva 0–4.
+- **Reglas Topstep verificadas** (`futures/topstep_rules.json`): MLL $2,000 trailing al cierre, vigilado en tiempo real con P&L no realizado, se congela al llegar al balance inicial; consistencia oficial 55% (el laboratorio mantiene 50%, más estricto); DLL $1,000; 5 contratos; $10 por liquidación.
+- **Protocolo estadístico** (`futures/protocol.json`, SHA-256 `dad6c111…7b7a`): RAND emparejado con 1000 corridas y semilla por SHA-256; p ≤ 0.05; largo mínimo 100 operaciones / 120 sesiones; criterios de muerte declarados; registro de intentos de solo agregar; DSR con la cuenta total de intentos; Holm sobre las 48 pruebas del mapa; CPCV 6 grupos; placebos (desplazado, barajado) y curva de costos.
+- **Lista congelada de sesiones** (`futures/sessions_manifest.json`, SHA-256 `2bd01ecb…c571`): 576 válidas de diseño, 19 excluidas (9 rollos sin segundo contrato, 7 huecos ≥ 120 s en Nueva York, 3 sin sesión de Nueva York). 0 fallos de horario de verano.
+- **Bot con la "regla de Oscar"**: se retira definitivamente. Jose Miguel aclaró que fue contexto suyo al inicio de la conversación, no una regla de Oscar.
+- **v1 es el intento ingenuo**: los números de BIG, ABS y POC v1 no salen de los datos; se corren igual porque ya están congelados, y se dice así en la página.
+- **Sellos OpenTimestamps** sobre v1.json, research_plan.json, protocol.json, sessions_manifest.json, costs.json, topstep_rules.json, lab_rules.json y news.json (archivos .ots junto a cada uno).
+- **Motor** `futures/lab/engine/` (versión 1.0.0), 9 pruebas unitarias; prueba de humo con 60 sesiones correcta.
+- **Estudios registrados antes de correr**: `mapa_v1` (48 intentos declarados) y `tanda1` (51: 3 pruebas + 48 de sensibilidad).
+- `docs/` de la época cripto pasa a `docs/archivo/`; nuevo `docs/README.md` del laboratorio NQ.

@@ -1,0 +1,34 @@
+{
+ "titulo": "Reglas de la cuenta Topstep $50K Trading Combine · verificadas antes de programar el simulador",
+ "fecha_verificacion": "2026-10-22",
+ "fuentes": [
+  "https://help.topstep.com/en/articles/8284197-trading-combine-parameters",
+  "https://help.topstep.com/en/articles/8284204-what-is-the-maximum-loss-limit",
+  "https://help.topstep.com/en/articles/8284208-what-is-the-consistency-target",
+  "https://help.topstep.com/en/articles/10490293-daily-loss-limit-in-the-trading-combine-and-express-funded-account"
+ ],
+ "cuenta": {
+  "balance_inicial_usd": 50000,
+  "meta_usd": 3000,
+  "mll_usd": 2000,
+  "mll_regla": "El MLL arranca $2,000 abajo del balance inicial ($48,000). Sube con el balance al CIERRE de cada día de trading (3:10 PM CT), nunca baja, y se congela para siempre cuando llega al balance inicial ($50,000). Se vigila en tiempo real con P&L realizado y NO realizado: si el balance toca el MLL en cualquier momento, incluso dentro de una operación abierta, la cuenta se liquida y queda fuera.",
+  "dll_usd": 1000,
+  "dll_regla": "Opcional en Topstep; el laboratorio lo usa siempre. Si el P&L neto del día toca −$1,000: se cierran posiciones, se cancelan órdenes y no se opera hasta la sesión siguiente (5 PM CT). No es violación.",
+  "consistencia_oficial": 0.55,
+  "consistencia_regla": "El mejor día de ganancia debe quedar ≤ 55% de la ganancia total al momento de pasar. Si lo excede, la meta sube a mejor_dia ÷ 0.55. El mejor día se fija a las 3:10 PM CT y las pérdidas no lo reinician. Se puede pasar en 2 días.",
+  "consistencia_laboratorio": 0.50,
+  "consistencia_nota": "Jose Miguel fijó 50% (más estricto que el 55% oficial). El simulador usa 50% para el veredicto y reporta también el resultado con 55%.",
+  "max_contratos": 5,
+  "contratos_laboratorio": 1,
+  "contratos_nota": "Las estrategias v1 operan 1 contrato. El simulador reporta además el escenario a 5 contratos (riesgo ×5) como información, no como veredicto.",
+  "dia_trading": "5:00 PM CT a 3:10 PM CT del día siguiente",
+  "minimo_dias": 2,
+  "liquidacion_fee_usd": 10
+ },
+ "simulacion": {
+  "arranques": "una cuenta nueva arranca en cada sesión del periodo de diseño que tenga al menos 60 sesiones por delante; cada una corre hasta pasar, romper el MLL, o agotar 120 sesiones",
+  "resultado_por_cuenta": "pasa / rompe_mll / sin_resolver, con los días que tardó y el peor drawdown",
+  "veredicto": "porcentaje de cuentas que pasan comparado contra el mismo porcentaje del RAND emparejado; se publica el histograma completo",
+  "mll_intradia": "el simulador revisa el MLL y el DLL contra el peor momento de cada operación (MAE en ticks), no solo contra el cierre"
+ }
+}

@@ -1,0 +1,22 @@
+{
+ "titulo": "Costos del laboratorio NQ · fijados antes de la primera prueba",
+ "fecha_verificacion": "2026-10-22",
+ "fuente": "https://help.topstep.com/en/articles/8284213-topstepx-commissions-and-fees (TopstepX, Trading Combine y Express Funded Account)",
+ "instrumento": "NQ (E-mini Nasdaq-100)",
+ "tick_puntos": 0.25,
+ "tick_usd": 5.0,
+ "comision_round_turn_usd": 3.78,
+ "comision_por_lado_usd": 1.89,
+ "desglose_round_turn": {"exchange_cme": 2.76, "nfa_regulatoria": 0.02, "comision_topstep": 1.00},
+ "deslizamiento_ticks_por_lado": 1,
+ "deslizamiento_usd_round_turn": 10.0,
+ "costo_total_round_turn_usd": 13.78,
+ "escenarios": {
+  "base": {"deslizamiento_ticks_por_lado": 1, "comision_round_turn_usd": 3.78, "nota": "el que decide pasa/no pasa"},
+  "estres": {"deslizamiento_ticks_por_lado": 2, "comision_round_turn_usd": 3.78, "nota": "costos al doble en deslizamiento; la estrategia debe seguir ganando"},
+  "curva": {"deslizamiento_ticks_por_lado": [0, 1, 2, 3, 4], "nota": "curva de costos del Red Team; se publica completa"}
+ },
+ "liquidacion_forzada_usd": 10.0,
+ "nota_liquidacion": "Topstep cobra $10 por contrato si el sistema liquida por romper el MLL; el simulador lo aplica cuando una cuenta rompe la regla.",
+ "regla": "Ningún programa puede bajar estos costos. Subirlos para una prueba de estrés sí está permitido y se reporta."
+}

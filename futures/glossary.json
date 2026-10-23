@@ -1,0 +1,39 @@
+{
+ "glosario": [
+  {"t": "Order flow", "d": "Las operaciones reales que se ejecutan (quién compró, quién vendió, cuánto y a qué precio), sin velas ni indicadores."},
+  {"t": "Tick", "d": "El movimiento mínimo del NQ: 0.25 puntos = $5 por contrato."},
+  {"t": "Orden agresiva", "d": "La que cruza el libro para ejecutarse ya (compra al ask o vende al bid). Es la que mueve el precio."},
+  {"t": "Delta", "d": "Volumen comprado agresivamente menos volumen vendido agresivamente."},
+  {"t": "Perfil de volumen", "d": "Cuántos contratos se operaron en cada precio durante un tramo del día."},
+  {"t": "POC", "d": "Point of Control: el precio con más volumen del perfil."},
+  {"t": "VAH / VAL", "d": "Borde alto y bajo del área de valor: la zona de precios donde se operó el 70% del volumen."},
+  {"t": "VWAP", "d": "Precio promedio ponderado por volumen desde la apertura."},
+  {"t": "Absorción", "d": "Mucho volumen agresivo contra un precio que no se mueve: alguien lo está absorbiendo del otro lado."},
+  {"t": "Iceberg", "d": "Orden pasiva que muestra poco y se repone cada vez que la ejecutan."},
+  {"t": "Niveles barridos", "d": "Cuántos precios distintos tocó una sola orden agresiva."},
+  {"t": "RAND emparejado", "d": "Bot de control que entra al azar pero con la misma cantidad, duración y horario de operaciones que la estrategia. Si la estrategia no le gana, no hay nada."},
+  {"t": "Valor p", "d": "De 1000 corridas del RAND, qué fracción ganó igual o más que la estrategia. 0.05 = solo 5% del azar lo iguala."},
+  {"t": "Costos base / estrés", "d": "Comisión Topstep + 1 tick por lado / + 2 ticks por lado."},
+  {"t": "MLL", "d": "Maximum Loss Limit de Topstep: $2,000 bajo el mejor cierre; romperlo mata la cuenta."},
+  {"t": "DLL", "d": "Daily Loss Limit: −$1,000 en el día cierra el día, no la cuenta."},
+  {"t": "Consistencia", "d": "El mejor día no puede ser más del 50% de la ganancia total (Topstep exige 55%; aquí somos más estrictos)."},
+  {"t": "Periodo de diseño / examen sellado", "d": "Las sesiones con las que se puede trabajar (hasta 21/04/2026) y las que están cifradas hasta el veredicto final."},
+  {"t": "Registro de intentos", "d": "Lista de solo agregar con cada prueba corrida. Sirve para saber cuántas cosas se probaron, no solo las que salieron bien."},
+  {"t": "Sharpe deflactado (DSR)", "d": "Sharpe corregido por cuántos intentos se hicieron: mientras más intentos, más suerte cabe esperar, y más exigente es la vara."},
+  {"t": "CPCV", "d": "Partir las sesiones en 6 grupos y probar en cada par: 15 resultados en vez de uno, para ver si la estrategia funcionó en muchos tramos o en uno solo."},
+  {"t": "Placebo", "d": "La misma prueba con la señal corrompida a propósito (desplazada en el tiempo o con direcciones barajadas). Si gana igual, la prueba está mal."},
+  {"t": "Superficie de sensibilidad", "d": "Qué pasa si cada parámetro se mueve un poco. Una meseta es ventaja; un pico aislado es suerte."},
+  {"t": "Largo mínimo", "d": "Menos de 100 operaciones o 120 sesiones no deciden nada: 'insuficiente'."},
+  {"t": "Cementerio", "d": "Ideas y versiones descartadas, cada una con su causa de muerte."},
+  {"t": "Huella SHA-256 / OpenTimestamps", "d": "La huella identifica el contenido exacto de un archivo; el sello OTS prueba en la cadena de Bitcoin desde cuándo existe."}
+ ],
+ "preguntas_oscar": [
+  {"id": 1, "q": "¿Los niveles que tú miras son los del perfil de Nueva York del día anterior (09:30–16:00) o del día completo (incluida la noche)? Hoy usamos Nueva York.", "estado": "abierta"},
+  {"id": 2, "q": "Para una 'orden grande', ¿te importa más el tamaño absoluto (70–100 contratos) o lo raro que es ese tamaño para esa hora? La v1 usa percentil 99 de las 20 sesiones anteriores.", "estado": "abierta"},
+  {"id": 3, "q": "Cuando ves absorción, ¿cuánto tiempo esperas la confirmación antes de descartarla? La v1 espera 60 s.", "estado": "abierta"},
+  {"id": 4, "q": "¿Operas después de las 11:30? La v1 cierra todo a las 11:45. Si tú operas la tarde, vale la pena una variante.", "estado": "abierta"},
+  {"id": 5, "q": "¿Qué stop usas en puntos para un scalp normal y cuánto máximo aguantas en tu peor operación? Lo necesito para comparar con los 24 ticks (6 puntos) de BIG.", "estado": "abierta"},
+  {"id": 6, "q": "¿Puedes abrir en ATAS el 27 de febrero de 2025 (NQH5, Nueva York) y comparar: máximo 21381.00, mínimo 20597.75, POC 21050.00, VAH 21235.25, VAL 20847.25? Si coincide, cerramos la validación visual.", "estado": "abierta"},
+  {"id": 7, "q": "¿Hay alguna señal que uses y que no esté en la lista de 12 del mapa? Si sí, se agrega al mapa 2.", "estado": "abierta"}
+ ]
+}

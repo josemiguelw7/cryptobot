@@ -1,75 +1,231 @@
 <style>
-.rx{background:#000;color:#f2f2f2;padding:30px 20px 50px;font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;min-height:80vh}
+.rx{background:#000;color:#f2f2f2;padding:22px 16px 60px;font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;min-height:80vh}
 .rx *{box-sizing:border-box}
 .rx .in{max-width:1100px;margin:0 auto}
-.rx h2{font-size:26px;margin:0 0 4px;font-weight:650}
-.rx h3{font-size:13px;color:#9a9a9a;text-transform:uppercase;letter-spacing:.8px;margin:26px 0 10px;font-weight:600}
-.rx .sub{color:#9a9a9a;margin:0 0 18px}
-.rx .card{background:#121212;border:1px solid #262626;border-radius:16px;padding:16px 18px;margin-bottom:12px}
-.rx .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
-.rx .kpi{background:#121212;border:1px solid #262626;border-radius:14px;padding:12px 14px}
-.rx .kpi b{display:block;font-size:22px;font-variant-numeric:tabular-nums}
-.rx .kpi small{color:#9a9a9a;font-size:12px;text-transform:uppercase;letter-spacing:.6px}
-.rx .pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:600;background:#262626;color:#cfcfcf}
-.rx .ok{background:#0f2e1b;color:#4ade80}.rx .no{background:#331414;color:#f87171}.rx .wait{background:#2b2410;color:#facc15}.rx .run{background:#0c2236;color:#38bdf8}
-.rx .head{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:space-between}
-.rx .head .t{font-size:18px;font-weight:650}
-.rx .idea{color:#cfcfcf;margin:8px 0 12px}
-.rx dl{display:grid;grid-template-columns:150px 1fr;gap:8px 16px;margin:0;font-size:14px}
+.rx h2{font-size:24px;margin:0 0 4px;font-weight:650}
+.rx h3{font-size:12px;color:#9a9a9a;text-transform:uppercase;letter-spacing:.8px;margin:24px 0 10px;font-weight:600}
+.rx h4{font-size:13px;color:#cfcfcf;margin:14px 0 6px;font-weight:600}
+.rx .sub{color:#9a9a9a;margin:0 0 16px;font-size:14px}
+.rx .card{background:#121212;border:1px solid #262626;border-radius:16px;padding:14px 16px;margin-bottom:12px}
+.rx .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
+.rx .kpi{background:#121212;border:1px solid #262626;border-radius:12px;padding:10px 12px;min-width:0}
+.rx .kpi b{display:block;font-size:20px;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rx .kpi small{color:#9a9a9a;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+.rx .kpi.g b{color:#4ade80}.rx .kpi.r b{color:#f87171}.rx .kpi.y b{color:#facc15}
+.rx .pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:600;background:#262626;color:#cfcfcf;white-space:nowrap}
+.rx .ok{background:#0f2e1b;color:#4ade80}.rx .no{background:#331414;color:#f87171}.rx .wait{background:#2b2410;color:#facc15}.rx .run{background:#0c2236;color:#38bdf8}.rx .err{background:#3a1a3a;color:#e879f9}
+.rx .head{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+.rx .head .t{font-size:17px;font-weight:650}
+.rx .idea{color:#cfcfcf;margin:8px 0 10px;font-size:14px}
+.rx dl{display:grid;grid-template-columns:140px 1fr;gap:6px 14px;margin:0;font-size:14px}
 .rx dt{color:#9a9a9a}.rx dd{margin:0}
 .rx .chg{font-size:14px;margin:6px 0;padding:8px 10px;background:#0b0b0b;border-left:3px solid #38bdf8;border-radius:6px}
 .rx .chg del{color:#f87171}.rx .chg ins{color:#4ade80;text-decoration:none}
-.rx .mono{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#9a9a9a;word-break:break-all}
-.rx details summary{cursor:pointer;color:#38bdf8;font-size:14px;margin-top:10px}
-.rx .empty{color:#9a9a9a;text-align:center;padding:28px 12px;border:1px dashed #333;border-radius:16px}
+.rx .mono{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:#9a9a9a;word-break:break-all}
+.rx details>summary{cursor:pointer;color:#38bdf8;font-size:14px;margin-top:8px;list-style:none;padding:8px 0}
+.rx details>summary::-webkit-details-marker{display:none}
+.rx details>summary::before{content:'▸ ';color:#38bdf8}.rx details[open]>summary::before{content:'▾ '}
+.rx .empty{color:#9a9a9a;text-align:center;padding:24px 12px;border:1px dashed #333;border-radius:16px;font-size:14px}
 .rx ol,.rx ul{margin:6px 0 0;padding-left:20px}.rx li{margin:4px 0}
-.rx table{width:100%;border-collapse:collapse;font-size:14px}
-.rx th,.rx td{text-align:left;padding:8px 6px;border-bottom:1px solid #222}
-.rx th{color:#9a9a9a;font-weight:500;font-size:12px;text-transform:uppercase}
-.rx .tw{overflow-x:auto}
+.rx table{width:100%;border-collapse:collapse;font-size:13.5px}
+.rx th,.rx td{text-align:left;padding:7px 6px;border-bottom:1px solid #222;vertical-align:top}
+.rx th{color:#9a9a9a;font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:.4px}
+.rx td.n,.rx th.n{text-align:right;font-variant-numeric:tabular-nums}
+.rx .tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .rx a{color:#38bdf8}
-@media(max-width:600px){.rx{padding:20px 12px 36px}.rx h2{font-size:21px}.rx dl{grid-template-columns:1fr;gap:2px}.rx dt{margin-top:8px}.rx .kpi b{font-size:18px}}
+.rx .g{color:#4ade80}.rx .r{color:#f87171}.rx .y{color:#facc15}
+.rx .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 12px}
+.rx .chip{padding:6px 12px;border-radius:999px;background:#1a1a1a;border:1px solid #2a2a2a;color:#cfcfcf;font-size:13px;cursor:pointer}
+.rx .chip.on{background:#1f2f3f;border-color:#38bdf8;color:#fff}
+.rx .muerte{background:#1a0f0f;border:1px solid #3a1a1a;border-radius:10px;padding:8px 12px;font-size:13.5px;margin-top:10px}
+.rx .muerte.pass{background:#0c1f14;border-color:#1b4a2b}
+.rx .sec{border-top:1px solid #222;margin-top:12px;padding-top:4px}
+.rx .btn{display:inline-block;padding:7px 12px;border-radius:10px;background:#1f1f1f;border:1px solid #333;color:#fff;font-size:13px;text-decoration:none;cursor:pointer}
+.rx .btn.p{background:#0c2236;border-color:#1c4a6a}
+.rx .heat td{text-align:center;padding:6px 4px;border-radius:6px;font-size:12px}
+.rx .bar{height:6px;background:#1f1f1f;border-radius:4px;overflow:hidden}.rx .bar i{display:block;height:100%;background:#38bdf8}
+.rx .gl dt{color:#fff;font-weight:600}.rx .gl dd{color:#bdbdbd;margin-bottom:6px}
+.rx .q{padding:10px 0;border-bottom:1px solid #222;font-size:14px}.rx .q small{color:#9a9a9a;display:block;margin-top:4px}
+.rx .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rx .plot{height:240px;margin-top:8px}
+.rx .note{color:#9a9a9a;font-size:12.5px}
+@media(max-width:600px){.rx{padding:16px 10px 50px}.rx h2{font-size:21px}.rx dl{grid-template-columns:1fr;gap:2px}.rx dt{margin-top:8px}.rx .kpi b{font-size:17px}.rx .row{grid-template-columns:1fr 1fr}.rx .two{grid-template-columns:1fr}.rx .card{padding:12px}.rx table{font-size:12.5px}.rx th,.rx td{padding:6px 4px}.rx .plot{height:210px}.rx .head .t{font-size:15.5px}}
 </style>
 
 <div class="tab" id="tab-pruebas" hidden><section class="rx"><div class="in">
  <h2>Pruebas y resultados</h2>
- <p class="sub">Cada prueba tiene un número y apunta a la versión exacta de las reglas que usó. Se publican todas, también las que fallan.</p>
+ <p class="sub">Cada prueba tiene número, receta completa y hoja de resultados. Se publican todas: las que pasan, las que no, las insuficientes y las que fallan por error.</p>
  <div class="row" id="rx-kpis"></div>
- <h3>Fase 1 · Mapa de señales</h3>
- <div id="rx-mapa"></div>
+ <div class="chips" id="rx-filter"></div>
  <h3>Fase 2 · Pruebas de estrategias</h3>
  <div id="rx-tests"></div>
+ <div id="rx-compare"></div>
+ <h3>Fase 1 · Mapa de señales</h3>
+ <div id="rx-mapa"></div>
+ <h3>Cementerio · lo que ya no sigue</h3>
+ <div id="rx-grave"></div>
+ <h3>Registro de intentos</h3>
+ <div id="rx-reg"></div>
+ <h3>Calidad de datos · sesiones válidas</h3>
+ <div id="rx-data"></div>
 </div></section></div>
 
 <div class="tab" id="tab-estrategias" hidden><section class="rx"><div class="in">
  <h2>Estrategias y reglas</h2>
  <p class="sub">Las reglas se escriben y se congelan antes de probar. Todo cambio crea una versión nueva, con el motivo y lo que cambió.</p>
- <div id="rx-plan"></div>
- <h3>Reglas comunes a todas las estrategias</h3>
- <div class="card"><dl id="rx-comun"></dl></div>
  <h3>Estrategias registradas</h3>
  <div id="rx-strats"></div>
+ <h3>Reglas comunes a todas las estrategias</h3>
+ <div class="card"><dl id="rx-comun"></dl></div>
+ <h3>Plan de investigación</h3>
+ <div id="rx-plan"></div>
+ <h3>Protocolo estadístico · cómo se mide</h3>
+ <div id="rx-proto"></div>
+ <h3>Costos y reglas Topstep · verificados</h3>
+ <div id="rx-costs"></div>
+ <h3>Preguntas abiertas para Oscar</h3>
+ <div id="rx-q"></div>
+ <h3>Glosario</h3>
+ <div id="rx-gl"></div>
+ <h3>Documentos congelados · huellas y sellos de fecha</h3>
+ <div id="rx-seal"></div>
 </div></section></div>
 
 <script>
 (function(){
 const esc=s=>String(s??'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const money=n=>n==null?'—':(n<0?'−$':'$')+Math.abs(n).toLocaleString('es-ES',{maximumFractionDigits:0});
+const num=(n,d=0)=>n==null?'—':Number(n).toLocaleString('es-ES',{maximumFractionDigits:d});
+const pct=n=>n==null?'—':num(n,1)+'%';
 const LBL={contexto:'Contexto',disparador:'Disparador',ubicacion:'Ubicación',confirmacion:'Confirmación',entrada:'Entrada',stop:'Stop',objetivo:'Objetivo',tiempo_maximo:'Tiempo máximo',filtros:'Filtros',
  instrumento:'Instrumento',horario:'Horario',cierre_forzado:'Cierre forzado',noticias:'Noticias',costos:'Costos',limites_dia:'Límites del día',una_posicion:'Posiciones',niveles_de_referencia:'Niveles de referencia',umbrales_relativos:'Umbrales',datos:'Datos',control:'Control'};
 const ORDER=['contexto','disparador','ubicacion','confirmacion','entrada','stop','objetivo','tiempo_maximo','filtros'];
-const ST={registrada:['Registrada · sin probar','wait'],probando:['Probando','run'],aprobada:['Aprobada','ok'],rechazada:['Rechazada','no'],comite:['En comité','run']};
-const money=n=>(n<0?'−$':'$')+Math.abs(n).toLocaleString('es-ES',{maximumFractionDigits:0});
-let R=null;
+const V={pasa:['Pasa todo','ok'],no_pasa:['No pasa','no'],insuficiente:['Insuficiente','wait'],error:['Error / fuga','err'],en_revision:['En revisión','run']};
+const PL={paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',font:{color:'#9a9a9a',size:11},margin:{l:48,r:8,t:8,b:30},xaxis:{gridcolor:'#222',zeroline:false},yaxis:{gridcolor:'#222',zeroline:false},legend:{orientation:'h',y:1.15,font:{size:11}}};
+const CFG={displaylogo:false,responsive:true,modeBarButtonsToRemove:['lasso2d','select2d','zoom2d','pan2d','autoScale2d']};
+let R=null,filter='todas',cmp=[];
+const lay=o=>Object.assign(JSON.parse(JSON.stringify(PL)),o||{});
+function plotly(){if(window.Plotly)return Promise.resolve();return new Promise(ok=>{const s=document.createElement('script');s.src='https://cdn.plot.ly/plotly-2.35.2.min.js';s.onload=ok;document.head.appendChild(s)})}
+function kpi(a,b,c){return `<div class="kpi ${c||''}"><small>${a}</small><b>${b}</b></div>`}
 
-function renderPlan(){
- const p=R.plan; if(!p) return;
- document.getElementById('rx-plan').innerHTML=`<div class="card">
-  <div class="head"><span class="t">${esc(p.titulo)}</span><span class="pill">registrado ${esc(p.fecha_registro)}</span></div>
-  <ol>${p.fases.map(f=>`<li><b>${esc(f.nombre)}.</b> ${esc(f.que)}${f.senales?`<details><summary>Ver las ${f.senales.length} señales</summary><ul>${f.senales.map(s=>`<li>${esc(s)}</li>`).join('')}</ul></details>`:''}</li>`).join('')}</ol>
-  <h3 style="margin-top:16px">Para pasar, una estrategia debe</h3><ul>${p.criterios_para_pasar.map(c=>`<li>${esc(c)}</li>`).join('')}</ul>
-  <h3>Reglas del proceso</h3><ul>${p.reglas.map(c=>`<li>${esc(c)}</li>`).join('')}</ul>
-  <p class="mono" style="margin-top:12px">Huella SHA-256 ${esc(p.sha256)}</p></div>`;
+/* ---------- PRUEBAS ---------- */
+function renderKpis(){
+ const T=R.pruebas||[],reg=R.registro||{},M=(R.mapa&&R.mapa.senales)||[];
+ const pasa=T.filter(t=>t.veredicto==='pasa').length,grave=(R.cementerio||[]).length;
+ const decl=(reg.estudios||[]).reduce((s,e)=>s+(e.n_declarado||0),0);
+ document.getElementById('rx-kpis').innerHTML=kpi('Pruebas publicadas',T.length)+kpi('Intentos registrados',`${reg.total_intentos||0} / ${decl} decl.`)+kpi('Pasan todo',pasa,pasa?'g':'')+kpi('En el cementerio',grave)+kpi('Señales significativas',M.length?M.filter(m=>m.significativa).length+' / '+M.length:'—')+kpi('Examen sellado','cerrado','y');
+ const cats=[['todas','Todas'],['pasa','Pasan'],['no_pasa','No pasan'],['insuficiente','Insuficientes'],['error','Errores']];
+ document.getElementById('rx-filter').innerHTML=cats.map(([k,l])=>`<span class="chip ${filter===k?'on':''}" data-f="${k}">${l} <small>${k==='todas'?T.length:T.filter(t=>t.veredicto===k).length}</small></span>`).join('');
 }
+function testCard(t){
+ const r=t.resultados||{},v=V[t.veredicto]||V.en_revision,hr=t.hoja_resumen||{},ts=hr.topstep||{};
+ const pv=r.vs_rand,pc=pv==null?'':pv<=0.05?'g':pv<=0.2?'y':'r';
+ return `<div class="card" id="prueba-${t.id}">
+  <div class="head"><span class="t">${t.id} · ${esc(t.estrategia)} v${t.version}</span><span><span class="pill ${v[1]}">${v[0]}</span> <span class="chip ${cmp.includes(t.id)?'on':''}" data-cmp="${t.id}" style="padding:3px 9px;font-size:12px">comparar</span></span></div>
+  <p class="sub" style="margin:4px 0 10px">${esc(t.fecha)} · estudio ${esc(t.tanda)} · ${esc(t.periodo||'')} · reglas: <a href="#estrategias" data-goto-est="${t.estrategia}">${t.estrategia} v${t.version}</a></p>
+  <div class="row">${kpi('Operaciones',num(r.operaciones))}${kpi('Ganancia neta',money(r.ganancia_neta),r.ganancia_neta>0?'g':'r')}${kpi('p contra RAND',pv==null?'—':num(pv,3),pc)}${kpi('Pasa Topstep',pct(r.topstep)+(ts.rand_pct_pasan!=null?` <span class="note">(RAND ${pct(ts.rand_pct_pasan)})</span>`:''),r.topstep>=50?'g':'')}${kpi('Aciertos',pct(r.aciertos))}${kpi('Factor',num(r.factor,2))}${kpi('Peor drawdown',money(r.drawdown_max),'r')}${kpi('Sharpe anual',num(r.sharpe_anual,2))}</div>
+  <div class="muerte ${t.veredicto==='pasa'?'pass':''}">${t.veredicto==='pasa'?'✅ Cumple los cuatro criterios del protocolo.':'<b>Causa:</b> '+esc(t.muerte||'—')}${t.estres?` · <b>Con costos al doble:</b> ${money(t.estres.neto)} (p ${num(t.estres.p_rand,3)})`:''}${t.dsr!=null?` · <b>DSR</b> ${num(t.dsr,3)} con ${t.intentos_totales} intentos`:''}</div>
+  <div id="curva-${t.id}" class="plot" style="height:230px"></div>
+  ${t.notas?`<p class="idea">${esc(t.notas)}</p>`:''}
+  <details data-full="${t.id}"><summary>Hoja de resultados completa, Red Team, Topstep, sensibilidad y operaciones</summary><div class="sec" id="full-${t.id}"><p class="note">Cargando…</p></div></details>
+  <p class="mono" style="margin-top:10px">receta · commit ${esc((t.receta||{}).git_commit||'').slice(0,10)} · motor ${esc((t.receta||{}).motor)} · sesiones ${esc(((t.receta||{}).sesiones_sha256||'').slice(0,12))} · protocolo ${esc(((t.receta||{}).protocol_sha256||'').slice(0,12))} · costos ${esc(JSON.stringify((t.receta||{}).costos||{}))}</p>
+  <p style="margin-top:6px;font-size:13px">Descargar: <a href="${t.archivos.trades_csv}" download>operaciones CSV</a> · <a href="${t.archivos.trades_json}" download>JSON</a> · <a href="${t.archivos.report_json}" download>hoja completa JSON</a></p>
+ </div>`;
+}
+function renderTests(){
+ const T=(R.pruebas||[]).filter(t=>filter==='todas'||t.veredicto===filter).slice().reverse();
+ const el=document.getElementById('rx-tests');
+ el.innerHTML=T.length?T.map(testCard).join(''):`<div class="empty">${(R.pruebas||[]).length?'Ninguna prueba en esta categoría.':'Todavía no hay pruebas publicadas. La tanda 1 (BIG, ABS y POC v1) corre con toda la infraestructura ya lista: registro de intentos, RAND emparejado, Red Team y cuentas Topstep.'}</div>`;
+ if(T.length)plotly().then(()=>T.forEach(t=>drawCurve('curva-'+t.id,t)));
+}
+function drawCurve(id,t){
+ if(!t.curva||!document.getElementById(id))return;
+ const c=t.curva,tr=[];
+ if(c.rand_p5&&c.rand_p95){tr.push({x:c.x,y:c.rand_p5,line:{width:0},hoverinfo:'skip',showlegend:false},{x:c.x,y:c.rand_p95,fill:'tonexty',fillcolor:'rgba(150,150,150,.2)',line:{width:0},name:'RAND · 90% de los casos'})}
+ tr.push({x:c.x,y:c.y,line:{color:t.veredicto==='pasa'?'#4ade80':'#38bdf8',width:2},name:`${t.estrategia} v${t.version}`});
+ Plotly.react(id,tr,lay({yaxis:{gridcolor:'#222',tickprefix:'$',zeroline:true,zerolinecolor:'#444'}}),CFG);
+}
+async function loadFull(id){
+ const t=(R.pruebas||[]).find(x=>x.id===id),box=document.getElementById('full-'+id);
+ if(!t||box.dataset.done)return; box.dataset.done=1;
+ let F,TR; try{F=await (await fetch(t.archivos.report_json)).json();TR=await (await fetch(t.archivos.trades_json)).json()}catch(e){box.innerHTML='<p class="note">No se pudo cargar la hoja.</p>';return}
+ const h=F.hoja||{},rt=h.red_team||{},ts=h.topstep||{},s=h.salidas||{},cc=h.concentracion||{},cp=h.cpcv||{},rd=h.rand||{};
+ const ya=h.por_anio||{};
+ box.innerHTML=`
+  <h4>Por año (costos base)</h4><div class="row">${Object.entries(ya).map(([y,v])=>kpi(y,money(v.neto)+` <span class="note">(${v.operaciones} op.)</span>`,v.neto>0?'g':'r')).join('')}</div>
+  <h4>Salidas</h4><div class="row">${['objetivo','stop','tiempo','cierre'].map(k=>kpi(k,num(s[k]))).join('')}</div>
+  <div class="two"><div><h4>Ganancia por operación</h4><div id="h1-${id}" class="plot"></div></div><div><h4>Ganancia por sesión</h4><div id="h2-${id}" class="plot"></div></div></div>
+  <div class="two"><div><h4>Estadísticas móviles (20 sesiones)</h4><div id="h3-${id}" class="plot"></div></div><div><h4>Duración de las operaciones (min)</h4><div id="h4-${id}" class="plot"></div></div></div>
+  <h4>Calor por hora y día · ganancia neta</h4><div class="tw">${heat(h.calor)}</div>
+  <h4>Los 5 peores drawdowns</h4><div class="tw"><table><tr><th>Inicio</th><th>Fondo</th><th>Fin</th><th class="n">Profundidad</th><th class="n">Sesiones</th></tr>${(h.drawdowns||[]).map(d=>`<tr><td>${d.inicio}</td><td>${d.fondo}</td><td>${d.recuperado?d.fin:'sin recuperar'}</td><td class="n r">${money(d.profundidad)}</td><td class="n">${d.sesiones}</td></tr>`).join('')}</table></div>
+  <h4>Concentración y estabilidad</h4><div class="row">${kpi('Top 5 operaciones',pct(cc.top5_operaciones_pct),cc.top5_operaciones_pct>50?'r':'')}${kpi('Top 5 días',pct(cc.top5_dias_pct),cc.depende_de_pocos_dias?'r':'g')}${kpi('CPCV caminos > 0',cp.total?`${cp.positivos} / ${cp.total}`:'—',cp.positivos>=10?'g':cp.positivos<=5?'r':'y')}${kpi('MAE / MFE prom.',`${num((h.mae_mfe||{}).mae_prom,1)} / ${num((h.mae_mfe||{}).mfe_prom,1)} t`)}</div>
+  ${cp.caminos?`<div id="h5-${id}" class="plot" style="height:160px"></div>`:''}
+  <h4>Red Team</h4><div class="row">${kpi('Placebo desplazado 5 min',money((rt.placebo_desplazado||{}).neto),rt.fuga_sospechada?'r':'g')}${kpi('Direcciones barajadas · p',num((rt.direcciones_barajadas||{}).p_valor,3),(rt.direcciones_barajadas||{}).p_valor<=0.05?'g':'r')}${kpi('RAND · p',num(rd.p_valor,3))}${kpi('RAND media',money(rd.rand_media))}</div>
+  <p class="note">${rt.fuga_sospechada?'⚠️ El placebo desplazado gana parecido a la estrategia: posible fuga de futuro. La prueba cuenta como error.':'El placebo desplazado (misma señal usada 5 minutos antes de existir) no reproduce el resultado: no hay señales de fuga de futuro.'} Direcciones barajadas ${(rt.direcciones_barajadas||{}).n} veces: percentil 95 del azar ${money((rt.direcciones_barajadas||{}).p95)} contra real ${money((rt.direcciones_barajadas||{}).real)}.</p>
+  <h4>Curva de costos (ticks de deslizamiento por lado)</h4><div id="h6-${id}" class="plot" style="height:180px"></div>
+  <h4>Cuentas Topstep $50K · un arranque por sesión</h4><div class="row">${kpi('Cuentas',num(ts.cuentas))}${kpi('Pasan',`${num(ts.pasan)} · ${pct(ts.pct_pasan)}`,ts.pct_pasan>=50?'g':'r')}${kpi('Rompen MLL',num(ts.rompen_mll),'r')}${kpi('Sin resolver (120 días)',num(ts.sin_resolver))}${kpi('RAND pasa',pct(ts.rand_pct_pasan))}${kpi('Días (mediana) para pasar',num(ts.dias_mediana_pasa))}${kpi('Con 55% oficial',pct((ts.oficial_55||{}).pct_pasan))}${kpi('Con 5 contratos',pct((ts.cinco_contratos||{}).pct_pasan))}</div>
+  <div class="two"><div><h4>Balance final de cada cuenta</h4><div id="h7-${id}" class="plot" style="height:190px"></div></div><div><h4>Días que tardan las que pasan</h4><div id="h8-${id}" class="plot" style="height:190px"></div></div></div>
+  ${h.sensibilidad?`<h4>Superficie de sensibilidad · vecinos de cada parámetro (cada corrida cuenta como intento)</h4><div class="tw"><table><tr><th>Parámetro</th>${[-2,-1,0,1,2].map(m=>`<th class="n">${m>0?'+':''}${m===0?'original':m}</th>`).join('')}</tr>${Object.entries(h.sensibilidad).map(([k,row])=>`<tr><td>${k}</td>${row.map(c=>`<td class="n ${c.neto==null?'':c.neto>0?'g':'r'}">${c.neto==null?'—':money(c.neto)}<br><span class="note">${c.valor}</span></td>`).join('')}</tr>`).join('')}</table></div><p class="note">Se busca una meseta: si solo el valor original gana, es suerte, no ventaja.</p>`:''}
+  <h4>Por nivel de referencia y por lado</h4><div class="tw"><table><tr><th>Nivel</th><th class="n">Op.</th><th class="n">Neto</th></tr>${Object.entries(h.por_nivel||{}).map(([k,v])=>`<tr><td>${esc(k)}</td><td class="n">${v.operaciones}</td><td class="n ${v.neto>0?'g':'r'}">${money(v.neto)}</td></tr>`).join('')}${Object.entries(h.por_lado||{}).map(([k,v])=>`<tr><td>${k==='1'?'compras':'ventas'}</td><td class="n">${v.operaciones}</td><td class="n ${v.neto>0?'g':'r'}">${money(v.neto)}</td></tr>`).join('')}</table></div>
+  <h4>Operaciones (${TR.length}) · toca "ver" para el replay en el Explorador</h4><div id="tl-${id}"></div>`;
+ tradeTable(id,TR,0);
+ await plotly();
+ const H=h.hist_operacion;if(H)Plotly.react('h1-'+id,[{x:H.bins.slice(0,-1),y:H.counts,type:'bar',marker:{color:H.bins.slice(0,-1).map(b=>b>=0?'#4ade80':'#f87171')}}],lay({xaxis:{tickprefix:'$',gridcolor:'#222'},margin:{l:36,r:8,t:8,b:30}}),CFG);
+ const D=h.diario;if(D)Plotly.react('h2-'+id,[{x:D.x,y:D.y,type:'bar',marker:{color:D.y.map(v=>v>=0?'#4ade80':'#f87171')}}],lay({yaxis:{tickprefix:'$',gridcolor:'#222'}}),CFG);
+ const M=h.movil_20;if(M&&M.neto.length)Plotly.react('h3-'+id,[{y:M.neto,name:'neto 20 sesiones',line:{color:'#38bdf8',width:1.5}},{y:M.sharpe,name:'Sharpe anual móvil',yaxis:'y2',line:{color:'#facc15',width:1}}],lay({yaxis:{tickprefix:'$',gridcolor:'#222'},yaxis2:{overlaying:'y',side:'right',gridcolor:'rgba(0,0,0,0)'}}),CFG);
+ const U=h.duracion;if(U)Plotly.react('h4-'+id,[{x:U.bins.slice(0,-1).map((b,i)=>`${b}–${U.bins[i+1]}`),y:U.counts,type:'bar',marker:{color:'#38bdf8'}}],lay({margin:{l:36,r:8,t:8,b:40}}),CFG);
+ if(cp.caminos)Plotly.react('h5-'+id,[{x:cp.caminos,type:'histogram',nbinsx:10,marker:{color:cp.caminos.map(v=>v>0?'#4ade80':'#f87171')}}],lay({xaxis:{tickprefix:'$',gridcolor:'#222',title:{text:'15 caminos CPCV',font:{size:11}}},margin:{l:36,r:8,t:8,b:36}}),CFG);
+ const CC=rt.curva_costos;if(CC)Plotly.react('h6-'+id,[{x:CC.map(c=>c.slip_ticks+' tick'),y:CC.map(c=>c.neto),type:'bar',marker:{color:CC.map(c=>c.neto>0?'#4ade80':'#f87171')},text:CC.map(c=>money(c.neto)),textposition:'auto'}],lay({yaxis:{tickprefix:'$',gridcolor:'#222',zeroline:true,zerolinecolor:'#555'},margin:{l:48,r:8,t:8,b:30}}),CFG);
+ if(ts.hist_balance&&ts.hist_balance.length)Plotly.react('h7-'+id,[{x:ts.hist_balance_bins.slice(0,-1),y:ts.hist_balance,type:'bar',marker:{color:ts.hist_balance_bins.slice(0,-1).map(b=>b>=53000?'#4ade80':b<=48000?'#f87171':'#38bdf8')}}],lay({xaxis:{tickprefix:'$',gridcolor:'#222'},margin:{l:36,r:8,t:8,b:30},shapes:[{type:'line',x0:48000,x1:48000,y0:0,y1:1,yref:'paper',line:{color:'#f87171',dash:'dot'}},{type:'line',x0:53000,x1:53000,y0:0,y1:1,yref:'paper',line:{color:'#4ade80',dash:'dot'}}]}),CFG);
+ if(ts.hist_dias_pasa&&ts.hist_dias_pasa.length)Plotly.react('h8-'+id,[{x:['≤10','≤20','≤30','≤45','≤60','≤90','≤120'],y:ts.hist_dias_pasa,type:'bar',marker:{color:'#4ade80'}}],lay({margin:{l:36,r:8,t:8,b:30}}),CFG);
+}
+function heat(c){
+ if(!c)return '';const mx=Math.max(1,...c.neto.flat().map(Math.abs));
+ const col=v=>v===0?'#161616':v>0?`rgba(74,222,128,${0.15+0.6*Math.abs(v)/mx})`:`rgba(248,113,113,${0.15+0.6*Math.abs(v)/mx})`;
+ return `<table class="heat"><tr><th></th>${c.horas.map(h=>`<th>${h}</th>`).join('')}</tr>${c.dias.map((d,i)=>`<tr><th>${d}</th>${c.horas.map((h,j)=>`<td style="background:${col(c.neto[i][j])}">${money(c.neto[i][j])}<br><span class="note">${c.operaciones[i][j]} op.</span></td>`).join('')}</tr>`).join('')}</table>`;
+}
+function tradeTable(id,TR,page){
+ const P=40,rows=TR.slice(page*P,page*P+P),el=document.getElementById('tl-'+id);
+ el.innerHTML=`<div class="tw"><table><tr><th>Fecha</th><th>Lado</th><th>Entrada</th><th>Salida</th><th>Motivo</th><th class="n">Ticks</th><th class="n">Neto</th><th></th></tr>${rows.map((t,i)=>`<tr><td>${t.date}</td><td>${t.side>0?'<span class="g">compra</span>':'<span class="r">venta</span>'}</td><td>${t.entry_hms}<br><span class="note">${t.entry_px}</span></td><td>${t.exit_hms}<br><span class="note">${t.exit_px}</span></td><td>${t.reason}<br><span class="note">${esc(t.level)}</span></td><td class="n">${t.pnl_ticks}</td><td class="n ${t.net_usd>0?'g':'r'}">${money(t.net_usd)}</td><td><a class="btn" data-replay="${id}:${page*P+i}">ver</a></td></tr>`).join('')}</table></div>
+ <div class="chips">${Array.from({length:Math.ceil(TR.length/P)},(_,k)=>`<span class="chip ${k===page?'on':''}" data-page="${id}:${k}">${k+1}</span>`).join('')}</div>`;
+ el._trades=TR;
+}
+function renderCompare(){
+ const el=document.getElementById('rx-compare');const T=cmp.map(id=>(R.pruebas||[]).find(t=>t.id===id)).filter(Boolean);
+ if(T.length<2){el.innerHTML=cmp.length===1?`<div class="card note">Elegiste ${cmp[0]} para comparar. Toca "comparar" en otra prueba.</div>`:'';return}
+ const rows=[['Operaciones',t=>num(t.resultados.operaciones)],['Ganancia neta',t=>money(t.resultados.ganancia_neta)],['p contra RAND',t=>num(t.resultados.vs_rand,3)],['Con costos al doble',t=>money((t.estres||{}).neto)],['Pasa Topstep',t=>pct(t.resultados.topstep)],['Aciertos',t=>pct(t.resultados.aciertos)],['Factor',t=>num(t.resultados.factor,2)],['Peor drawdown',t=>money(t.resultados.drawdown_max)],['Sharpe anual',t=>num(t.resultados.sharpe_anual,2)],['DSR',t=>num(t.dsr,3)],['Veredicto',t=>(V[t.veredicto]||V.en_revision)[0]]];
+ el.innerHTML=`<div class="card"><div class="head"><span class="t">Comparación lado a lado</span><span class="chip" data-cmpclear="1">limpiar</span></div><div class="tw"><table><tr><th></th>${T.map(t=>`<th>${t.id} · ${t.estrategia} v${t.version}</th>`).join('')}</tr>${rows.map(([l,f])=>`<tr><td>${l}</td>${T.map(t=>`<td>${f(t)}</td>`).join('')}</tr>`).join('')}</table></div><div id="cmp-plot" class="plot"></div></div>`;
+ plotly().then(()=>Plotly.react('cmp-plot',T.map((t,i)=>({x:t.curva.x,y:t.curva.y,name:`${t.id} ${t.estrategia} v${t.version}`,line:{width:2,color:['#38bdf8','#facc15','#e879f9','#4ade80'][i%4]}})),lay({yaxis:{tickprefix:'$',gridcolor:'#222',zeroline:true,zerolinecolor:'#444'}}),CFG));
+}
+
+/* ---------- MAPA · CEMENTERIO · REGISTRO · DATOS ---------- */
+function renderMapa(){
+ const M=R.mapa||{},S=M.senales||[],el=document.getElementById('rx-mapa');
+ if(!S.length){el.innerHTML='<div class="empty">Todavía no se ha medido. Para cada una de las 12 señales se va a publicar qué hace el precio después (1, 5, 15 y 30 min) contra momentos al azar a la misma hora, con corrección por pruebas múltiples.</div>';return}
+ const cell=(m,h)=>{const v=m[h],p=m[h+'_p'],sig=(m.horizontes_significativos||[]).includes(h);return `<td class="n ${v>0?'g':v<0?'r':''}">${v==null?'—':num(v,1)} t<br><span class="note">azar ${num(m[h+'_azar'],1)} · p ${num(p,3)}${sig?' ✓':''}</span></td>`};
+ el.innerHTML=`<div class="card"><p class="note" style="margin-bottom:8px">${M.sesiones} sesiones · ${M.sorteos} sorteos por evento · ${M.pruebas} pruebas · corrección ${esc(M.correccion)} · ✓ = sobrevive la corrección. Ticks promedio en la dirección que la señal predice.</p><div class="tw"><table><tr><th>Señal</th><th class="n">Eventos</th><th class="n">1 min</th><th class="n">5 min</th><th class="n">15 min</th><th class="n">30 min</th><th>Veredicto</th></tr>${S.map(m=>`<tr><td><b>${esc(m.senal)}</b><br><span class="note">${esc(m.hipotesis)}</span></td><td class="n">${num(m.n)}</td>${['r1','r5','r15','r30'].map(h=>cell(m,h)).join('')}<td><span class="pill ${m.significativa?'ok':''}">${m.significativa?'distinta del azar':'no distinta'}</span></td></tr>`).join('')}</table></div></div>`;
+}
+function renderGrave(){
+ const G=R.cementerio||[],el=document.getElementById('rx-grave');
+ el.innerHTML=G.length?`<div class="card"><div class="tw"><table><tr><th>Prueba</th><th>Qué</th><th>Fecha</th><th>Veredicto</th><th>Causa de muerte</th><th class="n">Neto</th></tr>${G.map(g=>`<tr><td><a href="#pruebas" data-goto="${g.id}">${g.id}</a></td><td>${esc(g.que)}</td><td>${esc(g.fecha)}</td><td><span class="pill ${(V[g.veredicto]||V.en_revision)[1]}">${(V[g.veredicto]||V.en_revision)[0]}</span></td><td>${esc(g.causa)}</td><td class="n ${g.neto>0?'g':'r'}">${money(g.neto)}</td></tr>`).join('')}</table></div></div>`:'<div class="empty">Vacío por ahora. Aquí queda cada estrategia o versión descartada con su causa de muerte en una línea. Los resultados negativos valen tanto como los positivos.</div>';
+}
+function renderReg(){
+ const reg=R.registro||{},E=reg.estudios||[],el=document.getElementById('rx-reg');
+ el.innerHTML=`<div class="card"><div class="head"><span class="t">${reg.total_intentos||0} intentos en el registro</span><span class="pill ${reg.cadena_ok?'ok':'no'}">${reg.cadena_ok?'cadena de huellas intacta':'CADENA ROTA'}</span></div>
+ <p class="note" style="margin:6px 0 10px">Cada estudio declara cuántos intentos va a correr antes de empezar. Cada intento se escribe en una lista de solo agregar donde cada línea lleva la huella de la anterior: borrar o editar una rompe la cadena.</p>
+ ${E.length?`<div class="tw"><table><tr><th>Estudio</th><th>Hipótesis</th><th class="n">Declarados</th><th class="n">Usados</th><th>Desglose</th></tr>${E.map(e=>`<tr><td><b>${esc(e.study_id)}</b><br><span class="note">${esc((e.registrado_utc||'').slice(0,10))}</span></td><td>${esc(e.hipotesis)}</td><td class="n">${e.n_declarado}</td><td class="n ${e.excedido?'r':''}">${e.usados}${e.excedido?' ⚠ excedido':''}</td><td class="note">${e.pruebas} pruebas · ${e.sensibilidad} sensibilidad · ${e.senales} señales<div class="bar"><i style="width:${Math.min(100,100*e.usados/Math.max(1,e.n_declarado))}%"></i></div></td></tr>`).join('')}</table></div>`:'<p class="note">Ningún estudio registrado todavía.</p>'}
+ ${(reg.intentos||[]).length?`<details><summary>Ver los ${reg.intentos.length} intentos uno por uno</summary><div class="tw"><table><tr><th>Id</th><th>Estudio</th><th>Qué</th><th>Tipo</th><th>Veredicto</th><th class="n">Neto</th><th>Commit</th></tr>${reg.intentos.slice().reverse().map(t=>`<tr><td>${esc(t.test_id)}</td><td>${esc(t.study_id)}</td><td>${esc(t.estrategia)} v${t.version}</td><td>${esc(t.tipo)}</td><td>${esc(t.veredicto)}${t.error?' ⚠':''}</td><td class="n">${t.neto==null?'—':money(t.neto)}</td><td class="mono">${esc(t.git)}</td></tr>`).join('')}</table></div></details>`:''}</div>`;
+}
+function renderData(){
+ const S=R.sesiones,el=document.getElementById('rx-data');
+ if(!S){el.innerHTML='<div class="empty">Sin auditoría de sesiones todavía.</div>';return}
+ const r=S.resumen||{};
+ el.innerHTML=`<div class="card"><div class="row">${kpi('Sesiones de diseño',num(r.total))}${kpi('Válidas',num(r.diseno_validas),'g')}${kpi('Con aviso',num(r.aviso),'y')}${kpi('Excluidas',num(r.excluidas),'r')}${kpi('Fallos horario de verano',num(r.dst_fallos),r.dst_fallos?'r':'g')}${kpi('2024 / 2025 / 2026',`${S.por_anio['2024']} / ${S.por_anio['2025']} / ${S.por_anio['2026']}`)}</div>
+ <p class="note" style="margin-top:10px">Criterios: ventana ${esc(S.criterios.ventana)} · aviso con hueco ≥ ${S.criterios.hueco_aviso_s} s · excluida con hueco ≥ ${S.criterios.hueco_excluye_s} s · ${esc(S.criterios.rollos)} · ${esc(S.criterios.dst)}. Lista congelada el ${esc((S.generado||'').slice(0,10))}; huella de la lista <span class="mono">${esc(S.sha256_lista)}</span>.</p>
+ <details><summary>Excluidas (${S.excluidas.length}) y con aviso (${S.avisos.length})</summary><div class="tw"><table><tr><th>Sesión</th><th>Motivo</th></tr>${S.excluidas.map(x=>`<tr><td>${x.date}</td><td class="r">${esc(x.motivo)}</td></tr>`).join('')}${S.avisos.map(x=>`<tr><td>${x.date}</td><td class="y">${esc(x.motivo)}</td></tr>`).join('')}</table></div></details></div>`;
+}
+
+/* ---------- ESTRATEGIAS ---------- */
 function renderStrats(){
  const vs=R.versiones||[]; if(!vs.length) return;
  const c=vs[vs.length-1].comun||{};
@@ -78,43 +234,71 @@ function renderStrats(){
  vs.forEach(v=>v.estrategias.forEach(s=>{(byId[s.id]=byId[s.id]||[]).push({...s,_file:v.archivo,_sha:v.sha256,_fecha:v.fecha_registro,_motivo:s.motivo_cambio})}));
  document.getElementById('rx-strats').innerHTML=Object.entries(byId).map(([id,hist])=>{
   hist.sort((a,b)=>a.version-b.version); const s=hist[hist.length-1];
-  const tests=(R.pruebas||[]).filter(t=>t.estrategia===id);
-  const st=ST[s.estado||(tests.length?'probando':'registrada')]||ST.registrada;
+  const tests=(R.pruebas||[]).filter(t=>t.estrategia===id),last=tests[tests.length-1];
+  const st=last?(V[last.veredicto]||V.en_revision):['Registrada · sin probar','wait'];
   const changes=hist.slice(1).map((h,i)=>{const prev=hist[i];
    const d=ORDER.filter(k=>(prev[k]||'')!==(h[k]||'')).map(k=>`<div><b>${LBL[k]}:</b> <del>${esc(prev[k]||'—')}</del> → <ins>${esc(h[k]||'—')}</ins></div>`).join('');
    return `<div class="chg"><b>v${prev.version} → v${h.version}</b> · ${esc(h._fecha)}<br>Motivo: ${esc(h._motivo||'sin motivo escrito')}${d}</div>`}).join('');
+  const card=last?modelCard(last):'';
   return `<div class="card" id="est-${id}">
-   <div class="head"><span class="t">${id} · ${esc(s.nombre)}</span><span><span class="pill">v${s.version}</span> <span class="pill ${st[1]}">${st[0]}</span></span></div>
+   <div class="head"><span class="t">${id} · ${esc(s.nombre)}</span><span><span class="pill">v${s.version} de 3</span> <span class="pill ${st[1]}">${st[0]}</span></span></div>
    <p class="idea">${esc(s.idea)}</p>
    <dl>${ORDER.filter(k=>s[k]).map(k=>`<dt>${LBL[k]}</dt><dd>${esc(s[k])}</dd>`).join('')}</dl>
-   ${changes?`<h3>Historial de cambios</h3>${changes}`:`<p class="sub" style="margin:14px 0 0">Versión original, sin cambios.</p>`}
-   <p style="margin:12px 0 0;font-size:14px">Pruebas: ${tests.length?tests.map(t=>`<a href="#pruebas" data-goto="${t.id}">${t.id}</a>`).join(', '):'ninguna todavía'}</p>
+   ${card}
+   ${changes?`<h4>Historial de cambios</h4>${changes}`:`<p class="note" style="margin:12px 0 0">Versión original, sin cambios. Los números de la v1 son propuestas de Claude sin medir datos (intento ingenuo).</p>`}
+   <p style="margin:10px 0 0;font-size:14px">Pruebas: ${tests.length?tests.map(t=>`<a href="#pruebas" data-goto="${t.id}">${t.id}</a>`).join(', '):'ninguna todavía'}</p>
    <p class="mono">${esc(s._file)} · registrada ${esc(s._fecha)} · SHA-256 ${esc(s._sha)}</p></div>`}).join('');
 }
-function renderTests(){
- const T=R.pruebas||[], M=R.mapa||[];
- const pas=T.filter(t=>t.veredicto==='pasa').length;
- const k=[['Pruebas corridas',T.length],['Intentos totales',T.length+M.length],['Pasan los criterios',pas],['Examen sellado','cerrado']];
- document.getElementById('rx-kpis').innerHTML=k.map(([a,b])=>`<div class="kpi"><small>${a}</small><b>${b}</b></div>`).join('');
- document.getElementById('rx-mapa').innerHTML=M.length?`<div class="card tw"><table><tr><th>Señal</th><th>Veces</th><th>5 min</th><th>15 min</th><th>30 min</th><th>¿Distinta del azar?</th></tr>${M.map(m=>`<tr><td>${esc(m.senal)}</td><td>${m.n}</td><td>${m.r5??'—'}</td><td>${m.r15??'—'}</td><td>${m.r30??'—'}</td><td><span class="pill ${m.significativa?'ok':''}">${m.significativa?'sí':'no'}</span></td></tr>`).join('')}</table></div>`
-  :`<div class="empty">Todavía no se ha medido. Aquí va a aparecer, para cada una de las 12 señales, qué hace el precio después comparado contra momentos al azar.</div>`;
- document.getElementById('rx-tests').innerHTML=T.length?T.slice().reverse().map(t=>{const r=t.resultados||{};
-  const v=t.veredicto==='pasa'?['Pasa','ok']:t.veredicto==='no_pasa'?['No pasa','no']:['En revisión','wait'];
-  return `<div class="card" id="prueba-${t.id}"><div class="head"><span class="t">${t.id} · ${t.estrategia} v${t.version}</span><span class="pill ${v[1]}">${v[0]}</span></div>
-   <p class="sub" style="margin:4px 0 12px">${esc(t.fecha)} · tanda ${t.tanda} · ${esc(t.periodo||'')} · reglas: <a href="#estrategias" data-goto-est="${t.estrategia}">${t.estrategia} v${t.version}</a></p>
-   <div class="row">${[['Operaciones',r.operaciones],['Ganancia neta',r.ganancia_neta!=null?money(r.ganancia_neta):null],['Aciertos',r.aciertos],['Factor de ganancia',r.factor],['Gana a RAND',r.vs_rand],['Pasa Topstep',r.topstep]].filter(x=>x[1]!=null).map(([a,b])=>`<div class="kpi"><small>${a}</small><b>${b}</b></div>`).join('')}</div>
-   ${t.curva?`<div id="curva-${t.id}" style="height:260px;margin-top:12px"></div>`:''}
-   ${t.notas?`<p class="idea" style="margin-top:12px">${esc(t.notas)}</p>`:''}</div>`}).join('')
-  :`<div class="empty">Todavía no hay pruebas. La tanda 1 (BIG, ABS y POC v1) se corre en cuanto esté listo el motor de pruebas.</div>`;
- if(T.some(t=>t.curva)) loadPlotly().then(()=>T.filter(t=>t.curva).forEach(t=>Plotly.react('curva-'+t.id,[
-  {x:t.curva.x,y:t.curva.rand_p5,line:{width:0},hoverinfo:'skip',showlegend:false},
-  {x:t.curva.x,y:t.curva.rand_p95,fill:'tonexty',fillcolor:'rgba(150,150,150,.18)',line:{width:0},name:'RAND (90% de los casos)'},
-  {x:t.curva.x,y:t.curva.y,line:{color:'#38bdf8',width:2},name:t.estrategia}],
-  {paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',font:{color:'#9a9a9a',size:11},margin:{l:50,r:8,t:6,b:28},legend:{orientation:'h',y:1.12},xaxis:{gridcolor:'#222'},yaxis:{gridcolor:'#222',tickprefix:'$'}},{displaylogo:false,responsive:true})));
+function modelCard(t){
+ const hr=t.hoja_resumen||{},cc=hr.concentracion||{},cp=hr.cpcv||{},ya=hr.por_anio||{},ts=hr.topstep||{};
+ const fail=[];if(t.estres&&t.estres.neto<=0)fail.push('no sobrevive 2 ticks de deslizamiento');if(cc.depende_de_pocos_dias)fail.push('más de la mitad de la ganancia viene de 5 días');
+ Object.entries(ya).forEach(([y,v])=>{if(v.neto<=0)fail.push('pierde en '+y)});if(cp.total&&cp.positivos<8)fail.push(`solo ${cp.positivos} de ${cp.total} caminos CPCV positivos`);
+ return `<div class="sec"><h4>Ficha de la última prueba (${t.id})</h4><dl>
+  <dt>Régimen donde funcionó</dt><dd>${Object.entries(ya).filter(([y,v])=>v.neto>0).map(([y])=>y).join(', ')||'ninguno'}</dd>
+  <dt>Modos de falla vistos</dt><dd>${fail.length?fail.join('; '):'ninguno detectado por el Red Team automático'}</dd>
+  <dt>Topstep</dt><dd>${pct(ts.pct_pasan)} de las cuentas pasan (RAND ${pct(ts.rand_pct_pasan)})</dd>
+  <dt>Limitaciones</dt><dd>solo horario 09:30–11:30 ET, 1 contrato, periodo de diseño; sin datos de ES; umbrales de las 20 sesiones anteriores</dd>
+  <dt>Veredicto</dt><dd><span class="pill ${(V[t.veredicto]||V.en_revision)[1]}">${(V[t.veredicto]||V.en_revision)[0]}</span> ${esc(t.muerte||'')}</dd></dl></div>`;
 }
-function loadPlotly(){if(window.Plotly)return Promise.resolve();return new Promise(ok=>{const s=document.createElement('script');s.src='https://cdn.plot.ly/plotly-2.35.2.min.js';s.onload=ok;document.head.appendChild(s)})}
-document.addEventListener('click',e=>{const a=e.target.closest('[data-goto],[data-goto-est]');if(!a)return;
- const id=a.dataset.goto?'prueba-'+a.dataset.goto:'est-'+a.dataset.gotoEst;setTimeout(()=>document.getElementById(id)?.scrollIntoView({behavior:'smooth'}),60)});
-fetch('data/research.json').then(r=>r.json()).then(j=>{R=j;renderPlan();renderStrats();renderTests()}).catch(()=>{});
+function renderPlan(){
+ const p=R.plan; if(!p) return;
+ document.getElementById('rx-plan').innerHTML=`<div class="card">
+  <div class="head"><span class="t">${esc(p.titulo)}</span><span class="pill">registrado ${esc(p.fecha_registro)}</span></div>
+  <ol>${p.fases.map(f=>`<li><b>${esc(f.nombre)}.</b> ${esc(f.que)}${f.senales?`<details><summary>Ver las ${f.senales.length} señales</summary><ul>${f.senales.map(s=>`<li>${esc(s)}</li>`).join('')}</ul></details>`:''}</li>`).join('')}</ol>
+  <h4>Para pasar, una estrategia debe</h4><ul>${p.criterios_para_pasar.map(c=>`<li>${esc(c)}</li>`).join('')}</ul>
+  <h4>Reglas del proceso</h4><ul>${p.reglas.map(c=>`<li>${esc(c)}</li>`).join('')}</ul>
+  <p class="mono" style="margin-top:12px">Huella SHA-256 ${esc(p.sha256)}</p></div>`;
+}
+function renderProto(){
+ const P=R.protocolo; if(!P)return;
+ const sec=(k,o)=>`<details><summary>${k}</summary><dl>${Object.entries(o).map(([a,b])=>`<dt>${esc(a.replace(/_/g,' '))}</dt><dd>${Array.isArray(b)?'<ul>'+b.map(x=>`<li>${esc(x)}</li>`).join('')+'</ul>':typeof b==='object'?Object.entries(b).map(([c,d])=>`<b>${esc(c)}</b>: ${esc(Array.isArray(d)?d.join(', '):d)}`).join('<br>'):esc(b)}</dd>`).join('')}</dl></details>`;
+ const keys=[['RAND emparejado',P.rand_emparejado],['Costos',P.costos],['Por año',P.por_anio],['Largo mínimo',P.largo_minimo],['Criterios de muerte',P.criterios_de_muerte],['Pruebas múltiples',P.pruebas_multiples],['Validación combinatoria (CPCV)',P.validacion_combinatoria],['Sensibilidad',P.sensibilidad],['Red Team',P.red_team],['Topstep',P.topstep],['Veredicto final',P.veredicto_final]];
+ document.getElementById('rx-proto').innerHTML=`<div class="card"><p class="idea">${esc(P.proposito)}</p>${keys.filter(k=>k[1]).map(k=>sec(k[0],k[1])).join('')}<p class="mono" style="margin-top:10px">${esc(P.regla)}<br>SHA-256 ${esc(P.sha256)}</p></div>`;
+}
+function renderCosts(){
+ const C=R.costos||{},T=(R.topstep||{}).cuenta||{};
+ document.getElementById('rx-costs').innerHTML=`<div class="card"><div class="row">${kpi('Comisión NQ ida y vuelta','$'+num(C.comision_round_turn_usd,2))}${kpi('Deslizamiento',C.deslizamiento_ticks_por_lado+' tick/lado')}${kpi('Costo total por operación','$'+num(C.costo_total_round_turn_usd,2))}${kpi('Meta Topstep',money(T.meta_usd))}${kpi('MLL',money(T.mll_usd))}${kpi('DLL',money(T.dll_usd))}${kpi('Consistencia',`${(T.consistencia_laboratorio*100)}% (oficial ${T.consistencia_oficial*100}%)`)}${kpi('Contratos',`${T.contratos_laboratorio} (máx ${T.max_contratos})`)}</div>
+ <p class="note" style="margin-top:10px">Verificado el ${esc(C.fecha_verificacion)} en ${esc((C.fuente||'').split(' ')[0])}. Desglose: bolsa $${C.desglose_round_turn?.exchange_cme} + NFA $${C.desglose_round_turn?.nfa_regulatoria} + Topstep $${C.desglose_round_turn?.comision_topstep}. ${esc(T.mll_regla||'')}</p></div>`;
+}
+function renderQ(){
+ const G=R.glosario||{},Q=G.preguntas_oscar||[],GL=G.glosario||[];
+ document.getElementById('rx-q').innerHTML=Q.length?`<div class="card">${Q.map(q=>`<div class="q"><b>${q.id}.</b> ${esc(q.q)}<small>${q.estado==='respondida'?'✓ respondida: '+esc(q.respuesta||''):'abierta'}</small></div>`).join('')}</div>`:'';
+ document.getElementById('rx-gl').innerHTML=`<div class="card"><details><summary>Ver ${GL.length} términos</summary><dl class="gl" style="grid-template-columns:1fr;margin-top:8px">${GL.map(g=>`<dt>${esc(g.t)}</dt><dd>${esc(g.d)}</dd>`).join('')}</dl></details></div>`;
+}
+function renderSeal(){
+ const S=R.sellos||[];document.getElementById('rx-seal').innerHTML=`<div class="card"><div class="tw"><table><tr><th>Archivo</th><th>SHA-256</th><th>OTS</th></tr>${S.map(s=>`<tr><td>${esc(s.archivo)}<br><span class="note">${esc(s.modificado||'')}</span></td><td class="mono">${esc(s.sha256||'falta')}</td><td>${s.ots?'<span class="pill ok">sellado</span>':'<span class="pill">sin sello</span>'}</td></tr>`).join('')}</table></div><p class="note" style="margin-top:8px">La huella identifica el contenido exacto; el sello OpenTimestamps (.ots junto al archivo en el repositorio) prueba en Bitcoin desde cuándo existe. Cualquiera puede verificarlo con <code>ots verify</code>.</p></div>`;
+}
+
+/* ---------- eventos ---------- */
+document.addEventListener('click',e=>{
+ const f=e.target.closest('[data-f]');if(f){filter=f.dataset.f;renderKpis();renderTests();return}
+ const c=e.target.closest('[data-cmp]');if(c){const id=c.dataset.cmp;cmp=cmp.includes(id)?cmp.filter(x=>x!==id):[...cmp,id].slice(-3);renderTests();renderCompare();return}
+ if(e.target.closest('[data-cmpclear]')){cmp=[];renderTests();renderCompare();return}
+ const p=e.target.closest('[data-page]');if(p){const [id,k]=p.dataset.page.split(':');tradeTable(id,document.getElementById('tl-'+id)._trades,+k);return}
+ const r=e.target.closest('[data-replay]');if(r){const [id,k]=r.dataset.replay.split(':');const t=document.getElementById('tl-'+id)._trades[+k];if(window.xpReplay){window.xpReplay({...t,test_id:id});location.hash='#explorador'}return}
+ const a=e.target.closest('[data-goto],[data-goto-est]');if(!a)return;
+ const id=a.dataset.goto?'prueba-'+a.dataset.goto:'est-'+a.dataset.gotoEst;setTimeout(()=>document.getElementById(id)?.scrollIntoView({behavior:'smooth'}),80)});
+document.addEventListener('toggle',e=>{const d=e.target;if(d.matches&&d.matches('details[data-full]')&&d.open)loadFull(d.dataset.full)},true);
+fetch('data/research.json').then(r=>r.json()).then(j=>{R=j;renderKpis();renderTests();renderCompare();renderMapa();renderGrave();renderReg();renderData();renderStrats();renderPlan();renderProto();renderCosts();renderQ();renderSeal()}).catch(err=>{console.error(err)});
 })();
 </script>
