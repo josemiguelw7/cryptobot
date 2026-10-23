@@ -625,3 +625,17 @@ Validación de datos previa: ATAS vs Databento TBBO en 2024-05-14 y 2026-09-14
 Pendientes: segundo contrato en días de rollo y marca de sesiones con huecos.
 A partir de hoy, cada hallazgo o avance se agrega a `futures/updates.json` y
 se publica en la página para Oscar.
+
+
+**2026-10-22 · REGISTRO: examen final sellado con cifrado.**
+132 sesiones NQ (2026-04-22 a 2026-10-22), el manifiesto completo y la referencia
+Databento 2026-09-14 se cifraron en rt-oscar-lab:/srv/lab/data/sealed/
+(AES-256-CBC, PBKDF2 200000). SHA-256 del archivo:
+354e2b451c2d07664edfbe6756eff632aea0f0720d16c5b0d49489dca7b7f0b9.
+Verificado: el archivo descifra y contiene los 134 elementos esperados antes de
+borrar las copias planas. La llave vive fuera de la VM, en la Mac del propietario
+(~/.radtak/lab-seal/), y se usa solo para el veredicto final. En raw/NQ quedan
+595 sesiones de diseño (2024-01-02 a 2026-04-21), en solo lectura.
+Nota: la laptop de descarga conserva los originales sin cifrar; el laboratorio
+no tiene acceso a ella. La comparación ATAS-Databento del 2026-09-14 tocó un
+día de la ventana sellada solo para validar datos (volumen), no para diseño.

@@ -4,6 +4,12 @@
     {
       "date": "2026-10-22",
       "kind": "avance",
+      "title": "Examen final sellado de verdad",
+      "body": "Las 132 sesiones del 22 de abril al 22 de octubre de 2026 quedaron cifradas en el servidor (AES-256), junto con el manifiesto completo y la referencia de Databento de ese periodo. La llave no está en el servidor, así que el código del laboratorio no puede leerlas. Para diseñar y probar quedan 595 sesiones, del 2 de enero de 2024 al 21 de abril de 2026. Huella del archivo sellado: 354e2b45…b7f0b9."
+    },
+    {
+      "date": "2026-10-22",
+      "kind": "avance",
       "title": "Descarga completa y datos en el servidor",
       "body": "Terminó la descarga del NQ: 727 sesiones (2 de enero de 2024 al 22 de octubre de 2026), 197 millones de operaciones, 403 millones de contratos y 12 contratos trimestrales. Las 7 sesiones sin datos son feriados en que la CME cerró. Todo se copió a rt-oscar-lab por cable, cada archivo coincide con su huella y la carpeta quedó en solo lectura. Pendiente: bajar el segundo contrato de los 12 días de rollo y revisar las sesiones con pausas de más de un minuto."
     },

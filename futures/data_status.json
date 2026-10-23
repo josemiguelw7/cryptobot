@@ -27,6 +27,6 @@
   "volume": 402914332,
   "size_gb": 4.67,
   "exam_holdout_from": "2026-04-22",
-  "exam_holdout_note": "Los últimos 6 meses quedan sellados como examen final: no se usan para diseñar ni ajustar ninguna estrategia.",
+  "exam_holdout_note": "132 sesiones (22/04/2026 a 22/10/2026) cifradas en el servidor; la llave está fuera del servidor. Para diseño quedan 595 sesiones. Huella SHA-256 del archivo sellado: 354e2b451c2d07664edfbe6756eff632aea0f0720d16c5b0d49489dca7b7f0b9",
   "last_session": "2026-10-22"
 }
