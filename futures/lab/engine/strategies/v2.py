@@ -38,7 +38,8 @@ def fade(s, ref, thr, p=None):
         if side == 0 or t0 - last < p["cooldown_s"]:
             continue
         last = t0
-        out.append(Signal(sec=t0, side=-side, stop_ticks=p["stop"], target_ticks=p["target"], max_sec=p["max_min"] * 60,
+        # la señal se fecha DESPUÉS de la orden (todos sus llenados comparten el timestamp)
+        out.append(Signal(sec=t0 + 1e-6, side=-side, stop_ticks=p["stop"], target_ticks=p["target"], max_sec=p["max_min"] * 60,
                           kind="FADE", level="orden", meta={"order_size": int(size[c]), "levels": int(hi[c] - lo[c] + 1), "order_px": int(px[starts[c]]) / 4}))
     return out
 

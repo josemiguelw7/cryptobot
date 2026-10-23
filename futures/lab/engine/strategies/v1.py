@@ -86,7 +86,7 @@ def big(s, ref, thr, p=None):
         if not ok:
             continue
         last_sig = t0
-        out.append(Signal(sec=t0 + p["confirm_s"], side=side, stop_ticks=p["stop"], target_ticks=p["target"],
+        out.append(Signal(sec=t0 + p["confirm_s"] + 1e-6, side=side, stop_ticks=p["stop"], target_ticks=p["target"],
                           max_sec=p["max_min"] * 60, kind="BIG", level=name,
                           meta={"order_size": int(size[c]), "levels": int(levels[c]), "order_px": first_px / 4, "p99": thr["order_p99"]}))
     return out

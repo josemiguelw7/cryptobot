@@ -1,8 +1,10 @@
 """Simulación de operaciones contra la cinta real (cada llenado, en orden).
 
 Reglas de llenado (conservadoras, fijas):
-  - Entrada a mercado: se llena en la mejor oferta contraria vigente en el momento
-    de la decisión (ask para comprar, bid para vender) más `slip` ticks en contra.
+  - Entrada a mercado: se llena en la mejor oferta contraria que ve el PRIMER llenado posterior a la decisión
+    (su bid/ask "antes"), más `slip` ticks en contra. No se usa el libro "después" del último llenado previo:
+    una orden grande ejecuta todos sus llenados en el mismo instante y ATAS deja ese libro congelado en el
+    valor previo al barrido, lo que daba precios de entrada imposibles (hallazgo del 23/10/2026).
   - Stop: es un stop de mercado; se llena al precio del stop más `slip` ticks en contra
     en cuanto la cinta opera en o más allá del stop.
   - Objetivo: es una orden límite; se da por llenada solo cuando la cinta opera MÁS ALLÁ
@@ -53,9 +55,9 @@ def _in_news(sec, news):
 
 
 def _best(s, i, side):
-    """Mejor oferta contraria vigente justo antes del índice i."""
-    k = i - 1 if i > 0 else 0
-    q = s.ask[k] if side > 0 else s.bid[k]
+    """Mejor oferta contraria que ve una orden que llega justo antes del llenado i (libro 'antes' de i)."""
+    k = min(i, s.n - 1)
+    q = s.askb[k] if side > 0 else s.bidb[k]
     if q <= 0:
         q = s.px[k]
     return int(q)

@@ -17,6 +17,7 @@ def tape(prices, start=NY_OPEN, dt=1.0, vol=1, side=1):
     df = pl.DataFrame({"ts": pl.Series(ts).cast(pl.Datetime("ns", "UTC")), "trade_id": list(range(n)),
                        "price_t": prices, "volume": [vol] * n, "side": [side] * n,
                        "bid_after_t": [p - 1 for p in prices], "ask_after_t": [p + 1 for p in prices],
+                       "bid_before_t": [p - 1 for p in prices], "ask_before_t": [p + 1 for p in prices],
                        "bid_size_after": [10] * n, "ask_size_after": [10] * n, "contract": ["NQZ9"] * n})
     s = Session("2030-01-01", df)
     s.sec = np.array([start + k * dt for k in range(n)])  # hora ET sintética

@@ -6,6 +6,7 @@ Session.px     : int32, precio en ticks (precio*4)
 Session.vol    : int32, contratos de la operación
 Session.side   : int8, +1 compra agresiva, -1 venta agresiva
 Session.bid/ask: int32, mejor compra/venta en ticks DESPUÉS de la operación
+Session.bidb/askb: int32, mejor compra/venta ANTES de la operación (el libro que ve una orden que llega en ese instante)
 Session.bsz/asz: int32, tamaño del libro en mejor compra/venta después de la operación
 Session.tid    : int64, trade_id (orden agresiva; una orden puede partirse en varios llenados)
 """
@@ -19,7 +20,7 @@ NY_OPEN, NY_CLOSE = 34200.0, 57600.0   # 09:30 y 16:00 ET en segundos
 
 
 class Session:
-    __slots__ = ("date", "contract", "t", "sec", "px", "vol", "side", "bid", "ask", "bsz", "asz", "tid", "n")
+    __slots__ = ("date", "contract", "t", "sec", "px", "vol", "side", "bid", "ask", "bidb", "askb", "bsz", "asz", "tid", "n")
 
     def __init__(self, date, df):
         self.date = date
@@ -33,6 +34,8 @@ class Session:
         self.side = df["side"].to_numpy()
         self.bid = df["bid_after_t"].to_numpy()
         self.ask = df["ask_after_t"].to_numpy()
+        self.bidb = df["bid_before_t"].to_numpy() if "bid_before_t" in df.columns else self.bid
+        self.askb = df["ask_before_t"].to_numpy() if "ask_before_t" in df.columns else self.ask
         self.bsz = df["bid_size_after"].to_numpy()
         self.asz = df["ask_size_after"].to_numpy()
         self.tid = df["trade_id"].to_numpy()
