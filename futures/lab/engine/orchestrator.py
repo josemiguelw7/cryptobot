@@ -102,7 +102,7 @@ def run_in_container(wd, item, out, tag):
     """Corre la prueba en un contenedor efímero. Devuelve (ok, log)."""
     os.makedirs(out, exist_ok=True)
     cmd = (f"sudo -n docker run --rm --network none --name nqlab-{item['id']}-{tag} "
-           f"-v {wd}:/lab:ro -v {DATA}:/srv/lab/data:ro -v {out}:/out -e LAB_DATA=/srv/lab/data -e LAB_OUT=/out "
+           f"-v {wd}:/lab:ro -v {DATA}:/srv/lab/data:ro -v {out}:/out -e LAB_DATA=/srv/lab/data -e LAB_OUT=/out -e LAB_RESULTS=/out/results -e LAB_STATS=/out/lab_stats.jsonl "
            f"-w /lab/futures/lab {IMAGE} python -m engine.run_test --strategy {item['estrategia']} --version {item['version']} "
            f"--study {item['estudio']} --sens --isolated --n-trials {item.get('_n_trials', 1)} --var-sr {item.get('_var_sr', 0.0)}")
     t0 = time.time(); r = sh(cmd)
