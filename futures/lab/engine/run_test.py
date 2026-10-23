@@ -78,6 +78,12 @@ def main():
     dates, sess_sha = config.design_sessions()
     if a.limit:
         dates = dates[:a.limit]
+    if a.isolated:
+        from . import data_manifest, regime as _regime
+        bad, man_sha = data_manifest.verify()
+        if bad or man_sha != sess_sha:
+            raise SystemExit("DATOS DIFIEREN del manifiesto canónico: " + "; ".join(bad[:5]))
+        _regime.OUT = os.path.join(os.environ.get("LAB_OUT", "/tmp"), "regimes.json"); _regime.build(dates)
     precompute_stats(dates)
     L = Levels(dates)
     gen, params = gen_for(a.strategy, a.version)

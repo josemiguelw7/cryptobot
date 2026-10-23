@@ -6,7 +6,7 @@ Escribe futures/lab/results/<id>/ {trades.csv, trades.json, report.json} y devue
 import csv, json, os
 from datetime import date as _date
 import numpy as np
-from . import config, stats
+from . import config, stats, regime
 from .sim import sec_to_hms
 
 DIAS = ["lun", "mar", "mié", "jue", "vie"]
@@ -51,7 +51,7 @@ def build(test_id, meta, trades, sessions, daily, rand_sum, topstep_sum, redteam
                     "puntos": [[t["mae_ticks"], t["mfe_ticks"], t["net_usd"]] for t in tr[:2000]]},
         "salidas": {k: sum(1 for t in tr if t["reason"] == k) for k in ("objetivo", "stop", "tiempo", "cierre")},
         "por_anio": sm["por_anio"], "concentracion": sm["concentracion"], "cpcv": sm["cpcv"],
-        "por_nivel": _by(tr, "level"), "por_lado": _by(tr, "side"),
+        "por_nivel": _by(tr, "level"), "por_lado": _by(tr, "side"), "por_regimen": regime.by_regime(tr),
         "red_team": redteam, "topstep": topstep_sum, "rand": {k: v for k, v in rand_sum.items() if not k.startswith("rand_p")},
         **extra,
     }
@@ -86,6 +86,6 @@ def publish(ficha):
     p = os.path.join(config.FUT, "tests.json")
     d = json.load(open(p, encoding="utf-8")) if os.path.exists(p) else {"pruebas": []}
     light = {k: v for k, v in ficha.items() if k != "hoja"}
-    light["hoja_resumen"] = {k: ficha["hoja"].get(k) for k in ("salidas", "por_anio", "concentracion", "cpcv", "topstep", "rand", "drawdown_max")}
+    light["hoja_resumen"] = {k: ficha["hoja"].get(k) for k in ("salidas", "por_anio", "concentracion", "cpcv", "topstep", "rand", "drawdown_max", "por_regimen", "ojos_de_oscar")}
     d["pruebas"] = [t for t in d["pruebas"] if t["id"] != ficha["id"]] + [light]
     json.dump(d, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)

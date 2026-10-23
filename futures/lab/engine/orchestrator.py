@@ -98,6 +98,14 @@ def preflight(item, commit, wd):
     return fails
 
 
+def golden_in_container(wd, rd):
+    """La prueba dorada corre en contenedor con el commit exacto; si difiere, no se corre nada."""
+    out = os.path.join(rd, "golden"); os.makedirs(out, exist_ok=True)
+    cmd = (f"sudo -n docker run --rm --network none -v {wd}:/lab:ro -v {DATA}:/srv/lab/data:ro -v {out}:/out "
+           f"-e LAB_DATA=/srv/lab/data -e LAB_OUT=/out -e LAB_STATS=/out/lab_stats.jsonl -w /lab/futures/lab {IMAGE} python -m engine.golden")
+    r = sh(cmd); return r.returncode == 0, (r.stdout + r.stderr)[-400:]
+
+
 def run_in_container(wd, item, out, tag):
     """Corre la prueba en un contenedor efímero. Devuelve (ok, log)."""
     os.makedirs(out, exist_ok=True)
@@ -122,6 +130,10 @@ def run_one(item):
         logf.write("PREFLIGHT FALLA: " + "; ".join(fails) + "\n"); logf.close()
         it["estado"] = "congelada"; it["ultimo_error"] = "; ".join(fails); save_backlog(b); return
     ensure_image()
+    gok, glog = golden_in_container(wd, rd); logf.write(f"{now()} golden: {glog}\n")
+    if not gok:
+        logf.write("GOLDEN DIFIERE: el motor cambió sin actualizar golden.json; no se corre nada\n"); logf.close()
+        it["estado"] = "congelada"; it["ultimo_error"] = "golden difiere: " + glog[-160:]; save_backlog(b); return
     sys.path.insert(0, os.path.join(REPO, "futures", "lab"))
     from engine import registry
     import statistics
