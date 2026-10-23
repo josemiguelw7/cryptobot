@@ -139,12 +139,20 @@ def _jsonable(o):
     return o.item() if hasattr(o, "item") else str(o)
 
 
+def mid_at(s, secs):
+    """Mid del libro que ve una orden que llega en cada instante: (bid+ask) ANTES del primer llenado posterior.
+    No se usa el último llenado: en un barrido todos los llenados comparten timestamp y su precio queda
+    ~8 ticks atrás del libro real (hallazgo del 23/10/2026 que invalidó 'desvanecer órdenes grandes')."""
+    idx = np.clip(np.searchsorted(s.sec, np.asarray(secs), side="left"), 0, s.n - 1)
+    b, a_ = s.bidb[idx].astype(float), s.askb[idx].astype(float)
+    ok = (b > 0) & (a_ > 0)
+    return np.where(ok, (b + a_) / 2, s.px[idx].astype(float))
+
+
 def forward(s, secs, dirs):
-    base = np.array([s.price_at(t) or 0 for t in secs], dtype=float)
-    res = {}
+    base = mid_at(s, secs); res = {}
     for k, h in H.items():
-        fut = np.array([s.price_at(t + h) or 0 for t in secs], dtype=float)
-        res[k] = (fut - base) * dirs
+        res[k] = (mid_at(s, np.asarray(secs) + h) - base) * dirs
     return res
 
 
@@ -158,11 +166,9 @@ def baseline(s, secs, dirs, n=1000, rng=None, groups=None, ngroups=0):
         rs = slot + rng.random(len(secs)) * 1800
         rs = np.minimum(rs, NY_CLOSE - 1801)
         rdir = rng.choice([-1.0, 1.0], size=len(secs))
-        idx0 = np.searchsorted(s.sec, rs, side="right") - 1
-        base = s.px[np.clip(idx0, 0, s.n - 1)].astype(float)
+        base = mid_at(s, rs)
         for k, h in H.items():
-            idx1 = np.searchsorted(s.sec, rs + h, side="right") - 1
-            mv = (s.px[np.clip(idx1, 0, s.n - 1)] - base)
+            mv = (mid_at(s, rs + h) - base)
             out[k][r] = float(np.sum(mv * dirs)); out_rd[k][r] = float(np.sum(mv * rdir))
             if ngroups:
                 out_g[k][r] = np.bincount(groups, weights=mv * dirs, minlength=ngroups)
@@ -287,7 +293,7 @@ def main():
     for r in rows:
         for g, v in r.get("por_regimen", {}).items():
             v["significativa"] = (r["id"], g) in sigr
-    out = {"titulo": "Mapa de señales v2 (azar misma dirección + dirección aleatoria + régimen + media hora + estabilidad 2024/2025)", "fecha": time.strftime("%Y-%m-%d"), "sesiones": len(dates), "sorteos": a.draws,
+    out = {"titulo": "Mapa de señales v3 (precios desde el mid del libro operable; azar misma dirección + dirección aleatoria + régimen + media hora + estabilidad 2024/2025)", "fecha": time.strftime("%Y-%m-%d"), "sesiones": len(dates), "sorteos": a.draws,
            "pruebas": m, "pruebas_regimen": mr, "correccion": "Holm 5% (48 principales; 24 de régimen aparte)", "sesiones_sha256": sess_sha, "senales": rows}
     if a.dry:
         print(f"humo: {m} pruebas, {len(sig)} significativas · {time.time()-t0:.0f}s (sin registrar)"); return

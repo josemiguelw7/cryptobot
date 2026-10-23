@@ -48,24 +48,24 @@
    "nombre": "FADE v2: desvanecer órdenes grandes con objetivo corto",
    "hipotesis": "Objetivo 8 ticks, stop 12, 10 min capturan el efecto de 6–7 ticks que el mapa mide contra la orden grande (p bruto 0.0016, estable 2024/2025).",
    "origen": "mapa v2 + humo de FADE v1",
-   "estado": "congelada",
+   "estado": "descartada",
    "estrategia": "FADE",
    "version": 2,
    "estudio": "tanda2b",
    "requisitos": [],
-   "decision": "aprobada 23/10/2026"
+   "decision": "descartada 23/10/2026 antes de correr: la premisa (reversión tras órdenes grandes) era un artefacto de medición del mapa; desde el libro operable el precio sigue −6.6 ticks en la dirección del barrido (1,254 eventos, 100 sesiones). Humo con la entrada corregida: FADE v2 −$10,192, FADEL −$2,027."
   },
   {
    "id": "T2B-FADEL",
    "nombre": "FADEL v1: desvanecer con entrada pasiva (orden límite con cola)",
    "hipotesis": "Parte del efecto es el rebote del spread; una orden límite en el extremo de la orden grande lo cobra en vez de pagarlo.",
    "origen": "mapa v2 + modelo de cola del simulador",
-   "estado": "congelada",
+   "estado": "descartada",
    "estrategia": "FADEL",
    "version": 1,
    "estudio": "tanda2b",
    "requisitos": [],
-   "decision": "aprobada 23/10/2026"
+   "decision": "descartada 23/10/2026 antes de correr: la premisa (reversión tras órdenes grandes) era un artefacto de medición del mapa; desde el libro operable el precio sigue −6.6 ticks en la dirección del barrido (1,254 eventos, 100 sesiones). Humo con la entrada corregida: FADE v2 −$10,192, FADEL −$2,027."
   },
   {
    "id": "E-PROXY",

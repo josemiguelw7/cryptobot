@@ -7,6 +7,13 @@ import sys
 from . import registry, config
 
 STUDIES = {
+    "mapa_v3": {
+        "hypothesis": "Repetición del mapa v2 midiendo desde el mid del libro operable (bid/ask antes del primer llenado posterior) en vez del último llenado, que en un barrido queda ~8 ticks atrás del libro real. Se espera que 'desvanecer órdenes grandes' desaparezca y que el resto se corrija en menor medida.",
+        "n_declared": 48 + 24,
+        "kill": ["no sobrevive Holm", "signo distinto en 2024 y 2025"],
+        "strategies": ["12 señales × régimen"],
+        "notes": "Corrección metodológica tras el hallazgo del 23/10/2026 (FADE). El mapa v2 queda en signal_map_v2.json como registro del error.",
+    },
     "tanda2b": {
         "hypothesis": "FADE v2 (objetivo 8, stop 12, 10 min) y FADEL v1 (entrada pasiva con cola) capturan el efecto de 6–7 ticks contra las órdenes grandes y ganan a RAND después de costos.",
         "n_declared": 2 + 32,
