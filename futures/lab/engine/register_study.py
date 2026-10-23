@@ -7,6 +7,13 @@ import sys
 from . import registry, config
 
 STUDIES = {
+    "mapa_v2": {
+        "hypothesis": "Las 12 señales, además del azar de la misma dirección, se comparan contra un azar con dirección aleatoria (¿la dirección es rentable?), se parten por régimen (tendencia/balance) y por media hora, y se exige que el signo del efecto a 15 min sea el mismo en 2024 y en 2025.",
+        "n_declared": 48 + 24,
+        "kill": ["no sobrevive Holm (48 principales / 24 de régimen)", "signo distinto en 2024 y 2025"],
+        "strategies": ["12 señales × régimen"],
+        "notes": "Aprobado por Jose Miguel (método, no estrategia). El desglose por media hora es descriptivo: no se cuenta como prueba.",
+    },
     "salidas_v1": {
         "hypothesis": "Pedido de Oscar (23/10/2026): con las mismas señales v1, un take profit fijo (20/30/40/50 puntos), otro stop fijo (3/4/6/8 puntos), más tiempo, o agregar contratos a favor, mejoran el resultado neto y forman una meseta (no un pico aislado).",
         "n_declared": 159,
