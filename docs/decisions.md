@@ -639,3 +639,7 @@ borrar las copias planas. La llave vive fuera de la VM, en la Mac del propietari
 Nota: la laptop de descarga conserva los originales sin cifrar; el laboratorio
 no tiene acceso a ella. La comparación ATAS-Databento del 2026-09-14 tocó un
 día de la ventana sellada solo para validar datos (volumen), no para diseño.
+
+## 2026-10-22 · Estrategias v1 registradas (BIG, ABS, POC)
+
+Archivo `futures/strategies/v1.json`, SHA-256 `73abb571d6bab88af6775e65c925157e5fbafcaaa11c3921418767e2e2c3d229`. Congeladas antes de cualquier prueba: no se modifican; todo cambio es v2 y cuenta como otro intento. Se prueban solo en el periodo de diseño (2024-01-02 a 2026-04-21) contra RAND emparejado. El examen sellado solo se abre con una versión aprobada por Jose Miguel y Oscar.
