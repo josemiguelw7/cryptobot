@@ -7,6 +7,13 @@ import sys
 from . import registry, config
 
 STUDIES = {
+    "proxy_v1": {
+        "hypothesis": "Con el rango y el cuerpo de los primeros 15 minutos, la apertura dentro/fuera del valor y la distancia al VWAP a las 09:45 se puede anticipar si el día terminará en balance o tendencia claramente mejor que la base.",
+        "n_declared": 1,
+        "kill": ["ningún proxy separa más de 15 puntos porcentuales de la base"],
+        "strategies": ["proxy de régimen"],
+        "notes": "Descriptivo salvo la precisión del mejor proxy (1 intento). Aprobado por Jose Miguel el 23/10/2026.",
+    },
     "mapa_v3": {
         "hypothesis": "Repetición del mapa v2 midiendo desde el mid del libro operable (bid/ask antes del primer llenado posterior) en vez del último llenado, que en un barrido queda ~8 ticks atrás del libro real. Se espera que 'desvanecer órdenes grandes' desaparezca y que el resto se corrija en menor medida.",
         "n_declared": 48 + 24,
