@@ -72,7 +72,7 @@
    "nombre": "Estudio: proxy de régimen en tiempo real",
    "hipotesis": "Con el rango de apertura (primeros 15 min), la apertura dentro/fuera del valor y la distancia al VWAP a las 09:45 se puede anticipar si el día será de balance o de tendencia; si sí, HVN condicionada al proxy pasa de +17 a cerca de +53 ticks sin usar el futuro.",
    "origen": "mapa v2 (HVN +53 en balance, −22 en tendencia)",
-   "estado": "aprobada",
+   "estado": "corrida",
    "estrategia": null,
    "version": null,
    "estudio": "proxy_v1",
@@ -80,7 +80,9 @@
     "estudio proxy_v1 registrado",
     "script engine/regime_proxy.py"
    ],
-   "decision": "aprobada 23/10/2026"
+   "decision": "corrido 23/10/2026: base 48% de días de tendencia; mejor proxy (distancia al VWAP a las 09:45) 56.8% en su tercil extremo, por debajo de los 15 puntos exigidos; apertura dentro/fuera del valor 49% vs 46%. No se puede anticipar el régimen a las 09:45 con estos proxies: condicionar HVN al régimen no es operable.",
+   "test_id": "proxy_v1",
+   "veredicto": "negativo"
   },
   {
    "id": "T2-FADE",
