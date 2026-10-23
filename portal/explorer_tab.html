@@ -69,7 +69,7 @@ const C={buy:'#22c55e',sell:'#ef4444',txt:'#e6ebf5',mut:'#8a94a8',gold:'#f5b942'
 const base={paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',font:{color:C.mut,size:12},
   margin:{l:58,r:12,t:6,b:30},xaxis:{gridcolor:C.line,zeroline:false},yaxis:{gridcolor:C.line,zeroline:false},showlegend:false,hovermode:'closest'};
 const cfg={displaylogo:false,responsive:true,modeBarButtonsToRemove:['lasso2d','select2d']};
-const fmt=n=>n.toLocaleString('es-ES');
+const fmt=n=>n.toLocaleString('es-MX');
 const hline=(y,c,d)=>({type:'line',xref:'paper',x0:0,x1:1,y0:y,y1:y,line:{color:c,width:1,dash:d}});
 let ready=null,cur=null,replay=null,days=null;
 function plotly(){if(window.Plotly)return Promise.resolve();if(ready)return ready;

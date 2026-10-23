@@ -94,8 +94,8 @@
 <script>
 (function(){
 const esc=s=>String(s??'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
-const money=n=>n==null?'—':(n<0?'−$':'$')+Math.abs(n).toLocaleString('es-ES',{maximumFractionDigits:0});
-const num=(n,d=0)=>n==null?'—':Number(n).toLocaleString('es-ES',{maximumFractionDigits:d});
+const money=n=>n==null?'—':(n<0?'−$':'$')+Math.abs(n).toLocaleString('es-MX',{maximumFractionDigits:0});
+const num=(n,d=0)=>n==null?'—':Number(n).toLocaleString('es-MX',{maximumFractionDigits:d});
 const pct=n=>n==null?'—':num(n,1)+'%';
 const LBL={contexto:'Contexto',disparador:'Disparador',ubicacion:'Ubicación',confirmacion:'Confirmación',entrada:'Entrada',stop:'Stop',objetivo:'Objetivo',tiempo_maximo:'Tiempo máximo',filtros:'Filtros',
  instrumento:'Instrumento',horario:'Horario',cierre_forzado:'Cierre forzado',noticias:'Noticias',costos:'Costos',limites_dia:'Límites del día',una_posicion:'Posiciones',niveles_de_referencia:'Niveles de referencia',umbrales_relativos:'Umbrales',datos:'Datos',control:'Control'};
