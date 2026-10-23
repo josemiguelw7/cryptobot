@@ -208,9 +208,9 @@ def main():
                 sums[k][h] += float(fw[h].sum()); bsum[k][h] += bl[h]; rdsum[k][h] += bl_rd[h]
                 gsum[k][h] += np.bincount(gidx, weights=fw[h], minlength=NG)
                 if h in ("r15", "r30"): gbase[k][h] += bl_g[h]
-            gcnt[k] += np.bincount(gidx, minlength=NG)
                 hist[k][h] += fw[h][:50].tolist()
                 ysum[k][h][y] = ysum[k][h].get(y, 0.0) + float(fw[h].sum())
+            gcnt[k] += np.bincount(gidx, minlength=NG)
             cnt[k] += len(secs); ycnt[k][y] = ycnt[k].get(y, 0) + len(secs)
         if (n + 1) % 25 == 0: print(f"  {n+1}/{len(dates)} sesiones · {time.time()-t0:.0f}s", flush=True)
     rows, pv = [], []
