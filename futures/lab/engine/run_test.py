@@ -157,6 +157,8 @@ def main():
     if a.dry:
         print(json.dumps({"veredicto": v, **res}, ensure_ascii=False, indent=1)); return
     ficha = report.build(test_id, meta, trades, dates, daily, rs, ts, rt, extra)
+    if a.isolated:
+        print(f"{test_id} {a.strategy} v{a.version}: {v} · {time.time()-t0:.0f}s (aislado: el orquestador registra y publica)", flush=True); return
     report.publish(ficha)
     from . import replay
     replay.build(test_id, trades, L)

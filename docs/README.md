@@ -27,7 +27,10 @@ Lo anterior (cripto y acciones, cerrado el 22/10/2026) está en `docs/archivo/` 
 | Glosario y preguntas abiertas para Oscar | `docs/glosario.md`, `docs/preguntas_oscar.md` |
 | Motor de pruebas | `futures/lab/engine/` |
 | Lector, medidas y auditoría de datos | `futures/lab/ingest.py`, `features.py`, `sessions_audit.py` |
-| Página | `portal/build_futures_site.py` → `site/index.html` |
+| Página | `portal/build_futures_site.py` → `site/index.html` (y regenera `LAB.md`) |
+| Cola de pruebas | `futures/backlog.json` |
+| Orquestador / contenedores | `futures/lab/engine/orchestrator.py` · recibos en `futures/lab/runs/` |
+| Red Team ciego | `futures/lab/engine/redteam_pack.py` → `docs/redteam/` |
 
 Todo documento congelado tiene su `.ots` (OpenTimestamps) junto al archivo: prueba externa de la fecha.
 
@@ -37,7 +40,15 @@ Todo documento congelado tiene su `.ots` (OpenTimestamps) junto al archivo: prue
 - Examen sellado: 132 sesiones desde 2026-04-22, cifradas; la llave está solo en la Mac (`~/.radtak/lab-seal/`).
 - Diseño: 595 sesiones hasta 2026-04-21 → **576 válidas** tras la auditoría (`sessions_manifest.json`).
 
-## Cómo se corre una prueba
+## Cómo se corre una prueba (con orquestador, que es lo normal)
+1. Regla en `futures/strategies/v<N>.json` + `ots stamp` + estudio registrado.
+2. Prueba en `futures/backlog.json` con `estado: "congelada"` → `./futures/lab/sync_vm.sh push`.
+3. El cron de la VM (cada 15 min) la corre dos veces en contenedores efímeros sin red; publica solo si se reproduce.
+4. `./futures/lab/sync_vm.sh pull && .venv/bin/python portal/build_futures_site.py && git add -A && git commit && git push origin main`.
+5. Si pasa o queda en "revisar": `python -m engine.redteam_pack <id>` y revisión ciega → `docs/redteam/<id>.md`.
+Estado del orquestador: `ssh rt-oscar-lab 'cd /srv/lab/repo/futures/lab && /srv/lab/.venv/bin/python -m engine.orchestrator --status'`.
+
+## Cómo se corre una prueba a mano (solo para depurar)
 ```
 ./futures/lab/sync_vm.sh push                       # código y JSON congelados a la VM
 ssh rt-oscar-lab
