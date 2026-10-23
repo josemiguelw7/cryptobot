@@ -31,7 +31,7 @@ def _last_hash(path):
 def _append(path, rec):
     os.makedirs(config.REGISTRY, exist_ok=True)
     rec["prev_sha256"] = _last_hash(path)
-    line = json.dumps(rec, ensure_ascii=False, sort_keys=True)
+    line = json.dumps(rec, ensure_ascii=False, sort_keys=True, default=lambda o: o.item() if hasattr(o, "item") else str(o))
     with open(path, "a", encoding="utf-8") as f:
         f.write(line + "\n")
     return hashlib.sha256((line + "\n").encode()).hexdigest()

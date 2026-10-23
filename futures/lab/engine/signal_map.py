@@ -134,6 +134,11 @@ def events(s, L, d, thr, ref, prof):
     return out
 
 
+def _jsonable(o):
+    """numpy -> tipos nativos al guardar."""
+    return o.item() if hasattr(o, "item") else str(o)
+
+
 def forward(s, secs, dirs):
     base = np.array([s.price_at(t) or 0 for t in secs], dtype=float)
     res = {}
@@ -240,7 +245,7 @@ def main():
                 r[h] = None; r[h + "_p"] = None
         r["por_anio"] = {y: {h: round(ysum[k][h].get(y, 0.0) / n, 2) for h in H} for y, n in ycnt[k].items() if n} if cnt[k] else {}
         yrs = [y for y in ("2024", "2025") if y in r["por_anio"]]
-        r["estable_r15"] = (len(yrs) == 2 and np.sign(r["por_anio"]["2024"]["r15"]) == np.sign(r["por_anio"]["2025"]["r15"]) and r["por_anio"]["2024"]["r15"] != 0) if cnt[k] else None
+        r["estable_r15"] = bool(len(yrs) == 2 and np.sign(r["por_anio"]["2024"]["r15"]) == np.sign(r["por_anio"]["2025"]["r15"]) and r["por_anio"]["2024"]["r15"] != 0) if cnt[k] else None
         # condicional: régimen × media hora (descriptivo, con z contra el azar de la misma dirección por celda)
         cond = {}
         for gi, gname in enumerate(GROUPS):
@@ -286,7 +291,9 @@ def main():
            "pruebas": m, "pruebas_regimen": mr, "correccion": "Holm 5% (48 principales; 24 de régimen aparte)", "sesiones_sha256": sess_sha, "senales": rows}
     if a.dry:
         print(f"humo: {m} pruebas, {len(sig)} significativas · {time.time()-t0:.0f}s (sin registrar)"); return
-    json.dump(out, open(os.path.join(config.FUT, "signal_map.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    tmp = os.path.join(config.FUT, "signal_map.json.tmp")
+    json.dump(out, open(tmp, "w", encoding="utf-8"), ensure_ascii=False, indent=1, default=_jsonable)
+    os.replace(tmp, os.path.join(config.FUT, "signal_map.json"))   # nunca deja un archivo a medias
     for r in rows:
         if only and r["id"] not in only: continue
         registry.record_trial(f"S-{r['id']}", a.study, r["id"], 1, "senal", {"horizontes": list(H)}, sess_sha, len(dates), "20261022",
