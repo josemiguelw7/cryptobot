@@ -643,3 +643,7 @@ día de la ventana sellada solo para validar datos (volumen), no para diseño.
 ## 2026-10-22 · Estrategias v1 registradas (BIG, ABS, POC)
 
 Archivo `futures/strategies/v1.json`, SHA-256 `73abb571d6bab88af6775e65c925157e5fbafcaaa11c3921418767e2e2c3d229`. Congeladas antes de cualquier prueba: no se modifican; todo cambio es v2 y cuenta como otro intento. Se prueban solo en el periodo de diseño (2024-01-02 a 2026-04-21) contra RAND emparejado. El examen sellado solo se abre con una versión aprobada por Jose Miguel y Oscar.
+
+## 2026-10-22 · Plan de investigación NQ v1 registrado
+
+Archivo `futures/research_plan.json`, SHA-256 `5387f568a734f5eda8ac2f2d400a888486284ca89b8ccd067dd262c6cc26ac22`. Fase 1 mapa de 12 señales contra momentos al azar; Fase 2 estrategias de 3 en 3 (tanda 1 = BIG, ABS, POC v1); Fase 3 comité y examen sellado. Máximo 3 versiones por estrategia; toda prueba numerada y publicada. Registro de pruebas en `futures/tests.json`.

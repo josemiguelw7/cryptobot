@@ -1,0 +1,48 @@
+{
+ "titulo": "Plan de investigación NQ v1",
+ "fecha_registro": "2026-10-22",
+ "fases": [
+  {
+   "id": "F1",
+   "nombre": "Mapa de señales",
+   "que": "Por cada señal, cada vez que aparece, se mide el movimiento del precio a 1, 5, 15 y 30 min y se compara contra momentos al azar a la misma hora. Sin stops ni objetivos: no hay nada que ajustar.",
+   "senales": [
+    "Órdenes grandes (tamaño y niveles barridos)",
+    "Absorción",
+    "Desequilibrios apilados",
+    "Divergencia de delta",
+    "Ruptura del rango inicial",
+    "Agotamiento",
+    "Rechazo del área de valor",
+    "Zonas HVN (estilo Profit Pro)",
+    "Desequilibrio de la mejor compra/venta",
+    "Icebergs (orden que se repone)",
+    "Ráfagas de intensidad",
+    "Momentum primera → última media hora"
+   ]
+  },
+  {
+   "id": "F2",
+   "nombre": "Estrategias de 3 en 3",
+   "que": "Tanda 1 = BIG, ABS y POC v1 (ya congeladas). Tandas siguientes = las 3 señales más prometedoras del mapa, con reglas escritas y congeladas antes de probar."
+  },
+  {
+   "id": "F3",
+   "nombre": "Comité y examen sellado",
+   "que": "Solo una estrategia que cumpla todos los criterios va al comité (Jose Miguel + Oscar). Si la aprueban, se abre el examen sellado una sola vez."
+  }
+ ],
+ "criterios_para_pasar": [
+  "Gana a RAND en al menos 95 de cada 100 comparaciones",
+  "Sigue ganando con costos al doble",
+  "Positiva por separado en 2024, 2025 y 2026 (periodo de diseño)",
+  "Pasa la cuenta Topstep $50K en la mayoría de los arranques simulados"
+ ],
+ "reglas": [
+  "Máximo 3 versiones por estrategia",
+  "Toda prueba recibe un número y se publica, también las fallidas",
+  "Cada cambio de parámetros crea una versión nueva con el motivo escrito",
+  "Mientras más ideas se prueban, más alta la exigencia (corrección por pruebas múltiples)",
+  "Solo datos de diseño hasta el 2026-04-21; el examen sellado no se abre sin aprobación del comité"
+ ]
+}

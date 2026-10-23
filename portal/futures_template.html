@@ -63,7 +63,7 @@ a{color:var(--accent)}
 @media (max-width:600px){
  #tabbar{padding:8px 10px;gap:2px;padding-top:max(8px,env(safe-area-inset-top))}
  #tabbar .brand{display:none}
- #tabbar a{padding:8px 12px;font-size:14px;flex:1;text-align:center}
+ #tabbar a{padding:8px 11px;font-size:14px}
  #tabbar a .lg{display:none}
  .tf{padding:20px 12px 30px}
  .tf .grid{grid-template-columns:1fr !important}
@@ -91,8 +91,10 @@ a{color:var(--accent)}
 </style>
 <span class="brand">Laboratorio NQ</span>
 <a href="#floor" data-t="floor">Floor</a>
-<a href="#explorador" data-t="explorador">Explorador<span class="lg"> de sesiones</span></a>
-<a href="#bitacora" data-t="bitacora">Bitácora<span class="lg">, reglas y datos</span></a>
+<a href="#pruebas" data-t="pruebas">Pruebas</a>
+<a href="#estrategias" data-t="estrategias">Estrategias</a>
+<a href="#explorador" data-t="explorador">Explorador</a>
+<a href="#bitacora" data-t="bitacora">Bitácora</a>
 </nav>
 
 
@@ -231,6 +233,127 @@ Nada de esto toca dinero real.</div>
 </div>
 
 </div>
+<style>
+.rx{background:#000;color:#f2f2f2;padding:30px 20px 50px;font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;min-height:80vh}
+.rx *{box-sizing:border-box}
+.rx .in{max-width:1100px;margin:0 auto}
+.rx h2{font-size:26px;margin:0 0 4px;font-weight:650}
+.rx h3{font-size:13px;color:#9a9a9a;text-transform:uppercase;letter-spacing:.8px;margin:26px 0 10px;font-weight:600}
+.rx .sub{color:#9a9a9a;margin:0 0 18px}
+.rx .card{background:#121212;border:1px solid #262626;border-radius:16px;padding:16px 18px;margin-bottom:12px}
+.rx .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.rx .kpi{background:#121212;border:1px solid #262626;border-radius:14px;padding:12px 14px}
+.rx .kpi b{display:block;font-size:22px;font-variant-numeric:tabular-nums}
+.rx .kpi small{color:#9a9a9a;font-size:12px;text-transform:uppercase;letter-spacing:.6px}
+.rx .pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:600;background:#262626;color:#cfcfcf}
+.rx .ok{background:#0f2e1b;color:#4ade80}.rx .no{background:#331414;color:#f87171}.rx .wait{background:#2b2410;color:#facc15}.rx .run{background:#0c2236;color:#38bdf8}
+.rx .head{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+.rx .head .t{font-size:18px;font-weight:650}
+.rx .idea{color:#cfcfcf;margin:8px 0 12px}
+.rx dl{display:grid;grid-template-columns:150px 1fr;gap:8px 16px;margin:0;font-size:14px}
+.rx dt{color:#9a9a9a}.rx dd{margin:0}
+.rx .chg{font-size:14px;margin:6px 0;padding:8px 10px;background:#0b0b0b;border-left:3px solid #38bdf8;border-radius:6px}
+.rx .chg del{color:#f87171}.rx .chg ins{color:#4ade80;text-decoration:none}
+.rx .mono{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#9a9a9a;word-break:break-all}
+.rx details summary{cursor:pointer;color:#38bdf8;font-size:14px;margin-top:10px}
+.rx .empty{color:#9a9a9a;text-align:center;padding:28px 12px;border:1px dashed #333;border-radius:16px}
+.rx ol,.rx ul{margin:6px 0 0;padding-left:20px}.rx li{margin:4px 0}
+.rx table{width:100%;border-collapse:collapse;font-size:14px}
+.rx th,.rx td{text-align:left;padding:8px 6px;border-bottom:1px solid #222}
+.rx th{color:#9a9a9a;font-weight:500;font-size:12px;text-transform:uppercase}
+.rx .tw{overflow-x:auto}
+.rx a{color:#38bdf8}
+@media(max-width:600px){.rx{padding:20px 12px 36px}.rx h2{font-size:21px}.rx dl{grid-template-columns:1fr;gap:2px}.rx dt{margin-top:8px}.rx .kpi b{font-size:18px}}
+</style>
+
+<div class="tab" id="tab-pruebas" hidden><section class="rx"><div class="in">
+ <h2>Pruebas y resultados</h2>
+ <p class="sub">Cada prueba tiene un número y apunta a la versión exacta de las reglas que usó. Se publican todas, también las que fallan.</p>
+ <div class="row" id="rx-kpis"></div>
+ <h3>Fase 1 · Mapa de señales</h3>
+ <div id="rx-mapa"></div>
+ <h3>Fase 2 · Pruebas de estrategias</h3>
+ <div id="rx-tests"></div>
+</div></section></div>
+
+<div class="tab" id="tab-estrategias" hidden><section class="rx"><div class="in">
+ <h2>Estrategias y reglas</h2>
+ <p class="sub">Las reglas se escriben y se congelan antes de probar. Todo cambio crea una versión nueva, con el motivo y lo que cambió.</p>
+ <div id="rx-plan"></div>
+ <h3>Reglas comunes a todas las estrategias</h3>
+ <div class="card"><dl id="rx-comun"></dl></div>
+ <h3>Estrategias registradas</h3>
+ <div id="rx-strats"></div>
+</div></section></div>
+
+<script>
+(function(){
+const esc=s=>String(s??'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const LBL={contexto:'Contexto',disparador:'Disparador',ubicacion:'Ubicación',confirmacion:'Confirmación',entrada:'Entrada',stop:'Stop',objetivo:'Objetivo',tiempo_maximo:'Tiempo máximo',filtros:'Filtros',
+ instrumento:'Instrumento',horario:'Horario',cierre_forzado:'Cierre forzado',noticias:'Noticias',costos:'Costos',limites_dia:'Límites del día',una_posicion:'Posiciones',niveles_de_referencia:'Niveles de referencia',umbrales_relativos:'Umbrales',datos:'Datos',control:'Control'};
+const ORDER=['contexto','disparador','ubicacion','confirmacion','entrada','stop','objetivo','tiempo_maximo','filtros'];
+const ST={registrada:['Registrada · sin probar','wait'],probando:['Probando','run'],aprobada:['Aprobada','ok'],rechazada:['Rechazada','no'],comite:['En comité','run']};
+const money=n=>(n<0?'−$':'$')+Math.abs(n).toLocaleString('es-ES',{maximumFractionDigits:0});
+let R=null;
+
+function renderPlan(){
+ const p=R.plan; if(!p) return;
+ document.getElementById('rx-plan').innerHTML=`<div class="card">
+  <div class="head"><span class="t">${esc(p.titulo)}</span><span class="pill">registrado ${esc(p.fecha_registro)}</span></div>
+  <ol>${p.fases.map(f=>`<li><b>${esc(f.nombre)}.</b> ${esc(f.que)}${f.senales?`<details><summary>Ver las ${f.senales.length} señales</summary><ul>${f.senales.map(s=>`<li>${esc(s)}</li>`).join('')}</ul></details>`:''}</li>`).join('')}</ol>
+  <h3 style="margin-top:16px">Para pasar, una estrategia debe</h3><ul>${p.criterios_para_pasar.map(c=>`<li>${esc(c)}</li>`).join('')}</ul>
+  <h3>Reglas del proceso</h3><ul>${p.reglas.map(c=>`<li>${esc(c)}</li>`).join('')}</ul>
+  <p class="mono" style="margin-top:12px">Huella SHA-256 ${esc(p.sha256)}</p></div>`;
+}
+function renderStrats(){
+ const vs=R.versiones||[]; if(!vs.length) return;
+ const c=vs[vs.length-1].comun||{};
+ document.getElementById('rx-comun').innerHTML=Object.entries(c).map(([k,v])=>`<dt>${LBL[k]||k}</dt><dd>${esc(v)}</dd>`).join('');
+ const byId={};
+ vs.forEach(v=>v.estrategias.forEach(s=>{(byId[s.id]=byId[s.id]||[]).push({...s,_file:v.archivo,_sha:v.sha256,_fecha:v.fecha_registro,_motivo:s.motivo_cambio})}));
+ document.getElementById('rx-strats').innerHTML=Object.entries(byId).map(([id,hist])=>{
+  hist.sort((a,b)=>a.version-b.version); const s=hist[hist.length-1];
+  const tests=(R.pruebas||[]).filter(t=>t.estrategia===id);
+  const st=ST[s.estado||(tests.length?'probando':'registrada')]||ST.registrada;
+  const changes=hist.slice(1).map((h,i)=>{const prev=hist[i];
+   const d=ORDER.filter(k=>(prev[k]||'')!==(h[k]||'')).map(k=>`<div><b>${LBL[k]}:</b> <del>${esc(prev[k]||'—')}</del> → <ins>${esc(h[k]||'—')}</ins></div>`).join('');
+   return `<div class="chg"><b>v${prev.version} → v${h.version}</b> · ${esc(h._fecha)}<br>Motivo: ${esc(h._motivo||'sin motivo escrito')}${d}</div>`}).join('');
+  return `<div class="card" id="est-${id}">
+   <div class="head"><span class="t">${id} · ${esc(s.nombre)}</span><span><span class="pill">v${s.version}</span> <span class="pill ${st[1]}">${st[0]}</span></span></div>
+   <p class="idea">${esc(s.idea)}</p>
+   <dl>${ORDER.filter(k=>s[k]).map(k=>`<dt>${LBL[k]}</dt><dd>${esc(s[k])}</dd>`).join('')}</dl>
+   ${changes?`<h3>Historial de cambios</h3>${changes}`:`<p class="sub" style="margin:14px 0 0">Versión original, sin cambios.</p>`}
+   <p style="margin:12px 0 0;font-size:14px">Pruebas: ${tests.length?tests.map(t=>`<a href="#pruebas" data-goto="${t.id}">${t.id}</a>`).join(', '):'ninguna todavía'}</p>
+   <p class="mono">${esc(s._file)} · registrada ${esc(s._fecha)} · SHA-256 ${esc(s._sha)}</p></div>`}).join('');
+}
+function renderTests(){
+ const T=R.pruebas||[], M=R.mapa||[];
+ const pas=T.filter(t=>t.veredicto==='pasa').length;
+ const k=[['Pruebas corridas',T.length],['Intentos totales',T.length+M.length],['Pasan los criterios',pas],['Examen sellado','cerrado']];
+ document.getElementById('rx-kpis').innerHTML=k.map(([a,b])=>`<div class="kpi"><small>${a}</small><b>${b}</b></div>`).join('');
+ document.getElementById('rx-mapa').innerHTML=M.length?`<div class="card tw"><table><tr><th>Señal</th><th>Veces</th><th>5 min</th><th>15 min</th><th>30 min</th><th>¿Distinta del azar?</th></tr>${M.map(m=>`<tr><td>${esc(m.senal)}</td><td>${m.n}</td><td>${m.r5??'—'}</td><td>${m.r15??'—'}</td><td>${m.r30??'—'}</td><td><span class="pill ${m.significativa?'ok':''}">${m.significativa?'sí':'no'}</span></td></tr>`).join('')}</table></div>`
+  :`<div class="empty">Todavía no se ha medido. Aquí va a aparecer, para cada una de las 12 señales, qué hace el precio después comparado contra momentos al azar.</div>`;
+ document.getElementById('rx-tests').innerHTML=T.length?T.slice().reverse().map(t=>{const r=t.resultados||{};
+  const v=t.veredicto==='pasa'?['Pasa','ok']:t.veredicto==='no_pasa'?['No pasa','no']:['En revisión','wait'];
+  return `<div class="card" id="prueba-${t.id}"><div class="head"><span class="t">${t.id} · ${t.estrategia} v${t.version}</span><span class="pill ${v[1]}">${v[0]}</span></div>
+   <p class="sub" style="margin:4px 0 12px">${esc(t.fecha)} · tanda ${t.tanda} · ${esc(t.periodo||'')} · reglas: <a href="#estrategias" data-goto-est="${t.estrategia}">${t.estrategia} v${t.version}</a></p>
+   <div class="row">${[['Operaciones',r.operaciones],['Ganancia neta',r.ganancia_neta!=null?money(r.ganancia_neta):null],['Aciertos',r.aciertos],['Factor de ganancia',r.factor],['Gana a RAND',r.vs_rand],['Pasa Topstep',r.topstep]].filter(x=>x[1]!=null).map(([a,b])=>`<div class="kpi"><small>${a}</small><b>${b}</b></div>`).join('')}</div>
+   ${t.curva?`<div id="curva-${t.id}" style="height:260px;margin-top:12px"></div>`:''}
+   ${t.notas?`<p class="idea" style="margin-top:12px">${esc(t.notas)}</p>`:''}</div>`}).join('')
+  :`<div class="empty">Todavía no hay pruebas. La tanda 1 (BIG, ABS y POC v1) se corre en cuanto esté listo el motor de pruebas.</div>`;
+ if(T.some(t=>t.curva)) loadPlotly().then(()=>T.filter(t=>t.curva).forEach(t=>Plotly.react('curva-'+t.id,[
+  {x:t.curva.x,y:t.curva.rand_p5,line:{width:0},hoverinfo:'skip',showlegend:false},
+  {x:t.curva.x,y:t.curva.rand_p95,fill:'tonexty',fillcolor:'rgba(150,150,150,.18)',line:{width:0},name:'RAND (90% de los casos)'},
+  {x:t.curva.x,y:t.curva.y,line:{color:'#38bdf8',width:2},name:t.estrategia}],
+  {paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',font:{color:'#9a9a9a',size:11},margin:{l:50,r:8,t:6,b:28},legend:{orientation:'h',y:1.12},xaxis:{gridcolor:'#222'},yaxis:{gridcolor:'#222',tickprefix:'$'}},{displaylogo:false,responsive:true})));
+}
+function loadPlotly(){if(window.Plotly)return Promise.resolve();return new Promise(ok=>{const s=document.createElement('script');s.src='https://cdn.plot.ly/plotly-2.35.2.min.js';s.onload=ok;document.head.appendChild(s)})}
+document.addEventListener('click',e=>{const a=e.target.closest('[data-goto],[data-goto-est]');if(!a)return;
+ const id=a.dataset.goto?'prueba-'+a.dataset.goto:'est-'+a.dataset.gotoEst;setTimeout(()=>document.getElementById(id)?.scrollIntoView({behavior:'smooth'}),60)});
+fetch('data/research.json').then(r=>r.json()).then(j=>{R=j;renderPlan();renderStrats();renderTests()}).catch(()=>{});
+})();
+</script>
+
 <div class="tab" id="tab-explorador" hidden>
 <section class="xp">
 <style>
@@ -398,7 +521,7 @@ const esc = s => String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>'
 </script>
 <script>
 (function(){
-const tabs=['floor','explorador','bitacora'];
+const tabs=['floor','pruebas','estrategias','explorador','bitacora'];
 function show(){let h=(location.hash||'#floor').slice(1);if(!tabs.includes(h))h='floor';
  tabs.forEach(t=>{document.getElementById('tab-'+t).hidden=(t!==h)});
  document.querySelectorAll('#tabbar a[data-t]').forEach(a=>a.classList.toggle('on',a.dataset.t===h));
