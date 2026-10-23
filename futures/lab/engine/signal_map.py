@@ -143,19 +143,25 @@ def forward(s, secs, dirs):
     return res
 
 
-def baseline(s, secs, dirs, n=1000, rng=None):
-    """n sorteos: cada evento se mueve a un momento al azar dentro de su misma media hora."""
+def baseline(s, secs, dirs, n=1000, rng=None, groups=None, ngroups=0):
+    """n sorteos: cada evento se mueve a un momento al azar dentro de su misma media hora.
+    Devuelve (misma dirección, dirección aleatoria, por grupo [misma dirección])."""
     secs = np.asarray(secs); slot = np.floor((secs - NY_OPEN) / 1800) * 1800 + NY_OPEN
-    out = {k: np.zeros(n) for k in H}
+    out = {k: np.zeros(n) for k in H}; out_rd = {k: np.zeros(n) for k in H}
+    out_g = {k: np.zeros((n, ngroups)) for k in H} if ngroups else None
     for r in range(n):
         rs = slot + rng.random(len(secs)) * 1800
         rs = np.minimum(rs, NY_CLOSE - 1801)
+        rdir = rng.choice([-1.0, 1.0], size=len(secs))
         idx0 = np.searchsorted(s.sec, rs, side="right") - 1
         base = s.px[np.clip(idx0, 0, s.n - 1)].astype(float)
         for k, h in H.items():
             idx1 = np.searchsorted(s.sec, rs + h, side="right") - 1
-            out[k][r] = float(np.sum((s.px[np.clip(idx1, 0, s.n - 1)] - base) * dirs))
-    return out
+            mv = (s.px[np.clip(idx1, 0, s.n - 1)] - base)
+            out[k][r] = float(np.sum(mv * dirs)); out_rd[k][r] = float(np.sum(mv * rdir))
+            if ngroups:
+                out_g[k][r] = np.bincount(groups, weights=mv * dirs, minlength=ngroups)
+    return out, out_rd, out_g
 
 
 def main():
@@ -168,6 +174,13 @@ def main():
     if a.limit: dates = dates[:a.limit]
     precompute_stats(dates); L = Levels(dates); t0 = time.time()
     import polars as pl
+    from . import regime as _regime
+    REG = _regime.load() or (_regime.build(dates) and _regime.load())
+    SLOTS = 13; GROUPS = ["tendencia", "balance"]           # grupos del condicional: régimen × media hora
+    NG = len(GROUPS) * SLOTS
+    gsum = {k: {h: np.zeros(NG) for h in H} for k in NAMES}; gcnt = {k: np.zeros(NG, dtype=int) for k in NAMES}
+    gbase = {k: {h: np.zeros((a.draws, NG)) for h in ("r15", "r30")} for k in NAMES}
+    rdsum = {k: {h: np.zeros(a.draws) for h in H} for k in NAMES}
     sums = {k: {h: 0.0 for h in H} for k in NAMES}; cnt = {k: 0 for k in NAMES}
     bsum = {k: {h: np.zeros(a.draws) for h in H} for k in NAMES}
     rng = np.random.default_rng(20261022)
@@ -188,10 +201,14 @@ def main():
             keep = secs <= NY_CLOSE - 1800
             secs, dirs = secs[keep], dirs[keep]
             if not len(secs): continue
-            fw = forward(s, secs, dirs); bl = baseline(s, secs, dirs, a.draws, rng)
+            gidx = (0 if REG.get(d, {}).get("tendencia") == "tendencia" else 1) * SLOTS + np.clip(((secs - NY_OPEN) // 1800).astype(int), 0, SLOTS - 1)
+            fw = forward(s, secs, dirs); bl, bl_rd, bl_g = baseline(s, secs, dirs, a.draws, rng, gidx, NG)
             y = d[:4]
             for h in H:
-                sums[k][h] += float(fw[h].sum()); bsum[k][h] += bl[h]
+                sums[k][h] += float(fw[h].sum()); bsum[k][h] += bl[h]; rdsum[k][h] += bl_rd[h]
+                gsum[k][h] += np.bincount(gidx, weights=fw[h], minlength=NG)
+                if h in ("r15", "r30"): gbase[k][h] += bl_g[h]
+            gcnt[k] += np.bincount(gidx, minlength=NG)
                 hist[k][h] += fw[h][:50].tolist()
                 ysum[k][h][y] = ysum[k][h].get(y, 0.0) + float(fw[h].sum())
             cnt[k] += len(secs); ycnt[k][y] = ycnt[k].get(y, 0) + len(secs)
@@ -216,11 +233,35 @@ def main():
                 r[h] = round(obs, 2); r[h + "_azar"] = round(float(bm.mean()), 2); r[h + "_p"] = round(p, 4)
                 r[h + "_dir"] = "a favor" if obs > float(bm.mean()) else "contraria"; pv.append((k, h, p))
                 r[h + "_z"] = round(float((obs - bm.mean()) / bm.std()), 2) if bm.std() > 0 else None
+                rd = rdsum[k][h] / cnt[k]   # azar con dirección aleatoria: ¿la DIRECCIÓN es rentable por sí sola?
+                pu = (1 + int((rd >= obs).sum())) / (1 + a.draws); pd_ = (1 + int((rd <= obs).sum())) / (1 + a.draws)
+                r[h + "_p_bruto"] = round(min(1.0, 2 * min(pu, pd_)), 4)
             else:
                 r[h] = None; r[h + "_p"] = None
         r["por_anio"] = {y: {h: round(ysum[k][h].get(y, 0.0) / n, 2) for h in H} for y, n in ycnt[k].items() if n} if cnt[k] else {}
         yrs = [y for y in ("2024", "2025") if y in r["por_anio"]]
         r["estable_r15"] = (len(yrs) == 2 and np.sign(r["por_anio"]["2024"]["r15"]) == np.sign(r["por_anio"]["2025"]["r15"]) and r["por_anio"]["2024"]["r15"] != 0) if cnt[k] else None
+        # condicional: régimen × media hora (descriptivo, con z contra el azar de la misma dirección por celda)
+        cond = {}
+        for gi, gname in enumerate(GROUPS):
+            cond[gname] = []
+            for sl in range(SLOTS):
+                g = gi * SLOTS + sl; n_ = int(gcnt[k][g])
+                c = {"slot": f"{9 + (sl + 1) // 2}:{'30' if sl % 2 == 0 else '00'}", "n": n_}
+                for h in ("r15", "r30"):
+                    if n_:
+                        obs_ = gsum[k][h][g] / n_; b_ = gbase[k][h][:, g] / n_
+                        c[h] = round(float(obs_), 2); c[h + "_z"] = round(float((obs_ - b_.mean()) / b_.std()), 2) if b_.std() > 0 else None
+                cond[gname].append(c)
+        r["condicional"] = cond
+        # por régimen (r30): obs y p de dos colas contra el azar de la misma dirección, 24 pruebas con Holm aparte
+        r["por_regimen"] = {}
+        for gi, gname in enumerate(GROUPS):
+            sel = slice(gi * SLOTS, (gi + 1) * SLOTS); n_ = int(gcnt[k][sel].sum())
+            if n_:
+                obs_ = gsum[k]["r30"][sel].sum() / n_; b_ = gbase[k]["r30"][:, sel].sum(axis=1) / n_
+                pu = (1 + int((b_ >= obs_).sum())) / (1 + a.draws); pd_ = (1 + int((b_ <= obs_).sum())) / (1 + a.draws)
+                r["por_regimen"][gname] = {"n": n_, "r30": round(float(obs_), 2), "azar": round(float(b_.mean()), 2), "p": round(min(1.0, 2 * min(pu, pd_)), 4)}
         r["hist_r15"] = np.histogram(hist[k]["r15"], bins=[-80, -40, -20, -10, -5, 0, 5, 10, 20, 40, 80])[0].tolist() if hist[k]["r15"] else []
         rows.append(r)
     # Holm al 5% sobre las 48 pruebas
@@ -233,8 +274,16 @@ def main():
         r["significativa"] = bool(r["horizontes_significativos"])
         r["sentido"] = ("a favor" if all(r.get(h + "_dir") == "a favor" for h in r["horizontes_significativos"]) else
                         "contraria" if all(r.get(h + "_dir") == "contraria" for h in r["horizontes_significativos"]) else "mixto") if r["significativa"] else "—"
-    out = {"titulo": "Mapa de señales v1", "fecha": time.strftime("%Y-%m-%d"), "sesiones": len(dates), "sorteos": a.draws,
-           "pruebas": m, "correccion": "Holm 5%", "sesiones_sha256": sess_sha, "senales": rows}
+    prv = [(r["id"], g, v["p"]) for r in rows for g, v in r.get("por_regimen", {}).items()]
+    prv.sort(key=lambda x: x[2]); sigr = set(); mr = len(prv)
+    for rank, (k, g, p) in enumerate(prv):
+        if p <= 0.05 / (mr - rank): sigr.add((k, g))
+        else: break
+    for r in rows:
+        for g, v in r.get("por_regimen", {}).items():
+            v["significativa"] = (r["id"], g) in sigr
+    out = {"titulo": "Mapa de señales v2 (azar misma dirección + dirección aleatoria + régimen + media hora + estabilidad 2024/2025)", "fecha": time.strftime("%Y-%m-%d"), "sesiones": len(dates), "sorteos": a.draws,
+           "pruebas": m, "pruebas_regimen": mr, "correccion": "Holm 5% (48 principales; 24 de régimen aparte)", "sesiones_sha256": sess_sha, "senales": rows}
     json.dump(out, open(os.path.join(config.FUT, "signal_map.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     for r in rows:
         if only and r["id"] not in only: continue
