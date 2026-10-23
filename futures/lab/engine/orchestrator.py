@@ -170,6 +170,12 @@ def run_one(item):
         it["estado"] = "congelada"; it["ultimo_error"] = "falló una corrida; ver log"
     it["fin_utc"] = now(); save_backlog(b)
     json.dump(receipt, open(os.path.join(rd, "receipt.json"), "w"), indent=1); logf.close()
+    try:
+        from . import notify
+        notify.send(f"{item['id']} → {it['estado']}" + (f" ({it.get('veredicto')})" if it.get("veredicto") else ""),
+                    f"Prueba {item['id']} ({item['estrategia']} v{item['version']}): estado {it['estado']}" + (f", publicada como {it['test_id']} con veredicto {it['veredicto']}" if it.get("test_id") else "") + (f". Error: {it['ultimo_error']}" if it.get("ultimo_error") else "") + f"\nRecibo: /srv/lab/runs/{item['id']}/receipt.json")
+    except Exception:
+        pass
 
 
 def _result_dir(out):

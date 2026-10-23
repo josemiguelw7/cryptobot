@@ -29,7 +29,11 @@ def main():
     ups_p = os.path.join(config.FUT, "updates.json"); ups = json.load(open(ups_p, encoding="utf-8"))
     have = {e.get("test_id") for e in ups["entries"]}
     tids = [t for t in os.listdir(config.RESULTS) if os.path.exists(os.path.join(config.RESULTS, t, "report.json"))]
-    tids.sort(key=lambda t: json.load(open(os.path.join(config.RESULTS, t, "report.json"), encoding="utf-8")).get("receta", {}).get("registrado", "") or os.path.getmtime(os.path.join(config.RESULTS, t, "report.json")))
+    order = {}
+    for i, t in enumerate(registry.read(registry.TRIALS)):
+        if t.get("tipo") == "prueba" and t["test_id"] not in order:
+            order[t["test_id"]] = i
+    tids.sort(key=lambda t: order.get(t, 10**9))   # orden de registro, determinista
     for tid in tids:
         rp = os.path.join(config.RESULTS, tid, "report.json")
         f = json.load(open(rp, encoding="utf-8"))

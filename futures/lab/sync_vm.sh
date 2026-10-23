@@ -21,6 +21,8 @@ case "$1" in
     rsync -az $VM:/srv/lab/repo/futures/lab/results/ "$ROOT/futures/lab/results/" 2>/dev/null || true
     rsync -az $VM:/srv/lab/repo/futures/signal_map.json "$ROOT/futures/signal_map.json" 2>/dev/null || true
     rsync -az $VM:/srv/lab/runs/state.json "$ROOT/futures/lab/runs_state.json" 2>/dev/null || true
+    for f in golden.json regimes.json; do rsync -az $VM:/srv/lab/repo/futures/lab/$f "$ROOT/futures/lab/$f" 2>/dev/null || true; done
+    rsync -az $VM:/srv/lab/repo/futures/canonical_manifest.json "$ROOT/futures/canonical_manifest.json" 2>/dev/null || true
     rsync -az --exclude 'src' --exclude 'out1' --exclude 'out2' $VM:/srv/lab/runs/ "$ROOT/futures/lab/runs/" 2>/dev/null || true
     # tests.json y updates.json se reconstruyen en la Mac desde results/ + registro (la Mac es la dueña de esos dos)
     (cd "$ROOT/futures/lab" && LAB_DATA=/tmp/x "$ROOT/.venv/bin/python" -m engine.rebuild_tests)

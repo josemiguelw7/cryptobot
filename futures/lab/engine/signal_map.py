@@ -172,6 +172,7 @@ def main():
     bsum = {k: {h: np.zeros(a.draws) for h in H} for k in NAMES}
     rng = np.random.default_rng(20261022)
     hist = {k: {h: [] for h in H} for k in NAMES}
+    ysum = {k: {h: {} for h in H} for k in NAMES}; ycnt = {k: {} for k in NAMES}   # estabilidad: por año
     for n, d in enumerate(dates):
         ref, thr = L.reference(d), L.thresholds(d)
         if not thr: continue
@@ -188,10 +189,12 @@ def main():
             secs, dirs = secs[keep], dirs[keep]
             if not len(secs): continue
             fw = forward(s, secs, dirs); bl = baseline(s, secs, dirs, a.draws, rng)
+            y = d[:4]
             for h in H:
                 sums[k][h] += float(fw[h].sum()); bsum[k][h] += bl[h]
                 hist[k][h] += fw[h][:50].tolist()
-            cnt[k] += len(secs)
+                ysum[k][h][y] = ysum[k][h].get(y, 0.0) + float(fw[h].sum())
+            cnt[k] += len(secs); ycnt[k][y] = ycnt[k].get(y, 0) + len(secs)
         if (n + 1) % 25 == 0: print(f"  {n+1}/{len(dates)} sesiones · {time.time()-t0:.0f}s", flush=True)
     rows, pv = [], []
     prev_map = {}
@@ -215,6 +218,9 @@ def main():
                 r[h + "_z"] = round(float((obs - bm.mean()) / bm.std()), 2) if bm.std() > 0 else None
             else:
                 r[h] = None; r[h + "_p"] = None
+        r["por_anio"] = {y: {h: round(ysum[k][h].get(y, 0.0) / n, 2) for h in H} for y, n in ycnt[k].items() if n} if cnt[k] else {}
+        yrs = [y for y in ("2024", "2025") if y in r["por_anio"]]
+        r["estable_r15"] = (len(yrs) == 2 and np.sign(r["por_anio"]["2024"]["r15"]) == np.sign(r["por_anio"]["2025"]["r15"]) and r["por_anio"]["2024"]["r15"] != 0) if cnt[k] else None
         r["hist_r15"] = np.histogram(hist[k]["r15"], bins=[-80, -40, -20, -10, -5, 0, 5, 10, 20, 40, 80])[0].tolist() if hist[k]["r15"] else []
         rows.append(r)
     # Holm al 5% sobre las 48 pruebas

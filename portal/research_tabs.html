@@ -162,6 +162,8 @@ async function loadFull(id){
   <h4>Los 5 peores drawdowns</h4><div class="tw"><table><tr><th>Inicio</th><th>Fondo</th><th>Fin</th><th class="n">Profundidad</th><th class="n">Sesiones</th></tr>${(h.drawdowns||[]).map(d=>`<tr><td>${d.inicio}</td><td>${d.fondo}</td><td>${d.recuperado?d.fin:'sin recuperar'}</td><td class="n r">${money(d.profundidad)}</td><td class="n">${d.sesiones}</td></tr>`).join('')}</table></div>
   <h4>Concentración y estabilidad</h4><div class="row">${kpi('Top 5 operaciones',pct(cc.top5_operaciones_pct),cc.top5_operaciones_pct>50?'r':'')}${kpi('Top 5 días',pct(cc.top5_dias_pct),cc.depende_de_pocos_dias?'r':'g')}${kpi('CPCV caminos > 0',cp.total?`${cp.positivos} / ${cp.total}`:'—',cp.positivos>=10?'g':cp.positivos<=5?'r':'y')}${kpi('MAE / MFE prom.',`${num((h.mae_mfe||{}).mae_prom,1)} / ${num((h.mae_mfe||{}).mfe_prom,1)} t`)}</div>
   ${cp.caminos?`<div id="h5-${id}" class="plot" style="height:160px"></div>`:''}
+  <h4>Por régimen de mercado · ganancia neta (operaciones)</h4><div class="tw"><table><tr><th>Dimensión</th>${['a','b','c'].map(()=>'').join('')}<th>Valores</th></tr>${Object.entries(h.por_regimen||{}).map(([k,d])=>`<tr><td>${esc(k)}</td><td>${Object.entries(d).map(([v,c])=>`<span class="pill ${c.neto>0?'ok':c.neto<0?'no':''}" style="margin:2px">${esc(v)} · ${money(c.neto)} (${c.operaciones})</span>`).join(' ')}</td></tr>`).join('')}</table></div><p class="note">Reglas fijas: tendencia = cuerpo ≥ 50% del rango de Nueva York; volatilidad = rango ≥ mediana de las 20 sesiones anteriores; noticias = Fed, CPI o NFP; apertura dentro o fuera del valor de ayer. Una estrategia que solo gana en un régimen es una apuesta a ese régimen.</p>
+  <div id="oscar-${id}"></div>
   <h4>Red Team</h4><div class="row">${kpi('Placebo desplazado 5 min',money((rt.placebo_desplazado||{}).neto),rt.fuga_sospechada?'r':'g')}${kpi('Direcciones barajadas · p',num((rt.direcciones_barajadas||{}).p_valor,3),(rt.direcciones_barajadas||{}).p_valor<=0.05?'g':'r')}${kpi('RAND · p',num(rd.p_valor,3))}${kpi('RAND media',money(rd.rand_media))}</div>
   <p class="note">${rt.fuga_sospechada?'⚠️ El placebo desplazado (misma señal 5 min antes) gana parecido o más que la estrategia. Puede ser fuga de futuro o, si la señal vale por el nivel y la dirección y no por el momento, puede ser normal. Protocolo v2: queda en "revisar" hasta una revisión de código registrada.':'El placebo desplazado (misma señal usada 5 minutos antes de existir) no reproduce el resultado: no hay señales de fuga de futuro.'} Direcciones barajadas ${(rt.direcciones_barajadas||{}).n} veces: percentil 95 del azar ${money((rt.direcciones_barajadas||{}).p95)} contra real ${money((rt.direcciones_barajadas||{}).real)}.</p>
   <h4>Curva de costos (ticks de deslizamiento por lado)</h4><div id="h6-${id}" class="plot" style="height:180px"></div>
@@ -171,6 +173,7 @@ async function loadFull(id){
   <h4>Por nivel de referencia y por lado</h4><div class="tw"><table><tr><th>Nivel</th><th class="n">Op.</th><th class="n">Neto</th></tr>${Object.entries(h.por_nivel||{}).map(([k,v])=>`<tr><td>${esc(k)}</td><td class="n">${v.operaciones}</td><td class="n ${v.neto>0?'g':'r'}">${money(v.neto)}</td></tr>`).join('')}${Object.entries(h.por_lado||{}).map(([k,v])=>`<tr><td>${k==='1'?'compras':'ventas'}</td><td class="n">${v.operaciones}</td><td class="n ${v.neto>0?'g':'r'}">${money(v.neto)}</td></tr>`).join('')}</table></div>
   <h4>Operaciones (${TR.length}) · toca "ver" para el replay en el Explorador</h4><div id="tl-${id}"></div>`;
  tradeTable(id,TR,0);
+ oscarBox(id,h.ojos_de_oscar);
  await plotly();
  const H=h.hist_operacion;if(H)Plotly.react('h1-'+id,[{x:H.bins.slice(0,-1),y:H.counts,type:'bar',marker:{color:H.bins.slice(0,-1).map(b=>b>=0?'#4ade80':'#f87171')}}],lay({xaxis:{tickprefix:'$',gridcolor:'#222'},margin:{l:36,r:8,t:8,b:30}}),CFG);
  const D=h.diario;if(D)Plotly.react('h2-'+id,[{x:D.x,y:D.y,type:'bar',marker:{color:D.y.map(v=>v>=0?'#4ade80':'#f87171')}}],lay({yaxis:{tickprefix:'$',gridcolor:'#222'}}),CFG);
@@ -180,6 +183,16 @@ async function loadFull(id){
  const CC=rt.curva_costos;if(CC)Plotly.react('h6-'+id,[{x:CC.map(c=>c.slip_ticks+' tick'),y:CC.map(c=>c.neto),type:'bar',marker:{color:CC.map(c=>c.neto>0?'#4ade80':'#f87171')},text:CC.map(c=>money(c.neto)),textposition:'auto'}],lay({yaxis:{tickprefix:'$',gridcolor:'#222',zeroline:true,zerolinecolor:'#555'},margin:{l:48,r:8,t:8,b:30}}),CFG);
  if(ts.hist_balance&&ts.hist_balance.length)Plotly.react('h7-'+id,[{x:ts.hist_balance_bins.slice(0,-1),y:ts.hist_balance,type:'bar',marker:{color:ts.hist_balance_bins.slice(0,-1).map(b=>b>=53000?'#4ade80':b<=48000?'#f87171':'#38bdf8')}}],lay({xaxis:{tickprefix:'$',gridcolor:'#222'},margin:{l:36,r:8,t:8,b:30},shapes:[{type:'line',x0:48000,x1:48000,y0:0,y1:1,yref:'paper',line:{color:'#f87171',dash:'dot'}},{type:'line',x0:53000,x1:53000,y0:0,y1:1,yref:'paper',line:{color:'#4ade80',dash:'dot'}}]}),CFG);
  if(ts.hist_dias_pasa&&ts.hist_dias_pasa.length)Plotly.react('h8-'+id,[{x:['≤10','≤20','≤30','≤45','≤60','≤90','≤120'],y:ts.hist_dias_pasa,type:'bar',marker:{color:'#4ade80'}}],lay({margin:{l:36,r:8,t:8,b:30}}),CFG);
+}
+async function oscarBox(id,acuerdo){
+ const el=document.getElementById('oscar-'+id);if(!el)return;
+ let M=null;try{M=await (await fetch(`data/tests/${id}/oscar/muestra.json`)).json()}catch(e){}
+ if(!M){el.innerHTML='';return}
+ el.innerHTML=`<h4>Los ojos de Oscar · 30 operaciones para marcar en ATAS</h4>
+ ${acuerdo?`<div class="row">${kpi('Respondidas',num(acuerdo.respondidas))}${kpi('Oscar la habría tomado',pct(acuerdo.acuerdo_pct),acuerdo.acuerdo_pct>=70?'g':acuerdo.acuerdo_pct>=40?'y':'r')}${Object.entries(acuerdo.por_grupo||{}).map(([g,v])=>kpi(g,`${v.tomaria} / ${v.n}`)).join('')}</div>`:'<p class="note">Pendiente de respuesta. Oscar descarga el CSV, marca "si/no" y un comentario en cada fila, y lo devuelve; el acuerdo entre el código y su criterio se publica aquí.</p>'}
+ <p style="font-size:13px"><a class="btn p" href="data/tests/${id}/oscar/muestra.csv" download>Descargar muestra CSV</a></p>
+ <div class="tw"><table><tr><th>#</th><th>Grupo</th><th>Fecha</th><th>Lado</th><th>Entrada</th><th>Salida</th><th class="n">Neto</th><th></th></tr>${M.map(r=>`<tr><td>${r.n}</td><td>${esc(r.grupo)}</td><td>${r.fecha}</td><td>${r.lado==='compra'?'<span class="g">compra</span>':'<span class="r">venta</span>'}</td><td>${r.entrada_hora_et}<br><span class="note">${r.entrada_precio}</span></td><td>${r.salida_hora_et}<br><span class="note">${r.salida_precio} · ${r.motivo}</span></td><td class="n ${r.neto_usd>0?'g':'r'}">${money(r.neto_usd)}</td><td><a class="btn" data-oreplay="${id}:${r.n}">ver</a></td></tr>`).join('')}</table></div>`;
+ el._muestra=M;
 }
 function heat(c){
  if(!c)return '';const mx=Math.max(1,...c.neto.flat().map(Math.abs));
@@ -305,6 +318,7 @@ document.addEventListener('click',e=>{
  const c=e.target.closest('[data-cmp]');if(c){const id=c.dataset.cmp;cmp=cmp.includes(id)?cmp.filter(x=>x!==id):[...cmp,id].slice(-3);renderTests();renderCompare();return}
  if(e.target.closest('[data-cmpclear]')){cmp=[];renderTests();renderCompare();return}
  const p=e.target.closest('[data-page]');if(p){const [id,k]=p.dataset.page.split(':');tradeTable(id,document.getElementById('tl-'+id)._trades,+k);return}
+ const orp=e.target.closest('[data-oreplay]');if(orp){const [id,n]=orp.dataset.oreplay.split(':');const M=document.getElementById('oscar-'+id)._muestra;const r=M.find(x=>String(x.n)===n);if(window.xpReplay&&r){window.xpReplay({test_id:id,date:r.fecha,side:r.lado==='compra'?1:-1,kind:r.senal,level:r.nivel,entry_hms:r.entrada_hora_et,entry_px:r.entrada_precio,exit_hms:r.salida_hora_et,exit_px:r.salida_precio,reason:r.motivo,stop_ticks:r.stop_ticks,target_ticks:r.objetivo_ticks,net_usd:r.neto_usd,mae_ticks:'—',mfe_ticks:'—'});location.hash='#explorador'}return}
  const r=e.target.closest('[data-replay]');if(r){const [id,k]=r.dataset.replay.split(':');const t=document.getElementById('tl-'+id)._trades[+k];if(window.xpReplay){window.xpReplay({...t,test_id:id});location.hash='#explorador'}return}
  const a=e.target.closest('[data-goto],[data-goto-est]');if(!a)return;
  const id=a.dataset.goto?'prueba-'+a.dataset.goto:'est-'+a.dataset.gotoEst;setTimeout(()=>document.getElementById(id)?.scrollIntoView({behavior:'smooth'}),80)});

@@ -5584,7 +5584,9 @@
      "rand_total_p5": -27730.65,
      "rand_total_p95": -10762.86
     },
-    "drawdown_max": -13782.8
+    "drawdown_max": -13782.8,
+    "por_regimen": null,
+    "ojos_de_oscar": null
    }
   },
   {
@@ -11169,7 +11171,9 @@
      "rand_total_p5": -5630.31,
      "rand_total_p95": 518.78
     },
-    "drawdown_max": -2893.48
+    "drawdown_max": -2893.48,
+    "por_regimen": null,
+    "ojos_de_oscar": null
    }
   },
   {
@@ -16766,7 +16770,9 @@
      "rand_total_p5": -6443.84,
      "rand_total_p95": 1376.66
     },
-    "drawdown_max": -2093.64
+    "drawdown_max": -2093.64,
+    "por_regimen": null,
+    "ojos_de_oscar": null
    }
   },
   {
@@ -22358,7 +22364,9 @@
      "rand_total_p5": -12253.92,
      "rand_total_p95": 6837.68
     },
-    "drawdown_max": -7416.8
+    "drawdown_max": -7416.8,
+    "por_regimen": null,
+    "ojos_de_oscar": null
    }
   }
  ]

@@ -1,0 +1,4639 @@
+{
+ "reglas": [
+  "",
+  "  tendencia : |cierre − apertura| de Nueva York ≥ 50% del rango del día   → \"tendencia\", si no \"balance\"",
+  "  volatilidad: rango de Nueva York ≥ mediana del rango de las 20 sesiones válidas anteriores → \"alta\", si no \"baja\"",
+  "  noticias  : día con Fed, CPI o NFP (futures/news.json) → \"noticias\", si no \"normal\"",
+  "  apertura  : abre dentro / fuera del área de valor del día anterior"
+ ],
+ "resumen": {
+  "tendencia": {
+   "tendencia": 275,
+   "balance": 301
+  },
+  "volatilidad": {
+   "sin_referencia": 20,
+   "alta": 278,
+   "baja": 278
+  },
+  "noticias": {
+   "normal": 505,
+   "noticias": 71
+  },
+  "apertura": {
+   "sin_referencia": 1,
+   "fuera_del_valor": 374,
+   "dentro_del_valor": 201
+  }
+ },
+ "sesiones": {
+  "2024-01-02": {
+   "tendencia": "tendencia",
+   "volatilidad": "sin_referencia",
+   "noticias": "normal",
+   "apertura": "sin_referencia",
+   "rango_ticks": 1004,
+   "cuerpo_pct": 56.2
+  },
+  "2024-01-03": {
+   "tendencia": "tendencia",
+   "volatilidad": "sin_referencia",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 526,
+   "cuerpo_pct": 52.7
+  },
+  "2024-01-04": {
+   "tendencia": "balance",
+   "volatilidad": "sin_referencia",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 591,
+   "cuerpo_pct": 6.8
+  },
+  "2024-01-05": {
+   "tendencia": "balance",
+   "volatilidad": "sin_referencia",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 694,
+   "cuerpo_pct": 8.4
+  },
+  "2024-01-08": {
+   "tendencia": "tendencia",
+   "volatilidad": "sin_referencia",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1223,
+   "cuerpo_pct": 94.6
+  },
+  "2024-01-09": {
+   "tendencia": "tendencia",
+   "volatilidad": "sin_referencia",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 832,
+   "cuerpo_pct": 78.1
+  },
+  "2024-01-10": {
+   "tendencia": "tendencia",
+   "volatilidad": "sin_referencia",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 726,
+   "cuerpo_pct": 56.1
+  },
+  "2024-01-11": {
+   "tendencia": "balance",
+   "volatilidad": "sin_referencia",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1162,
+   "cuerpo_pct": 6.5
+  },
+  "2024-01-12": {
+   "tendencia": "balance",
+   "volatilidad": "sin_referencia",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 516,
+   "cuerpo_pct": 27.7
+  },
+  "2024-01-15": {
+   "tendencia": "balance",
+   "volatilidad": "sin_referencia",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 171,
+   "cuerpo_pct": 28.7
+  },
+  "2024-01-16": {
+   "tendencia": "balance",
+   "volatilidad": "sin_referencia",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 715,
+   "cuerpo_pct": 28.5
+  },
+  "2024-01-17": {
+   "tendencia": "balance",
+   "volatilidad": "sin_referencia",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 783,
+   "cuerpo_pct": 22.2
+  },
+  "2024-01-18": {
+   "tendencia": "tendencia",
+   "volatilidad": "sin_referencia",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 733,
+   "cuerpo_pct": 61.1
+  },
+  "2024-01-22": {
+   "tendencia": "balance",
+   "volatilidad": "sin_referencia",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 604,
+   "cuerpo_pct": 44.7
+  },
+  "2024-01-23": {
+   "tendencia": "balance",
+   "volatilidad": "sin_referencia",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 518,
+   "cuerpo_pct": 32.4
+  },
+  "2024-01-24": {
+   "tendencia": "balance",
+   "volatilidad": "sin_referencia",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 758,
+   "cuerpo_pct": 35.8
+  },
+  "2024-01-25": {
+   "tendencia": "balance",
+   "volatilidad": "sin_referencia",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 840,
+   "cuerpo_pct": 40.0
+  },
+  "2024-01-26": {
+   "tendencia": "balance",
+   "volatilidad": "sin_referencia",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 514,
+   "cuerpo_pct": 22.2
+  },
+  "2024-01-29": {
+   "tendencia": "tendencia",
+   "volatilidad": "sin_referencia",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 786,
+   "cuerpo_pct": 81.4
+  },
+  "2024-01-30": {
+   "tendencia": "tendencia",
+   "volatilidad": "sin_referencia",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 546,
+   "cuerpo_pct": 57.1
+  },
+  "2024-01-31": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1014,
+   "cuerpo_pct": 63.6
+  },
+  "2024-02-01": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 757,
+   "cuerpo_pct": 70.4
+  },
+  "2024-02-02": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1240,
+   "cuerpo_pct": 71.6
+  },
+  "2024-02-05": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 765,
+   "cuerpo_pct": 13.3
+  },
+  "2024-02-06": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 828,
+   "cuerpo_pct": 38.2
+  },
+  "2024-02-07": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 627,
+   "cuerpo_pct": 43.2
+  },
+  "2024-02-08": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 354,
+   "cuerpo_pct": 32.8
+  },
+  "2024-02-09": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 784,
+   "cuerpo_pct": 66.3
+  },
+  "2024-02-12": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 741,
+   "cuerpo_pct": 35.8
+  },
+  "2024-02-13": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 999,
+   "cuerpo_pct": 21.0
+  },
+  "2024-02-14": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 787,
+   "cuerpo_pct": 40.9
+  },
+  "2024-02-15": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 610,
+   "cuerpo_pct": 17.0
+  },
+  "2024-02-16": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 852,
+   "cuerpo_pct": 84.4
+  },
+  "2024-02-19": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 140,
+   "cuerpo_pct": 1.4
+  },
+  "2024-02-20": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1086,
+   "cuerpo_pct": 18.0
+  },
+  "2024-02-21": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 679,
+   "cuerpo_pct": 24.7
+  },
+  "2024-02-22": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 892,
+   "cuerpo_pct": 66.8
+  },
+  "2024-02-23": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 795,
+   "cuerpo_pct": 59.9
+  },
+  "2024-02-26": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 374,
+   "cuerpo_pct": 42.5
+  },
+  "2024-02-27": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 495,
+   "cuerpo_pct": 0.8
+  },
+  "2024-02-28": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 396,
+   "cuerpo_pct": 6.3
+  },
+  "2024-02-29": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 845,
+   "cuerpo_pct": 17.4
+  },
+  "2024-03-01": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1116,
+   "cuerpo_pct": 85.6
+  },
+  "2024-03-04": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 377,
+   "cuerpo_pct": 76.1
+  },
+  "2024-03-05": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1211,
+   "cuerpo_pct": 66.7
+  },
+  "2024-03-06": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 843,
+   "cuerpo_pct": 28.5
+  },
+  "2024-03-07": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 965,
+   "cuerpo_pct": 52.6
+  },
+  "2024-03-08": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1696,
+   "cuerpo_pct": 65.4
+  },
+  "2024-03-12": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1268,
+   "cuerpo_pct": 51.8
+  },
+  "2024-03-13": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 592,
+   "cuerpo_pct": 66.2
+  },
+  "2024-03-14": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 947,
+   "cuerpo_pct": 41.0
+  },
+  "2024-03-15": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 673,
+   "cuerpo_pct": 55.9
+  },
+  "2024-03-18": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 648,
+   "cuerpo_pct": 33.6
+  },
+  "2024-03-19": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 944,
+   "cuerpo_pct": 53.5
+  },
+  "2024-03-20": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1012,
+   "cuerpo_pct": 65.7
+  },
+  "2024-03-21": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 626,
+   "cuerpo_pct": 82.3
+  },
+  "2024-03-22": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 504,
+   "cuerpo_pct": 27.4
+  },
+  "2024-03-25": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 628,
+   "cuerpo_pct": 32.0
+  },
+  "2024-03-26": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 677,
+   "cuerpo_pct": 69.9
+  },
+  "2024-03-27": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 773,
+   "cuerpo_pct": 30.9
+  },
+  "2024-03-28": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 360,
+   "cuerpo_pct": 41.1
+  },
+  "2024-04-01": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 770,
+   "cuerpo_pct": 2.7
+  },
+  "2024-04-02": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 582,
+   "cuerpo_pct": 29.6
+  },
+  "2024-04-03": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 849,
+   "cuerpo_pct": 61.2
+  },
+  "2024-04-04": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1995,
+   "cuerpo_pct": 93.5
+  },
+  "2024-04-05": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1223,
+   "cuerpo_pct": 50.8
+  },
+  "2024-04-08": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 554,
+   "cuerpo_pct": 24.0
+  },
+  "2024-04-09": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 977,
+   "cuerpo_pct": 11.9
+  },
+  "2024-04-10": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 505,
+   "cuerpo_pct": 41.0
+  },
+  "2024-04-11": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1397,
+   "cuerpo_pct": 62.1
+  },
+  "2024-04-12": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 892,
+   "cuerpo_pct": 52.0
+  },
+  "2024-04-15": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1990,
+   "cuerpo_pct": 92.4
+  },
+  "2024-04-16": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 680,
+   "cuerpo_pct": 4.7
+  },
+  "2024-04-17": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1377,
+   "cuerpo_pct": 88.0
+  },
+  "2024-04-18": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 898,
+   "cuerpo_pct": 57.2
+  },
+  "2024-04-19": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1615,
+   "cuerpo_pct": 77.5
+  },
+  "2024-04-22": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1198,
+   "cuerpo_pct": 20.6
+  },
+  "2024-04-23": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 974,
+   "cuerpo_pct": 73.1
+  },
+  "2024-04-24": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 913,
+   "cuerpo_pct": 31.9
+  },
+  "2024-04-25": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1187,
+   "cuerpo_pct": 71.9
+  },
+  "2024-04-26": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 933,
+   "cuerpo_pct": 61.1
+  },
+  "2024-04-29": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 631,
+   "cuerpo_pct": 10.5
+  },
+  "2024-04-30": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1327,
+   "cuerpo_pct": 82.2
+  },
+  "2024-05-01": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1576,
+   "cuerpo_pct": 17.8
+  },
+  "2024-05-02": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1197,
+   "cuerpo_pct": 21.8
+  },
+  "2024-05-03": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 626,
+   "cuerpo_pct": 28.1
+  },
+  "2024-05-06": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 622,
+   "cuerpo_pct": 79.3
+  },
+  "2024-05-07": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 399,
+   "cuerpo_pct": 14.5
+  },
+  "2024-05-08": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 655,
+   "cuerpo_pct": 60.5
+  },
+  "2024-05-09": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 522,
+   "cuerpo_pct": 22.2
+  },
+  "2024-05-10": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 638,
+   "cuerpo_pct": 12.7
+  },
+  "2024-05-13": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 405,
+   "cuerpo_pct": 35.6
+  },
+  "2024-05-14": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 670,
+   "cuerpo_pct": 81.9
+  },
+  "2024-05-15": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1041,
+   "cuerpo_pct": 70.4
+  },
+  "2024-05-16": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 468,
+   "cuerpo_pct": 23.9
+  },
+  "2024-05-17": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 528,
+   "cuerpo_pct": 9.7
+  },
+  "2024-05-20": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 637,
+   "cuerpo_pct": 77.1
+  },
+  "2024-05-21": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 523,
+   "cuerpo_pct": 87.8
+  },
+  "2024-05-22": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 618,
+   "cuerpo_pct": 9.2
+  },
+  "2024-05-23": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1444,
+   "cuerpo_pct": 78.9
+  },
+  "2024-05-24": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 774,
+   "cuerpo_pct": 57.9
+  },
+  "2024-05-27": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 320,
+   "cuerpo_pct": 89.7
+  },
+  "2024-05-28": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 504,
+   "cuerpo_pct": 18.1
+  },
+  "2024-05-29": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 475,
+   "cuerpo_pct": 38.3
+  },
+  "2024-05-30": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 893,
+   "cuerpo_pct": 72.0
+  },
+  "2024-05-31": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1561,
+   "cuerpo_pct": 0.8
+  },
+  "2024-06-03": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1279,
+   "cuerpo_pct": 18.8
+  },
+  "2024-06-04": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 742,
+   "cuerpo_pct": 34.5
+  },
+  "2024-06-05": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1118,
+   "cuerpo_pct": 81.8
+  },
+  "2024-06-06": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 394,
+   "cuerpo_pct": 37.6
+  },
+  "2024-06-07": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 650,
+   "cuerpo_pct": 0.2
+  },
+  "2024-06-10": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 608,
+   "cuerpo_pct": 81.4
+  },
+  "2024-06-11": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1012,
+   "cuerpo_pct": 72.7
+  },
+  "2024-06-12": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 856,
+   "cuerpo_pct": 41.9
+  },
+  "2024-06-13": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 654,
+   "cuerpo_pct": 27.1
+  },
+  "2024-06-14": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 541,
+   "cuerpo_pct": 81.1
+  },
+  "2024-06-18": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 410,
+   "cuerpo_pct": 8.0
+  },
+  "2024-06-19": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 116,
+   "cuerpo_pct": 40.5
+  },
+  "2024-06-20": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1220,
+   "cuerpo_pct": 68.7
+  },
+  "2024-06-21": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 634,
+   "cuerpo_pct": 26.5
+  },
+  "2024-06-24": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1020,
+   "cuerpo_pct": 69.5
+  },
+  "2024-06-25": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 756,
+   "cuerpo_pct": 72.5
+  },
+  "2024-06-26": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 464,
+   "cuerpo_pct": 65.1
+  },
+  "2024-06-27": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 651,
+   "cuerpo_pct": 35.3
+  },
+  "2024-06-28": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1468,
+   "cuerpo_pct": 37.6
+  },
+  "2024-07-01": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1049,
+   "cuerpo_pct": 29.3
+  },
+  "2024-07-02": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1130,
+   "cuerpo_pct": 97.1
+  },
+  "2024-07-03": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 877,
+   "cuerpo_pct": 92.7
+  },
+  "2024-07-04": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 146,
+   "cuerpo_pct": 65.8
+  },
+  "2024-07-05": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 845,
+   "cuerpo_pct": 85.3
+  },
+  "2024-07-08": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 400,
+   "cuerpo_pct": 33.5
+  },
+  "2024-07-09": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 624,
+   "cuerpo_pct": 28.4
+  },
+  "2024-07-10": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 855,
+   "cuerpo_pct": 63.5
+  },
+  "2024-07-11": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 2100,
+   "cuerpo_pct": 88.5
+  },
+  "2024-07-12": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1263,
+   "cuerpo_pct": 30.8
+  },
+  "2024-07-15": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1163,
+   "cuerpo_pct": 5.8
+  },
+  "2024-07-16": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 880,
+   "cuerpo_pct": 22.6
+  },
+  "2024-07-17": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1175,
+   "cuerpo_pct": 91.4
+  },
+  "2024-07-18": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1562,
+   "cuerpo_pct": 64.0
+  },
+  "2024-07-19": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1290,
+   "cuerpo_pct": 48.8
+  },
+  "2024-07-22": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 940,
+   "cuerpo_pct": 18.4
+  },
+  "2024-07-23": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 723,
+   "cuerpo_pct": 18.3
+  },
+  "2024-07-24": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1940,
+   "cuerpo_pct": 89.9
+  },
+  "2024-07-25": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 2029,
+   "cuerpo_pct": 44.5
+  },
+  "2024-07-26": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1030,
+   "cuerpo_pct": 4.7
+  },
+  "2024-07-29": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1056,
+   "cuerpo_pct": 29.1
+  },
+  "2024-07-30": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 2067,
+   "cuerpo_pct": 67.6
+  },
+  "2024-07-31": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1050,
+   "cuerpo_pct": 47.5
+  },
+  "2024-08-01": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 3255,
+   "cuerpo_pct": 61.2
+  },
+  "2024-08-02": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1501,
+   "cuerpo_pct": 23.9
+  },
+  "2024-08-05": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 3119,
+   "cuerpo_pct": 59.0
+  },
+  "2024-08-06": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 2069,
+   "cuerpo_pct": 17.9
+  },
+  "2024-08-07": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 2427,
+   "cuerpo_pct": 79.2
+  },
+  "2024-08-08": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1964,
+   "cuerpo_pct": 60.0
+  },
+  "2024-08-09": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1080,
+   "cuerpo_pct": 58.8
+  },
+  "2024-08-12": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 967,
+   "cuerpo_pct": 1.9
+  },
+  "2024-08-13": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1185,
+   "cuerpo_pct": 94.3
+  },
+  "2024-08-14": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1112,
+   "cuerpo_pct": 10.8
+  },
+  "2024-08-15": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1068,
+   "cuerpo_pct": 88.1
+  },
+  "2024-08-16": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 793,
+   "cuerpo_pct": 50.4
+  },
+  "2024-08-19": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1329,
+   "cuerpo_pct": 76.9
+  },
+  "2024-08-20": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 728,
+   "cuerpo_pct": 3.3
+  },
+  "2024-08-21": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 841,
+   "cuerpo_pct": 30.3
+  },
+  "2024-08-22": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1933,
+   "cuerpo_pct": 85.3
+  },
+  "2024-08-23": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1250,
+   "cuerpo_pct": 10.8
+  },
+  "2024-08-26": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1184,
+   "cuerpo_pct": 57.3
+  },
+  "2024-08-27": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1011,
+   "cuerpo_pct": 50.6
+  },
+  "2024-08-28": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1512,
+   "cuerpo_pct": 54.2
+  },
+  "2024-08-29": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1426,
+   "cuerpo_pct": 29.5
+  },
+  "2024-08-30": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1049,
+   "cuerpo_pct": 19.4
+  },
+  "2024-09-02": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 331,
+   "cuerpo_pct": 34.1
+  },
+  "2024-09-03": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 2289,
+   "cuerpo_pct": 81.4
+  },
+  "2024-09-04": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1106,
+   "cuerpo_pct": 28.3
+  },
+  "2024-09-05": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1234,
+   "cuerpo_pct": 28.8
+  },
+  "2024-09-06": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 2148,
+   "cuerpo_pct": 87.8
+  },
+  "2024-09-09": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 931,
+   "cuerpo_pct": 25.8
+  },
+  "2024-09-10": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1155,
+   "cuerpo_pct": 33.4
+  },
+  "2024-09-11": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 2986,
+   "cuerpo_pct": 47.1
+  },
+  "2024-09-12": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1194,
+   "cuerpo_pct": 64.6
+  },
+  "2024-09-13": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 716,
+   "cuerpo_pct": 65.9
+  },
+  "2024-09-17": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1103,
+   "cuerpo_pct": 41.0
+  },
+  "2024-09-18": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1368,
+   "cuerpo_pct": 42.8
+  },
+  "2024-09-19": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 956,
+   "cuerpo_pct": 12.8
+  },
+  "2024-09-20": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 896,
+   "cuerpo_pct": 0.9
+  },
+  "2024-09-23": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 432,
+   "cuerpo_pct": 0.7
+  },
+  "2024-09-24": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1047,
+   "cuerpo_pct": 13.5
+  },
+  "2024-09-25": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 542,
+   "cuerpo_pct": 39.7
+  },
+  "2024-09-26": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1318,
+   "cuerpo_pct": 49.2
+  },
+  "2024-09-27": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 840,
+   "cuerpo_pct": 73.8
+  },
+  "2024-09-30": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 923,
+   "cuerpo_pct": 39.5
+  },
+  "2024-10-01": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1792,
+   "cuerpo_pct": 61.0
+  },
+  "2024-10-02": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1027,
+   "cuerpo_pct": 26.2
+  },
+  "2024-10-03": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 939,
+   "cuerpo_pct": 32.4
+  },
+  "2024-10-04": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 929,
+   "cuerpo_pct": 0.0
+  },
+  "2024-10-07": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 957,
+   "cuerpo_pct": 57.2
+  },
+  "2024-10-08": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1039,
+   "cuerpo_pct": 75.7
+  },
+  "2024-10-09": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 977,
+   "cuerpo_pct": 72.2
+  },
+  "2024-10-10": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "noticias",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 827,
+   "cuerpo_pct": 34.0
+  },
+  "2024-10-11": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 718,
+   "cuerpo_pct": 61.0
+  },
+  "2024-10-14": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 620,
+   "cuerpo_pct": 46.0
+  },
+  "2024-10-15": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1621,
+   "cuerpo_pct": 71.1
+  },
+  "2024-10-16": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 692,
+   "cuerpo_pct": 3.6
+  },
+  "2024-10-17": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 889,
+   "cuerpo_pct": 94.2
+  },
+  "2024-10-18": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 387,
+   "cuerpo_pct": 17.6
+  },
+  "2024-10-21": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 838,
+   "cuerpo_pct": 44.4
+  },
+  "2024-10-22": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 931,
+   "cuerpo_pct": 58.9
+  },
+  "2024-10-23": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1535,
+   "cuerpo_pct": 56.5
+  },
+  "2024-10-24": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 587,
+   "cuerpo_pct": 5.3
+  },
+  "2024-10-25": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 989,
+   "cuerpo_pct": 1.6
+  },
+  "2024-10-28": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 563,
+   "cuerpo_pct": 88.6
+  },
+  "2024-10-29": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1257,
+   "cuerpo_pct": 58.8
+  },
+  "2024-10-30": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 739,
+   "cuerpo_pct": 68.6
+  },
+  "2024-10-31": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1440,
+   "cuerpo_pct": 98.5
+  },
+  "2024-11-01": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 922,
+   "cuerpo_pct": 33.8
+  },
+  "2024-11-04": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 855,
+   "cuerpo_pct": 16.4
+  },
+  "2024-11-05": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 903,
+   "cuerpo_pct": 83.7
+  },
+  "2024-11-06": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1148,
+   "cuerpo_pct": 72.9
+  },
+  "2024-11-07": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 996,
+   "cuerpo_pct": 86.2
+  },
+  "2024-11-08": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 415,
+   "cuerpo_pct": 47.0
+  },
+  "2024-11-11": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 778,
+   "cuerpo_pct": 32.1
+  },
+  "2024-11-12": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 788,
+   "cuerpo_pct": 14.7
+  },
+  "2024-11-13": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 848,
+   "cuerpo_pct": 0.0
+  },
+  "2024-11-14": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 814,
+   "cuerpo_pct": 63.6
+  },
+  "2024-11-15": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1474,
+   "cuerpo_pct": 72.3
+  },
+  "2024-11-18": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 893,
+   "cuerpo_pct": 32.7
+  },
+  "2024-11-19": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1138,
+   "cuerpo_pct": 85.8
+  },
+  "2024-11-20": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1150,
+   "cuerpo_pct": 0.8
+  },
+  "2024-11-21": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1566,
+   "cuerpo_pct": 13.3
+  },
+  "2024-11-22": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 631,
+   "cuerpo_pct": 35.5
+  },
+  "2024-11-25": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1203,
+   "cuerpo_pct": 46.1
+  },
+  "2024-11-26": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 484,
+   "cuerpo_pct": 42.1
+  },
+  "2024-11-27": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1058,
+   "cuerpo_pct": 45.4
+  },
+  "2024-11-28": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 142,
+   "cuerpo_pct": 45.1
+  },
+  "2024-11-29": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 848,
+   "cuerpo_pct": 75.8
+  },
+  "2024-12-02": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 933,
+   "cuerpo_pct": 74.7
+  },
+  "2024-12-03": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 622,
+   "cuerpo_pct": 77.8
+  },
+  "2024-12-04": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 641,
+   "cuerpo_pct": 74.7
+  },
+  "2024-12-05": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 433,
+   "cuerpo_pct": 55.0
+  },
+  "2024-12-06": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "noticias",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 733,
+   "cuerpo_pct": 91.3
+  },
+  "2024-12-09": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 851,
+   "cuerpo_pct": 60.8
+  },
+  "2024-12-10": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1016,
+   "cuerpo_pct": 49.0
+  },
+  "2024-12-11": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 988,
+   "cuerpo_pct": 81.9
+  },
+  "2024-12-12": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 481,
+   "cuerpo_pct": 42.4
+  },
+  "2024-12-13": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 966,
+   "cuerpo_pct": 0.9
+  },
+  "2024-12-17": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 567,
+   "cuerpo_pct": 15.0
+  },
+  "2024-12-18": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 3687,
+   "cuerpo_pct": 85.2
+  },
+  "2024-12-19": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1339,
+   "cuerpo_pct": 90.0
+  },
+  "2024-12-20": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 2607,
+   "cuerpo_pct": 54.8
+  },
+  "2024-12-23": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1200,
+   "cuerpo_pct": 45.2
+  },
+  "2024-12-24": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1002,
+   "cuerpo_pct": 87.9
+  },
+  "2024-12-26": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 824,
+   "cuerpo_pct": 22.1
+  },
+  "2024-12-27": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1457,
+   "cuerpo_pct": 39.3
+  },
+  "2024-12-30": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1272,
+   "cuerpo_pct": 0.8
+  },
+  "2024-12-31": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1226,
+   "cuerpo_pct": 76.9
+  },
+  "2025-01-02": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1841,
+   "cuerpo_pct": 38.8
+  },
+  "2025-01-03": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1191,
+   "cuerpo_pct": 72.0
+  },
+  "2025-01-06": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 996,
+   "cuerpo_pct": 7.1
+  },
+  "2025-01-07": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 2106,
+   "cuerpo_pct": 82.2
+  },
+  "2025-01-08": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1062,
+   "cuerpo_pct": 1.7
+  },
+  "2025-01-10": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1290,
+   "cuerpo_pct": 54.9
+  },
+  "2025-01-13": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1050,
+   "cuerpo_pct": 69.5
+  },
+  "2025-01-14": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1425,
+   "cuerpo_pct": 41.5
+  },
+  "2025-01-15": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1064,
+   "cuerpo_pct": 54.3
+  },
+  "2025-01-16": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1018,
+   "cuerpo_pct": 96.9
+  },
+  "2025-01-17": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 763,
+   "cuerpo_pct": 24.4
+  },
+  "2025-01-20": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 635,
+   "cuerpo_pct": 25.7
+  },
+  "2025-01-21": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 985,
+   "cuerpo_pct": 1.5
+  },
+  "2025-01-22": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 764,
+   "cuerpo_pct": 44.0
+  },
+  "2025-01-23": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 711,
+   "cuerpo_pct": 86.1
+  },
+  "2025-01-24": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 937,
+   "cuerpo_pct": 58.2
+  },
+  "2025-01-27": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1294,
+   "cuerpo_pct": 41.6
+  },
+  "2025-01-28": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1866,
+   "cuerpo_pct": 58.4
+  },
+  "2025-01-29": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "noticias",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 957,
+   "cuerpo_pct": 29.0
+  },
+  "2025-01-30": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1317,
+   "cuerpo_pct": 7.8
+  },
+  "2025-01-31": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1721,
+   "cuerpo_pct": 44.9
+  },
+  "2025-02-03": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1626,
+   "cuerpo_pct": 47.0
+  },
+  "2025-02-04": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1155,
+   "cuerpo_pct": 85.5
+  },
+  "2025-02-05": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1072,
+   "cuerpo_pct": 78.4
+  },
+  "2025-02-06": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 683,
+   "cuerpo_pct": 54.9
+  },
+  "2025-02-07": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1661,
+   "cuerpo_pct": 71.7
+  },
+  "2025-02-11": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 683,
+   "cuerpo_pct": 49.8
+  },
+  "2025-02-12": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1211,
+   "cuerpo_pct": 82.9
+  },
+  "2025-02-13": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1157,
+   "cuerpo_pct": 82.9
+  },
+  "2025-02-14": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 540,
+   "cuerpo_pct": 63.7
+  },
+  "2025-02-17": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 237,
+   "cuerpo_pct": 10.1
+  },
+  "2025-02-18": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 661,
+   "cuerpo_pct": 11.5
+  },
+  "2025-02-19": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 727,
+   "cuerpo_pct": 21.9
+  },
+  "2025-02-20": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1098,
+   "cuerpo_pct": 23.6
+  },
+  "2025-02-21": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 2102,
+   "cuerpo_pct": 96.0
+  },
+  "2025-02-24": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1572,
+   "cuerpo_pct": 84.2
+  },
+  "2025-02-25": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1630,
+   "cuerpo_pct": 59.2
+  },
+  "2025-02-26": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1379,
+   "cuerpo_pct": 13.7
+  },
+  "2025-02-27": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 3133,
+   "cuerpo_pct": 93.5
+  },
+  "2025-02-28": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1935,
+   "cuerpo_pct": 68.1
+  },
+  "2025-03-03": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 3217,
+   "cuerpo_pct": 72.5
+  },
+  "2025-03-04": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 2629,
+   "cuerpo_pct": 8.3
+  },
+  "2025-03-05": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 2040,
+   "cuerpo_pct": 46.4
+  },
+  "2025-03-06": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 2041,
+   "cuerpo_pct": 43.1
+  },
+  "2025-03-07": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 2083,
+   "cuerpo_pct": 36.0
+  },
+  "2025-03-10": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 2529,
+   "cuerpo_pct": 66.6
+  },
+  "2025-03-11": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1943,
+   "cuerpo_pct": 5.8
+  },
+  "2025-03-12": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1530,
+   "cuerpo_pct": 22.9
+  },
+  "2025-03-13": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1628,
+   "cuerpo_pct": 79.3
+  },
+  "2025-03-14": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1223,
+   "cuerpo_pct": 78.3
+  },
+  "2025-03-18": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1184,
+   "cuerpo_pct": 64.5
+  },
+  "2025-03-19": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1747,
+   "cuerpo_pct": 37.6
+  },
+  "2025-03-20": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1396,
+   "cuerpo_pct": 27.0
+  },
+  "2025-03-21": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1466,
+   "cuerpo_pct": 80.7
+  },
+  "2025-03-24": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 721,
+   "cuerpo_pct": 60.7
+  },
+  "2025-03-25": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 534,
+   "cuerpo_pct": 64.8
+  },
+  "2025-03-26": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1720,
+   "cuerpo_pct": 76.0
+  },
+  "2025-03-27": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1049,
+   "cuerpo_pct": 13.0
+  },
+  "2025-03-28": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 2080,
+   "cuerpo_pct": 86.5
+  },
+  "2025-03-31": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 2052,
+   "cuerpo_pct": 55.2
+  },
+  "2025-04-01": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1531,
+   "cuerpo_pct": 58.3
+  },
+  "2025-04-02": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 2295,
+   "cuerpo_pct": 72.9
+  },
+  "2025-04-03": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1638,
+   "cuerpo_pct": 58.1
+  },
+  "2025-04-04": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 2881,
+   "cuerpo_pct": 86.0
+  },
+  "2025-04-07": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 6752,
+   "cuerpo_pct": 37.5
+  },
+  "2025-04-08": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 5535,
+   "cuerpo_pct": 65.8
+  },
+  "2025-04-09": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 8738,
+   "cuerpo_pct": 94.3
+  },
+  "2025-04-10": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 3810,
+   "cuerpo_pct": 32.4
+  },
+  "2025-04-11": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 2414,
+   "cuerpo_pct": 65.1
+  },
+  "2025-04-14": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 2069,
+   "cuerpo_pct": 56.0
+  },
+  "2025-04-15": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1042,
+   "cuerpo_pct": 10.5
+  },
+  "2025-04-16": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 2475,
+   "cuerpo_pct": 32.0
+  },
+  "2025-04-17": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1058,
+   "cuerpo_pct": 47.3
+  },
+  "2025-04-21": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1860,
+   "cuerpo_pct": 44.5
+  },
+  "2025-04-22": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1654,
+   "cuerpo_pct": 55.1
+  },
+  "2025-04-23": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1743,
+   "cuerpo_pct": 36.9
+  },
+  "2025-04-24": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1967,
+   "cuerpo_pct": 90.4
+  },
+  "2025-04-25": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1282,
+   "cuerpo_pct": 71.5
+  },
+  "2025-04-28": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1463,
+   "cuerpo_pct": 6.5
+  },
+  "2025-04-29": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1139,
+   "cuerpo_pct": 76.8
+  },
+  "2025-04-30": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 2448,
+   "cuerpo_pct": 55.9
+  },
+  "2025-05-01": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1072,
+   "cuerpo_pct": 34.8
+  },
+  "2025-05-02": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1028,
+   "cuerpo_pct": 37.2
+  },
+  "2025-05-05": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 825,
+   "cuerpo_pct": 27.4
+  },
+  "2025-05-06": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1149,
+   "cuerpo_pct": 27.9
+  },
+  "2025-05-07": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "noticias",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1499,
+   "cuerpo_pct": 13.2
+  },
+  "2025-05-08": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1433,
+   "cuerpo_pct": 3.0
+  },
+  "2025-05-09": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 887,
+   "cuerpo_pct": 41.0
+  },
+  "2025-05-12": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1057,
+   "cuerpo_pct": 11.6
+  },
+  "2025-05-13": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1495,
+   "cuerpo_pct": 71.4
+  },
+  "2025-05-14": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 583,
+   "cuerpo_pct": 56.4
+  },
+  "2025-05-15": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1128,
+   "cuerpo_pct": 41.7
+  },
+  "2025-05-16": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 767,
+   "cuerpo_pct": 19.0
+  },
+  "2025-05-19": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1369,
+   "cuerpo_pct": 93.5
+  },
+  "2025-05-20": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 705,
+   "cuerpo_pct": 19.6
+  },
+  "2025-05-21": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1943,
+   "cuerpo_pct": 26.7
+  },
+  "2025-05-22": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 895,
+   "cuerpo_pct": 5.5
+  },
+  "2025-05-23": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1042,
+   "cuerpo_pct": 49.7
+  },
+  "2025-05-26": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 369,
+   "cuerpo_pct": 25.5
+  },
+  "2025-05-27": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1183,
+   "cuerpo_pct": 70.0
+  },
+  "2025-05-28": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 874,
+   "cuerpo_pct": 60.8
+  },
+  "2025-05-29": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1515,
+   "cuerpo_pct": 69.4
+  },
+  "2025-05-30": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1448,
+   "cuerpo_pct": 3.5
+  },
+  "2025-06-02": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1236,
+   "cuerpo_pct": 79.8
+  },
+  "2025-06-03": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1000,
+   "cuerpo_pct": 63.2
+  },
+  "2025-06-04": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 648,
+   "cuerpo_pct": 19.8
+  },
+  "2025-06-05": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1726,
+   "cuerpo_pct": 52.1
+  },
+  "2025-06-06": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "noticias",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 606,
+   "cuerpo_pct": 5.4
+  },
+  "2025-06-09": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 560,
+   "cuerpo_pct": 15.0
+  },
+  "2025-06-10": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 998,
+   "cuerpo_pct": 51.4
+  },
+  "2025-06-11": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1102,
+   "cuerpo_pct": 46.9
+  },
+  "2025-06-12": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 635,
+   "cuerpo_pct": 67.4
+  },
+  "2025-06-13": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1018,
+   "cuerpo_pct": 10.6
+  },
+  "2025-06-17": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 902,
+   "cuerpo_pct": 47.6
+  },
+  "2025-06-18": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "noticias",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 862,
+   "cuerpo_pct": 20.4
+  },
+  "2025-06-19": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 546,
+   "cuerpo_pct": 59.7
+  },
+  "2025-06-20": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1462,
+   "cuerpo_pct": 63.5
+  },
+  "2025-06-23": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1419,
+   "cuerpo_pct": 57.3
+  },
+  "2025-06-24": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 753,
+   "cuerpo_pct": 63.5
+  },
+  "2025-06-25": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 639,
+   "cuerpo_pct": 22.4
+  },
+  "2025-06-26": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 872,
+   "cuerpo_pct": 55.7
+  },
+  "2025-06-27": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 902,
+   "cuerpo_pct": 19.7
+  },
+  "2025-06-30": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 615,
+   "cuerpo_pct": 8.9
+  },
+  "2025-07-01": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1015,
+   "cuerpo_pct": 43.2
+  },
+  "2025-07-02": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 811,
+   "cuerpo_pct": 93.8
+  },
+  "2025-07-03": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 689,
+   "cuerpo_pct": 73.7
+  },
+  "2025-07-04": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 230,
+   "cuerpo_pct": 19.6
+  },
+  "2025-07-07": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 791,
+   "cuerpo_pct": 30.2
+  },
+  "2025-07-08": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 487,
+   "cuerpo_pct": 36.1
+  },
+  "2025-07-09": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 769,
+   "cuerpo_pct": 37.7
+  },
+  "2025-07-10": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 755,
+   "cuerpo_pct": 29.9
+  },
+  "2025-07-11": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 634,
+   "cuerpo_pct": 25.2
+  },
+  "2025-07-14": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 897,
+   "cuerpo_pct": 41.0
+  },
+  "2025-07-15": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 691,
+   "cuerpo_pct": 85.8
+  },
+  "2025-07-16": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1058,
+   "cuerpo_pct": 0.3
+  },
+  "2025-07-17": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 856,
+   "cuerpo_pct": 73.6
+  },
+  "2025-07-18": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 562,
+   "cuerpo_pct": 53.2
+  },
+  "2025-07-21": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 678,
+   "cuerpo_pct": 52.4
+  },
+  "2025-07-22": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 967,
+   "cuerpo_pct": 51.3
+  },
+  "2025-07-23": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 712,
+   "cuerpo_pct": 35.4
+  },
+  "2025-07-24": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 505,
+   "cuerpo_pct": 2.2
+  },
+  "2025-07-25": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 581,
+   "cuerpo_pct": 43.2
+  },
+  "2025-07-28": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 369,
+   "cuerpo_pct": 20.3
+  },
+  "2025-07-30": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 932,
+   "cuerpo_pct": 1.3
+  },
+  "2025-07-31": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1786,
+   "cuerpo_pct": 88.1
+  },
+  "2025-08-01": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1283,
+   "cuerpo_pct": 64.5
+  },
+  "2025-08-04": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 874,
+   "cuerpo_pct": 93.0
+  },
+  "2025-08-05": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1135,
+   "cuerpo_pct": 75.8
+  },
+  "2025-08-06": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1187,
+   "cuerpo_pct": 86.1
+  },
+  "2025-08-07": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1368,
+   "cuerpo_pct": 29.2
+  },
+  "2025-08-08": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 776,
+   "cuerpo_pct": 89.0
+  },
+  "2025-08-11": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 868,
+   "cuerpo_pct": 35.6
+  },
+  "2025-08-12": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1312,
+   "cuerpo_pct": 61.4
+  },
+  "2025-08-13": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 730,
+   "cuerpo_pct": 55.6
+  },
+  "2025-08-14": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 666,
+   "cuerpo_pct": 38.6
+  },
+  "2025-08-15": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 706,
+   "cuerpo_pct": 58.5
+  },
+  "2025-08-18": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 421,
+   "cuerpo_pct": 27.3
+  },
+  "2025-08-19": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1378,
+   "cuerpo_pct": 84.8
+  },
+  "2025-08-20": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1588,
+   "cuerpo_pct": 25.6
+  },
+  "2025-08-21": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 917,
+   "cuerpo_pct": 18.9
+  },
+  "2025-08-22": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1778,
+   "cuerpo_pct": 67.5
+  },
+  "2025-08-25": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 692,
+   "cuerpo_pct": 0.3
+  },
+  "2025-08-26": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 692,
+   "cuerpo_pct": 67.2
+  },
+  "2025-08-27": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 680,
+   "cuerpo_pct": 46.6
+  },
+  "2025-08-28": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 925,
+   "cuerpo_pct": 54.7
+  },
+  "2025-08-29": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1082,
+   "cuerpo_pct": 66.2
+  },
+  "2025-09-01": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 260,
+   "cuerpo_pct": 40.4
+  },
+  "2025-09-02": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1060,
+   "cuerpo_pct": 66.6
+  },
+  "2025-09-03": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 828,
+   "cuerpo_pct": 13.9
+  },
+  "2025-09-04": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1081,
+   "cuerpo_pct": 68.8
+  },
+  "2025-09-05": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1588,
+   "cuerpo_pct": 46.3
+  },
+  "2025-09-08": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 512,
+   "cuerpo_pct": 15.4
+  },
+  "2025-09-09": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 656,
+   "cuerpo_pct": 19.8
+  },
+  "2025-09-10": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 862,
+   "cuerpo_pct": 57.8
+  },
+  "2025-09-11": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "noticias",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 545,
+   "cuerpo_pct": 25.7
+  },
+  "2025-09-12": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 630,
+   "cuerpo_pct": 44.3
+  },
+  "2025-09-16": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 405,
+   "cuerpo_pct": 63.2
+  },
+  "2025-09-17": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1235,
+   "cuerpo_pct": 14.7
+  },
+  "2025-09-18": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 869,
+   "cuerpo_pct": 8.7
+  },
+  "2025-09-19": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 720,
+   "cuerpo_pct": 51.2
+  },
+  "2025-09-22": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 852,
+   "cuerpo_pct": 86.0
+  },
+  "2025-09-23": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 917,
+   "cuerpo_pct": 73.9
+  },
+  "2025-09-24": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1089,
+   "cuerpo_pct": 53.5
+  },
+  "2025-09-25": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1097,
+   "cuerpo_pct": 20.4
+  },
+  "2025-09-26": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 868,
+   "cuerpo_pct": 32.9
+  },
+  "2025-09-29": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 780,
+   "cuerpo_pct": 6.9
+  },
+  "2025-09-30": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 766,
+   "cuerpo_pct": 40.5
+  },
+  "2025-10-01": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1243,
+   "cuerpo_pct": 80.0
+  },
+  "2025-10-02": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 701,
+   "cuerpo_pct": 31.8
+  },
+  "2025-10-03": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 979,
+   "cuerpo_pct": 55.9
+  },
+  "2025-10-06": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 577,
+   "cuerpo_pct": 20.6
+  },
+  "2025-10-07": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1120,
+   "cuerpo_pct": 68.5
+  },
+  "2025-10-08": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1081,
+   "cuerpo_pct": 92.6
+  },
+  "2025-10-09": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 696,
+   "cuerpo_pct": 19.8
+  },
+  "2025-10-10": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 4015,
+   "cuerpo_pct": 90.7
+  },
+  "2025-10-13": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 962,
+   "cuerpo_pct": 39.8
+  },
+  "2025-10-14": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 2106,
+   "cuerpo_pct": 22.6
+  },
+  "2025-10-15": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1807,
+   "cuerpo_pct": 17.3
+  },
+  "2025-10-16": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 2144,
+   "cuerpo_pct": 40.0
+  },
+  "2025-10-17": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1533,
+   "cuerpo_pct": 65.9
+  },
+  "2025-10-20": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 959,
+   "cuerpo_pct": 75.6
+  },
+  "2025-10-21": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 581,
+   "cuerpo_pct": 6.7
+  },
+  "2025-10-22": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1938,
+   "cuerpo_pct": 46.4
+  },
+  "2025-10-23": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1156,
+   "cuerpo_pct": 81.9
+  },
+  "2025-10-24": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 564,
+   "cuerpo_pct": 30.5
+  },
+  "2025-10-27": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 739,
+   "cuerpo_pct": 78.5
+  },
+  "2025-10-28": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 902,
+   "cuerpo_pct": 48.1
+  },
+  "2025-10-29": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1109,
+   "cuerpo_pct": 5.5
+  },
+  "2025-10-30": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1254,
+   "cuerpo_pct": 80.8
+  },
+  "2025-10-31": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1243,
+   "cuerpo_pct": 66.5
+  },
+  "2025-11-03": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1002,
+   "cuerpo_pct": 50.1
+  },
+  "2025-11-04": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1398,
+   "cuerpo_pct": 46.6
+  },
+  "2025-11-05": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1568,
+   "cuerpo_pct": 50.7
+  },
+  "2025-11-06": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1952,
+   "cuerpo_pct": 85.3
+  },
+  "2025-11-07": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1855,
+   "cuerpo_pct": 11.5
+  },
+  "2025-11-10": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1234,
+   "cuerpo_pct": 56.5
+  },
+  "2025-11-11": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 871,
+   "cuerpo_pct": 19.3
+  },
+  "2025-11-12": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1168,
+   "cuerpo_pct": 52.5
+  },
+  "2025-11-13": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1998,
+   "cuerpo_pct": 75.5
+  },
+  "2025-11-14": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 2669,
+   "cuerpo_pct": 57.3
+  },
+  "2025-11-17": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 2089,
+   "cuerpo_pct": 21.0
+  },
+  "2025-11-18": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1823,
+   "cuerpo_pct": 29.3
+  },
+  "2025-11-19": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1924,
+   "cuerpo_pct": 23.6
+  },
+  "2025-11-20": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 4848,
+   "cuerpo_pct": 88.5
+  },
+  "2025-11-21": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 2676,
+   "cuerpo_pct": 16.2
+  },
+  "2025-11-24": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1907,
+   "cuerpo_pct": 86.3
+  },
+  "2025-11-25": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 2133,
+   "cuerpo_pct": 41.8
+  },
+  "2025-11-26": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 969,
+   "cuerpo_pct": 30.4
+  },
+  "2025-11-27": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 128,
+   "cuerpo_pct": 0.8
+  },
+  "2025-11-28": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 675,
+   "cuerpo_pct": 75.0
+  },
+  "2025-12-01": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1146,
+   "cuerpo_pct": 51.4
+  },
+  "2025-12-02": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1022,
+   "cuerpo_pct": 42.2
+  },
+  "2025-12-03": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1021,
+   "cuerpo_pct": 63.9
+  },
+  "2025-12-04": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 897,
+   "cuerpo_pct": 37.5
+  },
+  "2025-12-05": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 867,
+   "cuerpo_pct": 21.1
+  },
+  "2025-12-08": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1184,
+   "cuerpo_pct": 41.3
+  },
+  "2025-12-09": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 703,
+   "cuerpo_pct": 48.2
+  },
+  "2025-12-10": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1368,
+   "cuerpo_pct": 44.7
+  },
+  "2025-12-11": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1330,
+   "cuerpo_pct": 21.5
+  },
+  "2025-12-12": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 2006,
+   "cuerpo_pct": 69.9
+  },
+  "2025-12-16": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1089,
+   "cuerpo_pct": 51.5
+  },
+  "2025-12-17": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 2240,
+   "cuerpo_pct": 94.8
+  },
+  "2025-12-18": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1005,
+   "cuerpo_pct": 10.8
+  },
+  "2025-12-19": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 973,
+   "cuerpo_pct": 90.2
+  },
+  "2025-12-22": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 667,
+   "cuerpo_pct": 55.5
+  },
+  "2025-12-23": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 769,
+   "cuerpo_pct": 86.9
+  },
+  "2025-12-24": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 432,
+   "cuerpo_pct": 64.6
+  },
+  "2025-12-26": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 404,
+   "cuerpo_pct": 31.9
+  },
+  "2025-12-29": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 684,
+   "cuerpo_pct": 20.0
+  },
+  "2025-12-30": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 502,
+   "cuerpo_pct": 11.6
+  },
+  "2025-12-31": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 990,
+   "cuerpo_pct": 90.3
+  },
+  "2026-01-02": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 2154,
+   "cuerpo_pct": 56.1
+  },
+  "2026-01-05": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 678,
+   "cuerpo_pct": 32.9
+  },
+  "2026-01-06": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 919,
+   "cuerpo_pct": 77.3
+  },
+  "2026-01-07": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 901,
+   "cuerpo_pct": 19.8
+  },
+  "2026-01-08": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 936,
+   "cuerpo_pct": 44.4
+  },
+  "2026-01-09": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1480,
+   "cuerpo_pct": 59.3
+  },
+  "2026-01-12": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1108,
+   "cuerpo_pct": 74.5
+  },
+  "2026-01-13": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 958,
+   "cuerpo_pct": 19.3
+  },
+  "2026-01-14": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1478,
+   "cuerpo_pct": 27.9
+  },
+  "2026-01-15": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1105,
+   "cuerpo_pct": 74.6
+  },
+  "2026-01-16": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1198,
+   "cuerpo_pct": 61.3
+  },
+  "2026-01-21": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 2104,
+   "cuerpo_pct": 52.3
+  },
+  "2026-01-22": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 780,
+   "cuerpo_pct": 34.4
+  },
+  "2026-01-23": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1133,
+   "cuerpo_pct": 44.9
+  },
+  "2026-01-26": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 929,
+   "cuerpo_pct": 41.3
+  },
+  "2026-01-27": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 788,
+   "cuerpo_pct": 47.3
+  },
+  "2026-01-28": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 801,
+   "cuerpo_pct": 51.6
+  },
+  "2026-01-29": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 2556,
+   "cuerpo_pct": 22.2
+  },
+  "2026-01-30": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1485,
+   "cuerpo_pct": 43.0
+  },
+  "2026-02-02": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1639,
+   "cuerpo_pct": 76.8
+  },
+  "2026-02-03": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 2933,
+   "cuerpo_pct": 66.7
+  },
+  "2026-02-04": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 2426,
+   "cuerpo_pct": 64.5
+  },
+  "2026-02-05": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1670,
+   "cuerpo_pct": 31.6
+  },
+  "2026-02-06": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 2085,
+   "cuerpo_pct": 73.9
+  },
+  "2026-02-09": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1893,
+   "cuerpo_pct": 59.2
+  },
+  "2026-02-10": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 996,
+   "cuerpo_pct": 63.0
+  },
+  "2026-02-11": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1628,
+   "cuerpo_pct": 34.3
+  },
+  "2026-02-12": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 2684,
+   "cuerpo_pct": 86.8
+  },
+  "2026-02-13": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1667,
+   "cuerpo_pct": 14.2
+  },
+  "2026-02-16": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 507,
+   "cuerpo_pct": 12.2
+  },
+  "2026-02-17": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1762,
+   "cuerpo_pct": 26.7
+  },
+  "2026-02-18": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1505,
+   "cuerpo_pct": 39.3
+  },
+  "2026-02-19": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 842,
+   "cuerpo_pct": 14.3
+  },
+  "2026-02-20": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1844,
+   "cuerpo_pct": 78.0
+  },
+  "2026-02-23": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1488,
+   "cuerpo_pct": 57.3
+  },
+  "2026-02-24": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1537,
+   "cuerpo_pct": 58.6
+  },
+  "2026-02-25": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 959,
+   "cuerpo_pct": 93.1
+  },
+  "2026-02-26": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1921,
+   "cuerpo_pct": 53.9
+  },
+  "2026-03-02": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1984,
+   "cuerpo_pct": 76.4
+  },
+  "2026-03-04": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1567,
+   "cuerpo_pct": 68.0
+  },
+  "2026-03-05": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1749,
+   "cuerpo_pct": 13.9
+  },
+  "2026-03-06": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1301,
+   "cuerpo_pct": 5.4
+  },
+  "2026-03-09": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 2980,
+   "cuerpo_pct": 75.2
+  },
+  "2026-03-10": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1301,
+   "cuerpo_pct": 1.7
+  },
+  "2026-03-11": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "noticias",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1226,
+   "cuerpo_pct": 16.6
+  },
+  "2026-03-12": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1167,
+   "cuerpo_pct": 75.6
+  },
+  "2026-03-17": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 683,
+   "cuerpo_pct": 5.4
+  },
+  "2026-03-18": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1426,
+   "cuerpo_pct": 77.6
+  },
+  "2026-03-19": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1459,
+   "cuerpo_pct": 40.2
+  },
+  "2026-03-20": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 2080,
+   "cuerpo_pct": 71.9
+  },
+  "2026-03-23": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1526,
+   "cuerpo_pct": 24.8
+  },
+  "2026-03-24": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1005,
+   "cuerpo_pct": 13.9
+  },
+  "2026-03-25": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 958,
+   "cuerpo_pct": 24.7
+  },
+  "2026-03-26": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1870,
+   "cuerpo_pct": 79.0
+  },
+  "2026-03-27": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1580,
+   "cuerpo_pct": 87.5
+  },
+  "2026-03-30": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 2055,
+   "cuerpo_pct": 72.7
+  },
+  "2026-03-31": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 2395,
+   "cuerpo_pct": 88.1
+  },
+  "2026-04-01": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1220,
+   "cuerpo_pct": 37.0
+  },
+  "2026-04-02": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 2355,
+   "cuerpo_pct": 77.7
+  },
+  "2026-04-06": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 998,
+   "cuerpo_pct": 39.5
+  },
+  "2026-04-07": {
+   "tendencia": "balance",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1758,
+   "cuerpo_pct": 28.6
+  },
+  "2026-04-08": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1293,
+   "cuerpo_pct": 37.0
+  },
+  "2026-04-09": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1237,
+   "cuerpo_pct": 54.3
+  },
+  "2026-04-10": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "noticias",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 683,
+   "cuerpo_pct": 18.0
+  },
+  "2026-04-13": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1561,
+   "cuerpo_pct": 82.5
+  },
+  "2026-04-14": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1389,
+   "cuerpo_pct": 99.2
+  },
+  "2026-04-15": {
+   "tendencia": "tendencia",
+   "volatilidad": "alta",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1581,
+   "cuerpo_pct": 86.2
+  },
+  "2026-04-16": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1154,
+   "cuerpo_pct": 15.9
+  },
+  "2026-04-17": {
+   "tendencia": "tendencia",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1021,
+   "cuerpo_pct": 53.0
+  },
+  "2026-04-20": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "dentro_del_valor",
+   "rango_ticks": 1036,
+   "cuerpo_pct": 19.6
+  },
+  "2026-04-21": {
+   "tendencia": "balance",
+   "volatilidad": "baja",
+   "noticias": "normal",
+   "apertura": "fuera_del_valor",
+   "rango_ticks": 1334,
+   "cuerpo_pct": 49.7
+  }
+ }
+}

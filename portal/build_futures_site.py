@@ -105,9 +105,9 @@ def copy_results(tests):
         src = os.path.join(FUT, "lab", "results", t["id"]); dst = os.path.join(OUT, "data", "tests", t["id"])
         if os.path.isdir(src):
             os.makedirs(dst, exist_ok=True)
-            for f in ("trades.csv", "trades.json", "report.json"):
+            for f in ("trades.csv", "trades.json", "report.json", "oscar/muestra.csv", "oscar/muestra.json", "oscar/acuerdo.json"):
                 if os.path.exists(os.path.join(src, f)):
-                    shutil.copy2(os.path.join(src, f), os.path.join(dst, f))
+                    os.makedirs(os.path.dirname(os.path.join(dst, f)), exist_ok=True); shutil.copy2(os.path.join(src, f), os.path.join(dst, f))
             days = os.path.join(src, "days")
             if os.path.isdir(days):
                 os.makedirs(os.path.join(OUT, "data", "days"), exist_ok=True)
@@ -161,7 +161,7 @@ def build():
                .replace("<!--EXPLORER_TAB-->", frag("explorer_tab.html")).replace("__DATA__", json.dumps(data, ensure_ascii=False)))
     with open(os.path.join(OUT, "index.html"), "w", encoding="utf-8") as f:
         f.write(html)
-    import build_lab_md; build_lab_md.build(r["sellos"])
+    import build_lab_md, build_comite; build_lab_md.build(r["sellos"]); build_comite.build()
     print(f"site/index.html · {len(r['pruebas'])} pruebas · {r['registro']['total_intentos']} intentos · cadena {'ok' if r['registro']['cadena_ok'] else 'ROTA'}")
 
 
