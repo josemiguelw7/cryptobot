@@ -41,7 +41,7 @@ def main():
     if a.update:
         json.dump({"estrategia": "ABS v1", "sesiones": N_SESSIONS, "sesiones_sha256": sess_sha, "operaciones": n, "trades_sha256": h,
                    "commit": config.git_commit(), "fecha": time.strftime("%Y-%m-%d"), "motivo": a.update}, open(GOLDEN, "w"), indent=1)
-        print(f"golden fijada: {h[:16]} ({n} operaciones) · {time.time()-t0:.0f}s"); return
+        print(f"golden fijada: {h[:16]} ({n} operaciones) · {time.time()-t0:.0f}s · RECUERDA: sync pull + commit + push, o el orquestador se negará a correr"); return
     if not os.path.exists(GOLDEN):
         print("no hay golden.json; fíjala con --update"); sys.exit(2)
     g = json.load(open(GOLDEN))

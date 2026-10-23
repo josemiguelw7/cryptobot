@@ -163,7 +163,7 @@ def run_one(item):
                                   rep["receta"].get("sesiones_sha256"), 0, rep["receta"].get("semilla"), rep["receta"].get("costos"),
                                   {**rep["resultados"], "reproducible": True, "commit": commit, "contenedor": IMAGE}, rep["veredicto"],
                                   f"orquestador: 2 corridas en contenedor efímero sin red, trades.csv idéntico ({h1[:12]})")
-            it["estado"] = "corrida"; it["test_id"] = test_id; it["veredicto"] = rep["veredicto"]
+            it["estado"] = "corrida"; it["test_id"] = test_id; it["veredicto"] = rep["veredicto"]; it.pop("ultimo_error", None)
             logf.write(f"{now()} PUBLICADA como {test_id} ({rep['veredicto']})\n")
         else:
             it["estado"] = "congelada"; it["ultimo_error"] = f"NO REPRODUCIBLE: {h1[:12]} vs {h2[:12]}"
