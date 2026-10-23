@@ -37,9 +37,9 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 - P003: 30 operaciones en la pestaña Pruebas › hoja completa
 
 ## 7. Lo más fuerte del mapa (para decidir la siguiente tanda)
-- Órdenes grandes (tamaño y niveles barridos): -6.71 ticks a 30 min · contraria · 19,255 eventos
-- Absorción: 6.07 ticks a 30 min · contraria · 5,782 eventos
-- Divergencia de delta: -0.24 ticks a 30 min · a favor · 33,555 eventos
+- Órdenes grandes (tamaño y niveles barridos): -6.69 ticks a 30 min · contraria · 19,257 eventos
+- Absorción: 6.13 ticks a 30 min · contraria · 5,784 eventos
+- Divergencia de delta: -0.16 ticks a 30 min · a favor · 33,785 eventos
 
 ## 8. Decisiones tomadas hoy
 - 

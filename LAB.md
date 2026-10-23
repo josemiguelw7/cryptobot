@@ -1,13 +1,13 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-23 17:27 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-23 19:19 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga-radtak-projects.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
 ## En una línea
 
 - Sesiones válidas de diseño: **576** (examen sellado desde 2026-04-22, cerrado).
-- Intentos registrados: **268** · pruebas publicadas: **4** (error 1, no_pasa 3).
+- Intentos registrados: **293** · pruebas publicadas: **4** (error 1, no_pasa 3).
 - Estrategias aprobadas por el comité: **0**. Nada toca dinero real.
 
 ## Pruebas corridas
@@ -26,9 +26,9 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 | Id | Prueba | Estado | Origen | Falta |
 |---|---|---|---|---|
 | S-SALIDAS | Estudio de salidas (TP fijo, SL fijo, tiempo, piramidar) sobre las v1 | **corrida** → salidas_v1 | Oscar · 23/10/2026 | estudio salidas_v1 registrado con 159 intentos declarados |
-| T2-ABS-RUN | ABS v2: dejar correr al ganador 15 min (TP ≥ 40 puntos o sin TP), stop v1 | **propuesta** | estudio de salidas · pedido de Oscar | aprobación de Oscar y Jose Miguel; cuenta como versión 2 de 3 de ABS; aciertos bajan a 25–30%: revisar concentración en  |
-| T2-FADE | Desvanecer órdenes grandes | **propuesta** | mapa v1 · hipótesis inversa de BIG | reglas congeladas en strategies/v2.json; estudio tanda2 registrado con N declarado |
-| T2-HVN | Rechazo de zonas HVN del día anterior | **propuesta** | mapa v1 · estilo Profit Pro | definir confirmación y stop en percentiles medidos, no inventados; reglas congeladas |
+| T2-ABS-RUN | ABS v2: dejar correr al ganador 15 min (TP ≥ 40 puntos o sin TP), stop v1 | **propuesta** | estudio de salidas · pedido de Oscar | reglas escritas y selladas en strategies/v2.json como ABS v2 (listo); aprobación de Oscar y Jose Miguel → pasar a congel |
+| T2-FADE | Desvanecer órdenes grandes | **propuesta** | mapa v1 · hipótesis inversa de BIG | reglas escritas y selladas en strategies/v2.json (listo); aprobación de Oscar y Jose Miguel → pasar a congelada |
+| T2-HVN | Rechazo de zonas HVN del día anterior | **propuesta** | mapa v1 · estilo Profit Pro | reglas escritas y selladas en strategies/v2.json (listo); aprobación de Oscar y Jose Miguel → pasar a congelada |
 | T2-ABS-EARLY | ABS con entrada temprana | **propuesta** | P003 + placebo del Red Team | cuenta como versión 2 de 3 de ABS; aprobación de Oscar |
 | T2-ABS-HOURS | ABS v1 en toda la sesión de Nueva York | **propuesta** | P003 · pocas operaciones | si se combina con T2-ABS-EARLY es una sola v2; máximo 3 versiones |
 | T2-ICE | Icebergs con definición medida | **propuesta** | mapa v1 · ice | agregar tamaños 'antes' del libro al lector de sesión |
@@ -40,6 +40,8 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - **tanda1**: Las estrategias BIG, ABS y POC v1 (reglas de los videos con números propuestos sin medir) ganan a RAND emparejado después de costos. · declarados 51, usados 67 ⚠ excedido
 - **mapa_v1**: Alguna de las 12 señales de order flow mueve el precio en la dirección predicha a 1, 5, 15 o 30 min más de lo que lo hacen momentos al azar  · declarados 48, usados 38
 - **salidas_v1**: Pedido de Oscar (23/10/2026): con las mismas señales v1, un take profit fijo (20/30/40/50 puntos), otro stop fijo (3/4/6/8 puntos), más tiem · declarados 159, usados 159
+- **mapa_v2**: Las 12 señales, además del azar de la misma dirección, se comparan contra un azar con dirección aleatoria (¿la dirección es rentable?), se p · declarados 72, usados 24
+- **tanda2**: FADE v1 (desvanecer órdenes grandes), HVN v1 (rechazo de nodos de ayer) y ABS v2 (dejar correr al ganador), con números medidos en el mapa v · declarados 51, usados 0
 
 ## Mapa de señales (resumen)
 
@@ -47,23 +49,24 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 
 | Señal | Eventos | 15 min | 30 min | Veredicto |
 |---|---|---|---|---|
-| Órdenes grandes (tamaño y niveles barridos) | 19,255 | -6.07 | -6.71 | distinta del azar · contraria |
-| Absorción | 5,782 | 3.72 | 6.07 | distinta del azar · contraria |
-| Desequilibrios apilados | 12,198 | 1.24 | 1.56 | distinta del azar · contraria |
-| Divergencia de delta | 33,555 | -1.43 | -0.24 | distinta del azar · a favor |
+| Órdenes grandes (tamaño y niveles barridos) | 19,257 | -6.07 | -6.69 | distinta del azar · contraria |
+| Absorción | 5,784 | 3.75 | 6.13 | distinta del azar · contraria |
+| Desequilibrios apilados | 12,202 | 1.27 | 1.61 | distinta del azar · contraria |
+| Divergencia de delta | 33,785 | -1.37 | -0.16 | distinta del azar · a favor |
 | Ruptura del rango inicial | 556 | 11.74 | 17.51 | distinta del azar · contraria |
 | Agotamiento | 10,519 | 0.14 | -0.65 | distinta del azar · a favor |
 | Rechazo del área de valor | 246 | -3.29 | -18.21 | distinta del azar · a favor |
 | Zonas HVN (estilo Profit Pro) | 2,561 | 9.43 | 16.99 | distinta del azar · a favor |
-| Desequilibrio de la mejor compra/venta | 2,480 | -5.98 | -2.75 | distinta del azar · a favor |
+| Desequilibrio de la mejor compra/venta | 2,481 | -5.97 | -2.79 | distinta del azar · a favor |
 | Icebergs (orden que se repone) | 17 | 10.12 | 59.94 | no distinta |
-| Ráfagas de intensidad | 10,152 | -1.74 | -1.0 | distinta del azar · contraria |
+| Ráfagas de intensidad | 10,153 | -1.74 | -0.98 | distinta del azar · contraria |
 | Momentum primera → última media hora | 554 | -1.09 | -5.83 | distinta del azar · mixto |
 
 ## Documentos congelados
 
 - `futures/strategies/v1.json` · 73abb571d6bab88a… · OTS ✓
 - `futures/strategies/v1_aclaraciones.json` · 7bfee3753adbb8fa… · OTS ✓
+- `futures/strategies/v2.json` · d2145d6dbd0c76f7… · OTS ✓
 - `futures/research_plan.json` · 5387f568a734f5ed… · OTS ✓
 - `futures/protocol.json` · b4f30dc2cc8d1fc2… · OTS ✓
 - `futures/protocol_v1.json` · dad6c111f88fab2d… · OTS ✓
