@@ -2,9 +2,9 @@
  "estrategia": "ABS v1",
  "sesiones": 60,
  "sesiones_sha256": "efa6fa9dbd9f0e8005cb30be48a5867a6717292f78604ff67f06f420ae4bb782",
- "operaciones": 15,
- "trades_sha256": "119421551a85aad119d151aea57386a6b18e022c76e49deeb082d77c2de629ce",
+ "operaciones": 14,
+ "trades_sha256": "885b6df1468b6753ffcb2254534f896af507eb0996857a90905120e1b4d6632f",
  "commit": "00ebb64d9545b76885137e1e9e5b4cd2b0bf16c4",
  "fecha": "2026-10-23",
- "motivo": "primera fijaci\u00f3n: motor 1.0.0 tras la tanda 1"
+ "motivo": "entrada a mercado con el libro antes del siguiente llenado (23/10/2026); segunda fijacion tras un push que la piso"
 }
