@@ -1,8 +1,7 @@
 {
- "titulo": "Protocolo estadístico del laboratorio NQ v1 · definiciones exactas, fijadas antes de la primera prueba",
- "fecha_registro": "2026-10-22",
+ "titulo": "Protocolo estadístico del laboratorio NQ v2 · definiciones exactas",
+ "fecha_registro": "2026-10-23",
  "proposito": "El plan de investigación dice QUÉ se exige. Este protocolo dice CÓMO se mide, con números, para que nadie (ni Claude, ni Jose Miguel, ni Oscar) pueda acomodar la medición después de ver el resultado.",
-
  "rand_emparejado": {
   "que_es": "Un bot que entra al azar pero copia la 'forma' de la estrategia: misma cantidad de operaciones por sesión, misma duración de cada operación (en segundos), mismo horario permitido, mismos costos, mismo número de contratos. Lo único que no copia es CUÁNDO entra ni en qué dirección.",
   "como_se_genera": "Para cada sesión, se toman las N operaciones reales de la estrategia. Para cada una se sortea un instante de entrada uniforme dentro del horario permitido (09:30–11:30 ET menos ventanas de noticias) y una dirección con 50/50. Se mantiene la duración exacta de la operación original (sale por tiempo); no usa stop ni objetivo. Se llena con las mismas reglas del simulador (mercado + deslizamiento + comisión).",
@@ -13,25 +12,21 @@
   "pasa_si": "p ≤ 0.05, es decir, la estrategia supera al menos a 950 de las 1000 corridas. Es el 'gana a RAND 95 de 100' del plan, ahora con número exacto.",
   "se_publica": "la curva de la estrategia sobre la franja del percentil 5 al 95 de las 1000 curvas RAND, y el valor p"
  },
-
  "costos": {
   "base": "comisión $3.78 round turn + 1 tick de deslizamiento por lado (futures/costs.json)",
   "estres": "2 ticks por lado; la ganancia neta debe seguir siendo positiva y p ≤ 0.10",
   "curva": "0, 1, 2, 3 y 4 ticks por lado; se publica completa aunque no decida nada"
  },
-
  "por_anio": {
   "regla": "ganancia neta > 0 en cada uno de 2024, 2025 y 2026-diseño (02-ene a 21-abr) con costos base",
   "nota": "2026-diseño tiene solo 75 sesiones; si tiene menos de 30 operaciones, ese año no decide pero se publica"
  },
-
  "largo_minimo": {
   "operaciones_minimas": 100,
   "sesiones_minimas": 120,
   "regla": "una prueba con menos de 100 operaciones o menos de 120 sesiones con señal posible no cuenta ni a favor ni en contra: queda como 'insuficiente' y se publica igual",
   "min_btl": "además se calcula el largo mínimo de backtest (Bailey, Borwein, López de Prado, Zhu 2014) para el número de intentos declarados del estudio; si el periodo es más corto, el resultado se marca 'por debajo del largo mínimo'"
  },
-
  "criterios_de_muerte": {
   "declarados_antes": "cada prueba registra, antes de correr, qué resultado la mata",
   "muerte_inmediata": [
@@ -42,45 +37,49 @@
   ],
   "sobrevive_pero_no_pasa": "cualquier otro resultado que no cumpla los cuatro criterios del plan; va al cementerio con causa escrita si se descarta, o a una versión nueva (máximo 3)"
  },
-
  "pruebas_multiples": {
   "registro": "toda corrida del motor que produzca un resultado para una estrategia o señal se escribe en futures/lab/registry/trials.jsonl (solo agregar, nunca borrar ni editar). Las corridas fallidas por error de programa también se anotan, marcadas como error.",
   "estudios_declarados": "antes de correr una tanda se registra un estudio con: hipótesis, cuántos intentos se van a correr (N declarado), y los criterios de muerte. No se puede registrar un intento sin estudio. Si se corren más intentos que N, el exceso se cuenta igual y se publica como 'excedido'.",
   "sharpe_deflactado": "para la estrategia que llegue al comité se calcula el Sharpe deflactado (Bailey y López de Prado 2014) usando N = total de intentos en el registro (todas las estrategias, todas las versiones, todas las señales), la varianza de los Sharpe entre intentos, y la asimetría y curtosis de los retornos diarios. Pasa si DSR ≥ 0.95. Para N = 1 se usa el PSR.",
-  "mapa_de_senales": "12 señales × 4 horizontes = 48 pruebas; una señal se declara 'distinta del azar' solo si su valor p (permutación, 1000 sorteos a la misma hora del día) sobrevive la corrección de Holm al 5% sobre las 48."
+  "mapa_de_senales": "12 señales × 4 horizontes = 48 pruebas; 5,000 sorteos por evento; p de dos colas; una señal se declara 'distinta del azar' solo si su p sobrevive la corrección de Holm al 5% sobre las pruebas con eventos. Se publica el sentido (a favor / contraria) y el z-score."
  },
-
  "validacion_combinatoria": {
   "metodo": "CPCV (López de Prado 2018): las sesiones de diseño se parten en 6 grupos contiguos; se prueba en cada par de grupos (15 combinaciones) y se arma la distribución de 15 caminos de resultado fuera de muestra, con purga de 1 sesión entre grupos.",
   "se_publica": "el histograma de los 15 caminos y cuántos tienen ganancia neta > 0",
   "nota": "las estrategias v1 no tienen parámetros ajustados con datos, así que CPCV aquí mide estabilidad en el tiempo, no sobreajuste de parámetros"
  },
-
  "sensibilidad": {
   "metodo": "para cada parámetro numérico de la estrategia se corren los vecinos (−2, −1, 0, +1, +2 pasos declarados) manteniendo el resto fijo; se publica la superficie",
   "regla": "las corridas de sensibilidad se registran como intentos del estudio y cuentan para N. Lo que se busca es una meseta: si solo el valor original gana, es suerte, y la ficha lo dice.",
   "no_se_usa_para": "elegir un parámetro mejor y reportarlo como si fuera el original. Un cambio de parámetro es una versión nueva."
  },
-
  "red_team": {
-  "placebo_desplazado": "la misma señal usada 5 minutos ANTES de ocurrir (fuga de futuro). Si gana igual, la prueba está contaminada y se marca error.",
+  "placebo_desplazado": "la misma señal usada 5 minutos ANTES de ocurrir. Si gana ≥ 50% de lo real, la prueba queda en 'revisar' (no puede pasar) hasta que una revisión de código registrada confirme que no hay fuga de futuro; si la hay, se corrige a 'error'.",
   "placebo_barajado": "las direcciones de las operaciones reales se barajan al azar 200 veces; la ganancia real debe quedar fuera del 95% de las barajadas",
   "placebo_horas": "mismo número de operaciones, horas al azar (equivale al RAND; se deja aquí por completitud)",
   "concentracion": "se publica qué porcentaje de la ganancia neta viene de las 5 mejores operaciones y de los 5 mejores días; más del 50% en 5 días se marca como 'depende de pocos días'",
   "curva_de_costos": "ver costos.curva"
  },
-
  "topstep": {
   "ver": "futures/topstep_rules.json",
   "pasa_si": "el porcentaje de cuentas que pasan es ≥ 50% y supera el del RAND emparejado con p ≤ 0.05 (mismas fechas de arranque)"
  },
-
  "veredicto_final": {
   "pasa": "cumple los cuatro criterios del plan (RAND, costos al doble, los 3 años, Topstep) con las definiciones de este protocolo, y supera el largo mínimo",
   "no_pasa": "falla alguno",
   "insuficiente": "no llega al largo mínimo",
-  "error": "falló un placebo de fuga o el programa; no cuenta para nada hasta que se corrija y se vuelva a correr como intento nuevo"
+  "error": "falló un placebo de fuga o el programa; no cuenta para nada hasta que se corrija y se vuelva a correr como intento nuevo",
+  "revisar": "placebo desplazado sospechoso; pendiente de revisión de código antes de poder pasar"
  },
-
- "regla": "Este protocolo se congela con su huella SHA-256 y OpenTimestamps. Cualquier cambio crea protocolo v2 con el motivo escrito, y las pruebas ya corridas conservan la versión que usaron."
+ "regla": "Este protocolo (v2) se congela con su huella SHA-256 y OpenTimestamps. El v1 queda en futures/protocol_v1.json. Cualquier cambio crea v3 con el motivo escrito, y las pruebas ya corridas conservan la versión que usaron.",
+ "version": 2,
+ "cambios_v2": {
+  "motivo": "La corrida de ABS v1 mostró que el 'placebo desplazado' no distingue fuga de futuro de una señal cuyo valor está en el nivel y la dirección (no en el momento): entrar 5 min antes, más cerca del extremo absorbido, gana más sin usar datos del futuro. Marcarlo 'error' automáticamente mataría resultados válidos. Además, con 1,000 sorteos el p mínimo de dos colas (0.002) no puede pasar Holm con 40-48 pruebas (< 0.00125).",
+  "cambios": [
+   "placebo desplazado ≥ 50% del real → veredicto 'revisar': la prueba no puede pasar hasta que una revisión de código (Red Team con IA, registrada en decisions.md) confirme que no usa datos del futuro; entonces el veredicto se corrige con una línea de corrección en el registro",
+   "mapa de señales: 5,000 sorteos por evento (p mínimo de dos colas 0.0004) y se publica además el z-score contra el azar",
+   "mapa: un evento por celda de 10 s y dirección; p de dos colas con sentido 'a favor' o 'contraria'"
+  ],
+  "protocolo_v1_sha256": "dad6c111f88fab2d45b25ebc73b4251865e366935e6c39b65b171ef947477b7a"
+ }
 }

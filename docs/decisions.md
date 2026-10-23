@@ -671,3 +671,10 @@ La primera corrida completa (mapa de señales + BIG v1 = P013) reveló dos falla
 Además, en el mapa, iceberg y momentum no producían eventos y los niveles vecinos contaban el mismo momento varias veces.
 
 Decisión: P013 y el mapa corrida 1 quedan en el registro como **error** (se agregan líneas de corrección; nada se borra ni se edita). La población de los percentiles queda aclarada en `futures/strategies/v1_aclaraciones.json` (órdenes de 10+ contratos; sellado con OTS, SHA-256 `7bfee375…77dc`). El programa ahora se detiene si el percentil pedido no cabe en lo guardado. El mapa reporta p de dos colas y el sentido (a favor / contraria), porque una señal que se comporta al revés de lo que dice su hipótesis es información útil. Todo se repite.
+
+## 2026-10-23 · Protocolo v2 (motivo escrito) y primeros resultados reales
+
+- **ABS v1 (P003)**: gana a RAND (p = 0.002), neto +$4,641 con costos base y +$2,505 con costos al doble, 6.4% de cuentas Topstep pasan (RAND 0.2%). Pero el placebo desplazado 5 min gana +$7,753: el valor está en el nivel y la dirección, no en el momento. Con el protocolo v1 habría sido "error" automático. **Protocolo v2** (SHA-256 `b4f30dc2…2a1e`, sellado; v1 guardado en `futures/protocol_v1.json`): sospecha → "revisar" hasta una revisión de código registrada. P003 queda en "revisar" con línea de corrección en el registro.
+- **BIG v1 (P002)** con la población correcta (órdenes de 10+): no pasa.
+- **Mapa corrida 2**: 0 significativas, y no por los datos sino por la resolución: con 1,000 sorteos el p mínimo de dos colas es 0.002 y Holm pide < 0.00125. Protocolo v2: 5,000 sorteos y z-score publicado. Se repite (corrida 3).
+- Regla aprendida y anotada: una "prueba de fuga" que castiga señales de nivel no es prueba de fuga. La revisión de código del Red Team con IA se hace antes del comité y se registra aquí.

@@ -155,7 +155,7 @@ def baseline(s, secs, dirs, n=1000, rng=None):
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--study", required=True); ap.add_argument("--limit", type=int, default=0)
-    ap.add_argument("--draws", type=int, default=1000); a = ap.parse_args()
+    ap.add_argument("--draws", type=int, default=5000); a = ap.parse_args()
     if not any(s["study_id"] == a.study for s in registry.read(registry.STUDIES)):
         raise SystemExit("estudio no registrado")
     dates, sess_sha = config.design_sessions()
@@ -197,6 +197,7 @@ def main():
                 p = min(1.0, 2 * min(p_up, p_dn))   # dos colas: la señal puede ser mejor O peor que el azar
                 r[h] = round(obs, 2); r[h + "_azar"] = round(float(bm.mean()), 2); r[h + "_p"] = round(p, 4)
                 r[h + "_dir"] = "a favor" if obs > float(bm.mean()) else "contraria"; pv.append((k, h, p))
+                r[h + "_z"] = round(float((obs - bm.mean()) / bm.std()), 2) if bm.std() > 0 else None
             else:
                 r[h] = None; r[h + "_p"] = None
         r["hist_r15"] = np.histogram(hist[k]["r15"], bins=[-80, -40, -20, -10, -5, 0, 5, 10, 20, 40, 80])[0].tolist() if hist[k]["r15"] else []

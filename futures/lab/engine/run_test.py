@@ -47,6 +47,8 @@ def verdict(res, protocol_ok):
     r = res
     if r["error"]:
         return "error"
+    if r.get("revisar"):
+        return "revisar"
     if r["operaciones"] < 100 or r["sesiones_con_senal_posible"] < 120:
         return "insuficiente"
     years = {y: v["neto"] for y, v in r["por_anio"].items()}
@@ -121,7 +123,7 @@ def main():
           "direcciones_barajadas": redteam.placebo_flip(sig_by_date, rules, slip, comm, net, n=a.flip, test_id=test_id),
           "curva_costos": redteam.cost_curve(sig_by_date, rules, comm)}
     leak = net > 0 and rt["placebo_desplazado"]["neto"] >= 0.5 * net
-    rt["fuga_sospechada"] = bool(leak)
+    rt["fuga_sospechada"] = bool(leak)   # protocolo v2: sospecha -> 'revisar' (revisión de código), no error automático
     print(f"  Topstep {ts['pct_pasan']}% (RAND {ts['rand_pct_pasan']}%) · placebo desplazado {rt['placebo_desplazado']['neto']:.0f} · {time.time()-t0:.0f}s", flush=True)
     extra = {}
     if a.sens:
@@ -131,7 +133,7 @@ def main():
     sm = stats.summary(trades, daily, dates)
     res = {"operaciones": len(trades), "ganancia_neta": round(net, 2), "p_rand": rs["p_valor"], "estres_neto": round(stress_net, 2),
            "p_rand_estres": p_stress, "por_anio": sm["por_anio"], "topstep_pct": ts["pct_pasan"], "rompen_pct": round(100 * ts["rompen_mll"] / max(1, ts["cuentas"]), 1),
-           "topstep_rand_pct": ts["rand_pct_pasan"] or 0.0, "sesiones_con_senal_posible": possible, "error": leak,
+           "topstep_rand_pct": ts["rand_pct_pasan"] or 0.0, "sesiones_con_senal_posible": possible, "error": False, "revisar": leak,
            "sharpe_diario": round(stats.sharpe(daily), 4), "psr": sm["psr"], "concentracion": sm["concentracion"], "cpcv": sm["cpcv"]}
     v = verdict(res, True)
     n_trials = len(registry.read(registry.TRIALS)) + 1
@@ -154,7 +156,7 @@ def main():
     from . import replay
     replay.build(test_id, trades, L)
     registry.record_trial(test_id, a.study, a.strategy, a.version, "prueba", params, sess_sha, len(dates), meta["receta"]["semilla"],
-                          c.as_dict(), res, v, a.notas, error="fuga sospechada (placebo desplazado)" if leak else None)
+                          c.as_dict(), res, v, a.notas, error=None)
     if a.sens:
         for name, row in extra["sensibilidad"].items():
             for cell in row:
@@ -169,7 +171,9 @@ def main():
 
 def _death_reason(r, v):
     if v == "error":
-        return "placebo desplazado gana parecido: posible fuga de futuro"
+        return "error de programa"
+    if v == "revisar":
+        return "el placebo desplazado gana parecido o más: hay que revisar el código antes de poder pasar (protocolo v2)"
     if v == "insuficiente":
         return f"{r['operaciones']} operaciones / {r['sesiones_con_senal_posible']} sesiones: por debajo del mínimo"
     if v == "pasa":
@@ -186,7 +190,7 @@ def _death_reason(r, v):
 
 def _bitacora(test_id, strategy, version, v, r, ts):
     p = os.path.join(config.FUT, "updates.json"); d = json.load(open(p, encoding="utf-8"))
-    lbl = {"pasa": "pasa", "no_pasa": "no pasa", "insuficiente": "insuficiente", "error": "error"}[v]
+    lbl = {"pasa": "pasa", "no_pasa": "no pasa", "insuficiente": "insuficiente", "error": "error", "revisar": "revisar"}[v]
     body = (f"{strategy} v{version}: {r['operaciones']} operaciones, ganancia neta ${r['ganancia_neta']:,.0f} con costos base, "
             f"p contra RAND {r['p_rand']}, estrés ${r['estres_neto']:,.0f}, Topstep {ts['pct_pasan']}% de las cuentas (RAND {ts['rand_pct_pasan']}%). "
             f"Veredicto: {lbl}." + (f" Causa: {_death_reason(r, v)}." if v != "pasa" else ""))

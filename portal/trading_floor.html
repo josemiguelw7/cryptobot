@@ -99,7 +99,7 @@ fetch('data/research.json').then(r=>r.json()).then(R=>{
   document.getElementById('tf-nums').innerHTML=[
     ['Sesiones válidas',(ses.resumen||{}).diseno_validas??'—'],['Intentos registrados',reg.total_intentos??0],
     ['Pruebas publicadas',T.length],['Pasan todo',pasa]].map(([a,b])=>`<div class="n"><small>${a}</small><b>${b}</b></div>`).join('');
-  document.getElementById('tf-verd').innerHTML=[['Aprobadas',0],['Devueltas',0],['Rechazadas',T.filter(t=>t.veredicto==='no_pasa').length],['En revisión',pasa]].map(([a,b])=>`<span>${a}<b>${b}</b></span>`).join('');
+  document.getElementById('tf-verd').innerHTML=[['Aprobadas',0],['Devueltas',0],['Rechazadas',T.filter(t=>t.veredicto==='no_pasa').length],['En revisión',pasa+T.filter(t=>t.veredicto==='revisar').length]].map(([a,b])=>`<span>${a}<b>${b}</b></span>`).join('');
   if(R.generado)document.getElementById('tf-upd').textContent='actualizado '+new Date(R.generado).toLocaleString('es-MX',{dateStyle:'medium',timeStyle:'short'});
 }).catch(()=>{});
 })();
