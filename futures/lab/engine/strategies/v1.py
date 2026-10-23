@@ -123,7 +123,7 @@ def absorption(s, ref, thr, p=None):
                 continue
             # confirmación en los 60 s siguientes
             conf = None
-            for f in range(e + 1, min(nb, e + 1 + W)):
+            for f in range(e + 1, min(nb, e + 1 + p["confirm_s"] // BIN)):
                 dw = bw[f - W + 1] - sw[f - W + 1] if f - W + 1 >= 0 else 0
                 if side > 0 and dw < 0 and lo[f] <= ext - p["away_ticks"]:
                     conf = f; break

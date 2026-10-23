@@ -2,6 +2,24 @@
   "note": "Bitácora del laboratorio: hallazgos, decisiones y avances, del más reciente al más antiguo. Cada entrada nueva se agrega arriba.",
   "entries": [
     {
+      "date": "2026-10-23",
+      "kind": "hallazgo",
+      "title": "Mapa de señales v1 publicado: 38 de 48 pruebas distintas del azar",
+      "body": "Con 5,000 sorteos por evento y corrección de Holm, 38 de las 48 pruebas (12 señales × 4 horizontes) son distintas del azar. Lo más llamativo: las órdenes grandes (19,255 eventos) marcan el PEOR momento de su media hora: el precio va 6–7 ticks en contra de la orden a 5, 15 y 30 minutos (sentido contrario a la hipótesis de continuación). Las zonas HVN del día anterior (2,561 eventos) sí rechazan: +9 ticks a 15 min y +17 a 30 min en la dirección de rechazo. Los icebergs con la definición actual son rarísimos (17 eventos) y el momentum apertura→cierre no tiene prueba válida con este diseño. Todo está en la pestaña Pruebas con z-score y sentido por horizonte."
+    },
+    {
+      "date": "2026-10-23",
+      "kind": "decisión",
+      "title": "Protocolo v2: placebo sospechoso → revisar; mapa con 5,000 sorteos",
+      "body": "ABS v1 ganó a RAND y sobrevivió costos al doble, pero el placebo desplazado (misma señal 5 minutos antes) ganó más. No es fuga de futuro: entrar antes, más cerca del extremo absorbido, gana más sin usar datos futuros. Marcarlo error automáticamente mataría resultados válidos, así que el protocolo v2 lo deja en \"revisar\" hasta una revisión de código registrada. Además el mapa pasa a 5,000 sorteos por evento, porque con 1,000 el valor p mínimo no podía pasar la corrección de Holm. El protocolo v1 queda guardado con su sello."
+    },
+    {
+      "date": "2026-10-23",
+      "kind": "hallazgo",
+      "title": "Red Team: la primera corrida tenía el umbral mal y se marca como error",
+      "body": "Antes de publicar, la revisión encontró que el percentil 99 de tamaño de orden se calculaba sobre todas las órdenes (incluidas las de 1 contrato) y con un cálculo truncado: 'orden grande' quedó en 15 contratos y 'absorción' en 249 contratos por minuto. La prueba P013 (BIG v1) y la primera corrida del mapa de señales quedan en el registro como ERROR, no se borran, y no cuentan ni a favor ni en contra. La definición queda aclarada en strategies/v1_aclaraciones.json (población: órdenes de 10+ contratos) y se repite todo."
+    },
+    {
       "date": "2026-10-22",
       "kind": "avance",
       "title": "Lector y primeras medidas listos",
@@ -48,6 +66,34 @@
       "kind": "decisión",
       "title": "El proyecto pasa de cripto y acciones a futuros NQ",
       "body": "Se cierran los bots de cripto y acciones (archivados, nada se borra) y se reorienta todo a order flow en NQ con datos tick de 2024 a hoy."
+    },
+    {
+      "date": "2026-10-22",
+      "kind": "prueba",
+      "title": "Prueba P002 · BIG v1 · no pasa",
+      "body": "BIG v1: 127 operaciones, ganancia neta $-2,120 con costos base, p contra RAND 0.4086, estrés $-3,300, Topstep 0.0% de las cuentas (RAND 0.0%). Veredicto: no pasa. Causa: pierde con costos base; no gana a RAND (p=0.4086); muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%.",
+      "test_id": "P002"
+    },
+    {
+      "date": "2026-10-22",
+      "kind": "prueba",
+      "title": "Prueba P003 · ABS v1 · no pasa",
+      "body": "ABS v1: 128 operaciones, ganancia neta $4,641 con costos base, p contra RAND 0.002, estrés $2,505, Topstep 6.4% de las cuentas (RAND 0.2%). Veredicto: no pasa. Causa: revisión de código registrada en docs/decisions.md (2026-10-23): sin fuga de futuro. Veredicto con las reglas del protocolo v2: no pasa (pierde en 2025; pasa Topstep solo 6.4%). Fila confirm_s de la sensibilidad inválida (parámetro no conectado)..",
+      "test_id": "P003"
+    },
+    {
+      "date": "2026-10-22",
+      "kind": "prueba",
+      "title": "Prueba P004 · POC v1 · no pasa",
+      "body": "POC v1: 148 operaciones, ganancia neta $-3,934 con costos base, p contra RAND 0.5794, estrés $-4,684, Topstep 12.0% de las cuentas (RAND 8.2%). Veredicto: no pasa. Causa: pierde con costos base; no gana a RAND (p=0.5794); muere con costos al doble; pierde en 2024, 2026; pasa Topstep solo 12.0%.",
+      "test_id": "P004"
+    },
+    {
+      "date": "2026-10-22",
+      "kind": "prueba",
+      "title": "Prueba P013 · BIG v1 · error",
+      "body": "BIG v1: 1018 operaciones, ganancia neta $-13,718 con costos base, p contra RAND 0.1419, estrés $-22,104, Topstep 0.0% de las cuentas (RAND 1.0%). Veredicto: error. Causa: umbral de orden grande mal calculado (percentil truncado y sobre todas las órdenes: 15 contratos). Ver strategies/v1_aclaraciones.json.",
+      "test_id": "P013"
     }
   ]
 }

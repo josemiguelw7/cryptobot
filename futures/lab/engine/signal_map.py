@@ -103,11 +103,16 @@ def events(s, L, d, thr, ref, prof):
             q = b / (b + a_)
             if q >= 0.8: out["qimb"].append((NY_OPEN + (e + 1) * BIN, 1))
             elif q <= 0.2: out["qimb"].append((NY_OPEN + (e + 1) * BIN, -1))
-    # icebergs: un precio absorbe >= 100 contratos del mismo lado en 10 s sin moverse
-    for e in range(nb):
-        if bh[e] - bl[e] <= 1 and tot[e] >= 100:
-            if buy[e] >= 3 * max(sell[e], 1): out["ice"].append((NY_OPEN + (e + 1) * BIN, -1))
-            elif sell[e] >= 3 * max(buy[e], 1): out["ice"].append((NY_OPEN + (e + 1) * BIN, 1))
+    # icebergs: racha de llenados consecutivos en el MISMO precio y del mismo lado agresor, con >= 5 órdenes distintas
+    # y >= 100 contratos, y la cotización en ese precio sigue viva al final (se repone). Dirección: contra el agresor.
+    chg = (px[1:] != px[:-1]) | (sd[1:] != sd[:-1])
+    rs_ = np.r_[0, np.flatnonzero(chg) + 1]; re_ = np.r_[rs_[1:], len(px)]
+    runvol = np.add.reduceat(vol, rs_)
+    tchg = np.r_[0, (tid[1:] != tid[:-1]).astype(int)]; cum = np.cumsum(tchg)
+    norders = cum[re_ - 1] - cum[rs_] + 1
+    quote_after = np.where(sd[rs_] > 0, s.asz[i + re_ - 1], s.bsz[i + re_ - 1])
+    cand = np.flatnonzero((runvol >= 100) & (norders >= 5) & (quote_after >= 20) & (sd[rs_] != 0))
+    out["ice"] = [(float(sec[re_[c] - 1]), -int(sd[rs_[c]])) for c in cand]
     # ráfagas: celda de 10 s con volumen >= p99 de las celdas de la sesión
     p99 = np.percentile(tot, 99)
     for e in np.flatnonzero(tot >= p99):
@@ -155,7 +160,8 @@ def baseline(s, secs, dirs, n=1000, rng=None):
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--study", required=True); ap.add_argument("--limit", type=int, default=0)
-    ap.add_argument("--draws", type=int, default=5000); a = ap.parse_args()
+    ap.add_argument("--draws", type=int, default=5000); ap.add_argument("--only", default="")
+    a = ap.parse_args(); only = set(a.only.split(",")) - {""}
     if not any(s["study_id"] == a.study for s in registry.read(registry.STUDIES)):
         raise SystemExit("estudio no registrado")
     dates, sess_sha = config.design_sessions()
@@ -176,9 +182,9 @@ def main():
             pr = pl.read_parquet(pp).filter(pl.col("seg") == "ny"); prof = np.c_[pr["price_t"].to_numpy(), pr["vol"].to_numpy()]
         ev = events(s, L, d, thr, ref, prof)
         for k, lst in ev.items():
-            if not lst: continue
+            if not lst or (only and k not in only): continue
             secs = np.array([x[0] for x in lst]); dirs = np.array([x[1] for x in lst], dtype=float)
-            keep = secs < NY_CLOSE - 1801
+            keep = secs <= NY_CLOSE - 1800
             secs, dirs = secs[keep], dirs[keep]
             if not len(secs): continue
             fw = forward(s, secs, dirs); bl = baseline(s, secs, dirs, a.draws, rng)
@@ -188,7 +194,16 @@ def main():
             cnt[k] += len(secs)
         if (n + 1) % 25 == 0: print(f"  {n+1}/{len(dates)} sesiones · {time.time()-t0:.0f}s", flush=True)
     rows, pv = [], []
+    prev_map = {}
+    mp = os.path.join(config.FUT, "signal_map.json")
+    if only and os.path.exists(mp):
+        prev_map = {r["id"]: r for r in json.load(open(mp, encoding="utf-8"))["senales"]}
     for k in NAMES:
+        if only and k not in only and k in prev_map:
+            r = prev_map[k]; rows.append(r)
+            for h in H:
+                if r.get(h + "_p") is not None: pv.append((k, h, r[h + "_p"]))
+            continue
         r = {"id": k, "senal": NAMES[k], "hipotesis": HYP[k], "n": cnt[k]}
         for h in H:
             if cnt[k]:
@@ -216,6 +231,7 @@ def main():
            "pruebas": m, "correccion": "Holm 5%", "sesiones_sha256": sess_sha, "senales": rows}
     json.dump(out, open(os.path.join(config.FUT, "signal_map.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     for r in rows:
+        if only and r["id"] not in only: continue
         registry.record_trial(f"S-{r['id']}", a.study, r["id"], 1, "senal", {"horizontes": list(H)}, sess_sha, len(dates), "20261022",
                               config.Costs().as_dict(), {"n": r["n"], **{h: r[h] for h in H}, **{h + "_p": r[h + "_p"] for h in H}},
                               "significativa" if r["significativa"] else "no_significativa")

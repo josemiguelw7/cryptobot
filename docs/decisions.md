@@ -678,3 +678,27 @@ Decisión: P013 y el mapa corrida 1 quedan en el registro como **error** (se agr
 - **BIG v1 (P002)** con la población correcta (órdenes de 10+): no pasa.
 - **Mapa corrida 2**: 0 significativas, y no por los datos sino por la resolución: con 1,000 sorteos el p mínimo de dos colas es 0.002 y Holm pide < 0.00125. Protocolo v2: 5,000 sorteos y z-score publicado. Se repite (corrida 3).
 - Regla aprendida y anotada: una "prueba de fuga" que castiga señales de nivel no es prueba de fuga. La revisión de código del Red Team con IA se hace antes del comité y se registra aquí.
+
+## 2026-10-23 · Revisión de código de ABS v1 (P003) · Red Team
+
+Revisado `futures/lab/engine/strategies/v1.py::absorption` y `sim.py` línea por línea buscando fuga de futuro:
+- La ventana de 60 s que detecta la absorción usa solo celdas hasta el instante e; el extremo y el precio inicial salen de esas mismas celdas.
+- La ubicación compara contra niveles del día anterior y de la noche (ambos anteriores a las 09:30).
+- La confirmación en la celda f usa el delta de la ventana que termina en f y el mínimo/máximo de f; la señal se fecha al FINAL de f.
+- El simulador llena en la mejor oferta contraria del último llenado anterior a la señal, más 1 tick. No hay ningún índice que mire adelante.
+**Conclusión: sin fuga de futuro.** El placebo desplazado gana más porque entra 5 min antes, más cerca del extremo absorbido, y la vuelta se da igual: el valor de ABS está en el nivel y la dirección.
+Hallazgo menor: el parámetro `confirm_s` no estaba conectado en el código (siempre 60 s, que es el valor de la v1): el resultado principal es correcto; la fila `confirm_s` de la superficie de sensibilidad de P003 no vale. Código corregido para versiones futuras.
+
+**Veredicto final de P003 (ABS v1): no pasa.** Gana a RAND (p = 0.002), sobrevive 2 ticks por lado, 12 de 15 caminos CPCV positivos, meseta en `near_ticks` y mejora con más objetivo (`rr`), pero pierde en 2025 (−$405) y solo 6.4% de las cuentas Topstep pasan con 1 contrato (ninguna rompe el MLL; 484 de 517 no llegan a la meta en 120 sesiones) porque hay solo 128 operaciones en 576 sesiones. Además el 67.7% de la ganancia viene de 5 días. Es la estrategia más prometedora de la tanda 1 y la única con ventaja real sobre el azar.
+Ideas para una eventual v2 (NO se implementan hasta que Oscar y Jose Miguel lo aprueben): entrada más temprana (lo que sugiere el placebo), más horas de operación para tener más operaciones, objetivo más amplio (la sensibilidad muestra que 2.5–3× riesgo gana más), y revisar por qué `prev_vah` y `prev_low` no aportan.
+
+## 2026-10-23 · Incidente de sincronización y regla nueva
+
+El `push` Mac→VM copiaba también `tests.json`, `updates.json` y `signal_map.json`, y pisó dos veces las fichas y la bitácora que el motor había escrito en la VM. Nada se perdió: la fuente de verdad son `results/<id>/report.json` (ficha completa de cada prueba) y el registro (cadena de huellas, correcciones incluidas). Se agregó `engine/rebuild_tests.py`, que reconstruye `tests.json` y las entradas de bitácora desde esas fuentes aplicando la última corrección de cada prueba. Regla: la VM escribe `results/`, `registry/` y `signal_map.json`; la Mac es dueña de `tests.json` y `updates.json` y los reconstruye en cada `pull`. El `push` ya no manda archivos de estado.
+
+## 2026-10-23 · Tanda 1 cerrada y mapa de señales v1 publicado
+
+- P002 BIG v1: no pasa (−$2,120, p 0.41). P003 ABS v1: no pasa pero con ventaja real (ver revisión arriba). P004 POC v1: no pasa (−$3,934, p 0.58). P013: error (umbral). Las 3 estrategias v1 van al cementerio con causa escrita; ninguna va al comité.
+- Mapa v1 (5,000 sorteos, Holm): 38 de 48 pruebas distintas del azar. Órdenes grandes: el precio va 6–7 ticks EN CONTRA de la orden a 5, 15 y 30 min (sentido contrario; 19,255 eventos). HVN del día anterior: rechazo de +9 ticks a 15 min y +17 a 30 min (2,561 eventos). Absorción: +3.7 / +6.1 ticks a favor en bruto a 15 y 30 min, pero por debajo de un momento al azar de la misma media hora con la misma dirección. Icebergs: 17 eventos con la definición actual (rarísimos). Momentum apertura→cierre: sin prueba válida con este diseño (el azar no tiene dispersión).
+- Candidatas para la tanda 2 (se diseñan y congelan SOLO con Oscar y Jose Miguel): desvanecer órdenes grandes (hipótesis inversa de BIG), rechazo de HVN del día anterior, y ABS con entrada más temprana y más horas.
+- Intentos registrados al cierre: 109 (mapa 48 declarados / 48 usados; tanda 1: 51 declarados / 52 usados → marcado "excedido" en la página, por la repetición de BIG tras el error de umbral).

@@ -10,7 +10,7 @@ Fuentes (todas en futures/):
 Salida: site/index.html, site/data/research.json, site/data/tests/<id>/*, site/data/days/*.json
 Despliegue: git push origin main (Vercel).
 """
-import csv, glob, hashlib, json, os, shutil, sys
+import csv, glob, hashlib, json, os, re, shutil, sys
 from datetime import datetime, timezone, timedelta
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -125,10 +125,15 @@ def research_export():
     plan, ph = rd("research_plan.json"); plan["sha256"] = ph
     proto, prh = rd("protocol.json"); proto["sha256"] = prh
     vers = []
-    for f in sorted(glob.glob(os.path.join(FUT, "strategies", "v*.json")), key=lambda x: int(os.path.basename(x)[1:-5])):
+    for f in sorted([x for x in glob.glob(os.path.join(FUT, "strategies", "v*.json")) if re.fullmatch(r"v\d+\.json", os.path.basename(x))], key=lambda x: int(os.path.basename(x)[1:-5])):
         d, h = rd("strategies/" + os.path.basename(f)); d["sha256"] = h; d["archivo"] = "futures/strategies/" + os.path.basename(f); vers.append(d)
     tests = load("tests.json", {"pruebas": []}).get("pruebas", [])
     mapa = load("signal_map.json", {})
+    for r in mapa.get("senales", []):   # sin z (desviación cero del azar) no hay prueba válida
+        if r.get("n") and any(r.get(h + "_z") is None for h in ("r1", "r5", "r15", "r30") if r.get(h) is not None):
+            r["significativa"] = False; r["horizontes_significativos"] = []; r["sentido"] = "sin prueba válida (azar sin dispersión)"
+        if r.get("n"):
+            r["bruto"] = "gana" if (r.get("r30") or 0) > 0 and (r.get("r15") or 0) > 0 else "pierde" if (r.get("r30") or 0) < 0 and (r.get("r15") or 0) < 0 else "mixto"
     reg = registry_export()
     ups = load("updates.json", {"entries": []}).get("entries", [])
     week = (datetime.now(timezone.utc) - timedelta(days=7)).strftime("%Y-%m-%d")
