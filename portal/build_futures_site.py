@@ -6,6 +6,8 @@ con los datos incrustados: funciona desde file://, desde el portal en
 Fuentes:
   futures/roster.json       -> los 10 bots (fuente única, también la usa el motor)
   futures/data_status.json  -> instantánea de la descarga de datos tick
+  futures/lab_rules.json    -> reglas del laboratorio (instrumento, costos, criterio Topstep...)
+  futures/updates.json      -> bitácora de hallazgos y avances (la más reciente arriba)
   backtest/results/futures_ledger.csv -> libro de exámenes de futuros (si existe)
 
 La liga anterior (cripto y acciones, cerrada el 2026-10-22) queda
@@ -43,6 +45,8 @@ def build():
         "generated": datetime.now(timezone.utc).isoformat(timespec="minutes"),
         "roster": load("futures/roster.json", {"bots": []}),
         "dataset": load("futures/data_status.json", {}),
+        "rules": load("futures/lab_rules.json", {"rules": []}),
+        "updates": load("futures/updates.json", {"entries": []}),
         "runs": len(rows),
         "runs_by_bot": {},
         "integrity": charter_integrity(),

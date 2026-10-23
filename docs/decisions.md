@@ -599,3 +599,29 @@ gobernanza (charter, libro de exámenes, bóveda) para reutilizarla en futuros.
 Estado al cierre: sin operaciones desde 2026-10-04; el bot aleatorio
 lideraba el escuadrón cripto. Datos de futuros: Databento (GLBX.MDP3,
 trades con lado agresor), probado el 2026-10-22 con un día de ES por ~$0.62.
+
+
+**2026-10-22 · DECISIÓN DEL PROPIETARIO: reglas del laboratorio de futuros (v1).**
+Jose Miguel fija, con las respuestas de Oscar, las reglas antes de cualquier
+backtest. Fuente única: `futures/lab_rules.json` (se publica en la página).
+- Instrumento: solo NQ; MNQ fuera.
+- Estilo: scalping intradía (segundos a minutos); cierre obligatorio antes del
+  fin de sesión; sin swing.
+- Sesiones: prioridad Nueva York 9:30–16:00 ET; estudio separado de Asia,
+  Londres y resto del overnight.
+- Costos: comisiones publicadas por Topstep para NQ + 1 tick de deslizamiento
+  por lado; prueba de estrés al doble de deslizamiento.
+- Aprobación: reglas de la cuenta Topstep 50K ($3,000 meta, $2,000 pérdida
+  máxima al cierre del día, $1,000 límite diario conservado aunque sea
+  opcional, 5 NQ máx., consistencia 50%). Se simulan cuentas con arranques en
+  fechas distintas; la estrategia debe pasar bastante más seguido que RAND con
+  las mismas reglas. El umbral exacto se sella antes de la primera corrida.
+- Big trades: umbral por investigación (fijo 70–80 vs relativo por sesión/hora,
+  con agrupación de órdenes partidas), no por convención.
+- Días de rollo: incluidos; se bajan ambos contratos.
+- Noticias: sin entradas de −2 a +5 min en CPI, NFP y Fed (margen mayor en Fed).
+Validación de datos previa: ATAS vs Databento TBBO en 2024-05-14 y 2026-09-14
+(volumen 0.04% / 17 contratos; libro 99.8% / 100%). ATAS aceptado como base.
+Pendientes: segundo contrato en días de rollo y marca de sesiones con huecos.
+A partir de hoy, cada hallazgo o avance se agrega a `futures/updates.json` y
+se publica en la página para Oscar.

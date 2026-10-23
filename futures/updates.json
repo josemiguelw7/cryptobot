@@ -1,0 +1,15 @@
+{
+  "note": "Bitácora del laboratorio: hallazgos, decisiones y avances, del más reciente al más antiguo. Cada entrada nueva se agrega arriba.",
+  "entries": [
+    {"date": "2026-10-22", "kind": "decisión", "title": "Reglas del laboratorio acordadas",
+     "body": "Solo NQ, scalping intradía, prioridad Nueva York con estudio del overnight, costos de Topstep más deslizamiento, aprobación con las reglas de la cuenta Topstep de $50K, días de rollo incluidos y pausa en noticias fuertes. Detalle en la sección de reglas."},
+    {"date": "2026-10-22", "kind": "hallazgo", "title": "Los datos de ATAS coinciden con Databento",
+     "body": "Se compraron dos días de referencia en Databento (14/05/2024, día normal, y 14/09/2026, día de rollo). El volumen coincide con diferencias de 0.04% y 17 contratos, y el libro antes de cada operación coincide en 99.8% y 100%. El histórico de ATAS queda aceptado como base del laboratorio."},
+    {"date": "2026-10-22", "kind": "hallazgo", "title": "Dos detalles a corregir en los datos",
+     "body": "ATAS guarda un solo contrato por sesión, así que los días de rollo pierden cerca de la mitad del volumen: se bajará el segundo contrato. Además apareció un hueco de 2 minutos en el feed de Rithmic (14/05/2024): se marcarán todas las sesiones con huecos."},
+    {"date": "2026-10-22", "kind": "avance", "title": "Servidor del laboratorio listo",
+     "body": "Máquina dedicada rt-oscar-lab (8 núcleos, 32 GB) con Python y librerías para procesar ticks, conectada por Tailscale. Las sesiones descargadas se copian ahí verificando cada archivo."},
+    {"date": "2026-10-22", "kind": "decisión", "title": "El proyecto pasa de cripto y acciones a futuros NQ",
+     "body": "Se cierran los bots de cripto y acciones (archivados, nada se borra) y se reorienta todo a order flow en NQ con datos tick de 2024 a hoy."}
+  ]
+}

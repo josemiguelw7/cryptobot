@@ -47,6 +47,15 @@ h1{font-size:23px;letter-spacing:-.01em}
 details summary{cursor:pointer;color:var(--dim);font-size:12.5px}
 .hash{font:11px/1.5 ui-monospace,Menlo,monospace;color:var(--dim);overflow-wrap:anywhere;margin-top:6px}
 a{color:var(--accent)}
+.log{list-style:none}.log li{border-left:2px solid var(--line);padding:0 0 14px 14px;position:relative}
+.log li:before{content:"";position:absolute;left:-5px;top:6px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.log .meta{font-size:11.5px;color:var(--dim)}.log .ttl{font-weight:650;font-size:14.5px;margin:2px 0}
+.log .bd{font-size:13.5px}
+.k-hallazgo{background:var(--ok-bg);color:var(--ok)}.k-decisión{background:var(--accent-bg);color:var(--accent)}
+.k-avance{background:var(--warn-bg);color:var(--warn)}
+.rl{display:grid;grid-template-columns:150px 1fr;gap:6px 14px;font-size:13.5px}
+.rl b{font-size:12.5px}
+@media (max-width:620px){.rl{grid-template-columns:1fr}.rl div{margin-bottom:6px}}
 .foot-note{color:var(--dim);font-size:12px;text-align:center;margin-top:24px}
 @media (max-width:620px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}
 .pipe{grid-template-columns:repeat(5,minmax(0,1fr))}.step{font-size:10.5px;padding:8px 3px}.step b{font-size:11.5px}}
@@ -59,6 +68,15 @@ Nada de esto toca dinero real.</div>
 <div class="card"><h2>En qué etapa vamos</h2>
   <div class="pipe" id="pipe"></div>
   <div class="note" id="stageNote"></div>
+</div>
+
+<div class="card"><h2>Bitácora · hallazgos y novedades</h2>
+  <ul class="log" id="log"></ul>
+</div>
+
+<div class="card"><h2>Reglas del laboratorio</h2>
+  <div class="rl" id="rl"></div>
+  <div class="note" id="rlnote"></div>
 </div>
 
 <div class="card"><h2>Datos tick del NQ</h2>
@@ -81,8 +99,7 @@ Nada de esto toca dinero real.</div>
     <li><b>Parámetros antes del resultado:</b> se escriben y se guardan en git antes de correr la prueba.</li>
     <li><b>Todas las corridas cuentan:</b> buenas y malas van al libro de exámenes, para saber cuántos intentos hubo.</li>
     <li><b>Examen final sellado:</b> los últimos 6 meses no se tocan hasta el veredicto.</li>
-    <li><b>Costos reales:</b> comisión y deslizamiento en cada operación, y una prueba extra al doble de deslizamiento.</li>
-  </ul>
+      </ul>
   <details><summary>Documentos sellados (huellas SHA-256)</summary><div id="hashes"></div></details>
 </div>
 
@@ -141,6 +158,15 @@ const esc = s => String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>'
       <div class="foot"><span>${b.params?'parámetros fijados':'en diseño'}</span>
       <span>${n} ${n===1?'prueba':'pruebas'}</span></div></div>`;}).join('');
 
+  const ups=(D.updates&&D.updates.entries)||[];
+  document.getElementById('log').innerHTML = ups.length ? ups.map(u=>
+    `<li><div class="meta">${esc(u.date)} · <span class="badge k-${esc(u.kind)}">${esc((u.kind||'').toUpperCase())}</span></div>
+     <div class="ttl">${esc(u.title)}</div><div class="bd">${esc(u.body)}</div></li>`).join('')
+    : '<li><div class="bd">Sin novedades todavía.</div></li>';
+  const R=D.rules||{};
+  document.getElementById('rl').innerHTML=(R.rules||[]).map(r=>
+    `<div><b>${esc(r.topic)}</b></div><div>${esc(r.rule)}</div>`).join('');
+  document.getElementById('rlnote').textContent=(R.status||'')+(R.updated?' Última actualización: '+R.updated+'.':'');
   document.getElementById('hashes').innerHTML = Object.entries(D.integrity||{}).map(([k,v])=>
     `<div class="hash"><b>${esc(v.path)}</b><br>${esc(v.sha256||v.status)}</div>`).join('');
   document.getElementById('gen').textContent =

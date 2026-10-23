@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "updated": "2026-10-22",
+  "status": "Acordadas por Jose Miguel el 22/10/2026 con las respuestas de Oscar. Abiertas a corrección de Oscar antes de la primera prueba.",
+  "rules": [
+    {"topic": "Instrumento", "rule": "Solo NQ (E-mini Nasdaq-100). MNQ queda fuera del estudio."},
+    {"topic": "Estilo", "rule": "Scalping intradía: operaciones de segundos a minutos. Toda posición se cierra antes de que termine la sesión. Nada de swing."},
+    {"topic": "Sesiones", "rule": "Prioridad: Nueva York, 9:30–16:00 hora de NY. Además se buscan patrones de volumen y order flow por separado en Asia, Londres y el resto del overnight."},
+    {"topic": "Costos", "rule": "Comisiones publicadas por Topstep para NQ más 1 tick de deslizamiento por lado (1 tick = 0.25 puntos = $5). Prueba extra con el doble de deslizamiento."},
+    {"topic": "Criterio de aprobación", "rule": "Reglas de la cuenta Topstep de $50,000: meta de $3,000, pérdida máxima de $2,000 calculada al cierre del día anterior, límite diario de $1,000 (se mantiene aunque Topstep lo haga opcional), máximo 5 contratos de NQ, el mejor día no puede pasar del 50% de la meta. Se simulan muchas cuentas que arrancan en fechas distintas; una estrategia sirve si pasa bastante más seguido que el bot aleatorio con las mismas reglas."},
+    {"topic": "Big trades", "rule": "Sin umbral fijo de entrada. Investigación propia: se comparan umbrales fijos (70–80 contratos, el estándar de ATAS y Deep Charts) contra umbrales relativos por sesión y hora, agrupando órdenes partidas. Gana el que anticipe una reacción del precio."},
+    {"topic": "Días de rollo", "rule": "Se incluyen. Esos días se bajan los dos contratos para tener el volumen completo."},
+    {"topic": "Noticias", "rule": "No se abren operaciones alrededor de CPI, empleo (NFP) y decisiones de la Fed: de 2 minutos antes a 5 minutos después del dato; margen más amplio para la Fed. El resto del día se opera normal."}
+  ]
+}
