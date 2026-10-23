@@ -68,10 +68,12 @@ def main():
     ap.add_argument("--rand-estres", type=int, default=300); ap.add_argument("--flip", type=int, default=200)
     ap.add_argument("--sens", action="store_true"); ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--notas", default=""); ap.add_argument("--dry", action="store_true")
+    ap.add_argument("--isolated", action="store_true", help="contenedor efímero: sin registro, sin bitácora, id por huella de configuración")
+    ap.add_argument("--n-trials", type=int, default=0); ap.add_argument("--var-sr", type=float, default=-1.0)
     a = ap.parse_args()
     t0 = time.time()
     st = next((s for s in registry.read(registry.STUDIES) if s["study_id"] == a.study), None)
-    if not st:
+    if not st and not a.isolated:
         raise SystemExit(f"estudio {a.study} no registrado: registra hipótesis y N declarado antes de correr")
     dates, sess_sha = config.design_sessions()
     if a.limit:
@@ -94,7 +96,7 @@ def main():
         sig_by_date[d] = sigs
         trades += simulate(s, sigs, r, slip, comm)
     print(f"[{a.strategy}] {len(trades)} operaciones en {possible} sesiones · {time.time()-t0:.0f}s", flush=True)
-    test_id = registry.next_test_id()
+    test_id = ("X" + config.config_hash({"s": a.strategy, "v": a.version, "p": params, "c": c.as_dict()})[:10]) if a.isolated else registry.next_test_id()
     daily = stats.daily_series(trades, dates)
     net = float(daily.sum())
     # RAND base y de estrés
@@ -136,9 +138,12 @@ def main():
            "topstep_rand_pct": ts["rand_pct_pasan"] or 0.0, "sesiones_con_senal_posible": possible, "error": False, "revisar": leak,
            "sharpe_diario": round(stats.sharpe(daily), 4), "psr": sm["psr"], "concentracion": sm["concentracion"], "cpcv": sm["cpcv"]}
     v = verdict(res, True)
-    n_trials = len(registry.read(registry.TRIALS)) + 1
-    shs = registry.all_sharpes() + [res["sharpe_diario"]]
-    res["dsr"] = round(stats.dsr(daily, n_trials, float(np.var(shs)) if len(shs) > 1 else 0.0), 3)
+    if a.isolated:
+        n_trials = a.n_trials or 1; var_sr = max(a.var_sr, 0.0)
+    else:
+        n_trials = len(registry.read(registry.TRIALS)) + 1
+        shs = registry.all_sharpes() + [res["sharpe_diario"]]; var_sr = float(np.var(shs)) if len(shs) > 1 else 0.0
+    res["dsr"] = round(stats.dsr(daily, n_trials, var_sr), 3)
     res["min_btl_anios"] = round(stats.min_btl_years(n_trials), 2)
     res["intentos_totales_al_cerrar"] = n_trials
     meta = {"estrategia": a.strategy, "version": a.version, "fecha": time.strftime("%Y-%m-%d"), "tanda": a.study,

@@ -1,0 +1,2 @@
+# Revisiones ciegas del Red Team
+Cada prueba que llegue a "pasa" o "revisar" recibe una revisión de un Claude **sin contexto** (conversación nueva, sin memoria del proyecto), que solo ve el paquete que arma `engine/redteam_pack.py`. El informe se pega aquí como `<id>.md` y se enlaza desde `docs/decisions.md`. Si la revisión encuentra una falla crítica, la prueba pasa a "error" con línea de corrección en el registro.

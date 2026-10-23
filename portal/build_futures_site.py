@@ -137,7 +137,7 @@ def research_export():
     reg = registry_export()
     ups = load("updates.json", {"entries": []}).get("entries", [])
     week = (datetime.now(timezone.utc) - timedelta(days=7)).strftime("%Y-%m-%d")
-    data = {"plan": plan, "protocolo": proto, "versiones": vers, "pruebas": tests, "mapa": mapa, "registro": reg,
+    data = {"plan": plan, "protocolo": proto, "versiones": vers, "pruebas": tests, "mapa": mapa, "registro": reg, "backlog": load("backlog.json", {"pruebas": []}),
             "cementerio": graveyard(tests, reg["intentos"]), "sesiones": sessions_export(), "costos": load("costs.json", {}),
             "topstep": load("topstep_rules.json", {}), "glosario": load("glossary.json", {}), "sellos": integrity(),
             "cambios_semana": [u for u in ups if u.get("date", "") >= week], "generado": datetime.now(timezone.utc).isoformat(timespec="minutes")}
@@ -161,6 +161,7 @@ def build():
                .replace("<!--EXPLORER_TAB-->", frag("explorer_tab.html")).replace("__DATA__", json.dumps(data, ensure_ascii=False)))
     with open(os.path.join(OUT, "index.html"), "w", encoding="utf-8") as f:
         f.write(html)
+    import build_lab_md; build_lab_md.build(r["sellos"])
     print(f"site/index.html · {len(r['pruebas'])} pruebas · {r['registro']['total_intentos']} intentos · cadena {'ok' if r['registro']['cadena_ok'] else 'ROTA'}")
 
 

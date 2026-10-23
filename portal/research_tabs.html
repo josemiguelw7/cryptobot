@@ -57,6 +57,8 @@
  <p class="sub">Cada prueba tiene número, receta completa y hoja de resultados. Se publican todas: las que pasan, las que no, las insuficientes y las que fallan por error.</p>
  <div class="row" id="rx-kpis"></div>
  <div class="chips" id="rx-filter"></div>
+ <h3>Cola de pruebas · qué sigue</h3>
+ <div id="rx-backlog"></div>
  <h3>Fase 2 · Pruebas de estrategias</h3>
  <div id="rx-tests"></div>
  <div id="rx-compare"></div>
@@ -198,6 +200,14 @@ function renderCompare(){
  plotly().then(()=>Plotly.react('cmp-plot',T.map((t,i)=>({x:t.curva.x,y:t.curva.y,name:`${t.id} ${t.estrategia} v${t.version}`,line:{width:2,color:['#38bdf8','#facc15','#e879f9','#4ade80'][i%4]}})),lay({yaxis:{tickprefix:'$',gridcolor:'#222',zeroline:true,zerolinecolor:'#444'}}),CFG));
 }
 
+/* ---------- BACKLOG ---------- */
+const BS={propuesta:['Propuesta · falta aprobación','wait'],aprobada:['Aprobada · falta congelar','run'],congelada:['Congelada · en cola del orquestador','run'],en_cola:['En cola','run'],corriendo:['Corriendo','run'],corrida:['Corrida','ok'],descartada:['Descartada','no']};
+function renderBacklog(){
+ const B=(R.backlog||{}).pruebas||[],el=document.getElementById('rx-backlog');
+ if(!B.length){el.innerHTML='<div class="empty">Sin pruebas en cola.</div>';return}
+ el.innerHTML=`<div class="card"><p class="note" style="margin-bottom:8px">Propuesta → aprobada (Oscar y Jose Miguel) → congelada (reglas con huella y sello) → corrida. El orquestador arranca solo las congeladas, dos veces en contenedores limpios sin red, y publica solo si el resultado se reproduce bit a bit.</p>${B.map(it=>`<div class="q"><div class="head"><b>${esc(it.id)} · ${esc(it.nombre)}</b><span class="pill ${(BS[it.estado]||['?',''])[1]}">${(BS[it.estado]||[it.estado])[0]}${it.test_id?' → '+it.test_id:''}</span></div><div style="margin-top:4px">${esc(it.hipotesis)}</div><small>Origen: ${esc(it.origen||'')}${it.requisitos?' · Falta: '+esc(it.requisitos.join('; ')):''}${it.ultimo_error?' · <span class="r">'+esc(it.ultimo_error)+'</span>':''}</small></div>`).join('')}</div>`;
+}
+
 /* ---------- MAPA · CEMENTERIO · REGISTRO · DATOS ---------- */
 function renderMapa(){
  const M=R.mapa||{},S=M.senales||[],el=document.getElementById('rx-mapa');
@@ -299,6 +309,6 @@ document.addEventListener('click',e=>{
  const a=e.target.closest('[data-goto],[data-goto-est]');if(!a)return;
  const id=a.dataset.goto?'prueba-'+a.dataset.goto:'est-'+a.dataset.gotoEst;setTimeout(()=>document.getElementById(id)?.scrollIntoView({behavior:'smooth'}),80)});
 document.addEventListener('toggle',e=>{const d=e.target;if(d.matches&&d.matches('details[data-full]')&&d.open)loadFull(d.dataset.full)},true);
-fetch('data/research.json').then(r=>r.json()).then(j=>{R=j;renderKpis();renderTests();renderCompare();renderMapa();renderGrave();renderReg();renderData();renderStrats();renderPlan();renderProto();renderCosts();renderQ();renderSeal()}).catch(err=>{console.error(err)});
+fetch('data/research.json').then(r=>r.json()).then(j=>{R=j;renderKpis();renderBacklog();renderTests();renderCompare();renderMapa();renderGrave();renderReg();renderData();renderStrats();renderPlan();renderProto();renderCosts();renderQ();renderSeal()}).catch(err=>{console.error(err)});
 })();
 </script>

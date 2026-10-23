@@ -1,0 +1,29 @@
+{
+ "comun": {
+  "instrumento": "NQ (contrato del frente), 1 contrato por operación en la v1",
+  "horario": "Nueva York 09:30–11:30 ET (los traders estudiados operan casi solo la primera hora u hora y media)",
+  "cierre_forzado": "cualquier posición abierta se cierra a mercado a las 11:45 ET",
+  "noticias": "no se abre de −2 a +5 min de CPI, NFP y Fed",
+  "costos": "comisión Topstep + 1 tick de deslizamiento por lado; prueba extra al doble",
+  "limites_dia": "máximo 6 operaciones por estrategia por día; se detiene tras 3 pérdidas seguidas",
+  "una_posicion": "nunca más de una posición abierta por estrategia",
+  "niveles_de_referencia": "del día anterior (perfil de Nueva York): POC, VAH, VAL (70%), máximo y mínimo; de la noche (18:00–09:30 ET): máximo y mínimo; VWAP del día desde las 09:30",
+  "umbrales_relativos": "todo umbral en percentiles se calcula con las 20 sesiones ANTERIORES, tramo de Nueva York; nunca con el mismo día ni con el futuro",
+  "datos": "solo periodo de diseño 2024-01-02 a 2026-04-21; el examen sellado no se abre",
+  "control": "RAND emparejado: mismas cantidades de operaciones por día, misma dirección al azar, misma duración y mismo horario"
+ },
+ "estrategia": {
+  "id": "ABS",
+  "version": 1,
+  "nombre": "Absorción · reversión en nivel",
+  "idea": "Mucho volumen agresivo contra un nivel que no logra moverlo: alguien está absorbiendo del otro lado. Se opera la vuelta.",
+  "disparador": "en una ventana móvil de 60 s, volumen agresivo de un lado ≥ percentil 95 de las ventanas de 60 s de las 20 sesiones anteriores, mientras el precio no avanza más de 2 ticks más allá del extremo que tenía al comenzar la ventana",
+  "ubicacion": "el extremo de la ventana queda a ≤ 4 ticks de algún nivel de referencia",
+  "confirmacion": "en los 60 s siguientes el delta de esa ventana cambia de signo (el otro lado domina) y el precio se aleja 4 ticks del extremo absorbido",
+  "entrada": "a mercado en el momento de la confirmación, en contra del volumen absorbido",
+  "stop": "4 ticks más allá del extremo absorbido, con mínimo de 12 y máximo de 32 ticks de distancia",
+  "objetivo": "2 veces la distancia al stop",
+  "tiempo_maximo": "15 minutos",
+  "filtros": "un mismo nivel solo puede dar una señal ABS por día"
+ }
+}

@@ -18,7 +18,7 @@ import numpy as np
 import polars as pl
 from . import config
 
-STATS = os.path.join(config.FEAT, "lab_stats_NQ.jsonl")
+STATS = os.environ.get("LAB_STATS", os.path.join(config.FEAT, "lab_stats_NQ.jsonl"))
 SUMMARY = os.path.join(config.FEAT, "summary_NQ.jsonl")
 LOOKBACK = 20
 

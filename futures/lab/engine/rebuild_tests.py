@@ -50,6 +50,14 @@ def main():
             ups["entries"].append({"date": f["fecha"], "kind": "prueba", "title": f"Prueba {tid} · {f['estrategia']} v{f['version']} · {lbl}", "body": body, "test_id": tid})
     ups["entries"].sort(key=lambda e: e.get("date", ""), reverse=True)
     json.dump(ups, open(ups_p, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+    # estado del orquestador (VM) -> backlog.json (Mac)
+    stp = os.path.join(config.LAB, "runs_state.json"); bp = os.path.join(config.FUT, "backlog.json")
+    if os.path.exists(stp) and os.path.exists(bp):
+        st = json.load(open(stp)); b = json.load(open(bp, encoding="utf-8"))
+        for it in b["pruebas"]:
+            if it["id"] in st:
+                it.update(st[it["id"]])
+        json.dump(b, open(bp, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print("tests.json reconstruido:", [t["id"] + ":" + t["veredicto"] for t in json.load(open(p, encoding="utf-8"))["pruebas"]])
 
 
