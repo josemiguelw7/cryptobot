@@ -1,14 +1,132 @@
 {
  "titulo": "Backlog de pruebas del laboratorio NQ",
  "regla": "Una prueba pasa por estados: propuesta → aprobada (Oscar y Jose Miguel) → congelada (reglas escritas con huella y sello OTS, estudio registrado) → en_cola → corrida. El orquestador SOLO arranca las que están 'congelada'. Nadie corre una 'propuesta'.",
- "estados": ["propuesta", "aprobada", "congelada", "en_cola", "corriendo", "corrida", "descartada"],
+ "estados": [
+  "propuesta",
+  "aprobada",
+  "congelada",
+  "en_cola",
+  "corriendo",
+  "corrida",
+  "descartada"
+ ],
  "pruebas": [
-  {"id": "T2-FADE", "nombre": "Desvanecer órdenes grandes", "hipotesis": "Entrar EN CONTRA de una orden agresiva ≥ p99 (10+ contratos) que barre ≥ 2 niveles, porque el mapa muestra 6–7 ticks en contra de la orden a 5, 15 y 30 min (19,255 eventos, z ≈ −28).", "origen": "mapa v1 · hipótesis inversa de BIG", "estado": "propuesta", "estrategia": "FADE", "version": 1, "estudio": "tanda2", "requisitos": ["reglas congeladas en strategies/v2.json", "estudio tanda2 registrado con N declarado"], "notas": "Riesgo conocido: parte de la reversión inmediata es el rebote bid-ask; la prueba con costos lo descuenta."},
-  {"id": "T2-HVN", "nombre": "Rechazo de zonas HVN del día anterior", "hipotesis": "Cuando el precio llega a un nodo de alto volumen del perfil de Nueva York del día anterior después de moverse ≥ 20 ticks, rebota: +9 ticks a 15 min y +17 a 30 min (2,561 eventos).", "origen": "mapa v1 · estilo Profit Pro", "estado": "propuesta", "estrategia": "HVN", "version": 1, "estudio": "tanda2", "requisitos": ["definir confirmación y stop en percentiles medidos, no inventados", "reglas congeladas"], "notas": "Es la señal con mejor relación eventos/efecto del mapa."},
-  {"id": "T2-ABS-EARLY", "nombre": "ABS con entrada temprana", "hipotesis": "ABS v1 gana a RAND (p 0.002) y el placebo desplazado 5 min antes gana más: entrar al detectar la absorción (sin esperar la confirmación) debería ganar más con el mismo stop.", "origen": "P003 + placebo del Red Team", "estado": "propuesta", "estrategia": "ABS", "version": 2, "estudio": "tanda2", "requisitos": ["cuenta como versión 2 de 3 de ABS", "aprobación de Oscar"], "notas": "La v1 pierde en 2025 y tiene 128 operaciones: una v2 debería también ampliar horas o niveles para tener más operaciones."},
-  {"id": "T2-ABS-HOURS", "nombre": "ABS v1 en toda la sesión de Nueva York", "hipotesis": "Las mismas reglas de ABS v1 de 09:30 a 15:30 (cierre 15:45) producen suficientes operaciones para pasar Topstep.", "origen": "P003 · pocas operaciones", "estado": "propuesta", "estrategia": "ABS", "version": 2, "estudio": "tanda2", "requisitos": ["si se combina con T2-ABS-EARLY es una sola v2; máximo 3 versiones"], "notas": "Cambiar el horario es cambio de regla: versión nueva."},
-  {"id": "T2-ICE", "nombre": "Icebergs con definición medida", "hipotesis": "Con la definición actual solo hay 17 icebergs en 576 sesiones; con una definición basada en reposición observada (tamaño después ≥ tamaño antes tras ejecuciones repetidas) habrá suficientes para medir.", "origen": "mapa v1 · ice", "estado": "propuesta", "estrategia": null, "version": null, "estudio": "mapa_v2", "requisitos": ["agregar tamaños 'antes' del libro al lector de sesión"], "notas": "Va primero al mapa, no a una estrategia."},
-  {"id": "M2-DIR", "nombre": "Mapa v2 con azar de dirección aleatoria", "hipotesis": "Publicar además del azar 'misma dirección' un azar con dirección 50/50, para separar 'buen momento' de 'buena dirección'.", "origen": "revisión del mapa v1", "estado": "aprobada", "estrategia": null, "version": null, "estudio": "mapa_v2", "requisitos": ["cambio de código en signal_map.py", "estudio mapa_v2 registrado"], "notas": "Cambio metodológico; no requiere a Oscar, lo aprueba Jose Miguel."},
-  {"id": "T3-SMT", "nombre": "Divergencia NQ vs ES (SMT)", "hipotesis": "Cuando NQ hace nuevo extremo y ES no (o al revés), el precio revierte.", "origen": "videos · plan v1", "estado": "propuesta", "estrategia": "SMT", "version": 1, "estudio": "tanda3", "requisitos": ["descargar datos tick de ES (laptop ATAS)", "lector canónico para ES"], "notas": "Bloqueada por datos."}
+  {
+   "id": "S-SALIDAS",
+   "nombre": "Estudio de salidas (TP fijo, SL fijo, tiempo, piramidar) sobre las v1",
+   "hipotesis": "Pedido de Oscar: explorar take profit fijo de 20/30/40/50 puntos, distintos stops, y agregar contratos cuando la operación va a favor, con las mismas señales v1.",
+   "origen": "Oscar · 23/10/2026",
+   "estado": "aprobada",
+   "estrategia": null,
+   "version": null,
+   "estudio": "salidas_v1",
+   "requisitos": [
+    "estudio salidas_v1 registrado con 159 intentos declarados"
+   ],
+   "notas": "No es una estrategia nueva: es una superficie. Lo que se adopte será v2 con protocolo completo."
+  },
+  {
+   "id": "T2-FADE",
+   "nombre": "Desvanecer órdenes grandes",
+   "hipotesis": "Entrar EN CONTRA de una orden agresiva ≥ p99 (10+ contratos) que barre ≥ 2 niveles, porque el mapa muestra 6–7 ticks en contra de la orden a 5, 15 y 30 min (19,255 eventos, z ≈ −28).",
+   "origen": "mapa v1 · hipótesis inversa de BIG",
+   "estado": "propuesta",
+   "estrategia": "FADE",
+   "version": 1,
+   "estudio": "tanda2",
+   "requisitos": [
+    "reglas congeladas en strategies/v2.json",
+    "estudio tanda2 registrado con N declarado"
+   ],
+   "notas": "Riesgo conocido: parte de la reversión inmediata es el rebote bid-ask; la prueba con costos lo descuenta."
+  },
+  {
+   "id": "T2-HVN",
+   "nombre": "Rechazo de zonas HVN del día anterior",
+   "hipotesis": "Cuando el precio llega a un nodo de alto volumen del perfil de Nueva York del día anterior después de moverse ≥ 20 ticks, rebota: +9 ticks a 15 min y +17 a 30 min (2,561 eventos).",
+   "origen": "mapa v1 · estilo Profit Pro",
+   "estado": "propuesta",
+   "estrategia": "HVN",
+   "version": 1,
+   "estudio": "tanda2",
+   "requisitos": [
+    "definir confirmación y stop en percentiles medidos, no inventados",
+    "reglas congeladas"
+   ],
+   "notas": "Es la señal con mejor relación eventos/efecto del mapa."
+  },
+  {
+   "id": "T2-ABS-EARLY",
+   "nombre": "ABS con entrada temprana",
+   "hipotesis": "ABS v1 gana a RAND (p 0.002) y el placebo desplazado 5 min antes gana más: entrar al detectar la absorción (sin esperar la confirmación) debería ganar más con el mismo stop.",
+   "origen": "P003 + placebo del Red Team",
+   "estado": "propuesta",
+   "estrategia": "ABS",
+   "version": 2,
+   "estudio": "tanda2",
+   "requisitos": [
+    "cuenta como versión 2 de 3 de ABS",
+    "aprobación de Oscar"
+   ],
+   "notas": "La v1 pierde en 2025 y tiene 128 operaciones: una v2 debería también ampliar horas o niveles para tener más operaciones."
+  },
+  {
+   "id": "T2-ABS-HOURS",
+   "nombre": "ABS v1 en toda la sesión de Nueva York",
+   "hipotesis": "Las mismas reglas de ABS v1 de 09:30 a 15:30 (cierre 15:45) producen suficientes operaciones para pasar Topstep.",
+   "origen": "P003 · pocas operaciones",
+   "estado": "propuesta",
+   "estrategia": "ABS",
+   "version": 2,
+   "estudio": "tanda2",
+   "requisitos": [
+    "si se combina con T2-ABS-EARLY es una sola v2; máximo 3 versiones"
+   ],
+   "notas": "Cambiar el horario es cambio de regla: versión nueva."
+  },
+  {
+   "id": "T2-ICE",
+   "nombre": "Icebergs con definición medida",
+   "hipotesis": "Con la definición actual solo hay 17 icebergs en 576 sesiones; con una definición basada en reposición observada (tamaño después ≥ tamaño antes tras ejecuciones repetidas) habrá suficientes para medir.",
+   "origen": "mapa v1 · ice",
+   "estado": "propuesta",
+   "estrategia": null,
+   "version": null,
+   "estudio": "mapa_v2",
+   "requisitos": [
+    "agregar tamaños 'antes' del libro al lector de sesión"
+   ],
+   "notas": "Va primero al mapa, no a una estrategia."
+  },
+  {
+   "id": "M2-DIR",
+   "nombre": "Mapa v2 con azar de dirección aleatoria",
+   "hipotesis": "Publicar además del azar 'misma dirección' un azar con dirección 50/50, para separar 'buen momento' de 'buena dirección'.",
+   "origen": "revisión del mapa v1",
+   "estado": "aprobada",
+   "estrategia": null,
+   "version": null,
+   "estudio": "mapa_v2",
+   "requisitos": [
+    "cambio de código en signal_map.py",
+    "estudio mapa_v2 registrado"
+   ],
+   "notas": "Cambio metodológico; no requiere a Oscar, lo aprueba Jose Miguel."
+  },
+  {
+   "id": "T3-SMT",
+   "nombre": "Divergencia NQ vs ES (SMT)",
+   "hipotesis": "Cuando NQ hace nuevo extremo y ES no (o al revés), el precio revierte.",
+   "origen": "videos · plan v1",
+   "estado": "propuesta",
+   "estrategia": "SMT",
+   "version": 1,
+   "estudio": "tanda3",
+   "requisitos": [
+    "descargar datos tick de ES (laptop ATAS)",
+    "lector canónico para ES"
+   ],
+   "notas": "Bloqueada por datos."
+  }
  ]
 }

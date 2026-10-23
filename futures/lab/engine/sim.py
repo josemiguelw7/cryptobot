@@ -45,6 +45,7 @@ class Rules:
     news: tuple = ()                # ((s0, s1), ...) ventanas sin entradas
     contracts: int = 1
     target_rule: str = "through"    # 'through' | 'touch'
+    pyramid: dict | None = None     # {"add_ticks": X, "max_adds": n, "stop_breakeven": bool}: agrega 1 contrato cada X ticks a favor
 
 
 def _in_news(sec, news):
@@ -136,20 +137,42 @@ def simulate(s, signals, rules: Rules, slip: int, commission_rt: float, tick_usd
             k = len(px) - 1
             exit_px = int(px[k]) - side * slip
             reason = "cierre" if t_end >= rules.forced_close else "tiempo"
+        fills = [entry_px]; adds_idx = []
+        if rules.pyramid and (target_px is not None or sig.target_ticks is None):
+            # agrega 1 contrato cada add_ticks a favor (la cinta debe pasar de largo), hasta max_adds; el stop de TODO
+            # puede subir al precio de la primera entrada (breakeven) al primer agregado. La salida se recalcula.
+            P = rules.pyramid; stop_now = stop_px; k_lim = k
+            for a in range(1, int(P.get("max_adds", 1)) + 1):
+                add_px = entry_px + side * int(P["add_ticks"]) * a
+                hit = (px > add_px) if side > 0 else (px < add_px)
+                if not hit.any():
+                    break
+                ka = int(np.argmax(hit))
+                if ka >= k_lim:
+                    break
+                fills.append(add_px + side * slip); adds_idx.append(ka)
+                if P.get("stop_breakeven") and a == 1:
+                    stop_now = entry_px
+                    seg = px[ka:]; hs = (seg <= stop_now) if side > 0 else (seg >= stop_now)
+                    ks2 = ka + int(np.argmax(hs)) if hs.any() else None
+                    if ks2 is not None and (kt is None or ks2 <= kt) and ks2 < k_lim:
+                        k_lim, exit_px, reason = ks2, stop_now - side * slip, "stop_breakeven"
+            k = k_lim
         exit_sec = float(s.sec[i + k])
         path = px[: k + 1]
         mfe = int(((path - entry_px) * side).max())
         mae = int(((entry_px - path) * side).max())
         pnl_ticks = int((exit_px - entry_px) * side)
-        gross = pnl_ticks * tick_usd * rules.contracts
-        cost = commission_rt * rules.contracts
+        n_contr = rules.contracts * len(fills)
+        gross = sum(int((exit_px - f) * side) for f in fills) * tick_usd * rules.contracts
+        cost = commission_rt * n_contr
         net = gross - cost
         trades.append({
             "date": s.date, "kind": sig.kind, "level": sig.level, "side": side,
             "entry_sec": entry_sec, "entry_px": entry_px / 4, "exit_sec": exit_sec, "exit_px": exit_px / 4,
             "reason": reason, "pnl_ticks": pnl_ticks, "gross_usd": gross, "commission_usd": cost,
             "net_usd": net, "mae_ticks": mae, "mfe_ticks": mfe, "duration_s": exit_sec - entry_sec,
-            "contracts": rules.contracts, "slip_ticks": slip, "stop_ticks": sig.stop_ticks,
+            "contracts": n_contr, "fills": [f / 4 for f in fills], "slip_ticks": slip, "stop_ticks": sig.stop_ticks,
             "target_ticks": sig.target_ticks, "meta": sig.meta,
         })
         busy_until = exit_sec

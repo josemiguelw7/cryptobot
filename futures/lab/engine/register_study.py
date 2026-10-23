@@ -7,6 +7,13 @@ import sys
 from . import registry, config
 
 STUDIES = {
+    "salidas_v1": {
+        "hypothesis": "Pedido de Oscar (23/10/2026): con las mismas señales v1, un take profit fijo (20/30/40/50 puntos), otro stop fijo (3/4/6/8 puntos), más tiempo, o agregar contratos a favor, mejoran el resultado neto y forman una meseta (no un pico aislado).",
+        "n_declared": 159,
+        "kill": ["sin meseta: solo celdas aisladas ganan", "la celda mejor pierde con costos al doble o depende de 5 días"],
+        "strategies": ["BIG v1", "ABS v1", "POC v1 (salidas)"],
+        "notes": "5 TP × 5 SL × 2 tiempos = 50 celdas por estrategia (menos la base ya publicada) + 4 variantes de piramidar × 3 estrategias. Explora la dimensión de salida, no la señal. Nada se adopta sin versión nueva y protocolo completo.",
+    },
     "mapa_v1": {
         "hypothesis": "Alguna de las 12 señales de order flow mueve el precio en la dirección predicha a 1, 5, 15 o 30 min más de lo que lo hacen momentos al azar a la misma hora.",
         "n_declared": 48,
