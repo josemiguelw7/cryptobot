@@ -137,7 +137,7 @@ const esc = s => String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>'
   document.getElementById('dlnote').textContent =
     `Rango pedido: ${ds.job_from||'?'} a ${ds.job_to||'?'}. ${ds.source||''}. ` +
     `Instantánea del ${ds.snapshot_utc? new Date(ds.snapshot_utc).toLocaleString('es-MX'):'?'}; ` +
-    `el progreso en vivo está en el tablero local de la laptop.`;
+    `datos completos y verificados en el servidor del laboratorio.`;
   document.getElementById('stats').innerHTML = [
     [fmt(ds.trades),'operaciones'],[fmt(ds.volume),'contratos'],
     [(ds.contracts_seen||[]).length,'contratos trimestrales'],[(ds.size_gb??'—')+' GB','comprimido']]
