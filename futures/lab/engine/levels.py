@@ -6,8 +6,11 @@ Por sesión d (en orden de la lista congelada):
   umbrales(d): percentiles de órdenes y de ventanas de 60 s sobre las 20 sesiones válidas anteriores
 
 Estadísticas por sesión (precompute_stats) se guardan en FEAT/lab_stats_NQ.jsonl:
-  n_orders, top_orders (200 mayores tamaños de órdenes agresivas NY, agrupadas por trade_id)
-  n_win, top_buy60, top_sell60 (100 mayores volúmenes agresivos por lado en ventanas de 60 s, paso 10 s)
+  n_orders, top_orders: órdenes agresivas NY de 10+ contratos (agrupadas por trade_id); se guardan las 600 mayores
+  n_all: cuántas órdenes de cualquier tamaño hubo (solo informativo)
+  n_win, top_buy60, top_sell60: 500 mayores volúmenes agresivos por lado en ventanas de 60 s (paso 10 s)
+Población de los percentiles de órdenes: órdenes de 10+ contratos (aclaración registrada en strategies/v1_aclaraciones.json).
+El percentil agrupado es exacto mientras el rango pedido quede dentro de lo guardado; pooled_quantile avisa si no.
 """
 import json, os
 from concurrent.futures import ProcessPoolExecutor
@@ -26,7 +29,8 @@ def _session_stats(d):
     mins = et.dt.hour().cast(pl.Int32) * 60 + et.dt.minute().cast(pl.Int32)
     ny = df.filter((mins >= 570) & (mins < 960))
     orders = ny.group_by("trade_id").agg(pl.col("volume").sum().alias("size"), pl.col("price_t").n_unique().alias("levels"))
-    sizes = np.sort(orders["size"].to_numpy())[::-1]
+    all_sizes = orders["size"].to_numpy()
+    sizes = np.sort(all_sizes[all_sizes >= 10])[::-1]
     sec = (ny["ts"].cast(pl.Int64).to_numpy() // 1_000_000_000).astype(np.int64)
     sec = sec - sec.min() if len(sec) else sec
     buy = np.where(ny["side"].to_numpy() > 0, ny["volume"].to_numpy(), 0)
@@ -37,9 +41,9 @@ def _session_stats(d):
     k = np.ones(6)
     b60 = np.convolve(b10, k, mode="valid") if nb >= 6 else b10
     s60 = np.convolve(s10, k, mode="valid") if nb >= 6 else s10
-    return {"date": d, "n_orders": int(len(sizes)), "top_orders": sizes[:200].tolist(),
-            "n_win": int(len(b60)), "top_buy60": np.sort(b60)[::-1][:100].tolist(),
-            "top_sell60": np.sort(s60)[::-1][:100].tolist()}
+    return {"date": d, "n_orders": int(len(sizes)), "n_all": int(len(all_sizes)), "top_orders": sizes[:600].tolist(),
+            "n_win": int(len(b60)), "top_buy60": np.sort(b60)[::-1][:500].tolist(),
+            "top_sell60": np.sort(s60)[::-1][:500].tolist()}
 
 
 def precompute_stats(dates, workers=6):
@@ -61,7 +65,7 @@ def pooled_quantile(tops, ns, q):
     N = int(sum(ns))
     rank = int(np.floor((1 - q) * N))
     if rank >= len(allv):
-        return float(allv[-1]) if len(allv) else float("inf")
+        raise ValueError(f"percentil {q} fuera de lo guardado: rango {rank} >= {len(allv)}; hay que guardar más valores por sesión")
     return float(allv[rank])
 
 

@@ -1,6 +1,8 @@
 """Fase 1 · Mapa de señales. Para cada señal: cada vez que aparece, movimiento del precio a 1, 5, 15 y 30 min
 en la dirección que la señal predice (ticks), comparado con 1000 sorteos de momentos al azar en la misma
-sesión y la misma media hora. Sin stops ni objetivos. Corrección de Holm sobre las 48 pruebas (12 × 4).
+sesión y la misma media hora (misma dirección). Sin stops ni objetivos. p de dos colas: una señal puede ser
+mejor que el azar (sentido "a favor") o peor (sentido "contraria", que es la hipótesis opuesta). Holm sobre 48 pruebas.
+Un evento por celda de 10 s y dirección para no contar varias veces el mismo momento.
 
   python -m engine.signal_map --study mapa_v1 [--limit N]
 Salida: futures/signal_map.json + un intento por señal en el registro.
@@ -46,11 +48,11 @@ def events(s, L, d, thr, ref, prof):
         if sw[w0] >= thr["sell60_p95"] and bl[w0:e + 1].min() >= first[w0] - 2:
             out["abs"].append((t, 1))
     tot = buy + sell
-    for e in range(2, nb):
-        b3, s3 = buy[e - 2:e + 1], sell[e - 2:e + 1]
-        if (b3 >= 3 * np.maximum(s3, 1)).all() and tot[e - 2:e + 1].min() >= 50:
+    for e in range(1, nb):
+        b2, s2 = buy[e - 1:e + 1], sell[e - 1:e + 1]
+        if (b2 >= 2 * np.maximum(s2, 1)).all() and tot[e - 1:e + 1].min() >= 50:
             out["stack"].append((NY_OPEN + (e + 1) * BIN, 1))
-        elif (s3 >= 3 * np.maximum(b3, 1)).all() and tot[e - 2:e + 1].min() >= 50:
+        elif (s2 >= 2 * np.maximum(b2, 1)).all() and tot[e - 1:e + 1].min() >= 50:
             out["stack"].append((NY_OPEN + (e + 1) * BIN, -1))
     # divergencia de delta: 5 min vs 5 min anteriores
     M = 30
@@ -103,7 +105,7 @@ def events(s, L, d, thr, ref, prof):
             elif q <= 0.2: out["qimb"].append((NY_OPEN + (e + 1) * BIN, -1))
     # icebergs: un precio absorbe >= 100 contratos del mismo lado en 10 s sin moverse
     for e in range(nb):
-        if bh[e] == bl[e] and tot[e] >= 100:
+        if bh[e] - bl[e] <= 1 and tot[e] >= 100:
             if buy[e] >= 3 * max(sell[e], 1): out["ice"].append((NY_OPEN + (e + 1) * BIN, -1))
             elif sell[e] >= 3 * max(buy[e], 1): out["ice"].append((NY_OPEN + (e + 1) * BIN, 1))
     # ráfagas: celda de 10 s con volumen >= p99 de las celdas de la sesión
@@ -112,8 +114,16 @@ def events(s, L, d, thr, ref, prof):
         dl = buy[e] - sell[e]
         if dl != 0:
             out["burst"].append((NY_OPEN + (e + 1) * BIN, 1 if dl > 0 else -1))
+    # un evento por celda de 10 s y dirección: niveles o celdas vecinas que disparan a la vez no se cuentan varias veces
+    for k, lst in out.items():
+        seen, uniq = set(), []
+        for t, dd in lst:
+            key = (int((t - NY_OPEN) // BIN), dd)
+            if key not in seen:
+                seen.add(key); uniq.append((t, dd))
+        out[k] = uniq
     # momentum: primera media hora -> última media hora
-    p930, p1000 = s.price_at(NY_OPEN), s.price_at(NY_OPEN + 1800)
+    p930, p1000 = int(s.px[0]), s.price_at(NY_OPEN + 1800)
     if p930 and p1000 and p1000 != p930:
         out["mom"].append((NY_CLOSE - 1800, 1 if p1000 > p930 else -1))
     return out
@@ -183,8 +193,10 @@ def main():
         for h in H:
             if cnt[k]:
                 obs = sums[k][h] / cnt[k]; bm = bsum[k][h] / cnt[k]
-                p = (1 + int((bm >= obs).sum())) / (1 + a.draws)
-                r[h] = round(obs, 2); r[h + "_azar"] = round(float(bm.mean()), 2); r[h + "_p"] = round(p, 4); pv.append((k, h, p))
+                p_up = (1 + int((bm >= obs).sum())) / (1 + a.draws); p_dn = (1 + int((bm <= obs).sum())) / (1 + a.draws)
+                p = min(1.0, 2 * min(p_up, p_dn))   # dos colas: la señal puede ser mejor O peor que el azar
+                r[h] = round(obs, 2); r[h + "_azar"] = round(float(bm.mean()), 2); r[h + "_p"] = round(p, 4)
+                r[h + "_dir"] = "a favor" if obs > float(bm.mean()) else "contraria"; pv.append((k, h, p))
             else:
                 r[h] = None; r[h + "_p"] = None
         r["hist_r15"] = np.histogram(hist[k]["r15"], bins=[-80, -40, -20, -10, -5, 0, 5, 10, 20, 40, 80])[0].tolist() if hist[k]["r15"] else []
@@ -197,6 +209,8 @@ def main():
     for r in rows:
         r["horizontes_significativos"] = [h for h in H if (r["id"], h) in sig]
         r["significativa"] = bool(r["horizontes_significativos"])
+        r["sentido"] = ("a favor" if all(r.get(h + "_dir") == "a favor" for h in r["horizontes_significativos"]) else
+                        "contraria" if all(r.get(h + "_dir") == "contraria" for h in r["horizontes_significativos"]) else "mixto") if r["significativa"] else "—"
     out = {"titulo": "Mapa de señales v1", "fecha": time.strftime("%Y-%m-%d"), "sesiones": len(dates), "sorteos": a.draws,
            "pruebas": m, "correccion": "Holm 5%", "sesiones_sha256": sess_sha, "senales": rows}
     json.dump(out, open(os.path.join(config.FUT, "signal_map.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)

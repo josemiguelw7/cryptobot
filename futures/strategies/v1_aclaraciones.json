@@ -1,0 +1,15 @@
+{
+ "titulo": "Aclaraciones de definición para las estrategias v1 · registradas antes de la corrida válida",
+ "fecha_registro": "2026-10-23",
+ "motivo": "La primera corrida (P013 y mapa 1) mostró que 'percentil 99 de las órdenes' tomado al pie de la letra incluía las órdenes de 1 contrato, con lo que 'orden grande' quedaba en 15 contratos; además el cálculo del percentil agrupado estaba truncado y daba 249 contratos por minuto como umbral de absorción. Esto no cambia ningún número de la v1: aclara sobre qué población se calculan los percentiles, como ya lo hacía futures/lab/features.py ('órdenes agrupadas de 10+ contratos').",
+ "aclaraciones": {
+  "poblacion_ordenes": "Los percentiles de tamaño de orden (BIG: p99) se calculan sobre las órdenes agresivas de 10 o más contratos del tramo de Nueva York de las 20 sesiones válidas anteriores.",
+  "poblacion_ventanas": "Los percentiles de volumen por ventana de 60 s (ABS: p95) se calculan sobre todas las ventanas de 60 s (paso 10 s) del tramo de Nueva York de las 20 sesiones válidas anteriores, por lado.",
+  "exactitud": "El cálculo agrupado guarda suficientes valores por sesión para que el percentil pedido sea exacto; si no alcanza, el programa se detiene con error en lugar de devolver un valor equivocado."
+ },
+ "corridas_afectadas": {
+  "P013 BIG v1": "queda en el registro como ERROR (umbral mal calculado); no cuenta ni a favor ni en contra",
+  "mapa de señales corrida 1": "queda en el registro como ERROR (umbrales y detectores con fallas: iceberg y momentum sin eventos, eventos duplicados por celda); se repite completo"
+ },
+ "regla": "Este documento se congela con huella y sello. Cualquier otra aclaración es un documento nuevo."
+}

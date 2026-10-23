@@ -19,7 +19,7 @@ FUT = os.path.join(ROOT, "futures")
 OUT = os.path.join(ROOT, "site")
 sys.path.insert(0, HERE)
 
-FROZEN = ["strategies/v1.json", "research_plan.json", "protocol.json", "sessions_manifest.json",
+FROZEN = ["strategies/v1.json", "strategies/v1_aclaraciones.json", "research_plan.json", "protocol.json", "sessions_manifest.json",
           "costs.json", "topstep_rules.json", "lab_rules.json", "news.json"]
 
 

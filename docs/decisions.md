@@ -662,3 +662,12 @@ Jose Miguel aprobó construir toda la infraestructura del laboratorio antes de c
 - **Motor** `futures/lab/engine/` (versión 1.0.0), 9 pruebas unitarias; prueba de humo con 60 sesiones correcta.
 - **Estudios registrados antes de correr**: `mapa_v1` (48 intentos declarados) y `tanda1` (51: 3 pruebas + 48 de sensibilidad).
 - `docs/` de la época cripto pasa a `docs/archivo/`; nuevo `docs/README.md` del laboratorio NQ.
+
+## 2026-10-23 · Red Team antes de publicar: primera corrida marcada como error
+
+La primera corrida completa (mapa de señales + BIG v1 = P013) reveló dos fallas de programa, no de estrategia:
+1. El percentil 99 de tamaño de orden se calculaba sobre **todas** las órdenes agresivas (casi todas de 1 contrato), así que "orden grande" quedó en 15 contratos.
+2. El percentil agrupado guardaba solo las 200 órdenes mayores por sesión y, al pedir un rango fuera de lo guardado, devolvía el mínimo en vez de fallar: "absorción" quedó en 249 contratos por minuto (el p95 real ronda 1,300).
+Además, en el mapa, iceberg y momentum no producían eventos y los niveles vecinos contaban el mismo momento varias veces.
+
+Decisión: P013 y el mapa corrida 1 quedan en el registro como **error** (se agregan líneas de corrección; nada se borra ni se edita). La población de los percentiles queda aclarada en `futures/strategies/v1_aclaraciones.json` (órdenes de 10+ contratos; sellado con OTS, SHA-256 `7bfee375…77dc`). El programa ahora se detiene si el percentil pedido no cabe en lo guardado. El mapa reporta p de dos colas y el sentido (a favor / contraria), porque una señal que se comporta al revés de lo que dice su hipótesis es información útil. Todo se repite.

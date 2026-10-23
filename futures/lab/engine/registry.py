@@ -75,7 +75,7 @@ def study_counts(study_id):
 
 
 def next_test_id():
-    n = len(read(TRIALS)) + 1
+    n = sum(1 for t in read(TRIALS) if t.get("tipo") == "prueba") + 1
     return f"P{n:03d}"
 
 
@@ -88,6 +88,12 @@ def record_trial(test_id, study_id, strategy, version, kind, params, sessions_sh
                                             "estrategias_sha256": config.strategies(version)[1] if kind != "senal" else None},
            "resultado": result, "veredicto": verdict, "notas": notes, "error": error}
     return _append(TRIALS, rec)
+
+
+def record_correction(test_id, reason, new_verdict):
+    """Corrección de una prueba ya publicada: nunca se edita la línea original; se agrega una línea de tipo 'correccion'."""
+    return _append(TRIALS, {"test_id": test_id, "study_id": "-", "registrado_utc": _now(), "tipo": "correccion", "estrategia": "-",
+                            "version": None, "motivo": reason, "veredicto": new_verdict, "git_commit": config.git_commit()})
 
 
 def all_sharpes():
