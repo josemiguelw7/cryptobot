@@ -1,0 +1,53 @@
+{
+ "version": 3,
+ "fecha_registro": "2026-10-23",
+ "titulo": "Tanda 2b · FADE v2 (objetivo corto) y FADEL v1 (entrada pasiva)",
+ "estado": "Aprobadas por Jose Miguel el 23/10/2026 (comité: 'vamos con todas tus sugerencias'). Selladas y congeladas.",
+ "comun": {
+  "instrumento": "NQ (contrato del frente), 1 contrato por operación en la v1",
+  "horario": "Nueva York 09:30–11:30 ET (los traders estudiados operan casi solo la primera hora u hora y media)",
+  "cierre_forzado": "cualquier posición abierta se cierra a mercado a las 11:45 ET",
+  "noticias": "no se abre de −2 a +5 min de CPI, NFP y Fed",
+  "costos": "comisión Topstep + 1 tick de deslizamiento por lado; prueba extra al doble",
+  "limites_dia": "máximo 6 operaciones por estrategia por día; se detiene tras 3 pérdidas seguidas",
+  "una_posicion": "nunca más de una posición abierta por estrategia",
+  "niveles_de_referencia": "del día anterior (perfil de Nueva York): POC, VAH, VAL (70%), máximo y mínimo; de la noche (18:00–09:30 ET): máximo y mínimo; VWAP del día desde las 09:30",
+  "umbrales_relativos": "todo umbral en percentiles se calcula con las 20 sesiones ANTERIORES, tramo de Nueva York; nunca con el mismo día ni con el futuro",
+  "datos": "solo periodo de diseño 2024-01-02 a 2026-04-21; el examen sellado no se abre",
+  "control": "RAND emparejado: mismas cantidades de operaciones por día, misma dirección al azar, misma duración y mismo horario"
+ },
+ "estrategias": [
+  {
+   "id": "FADE",
+   "version": 2,
+   "nombre": "Desvanecer órdenes grandes",
+   "idea": "El mapa de señales (19,255 eventos, z ≈ −28) muestra que después de una orden agresiva grande el precio va 6–7 ticks EN CONTRA de la orden a 5, 15 y 30 minutos: la orden grande marca el peor momento de su media hora. Se entra en contra.",
+   "contexto": "Cualquier día; sin filtro de régimen (el efecto se midió sin condicionar).",
+   "disparador": "Una orden agresiva de tamaño ≥ percentil 99 de las órdenes de 10+ contratos de las 20 sesiones válidas anteriores, que barre ≥ 2 niveles de precio.",
+   "ubicacion": "Sin filtro de nivel.",
+   "confirmacion": "Ninguna: el mapa mide el efecto desde el primer minuto. Se entra al terminar la orden.",
+   "entrada": "A mercado, en contra de la orden (si fue compra, se vende). Mínimo 120 s entre señales.",
+   "stop": "12 ticks desde la entrada.",
+   "objetivo": "8 ticks (el efecto medido es de 6–7 ticks a 5–30 min; se cobra antes de que se diluya).",
+   "tiempo_maximo": "10 minutos.",
+   "filtros": "Reglas comunes (horario 09:30–11:30, cierre 11:45, máximo 6 operaciones, parar tras 3 pérdidas, noticias).",
+   "motivo_cambio": "Humo de FADE v1 (60 sesiones, sin registrar): −$13,518; el stop de 16 ticks sin objetivo no captura un efecto de 6–7 ticks. Mapa v2: es la única señal cuya dirección es rentable sola (p bruto 0.0016) y estable 2024/2025. Versión 2 de 3."
+  },
+  {
+   "id": "FADEL",
+   "version": 1,
+   "nombre": "Desvanecer órdenes grandes con entrada pasiva",
+   "idea": "Igual que FADE, pero en vez de cruzar el spread se pone una orden límite en el precio extremo que barrió la orden grande, detrás de la cola visible. Parte del efecto medido es el rebote del spread: entrar pasivo lo cobra en vez de pagarlo.",
+   "contexto": "Cualquier día; sin filtro de régimen (el efecto se midió sin condicionar).",
+   "disparador": "Una orden agresiva de tamaño ≥ percentil 99 de las órdenes de 10+ contratos de las 20 sesiones válidas anteriores, que barre ≥ 2 niveles de precio.",
+   "ubicacion": "La orden límite va en el último precio que operó la orden grande (su extremo).",
+   "confirmacion": "Ninguna.",
+   "entrada": "Orden límite en contra de la orden grande, en su precio extremo, detrás del tamaño visible en el libro (modelo de cola del simulador). Si no se llena en 30 s, se cancela. Mínimo 120 s entre señales.",
+   "stop": "12 ticks desde el llenado.",
+   "objetivo": "8 ticks.",
+   "tiempo_maximo": "10 minutos.",
+   "filtros": "Reglas comunes."
+  }
+ ],
+ "nota": "Parámetros en futures/lab/engine/strategies/v2.py::PARAMS['FADE2'] y ['FADEL']."
+}

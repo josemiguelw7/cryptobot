@@ -32,7 +32,7 @@
    "nombre": "ABS v2: dejar correr al ganador 15 min (TP ≥ 40 puntos o sin TP), stop v1",
    "hipotesis": "En el estudio de salidas, ABS con el stop de la v1 y TP de 40–50 puntos sube de +$4,641 a +$8,569–$9,928 con 15 min de tenencia; el TP casi nunca se toca: trabaja la salida por tiempo. Hay meseta en TP 30–50 × stop v1/8 pts. Falta todo el protocolo (RAND, costos al doble, Topstep, placebos, por año).",
    "origen": "estudio de salidas · pedido de Oscar",
-   "estado": "propuesta",
+   "estado": "congelada",
    "estrategia": "ABS",
    "version": 2,
    "estudio": "tanda2",
@@ -40,14 +40,54 @@
     "reglas escritas y selladas en strategies/v2.json como ABS v2 (listo)",
     "aprobación de Oscar y Jose Miguel → pasar a congelada"
    ],
-   "notas": "Se puede combinar con T2-ABS-EARLY/HOURS en una sola v2 (máximo 3 versiones). · Humo (60 sesiones, sin registrar): +$1,639 en 20 operaciones, p 0.03, placebo desplazado sospechoso como en v1 (valor en el nivel)."
+   "notas": "Se puede combinar con T2-ABS-EARLY/HOURS en una sola v2 (máximo 3 versiones). · Humo (60 sesiones, sin registrar): +$1,639 en 20 operaciones, p 0.03, placebo desplazado sospechoso como en v1 (valor en el nivel).",
+   "decision": "aprobada 23/10/2026 · corre el orquestador · si vuelve a perder en 2025 se retira ABS"
+  },
+  {
+   "id": "T2B-FADE2",
+   "nombre": "FADE v2: desvanecer órdenes grandes con objetivo corto",
+   "hipotesis": "Objetivo 8 ticks, stop 12, 10 min capturan el efecto de 6–7 ticks que el mapa mide contra la orden grande (p bruto 0.0016, estable 2024/2025).",
+   "origen": "mapa v2 + humo de FADE v1",
+   "estado": "congelada",
+   "estrategia": "FADE",
+   "version": 2,
+   "estudio": "tanda2b",
+   "requisitos": [],
+   "decision": "aprobada 23/10/2026"
+  },
+  {
+   "id": "T2B-FADEL",
+   "nombre": "FADEL v1: desvanecer con entrada pasiva (orden límite con cola)",
+   "hipotesis": "Parte del efecto es el rebote del spread; una orden límite en el extremo de la orden grande lo cobra en vez de pagarlo.",
+   "origen": "mapa v2 + modelo de cola del simulador",
+   "estado": "congelada",
+   "estrategia": "FADEL",
+   "version": 1,
+   "estudio": "tanda2b",
+   "requisitos": [],
+   "decision": "aprobada 23/10/2026"
+  },
+  {
+   "id": "E-PROXY",
+   "nombre": "Estudio: proxy de régimen en tiempo real",
+   "hipotesis": "Con el rango de apertura (primeros 15 min), la apertura dentro/fuera del valor y la distancia al VWAP a las 09:45 se puede anticipar si el día será de balance o de tendencia; si sí, HVN condicionada al proxy pasa de +17 a cerca de +53 ticks sin usar el futuro.",
+   "origen": "mapa v2 (HVN +53 en balance, −22 en tendencia)",
+   "estado": "aprobada",
+   "estrategia": null,
+   "version": null,
+   "estudio": "proxy_v1",
+   "requisitos": [
+    "estudio proxy_v1 registrado",
+    "script engine/regime_proxy.py"
+   ],
+   "decision": "aprobada 23/10/2026"
   },
   {
    "id": "T2-FADE",
    "nombre": "Desvanecer órdenes grandes",
    "hipotesis": "Entrar EN CONTRA de una orden agresiva ≥ p99 (10+ contratos) que barre ≥ 2 niveles, porque el mapa muestra 6–7 ticks en contra de la orden a 5, 15 y 30 min (19,255 eventos, z ≈ −28).",
    "origen": "mapa v1 · hipótesis inversa de BIG",
-   "estado": "propuesta",
+   "estado": "descartada",
    "estrategia": "FADE",
    "version": 1,
    "estudio": "tanda2",
@@ -55,14 +95,15 @@
     "reglas escritas y selladas en strategies/v2.json (listo)",
     "aprobación de Oscar y Jose Miguel → pasar a congelada"
    ],
-   "notas": "Riesgo conocido: parte de la reversión inmediata es el rebote bid-ask; la prueba con costos lo descuenta. · Humo (60 sesiones, sin registrar): −$13,518 en 194 operaciones, p 1.0. El efecto promedio del mapa (6–7 ticks) no cubre stop de 16 ticks + costos de ~2.8 ticks. Antes de aprobar: mirar en el mapa v2 el efecto a 1–5 min por régimen y considerar objetivo corto (8 ticks) y stop corto, lo cual cambia la regla sellada (sería FADE v2)."
+   "notas": "Riesgo conocido: parte de la reversión inmediata es el rebote bid-ask; la prueba con costos lo descuenta. · Humo (60 sesiones, sin registrar): −$13,518 en 194 operaciones, p 1.0. El efecto promedio del mapa (6–7 ticks) no cubre stop de 16 ticks + costos de ~2.8 ticks. Antes de aprobar: mirar en el mapa v2 el efecto a 1–5 min por régimen y considerar objetivo corto (8 ticks) y stop corto, lo cual cambia la regla sellada (sería FADE v2).",
+   "decision": "no en su forma actual: humo −$13,518; reemplazada por FADE v2 y FADEL (tanda 2b)"
   },
   {
    "id": "T2-HVN",
    "nombre": "Rechazo de zonas HVN del día anterior",
    "hipotesis": "Cuando el precio llega a un nodo de alto volumen del perfil de Nueva York del día anterior después de moverse ≥ 20 ticks, rebota: +9 ticks a 15 min y +17 a 30 min (2,561 eventos).",
    "origen": "mapa v1 · estilo Profit Pro",
-   "estado": "propuesta",
+   "estado": "congelada",
    "estrategia": "HVN",
    "version": 1,
    "estudio": "tanda2",
@@ -70,7 +111,8 @@
     "reglas escritas y selladas en strategies/v2.json (listo)",
     "aprobación de Oscar y Jose Miguel → pasar a congelada"
    ],
-   "notas": "Es la señal con mejor relación eventos/efecto del mapa. · Humo (60 sesiones, sin registrar): −$2,288 en 145 operaciones, p 0.26. No concluyente."
+   "notas": "Es la señal con mejor relación eventos/efecto del mapa. · Humo (60 sesiones, sin registrar): −$2,288 en 145 operaciones, p 0.26. No concluyente.",
+   "decision": "aprobada 23/10/2026 por Jose Miguel (comité) · corre el orquestador"
   },
   {
    "id": "T2-ABS-EARLY",
@@ -85,7 +127,8 @@
     "cuenta como versión 2 de 3 de ABS",
     "aprobación de Oscar"
    ],
-   "notas": "La v1 pierde en 2025 y tiene 128 operaciones: una v2 debería también ampliar horas o niveles para tener más operaciones."
+   "notas": "La v1 pierde en 2025 y tiene 128 operaciones: una v2 debería también ampliar horas o niveles para tener más operaciones.",
+   "decision": "guardada: no gastar la 3ª versión de ABS antes de ver la v2"
   },
   {
    "id": "T2-ABS-HOURS",
@@ -99,28 +142,30 @@
    "requisitos": [
     "si se combina con T2-ABS-EARLY es una sola v2; máximo 3 versiones"
    ],
-   "notas": "Cambiar el horario es cambio de regla: versión nueva."
+   "notas": "Cambiar el horario es cambio de regla: versión nueva.",
+   "decision": "guardada: idem"
   },
   {
    "id": "T2-ICE",
    "nombre": "Icebergs con definición medida",
    "hipotesis": "Con la definición actual solo hay 17 icebergs en 576 sesiones; con una definición basada en reposición observada (tamaño después ≥ tamaño antes tras ejecuciones repetidas) habrá suficientes para medir.",
    "origen": "mapa v1 · ice",
-   "estado": "propuesta",
+   "estado": "descartada",
    "estrategia": null,
    "version": null,
    "estudio": "mapa_v2",
    "requisitos": [
     "agregar tamaños 'antes' del libro al lector de sesión"
    ],
-   "notas": "Va primero al mapa, no a una estrategia."
+   "notas": "Va primero al mapa, no a una estrategia.",
+   "decision": "17 eventos en 576 sesiones; la definición no sirve y arreglarla es trabajo de lector de datos"
   },
   {
    "id": "M2-DIR",
    "nombre": "Mapa v2 con azar de dirección aleatoria",
    "hipotesis": "Publicar además del azar 'misma dirección' un azar con dirección 50/50, para separar 'buen momento' de 'buena dirección'.",
    "origen": "revisión del mapa v1",
-   "estado": "aprobada",
+   "estado": "corrida",
    "estrategia": null,
    "version": null,
    "estudio": "mapa_v2",
@@ -128,7 +173,9 @@
     "cambio de código en signal_map.py",
     "estudio mapa_v2 registrado"
    ],
-   "notas": "Cambio metodológico; no requiere a Oscar, lo aprueba Jose Miguel."
+   "notas": "Cambio metodológico; no requiere a Oscar, lo aprueba Jose Miguel.",
+   "decision": "hecho dentro del mapa v2 (23/10/2026)",
+   "test_id": "mapa_v2"
   },
   {
    "id": "T3-SMT",

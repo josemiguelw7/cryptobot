@@ -7,6 +7,13 @@ import sys
 from . import registry, config
 
 STUDIES = {
+    "tanda2b": {
+        "hypothesis": "FADE v2 (objetivo 8, stop 12, 10 min) y FADEL v1 (entrada pasiva con cola) capturan el efecto de 6–7 ticks contra las órdenes grandes y ganan a RAND después de costos.",
+        "n_declared": 2 + 32,
+        "kill": ["ganancia neta <= 0 con costos base", "p vs RAND > 0.20", "pierde en 2 de 3 años", "rompe MLL en > 50% de arranques"],
+        "strategies": ["FADE v2", "FADEL v1"],
+        "notes": "Reemplaza a FADE v1 (descartada sin correr tras el humo). Aprobado por Jose Miguel el 23/10/2026.",
+    },
     "tanda2": {
         "hypothesis": "FADE v1 (desvanecer órdenes grandes), HVN v1 (rechazo de nodos de ayer) y ABS v2 (dejar correr al ganador), con números medidos en el mapa v1 y el estudio de salidas, ganan a RAND después de costos y pasan Topstep.",
         "n_declared": 3 + 48,

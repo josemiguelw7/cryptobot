@@ -13,6 +13,8 @@ PARAMS = {
     "FADE": {"min_levels": 2, "stop": 16, "target": None, "max_min": 15, "cooldown_s": 120},
     "HVN": {"far_ticks": 20, "within_s": 3600, "stop": 12, "target": 16, "max_min": 30, "hvn_pct": 90},
     "ABS": {**V1.PARAMS["ABS"], "target_fixed": 160},
+    "FADE2": {"min_levels": 2, "stop": 12, "target": 8, "max_min": 10, "cooldown_s": 120},
+    "FADEL": {"min_levels": 2, "stop": 12, "target": 8, "max_min": 10, "cooldown_s": 120, "wait_s": 30},
 }
 BIN = V1.BIN
 
@@ -38,6 +40,30 @@ def fade(s, ref, thr, p=None):
         last = t0
         out.append(Signal(sec=t0, side=-side, stop_ticks=p["stop"], target_ticks=p["target"], max_sec=p["max_min"] * 60,
                           kind="FADE", level="orden", meta={"order_size": int(size[c]), "levels": int(hi[c] - lo[c] + 1), "order_px": int(px[starts[c]]) / 4}))
+    return out
+
+
+def fade_v2(s, ref, thr, p=None):
+    """FADE con objetivo corto: el efecto medido es de 6–7 ticks, así que objetivo 8, stop 12, 10 minutos."""
+    p = p or PARAMS["FADE2"]
+    sigs = fade(s, ref, thr, {"min_levels": p["min_levels"], "stop": p["stop"], "target": p["target"], "max_min": p["max_min"], "cooldown_s": p["cooldown_s"]})
+    for x in sigs:
+        x.kind = "FADE"
+    return sigs
+
+
+def fade_limit(s, ref, thr, p=None):
+    """FADE pasivo: en vez de cruzar el spread, pone una orden límite EN el precio extremo que barrió la orden grande
+    (donde la orden grande dejó de empujar), detrás de la cola visible; si no se llena en 30 s se cancela.
+    Captura el rebote del spread en vez de pagarlo. Objetivo 8, stop 12, 10 min."""
+    p = p or PARAMS["FADEL"]
+    sigs = fade(s, ref, thr, {"min_levels": p["min_levels"], "stop": p["stop"], "target": p["target"], "max_min": p["max_min"], "cooldown_s": p["cooldown_s"]})
+    out = []
+    for x in sigs:
+        i = s.idx_sec(x.sec); k = i - 1 if i > 0 else 0
+        ext = int(s.px[k])                       # último precio operado por la orden grande (su extremo)
+        x.order = "limit"; x.limit_px = ext; x.wait_sec = p["wait_s"]; x.kind = "FADEL"
+        out.append(x)
     return out
 
 
@@ -85,5 +111,5 @@ def absorption_v2(s, ref, thr, p=None):
     return sigs
 
 
-REGISTRY = {"FADE": fade, "HVN": hvn, "ABS": absorption_v2}
+REGISTRY = {"FADE": fade, "HVN": hvn, "ABS": absorption_v2, "FADE2": fade_v2, "FADEL": fade_limit}
 NEEDS_PROFILE = {"HVN"}
