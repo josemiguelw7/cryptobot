@@ -1,6 +1,6 @@
 """Red Team automático (protocol.json › red_team): placebos y curva de costos.
 Todas las funciones reciben las señales ya generadas por sesión y vuelven a simular.
-Sesión afuera, variantes adentro: cada sesión se carga una sola vez.
+Regla de rendimiento: la sesión se carga UNA vez y adentro se corren todas las variantes.
 """
 import copy, hashlib
 import numpy as np
@@ -10,10 +10,6 @@ from .data import load
 
 def _net(trades):
     return float(sum(t["net_usd"] for t in trades))
-
-
-def _seed(*parts):
-    return int(hashlib.sha256(":".join(map(str, parts)).encode()).hexdigest()[:12], 16)
 
 
 def resim(signals_by_date, rules, slip, commission_rt, mutate=None):
@@ -36,8 +32,8 @@ def placebo_shift(signals_by_date, rules, slip, commission_rt, shift_s=300):
         for x in ss:
             x.sec = x.sec - shift_s
         return ss
-    tot, tr = resim(signals_by_date, rules, slip, commission_rt, mut)
-    return {"desplazamiento_s": shift_s, "neto": round(tot, 2), "operaciones": len(tr)}
+    tot, _ = resim(signals_by_date, rules, slip, commission_rt, mut)
+    return {"desplazamiento_s": shift_s, "neto": round(tot, 2)}
 
 
 def placebo_flip(signals_by_date, rules, slip, commission_rt, real_net, n=200, test_id="x"):
@@ -48,7 +44,7 @@ def placebo_flip(signals_by_date, rules, slip, commission_rt, real_net, n=200, t
             continue
         s = load(d, ny_only=True)
         for k in range(n):
-            rng = np.random.default_rng(_seed("flip", test_id, d, k))
+            rng = np.random.default_rng(int(hashlib.sha256(f"flip:{test_id}:{d}:{k}".encode()).hexdigest()[:12], 16))
             ss = []
             for x in sigs:
                 y = copy.copy(x)
@@ -68,7 +64,7 @@ def cost_curve(signals_by_date, rules, commission_rt, slips=(0, 1, 2, 3, 4)):
             continue
         s = load(d, ny_only=True)
         for sl in slips:
-            tr = simulate(s, sigs, rules, sl, commission_rt)
+            tr = simulate(s, [copy.copy(x) for x in sigs], rules, sl, commission_rt)
             tot[sl] += _net(tr); n[sl] += len(tr)
     return [{"slip_ticks": sl, "neto": round(tot[sl], 2), "operaciones": n[sl]} for sl in slips]
 
@@ -87,12 +83,12 @@ def sensitivity(gen, dates, levels, params, steps, rules, slip, commission_rt, o
             continue
         s = load(d, ny_only=True)
         kw = {"open_in_value": open_in_value(d)} if open_in_value else {}
-        for vi, (name, m, p) in enumerate(variants):
+        for i, (name, m, p) in enumerate(variants):
             if p[name] <= 0:
                 continue
             tr = simulate(s, gen(s, ref, thr, p, **kw), rules, slip, commission_rt)
-            tot[vi] += _net(tr); cnt[vi] += len(tr)
+            tot[i] += _net(tr); cnt[i] += len(tr)
     surface = {}
-    for vi, (name, m, p) in enumerate(variants):
-        surface.setdefault(name, []).append({"valor": p[name], "neto": round(tot[vi], 2) if p[name] > 0 else None, "operaciones": cnt[vi]})
+    for i, (name, m, p) in enumerate(variants):
+        surface.setdefault(name, []).append({"valor": p[name], "neto": None if p[name] <= 0 else round(tot[i], 2), "operaciones": cnt[i]})
     return surface

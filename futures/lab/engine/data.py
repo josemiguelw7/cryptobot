@@ -55,7 +55,7 @@ class Session:
         return int(self.px[i]) if i >= 0 else None
 
 
-@lru_cache(maxsize=4)
+@lru_cache(maxsize=640)   # ~20 MB por sesión NY; la VM tiene 32 GB: se carga cada sesión una sola vez
 def load(date, ny_only=False):
     p = os.path.join(config.CAN, f"{date}.parquet")
     df = pl.read_parquet(p)
