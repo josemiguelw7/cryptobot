@@ -96,7 +96,7 @@ a{color:var(--accent)}
 <a href="#estrategias" data-t="estrategias">Estrategias</a>
 <a href="#explorador" data-t="explorador">Explorador</a>
 <a href="#bitacora" data-t="bitacora">Bitácora</a>
-<a href="#" id="salir" style="margin-left:auto" onclick="event.preventDefault();try{localStorage.removeItem('lab-pin');sessionStorage.removeItem('lab-pin')}catch(e){};fetch('/api/entrar',{method:'POST',headers:{'Content-Type':'application/json'},body:'{"salir":true}'}).finally(()=>location.replace('/entrar.html'))">Salir</a>
+<a href="#" id="salir" style="margin-left:auto">Salir</a>
 </nav>
 
 
@@ -234,6 +234,11 @@ function show(){let h=(location.hash||'#floor').slice(1),go=null;if(h.startsWith
  if(go){let n=0;const t=setInterval(()=>{const el=document.getElementById(go);if(el||++n>40){clearInterval(t);if(el){el.scrollIntoView({behavior:'smooth'});const d=el.querySelector('details');if(d&&!d.open)d.open=true}}},150)}}
 window.addEventListener('hashchange',show);document.addEventListener('DOMContentLoaded',show);show();
 })();
+</script>
+<script>
+document.getElementById('salir').addEventListener('click',function(e){e.preventDefault();
+ try{localStorage.removeItem('lab-pin');sessionStorage.removeItem('lab-pin')}catch(_){}
+ fetch('/api/entrar',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({salir:true})}).finally(function(){location.replace('/entrar.html')})});
 </script>
 <!--REPORT_WIDGET-->
 </body></html>
