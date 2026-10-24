@@ -49,7 +49,7 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 - Divergencia de delta: -0.66 ticks a 30 min · a favor · 33,785 eventos
 
 ## 7b. Buzón de Oscar (notas nuevas)
-- ninguna
+- 2026-10-24_1645_sugerencia-o-pedido-aparte-de-las-pruebas-que-estas-haciendo.md
 
 ## 8. Decisiones tomadas hoy
 - 
