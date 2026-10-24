@@ -1,0 +1,13 @@
+{
+ "id": "T3-ORB",
+ "commit": "503d4321692b5cd9ef0b5bfe07de735cf4d1f7ac",
+ "inicio": "2026-10-24T10:00:01+00:00",
+ "fin": "2026-10-24T10:02:46+00:00",
+ "corrida_1_ok": true,
+ "corrida_2_ok": true,
+ "trades_sha256": [
+  "c9cec8aba09bb1dd60b3db244759a9ff834801d96f6bea09c6b145c6a5f24ab5",
+  "c9cec8aba09bb1dd60b3db244759a9ff834801d96f6bea09c6b145c6a5f24ab5"
+ ],
+ "reproducible": true
+}

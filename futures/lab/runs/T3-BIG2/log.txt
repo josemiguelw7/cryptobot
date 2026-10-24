@@ -1,0 +1,44 @@
+2026-10-24T09:45:01+00:00 clon limpio de dcf7aa6950ab8e9d49addd19429fa4f9d4eaf445
+2026-10-24T09:45:08+00:00 golden: golden OK: esperado 885b6df1468b6753 (14 op.) · obtenido 885b6df1468b6753 (14 op.) · 5s
+
+$ sudo -n docker run --rm --network none --name nqlab-T3-BIG2-a -v /srv/lab/runs/T3-BIG2/src:/lab:ro -v /srv/lab/data:/srv/lab/data:ro -v /srv/lab/runs/T3-BIG2/out1:/out -e LAB_DATA=/srv/lab/data -e LAB_OUT=/out -e LAB_RESULTS=/out/results -e LAB_STATS=/out/lab_stats.jsonl -w /lab/futures/lab nqlab:1 python -m engine.run_test --strategy BIG --version 2 --study tanda3 --sens --isolated --n-trials 342 --var-sr 0.003998731875
+[BIG] 2724 operaciones en 556 sesiones · 50s
+  RAND 50/576
+  RAND 100/576
+  RAND 150/576
+  RAND 200/576
+  RAND 250/576
+  RAND 300/576
+  RAND 350/576
+  RAND 400/576
+  RAND 450/576
+  RAND 500/576
+  RAND 550/576
+  neto -72187 · p RAND 0.8052 · estrés -90755 (p 0.7309) · 77s
+  Topstep 0.0% (RAND 0.0%) · placebo desplazado -50719 · 90s
+  sensibilidad lista · 124s
+X877a7f8b3c BIG v2: no_pasa · 125s (aislado: el orquestador registra y publica)
+
+
+[126s exit 0]
+$ sudo -n docker run --rm --network none --name nqlab-T3-BIG2-b -v /srv/lab/runs/T3-BIG2/src:/lab:ro -v /srv/lab/data:/srv/lab/data:ro -v /srv/lab/runs/T3-BIG2/out2:/out -e LAB_DATA=/srv/lab/data -e LAB_OUT=/out -e LAB_RESULTS=/out/results -e LAB_STATS=/out/lab_stats.jsonl -w /lab/futures/lab nqlab:1 python -m engine.run_test --strategy BIG --version 2 --study tanda3 --sens --isolated --n-trials 342 --var-sr 0.003998731875
+[BIG] 2724 operaciones en 556 sesiones · 50s
+  RAND 50/576
+  RAND 100/576
+  RAND 150/576
+  RAND 200/576
+  RAND 250/576
+  RAND 300/576
+  RAND 350/576
+  RAND 400/576
+  RAND 450/576
+  RAND 500/576
+  RAND 550/576
+  neto -72187 · p RAND 0.8052 · estrés -90755 (p 0.7309) · 78s
+  Topstep 0.0% (RAND 0.0%) · placebo desplazado -50719 · 90s
+  sensibilidad lista · 125s
+X877a7f8b3c BIG v2: no_pasa · 125s (aislado: el orquestador registra y publica)
+
+
+[126s exit 0]
+2026-10-24T09:49:20+00:00 PUBLICADA como P007 (no_pasa)

@@ -104,7 +104,7 @@ const pct=n=>n==null?'—':num(n,1)+'%';
 const LBL={contexto:'Contexto',disparador:'Disparador',ubicacion:'Ubicación',confirmacion:'Confirmación',entrada:'Entrada',stop:'Stop',objetivo:'Objetivo',tiempo_maximo:'Tiempo máximo',filtros:'Filtros',
  instrumento:'Instrumento',horario:'Horario',cierre_forzado:'Cierre forzado',noticias:'Noticias',costos:'Costos',limites_dia:'Límites del día',una_posicion:'Posiciones',niveles_de_referencia:'Niveles de referencia',umbrales_relativos:'Umbrales',datos:'Datos',control:'Control'};
 const ORDER=['contexto','disparador','ubicacion','confirmacion','entrada','stop','objetivo','tiempo_maximo','filtros'];
-const V={pasa:['Pasa todo','ok'],no_pasa:['No pasa','no'],insuficiente:['Insuficiente','wait'],error:['Error de programa','err'],revisar:['Revisar · placebo sospechoso','run'],en_revision:['En revisión','run']};
+const V={pasa:['Pasa todo','ok'],no_pasa:['No pasa','no'],insuficiente:['Insuficiente','wait'],error:['Error de programa','err'],revisar:['Revisar · placebo sospechoso','run'],superada:['Superada · motor 1.0, se repite','wait'],en_revision:['En revisión','run']};
 const PL={paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor:'rgba(0,0,0,0)',font:{color:'#9a9a9a',size:11},margin:{l:48,r:8,t:8,b:30},xaxis:{gridcolor:'#222',zeroline:false},yaxis:{gridcolor:'#222',zeroline:false},legend:{orientation:'h',y:1.15,font:{size:11}}};
 const CFG={displaylogo:false,responsive:true,modeBarButtonsToRemove:['lasso2d','select2d','zoom2d','pan2d','autoScale2d']};
 let R=null,filter='todas',cmp=[];
@@ -118,7 +118,7 @@ function renderKpis(){
  const pasa=T.filter(t=>t.veredicto==='pasa').length,grave=(R.cementerio||[]).length;
  const decl=(reg.estudios||[]).reduce((s,e)=>s+(e.n_declarado||0),0);
  document.getElementById('rx-kpis').innerHTML=kpi('Pruebas publicadas',T.length)+kpi('Intentos registrados',`${reg.total_intentos||0} / ${decl} decl.`)+kpi('Pasan todo',pasa,pasa?'g':'')+kpi('En el cementerio',grave)+kpi('Señales significativas',M.length?M.filter(m=>m.significativa).length+' / '+M.length:'—')+kpi('Examen sellado','cerrado','y');
- const cats=[['todas','Todas'],['pasa','Pasan'],['revisar','Revisar'],['no_pasa','No pasan'],['insuficiente','Insuficientes'],['error','Errores']];
+ const cats=[['todas','Todas'],['pasa','Pasan'],['revisar','Revisar'],['no_pasa','No pasan'],['superada','Superadas'],['insuficiente','Insuficientes'],['error','Errores']];
  document.getElementById('rx-filter').innerHTML=cats.map(([k,l])=>`<span class="chip ${filter===k?'on':''}" data-f="${k}">${l} <small>${k==='todas'?T.length:T.filter(t=>t.veredicto===k).length}</small></span>`).join('');
 }
 function testCard(t){

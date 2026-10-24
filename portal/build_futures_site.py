@@ -84,7 +84,7 @@ def registry_export():
 def graveyard(tests, trials):
     out = []
     for t in tests:
-        if t.get("veredicto") in ("no_pasa", "error", "insuficiente"):
+        if t.get("veredicto") in ("no_pasa", "error", "insuficiente", "superada"):
             out.append({"id": t["id"], "que": f"{t['estrategia']} v{t['version']}", "fecha": t.get("fecha"), "veredicto": t["veredicto"],
                         "causa": t.get("muerte") or "sin causa escrita", "neto": (t.get("resultados") or {}).get("ganancia_neta")})
     return out

@@ -1,0 +1,13 @@
+{
+ "id": "T3-BIG2",
+ "commit": "dcf7aa6950ab8e9d49addd19429fa4f9d4eaf445",
+ "inicio": "2026-10-24T09:45:01+00:00",
+ "fin": "2026-10-24T09:49:20+00:00",
+ "corrida_1_ok": true,
+ "corrida_2_ok": true,
+ "trades_sha256": [
+  "7b423bd8a728ce4faa03d4667220dc004153abf422d5ef11213ce70597126b38",
+  "7b423bd8a728ce4faa03d4667220dc004153abf422d5ef11213ce70597126b38"
+ ],
+ "reproducible": true
+}
