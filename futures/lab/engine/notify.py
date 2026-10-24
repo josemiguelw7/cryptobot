@@ -17,7 +17,8 @@ def send(subject, body):
     c = json.load(open(CFG))
     req = urllib.request.Request("https://api.resend.com/emails", method="POST",
                                  data=json.dumps({"from": c["from"], "to": c["to"], "subject": f"[Laboratorio NQ] {subject}", "text": body}).encode(),
-                                 headers={"Authorization": "Bearer " + c["resend_api_key"], "Content-Type": "application/json"})
+                                 headers={"Authorization": "Bearer " + c["resend_api_key"], "Content-Type": "application/json",
+                                          "User-Agent": "nqlab-notify/1.0"})   # Cloudflare bloquea el User-Agent de urllib (error 1010)
     try:
         with urllib.request.urlopen(req, timeout=15) as r:
             return r.status < 300
