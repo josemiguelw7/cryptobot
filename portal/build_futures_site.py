@@ -182,7 +182,8 @@ def build():
     tpl = open(os.path.join(HERE, "futures_template.html"), encoding="utf-8").read()
     frag = lambda n: open(os.path.join(HERE, n), encoding="utf-8").read()
     html = (tpl.replace("<!--FLOOR-->", frag("trading_floor.html")).replace("<!--RESEARCH_TABS-->", frag("research_tabs.html"))
-               .replace("<!--EXPLORER_TAB-->", frag("explorer_tab.html")).replace("<!--REPORT_WIDGET-->", frag("report_widget.html")).replace("__DATA__", json.dumps(data, ensure_ascii=False)))
+               .replace("<!--EXPLORER_TAB-->", frag("explorer_tab.html")).replace("<!--REPORT_WIDGET-->", frag("report_widget.html")).replace("__DATA__", json.dumps(data, ensure_ascii=False))
+               .replace("__ICON__", "data:image/png;base64," + open(os.path.join(HERE, "brand", "tab64.b64")).read().strip()))
     with open(os.path.join(OUT, "index.html"), "w", encoding="utf-8") as f:
         f.write(html)
     import build_lab_md, build_comite, build_context_zip; build_lab_md.build(r["sellos"]); build_comite.build()

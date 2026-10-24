@@ -13,18 +13,18 @@
 .rx .kpi small{color:#9a9a9a;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
 .rx .kpi.g b{color:#4ade80}.rx .kpi.r b{color:#f87171}.rx .kpi.y b{color:#facc15}
 .rx .pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:600;background:#262626;color:#cfcfcf;white-space:nowrap}
-.rx .ok{background:#0f2e1b;color:#4ade80}.rx .no{background:#331414;color:#f87171}.rx .wait{background:#2b2410;color:#facc15}.rx .run{background:#0c2236;color:#38bdf8}.rx .err{background:#3a1a3a;color:#e879f9}
+.rx .ok{background:#0f2e1b;color:#4ade80}.rx .no{background:#331414;color:#f87171}.rx .wait{background:#2b2410;color:#facc15}.rx .run{background:#0c2236;color:#3FC1B0}.rx .err{background:#3a1a3a;color:#e879f9}
 .rx .head{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:space-between}
 .rx .head .t{font-size:17px;font-weight:650}
 .rx .idea{color:#cfcfcf;margin:8px 0 10px;font-size:14px}
 .rx dl{display:grid;grid-template-columns:140px 1fr;gap:6px 14px;margin:0;font-size:14px}
 .rx dt{color:#9a9a9a}.rx dd{margin:0}
-.rx .chg{font-size:14px;margin:6px 0;padding:8px 10px;background:#0b0b0b;border-left:3px solid #38bdf8;border-radius:6px}
+.rx .chg{font-size:14px;margin:6px 0;padding:8px 10px;background:#0b0b0b;border-left:3px solid #3FC1B0;border-radius:6px}
 .rx .chg del{color:#f87171}.rx .chg ins{color:#4ade80;text-decoration:none}
 .rx .mono{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:#9a9a9a;word-break:break-all}
-.rx details>summary{cursor:pointer;color:#38bdf8;font-size:14px;margin-top:8px;list-style:none;padding:8px 0}
+.rx details>summary{cursor:pointer;color:#3FC1B0;font-size:14px;margin-top:8px;list-style:none;padding:8px 0}
 .rx details>summary::-webkit-details-marker{display:none}
-.rx details>summary::before{content:'▸ ';color:#38bdf8}.rx details[open]>summary::before{content:'▾ '}
+.rx details>summary::before{content:'▸ ';color:#3FC1B0}.rx details[open]>summary::before{content:'▾ '}
 .rx .empty{color:#9a9a9a;text-align:center;padding:24px 12px;border:1px dashed #333;border-radius:16px;font-size:14px}
 .rx ol,.rx ul{margin:6px 0 0;padding-left:20px}.rx li{margin:4px 0}
 .rx table{width:100%;border-collapse:collapse;font-size:13.5px}
@@ -32,18 +32,18 @@
 .rx th{color:#9a9a9a;font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:.4px}
 .rx td.n,.rx th.n{text-align:right;font-variant-numeric:tabular-nums}
 .rx .tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
-.rx a{color:#38bdf8}
+.rx a{color:#3FC1B0}
 .rx .g{color:#4ade80}.rx .r{color:#f87171}.rx .y{color:#facc15}
 .rx .chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 12px}
 .rx .chip{padding:6px 12px;border-radius:999px;background:#1a1a1a;border:1px solid #2a2a2a;color:#cfcfcf;font-size:13px;cursor:pointer}
-.rx .chip.on{background:#1f2f3f;border-color:#38bdf8;color:#fff}
+.rx .chip.on{background:#1f2f3f;border-color:#3FC1B0;color:#fff}
 .rx .muerte{background:#1a0f0f;border:1px solid #3a1a1a;border-radius:10px;padding:8px 12px;font-size:13.5px;margin-top:10px}
 .rx .muerte.pass{background:#0c1f14;border-color:#1b4a2b}
 .rx .sec{border-top:1px solid #222;margin-top:12px;padding-top:4px}
 .rx .btn{display:inline-block;padding:7px 12px;border-radius:10px;background:#1f1f1f;border:1px solid #333;color:#fff;font-size:13px;text-decoration:none;cursor:pointer}
 .rx .btn.p{background:#0c2236;border-color:#1c4a6a}
 .rx .heat td{text-align:center;padding:6px 4px;border-radius:6px;font-size:12px}
-.rx .bar{height:6px;background:#1f1f1f;border-radius:4px;overflow:hidden}.rx .bar i{display:block;height:100%;background:#38bdf8}
+.rx .bar{height:6px;background:#1f1f1f;border-radius:4px;overflow:hidden}.rx .bar i{display:block;height:100%;background:#3FC1B0}
 .rx .gl dt{color:#fff;font-weight:600}.rx .gl dd{color:#bdbdbd;margin-bottom:6px}
 .rx .q{padding:10px 0;border-bottom:1px solid #222;font-size:14px}.rx .q small{color:#9a9a9a;display:block;margin-top:4px}
 .rx .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -155,7 +155,7 @@ function drawCurve(id,t){
  if(!t.curva||!document.getElementById(id))return;
  const c=t.curva,tr=[];
  if(c.rand_p5&&c.rand_p95){tr.push({x:c.x,y:c.rand_p5,line:{width:0},hoverinfo:'skip',showlegend:false},{x:c.x,y:c.rand_p95,fill:'tonexty',fillcolor:'rgba(150,150,150,.2)',line:{width:0},name:'RAND · 90% de los casos'})}
- tr.push({x:c.x,y:c.y,line:{color:t.veredicto==='pasa'?'#4ade80':'#38bdf8',width:2},name:`${t.estrategia} v${t.version}`});
+ tr.push({x:c.x,y:c.y,line:{color:t.veredicto==='pasa'?'#4ade80':'#3FC1B0',width:2},name:`${t.estrategia} v${t.version}`});
  Plotly.react(id,tr,lay({yaxis:{gridcolor:'#222',tickprefix:'$',zeroline:true,zerolinecolor:'#444'}}),CFG);
 }
 async function loadFull(id){
@@ -188,11 +188,11 @@ async function loadFull(id){
  await plotly();
  const H=h.hist_operacion;if(H)Plotly.react('h1-'+id,[{x:H.bins.slice(0,-1),y:H.counts,type:'bar',marker:{color:H.bins.slice(0,-1).map(b=>b>=0?'#4ade80':'#f87171')}}],lay({xaxis:{tickprefix:'$',gridcolor:'#222'},margin:{l:36,r:8,t:8,b:30}}),CFG);
  const D=h.diario;if(D)Plotly.react('h2-'+id,[{x:D.x,y:D.y,type:'bar',marker:{color:D.y.map(v=>v>=0?'#4ade80':'#f87171')}}],lay({yaxis:{tickprefix:'$',gridcolor:'#222'}}),CFG);
- const M=h.movil_20;if(M&&M.neto.length)Plotly.react('h3-'+id,[{y:M.neto,name:'neto 20 sesiones',line:{color:'#38bdf8',width:1.5}},{y:M.sharpe,name:'Sharpe anual móvil',yaxis:'y2',line:{color:'#facc15',width:1}}],lay({yaxis:{tickprefix:'$',gridcolor:'#222'},yaxis2:{overlaying:'y',side:'right',gridcolor:'rgba(0,0,0,0)'}}),CFG);
- const U=h.duracion;if(U)Plotly.react('h4-'+id,[{x:U.bins.slice(0,-1).map((b,i)=>`${b}–${U.bins[i+1]}`),y:U.counts,type:'bar',marker:{color:'#38bdf8'}}],lay({margin:{l:36,r:8,t:8,b:40}}),CFG);
+ const M=h.movil_20;if(M&&M.neto.length)Plotly.react('h3-'+id,[{y:M.neto,name:'neto 20 sesiones',line:{color:'#3FC1B0',width:1.5}},{y:M.sharpe,name:'Sharpe anual móvil',yaxis:'y2',line:{color:'#facc15',width:1}}],lay({yaxis:{tickprefix:'$',gridcolor:'#222'},yaxis2:{overlaying:'y',side:'right',gridcolor:'rgba(0,0,0,0)'}}),CFG);
+ const U=h.duracion;if(U)Plotly.react('h4-'+id,[{x:U.bins.slice(0,-1).map((b,i)=>`${b}–${U.bins[i+1]}`),y:U.counts,type:'bar',marker:{color:'#3FC1B0'}}],lay({margin:{l:36,r:8,t:8,b:40}}),CFG);
  if(cp.caminos)Plotly.react('h5-'+id,[{x:cp.caminos,type:'histogram',nbinsx:10,marker:{color:cp.caminos.map(v=>v>0?'#4ade80':'#f87171')}}],lay({xaxis:{tickprefix:'$',gridcolor:'#222',title:{text:'15 caminos CPCV',font:{size:11}}},margin:{l:36,r:8,t:8,b:36}}),CFG);
  const CC=rt.curva_costos;if(CC)Plotly.react('h6-'+id,[{x:CC.map(c=>c.slip_ticks+' tick'),y:CC.map(c=>c.neto),type:'bar',marker:{color:CC.map(c=>c.neto>0?'#4ade80':'#f87171')},text:CC.map(c=>money(c.neto)),textposition:'auto'}],lay({yaxis:{tickprefix:'$',gridcolor:'#222',zeroline:true,zerolinecolor:'#555'},margin:{l:48,r:8,t:8,b:30}}),CFG);
- if(ts.hist_balance&&ts.hist_balance.length)Plotly.react('h7-'+id,[{x:ts.hist_balance_bins.slice(0,-1),y:ts.hist_balance,type:'bar',marker:{color:ts.hist_balance_bins.slice(0,-1).map(b=>b>=53000?'#4ade80':b<=48000?'#f87171':'#38bdf8')}}],lay({xaxis:{tickprefix:'$',gridcolor:'#222'},margin:{l:36,r:8,t:8,b:30},shapes:[{type:'line',x0:48000,x1:48000,y0:0,y1:1,yref:'paper',line:{color:'#f87171',dash:'dot'}},{type:'line',x0:53000,x1:53000,y0:0,y1:1,yref:'paper',line:{color:'#4ade80',dash:'dot'}}]}),CFG);
+ if(ts.hist_balance&&ts.hist_balance.length)Plotly.react('h7-'+id,[{x:ts.hist_balance_bins.slice(0,-1),y:ts.hist_balance,type:'bar',marker:{color:ts.hist_balance_bins.slice(0,-1).map(b=>b>=53000?'#4ade80':b<=48000?'#f87171':'#3FC1B0')}}],lay({xaxis:{tickprefix:'$',gridcolor:'#222'},margin:{l:36,r:8,t:8,b:30},shapes:[{type:'line',x0:48000,x1:48000,y0:0,y1:1,yref:'paper',line:{color:'#f87171',dash:'dot'}},{type:'line',x0:53000,x1:53000,y0:0,y1:1,yref:'paper',line:{color:'#4ade80',dash:'dot'}}]}),CFG);
  if(ts.hist_dias_pasa&&ts.hist_dias_pasa.length)Plotly.react('h8-'+id,[{x:['≤10','≤20','≤30','≤45','≤60','≤90','≤120'],y:ts.hist_dias_pasa,type:'bar',marker:{color:'#4ade80'}}],lay({margin:{l:36,r:8,t:8,b:30}}),CFG);
 }
 async function oscarBox(id,acuerdo){
@@ -221,7 +221,7 @@ function renderCompare(){
  if(T.length<2){el.innerHTML=cmp.length===1?`<div class="card note">Elegiste ${cmp[0]} para comparar. Toca "comparar" en otra prueba.</div>`:'';return}
  const rows=[['Operaciones',t=>num(t.resultados.operaciones)],['Ganancia neta',t=>money(t.resultados.ganancia_neta)],['p contra RAND',t=>num(t.resultados.vs_rand,3)],['Con costos al doble',t=>money((t.estres||{}).neto)],['Pasa Topstep',t=>pct(t.resultados.topstep)],['Aciertos',t=>pct(t.resultados.aciertos)],['Factor',t=>num(t.resultados.factor,2)],['Peor drawdown',t=>money(t.resultados.drawdown_max)],['Sharpe anual',t=>num(t.resultados.sharpe_anual,2)],['DSR',t=>num(t.dsr,3)],['Veredicto',t=>(V[t.veredicto]||V.en_revision)[0]]];
  el.innerHTML=`<div class="card"><div class="head"><span class="t">Comparación lado a lado</span><span class="chip" data-cmpclear="1">limpiar</span></div><div class="tw"><table><tr><th></th>${T.map(t=>`<th>${t.id} · ${t.estrategia} v${t.version}</th>`).join('')}</tr>${rows.map(([l,f])=>`<tr><td>${l}</td>${T.map(t=>`<td>${f(t)}</td>`).join('')}</tr>`).join('')}</table></div><div id="cmp-plot" class="plot"></div></div>`;
- plotly().then(()=>Plotly.react('cmp-plot',T.map((t,i)=>({x:t.curva.x,y:t.curva.y,name:`${t.id} ${t.estrategia} v${t.version}`,line:{width:2,color:['#38bdf8','#facc15','#e879f9','#4ade80'][i%4]}})),lay({yaxis:{tickprefix:'$',gridcolor:'#222',zeroline:true,zerolinecolor:'#444'}}),CFG));
+ plotly().then(()=>Plotly.react('cmp-plot',T.map((t,i)=>({x:t.curva.x,y:t.curva.y,name:`${t.id} ${t.estrategia} v${t.version}`,line:{width:2,color:['#3FC1B0','#facc15','#e879f9','#4ade80'][i%4]}})),lay({yaxis:{tickprefix:'$',gridcolor:'#222',zeroline:true,zerolinecolor:'#444'}}),CFG));
 }
 
 /* ---------- BACKLOG ---------- */

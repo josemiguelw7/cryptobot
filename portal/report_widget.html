@@ -9,7 +9,7 @@
 #pin-st{min-height:20px;font-size:14px;margin-top:8px;color:#f87171}
 #pin-m .row{display:flex;gap:8px;justify-content:flex-end;margin-top:14px}
 #pin-m button{border:0;border-radius:10px;padding:10px 16px;font-family:inherit;font-weight:600;font-size:15px;cursor:pointer}
-#pin-ok{background:#2563eb;color:#fff}#pin-no{background:#262626;color:#cfcfcf}
+#pin-ok{background:#01874E;color:#fff}#pin-no{background:#262626;color:#cfcfcf}
 </style>
 <div id="pin-ov" role="dialog" aria-modal="true" aria-labelledby="pin-h"><div id="pin-m">
  <h3 id="pin-h">¿Quién eres?</h3>
@@ -42,7 +42,7 @@ $('pin-no').addEventListener('click',()=>{$('pin-ov').classList.remove('on');if(
 </script>
 <!-- Buzón flotante: pregunta, problema, datos o idea, con captura. Envía a api/subir (correo a los dos + commit al repo). -->
 <style>
-#bz-fab{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:900;background:#2563eb;color:#fff;border:0;border-radius:999px;padding:12px 18px;font:600 15px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;box-shadow:0 6px 24px rgba(0,0,0,.45);cursor:pointer}
+#bz-fab{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:900;background:#01874E;color:#fff;border:0;border-radius:999px;padding:12px 18px;font:600 15px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;box-shadow:0 6px 24px rgba(0,0,0,.45);cursor:pointer}
 #bz-fab:hover{background:#1d4ed8}
 #bz-ov{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:950;display:none;align-items:flex-end;justify-content:center}
 #bz-ov.on{display:flex}
@@ -53,16 +53,16 @@ $('pin-no').addEventListener('click',()=>{$('pin-ov').classList.remove('on');if(
 #bz-m .lb{display:block;color:#bdbdbd;font-size:12px;text-transform:uppercase;letter-spacing:.6px;margin:12px 0 6px}
 #bz-m .ch{display:flex;flex-wrap:wrap;gap:6px}
 #bz-m .ch button{background:#1f1f1f;color:#cfcfcf;border:1px solid #333;border-radius:999px;padding:7px 12px;font:inherit;font-size:14px;cursor:pointer}
-#bz-m .ch button.on{background:#0e2a3a;border-color:#38bdf8;color:#fff}
+#bz-m .ch button.on{background:#0e2a3a;border-color:#3FC1B0;color:#fff}
 #bz-m input,#bz-m textarea{width:100%;box-sizing:border-box;background:#0b0b0b;color:#fff;border:1px solid #333;border-radius:10px;padding:10px;font:inherit}
 #bz-m textarea{min-height:120px;resize:vertical}
 #bz-drop{border:1px dashed #444;border-radius:12px;padding:14px;text-align:center;color:#9a9a9a;font-size:14px;cursor:pointer}
-#bz-drop.hov{border-color:#38bdf8;color:#fff}
+#bz-drop.hov{border-color:#3FC1B0;color:#fff}
 #bz-prev{display:none;position:relative;margin-top:8px}#bz-prev img{max-width:100%;max-height:220px;border-radius:10px;border:1px solid #333;display:block}
 #bz-prev button{position:absolute;top:6px;right:6px;background:#000c;color:#fff;border:0;border-radius:999px;padding:4px 10px;cursor:pointer}
 #bz-m .row{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;align-items:center;flex-wrap:wrap}
 #bz-m .bt{border:0;border-radius:10px;padding:11px 16px;font-family:inherit;font-weight:600;font-size:15px;cursor:pointer}
-#bz-m .bt.p{background:#2563eb;color:#fff}#bz-m .bt.g{background:#262626;color:#cfcfcf}
+#bz-m .bt.p{background:#01874E;color:#fff}#bz-m .bt.g{background:#262626;color:#cfcfcf}
 #bz-m .bt:disabled{opacity:.5;cursor:default}
 #bz-st{font-size:14px;margin-top:10px;min-height:20px}#bz-st.ok{color:#4ade80}#bz-st.err{color:#f87171}
 #bz-m .ctx{color:#7a7a7a;font-size:12px;margin-top:8px}
@@ -97,7 +97,7 @@ $('pin-no').addEventListener('click',()=>{$('pin-ov').classList.remove('on');if(
 (function(){
 const $=id=>document.getElementById(id),ov=$('bz-ov');let img=null,tipo='pregunta';
 function pick(g,v){g.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.v===v))}
-function yo(){const w=window.labWho&&window.labWho();$('bz-yo').innerHTML=w?`Envías como <b style="color:#fff">${w.nombre}</b> · <a href="#" id="bz-out" style="color:#38bdf8">no soy yo</a>`:'Al enviar te pido tu PIN personal.'}
+function yo(){const w=window.labWho&&window.labWho();$('bz-yo').innerHTML=w?`Envías como <b style="color:#fff">${w.nombre}</b> · <a href="#" id="bz-out" style="color:#3FC1B0">no soy yo</a>`:'Al enviar te pido tu PIN personal.'}
 document.addEventListener('lab-auth',yo);document.addEventListener('click',e=>{if(e.target.id==='bz-out'){e.preventDefault();window.labLogout()}});
 $('bz-tipos').addEventListener('click',e=>{const b=e.target.closest('button');if(b){tipo=b.dataset.v;pick($('bz-tipos'),tipo)}});
 function where(){const t=(location.hash||'#floor').slice(1);return location.origin+location.pathname+'#'+(t==='reportar'?'floor':t)}
