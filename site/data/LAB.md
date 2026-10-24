@@ -1,13 +1,13 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-24 11:00 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-24 11:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga-radtak-projects.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
 ## En una línea
 
 - Sesiones válidas de diseño: **576** (examen sellado desde 2026-04-22, cerrado).
-- Intentos registrados: **380** · pruebas publicadas: **8** (error 1, superada 7).
+- Intentos registrados: **539** · pruebas publicadas: **8** (error 1, superada 7).
 - Estrategias aprobadas por el comité: **0**. Nada toca dinero real.
 
 ## Pruebas corridas
@@ -29,7 +29,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 
 | Id | Prueba | Estado | Origen | Falta |
 |---|---|---|---|---|
-| R-ORB1 | Repetición de P008 (ORB v1) con el motor 1.1 | **congelada** | revisión ciega P005 |  |
+| R-ORB1 | Repetición de P008 (ORB v1) con el motor 1.1 | **congelada** | revisión ciega P005 |  · ERROR: falló una corrida; ver log |
 | R-BIG2 | Repetición de P007 (BIG v2) con el motor 1.1 | **congelada** | revisión ciega P005 |  |
 | R-HVN1 | Repetición de P006 (HVN v1) con el motor 1.1 | **congelada** | revisión ciega P005 |  |
 | R-ABS2 | Repetición de P005 (ABS v2) con el motor 1.1 | **congelada** | revisión ciega P005 |  |
@@ -63,7 +63,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - **proxy_v1**: Con el rango y el cuerpo de los primeros 15 minutos, la apertura dentro/fuera del valor y la distancia al VWAP a las 09:45 se puede anticipa · declarados 1, usados 1
 - **tanda3**: BIG v2 (seguir la orden grande con entrada inmediata, objetivo 12, stop 16) y ORB v1 (ruptura del rango inicial, 16/16, 30 min), con premisa · declarados 34, usados 32
 - **repeticion_1_1**: Repetición de P002–P008 con el motor 1.1 (llenados corregidos tras la revisión ciega del 24/10/2026). Las reglas selladas no cambian. Se esp · declarados 119, usados 0
-- **salidas_1_1**: Repetición del estudio de salidas (pedido de Oscar) con el motor 1.1 y percentiles exactos. · declarados 159, usados 0
+- **salidas_1_1**: Repetición del estudio de salidas (pedido de Oscar) con el motor 1.1 y percentiles exactos. · declarados 159, usados 159
 - **mapa_v4**: Repetición del mapa v3 con percentiles exactos de órdenes y ventanas (los umbrales de 'órdenes grandes' y 'absorción' cambian). · declarados 72, usados 0
 
 ## Mapa de señales (resumen)

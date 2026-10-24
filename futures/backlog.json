@@ -22,7 +22,10 @@
    "estudio": "repeticion_1_1",
    "requisitos": [],
    "decision": "automática: toda prueba del motor 1.0 se repite (protocolo v3)",
-   "supera": "P008"
+   "supera": "P008",
+   "inicio_utc": "2026-10-24T11:00:01+00:00",
+   "fin_utc": "2026-10-24T11:02:03+00:00",
+   "ultimo_error": "falló una corrida; ver log"
   },
   {
    "id": "R-BIG2",
