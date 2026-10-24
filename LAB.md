@@ -1,13 +1,13 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-24 10:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-24 10:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga-radtak-projects.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
 ## En una línea
 
 - Sesiones válidas de diseño: **576** (examen sellado desde 2026-04-22, cerrado).
-- Intentos registrados: **373** · pruebas publicadas: **8** (error 1, no_pasa 7).
+- Intentos registrados: **380** · pruebas publicadas: **8** (error 1, superada 7).
 - Estrategias aprobadas por el comité: **0**. Nada toca dinero real.
 
 ## Pruebas corridas
@@ -15,13 +15,13 @@ Página: https://cryptobot-liga-radtak-projects.vercel.app · Guía del repo: `d
 | Id | Qué | Veredicto | Neto | p vs RAND | Topstep | Causa |
 |---|---|---|---|---|---|---|
 | P013 | BIG v1 | **error** | −$13,718 | 0.1419 | 0.0% | umbral de orden grande mal calculado (percentil truncado y sobre todas las órdenes: 15 contratos). Ver strateg |
-| P002 | BIG v1 | **no_pasa** | −$2,120 | 0.4086 | 0.0% | pierde con costos base; no gana a RAND (p=0.4086); muere con costos al doble; pierde en 2024, 2025, 2026; pasa |
-| P003 | ABS v1 | **no_pasa** | $4,641 | 0.002 | 6.4% | pierde en 2025 (−$405); pasa Topstep solo 6.4% (128 operaciones en 576 sesiones no alcanzan la meta); 67.7% de |
-| P004 | POC v1 | **no_pasa** | −$3,934 | 0.5794 | 12.0% | pierde con costos base; no gana a RAND (p=0.5794); muere con costos al doble; pierde en 2024, 2026; pasa Topst |
-| P005 | ABS v2 | **no_pasa** | $8,869 | 0.003 | 43.5% | pasa Topstep solo 43.5% (umbral 50%); 72% de la ganancia viene de 5 días; ganancia concentrada en 2024 (2025 + |
-| P006 | HVN v1 | **no_pasa** | −$30,239 | 0.5624 | 0.0% | pierde con costos base; no gana a RAND (p=0.5624); muere con costos al doble; pierde en 2024, 2025, 2026; pasa |
-| P007 | BIG v2 | **no_pasa** | −$72,187 | 0.8052 | 0.0% | pierde con costos base; no gana a RAND (p=0.8052); muere con costos al doble; pierde en 2024, 2025, 2026; pasa |
-| P008 | ORB v1 | **no_pasa** | −$15,144 | 0.5005 | 0.0% | pierde con costos base; no gana a RAND (p=0.5005); muere con costos al doble; pierde en 2024, 2025, 2026; pasa |
+| P002 | BIG v1 | **superada** | −$2,120 | 0.4086 | 0.0% | pierde con costos base; no gana a RAND (p=0.4086); muere con costos al doble; pierde en 2024, 2025, 2026; pasa |
+| P003 | ABS v1 | **superada** | $4,641 | 0.002 | 6.4% | pierde en 2025 (−$405); pasa Topstep solo 6.4% (128 operaciones en 576 sesiones no alcanzan la meta); 67.7% de |
+| P004 | POC v1 | **superada** | −$3,934 | 0.5794 | 12.0% | pierde con costos base; no gana a RAND (p=0.5794); muere con costos al doble; pierde en 2024, 2026; pasa Topst |
+| P005 | ABS v2 | **superada** | $8,869 | 0.003 | 43.5% | pasa Topstep solo 43.5% (umbral 50%); 72% de la ganancia viene de 5 días; ganancia concentrada en 2024 (2025 + |
+| P006 | HVN v1 | **superada** | −$30,239 | 0.5624 | 0.0% | pierde con costos base; no gana a RAND (p=0.5624); muere con costos al doble; pierde en 2024, 2025, 2026; pasa |
+| P007 | BIG v2 | **superada** | −$72,187 | 0.8052 | 0.0% | pierde con costos base; no gana a RAND (p=0.8052); muere con costos al doble; pierde en 2024, 2025, 2026; pasa |
+| P008 | ORB v1 | **superada** | −$15,144 | 0.5005 | 0.0% | pierde con costos base; no gana a RAND (p=0.5005); muere con costos al doble; pierde en 2024, 2025, 2026; pasa |
 
 ## Cola de pruebas (backlog)
 
@@ -29,6 +29,13 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 
 | Id | Prueba | Estado | Origen | Falta |
 |---|---|---|---|---|
+| R-ORB1 | Repetición de P008 (ORB v1) con el motor 1.1 | **congelada** | revisión ciega P005 |  |
+| R-BIG2 | Repetición de P007 (BIG v2) con el motor 1.1 | **congelada** | revisión ciega P005 |  |
+| R-HVN1 | Repetición de P006 (HVN v1) con el motor 1.1 | **congelada** | revisión ciega P005 |  |
+| R-ABS2 | Repetición de P005 (ABS v2) con el motor 1.1 | **congelada** | revisión ciega P005 |  |
+| R-POC1 | Repetición de P004 (POC v1) con el motor 1.1 | **congelada** | revisión ciega P005 |  |
+| R-ABS1 | Repetición de P003 (ABS v1) con el motor 1.1 | **congelada** | revisión ciega P005 |  |
+| R-BIG1 | Repetición de P002 (BIG v1) con el motor 1.1 | **congelada** | revisión ciega P005 |  |
 | T3-BIG2 | BIG v2: seguir a la orden grande con entrada inmediata y objetivo corto | **corrida** → P007 | mapa v3 |  |
 | T3-ORB | ORB v1: ruptura del rango de los primeros 15 minutos | **corrida** → P008 | mapa v3 |  |
 | S-SALIDAS | Estudio de salidas (TP fijo, SL fijo, tiempo, piramidar) sobre las v1 | **corrida** → salidas_v1 | Oscar · 23/10/2026 | estudio salidas_v1 registrado con 159 intentos declarados |
@@ -55,6 +62,9 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - **mapa_v3**: Repetición del mapa v2 midiendo desde el mid del libro operable (bid/ask antes del primer llenado posterior) en vez del último llenado, que  · declarados 72, usados 12
 - **proxy_v1**: Con el rango y el cuerpo de los primeros 15 minutos, la apertura dentro/fuera del valor y la distancia al VWAP a las 09:45 se puede anticipa · declarados 1, usados 1
 - **tanda3**: BIG v2 (seguir la orden grande con entrada inmediata, objetivo 12, stop 16) y ORB v1 (ruptura del rango inicial, 16/16, 30 min), con premisa · declarados 34, usados 32
+- **repeticion_1_1**: Repetición de P002–P008 con el motor 1.1 (llenados corregidos tras la revisión ciega del 24/10/2026). Las reglas selladas no cambian. Se esp · declarados 119, usados 0
+- **salidas_1_1**: Repetición del estudio de salidas (pedido de Oscar) con el motor 1.1 y percentiles exactos. · declarados 159, usados 0
+- **mapa_v4**: Repetición del mapa v3 con percentiles exactos de órdenes y ventanas (los umbrales de 'órdenes grandes' y 'absorción' cambian). · declarados 72, usados 0
 
 ## Mapa de señales (resumen)
 
@@ -80,11 +90,13 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - `futures/strategies/v1.json` · 73abb571d6bab88a… · OTS ✓
 - `futures/strategies/v1_aclaraciones.json` · 7bfee3753adbb8fa… · OTS ✓
 - `futures/strategies/v2.json` · d2145d6dbd0c76f7… · OTS ✓
+- `futures/strategies/v2_aclaraciones.json` · fd6e4bc634b51536… · OTS ✓
 - `futures/strategies/v3.json` · 8f3620feb56b07d9… · OTS ✓
 - `futures/strategies/v4.json` · edc0cd12ce8fe98c… · OTS ✓
 - `futures/research_plan.json` · 5387f568a734f5ed… · OTS ✓
-- `futures/protocol.json` · b4f30dc2cc8d1fc2… · OTS ✓
+- `futures/protocol.json` · 5b094ef861a68140… · OTS ✓
 - `futures/protocol_v1.json` · dad6c111f88fab2d… · OTS ✓
+- `futures/protocol_v2.json` · b4f30dc2cc8d1fc2… · OTS ✓
 - `futures/sessions_manifest.json` · 2bd01ecbb101b240… · OTS ✓
 - `futures/costs.json` · 5ff35311b7dbbb73… · OTS ✓
 - `futures/topstep_rules.json` · 7f2d0e0385d9d9c4… · OTS ✓
