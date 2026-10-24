@@ -3,7 +3,7 @@
 Proyecto de Jose Miguel y Oscar. Reorientado el 2026-10-22 desde cripto/acciones (archivado en `docs/archivo/`
 y en la etiqueta git `archivo-cripto-acciones-2026-10-22`). Nada toca dinero real.
 
-**Página:** https://cryptobot-liga-radtak-projects.vercel.app (una sola página con pestañas: Floor · Pruebas · Estrategias · Explorador · Bitácora).
+**Página:** https://cryptobot-liga.vercel.app (una sola página con pestañas: Floor · Pruebas · Estrategias · Explorador · Bitácora).
 
 ## Qué hay aquí
 

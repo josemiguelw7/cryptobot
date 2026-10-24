@@ -157,7 +157,8 @@ def research_export():
                 if ":" in line: k, v = line.split(":", 1); meta[k.strip()] = v.strip()
             raw = rest
         inbox.append({"archivo": os.path.basename(f), "titulo": meta.get("titulo") or os.path.basename(f), "autor": meta.get("autor", ""), "tipo": meta.get("tipo", ""),
-                      "fecha": (meta.get("fecha") or "")[:16].replace("T", " "), "texto": raw.strip()[:4000]})
+                      "fecha": (meta.get("fecha") or "")[:16].replace("T", " "), "texto": re.sub(r"\n*!\[captura\]\([^)]*\)\s*$", "", raw.strip())[:4000],
+                      "pagina": meta.get("pagina", ""), "captura": ("https://raw.githubusercontent.com/josemiguelw7/cryptobot/main/docs/oscar/inbox/" + meta["captura"]) if meta.get("captura") else ""})
     data = {"plan": plan, "protocolo": proto, "versiones": vers, "pruebas": tests, "mapa": mapa, "registro": reg, "backlog": load("backlog.json", {"pruebas": []}), "salidas": {k: v for k, v in sal.items() if v},
             "buzon": inbox,
             "cementerio": graveyard(tests, reg["intentos"]), "sesiones": sessions_export(), "costos": load("costs.json", {}),
@@ -180,7 +181,7 @@ def build():
     tpl = open(os.path.join(HERE, "futures_template.html"), encoding="utf-8").read()
     frag = lambda n: open(os.path.join(HERE, n), encoding="utf-8").read()
     html = (tpl.replace("<!--FLOOR-->", frag("trading_floor.html")).replace("<!--RESEARCH_TABS-->", frag("research_tabs.html"))
-               .replace("<!--EXPLORER_TAB-->", frag("explorer_tab.html")).replace("__DATA__", json.dumps(data, ensure_ascii=False)))
+               .replace("<!--EXPLORER_TAB-->", frag("explorer_tab.html")).replace("<!--REPORT_WIDGET-->", frag("report_widget.html")).replace("__DATA__", json.dumps(data, ensure_ascii=False)))
     with open(os.path.join(OUT, "index.html"), "w", encoding="utf-8") as f:
         f.write(html)
     import build_lab_md, build_comite, build_context_zip; build_lab_md.build(r["sellos"]); build_comite.build()

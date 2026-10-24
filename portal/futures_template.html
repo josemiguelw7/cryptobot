@@ -225,11 +225,13 @@ const esc = s => String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>'
 <script>
 (function(){
 const tabs=['floor','pruebas','estrategias','explorador','bitacora'];
-function show(){let h=(location.hash||'#floor').slice(1);if(!tabs.includes(h))h='floor';
+function show(){let h=(location.hash||'#floor').slice(1),go=null;if(h.startsWith('prueba-')){go=h;h='pruebas'}if(!tabs.includes(h))h='floor';
  tabs.forEach(t=>{document.getElementById('tab-'+t).hidden=(t!==h)});
  document.querySelectorAll('#tabbar a[data-t]').forEach(a=>a.classList.toggle('on',a.dataset.t===h));
- if(h==='explorador'&&window.xpShow)window.xpShow();window.scrollTo(0,0)}
+ if(h==='explorador'&&window.xpShow)window.xpShow();window.scrollTo(0,0);
+ if(go){let n=0;const t=setInterval(()=>{const el=document.getElementById(go);if(el||++n>40){clearInterval(t);if(el){el.scrollIntoView({behavior:'smooth'});const d=el.querySelector('details');if(d&&!d.open)d.open=true}}},150)}}
 window.addEventListener('hashchange',show);document.addEventListener('DOMContentLoaded',show);show();
 })();
 </script>
+<!--REPORT_WIDGET-->
 </body></html>

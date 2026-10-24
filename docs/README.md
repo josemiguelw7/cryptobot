@@ -3,7 +3,7 @@
 Proyecto de Jose Miguel y Oscar. Objetivo: encontrar, con método, si alguna estrategia de order flow
 en el futuro NQ le gana al azar después de costos y pasaría una cuenta Topstep $50K. Nada toca dinero real.
 
-Página pública (Oscar): https://cryptobot-liga-radtak-projects.vercel.app · se despliega con `git push origin main`.
+Página pública (Oscar): https://cryptobot-liga.vercel.app · se despliega con `git push origin main`.
 Lo anterior (cripto y acciones, cerrado el 22/10/2026) está en `docs/archivo/` y `site/archivo/`.
 
 ## Dónde está cada cosa

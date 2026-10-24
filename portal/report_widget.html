@@ -1,0 +1,89 @@
+<!-- Buzón flotante: pregunta, problema, datos o idea, con captura. Envía a api/subir (correo a los dos + commit al repo). -->
+<style>
+#bz-fab{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:900;background:#2563eb;color:#fff;border:0;border-radius:999px;padding:12px 18px;font:600 15px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;box-shadow:0 6px 24px rgba(0,0,0,.45);cursor:pointer}
+#bz-fab:hover{background:#1d4ed8}
+#bz-ov{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:950;display:none;align-items:flex-end;justify-content:center}
+#bz-ov.on{display:flex}
+@media(min-width:700px){#bz-ov{align-items:center}}
+#bz-m{background:#141414;color:#f2f2f2;border:1px solid #2a2a2a;border-radius:18px 18px 0 0;width:100%;max-width:560px;max-height:92vh;overflow:auto;padding:20px 20px calc(20px + env(safe-area-inset-bottom,0px));font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+@media(min-width:700px){#bz-m{border-radius:18px}}
+#bz-m h3{margin:0 0 4px;font-size:19px}#bz-m .s{color:#9a9a9a;font-size:13px;margin:0 0 14px}
+#bz-m .lb{display:block;color:#bdbdbd;font-size:12px;text-transform:uppercase;letter-spacing:.6px;margin:12px 0 6px}
+#bz-m .ch{display:flex;flex-wrap:wrap;gap:6px}
+#bz-m .ch button{background:#1f1f1f;color:#cfcfcf;border:1px solid #333;border-radius:999px;padding:7px 12px;font:inherit;font-size:14px;cursor:pointer}
+#bz-m .ch button.on{background:#0e2a3a;border-color:#38bdf8;color:#fff}
+#bz-m input,#bz-m textarea{width:100%;box-sizing:border-box;background:#0b0b0b;color:#fff;border:1px solid #333;border-radius:10px;padding:10px;font:inherit}
+#bz-m textarea{min-height:120px;resize:vertical}
+#bz-drop{border:1px dashed #444;border-radius:12px;padding:14px;text-align:center;color:#9a9a9a;font-size:14px;cursor:pointer}
+#bz-drop.hov{border-color:#38bdf8;color:#fff}
+#bz-prev{display:none;position:relative;margin-top:8px}#bz-prev img{max-width:100%;max-height:220px;border-radius:10px;border:1px solid #333;display:block}
+#bz-prev button{position:absolute;top:6px;right:6px;background:#000c;color:#fff;border:0;border-radius:999px;padding:4px 10px;cursor:pointer}
+#bz-m .row{display:flex;gap:8px;justify-content:flex-end;margin-top:16px;align-items:center;flex-wrap:wrap}
+#bz-m .bt{border:0;border-radius:10px;padding:11px 16px;font-family:inherit;font-weight:600;font-size:15px;cursor:pointer}
+#bz-m .bt.p{background:#2563eb;color:#fff}#bz-m .bt.g{background:#262626;color:#cfcfcf}
+#bz-m .bt:disabled{opacity:.5;cursor:default}
+#bz-st{font-size:14px;margin-top:10px;min-height:20px}#bz-st.ok{color:#4ade80}#bz-st.err{color:#f87171}
+#bz-m .ctx{color:#7a7a7a;font-size:12px;margin-top:8px}
+</style>
+<button id="bz-fab" type="button" aria-haspopup="dialog">❓ Pregunta o problema</button>
+<div id="bz-ov" role="dialog" aria-modal="true" aria-labelledby="bz-h">
+ <div id="bz-m">
+  <h3 id="bz-h">Pregunta, problema o datos</h3>
+  <p class="s">Les llega por correo a Jose Miguel y Oscar con la captura, y queda guardado en el laboratorio para la agenda del comité.</p>
+  <span class="lb">Qué es</span>
+  <div class="ch" id="bz-tipos">
+   <button type="button" data-v="pregunta" class="on">Pregunta</button>
+   <button type="button" data-v="problema">Algo a corregir</button>
+   <button type="button" data-v="datos">Datos para agregar</button>
+   <button type="button" data-v="idea">Idea o prueba nueva</button>
+  </div>
+  <span class="lb">Quién escribe</span>
+  <div class="ch" id="bz-quien"><button type="button" data-v="oscar" class="on">Oscar</button><button type="button" data-v="jose">Jose Miguel</button></div>
+  <span class="lb">Título (opcional)</span>
+  <input id="bz-t" maxlength="140" placeholder="p. ej. El P005 no coincide con lo que veo en ATAS">
+  <span class="lb">Detalle</span>
+  <textarea id="bz-x" placeholder="Qué viste, qué esperabas, o qué dato hay que agregar. Puedes pegar aquí una captura con ⌘V / Ctrl+V."></textarea>
+  <span class="lb">Captura de pantalla (opcional)</span>
+  <div id="bz-drop" tabindex="0">📷 Toca para elegir una imagen, arrástrala aquí o pégala con ⌘V / Ctrl+V</div>
+  <input type="file" id="bz-f" accept="image/*" hidden>
+  <div id="bz-prev"><img alt="captura"><button type="button" id="bz-rm">Quitar</button></div>
+  <div class="ctx" id="bz-ctx"></div>
+  <div id="bz-st"></div>
+  <div class="row"><button type="button" class="bt g" id="bz-c">Cerrar</button><button type="button" class="bt p" id="bz-s">Enviar</button></div>
+ </div>
+</div>
+<script>
+(function(){
+const $=id=>document.getElementById(id),ov=$('bz-ov');let img=null,tipo='pregunta',quien='oscar';
+try{quien=localStorage.getItem('bz-quien')||'oscar'}catch(e){}
+function pick(g,v){g.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.v===v))}
+pick($('bz-quien'),quien);
+$('bz-tipos').addEventListener('click',e=>{const b=e.target.closest('button');if(b){tipo=b.dataset.v;pick($('bz-tipos'),tipo)}});
+$('bz-quien').addEventListener('click',e=>{const b=e.target.closest('button');if(b){quien=b.dataset.v;pick($('bz-quien'),quien);try{localStorage.setItem('bz-quien',quien)}catch(e){}}});
+function where(){const t=(location.hash||'#floor').slice(1);return location.origin+location.pathname+'#'+(t==='reportar'?'floor':t)}
+function open(t){if(t)$('bz-x').value=t;ov.classList.add('on');$('bz-st').textContent='';$('bz-st').className='';$('bz-ctx').textContent='Se envía con la página donde estás: '+where();setTimeout(()=>$('bz-x').focus(),50)}
+function close(){ov.classList.remove('on');if(location.hash==='#reportar')history.replaceState(null,'','#floor')}
+window.bzOpen=open;
+$('bz-fab').addEventListener('click',()=>open());$('bz-c').addEventListener('click',close);
+ov.addEventListener('click',e=>{if(e.target===ov)close()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&ov.classList.contains('on'))close()});
+function shrink(file){return new Promise((ok,ko)=>{const r=new FileReader();r.onerror=ko;r.onload=()=>{const im=new Image();im.onerror=ko;im.onload=()=>{const M=1800,k=Math.min(1,M/Math.max(im.width,im.height));const c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);let q=.85,d=c.toDataURL('image/jpeg',q);while(d.length>2.8e6&&q>.4){q-=.1;d=c.toDataURL('image/jpeg',q)}ok(d)};im.src=r.result};r.readAsDataURL(file)})}
+async function setImg(file){if(!file||!/^image\//.test(file.type))return;$('bz-st').textContent='Preparando la captura…';$('bz-st').className='';try{img=await shrink(file);$('bz-prev').querySelector('img').src=img;$('bz-prev').style.display='block';$('bz-drop').style.display='none';$('bz-st').textContent=''}catch(e){$('bz-st').textContent='No pude leer esa imagen.';$('bz-st').className='err'}}
+$('bz-drop').addEventListener('click',()=>$('bz-f').click());$('bz-drop').addEventListener('keydown',e=>{if(e.key==='Enter')$('bz-f').click()});
+$('bz-f').addEventListener('change',e=>setImg(e.target.files[0]));
+['dragover','dragenter'].forEach(n=>$('bz-drop').addEventListener(n,e=>{e.preventDefault();$('bz-drop').classList.add('hov')}));
+['dragleave','drop'].forEach(n=>$('bz-drop').addEventListener(n,e=>{e.preventDefault();$('bz-drop').classList.remove('hov')}));
+$('bz-drop').addEventListener('drop',e=>setImg(e.dataTransfer.files[0]));
+document.addEventListener('paste',e=>{if(!ov.classList.contains('on'))return;const it=[...(e.clipboardData||{}).items||[]].find(i=>i.type.startsWith('image/'));if(it){e.preventDefault();setImg(it.getAsFile())}});
+$('bz-rm').addEventListener('click',()=>{img=null;$('bz-prev').style.display='none';$('bz-drop').style.display='block';$('bz-f').value=''});
+$('bz-s').addEventListener('click',async()=>{const x=$('bz-x').value.trim(),st=$('bz-st');if(x.length<5){st.textContent='Escribe la pregunta o el problema.';st.className='err';return}
+ $('bz-s').disabled=true;st.className='';st.textContent='Enviando…';
+ try{const r=await fetch('/api/subir',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({tipo,autor:quien,titulo:$('bz-t').value.trim(),texto:x,pagina:where()+' · pantalla '+innerWidth+'×'+innerHeight,imagen:img})});
+  const j=await r.json().catch(()=>({}));
+  if(j.ok){st.className='ok';st.textContent='✓ Enviado. '+(j.nota||'');$('bz-x').value='';$('bz-t').value='';$('bz-rm').click();setTimeout(close,2500)}
+  else{st.className='err';st.textContent='No se envió: '+(j.error||('error '+r.status))+' Puedes escribir a jose@radtak.com mientras tanto.'}}
+ catch(e){st.className='err';st.textContent='Sin conexión. Inténtalo de nuevo.'}
+ $('bz-s').disabled=false});
+function fromHash(){if(location.hash==='#reportar')open()}
+window.addEventListener('hashchange',fromHash);fromHash();
+})();
+</script>

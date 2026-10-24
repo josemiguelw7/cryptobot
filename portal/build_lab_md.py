@@ -33,7 +33,7 @@ def build(sellos):
     o = []
     o.append("# Laboratorio NQ · estado actual\n")
     o.append(f"_Generado automáticamente el {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')} desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._\n")
-    o.append("Página: https://cryptobot-liga-radtak-projects.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`\n")
+    o.append("Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`\n")
     o.append("## En una línea\n")
     o.append(f"- Sesiones válidas de diseño: **{man.get('resumen', {}).get('diseno_validas', '—')}** (examen sellado desde 2026-04-22, cerrado).")
     o.append(f"- Intentos registrados: **{len(trials)}** · pruebas publicadas: **{len(tests)}** ({', '.join(f'{k} {v}' for k, v in vcount.items()) or 'ninguna'}).")

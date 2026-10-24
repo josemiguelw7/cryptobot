@@ -58,15 +58,15 @@
     <div class="arrow">↓</div>
     <div class="grid">
       <details class="box"><summary><div class="num">02</div><div class="name">Data Engineering</div><span class="pill ok">listo con pendientes</span><span class="who">programa</span></summary>
-        <div class="det"><b>Listo:</b> 727 sesiones descargadas y verificadas, validadas contra Databento; 595 de diseño en formato del laboratorio; auditoría de huecos y horario de verano; lista congelada de <b>576 sesiones válidas</b>. Examen final sellado.<br><b>Pendiente:</b> segundo contrato de los 9 días de rollo (hoy excluidos), respaldo de la VM y copia de la llave del sello fuera de la Mac.</div></details>
-      <details class="box"><summary><div class="num">03</div><div class="name">Market Regime</div><span class="pill wait">pendiente</span><span class="who">programa</span></summary>
-        <div class="det">Clasificar cada día como balance o tendencia según cómo migra el área de valor. Por ahora el único contexto en uso es "abre dentro del valor de ayer" (lo usa POC).</div></details>
+        <div class="det"><b>Listo:</b> NQ, ES y YM de enero 2024 a octubre 2026 (727, 728 y 728 sesiones), descargados de ATAS, verificados archivo por archivo y copiados al servidor; NQ validado contra Databento. Lista congelada de <b>576 sesiones válidas</b> de NQ para diseño. Examen final sellado.<br><b>Pendiente:</b> el segundo contrato de los días de cambio de contrato en los tres mercados (hoy esos días tienen solo uno), costos de Topstep para ES y YM, y respaldo del servidor.</div></details>
+      <details class="box"><summary><div class="num">03</div><div class="name">Market Regime</div><span class="pill ok">probado</span><span class="who">programa</span></summary>
+        <div class="det">Cada día se clasifica después como balance o tendencia. La pregunta útil era si se puede saber <b>a las 09:45</b>: el estudio E-PROXY dice que no con estos datos (el mejor indicador acierta 56.8%, por debajo del mínimo de 63%). Por eso ninguna estrategia se condiciona al régimen por ahora.</div></details>
       <details class="box"><summary><div class="num">04</div><div class="name">Volume Profile</div><span class="pill wip">en curso</span><span class="who">programa</span></summary>
         <div class="det"><b>Listo:</b> perfil por nivel, POC, VAH, VAL y VWAP de Asia, Londres, Nueva York y post en las 595 sesiones; nodos HVN del día anterior para el mapa.<br><b>Falta:</b> perfiles compuestos de la noche y la semana, POC sin tocar de días anteriores.</div></details>
       <details class="box"><summary><div class="num">05</div><div class="name">Order Flow</div><span class="pill ok">listo para el mapa</span><span class="who">programa</span></summary>
         <div class="det"><b>Listo:</b> órdenes agresivas agrupadas con tamaño y niveles barridos, umbrales en percentiles solo del pasado, ventanas de absorción, desequilibrios, divergencia de delta, icebergs, ráfagas y desequilibrio del libro. Son los 12 detectores del mapa de señales.</div></details>
-      <details class="box"><summary><div class="num">06</div><div class="name">Strategy Discovery</div><span class="pill ok">3 hipótesis registradas</span><span class="who">IA + ustedes</span></summary>
-        <div class="det">BIG, ABS y POC v1 escritas y congeladas antes de probar (huella y sello de fecha). Son el <b>intento ingenuo</b>: los números no salen de los datos. Las tandas siguientes salen del mapa de señales.</div></details>
+      <details class="box"><summary><div class="num">06</div><div class="name">Strategy Discovery</div><span class="pill ok">5 estrategias · 3 en espera</span><span class="who">IA + ustedes</span></summary>
+        <div class="det">BIG, ABS, POC, HVN y ORB escritas y congeladas antes de probar (huella y sello de fecha), con versiones nuevas cuando un estudio lo pide. Las ideas nuevas salen del mapa de señales y de Oscar; tres esperan la decisión del comité (ver abajo).</div></details>
       <details class="box"><summary><div class="num">07</div><div class="name">Quant / Backtesting</div><span class="pill ok">motor listo</span><span class="who">programa</span></summary>
         <div class="det">Simula cada operación contra la cinta real: entrada en la mejor oferta contraria + 1 tick, stop de mercado con deslizamiento, objetivo solo si la cinta pasa de largo, cola para órdenes límite, límites del día, cierre forzado. Costos exactos de Topstep ($3.78). 9 pruebas unitarias.</div></details>
       <details class="box"><summary><div class="num">08</div><div class="name">Statistics</div><span class="pill ok">protocolo fijo</span><span class="who">programa</span></summary>
@@ -81,8 +81,13 @@
     <div class="box comm">
       <div class="name">Strategy Committee</div>
       <div style="color:#bdbdbd">Jose Miguel + Oscar · con los informes de Estadística, Red Team y Riesgo</div>
-      <div style="color:#9a9a9a;font-size:14px">Aprueba, devuelve a investigación o rechaza una estrategia. Solo una aprobada puede abrir el examen final sellado.</div>
-      <div class="verd" id="tf-verd"><span>Aprobadas<b>0</b></span><span>Devueltas<b>0</b></span><span>Rechazadas<b>0</b></span><span>En revisión<b>0</b></span></div>
+      <div style="color:#9a9a9a;font-size:14px">Dos trabajos: (1) decidir qué ideas se prueban, antes de correrlas, y (2) decidir si una estrategia que pasó todo puede abrir el examen final sellado.</div>
+      <div class="lbl" style="margin:16px 0 6px">Ideas para probar</div>
+      <div class="verd" id="tf-verd"></div>
+      <div id="tf-pend" style="margin-top:12px;text-align:left;font-size:14px;color:#cfcfcf"></div>
+      <div class="lbl" style="margin:16px 0 6px">Examen final</div>
+      <div class="verd" id="tf-exam"></div>
+      <p style="margin:12px 0 0;font-size:13px"><a href="https://github.com/josemiguelw7/cryptobot/blob/main/docs/comite/agenda_actual.md" target="_blank" rel="noopener">Agenda de la próxima reunión →</a></p>
     </div>
     <p class="foot">Mira los datos de un día real en el <a href="#explorador">Explorador de sesiones →</a> · Resultados en <a href="#pruebas">Pruebas →</a></p>
   </div>
@@ -99,7 +104,13 @@ fetch('data/research.json').then(r=>r.json()).then(R=>{
   document.getElementById('tf-nums').innerHTML=[
     ['Sesiones válidas',(ses.resumen||{}).diseno_validas??'—'],['Intentos registrados',reg.total_intentos??0],
     ['Pruebas publicadas',T.length],['Pasan todo',pasa]].map(([a,b])=>`<div class="n"><small>${a}</small><b>${b}</b></div>`).join('');
-  document.getElementById('tf-verd').innerHTML=[['Aprobadas',0],['Devueltas',0],['Rechazadas',T.filter(t=>t.veredicto==='no_pasa').length],['En revisión',pasa+T.filter(t=>t.veredicto==='revisar').length]].map(([a,b])=>`<span>${a}<b>${b}</b></span>`).join('');
+  const BL=((R.backlog||{}).pruebas)||[],dec=i=>String(i.decision||'').toLowerCase();
+  const prop=BL.filter(i=>i.estado==='propuesta'),apr=BL.filter(i=>dec(i).startsWith('aprobada')||(dec(i).includes('aprobada por')&&!dec(i).startsWith('automática'))),desc=BL.filter(i=>i.estado==='descartada');
+  const chip=([a,b,c])=>`<span${c?` style="border:1px solid ${c}"`:''}>${a}<b>${b}</b></span>`;
+  document.getElementById('tf-verd').innerHTML=[['Esperan su decisión',prop.length,prop.length?'#f5b942':''],['Aprobadas para probar',apr.length],['Descartadas antes de correr',desc.length]].map(chip).join('');
+  document.getElementById('tf-pend').innerHTML=prop.length?`<b style="color:#f5b942">Esperan decisión de Jose Miguel y Oscar:</b><ul style="margin:6px 0 0;padding-left:18px">${prop.map(i=>`<li><b>${esc(i.id)}</b> · ${esc(i.nombre)}</li>`).join('')}</ul>`:'<span style="color:#9a9a9a">No hay ideas esperando decisión.</span>';
+  const cand=T.filter(t=>t.veredicto==='pasa').length;
+  document.getElementById('tf-exam').innerHTML=[['Estrategias que pasaron todo',cand],['Aprobadas para el examen',0],['Examen sellado',cand?'listo para abrir':'cerrado']].map(chip).join('')+`<p style="margin:10px 0 0;font-size:13px;color:#9a9a9a">${cand?'Hay una estrategia que pasó todo: el comité decide si abre el examen.':'Ninguna estrategia ha pasado todas las pruebas todavía, así que el comité no ha tenido nada que aprobar para el examen.'}</p>`;
   if(R.generado)document.getElementById('tf-upd').textContent='actualizado '+new Date(R.generado).toLocaleString('es-MX',{dateStyle:'medium',timeStyle:'short'});
 }).catch(()=>{});
 })();

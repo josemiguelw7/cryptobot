@@ -183,8 +183,26 @@ def run_one(item):
     json.dump(receipt, open(os.path.join(rd, "receipt.json"), "w"), indent=1); logf.close()
     try:
         from . import notify
-        notify.send(f"{item['id']} → {it['estado']}" + (f" ({it.get('veredicto')})" if it.get("veredicto") else ""),
-                    f"Prueba {item['id']} ({item['estrategia']} v{item['version']}): estado {it['estado']}" + (f", publicada como {it['test_id']} con veredicto {it['veredicto']}" if it.get("test_id") else "") + (f". Error: {it['ultimo_error']}" if it.get("ultimo_error") else "") + f"\nRecibo: /srv/lab/runs/{item['id']}/receipt.json")
+        nombre = f"{item['id']} ({item['estrategia']} v{item['version']})"
+        if it.get("test_id"):
+            V = {"no_pasa": "no pasa", "pasa": "pasa", "revisar": "revisar"}.get(it["veredicto"], it["veredicto"])
+            R_ = (rep.get("resultados") or {}) if isinstance(locals().get("rep"), dict) else {}
+            lin = [f"La prueba {nombre} terminó y se publicó como {it['test_id']}.", f"Veredicto: {V}."]
+            nums = [f"neto ${R_['ganancia_neta']:,.0f}" if isinstance(R_.get("ganancia_neta"), (int, float)) else "",
+                    f"p contra el azar (RAND) {R_['vs_rand']}" if R_.get("vs_rand") is not None else "",
+                    f"pasa Topstep {R_['topstep']}% de las veces" if R_.get("topstep") is not None else "",
+                    f"{R_['operaciones']:,} operaciones" if isinstance(R_.get("operaciones"), int) else ""]
+            if any(nums):
+                lin.append("Resultado: " + ", ".join(x for x in nums if x) + ".")
+            if rep.get("muerte") or rep.get("causa"):
+                lin.append("Causa: " + str(rep.get("muerte") or rep.get("causa")))
+            lin.append("Se corrió dos veces en contenedores limpios, sin red, y las dos dieron el mismo resultado bit a bit.")
+            notify.send(f"{item['id']} terminó · {V} ({it['test_id']})", "\n\n".join(lin), test_id=it["test_id"])
+        else:
+            notify.send(f"{item['id']} no terminó · se reintenta sola",
+                        f"La prueba {nombre} no terminó: {it.get('ultimo_error') or 'error sin detalle'}.\n\n"
+                        "Queda en la cola como congelada y el orquestador la vuelve a intentar en la siguiente vuelta (cada 15 minutos). "
+                        "No hay que hacer nada; si sigue fallando, el error aparece en la cola de la pestaña Pruebas.")
     except Exception:
         pass
 
