@@ -7,6 +7,13 @@ import sys
 from . import registry, config
 
 STUDIES = {
+    "tanda3": {
+        "hypothesis": "BIG v2 (seguir la orden grande con entrada inmediata, objetivo 12, stop 16) y ORB v1 (ruptura del rango inicial, 16/16, 30 min), con premisas del mapa v3 medido desde precios operables, ganan a RAND después de costos y pasan Topstep.",
+        "n_declared": 2 + 32,
+        "kill": ["ganancia neta <= 0 con costos base", "p vs RAND > 0.20", "pierde en 2 de 3 años", "rompe MLL en > 50% de arranques"],
+        "strategies": ["BIG v2", "ORB v1"],
+        "notes": "Aprobadas por Jose Miguel el 24/10/2026. Corre el orquestador.",
+    },
     "proxy_v1": {
         "hypothesis": "Con el rango y el cuerpo de los primeros 15 minutos, la apertura dentro/fuera del valor y la distancia al VWAP a las 09:45 se puede anticipar si el día terminará en balance o tendencia claramente mejor que la base.",
         "n_declared": 1,

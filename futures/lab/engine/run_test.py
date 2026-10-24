@@ -21,8 +21,8 @@ from .sim import Rules, simulate
 from .strategies import v1 as S1, v2 as S2
 import polars as pl
 
-MODULES = {("BIG", 1): S1, ("ABS", 1): S1, ("POC", 1): S1, ("FADE", 1): S2, ("HVN", 1): S2, ("ABS", 2): S2, ("FADE", 2): S2, ("FADEL", 1): S2}
-REG_KEY = {("FADE", 2): "FADE2"}   # nombre del generador/parámetros cuando difiere del id
+MODULES = {("BIG", 1): S1, ("ABS", 1): S1, ("POC", 1): S1, ("FADE", 1): S2, ("HVN", 1): S2, ("ABS", 2): S2, ("FADE", 2): S2, ("FADEL", 1): S2, ("BIG", 2): S2, ("ORB", 1): S2}
+REG_KEY = {("FADE", 2): "FADE2", ("BIG", 2): "BIG2"}   # nombre del generador/parámetros cuando difiere del id
 
 SENS_STEPS = {
     ("BIG", 1): {"stop": 4, "target": 8, "confirm_s": 10, "near_ticks": 1},
@@ -33,6 +33,8 @@ SENS_STEPS = {
     ("ABS", 2): {"near_ticks": 1, "stop_min": 4, "target_fixed": 40, "max_min": 5},
     ("FADE", 2): {"stop": 2, "target": 2, "max_min": 3, "cooldown_s": 30},
     ("FADEL", 1): {"stop": 2, "target": 2, "wait_s": 15, "max_min": 3},
+    ("BIG", 2): {"stop": 4, "target": 4, "max_min": 5, "cooldown_s": 60},
+    ("ORB", 1): {"stop": 4, "target": 4, "max_min": 10, "range_min": 5},
 }
 
 

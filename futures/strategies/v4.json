@@ -1,0 +1,53 @@
+{
+ "version": 4,
+ "fecha_registro": "2026-10-24",
+ "titulo": "Tanda 3 · BIG v2 (seguir la orden grande) y ORB v1 (ruptura del rango inicial)",
+ "estado": "Aprobadas por Jose Miguel el 24/10/2026; Oscar informado. Selladas y congeladas.",
+ "comun": {
+  "instrumento": "NQ (contrato del frente), 1 contrato por operación en la v1",
+  "horario": "Nueva York 09:30–11:30 ET (los traders estudiados operan casi solo la primera hora u hora y media)",
+  "cierre_forzado": "cualquier posición abierta se cierra a mercado a las 11:45 ET",
+  "noticias": "no se abre de −2 a +5 min de CPI, NFP y Fed",
+  "costos": "comisión Topstep + 1 tick de deslizamiento por lado; prueba extra al doble",
+  "limites_dia": "máximo 6 operaciones por estrategia por día; se detiene tras 3 pérdidas seguidas",
+  "una_posicion": "nunca más de una posición abierta por estrategia",
+  "niveles_de_referencia": "del día anterior (perfil de Nueva York): POC, VAH, VAL (70%), máximo y mínimo; de la noche (18:00–09:30 ET): máximo y mínimo; VWAP del día desde las 09:30",
+  "umbrales_relativos": "todo umbral en percentiles se calcula con las 20 sesiones ANTERIORES, tramo de Nueva York; nunca con el mismo día ni con el futuro",
+  "datos": "solo periodo de diseño 2024-01-02 a 2026-04-21; el examen sellado no se abre",
+  "control": "RAND emparejado: mismas cantidades de operaciones por día, misma dirección al azar, misma duración y mismo horario"
+ },
+ "estrategias": [
+  {
+   "id": "BIG",
+   "version": 2,
+   "nombre": "Operaciones grandes · continuación",
+   "idea": "Mapa v3 (precios operables): después de una orden agresiva grande el precio SIGUE +12 ticks a 5, 15 y 30 min (p bruto 0.0004, estable 2024/2025, +19 en tendencia y +5 en balance). BIG v1 perdió por diseño, no por la señal.",
+   "disparador": "Orden agresiva de tamaño ≥ percentil 99 de las órdenes de 10+ contratos de las 20 sesiones válidas anteriores, que barre ≥ 2 niveles.",
+   "ubicacion": "Sin filtro de nivel.",
+   "confirmacion": "Ninguna: entrada inmediata al terminar la orden.",
+   "entrada": "A mercado, a favor de la orden. Mínimo 120 s entre señales.",
+   "stop": "16 ticks desde la entrada.",
+   "objetivo": "12 ticks (el efecto medido).",
+   "tiempo_maximo": "10 minutos.",
+   "filtros": "no se toma si ya hay posición abierta o si otra señal BIG ocurrió en los 2 minutos anteriores",
+   "contexto": "Cualquier día; sin filtro de régimen.",
+   "motivo_cambio": "Mapa v3 del 24/10/2026. Cambian: sin confirmación de 30 s, sin filtro de nivel, objetivo 12 (era 48), stop 16 (era 24), 10 min (era 15). Versión 2 de 3. Aprobada por Jose Miguel el 24/10/2026 ('apruebo que tomes los que puedas')."
+  },
+  {
+   "id": "ORB",
+   "version": 1,
+   "nombre": "Ruptura del rango inicial",
+   "idea": "Mapa v3: cuando el precio rompe el máximo o mínimo de los primeros 15 minutos, sigue +17.8 ticks a 30 min en promedio (estable 2024/2025; +38.6 en tendencia, −1.4 en balance). 556 eventos: una señal por día.",
+   "contexto": "Rango de los primeros 15 minutos (09:30–09:45).",
+   "disparador": "Primer precio que opera por encima del máximo (compra) o por debajo del mínimo (venta) del rango inicial, antes de las 11:30.",
+   "ubicacion": "El borde del rango.",
+   "confirmacion": "Ninguna.",
+   "entrada": "A mercado en la ruptura. Una vez por lado y por día.",
+   "stop": "16 ticks desde la entrada.",
+   "objetivo": "16 ticks.",
+   "tiempo_maximo": "30 minutos.",
+   "filtros": "Reglas comunes."
+  }
+ ],
+ "nota": "Parámetros en futures/lab/engine/strategies/v2.py::PARAMS['BIG2'] y ['ORB']. Ambas premisas salen del mapa v3 (precios operables), no del v1/v2."
+}

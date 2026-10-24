@@ -14,6 +14,8 @@ PARAMS = {
     "HVN": {"far_ticks": 20, "within_s": 3600, "stop": 12, "target": 16, "max_min": 30, "hvn_pct": 90},
     "ABS": {**V1.PARAMS["ABS"], "target_fixed": 160},
     "FADE2": {"min_levels": 2, "stop": 12, "target": 8, "max_min": 10, "cooldown_s": 120},
+    "BIG2": {"min_levels": 2, "stop": 16, "target": 12, "max_min": 10, "cooldown_s": 120},
+    "ORB": {"range_min": 15, "stop": 16, "target": 16, "max_min": 30},
     "FADEL": {"min_levels": 2, "stop": 12, "target": 8, "max_min": 10, "cooldown_s": 120, "wait_s": 30},
 }
 BIN = V1.BIN
@@ -68,6 +70,35 @@ def fade_limit(s, ref, thr, p=None):
     return out
 
 
+def big_v2(s, ref, thr, p=None):
+    """Seguir a la orden grande: mapa v3 (precios operables) mide +12 ticks a 5/15/30 min después de una orden
+    agresiva ≥ p99 (10+) que barre ≥ 2 niveles. Entrada inmediata A FAVOR, sin filtro de nivel ni confirmación.
+    Objetivo 12 ticks, stop 16, 10 minutos."""
+    p = p or PARAMS["BIG2"]
+    sigs = fade(s, ref, thr, {"min_levels": p["min_levels"], "stop": p["stop"], "target": p["target"], "max_min": p["max_min"], "cooldown_s": p["cooldown_s"]})
+    for x in sigs:
+        x.side = -x.side; x.kind = "BIG"       # fade() va en contra; aquí vamos a favor
+    return sigs
+
+
+def orb(s, ref, thr, p=None):
+    """Ruptura del rango inicial: máximo y mínimo de los primeros 15 min; entrada a mercado en el primer precio que
+    los supera (una vez por lado y por día). Mapa v3: +17.8 ticks a 30 min, estable 2024/2025."""
+    p = p or PARAMS["ORB"]
+    i, j = s.idx_sec(NY_OPEN), s.idx_sec(NY_OPEN + p["range_min"] * 60)
+    if j - i < 50:
+        return []
+    hi, lo = int(s.px[i:j].max()), int(s.px[i:j].min())
+    k = s.idx_sec(NY_OPEN + 2 * 3600 + 15 * 60)
+    px = s.px[j:k]; sec = s.sec[j:k]; out = []
+    up = np.flatnonzero(px > hi); dn = np.flatnonzero(px < lo)
+    if len(up):
+        out.append(Signal(sec=float(sec[up[0]]) + 1e-6, side=1, stop_ticks=p["stop"], target_ticks=p["target"], max_sec=p["max_min"] * 60, kind="ORB", level="rango_alto", meta={"rango": (hi - lo) / 4}))
+    if len(dn):
+        out.append(Signal(sec=float(sec[dn[0]]) + 1e-6, side=-1, stop_ticks=p["stop"], target_ticks=p["target"], max_sec=p["max_min"] * 60, kind="ORB", level="rango_bajo", meta={"rango": (hi - lo) / 4}))
+    return out
+
+
 def hvn(s, ref, thr, p=None, prof=None):
     """Cuando el precio toca un nodo de alto volumen (≥ p90 del perfil NY de ayer) tras haber estado ≥ 20 ticks
     lejos en la última hora, entra a mercado de vuelta hacia donde venía. Stop 12 ticks del otro lado del nodo,
@@ -112,5 +143,5 @@ def absorption_v2(s, ref, thr, p=None):
     return sigs
 
 
-REGISTRY = {"FADE": fade, "HVN": hvn, "ABS": absorption_v2, "FADE2": fade_v2, "FADEL": fade_limit}
+REGISTRY = {"FADE": fade, "HVN": hvn, "ABS": absorption_v2, "FADE2": fade_v2, "FADEL": fade_limit, "BIG2": big_v2, "ORB": orb}
 NEEDS_PROFILE = {"HVN"}
