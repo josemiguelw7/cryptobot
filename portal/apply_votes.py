@@ -1,9 +1,9 @@
-"""Aplica los votos del comité (docs/comite/votos/<id>__<persona>.json, escritos por la página con PIN) al backlog.
-Regla: una idea 'propuesta' cambia de estado solo cuando Jose Miguel y Oscar votan lo mismo:
-  aprobar + aprobar     -> aprobada   (luego Claude escribe y congela las reglas; el orquestador solo corre 'congelada')
-  descartar + descartar -> descartada
-  mas_datos + mas_datos -> sigue propuesta, con la petición anotada
-Votos distintos: sigue propuesta y va a la agenda. Cada voto queda guardado en el ítem (campo 'votos')."""
+"""Aplica los votos del comité (docs/comite/votos/<id>__oscar.json, escritos por la página con el PIN de Oscar) al backlog.
+Regla (decisión de Jose Miguel, 24/10/2026): Oscar decide solo. Su voto sobre una idea 'propuesta':
+  aprobar   -> aprobada   (luego Claude escribe y congela las reglas; el orquestador solo corre 'congelada')
+  descartar -> descartada
+  mas_datos -> sigue propuesta, con la petición anotada
+Cada voto queda guardado en el ítem (campo 'votos')."""
 import glob, json, os
 
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE)
@@ -28,21 +28,15 @@ def apply():
             continue
         if it.get("votos") != V:
             it["votos"] = V; changed += 1
-        if it["estado"] != "propuesta" or set(V) != {"jose", "oscar"}:
+        if it["estado"] != "propuesta" or "oscar" not in V:
             continue
-        a, o = V["jose"]["voto"], V["oscar"]["voto"]
-        if a != o:
-            continue
-        fecha = max(V["jose"]["fecha"], V["oscar"]["fecha"])[:10]
-        notas = "; ".join(f"{NOMBRE[p]}: {V[p]['comentario']}" for p in ("jose", "oscar") if V[p].get("comentario"))
-        if a == "aprobar":
-            it["estado"] = "aprobada"
-            it["decision"] = f"aprobada por Jose Miguel y Oscar {fecha} (votos en la página)" + (f" · {notas}" if notas else "")
-        elif a == "descartar":
-            it["estado"] = "descartada"
-            it["decision"] = f"descartada por Jose Miguel y Oscar {fecha} (votos en la página)" + (f" · {notas}" if notas else "")
+        v = V["oscar"]; fecha = (v.get("fecha") or "")[:10]; nota = f" · {v['comentario']}" if v.get("comentario") else ""
+        if v["voto"] == "aprobar":
+            it["estado"] = "aprobada"; it["decision"] = f"aprobada por Oscar {fecha} (voto en la página){nota}"
+        elif v["voto"] == "descartar":
+            it["estado"] = "descartada"; it["decision"] = f"descartada por Oscar {fecha} (voto en la página){nota}"
         else:
-            nueva = f"el comité pide más datos {fecha}" + (f" · {notas}" if notas else "")
+            nueva = f"Oscar pide más datos {fecha}{nota}"
             if it.get("decision") == nueva:
                 continue
             it["decision"] = nueva

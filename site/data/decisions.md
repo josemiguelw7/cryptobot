@@ -791,3 +791,8 @@ Decisiones:
 
 - **ES y YM** (728 sesiones cada uno) ya están en `/srv/lab/data/raw/`. El lector canónico, las medidas y la auditoría ahora aceptan `LAB_ROOT=NQ|ES|YM` con tick por mercado (NQ/ES 0.25, YM 1.0); corren en segundo plano. Siguiente: costos Topstep de ES y YM en `costs.json`, y **protocolo v4** con un solo cambio: chequeo cruzado (una estrategia que pase en NQ no debe perder en ES ni en YM con las mismas reglas en ticks y los costos de cada mercado). SMT pasa de bloqueada a propuesta (primero al mapa).
 - **Acceso de Oscar** sin costo de API: (1) artefacto de Claude "Pregúntale al Laboratorio NQ" (https://claude.ai/artifact/Cg4KvpvZ4gCEgVu2QZKmd7) con el contexto embebido y la capacidad de preguntar; cada pregunta se descuenta de la cuenta de quien la hace. (2) En la página: **Buzón de Oscar** (sube .md o texto; se guarda como commit en `docs/oscar/inbox/` vía una función de Vercel con un token de GitHub de alcance mínimo) y **Contexto para Claude** (zip regenerado en cada publicación con LAB.md, decisiones, backlog, resultados, mapa, glosario, buzón y un prompt de arranque) para conversar con datos frescos en una cuenta gratuita. Las notas del buzón entran a la agenda del comité, a LAB.md y al zip.
+
+## 2026-10-24 · El comité lo decide Oscar
+
+- Jose Miguel no vota: **el voto de Oscar decide solo** (aprobar → aprobada, descartar → descartada, más datos → sigue propuesta con la petición). Vota en la página con su PIN; cada voto queda en `docs/comite/votos/` y llega por correo. El PIN de Jose Miguel sirve para entrar al sitio y mandar notas.
+- Todo el sitio pide PIN personal (cookie firmada de 30 días); `/data/*` incluido.

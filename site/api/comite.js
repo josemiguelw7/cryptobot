@@ -1,7 +1,7 @@
 // Comité y PIN del laboratorio. Cada persona tiene su propio PIN (variables de Vercel PIN_JOSE y PIN_OSCAR).
 // POST {accion:"quien", pin}                         -> {ok, persona}
 // POST {accion:"votar", pin, id, voto, comentario}   -> guarda docs/comite/votos/<id>__<persona>.json (commit) y avisa por correo
-// Una idea cambia de estado solo cuando los dos votan lo mismo (lo aplica la publicación automática, máx. 30 min).
+// Decide Oscar: su voto cambia el estado de la idea (lo aplica la publicación automática, máx. 30 min). Jose Miguel no vota.
 const crypto = require("crypto");
 const REPO = "josemiguelw7/cryptobot";
 const SITE = "https://cryptobot-liga.vercel.app";
@@ -46,6 +46,7 @@ module.exports = async (req, res) => {
   if (!who) return res.status(401).json({ error: "PIN incorrecto." });
   if (b.accion === "quien") return res.status(200).json({ ok: true, persona: who, nombre: NOMBRE[who] });
   if (b.accion !== "votar") return res.status(400).json({ error: "acción desconocida" });
+  if (who !== "oscar") return res.status(403).json({ error: "En el comité decide Oscar; tu PIN sirve para entrar y mandar notas." });
 
   const id = String(b.id || "");
   const voto = String(b.voto || "");
@@ -71,13 +72,8 @@ module.exports = async (req, res) => {
     committer: { name: "nqlab-comite", email: "lab@radtak.com" } });
   if (!put.ok) return res.status(502).json({ error: "GitHub rechazó el voto", detalle: put.j.message || put.status });
 
-  // Voto del otro, para decir en qué quedó.
-  const otro = who === "jose" ? "oscar" : "jose";
-  const o = await gh("GET", `docs/comite/votos/${id}__${otro}.json`);
-  const vo = o.ok ? JSON.parse(Buffer.from(o.j.content, "base64").toString("utf8")).voto : null;
-  const estado = !vo ? `Falta el voto de ${NOMBRE[otro]}.`
-    : vo === voto ? `Los dos votaron ${VOTOS[voto]}: la idea cambia de estado en la siguiente publicación (máx. 30 min).`
-    : `Votos distintos (${NOMBRE[otro]}: ${VOTOS[vo]}). Queda para hablarlo en la reunión del comité.`;
+  const estado = voto === "mas_datos" ? "Queda propuesta con tu petición anotada; se ve en la página en la siguiente publicación (máx. 30 min)."
+    : `Decidido: la idea queda ${voto === "aprobar" ? "aprobada" : "descartada"} en la siguiente publicación (máx. 30 min).` + (voto === "aprobar" ? " Después Claude escribe y congela las reglas, y el orquestador la corre." : "");
 
   if (process.env.RESEND_API_KEY) {
     const html = `<div style="font:15px/1.55 -apple-system,Segoe UI,Roboto,sans-serif;color:#14181f;max-width:640px">

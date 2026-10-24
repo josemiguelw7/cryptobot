@@ -1,6 +1,6 @@
 {
  "titulo": "Backlog de pruebas del laboratorio NQ",
- "regla": "Una prueba pasa por estados: propuesta → aprobada (Oscar y Jose Miguel) → congelada (reglas escritas con huella y sello OTS, estudio registrado) → en_cola → corrida. El orquestador SOLO arranca las que están 'congelada'. Nadie corre una 'propuesta'.",
+ "regla": "Una prueba pasa por estados: propuesta → aprobada (decide Oscar, con su voto en la página) → congelada (reglas escritas con huella y sello OTS, estudio registrado) → en_cola → corrida. El orquestador SOLO arranca las que están 'congelada'. Nadie corre una 'propuesta'.",
  "estados": [
   "propuesta",
   "aprobada",
