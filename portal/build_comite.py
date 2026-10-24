@@ -1,7 +1,7 @@
 """Agenda del comité semanal (Jose Miguel + Oscar), generada desde el estado: qué corrió, qué murió y por qué,
 qué está propuesto, qué respuestas faltan. Se escribe en docs/comite/agenda_actual.md en cada construcción
 y se archiva una copia con fecha cuando se corre con --archivar (viernes)."""
-import json, os, sys
+import glob, json, os, sys
 from datetime import datetime, timezone, timedelta
 
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE); FUT = os.path.join(ROOT, "futures")
@@ -26,6 +26,8 @@ def build(archivar=False):
     if mapa.get("senales"):
         top = sorted([m for m in mapa["senales"] if m.get("significativa")], key=lambda m: -abs(m.get("r30_z") or 0))[:3]
         o += ["", "## 7. Lo más fuerte del mapa (para decidir la siguiente tanda)"] + [f"- {m['senal']}: {m.get('r30')} ticks a 30 min · {m.get('sentido')} · {m['n']:,} eventos" for m in top]
+    inbox = sorted(glob.glob(os.path.join(ROOT, "docs", "oscar", "inbox", "*.md")), reverse=True)[:8]
+    o += ["", "## 7b. Buzón de Oscar (notas nuevas)"] + ([f"- {os.path.basename(f)}" for f in inbox] or ["- ninguna"])
     o += ["", "## 8. Decisiones tomadas hoy", "- ", "", "_Al terminar: pasar lo decidido a `backlog.json` (estados) y a `docs/decisions.md`._"]
     d = os.path.join(ROOT, "docs", "comite"); os.makedirs(d, exist_ok=True)
     txt = "\n".join(o) + "\n"; open(os.path.join(d, "agenda_actual.md"), "w", encoding="utf-8").write(txt)

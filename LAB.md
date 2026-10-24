@@ -1,6 +1,6 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-24 10:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-24 11:00 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga-radtak-projects.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
@@ -102,6 +102,10 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - `futures/topstep_rules.json` · 7f2d0e0385d9d9c4… · OTS ✓
 - `futures/lab_rules.json` · 16df96bb8216fb99… · OTS ✓
 - `futures/news.json` · 8cede1c4dfd98531… · OTS ✓
+
+## Buzón de Oscar
+
+- sin notas todavía (se suben desde la página › Estrategias › Buzón de Oscar)
 
 ## Preguntas abiertas para Oscar
 

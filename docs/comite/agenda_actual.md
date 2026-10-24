@@ -38,6 +38,9 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 - Absorción: 7.98 ticks a 30 min · contraria · 5,784 eventos
 - Divergencia de delta: -0.66 ticks a 30 min · a favor · 33,785 eventos
 
+## 7b. Buzón de Oscar (notas nuevas)
+- ninguna
+
 ## 8. Decisiones tomadas hoy
 - 
 

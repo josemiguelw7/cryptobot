@@ -148,7 +148,18 @@ def research_export():
     ups = load("updates.json", {"entries": []}).get("entries", [])
     week = (datetime.now(timezone.utc) - timedelta(days=7)).strftime("%Y-%m-%d")
     sal = {sid: load(f"lab/results/salidas_v1/{sid}.json", None) for sid in ("BIG", "ABS", "POC")}
+    inbox = []
+    for f in sorted(glob.glob(os.path.join(ROOT, "docs", "oscar", "inbox", "*.md")), reverse=True):
+        raw = open(f, encoding="utf-8").read(); meta = {}
+        if raw.startswith("---"):
+            head, _, rest = raw[3:].partition("\n---\n")
+            for line in head.strip().split("\n"):
+                if ":" in line: k, v = line.split(":", 1); meta[k.strip()] = v.strip()
+            raw = rest
+        inbox.append({"archivo": os.path.basename(f), "titulo": meta.get("titulo") or os.path.basename(f), "autor": meta.get("autor", ""), "tipo": meta.get("tipo", ""),
+                      "fecha": (meta.get("fecha") or "")[:16].replace("T", " "), "texto": raw.strip()[:4000]})
     data = {"plan": plan, "protocolo": proto, "versiones": vers, "pruebas": tests, "mapa": mapa, "registro": reg, "backlog": load("backlog.json", {"pruebas": []}), "salidas": {k: v for k, v in sal.items() if v},
+            "buzon": inbox,
             "cementerio": graveyard(tests, reg["intentos"]), "sesiones": sessions_export(), "costos": load("costs.json", {}),
             "topstep": load("topstep_rules.json", {}), "glosario": load("glossary.json", {}), "sellos": integrity(),
             "cambios_semana": [u for u in ups if u.get("date", "") >= week], "generado": datetime.now(timezone.utc).isoformat(timespec="minutes")}
@@ -172,7 +183,10 @@ def build():
                .replace("<!--EXPLORER_TAB-->", frag("explorer_tab.html")).replace("__DATA__", json.dumps(data, ensure_ascii=False)))
     with open(os.path.join(OUT, "index.html"), "w", encoding="utf-8") as f:
         f.write(html)
-    import build_lab_md, build_comite; build_lab_md.build(r["sellos"]); build_comite.build()
+    import build_lab_md, build_comite, build_context_zip; build_lab_md.build(r["sellos"]); build_comite.build()
+    build_context_zip.build(ROOT, os.path.join(OUT, "data"))
+    for rel in ("LAB.md", "docs/decisions.md"):
+        shutil.copy2(os.path.join(ROOT, rel), os.path.join(OUT, "data", os.path.basename(rel)))
     print(f"site/index.html · {len(r['pruebas'])} pruebas · {r['registro']['total_intentos']} intentos · cadena {'ok' if r['registro']['cadena_ok'] else 'ROTA'}")
 
 

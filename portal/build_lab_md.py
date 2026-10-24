@@ -61,6 +61,10 @@ def build(sellos):
     o.append("\n## Documentos congelados\n")
     for s in sellos:
         o.append(f"- `{s['archivo']}` · {(s['sha256'] or 'falta')[:16]}… · {'OTS ✓' if s['ots'] else 'sin OTS'}")
+    import glob
+    inbox = sorted(glob.glob(os.path.join(ROOT, "docs", "oscar", "inbox", "*.md")), reverse=True)
+    o.append("\n## Buzón de Oscar\n")
+    o += [f"- `docs/oscar/inbox/{os.path.basename(f)}`" for f in inbox[:10]] or ["- sin notas todavía (se suben desde la página › Estrategias › Buzón de Oscar)"]
     o.append("\n## Preguntas abiertas para Oscar\n")
     for q in gl.get("preguntas_oscar", []):
         if q.get("estado") != "respondida":
