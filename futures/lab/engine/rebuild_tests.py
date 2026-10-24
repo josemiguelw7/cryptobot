@@ -13,10 +13,13 @@ NOTES = {  # notas de contexto por prueba (se escriben aquí para que sobrevivan
     "P003": "Única estrategia de la tanda 1 con ventaja real sobre el azar (p 0.002, sobrevive 2 ticks por lado, 12/15 caminos CPCV positivos). Revisión de código del Red Team: sin fuga de futuro; el placebo desplazado gana más porque el valor está en el nivel y la dirección, no en el momento. La fila confirm_s de la sensibilidad no vale (parámetro no conectado en el código v1). No pasa: pierde en 2025 y solo 6.4% de las cuentas Topstep llegan a la meta con 128 operaciones en 576 sesiones.",
     "P002": "Población corregida (órdenes de 10+ contratos, p99 ≈ 100). Seguir a la orden grande pierde: el mapa de señales muestra que esas órdenes marcan el peor momento de su media hora.",
     "P004": "Rechazo del área de valor hacia el POC en días que abren dentro del valor. El mapa confirma que el precio sale del valor más de lo que rebota.",
+    "P005": "ABS v2 (dejar correr al ganador, objetivo 40 puntos). La mejor hasta ahora: p 0.003, sobrevive costos al doble, 14/15 caminos CPCV, 43.5% de cuentas Topstep (RAND 3.5%). No pasa por tres cosas: Topstep bajo 50%, 72% de la ganancia en 5 días, y casi toda en 2024 (2025 +$140). Revisión de código: sin fuga; el placebo desplazado gana el triple porque el valor está en el nivel, no en el momento. ABS tiene una versión más; no gastarla hasta entender por qué 2025 no funciona.",
+    "P006": "HVN v1. Muere de forma contundente (0/15 CPCV, pierde los tres años). El mapa v3 lo explica: desde precios operables el precio no rebota en los nodos de ayer (−11.8 ticks a 15 min); el rebote del mapa v2 era un artefacto de medición.",
 }
 
 
-MUERTE = {"P003": "pierde en 2025 (−$405); pasa Topstep solo 6.4% (128 operaciones en 576 sesiones no alcanzan la meta); 67.7% de la ganancia viene de 5 días"}
+MUERTE = {"P003": "pierde en 2025 (−$405); pasa Topstep solo 6.4% (128 operaciones en 576 sesiones no alcanzan la meta); 67.7% de la ganancia viene de 5 días",
+          "P005": "pasa Topstep solo 43.5% (umbral 50%); 72% de la ganancia viene de 5 días; ganancia concentrada en 2024 (2025 +$140, 2026 −$159)"}
 
 
 def main():

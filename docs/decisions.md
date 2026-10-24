@@ -760,3 +760,12 @@ Estudio `proxy_v1` (1 intento): a las 09:45, con el rango y el cuerpo de los pri
 ## 2026-10-23 · Publicación automática y cierre del ciclo
 
 `futures/lab/publish_vm.sh` (cron en la VM, minutos 5 y 35): trae registro, resultados y mapa al clon de GitHub, reconstruye fichas y página, y hace push; Vercel despliega. Requiere que Jose Miguel agregue la deploy key de la VM (con escritura) en GitHub › cryptobot › Settings › Deploy keys. Hasta entonces el push falla en silencio y se publica a mano. Regla nueva para la Mac: `git pull` antes de trabajar, porque la VM también hace commits.
+
+## 2026-10-24 · Primeras pruebas corridas por el orquestador solo + mapa v3
+
+El orquestador corrió ABS v2 y HVN v1 sin intervención: clon limpio del commit `90f148ae`, golden verificada, dos contenedores sin red cada una, `trades.csv` idéntico, registro fuera del contenedor. ~10 minutos por prueba.
+- **P005 ABS v2**: +$8,869, p 0.003, estrés +$6,389 (p 0.0066), 14/15 CPCV, Topstep 43.5% (RAND 3.5%). Revisión de código (mismo código que P003 + objetivo fijo): sin fuga. **No pasa**: Topstep < 50%, 72% de la ganancia en 5 días, y la ganancia es de 2024 (+$8,888; 2025 +$140; 2026 −$159). El mapa v3 marca la absorción como no estable entre años: coherente. ABS tiene una versión más; no gastarla hasta entender 2025.
+- **P006 HVN v1**: −$30,239, 1,460 operaciones, 0/15 CPCV, pierde los tres años. Cementerio. Causa de raíz: la premisa salía del mapa v2 medido desde el último llenado; en el mapa v3 (precios operables) los nodos de ayer no rechazan (−11.8 ticks a 15 min).
+- **Mapa v3** (72 intentos): desde el mid del libro operable, las **órdenes grandes se siguen** (+11.7 / +12.4 / +12.2 ticks a 5/15/30 min; p bruto 0.0004; estable; +18.7 en tendencia y +5.4 en balance). Es la inversa exacta de lo que decía el v2, y explica por qué FADE perdía. Absorción: +8 a 30 min bruto pero "contraria" (peor que un momento al azar de la media hora) y no estable. Ruptura del rango inicial: +17.8 a 30 min (+38.6 en tendencia), estable, p bruto 0.21 (pocos eventos). Lo demás, cerca de cero.
+- Nueva propuesta **T3-BIG2** (seguir la orden grande con entrada inmediata, objetivo 12, stop 16, 10 min). Pendiente del comité; sería BIG v2 de 3.
+- Lección registrada: toda señal del mapa v1/v2 que se haya convertido en regla debe re-verificarse contra el v3 antes de gastar intentos. Las reglas de la tanda 2 se escribieron con el mapa viejo; solo ABS v2 sobrevivió porque su premisa no dependía del precio del último llenado.

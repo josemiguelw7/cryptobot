@@ -1,0 +1,13 @@
+{
+ "id": "T2-HVN",
+ "commit": "90f148ae7ebb7d7988f4ac60abd06ef2f01cd9d2",
+ "inicio": "2026-10-23T20:30:01+00:00",
+ "fin": "2026-10-23T20:41:00+00:00",
+ "corrida_1_ok": true,
+ "corrida_2_ok": true,
+ "trades_sha256": [
+  "beca4a6ac1f70c33efb64a1505aa42351854304a40cbddb29d84ec06d5634eba",
+  "beca4a6ac1f70c33efb64a1505aa42351854304a40cbddb29d84ec06d5634eba"
+ ],
+ "reproducible": true
+}

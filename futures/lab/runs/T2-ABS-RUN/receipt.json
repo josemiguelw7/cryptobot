@@ -1,0 +1,13 @@
+{
+ "id": "T2-ABS-RUN",
+ "commit": "90f148ae7ebb7d7988f4ac60abd06ef2f01cd9d2",
+ "inicio": "2026-10-23T20:15:01+00:00",
+ "fin": "2026-10-23T20:25:15+00:00",
+ "corrida_1_ok": true,
+ "corrida_2_ok": true,
+ "trades_sha256": [
+  "7a14d59b8fa2ccd9f965a413ee934008e80331653748737a9f5b2572d299a19a",
+  "7a14d59b8fa2ccd9f965a413ee934008e80331653748737a9f5b2572d299a19a"
+ ],
+ "reproducible": true
+}

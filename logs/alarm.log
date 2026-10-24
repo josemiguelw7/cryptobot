@@ -90,3 +90,7 @@ alarm check: today's rows present, all good.
 alarm check: today's rows present, all good.
 alarm check: today's rows present, all good.
 alarm check: today's rows present, all good.
+[digest: email not configured, printing]
+Subject: ⚠️ CRYPTOBOT: no league run today
+
+The 9am league cycle did not log any equity rows for today. Check the Mac was awake and logs/daily.log.

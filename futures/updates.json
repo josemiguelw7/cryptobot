@@ -20,6 +20,20 @@
       "body": "Antes de publicar, la revisión encontró que el percentil 99 de tamaño de orden se calculaba sobre todas las órdenes (incluidas las de 1 contrato) y con un cálculo truncado: 'orden grande' quedó en 15 contratos y 'absorción' en 249 contratos por minuto. La prueba P013 (BIG v1) y la primera corrida del mapa de señales quedan en el registro como ERROR, no se borran, y no cuentan ni a favor ni en contra. La definición queda aclarada en strategies/v1_aclaraciones.json (población: órdenes de 10+ contratos) y se repite todo."
     },
     {
+      "date": "2026-10-23",
+      "kind": "prueba",
+      "title": "Prueba P005 · ABS v2 · revisar",
+      "body": "ABS v2: 126 operaciones, ganancia neta $8,869 con costos base, p contra RAND 0.003, estrés $6,389, Topstep 43.5% de las cuentas (RAND 3.5%). Veredicto: revisar. Causa: el placebo desplazado gana parecido o más: hay que revisar el código antes de poder pasar (protocolo v2).",
+      "test_id": "P005"
+    },
+    {
+      "date": "2026-10-23",
+      "kind": "prueba",
+      "title": "Prueba P006 · HVN v1 · no pasa",
+      "body": "HVN v1: 1460 operaciones, ganancia neta $-30,239 con costos base, p contra RAND 0.5624, estrés $-42,146, Topstep 0.0% de las cuentas (RAND 0.0%). Veredicto: no pasa. Causa: pierde con costos base; no gana a RAND (p=0.5624); muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%.",
+      "test_id": "P006"
+    },
+    {
       "date": "2026-10-22",
       "kind": "avance",
       "title": "Lector y primeras medidas listos",

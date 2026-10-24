@@ -1,13 +1,13 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-23 19:19 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-24 09:27 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga-radtak-projects.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
 ## En una línea
 
 - Sesiones válidas de diseño: **576** (examen sellado desde 2026-04-22, cerrado).
-- Intentos registrados: **293** · pruebas publicadas: **4** (error 1, no_pasa 3).
+- Intentos registrados: **308** · pruebas publicadas: **6** (error 1, no_pasa 4, revisar 1).
 - Estrategias aprobadas por el comité: **0**. Nada toca dinero real.
 
 ## Pruebas corridas
@@ -18,6 +18,8 @@ Página: https://cryptobot-liga-radtak-projects.vercel.app · Guía del repo: `d
 | P002 | BIG v1 | **no_pasa** | −$2,120 | 0.4086 | 0.0% | pierde con costos base; no gana a RAND (p=0.4086); muere con costos al doble; pierde en 2024, 2025, 2026; pasa |
 | P003 | ABS v1 | **no_pasa** | $4,641 | 0.002 | 6.4% | pierde en 2025 (−$405); pasa Topstep solo 6.4% (128 operaciones en 576 sesiones no alcanzan la meta); 67.7% de |
 | P004 | POC v1 | **no_pasa** | −$3,934 | 0.5794 | 12.0% | pierde con costos base; no gana a RAND (p=0.5794); muere con costos al doble; pierde en 2024, 2026; pasa Topst |
+| P005 | ABS v2 | **revisar** | $8,869 | 0.003 | 43.5% | pasa Topstep solo 43.5% (umbral 50%); 72% de la ganancia viene de 5 días; ganancia concentrada en 2024 (2025 + |
+| P006 | HVN v1 | **no_pasa** | −$30,239 | 0.5624 | 0.0% | pierde con costos base; no gana a RAND (p=0.5624); muere con costos al doble; pierde en 2024, 2025, 2026; pasa |
 
 ## Cola de pruebas (backlog)
 
@@ -25,14 +27,18 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 
 | Id | Prueba | Estado | Origen | Falta |
 |---|---|---|---|---|
+| T3-BIG2 | BIG v2: seguir a la orden grande con entrada inmediata y objetivo corto | **propuesta** | mapa v3 | aprobación de Oscar y Jose Miguel; reglas selladas en strategies/v4.json; cuenta como versión 2 de 3 de BIG |
 | S-SALIDAS | Estudio de salidas (TP fijo, SL fijo, tiempo, piramidar) sobre las v1 | **corrida** → salidas_v1 | Oscar · 23/10/2026 | estudio salidas_v1 registrado con 159 intentos declarados |
-| T2-ABS-RUN | ABS v2: dejar correr al ganador 15 min (TP ≥ 40 puntos o sin TP), stop v1 | **propuesta** | estudio de salidas · pedido de Oscar | reglas escritas y selladas en strategies/v2.json como ABS v2 (listo); aprobación de Oscar y Jose Miguel → pasar a congel |
-| T2-FADE | Desvanecer órdenes grandes | **propuesta** | mapa v1 · hipótesis inversa de BIG | reglas escritas y selladas en strategies/v2.json (listo); aprobación de Oscar y Jose Miguel → pasar a congelada |
-| T2-HVN | Rechazo de zonas HVN del día anterior | **propuesta** | mapa v1 · estilo Profit Pro | reglas escritas y selladas en strategies/v2.json (listo); aprobación de Oscar y Jose Miguel → pasar a congelada |
+| T2-ABS-RUN | ABS v2: dejar correr al ganador 15 min (TP ≥ 40 puntos o sin TP), stop v1 | **corrida** → P005 | estudio de salidas · pedido de Oscar | reglas escritas y selladas en strategies/v2.json como ABS v2 (listo); aprobación de Oscar y Jose Miguel → pasar a congel |
+| T2B-FADE2 | FADE v2: desvanecer órdenes grandes con objetivo corto | **descartada** | mapa v2 + humo de FADE v1 |  |
+| T2B-FADEL | FADEL v1: desvanecer con entrada pasiva (orden límite con cola) | **descartada** | mapa v2 + modelo de cola del simulador |  |
+| E-PROXY | Estudio: proxy de régimen en tiempo real | **corrida** → proxy_v1 | mapa v2 (HVN +53 en balance, −22 en tendencia) | estudio proxy_v1 registrado; script engine/regime_proxy.py |
+| T2-FADE | Desvanecer órdenes grandes | **descartada** | mapa v1 · hipótesis inversa de BIG | reglas escritas y selladas en strategies/v2.json (listo); aprobación de Oscar y Jose Miguel → pasar a congelada |
+| T2-HVN | Rechazo de zonas HVN del día anterior | **corrida** → P006 | mapa v1 · estilo Profit Pro | reglas escritas y selladas en strategies/v2.json (listo); aprobación de Oscar y Jose Miguel → pasar a congelada |
 | T2-ABS-EARLY | ABS con entrada temprana | **propuesta** | P003 + placebo del Red Team | cuenta como versión 2 de 3 de ABS; aprobación de Oscar |
 | T2-ABS-HOURS | ABS v1 en toda la sesión de Nueva York | **propuesta** | P003 · pocas operaciones | si se combina con T2-ABS-EARLY es una sola v2; máximo 3 versiones |
-| T2-ICE | Icebergs con definición medida | **propuesta** | mapa v1 · ice | agregar tamaños 'antes' del libro al lector de sesión |
-| M2-DIR | Mapa v2 con azar de dirección aleatoria | **aprobada** | revisión del mapa v1 | cambio de código en signal_map.py; estudio mapa_v2 registrado |
+| T2-ICE | Icebergs con definición medida | **descartada** | mapa v1 · ice | agregar tamaños 'antes' del libro al lector de sesión |
+| M2-DIR | Mapa v2 con azar de dirección aleatoria | **corrida** → mapa_v2 | revisión del mapa v1 | cambio de código en signal_map.py; estudio mapa_v2 registrado |
 | T3-SMT | Divergencia NQ vs ES (SMT) | **propuesta** | videos · plan v1 | descargar datos tick de ES (laptop ATAS); lector canónico para ES |
 
 ## Estudios y cuenta de intentos
@@ -41,7 +47,10 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - **mapa_v1**: Alguna de las 12 señales de order flow mueve el precio en la dirección predicha a 1, 5, 15 o 30 min más de lo que lo hacen momentos al azar  · declarados 48, usados 38
 - **salidas_v1**: Pedido de Oscar (23/10/2026): con las mismas señales v1, un take profit fijo (20/30/40/50 puntos), otro stop fijo (3/4/6/8 puntos), más tiem · declarados 159, usados 159
 - **mapa_v2**: Las 12 señales, además del azar de la misma dirección, se comparan contra un azar con dirección aleatoria (¿la dirección es rentable?), se p · declarados 72, usados 24
-- **tanda2**: FADE v1 (desvanecer órdenes grandes), HVN v1 (rechazo de nodos de ayer) y ABS v2 (dejar correr al ganador), con números medidos en el mapa v · declarados 51, usados 0
+- **tanda2**: FADE v1 (desvanecer órdenes grandes), HVN v1 (rechazo de nodos de ayer) y ABS v2 (dejar correr al ganador), con números medidos en el mapa v · declarados 51, usados 2
+- **tanda2b**: FADE v2 (objetivo 8, stop 12, 10 min) y FADEL v1 (entrada pasiva con cola) capturan el efecto de 6–7 ticks contra las órdenes grandes y gana · declarados 34, usados 0
+- **mapa_v3**: Repetición del mapa v2 midiendo desde el mid del libro operable (bid/ask antes del primer llenado posterior) en vez del último llenado, que  · declarados 72, usados 12
+- **proxy_v1**: Con el rango y el cuerpo de los primeros 15 minutos, la apertura dentro/fuera del valor y la distancia al VWAP a las 09:45 se puede anticipa · declarados 1, usados 1
 
 ## Mapa de señales (resumen)
 
@@ -49,24 +58,25 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 
 | Señal | Eventos | 15 min | 30 min | Veredicto |
 |---|---|---|---|---|
-| Órdenes grandes (tamaño y niveles barridos) | 19,257 | -6.07 | -6.69 | distinta del azar · contraria |
-| Absorción | 5,784 | 3.75 | 6.13 | distinta del azar · contraria |
-| Desequilibrios apilados | 12,202 | 1.27 | 1.61 | distinta del azar · contraria |
-| Divergencia de delta | 33,785 | -1.37 | -0.16 | distinta del azar · a favor |
-| Ruptura del rango inicial | 556 | 11.74 | 17.51 | distinta del azar · contraria |
-| Agotamiento | 10,519 | 0.14 | -0.65 | distinta del azar · a favor |
-| Rechazo del área de valor | 246 | -3.29 | -18.21 | distinta del azar · a favor |
-| Zonas HVN (estilo Profit Pro) | 2,561 | 9.43 | 16.99 | distinta del azar · a favor |
-| Desequilibrio de la mejor compra/venta | 2,481 | -5.97 | -2.79 | distinta del azar · a favor |
-| Icebergs (orden que se repone) | 17 | 10.12 | 59.94 | no distinta |
-| Ráfagas de intensidad | 10,153 | -1.74 | -0.98 | distinta del azar · contraria |
-| Momentum primera → última media hora | 554 | -1.09 | -5.83 | distinta del azar · mixto |
+| Órdenes grandes (tamaño y niveles barridos) | 19,257 | 12.42 | 12.16 | distinta del azar · mixto |
+| Absorción | 5,784 | 3.68 | 7.98 | distinta del azar · contraria |
+| Desequilibrios apilados | 12,202 | 1.47 | 1.83 | distinta del azar · contraria |
+| Divergencia de delta | 33,785 | -1.4 | -0.66 | distinta del azar · a favor |
+| Ruptura del rango inicial | 556 | 8.22 | 17.79 | distinta del azar · contraria |
+| Agotamiento | 10,519 | 0.06 | -0.78 | distinta del azar · a favor |
+| Rechazo del área de valor | 246 | -1.27 | -13.05 | distinta del azar · a favor |
+| Zonas HVN (estilo Profit Pro) | 2,561 | -11.8 | -4.52 | distinta del azar · a favor |
+| Desequilibrio de la mejor compra/venta | 2,481 | -6.19 | -3.31 | no distinta |
+| Icebergs (orden que se repone) | 17 | 8.94 | 59.68 | no distinta |
+| Ráfagas de intensidad | 10,153 | -3.45 | -2.58 | distinta del azar · contraria |
+| Momentum primera → última media hora | 554 | -0.98 | -5.87 | distinta del azar · mixto |
 
 ## Documentos congelados
 
 - `futures/strategies/v1.json` · 73abb571d6bab88a… · OTS ✓
 - `futures/strategies/v1_aclaraciones.json` · 7bfee3753adbb8fa… · OTS ✓
 - `futures/strategies/v2.json` · d2145d6dbd0c76f7… · OTS ✓
+- `futures/strategies/v3.json` · 8f3620feb56b07d9… · OTS ✓
 - `futures/research_plan.json` · 5387f568a734f5ed… · OTS ✓
 - `futures/protocol.json` · b4f30dc2cc8d1fc2… · OTS ✓
 - `futures/protocol_v1.json` · dad6c111f88fab2d… · OTS ✓
@@ -91,11 +101,11 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - 2026-10-23 · hallazgo · Mapa de señales v1 publicado: 38 de 48 pruebas distintas del azar
 - 2026-10-23 · decisión · Protocolo v2: placebo sospechoso → revisar; mapa con 5,000 sorteos
 - 2026-10-23 · hallazgo · Red Team: la primera corrida tenía el umbral mal y se marca como error
+- 2026-10-23 · prueba · Prueba P005 · ABS v2 · revisar
+- 2026-10-23 · prueba · Prueba P006 · HVN v1 · no pasa
 - 2026-10-22 · avance · Lector y primeras medidas listos
 - 2026-10-22 · avance · Examen final sellado de verdad
 - 2026-10-22 · avance · Descarga completa y datos en el servidor
-- 2026-10-22 · decisión · Reglas del laboratorio acordadas
-- 2026-10-22 · hallazgo · Los datos de ATAS coinciden con Databento
 
 ## Cómo se corre una prueba nueva
 

@@ -1,0 +1,36 @@
+2026-10-23T20:30:02+00:00 clon limpio de 90f148ae7ebb7d7988f4ac60abd06ef2f01cd9d2
+2026-10-23T20:30:08+00:00 golden: golden OK: esperado 885b6df1468b6753 (14 op.) · obtenido 885b6df1468b6753 (14 op.) · 6s
+
+$ sudo -n docker run --rm --network none --name nqlab-T2-HVN-a -v /srv/lab/runs/T2-HVN/src:/lab:ro -v /srv/lab/data:/srv/lab/data:ro -v /srv/lab/runs/T2-HVN/out1:/out -e LAB_DATA=/srv/lab/data -e LAB_OUT=/out -e LAB_RESULTS=/out/results -e LAB_STATS=/out/lab_stats.jsonl -w /lab/futures/lab nqlab:1 python -m engine.run_test --strategy HVN --version 1 --study tanda2 --sens --isolated --n-trials 308 --var-sr 0.003998731875
+[HVN] 1460 operaciones en 556 sesiones · 64s
+  RAND 50/576
+  RAND 100/576
+  RAND 150/576
+  RAND 200/576
+  RAND 250/576
+  RAND 300/576
+  RAND 350/576
+  neto -30239 · p RAND 0.5624 · estrés -42146 (p 0.5116) · 82s
+  Topstep 0.0% (RAND 0.0%) · placebo desplazado -27198 · 97s
+  sensibilidad lista · 326s
+X597fe090b0 HVN v1: no_pasa · 326s (aislado: el orquestador registra y publica)
+
+
+[327s exit 0]
+$ sudo -n docker run --rm --network none --name nqlab-T2-HVN-b -v /srv/lab/runs/T2-HVN/src:/lab:ro -v /srv/lab/data:/srv/lab/data:ro -v /srv/lab/runs/T2-HVN/out2:/out -e LAB_DATA=/srv/lab/data -e LAB_OUT=/out -e LAB_RESULTS=/out/results -e LAB_STATS=/out/lab_stats.jsonl -w /lab/futures/lab nqlab:1 python -m engine.run_test --strategy HVN --version 1 --study tanda2 --sens --isolated --n-trials 308 --var-sr 0.003998731875
+[HVN] 1460 operaciones en 556 sesiones · 62s
+  RAND 50/576
+  RAND 100/576
+  RAND 150/576
+  RAND 200/576
+  RAND 250/576
+  RAND 300/576
+  RAND 350/576
+  neto -30239 · p RAND 0.5624 · estrés -42146 (p 0.5116) · 79s
+  Topstep 0.0% (RAND 0.0%) · placebo desplazado -27198 · 94s
+  sensibilidad lista · 324s
+X597fe090b0 HVN v1: no_pasa · 324s (aislado: el orquestador registra y publica)
+
+
+[325s exit 0]
+2026-10-23T20:41:00+00:00 PUBLICADA como P006 (no_pasa)

@@ -1,0 +1,30 @@
+{
+ "S-SALIDAS": {
+  "estado": "corrida",
+  "test_id": "salidas_v1",
+  "veredicto": "superficie publicada"
+ },
+ "M2-DIR": {
+  "estado": "corrida",
+  "test_id": "mapa_v2"
+ },
+ "T2-ABS-RUN": {
+  "estado": "corrida",
+  "inicio_utc": "2026-10-23T20:15:01+00:00",
+  "fin_utc": "2026-10-23T20:25:15+00:00",
+  "test_id": "P005",
+  "veredicto": "revisar"
+ },
+ "E-PROXY": {
+  "estado": "corrida",
+  "test_id": "proxy_v1",
+  "veredicto": "negativo"
+ },
+ "T2-HVN": {
+  "estado": "corrida",
+  "inicio_utc": "2026-10-23T20:30:01+00:00",
+  "fin_utc": "2026-10-23T20:41:00+00:00",
+  "test_id": "P006",
+  "veredicto": "no_pasa"
+ }
+}

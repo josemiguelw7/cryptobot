@@ -1,0 +1,26 @@
+2026-10-23T20:15:02+00:00 clon limpio de 90f148ae7ebb7d7988f4ac60abd06ef2f01cd9d2
+2026-10-23T20:15:09+00:00 golden: golden OK: esperado 885b6df1468b6753 (14 op.) · obtenido 885b6df1468b6753 (14 op.) · 6s
+
+$ sudo -n docker run --rm --network none --name nqlab-T2-ABS-RUN-a -v /srv/lab/runs/T2-ABS-RUN/src:/lab:ro -v /srv/lab/data:/srv/lab/data:ro -v /srv/lab/runs/T2-ABS-RUN/out1:/out -e LAB_DATA=/srv/lab/data -e LAB_OUT=/out -e LAB_RESULTS=/out/results -e LAB_STATS=/out/lab_stats.jsonl -w /lab/futures/lab nqlab:1 python -m engine.run_test --strategy ABS --version 2 --study tanda2 --sens --isolated --n-trials 295 --var-sr 0.003998731875
+[ABS] 126 operaciones en 556 sesiones · 63s
+  RAND 50/576
+  RAND 100/576
+  neto 8869 · p RAND 0.003 · estrés 6389 (p 0.0066) · 70s
+  Topstep 43.5% (RAND 3.5%) · placebo desplazado 27242 · 72s
+  sensibilidad lista · 303s
+Xc47975df58 ABS v2: revisar · 303s (aislado: el orquestador registra y publica)
+
+
+[304s exit 0]
+$ sudo -n docker run --rm --network none --name nqlab-T2-ABS-RUN-b -v /srv/lab/runs/T2-ABS-RUN/src:/lab:ro -v /srv/lab/data:/srv/lab/data:ro -v /srv/lab/runs/T2-ABS-RUN/out2:/out -e LAB_DATA=/srv/lab/data -e LAB_OUT=/out -e LAB_RESULTS=/out/results -e LAB_STATS=/out/lab_stats.jsonl -w /lab/futures/lab nqlab:1 python -m engine.run_test --strategy ABS --version 2 --study tanda2 --sens --isolated --n-trials 295 --var-sr 0.003998731875
+[ABS] 126 operaciones en 556 sesiones · 63s
+  RAND 50/576
+  RAND 100/576
+  neto 8869 · p RAND 0.003 · estrés 6389 (p 0.0066) · 69s
+  Topstep 43.5% (RAND 3.5%) · placebo desplazado 27242 · 71s
+  sensibilidad lista · 301s
+Xc47975df58 ABS v2: revisar · 301s (aislado: el orquestador registra y publica)
+
+
+[302s exit 0]
+2026-10-23T20:25:15+00:00 PUBLICADA como P005 (revisar)
