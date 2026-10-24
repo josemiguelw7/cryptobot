@@ -3,7 +3,7 @@
 _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `docs/decisions.md`._
 
 ## 1. Qué corrió esta semana
-- P013 · BIG v1 · **error** · neto -13718.04 · p 0.1419 · Topstep 0.0%
+- P013 · POC v1 · **error** · neto -3934.44 · p 0.5804 · Topstep 12.0%
 - P002 · BIG v1 · **superada** · neto -2120.06 · p 0.4086 · Topstep 0.0%
 - P003 · ABS v1 · **superada** · neto 4641.16 · p 0.002 · Topstep 6.4%
 - P004 · POC v1 · **superada** · neto -3934.44 · p 0.5794 · Topstep 12.0%
@@ -14,9 +14,10 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 - P009 · ORB v1 · **no_pasa** · neto -19063.54 · p 0.5455 · Topstep 0.0%
 - P010 · BIG v2 · **no_pasa** · neto -102617.7 · p 0.95 · Topstep 0.0%
 - P011 · HVN v1 · **no_pasa** · neto -87676.24 · p 0.999 · Topstep 0.0%
+- P012 · ABS v2 · **revisar** · neto 7873.72 · p 0.005 · Topstep 41.4%
 
 ## 2. Qué murió y por qué
-- P013 · BIG v1: umbral de orden grande mal calculado (percentil truncado y sobre todas las órdenes: 15 contratos). Ver strategies/v1_aclaraciones.json
+- P013 · POC v1: umbral de orden grande mal calculado (percentil truncado y sobre todas las órdenes: 15 contratos). Ver strategies/v1_aclaraciones.json
 - P009 · ORB v1: pierde con costos base; no gana a RAND (p=0.5455); no gana a RAND2 con las mismas salidas (p=0.5614); DSR 0.0 < 0.95 con 552 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%
 - P010 · BIG v2: pierde con costos base; no gana a RAND (p=0.95); no gana a RAND2 con las mismas salidas (p=0.9391); DSR 0.0 < 0.95 con 569 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%
 - P011 · HVN v1: pierde con costos base; no gana a RAND (p=0.999); no gana a RAND2 con las mismas salidas (p=1.0); DSR 0.0 < 0.95 con 584 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%

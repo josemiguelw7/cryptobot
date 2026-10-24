@@ -1,20 +1,20 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-24 12:20 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-24 12:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
 ## En una línea
 
 - Sesiones válidas de diseño: **576** (examen sellado desde 2026-04-22, cerrado).
-- Intentos registrados: **600** · pruebas publicadas: **11** (error 1, superada 7, no_pasa 3).
+- Intentos registrados: **633** · pruebas publicadas: **12** (error 1, superada 7, no_pasa 3, revisar 1).
 - Estrategias aprobadas por el comité: **0**. Nada toca dinero real.
 
 ## Pruebas corridas
 
 | Id | Qué | Veredicto | Neto | p vs RAND | Topstep | Causa |
 |---|---|---|---|---|---|---|
-| P013 | BIG v1 | **error** | −$13,718 | 0.1419 | 0.0% | umbral de orden grande mal calculado (percentil truncado y sobre todas las órdenes: 15 contratos). Ver strateg |
+| P013 | POC v1 | **error** | −$3,934 | 0.5804 | 12.0% | umbral de orden grande mal calculado (percentil truncado y sobre todas las órdenes: 15 contratos). Ver strateg |
 | P002 | BIG v1 | **superada** | −$2,120 | 0.4086 | 0.0% | pierde con costos base; no gana a RAND (p=0.4086); muere con costos al doble; pierde en 2024, 2025, 2026; pasa |
 | P003 | ABS v1 | **superada** | $4,641 | 0.002 | 6.4% | pierde en 2025 (−$405); pasa Topstep solo 6.4% (128 operaciones en 576 sesiones no alcanzan la meta); 67.7% de |
 | P004 | POC v1 | **superada** | −$3,934 | 0.5794 | 12.0% | pierde con costos base; no gana a RAND (p=0.5794); muere con costos al doble; pierde en 2024, 2026; pasa Topst |
@@ -25,6 +25,7 @@ Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` �
 | P009 | ORB v1 | **no_pasa** | −$19,064 | 0.5455 | 0.0% | pierde con costos base; no gana a RAND (p=0.5455); no gana a RAND2 con las mismas salidas (p=0.5614); DSR 0.0  |
 | P010 | BIG v2 | **no_pasa** | −$102,618 | 0.95 | 0.0% | pierde con costos base; no gana a RAND (p=0.95); no gana a RAND2 con las mismas salidas (p=0.9391); DSR 0.0 <  |
 | P011 | HVN v1 | **no_pasa** | −$87,676 | 0.999 | 0.0% | pierde con costos base; no gana a RAND (p=0.999); no gana a RAND2 con las mismas salidas (p=1.0); DSR 0.0 < 0. |
+| P012 | ABS v2 | **revisar** | $7,874 | 0.005 | 41.4% | placebo desplazado sospechoso: revisión de código pendiente; además: DSR 0.0 < 0.95 con 601 intentos; 80.9% de |
 
 ## Cola de pruebas (backlog)
 
@@ -35,9 +36,9 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 | R-ORB1 | Repetición de P008 (ORB v1) con el motor 1.1 | **corrida** → P009 | revisión ciega P005 |  · ERROR: falló una corrida; ver log |
 | R-BIG2 | Repetición de P007 (BIG v2) con el motor 1.1 | **corrida** → P010 | revisión ciega P005 |  |
 | R-HVN1 | Repetición de P006 (HVN v1) con el motor 1.1 | **corrida** → P011 | revisión ciega P005 |  |
-| R-ABS2 | Repetición de P005 (ABS v2) con el motor 1.1 | **corriendo** | revisión ciega P005 |  |
-| R-POC1 | Repetición de P004 (POC v1) con el motor 1.1 | **congelada** | revisión ciega P005 |  |
-| R-ABS1 | Repetición de P003 (ABS v1) con el motor 1.1 | **congelada** | revisión ciega P005 |  |
+| R-ABS2 | Repetición de P005 (ABS v2) con el motor 1.1 | **corrida** → P012 | revisión ciega P005 |  |
+| R-POC1 | Repetición de P004 (POC v1) con el motor 1.1 | **corrida** → P013 | revisión ciega P005 |  |
+| R-ABS1 | Repetición de P003 (ABS v1) con el motor 1.1 | **corriendo** | revisión ciega P005 |  |
 | R-BIG1 | Repetición de P002 (BIG v1) con el motor 1.1 | **congelada** | revisión ciega P005 |  |
 | T3-BIG2 | BIG v2: seguir a la orden grande con entrada inmediata y objetivo corto | **corrida** → P007 | mapa v3 |  |
 | T3-ORB | ORB v1: ruptura del rango de los primeros 15 minutos | **corrida** → P008 | mapa v3 |  |
@@ -65,7 +66,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - **mapa_v3**: Repetición del mapa v2 midiendo desde el mid del libro operable (bid/ask antes del primer llenado posterior) en vez del último llenado, que  · declarados 72, usados 12
 - **proxy_v1**: Con el rango y el cuerpo de los primeros 15 minutos, la apertura dentro/fuera del valor y la distancia al VWAP a las 09:45 se puede anticipa · declarados 1, usados 1
 - **tanda3**: BIG v2 (seguir la orden grande con entrada inmediata, objetivo 12, stop 16) y ORB v1 (ruptura del rango inicial, 16/16, 30 min), con premisa · declarados 34, usados 32
-- **repeticion_1_1**: Repetición de P002–P008 con el motor 1.1 (llenados corregidos tras la revisión ciega del 24/10/2026). Las reglas selladas no cambian. Se esp · declarados 119, usados 49
+- **repeticion_1_1**: Repetición de P002–P008 con el motor 1.1 (llenados corregidos tras la revisión ciega del 24/10/2026). Las reglas selladas no cambian. Se esp · declarados 119, usados 82
 - **salidas_1_1**: Repetición del estudio de salidas (pedido de Oscar) con el motor 1.1 y percentiles exactos. · declarados 159, usados 159
 - **mapa_v4**: Repetición del mapa v3 con percentiles exactos de órdenes y ventanas (los umbrales de 'órdenes grandes' y 'absorción' cambian). · declarados 72, usados 12
 

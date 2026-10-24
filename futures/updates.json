@@ -67,6 +67,13 @@
       "test_id": "P011"
     },
     {
+      "date": "2026-10-24",
+      "kind": "prueba",
+      "title": "Prueba P012 · ABS v2 · revisar",
+      "body": "ABS v2: 126 operaciones, ganancia neta $7,874 con costos base, p contra RAND 0.005, estrés $5,344, Topstep 41.4% de las cuentas (RAND 3.6%). Veredicto: revisar. Causa: placebo desplazado sospechoso: revisión de código pendiente; además: DSR 0.0 < 0.95 con 601 intentos; 80.9% de la ganancia en 5 días; pierde en 2026; pasa Topstep solo 41.4%.",
+      "test_id": "P012"
+    },
+    {
       "date": "2026-10-23",
       "kind": "hallazgo",
       "title": "Mapa de señales v1 publicado: 38 de 48 pruebas distintas del azar",
