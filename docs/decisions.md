@@ -769,3 +769,11 @@ El orquestador corrió ABS v2 y HVN v1 sin intervención: clon limpio del commit
 - **Mapa v3** (72 intentos): desde el mid del libro operable, las **órdenes grandes se siguen** (+11.7 / +12.4 / +12.2 ticks a 5/15/30 min; p bruto 0.0004; estable; +18.7 en tendencia y +5.4 en balance). Es la inversa exacta de lo que decía el v2, y explica por qué FADE perdía. Absorción: +8 a 30 min bruto pero "contraria" (peor que un momento al azar de la media hora) y no estable. Ruptura del rango inicial: +17.8 a 30 min (+38.6 en tendencia), estable, p bruto 0.21 (pocos eventos). Lo demás, cerca de cero.
 - Nueva propuesta **T3-BIG2** (seguir la orden grande con entrada inmediata, objetivo 12, stop 16, 10 min). Pendiente del comité; sería BIG v2 de 3.
 - Lección registrada: toda señal del mapa v1/v2 que se haya convertido en regla debe re-verificarse contra el v3 antes de gastar intentos. Las reglas de la tanda 2 se escribieron con el mapa viejo; solo ABS v2 sobrevivió porque su premisa no dependía del precio del último llenado.
+
+## 2026-10-24 · Tanda 3 congelada (BIG v2 y ORB v1) · "apruebo que tomes los que puedas"
+
+Jose Miguel delegó los pasos que Claude pueda tomar solo. Con esa aprobación (Oscar informado) quedan selladas en `futures/strategies/v4.json` (SHA-256 `edc0cd12…`, OTS) y congeladas en el backlog, estudio `tanda3` (34 intentos declarados):
+- **BIG v2**: seguir a la orden grande, entrada inmediata, sin filtro de nivel ni confirmación, objetivo 12, stop 16, 10 min. Premisa del mapa v3 (+12 ticks, estable, p bruto 0.0004). Versión 2 de 3 de BIG.
+- **ORB v1**: ruptura del rango de los primeros 15 min, 16/16, 30 min, una vez por lado y por día. Premisa del mapa v3 (+17.8 a 30 min, estable).
+Humo (60 sesiones de 2024, `--dry`, sin registrar): BIG v2 −$1,916 (327 op., p 0.03), ORB −$401 (77 op.). El orquestador decide con las 576 sesiones.
+Lo que Claude no puede hacer solo y queda en manos de Jose Miguel: deploy key de la VM en GitHub (publicación automática), correos de avisos, revisión ciega de P005 en una conversación nueva, datos de ES y segundos contratos de rollo, exportaciones semanales nuevas de ATAS (ventana viva), y pasarle a Oscar las muestras de P003 y P005.

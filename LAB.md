@@ -1,6 +1,6 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-24 09:28 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-24 09:36 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga-radtak-projects.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
@@ -27,7 +27,8 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 
 | Id | Prueba | Estado | Origen | Falta |
 |---|---|---|---|---|
-| T3-BIG2 | BIG v2: seguir a la orden grande con entrada inmediata y objetivo corto | **propuesta** | mapa v3 | aprobación de Oscar y Jose Miguel; reglas selladas en strategies/v4.json; cuenta como versión 2 de 3 de BIG |
+| T3-BIG2 | BIG v2: seguir a la orden grande con entrada inmediata y objetivo corto | **congelada** | mapa v3 |  |
+| T3-ORB | ORB v1: ruptura del rango de los primeros 15 minutos | **congelada** | mapa v3 |  |
 | S-SALIDAS | Estudio de salidas (TP fijo, SL fijo, tiempo, piramidar) sobre las v1 | **corrida** → salidas_v1 | Oscar · 23/10/2026 | estudio salidas_v1 registrado con 159 intentos declarados |
 | T2-ABS-RUN | ABS v2: dejar correr al ganador 15 min (TP ≥ 40 puntos o sin TP), stop v1 | **corrida** → P005 | estudio de salidas · pedido de Oscar | reglas escritas y selladas en strategies/v2.json como ABS v2 (listo); aprobación de Oscar y Jose Miguel → pasar a congel |
 | T2B-FADE2 | FADE v2: desvanecer órdenes grandes con objetivo corto | **descartada** | mapa v2 + humo de FADE v1 |  |
@@ -77,6 +78,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - `futures/strategies/v1_aclaraciones.json` · 7bfee3753adbb8fa… · OTS ✓
 - `futures/strategies/v2.json` · d2145d6dbd0c76f7… · OTS ✓
 - `futures/strategies/v3.json` · 8f3620feb56b07d9… · OTS ✓
+- `futures/strategies/v4.json` · edc0cd12ce8fe98c… · OTS ✓
 - `futures/research_plan.json` · 5387f568a734f5ed… · OTS ✓
 - `futures/protocol.json` · b4f30dc2cc8d1fc2… · OTS ✓
 - `futures/protocol_v1.json` · dad6c111f88fab2d… · OTS ✓

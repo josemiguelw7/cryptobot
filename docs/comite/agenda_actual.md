@@ -19,7 +19,6 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 - P006 · HVN v1: pierde con costos base; no gana a RAND (p=0.5624); muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%
 
 ## 3. Qué está propuesto (decidir: aprobar / descartar / pedir más datos)
-- [ ] **T3-BIG2** BIG v2: seguir a la orden grande con entrada inmediata y objetivo corto — Mapa v3 (precios operables): después de una orden agresiva ≥ p99 que barre ≥ 2 niveles, el precio SIGUE +12 ticks a 5, 15 y 30 min (p bruto 0.0004, estable 2024
 - [ ] **T2-ABS-EARLY** ABS con entrada temprana — ABS v1 gana a RAND (p 0.002) y el placebo desplazado 5 min antes gana más: entrar al detectar la absorción (sin esperar la confirmación) debería ganar más con e
 - [ ] **T2-ABS-HOURS** ABS v1 en toda la sesión de Nueva York — Las mismas reglas de ABS v1 de 09:30 a 15:30 (cierre 15:45) producen suficientes operaciones para pasar Topstep.
 - [ ] **T3-SMT** Divergencia NQ vs ES (SMT) — Cuando NQ hace nuevo extremo y ES no (o al revés), el precio revierte.
