@@ -16,29 +16,32 @@
    "nombre": "Repetición de P008 (ORB v1) con el motor 1.1",
    "hipotesis": "Misma regla sellada que P008; se repite porque el motor 1.0 tenía llenados optimistas (revisión ciega 24/10/2026).",
    "origen": "revisión ciega P005",
-   "estado": "congelada",
+   "estado": "corrida",
    "estrategia": "ORB",
    "version": 1,
    "estudio": "repeticion_1_1",
    "requisitos": [],
    "decision": "automática: toda prueba del motor 1.0 se repite (protocolo v3)",
    "supera": "P008",
-   "inicio_utc": "2026-10-24T11:00:01+00:00",
-   "fin_utc": "2026-10-24T11:02:03+00:00",
-   "ultimo_error": "falló una corrida; ver log"
+   "inicio_utc": "2026-10-24T11:15:01+00:00",
+   "fin_utc": "2026-10-24T11:18:32+00:00",
+   "ultimo_error": "falló una corrida; ver log",
+   "test_id": "P009",
+   "veredicto": "no_pasa"
   },
   {
    "id": "R-BIG2",
    "nombre": "Repetición de P007 (BIG v2) con el motor 1.1",
    "hipotesis": "Misma regla sellada que P007; se repite porque el motor 1.0 tenía llenados optimistas (revisión ciega 24/10/2026).",
    "origen": "revisión ciega P005",
-   "estado": "congelada",
+   "estado": "corriendo",
    "estrategia": "BIG",
    "version": 2,
    "estudio": "repeticion_1_1",
    "requisitos": [],
    "decision": "automática: toda prueba del motor 1.0 se repite (protocolo v3)",
-   "supera": "P007"
+   "supera": "P007",
+   "inicio_utc": "2026-10-24T11:30:01+00:00"
   },
   {
    "id": "R-HVN1",

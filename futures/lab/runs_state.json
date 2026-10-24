@@ -42,9 +42,15 @@
   "veredicto": "no_pasa"
  },
  "R-ORB1": {
-  "estado": "congelada",
-  "inicio_utc": "2026-10-24T11:00:01+00:00",
-  "fin_utc": "2026-10-24T11:02:03+00:00",
+  "estado": "corrida",
+  "inicio_utc": "2026-10-24T11:15:01+00:00",
+  "fin_utc": "2026-10-24T11:18:32+00:00",
+  "test_id": "P009",
+  "veredicto": "no_pasa",
   "ultimo_error": "fall\u00f3 una corrida; ver log"
+ },
+ "R-BIG2": {
+  "estado": "corriendo",
+  "inicio_utc": "2026-10-24T11:30:01+00:00"
  }
 }
