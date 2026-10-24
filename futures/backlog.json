@@ -355,6 +355,22 @@
     "lector canónico para ES"
    ],
    "notas": "Bloqueada por datos."
+  },
+  {
+   "id": "E-HVN-FUERZA",
+   "nombre": "Estudio: qué hace poderoso a un HVN (base del indicador para ATAS)",
+   "hipotesis": "Algunos HVN del perfil del día anterior hacen reaccionar al precio mucho más que otros. Se mide la reacción en el primer toque (5, 15 y 30 min) contra niveles al azar y por característica: tamaño del volumen, si está intacto, confluencia con POC/VAH/VAL/VWAP, hora, día de balance o tendencia y velocidad de llegada. Solo cuentan las que ganan al azar con corrección de Holm.",
+   "origen": "pedido de Oscar en el buzón (24/10/2026): indicador de ATAS que muestre HVN poderosos en vivo",
+   "estado": "aprobada",
+   "estrategia": "HVN",
+   "version": 0,
+   "requisitos": [
+    "estudio registrado antes de correr (fases y umbrales)",
+    "definición de 'HVN poderoso' congelada con huella y sello",
+    "chequeo cruzado en ES y YM sin abrir el examen de NQ",
+    "indicador C# para ATAS"
+   ],
+   "decision": "aprobada por Oscar 2026-10-24 (lo pidió él en el buzón)"
   }
  ]
 }
