@@ -108,6 +108,10 @@ def copy_results(tests):
             for f in ("trades.csv", "trades.json", "report.json", "oscar/muestra.csv", "oscar/muestra.json", "oscar/acuerdo.json"):
                 if os.path.exists(os.path.join(src, f)):
                     os.makedirs(os.path.dirname(os.path.join(dst, f)), exist_ok=True); shutil.copy2(os.path.join(src, f), os.path.join(dst, f))
+            rt = os.path.join(src, "redteam")
+            if os.path.isdir(rt):   # paquete de revisión ciega, descargable desde la página
+                shutil.rmtree(os.path.join(dst, "redteam"), ignore_errors=True); shutil.copytree(rt, os.path.join(dst, "redteam"))
+                shutil.make_archive(os.path.join(dst, f"redteam_{t['id']}"), "zip", rt)
             days = os.path.join(src, "days")
             if os.path.isdir(days):
                 os.makedirs(os.path.join(OUT, "data", "days"), exist_ok=True)

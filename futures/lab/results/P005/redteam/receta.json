@@ -1,0 +1,29 @@
+{
+ "git_commit": "00ebb64d9545b76885137e1e9e5b4cd2b0bf16c4",
+ "motor": "1.0.0",
+ "sesiones_sha256": "efa6fa9dbd9f0e8005cb30be48a5867a6717292f78604ff67f06f420ae4bb782",
+ "costos": {
+  "slip_ticks_por_lado": 1,
+  "comision_rt": 3.78,
+  "tick_usd": 5.0
+ },
+ "parametros": {
+  "near_ticks": 4,
+  "max_advance": 2,
+  "confirm_s": 60,
+  "away_ticks": 4,
+  "stop_beyond": 4,
+  "stop_min": 12,
+  "stop_max": 32,
+  "rr": 2.0,
+  "max_min": 15,
+  "target_fixed": 160
+ },
+ "protocol_sha256": "b4f30dc2cc8d1fc2d55059610ac17dd54f63e88d150c31e54facf53168dd2a1e",
+ "estrategias_sha256": "d2145d6dbd0c76f7cc9f603fc9545d664c414a49986caeeafacd77a2b0ee44fd",
+ "rand_corridas": 1000,
+ "semilla": "sha256(Xc47975df58:<fecha>:k)",
+ "reproducible": true,
+ "commit": "90f148ae7ebb7d7988f4ac60abd06ef2f01cd9d2",
+ "contenedor": "nqlab:1"
+}

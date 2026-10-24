@@ -1,0 +1,25 @@
+{
+ "git_commit": "00ebb64d9545b76885137e1e9e5b4cd2b0bf16c4",
+ "motor": "1.0.0",
+ "sesiones_sha256": "efa6fa9dbd9f0e8005cb30be48a5867a6717292f78604ff67f06f420ae4bb782",
+ "costos": {
+  "slip_ticks_por_lado": 1,
+  "comision_rt": 3.78,
+  "tick_usd": 5.0
+ },
+ "parametros": {
+  "near_ticks": 4,
+  "max_advance": 2,
+  "confirm_s": 60,
+  "away_ticks": 4,
+  "stop_beyond": 4,
+  "stop_min": 12,
+  "stop_max": 32,
+  "rr": 2.0,
+  "max_min": 15
+ },
+ "protocol_sha256": "dad6c111f88fab2d45b25ebc73b4251865e366935e6c39b65b171ef947477b7a",
+ "estrategias_sha256": "73abb571d6bab88af6775e65c925157e5fbafcaaa11c3921418767e2e2c3d229",
+ "rand_corridas": 1000,
+ "semilla": "sha256(P003:<fecha>:k)"
+}
