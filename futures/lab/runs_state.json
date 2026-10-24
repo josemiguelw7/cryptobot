@@ -78,7 +78,17 @@
   "veredicto": "no_pasa"
  },
  "R-ABS1": {
-  "estado": "corriendo",
-  "inicio_utc": "2026-10-24T12:30:01+00:00"
+  "estado": "corrida",
+  "inicio_utc": "2026-10-24T12:30:01+00:00",
+  "fin_utc": "2026-10-24T12:40:15+00:00",
+  "test_id": "P014",
+  "veredicto": "revisar"
+ },
+ "R-BIG1": {
+  "estado": "corrida",
+  "inicio_utc": "2026-10-24T12:45:01+00:00",
+  "fin_utc": "2026-10-24T12:49:17+00:00",
+  "test_id": "P015",
+  "veredicto": "no_pasa"
  }
 }

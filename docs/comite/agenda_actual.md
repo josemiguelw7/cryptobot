@@ -15,12 +15,15 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 - P010 · BIG v2 · **no_pasa** · neto -102617.7 · p 0.95 · Topstep 0.0%
 - P011 · HVN v1 · **no_pasa** · neto -87676.24 · p 0.999 · Topstep 0.0%
 - P012 · ABS v2 · **revisar** · neto 7873.72 · p 0.005 · Topstep 41.4%
+- P014 · ABS v1 · **revisar** · neto 4319.94 · p 0.003 · Topstep 3.7%
+- P015 · BIG v1 · **no_pasa** · neto -2235.06 · p 0.4845 · Topstep 0.0%
 
 ## 2. Qué murió y por qué
 - P013 · POC v1: umbral de orden grande mal calculado (percentil truncado y sobre todas las órdenes: 15 contratos). Ver strategies/v1_aclaraciones.json
 - P009 · ORB v1: pierde con costos base; no gana a RAND (p=0.5455); no gana a RAND2 con las mismas salidas (p=0.5614); DSR 0.0 < 0.95 con 552 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%
 - P010 · BIG v2: pierde con costos base; no gana a RAND (p=0.95); no gana a RAND2 con las mismas salidas (p=0.9391); DSR 0.0 < 0.95 con 569 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%
 - P011 · HVN v1: pierde con costos base; no gana a RAND (p=0.999); no gana a RAND2 con las mismas salidas (p=1.0); DSR 0.0 < 0.95 con 584 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%
+- P015 · BIG v1: pierde con costos base; no gana a RAND (p=0.4845); no gana a RAND2 con las mismas salidas (p=0.4675); DSR 0.0 < 0.95 con 651 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%
 
 ## 3. Qué está propuesto (decidir: aprobar / descartar / pedir más datos)
 - [ ] **T2-ABS-EARLY** ABS con entrada temprana — ABS v1 gana a RAND (p 0.002) y el placebo desplazado 5 min antes gana más: entrar al detectar la absorción (sin esperar la confirmación) debería ganar más con e

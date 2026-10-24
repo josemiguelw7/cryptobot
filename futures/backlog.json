@@ -102,27 +102,34 @@
    "nombre": "Repetición de P003 (ABS v1) con el motor 1.1",
    "hipotesis": "Misma regla sellada que P003; se repite porque el motor 1.0 tenía llenados optimistas (revisión ciega 24/10/2026).",
    "origen": "revisión ciega P005",
-   "estado": "corriendo",
+   "estado": "corrida",
    "estrategia": "ABS",
    "version": 1,
    "estudio": "repeticion_1_1",
    "requisitos": [],
    "decision": "automática: toda prueba del motor 1.0 se repite (protocolo v3)",
    "supera": "P003",
-   "inicio_utc": "2026-10-24T12:30:01+00:00"
+   "inicio_utc": "2026-10-24T12:30:01+00:00",
+   "fin_utc": "2026-10-24T12:40:15+00:00",
+   "test_id": "P014",
+   "veredicto": "revisar"
   },
   {
    "id": "R-BIG1",
    "nombre": "Repetición de P002 (BIG v1) con el motor 1.1",
    "hipotesis": "Misma regla sellada que P002; se repite porque el motor 1.0 tenía llenados optimistas (revisión ciega 24/10/2026).",
    "origen": "revisión ciega P005",
-   "estado": "congelada",
+   "estado": "corrida",
    "estrategia": "BIG",
    "version": 1,
    "estudio": "repeticion_1_1",
    "requisitos": [],
    "decision": "automática: toda prueba del motor 1.0 se repite (protocolo v3)",
-   "supera": "P002"
+   "supera": "P002",
+   "inicio_utc": "2026-10-24T12:45:01+00:00",
+   "fin_utc": "2026-10-24T12:49:17+00:00",
+   "test_id": "P015",
+   "veredicto": "no_pasa"
   },
   {
    "id": "T3-BIG2",

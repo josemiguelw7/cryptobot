@@ -74,6 +74,20 @@
       "test_id": "P012"
     },
     {
+      "date": "2026-10-24",
+      "kind": "prueba",
+      "title": "Prueba P014 · ABS v1 · revisar",
+      "body": "ABS v1: 127 operaciones, ganancia neta $4,320 con costos base, p contra RAND 0.003, estrés $3,915, Topstep 3.7% de las cuentas (RAND 0.1%). Veredicto: revisar. Causa: placebo desplazado sospechoso: revisión de código pendiente; además: DSR 0.0 < 0.95 con 634 intentos; 65.9% de la ganancia en 5 días; pasa Topstep solo 3.7%.",
+      "test_id": "P014"
+    },
+    {
+      "date": "2026-10-24",
+      "kind": "prueba",
+      "title": "Prueba P015 · BIG v1 · no pasa",
+      "body": "BIG v1: 127 operaciones, ganancia neta $-2,235 con costos base, p contra RAND 0.4845, estrés $-3,025, Topstep 0.0% de las cuentas (RAND 0.0%). Veredicto: no pasa. Causa: pierde con costos base; no gana a RAND (p=0.4845); no gana a RAND2 con las mismas salidas (p=0.4675); DSR 0.0 < 0.95 con 651 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%.",
+      "test_id": "P015"
+    },
+    {
       "date": "2026-10-23",
       "kind": "hallazgo",
       "title": "Mapa de señales v1 publicado: 38 de 48 pruebas distintas del azar",
