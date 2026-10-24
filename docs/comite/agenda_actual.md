@@ -7,7 +7,7 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 - P002 · BIG v1 · **no_pasa** · neto -2120.06 · p 0.4086 · Topstep 0.0%
 - P003 · ABS v1 · **no_pasa** · neto 4641.16 · p 0.002 · Topstep 6.4%
 - P004 · POC v1 · **no_pasa** · neto -3934.44 · p 0.5794 · Topstep 12.0%
-- P005 · ABS v2 · **revisar** · neto 8868.72 · p 0.003 · Topstep 43.5%
+- P005 · ABS v2 · **no_pasa** · neto 8868.72 · p 0.003 · Topstep 43.5%
 - P006 · HVN v1 · **no_pasa** · neto -30238.8 · p 0.5624 · Topstep 0.0%
 
 ## 2. Qué murió y por qué
@@ -15,6 +15,7 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 - P002 · BIG v1: pierde con costos base; no gana a RAND (p=0.4086); muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%
 - P003 · ABS v1: pierde en 2025 (−$405); pasa Topstep solo 6.4% (128 operaciones en 576 sesiones no alcanzan la meta); 67.7% de la ganancia viene de 5 días
 - P004 · POC v1: pierde con costos base; no gana a RAND (p=0.5794); muere con costos al doble; pierde en 2024, 2026; pasa Topstep solo 12.0%
+- P005 · ABS v2: pasa Topstep solo 43.5% (umbral 50%); 72% de la ganancia viene de 5 días; ganancia concentrada en 2024 (2025 +$140, 2026 −$159)
 - P006 · HVN v1: pierde con costos base; no gana a RAND (p=0.5624); muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%
 
 ## 3. Qué está propuesto (decidir: aprobar / descartar / pedir más datos)
