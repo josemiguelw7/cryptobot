@@ -5,7 +5,7 @@
 const REPO = "josemiguelw7/cryptobot";
 const SITE = "https://cryptobot-liga.vercel.app";
 const TO = ["jose@radtak.com", "oscontreras84@gmail.com"];
-const FROM = "Laboratorio NQ <lab@radtak.com>";
+const FROM = "Oscar Lab <lab@radtak.com>";
 const MAX_TXT = 200 * 1024;
 const MAX_IMG = 3 * 1024 * 1024;
 const TIPOS = { pregunta: "Pregunta", problema: "Problema a corregir", datos: "Datos para agregar", idea: "Idea o petición de prueba",
@@ -91,9 +91,9 @@ ${img ? `<p style="color:#69707d;font-size:13px">📎 Captura adjunta.</p>` : ""
 ${pagina ? `<p style="font-size:13px">📍 Enviado desde: <a href="${esc(pagina)}">${esc(pagina)}</a></p>` : ""}
 ${out.url ? `<p style="font-size:13px">📁 Guardado en el laboratorio: <a href="${esc(out.url)}">${esc(base)}.md</a> (entra a la agenda del comité)</p>` : ""}
 <p style="font-size:13px">🏠 <a href="${SITE}">Página del laboratorio</a> · ❓ <a href="${SITE}/#reportar">Enviar otra</a></p>
-<p style="font-size:12px;color:#8a909b">🤖 Aviso automático del buzón del Laboratorio NQ. Si respondes a este correo, la respuesta le llega a quien escribió la nota y a Jose Miguel.</p></div>`;
-    const msg = { from: FROM, to: TO, reply_to: TO, subject: `[Laboratorio NQ] Buzón · ${TIPOS[tipo]} · ${titulo || texto.slice(0, 60)}`, html,
-      text: `${TIPOS[tipo]} de ${autor}\n\n${titulo}\n\n${texto}\n\nEnviado desde: ${pagina}\n${out.url ? "Guardado: " + out.url + "\n" : ""}\n🤖 Aviso automático del buzón del Laboratorio NQ.` };
+<p style="font-size:12px;color:#8a909b">🤖 Aviso automático del buzón de Oscar Lab. Si respondes a este correo, la respuesta le llega a quien escribió la nota y a Jose Miguel.</p></div>`;
+    const msg = { from: FROM, to: TO, reply_to: TO, subject: `[Oscar Lab] Buzón · ${TIPOS[tipo]} · ${titulo || texto.slice(0, 60)}`, html,
+      text: `${TIPOS[tipo]} de ${autor}\n\n${titulo}\n\n${texto}\n\nEnviado desde: ${pagina}\n${out.url ? "Guardado: " + out.url + "\n" : ""}\n🤖 Aviso automático del buzón de Oscar Lab.` };
     if (img) msg.attachments = [{ filename: imgName, content: img.b64 }];
     try {
       const r = await fetch("https://api.resend.com/emails", { method: "POST",

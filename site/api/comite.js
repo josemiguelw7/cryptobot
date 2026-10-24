@@ -83,12 +83,12 @@ module.exports = async (req, res) => {
 ${comentario ? `<div style="white-space:pre-wrap;background:#f6f7f9;border:1px solid #e3e6eb;border-radius:10px;padding:12px">${esc(comentario)}</div>` : ""}
 <p>${esc(estado)}</p>
 <p style="font-size:13px">🏛️ <a href="${SITE}/#comite">Votar o ver el comité</a> · 📋 <a href="https://github.com/${REPO}/blob/main/docs/comite/agenda_actual.md">Agenda</a></p>
-<p style="font-size:12px;color:#8a909b">🤖 Aviso automático del comité del Laboratorio NQ.</p></div>`;
+<p style="font-size:12px;color:#8a909b">🤖 Aviso automático del comité de Oscar Lab.</p></div>`;
     await fetch("https://api.resend.com/emails", { method: "POST",
       headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, "Content-Type": "application/json", "User-Agent": "nqlab-comite/1.0" },
-      body: JSON.stringify({ from: "Laboratorio NQ <lab@radtak.com>", to: TO, reply_to: TO,
-        subject: `[Laboratorio NQ] Comité · ${NOMBRE[who]}: ${VOTOS[voto]} en ${id}`, html,
-        text: `${NOMBRE[who]} votó ${VOTOS[voto]} en ${id} (${it.nombre}).\n${comentario}\n\n${estado}\n\n${SITE}/#comite\n\n🤖 Aviso automático del comité del Laboratorio NQ.` }) }).catch(() => {});
+      body: JSON.stringify({ from: "Oscar Lab <lab@radtak.com>", to: TO, reply_to: TO,
+        subject: `[Oscar Lab] Comité · ${NOMBRE[who]}: ${VOTOS[voto]} en ${id}`, html,
+        text: `${NOMBRE[who]} votó ${VOTOS[voto]} en ${id} (${it.nombre}).\n${comentario}\n\n${estado}\n\n${SITE}/#comite\n\n🤖 Aviso automático del comité de Oscar Lab.` }) }).catch(() => {});
   }
   return res.status(200).json({ ok: true, persona: who, voto, estado });
 };
