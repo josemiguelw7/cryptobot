@@ -1,13 +1,13 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-24 09:50 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-24 10:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga-radtak-projects.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
 ## En una línea
 
 - Sesiones válidas de diseño: **576** (examen sellado desde 2026-04-22, cerrado).
-- Intentos registrados: **341** · pruebas publicadas: **6** (error 1, no_pasa 5).
+- Intentos registrados: **373** · pruebas publicadas: **8** (error 1, no_pasa 7).
 - Estrategias aprobadas por el comité: **0**. Nada toca dinero real.
 
 ## Pruebas corridas
@@ -20,6 +20,8 @@ Página: https://cryptobot-liga-radtak-projects.vercel.app · Guía del repo: `d
 | P004 | POC v1 | **no_pasa** | −$3,934 | 0.5794 | 12.0% | pierde con costos base; no gana a RAND (p=0.5794); muere con costos al doble; pierde en 2024, 2026; pasa Topst |
 | P005 | ABS v2 | **no_pasa** | $8,869 | 0.003 | 43.5% | pasa Topstep solo 43.5% (umbral 50%); 72% de la ganancia viene de 5 días; ganancia concentrada en 2024 (2025 + |
 | P006 | HVN v1 | **no_pasa** | −$30,239 | 0.5624 | 0.0% | pierde con costos base; no gana a RAND (p=0.5624); muere con costos al doble; pierde en 2024, 2025, 2026; pasa |
+| P007 | BIG v2 | **no_pasa** | −$72,187 | 0.8052 | 0.0% | pierde con costos base; no gana a RAND (p=0.8052); muere con costos al doble; pierde en 2024, 2025, 2026; pasa |
+| P008 | ORB v1 | **no_pasa** | −$15,144 | 0.5005 | 0.0% | pierde con costos base; no gana a RAND (p=0.5005); muere con costos al doble; pierde en 2024, 2025, 2026; pasa |
 
 ## Cola de pruebas (backlog)
 
@@ -27,8 +29,8 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 
 | Id | Prueba | Estado | Origen | Falta |
 |---|---|---|---|---|
-| T3-BIG2 | BIG v2: seguir a la orden grande con entrada inmediata y objetivo corto | **corriendo** | mapa v3 |  |
-| T3-ORB | ORB v1: ruptura del rango de los primeros 15 minutos | **congelada** | mapa v3 |  |
+| T3-BIG2 | BIG v2: seguir a la orden grande con entrada inmediata y objetivo corto | **corrida** → P007 | mapa v3 |  |
+| T3-ORB | ORB v1: ruptura del rango de los primeros 15 minutos | **corrida** → P008 | mapa v3 |  |
 | S-SALIDAS | Estudio de salidas (TP fijo, SL fijo, tiempo, piramidar) sobre las v1 | **corrida** → salidas_v1 | Oscar · 23/10/2026 | estudio salidas_v1 registrado con 159 intentos declarados |
 | T2-ABS-RUN | ABS v2: dejar correr al ganador 15 min (TP ≥ 40 puntos o sin TP), stop v1 | **corrida** → P005 | estudio de salidas · pedido de Oscar | reglas escritas y selladas en strategies/v2.json como ABS v2 (listo); aprobación de Oscar y Jose Miguel → pasar a congel |
 | T2B-FADE2 | FADE v2: desvanecer órdenes grandes con objetivo corto | **descartada** | mapa v2 + humo de FADE v1 |  |
@@ -52,7 +54,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - **tanda2b**: FADE v2 (objetivo 8, stop 12, 10 min) y FADEL v1 (entrada pasiva con cola) capturan el efecto de 6–7 ticks contra las órdenes grandes y gana · declarados 34, usados 0
 - **mapa_v3**: Repetición del mapa v2 midiendo desde el mid del libro operable (bid/ask antes del primer llenado posterior) en vez del último llenado, que  · declarados 72, usados 12
 - **proxy_v1**: Con el rango y el cuerpo de los primeros 15 minutos, la apertura dentro/fuera del valor y la distancia al VWAP a las 09:45 se puede anticipa · declarados 1, usados 1
-- **tanda3**: BIG v2 (seguir la orden grande con entrada inmediata, objetivo 12, stop 16) y ORB v1 (ruptura del rango inicial, 16/16, 30 min), con premisa · declarados 34, usados 0
+- **tanda3**: BIG v2 (seguir la orden grande con entrada inmediata, objetivo 12, stop 16) y ORB v1 (ruptura del rango inicial, 16/16, 30 min), con premisa · declarados 34, usados 32
 
 ## Mapa de señales (resumen)
 
@@ -101,14 +103,14 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 
 ## Últimos movimientos (bitácora)
 
+- 2026-10-24 · prueba · Prueba P007 · BIG v2 · no pasa
+- 2026-10-24 · prueba · Prueba P008 · ORB v1 · no pasa
 - 2026-10-23 · hallazgo · Mapa de señales v1 publicado: 38 de 48 pruebas distintas del azar
 - 2026-10-23 · decisión · Protocolo v2: placebo sospechoso → revisar; mapa con 5,000 sorteos
 - 2026-10-23 · hallazgo · Red Team: la primera corrida tenía el umbral mal y se marca como error
 - 2026-10-23 · prueba · Prueba P005 · ABS v2 · revisar
 - 2026-10-23 · prueba · Prueba P006 · HVN v1 · no pasa
 - 2026-10-22 · avance · Lector y primeras medidas listos
-- 2026-10-22 · avance · Examen final sellado de verdad
-- 2026-10-22 · avance · Descarga completa y datos en el servidor
 
 ## Cómo se corre una prueba nueva
 
