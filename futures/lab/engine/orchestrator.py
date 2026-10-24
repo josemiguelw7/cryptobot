@@ -197,7 +197,12 @@ def run_one(item):
             if rep.get("muerte") or rep.get("causa"):
                 lin.append("Causa: " + str(rep.get("muerte") or rep.get("causa")))
             lin.append("Se corrió dos veces en contenedores limpios, sin red, y las dos dieron el mismo resultado bit a bit.")
-            notify.send(f"{item['id']} terminó · {V} ({it['test_id']})", "\n\n".join(lin), test_id=it["test_id"])
+            try:   # formato estándar de Oscar (9 secciones); si algo falla, sale el aviso corto
+                from . import informe_floor
+                if not informe_floor.enviar(it["test_id"]):
+                    raise RuntimeError("envío falló")
+            except Exception:
+                notify.send(f"{item['id']} terminó · {V} ({it['test_id']})", "\n\n".join(lin), test_id=it["test_id"])
         else:
             notify.send(f"{item['id']} no terminó · se reintenta sola",
                         f"La prueba {nombre} no terminó: {it.get('ultimo_error') or 'error sin detalle'}.\n\n"
