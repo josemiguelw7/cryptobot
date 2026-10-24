@@ -16,13 +16,14 @@
    "nombre": "BIG v2: seguir a la orden grande con entrada inmediata y objetivo corto",
    "hipotesis": "Mapa v3 (precios operables): después de una orden agresiva ≥ p99 que barre ≥ 2 niveles, el precio SIGUE +12 ticks a 5, 15 y 30 min (p bruto 0.0004, estable 2024/2025, +19 en tendencia y +5 en balance). BIG v1 perdió por su diseño (confirmación de 30 s, filtro de nivel, objetivo 48 / stop 24), no por la señal. BIG v2: entrada inmediata a mercado con la orden, sin filtro de nivel, objetivo 12 ticks, stop 16, 10 minutos.",
    "origen": "mapa v3",
-   "estado": "congelada",
+   "estado": "corriendo",
    "estrategia": "BIG",
    "version": 2,
    "estudio": "tanda3",
    "requisitos": [],
    "notas": "Fricción estimada ~4 ticks (spread + deslizamiento de ida y vuelta) + 2.8 de comisión contra 12 de efecto: margen real ~5 ticks por operación. Se prueba con el protocolo completo antes de creer nada.",
-   "decision": "aprobada por Jose Miguel 24/10/2026; sellada en strategies/v4.json"
+   "decision": "aprobada por Jose Miguel 24/10/2026; sellada en strategies/v4.json",
+   "inicio_utc": "2026-10-24T09:45:01+00:00"
   },
   {
    "id": "T3-ORB",

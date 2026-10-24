@@ -26,5 +26,9 @@
   "fin_utc": "2026-10-23T20:41:00+00:00",
   "test_id": "P006",
   "veredicto": "no_pasa"
+ },
+ "T3-BIG2": {
+  "estado": "corriendo",
+  "inicio_utc": "2026-10-24T09:45:01+00:00"
  }
 }
