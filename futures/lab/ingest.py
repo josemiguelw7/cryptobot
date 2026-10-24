@@ -10,10 +10,13 @@ import csv, json, os, sys, time
 from concurrent.futures import ProcessPoolExecutor
 import polars as pl
 
-RAW = "/srv/lab/data/raw/NQ"
-OUT = "/srv/lab/data/canonical/NQ"
+import os
+ROOT = os.environ.get("LAB_ROOT", "NQ")                 # NQ | ES | YM
+RAW = f"/srv/lab/data/raw/{ROOT}"
+OUT = f"/srv/lab/data/canonical/{ROOT}"
+TICKS_PER_POINT = {"NQ": 4, "ES": 4, "YM": 1}            # NQ/ES: tick 0.25; YM: tick 1.0
 LOG = "/srv/lab/logs/ingest.jsonl"
-TICK = 4  # 1 punto = 4 ticks de 0.25
+TICK = TICKS_PER_POINT[ROOT]  # precios en ticks enteros
 
 PX = ["price", "bid_before", "ask_before", "bid_after", "ask_after"]
 SZ = ["volume", "trade_volume", "ticks_swept", "ticks_in_order",

@@ -12,11 +12,13 @@ Salidas:
   features/summary_NQ.jsonl             resumen por sesión y tramo
 Precios en ticks enteros (precio * 4).
 """
-import json, os, sys
+import os, json, sys
 from concurrent.futures import ProcessPoolExecutor
 import polars as pl
 
-CAN = "/srv/lab/data/canonical/NQ"
+ROOT = os.environ.get("LAB_ROOT", "NQ")
+CAN = f"/srv/lab/data/canonical/{ROOT}"
+TICK = {"NQ": 4, "ES": 4, "YM": 1}[ROOT]
 F = "/srv/lab/data/features"
 TZ = "America/New_York"
 THRESH = [20, 30, 50, 70, 80, 100, 150, 200]
@@ -58,7 +60,7 @@ def one(d):
         pl.col("volume").sum().alias("vol"))
         .with_columns((pl.col("buy") - pl.col("sell")).alias("delta"))
         .sort(["seg", "price_t"]))
-    prof.write_parquet(os.path.join(F, "profile", "NQ", f"{d}.parquet"), compression="zstd")
+    prof.write_parquet(os.path.join(F, "profile", ROOT, f"{d}.parquet"), compression="zstd")
     orders = (df.group_by("trade_id").agg(
         pl.col("ts").first(), pl.col("et").first(), pl.col("seg").first(),
         pl.col("side").first(), pl.col("price_t").first().alias("px_first"),
@@ -66,7 +68,7 @@ def one(d):
         pl.col("price_t").n_unique().alias("levels"))
         .sort("ts"))
     orders.filter(pl.col("size") >= 10).drop("et").write_parquet(
-        os.path.join(F, "orders", "NQ", f"{d}.parquet"), compression="zstd")
+        os.path.join(F, "orders", ROOT, f"{d}.parquet"), compression="zstd")
     recs = []
     for seg in ["asia", "londres", "ny", "post"]:
         s = df.filter(pl.col("seg") == seg)
@@ -82,7 +84,7 @@ def one(d):
             "delta": int((s["volume"].cast(pl.Int64) * s["side"].cast(pl.Int64)).sum()),
             "high_t": int(s["price_t"].max()), "low_t": int(s["price_t"].min()),
             "open_t": int(s["price_t"][0]), "close_t": int(s["price_t"][-1]),
-            "vwap": float((s["price_t"].cast(pl.Float64) * s["volume"].cast(pl.Float64)).sum() / s["volume"].sum() / 4),
+            "vwap": float((s["price_t"].cast(pl.Float64) * s["volume"].cast(pl.Float64)).sum() / s["volume"].sum() / TICK),
             "poc_t": poc, "vah_t": vah, "val_t": val,
             "orders": o.height,
             "big": {str(k): int((o["size"] >= k).sum()) for k in THRESH},
@@ -92,10 +94,10 @@ def one(d):
 
 
 def main():
-    for sub in ["profile/NQ", "orders/NQ"]:
+    for sub in [f"profile/{ROOT}", f"orders/{ROOT}"]:
         os.makedirs(os.path.join(F, sub), exist_ok=True)
     days = sys.argv[1:] or sorted(f[:-8] for f in os.listdir(CAN) if f.endswith(".parquet"))
-    out = os.path.join(F, "summary_NQ.jsonl" if not sys.argv[1:] else "summary_test.jsonl")
+    out = os.path.join(F, f"summary_{ROOT}.jsonl" if not sys.argv[1:] else "summary_test.jsonl")
     n = 0
     with ProcessPoolExecutor(max_workers=6) as ex, open(out, "w") as f:
         for recs in ex.map(one, days):

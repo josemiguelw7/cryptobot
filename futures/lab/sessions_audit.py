@@ -17,8 +17,10 @@ from concurrent.futures import ProcessPoolExecutor
 from datetime import datetime, timezone
 import polars as pl
 
-CAN = "/srv/lab/data/canonical/NQ"
-MAN = "/srv/lab/data/raw/NQ/_manifest.csv"
+ROOT = os.environ.get("LAB_ROOT", "NQ")
+CAN = f"/srv/lab/data/canonical/{ROOT}"
+MAN = f"/srv/lab/data/raw/{ROOT}/_manifest.csv"
+TICK = {"NQ": 4, "ES": 4, "YM": 1}[ROOT]
 TZ = "America/New_York"
 DESIGN_END = "2026-04-21"
 GAP_WARN, GAP_EXCL = 60.0, 120.0
@@ -43,7 +45,7 @@ def one(d):
            "ny_volume": int(ny["volume"].sum()), "ny_gap_max_s": round(float(gaps.max()), 1),
            "ny_gaps_30s": int((gaps >= 30).sum()), "ny_first_utc": str(first_utc)[:19],
            "dst_ok": dst_ok,
-           "ny_high": float(ny["price_t"].max()) / 4, "ny_low": float(ny["price_t"].min()) / 4}
+           "ny_high": float(ny["price_t"].max()) / TICK, "ny_low": float(ny["price_t"].min()) / TICK}
     return rec
 
 
@@ -74,7 +76,7 @@ def main():
     ok = [r for r in out if r["clase"] != "excluida"]
     design_ok = [r["date"] for r in ok if r["diseno"]]
     manifest = {
-        "titulo": "Lista congelada de sesiones válidas del laboratorio NQ",
+        "titulo": f"Lista congelada de sesiones válidas del laboratorio · {ROOT}",
         "generado_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "regla": "Solo entran a las pruebas las sesiones 'ok' y 'aviso'. Las excluidas se publican con su motivo. No se cambia después de ver resultados; una lista nueva es versión nueva.",
         "criterios": {"hueco_aviso_s": GAP_WARN, "hueco_excluye_s": GAP_EXCL, "ventana": "09:30-16:00 ET",
