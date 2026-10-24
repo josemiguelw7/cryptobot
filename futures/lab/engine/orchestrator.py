@@ -163,6 +163,15 @@ def run_one(item):
                                   rep["receta"].get("sesiones_sha256"), 0, rep["receta"].get("semilla"), rep["receta"].get("costos"),
                                   {**rep["resultados"], "reproducible": True, "commit": commit, "contenedor": IMAGE}, rep["veredicto"],
                                   f"orquestador: 2 corridas en contenedor efímero sin red, trades.csv idéntico ({h1[:12]})")
+            # las corridas de sensibilidad también cuentan como intentos (protocolo › sensibilidad)
+            params = rep["receta"].get("parametros", {})
+            for name, row in (rep.get("hoja", {}).get("sensibilidad") or {}).items():
+                for cell in row:
+                    if cell.get("neto") is None or cell["valor"] == params.get(name):
+                        continue
+                    p2 = dict(params); p2[name] = cell["valor"]
+                    registry.record_trial(f"{test_id}-{name}{cell['valor']}", item["estudio"], item["estrategia"], item["version"], "sensibilidad", p2,
+                                          rep["receta"].get("sesiones_sha256"), 0, "-", rep["receta"].get("costos"), {"ganancia_neta": cell["neto"], "operaciones": cell["operaciones"]}, "vecino", "")
             it["estado"] = "corrida"; it["test_id"] = test_id; it["veredicto"] = rep["veredicto"]; it.pop("ultimo_error", None)
             logf.write(f"{now()} PUBLICADA como {test_id} ({rep['veredicto']})\n")
         else:
