@@ -49,7 +49,7 @@ def test_stop_with_slip():
     sig = Signal(sec=NY_OPEN + 2, side=1, stop_ticks=5, target_ticks=50, max_sec=60)
     tr = simulate(s, [sig], Rules(), slip=1, commission_rt=0)
     t = tr[0]
-    assert t["reason"] == "stop" and t["exit_px"] == (102 - 5 - 1) / 4 and t["pnl_ticks"] == -6
+    assert t["reason"] == "stop" and t["exit_px"] == (95 - 1) / 4 and t["pnl_ticks"] == -8   # el mercado saltó a 95: se llena ahí, no en 97
 
 
 def test_short_symmetry():
@@ -94,6 +94,22 @@ def test_topstep_rules():
     assert r_mll["resultado"] == "rompe_mll" and r_mll["dias"] == 2   # 50500 - 2600 <= 48500 (MLL subió a 48500)
     r_dll = topstep.run_account(dates, {dates[0]: [(-900, -900), (-900, -900)]})
     assert r_dll["resultado"] == "sin_resolver" and r_dll["balance"] == 49000   # DLL corta el día en -1000
+
+
+def test_frozen_quote_and_gap():
+    # cotización congelada (ask 101) mientras el primer llenado imprime en 150: la entrada es 150+1, no 102, y el objetivo no se cobra en ese mismo llenado
+    s = tape([100] * 3 + [150, 150, 150, 160] + [100] * 5)
+    s.askb = np.full(s.n, 101); s.bidb = np.full(s.n, 99)          # libro congelado
+    sig = Signal(sec=NY_OPEN + 3, side=1, stop_ticks=10, target_ticks=5, max_sec=60)
+    tr = simulate(s, [sig], Rules(), slip=1, commission_rt=0)
+    t = tr[0]
+    assert t["entry_px"] == 151 / 4 and t["cotizacion_anomala"] and t["duration_s"] > 0
+    assert t["reason"] == "objetivo" and t["exit_px"] == 156 / 4   # 160 > 156: pasa de largo en el 4º llenado
+    # salto más allá del stop: stop 141, siguiente llenado 100 -> salida 99
+    s2 = tape([100] * 3 + [150, 150, 100, 100])
+    s2.askb = np.full(s2.n, 101); s2.bidb = np.full(s2.n, 99)
+    tr2 = simulate(s2, [sig], Rules(), slip=1, commission_rt=0)
+    assert tr2[0]["reason"] == "stop" and tr2[0]["exit_px"] == 99 / 4
 
 
 def test_stats_basic():

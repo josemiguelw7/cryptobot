@@ -41,8 +41,9 @@ def main():
         rp = os.path.join(config.RESULTS, tid, "report.json")
         f = json.load(open(rp, encoding="utf-8"))
         if tid in corr:
-            c = corr[tid]; f["veredicto"] = c["veredicto"]; f["correccion"] = c["motivo"]; f["corregido_utc"] = c["registrado_utc"]
+            c = corr[tid]; f["veredicto_original"] = f.get("veredicto_original", f["veredicto"]); f["veredicto"] = c["veredicto"]; f["correccion"] = c["motivo"]; f["corregido_utc"] = c["registrado_utc"]
             f["muerte"] = c["motivo"] if c["veredicto"] in ("error", "no_pasa", "insuficiente") else f.get("muerte")
+            json.dump(f, open(rp, "w", encoding="utf-8"), ensure_ascii=False)   # la ficha en results/ también lleva la corrección
         if tid in NOTES:
             f["notas"] = NOTES[tid]
         if tid in MUERTE:

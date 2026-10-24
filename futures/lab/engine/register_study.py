@@ -7,6 +7,15 @@ import sys
 from . import registry, config
 
 STUDIES = {
+    "salidas_1_1": {"hypothesis": "Repetición del estudio de salidas (pedido de Oscar) con el motor 1.1 y percentiles exactos.", "n_declared": 159, "kill": ["sin meseta"], "strategies": ["BIG v1", "ABS v1", "POC v1 (salidas)"], "notes": "Repite salidas_v1 (motor 1.0, superado)."},
+    "mapa_v4": {"hypothesis": "Repetición del mapa v3 con percentiles exactos de órdenes y ventanas (los umbrales de 'órdenes grandes' y 'absorción' cambian).", "n_declared": 72, "kill": ["no sobrevive Holm", "signo distinto 2024/2025"], "strategies": ["12 señales × régimen"], "notes": "Repite mapa_v3 (umbrales del motor 1.0)."},
+    "repeticion_1_1": {
+        "hypothesis": "Repetición de P002–P008 con el motor 1.1 (llenados corregidos tras la revisión ciega del 24/10/2026). Las reglas selladas no cambian. Se espera que los resultados empeoren.",
+        "n_declared": 7 + 112,
+        "kill": ["los mismos criterios del protocolo v3"],
+        "strategies": ["BIG v1", "ABS v1", "POC v1", "ABS v2", "HVN v1", "BIG v2", "ORB v1"],
+        "notes": "7 pruebas + 16 de sensibilidad cada una. Los intentos cuentan igual que cualquier otro.",
+    },
     "tanda3": {
         "hypothesis": "BIG v2 (seguir la orden grande con entrada inmediata, objetivo 12, stop 16) y ORB v1 (ruptura del rango inicial, 16/16, 30 min), con premisas del mapa v3 medido desde precios operables, ganan a RAND después de costos y pasan Topstep.",
         "n_declared": 2 + 32,

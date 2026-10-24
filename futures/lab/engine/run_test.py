@@ -81,8 +81,8 @@ def verdict(res, protocol_ok):
     neg_years = sum(1 for y, v in years.items() if v <= 0 and (y != "2026" or y26_decides))
     if r["ganancia_neta"] <= 0 or r["p_rand"] > 0.20 or neg_years >= 2 or r["topstep_pct"] is not None and r["rompen_pct"] > 50:
         return "no_pasa"
-    ok = (r["p_rand"] <= 0.05 and r["estres_neto"] > 0 and r["p_rand_estres"] <= 0.10 and neg_years == 0
-          and r["topstep_pct"] >= 50 and r["topstep_pct"] > r["topstep_rand_pct"])
+    ok = (r["p_rand"] <= 0.05 and r.get("p_rand2", 1.0) <= 0.05 and r["estres_neto"] > 0 and r["p_rand_estres"] <= 0.10 and neg_years == 0
+          and r["topstep_pct"] >= 50 and r["topstep_pct"] > r["topstep_rand_pct"] and r.get("dsr", 0.0) >= 0.95)
     return "pasa" if ok else "no_pasa"
 
 
@@ -90,7 +90,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--strategy", required=True); ap.add_argument("--version", type=int, default=1)
     ap.add_argument("--study", required=True); ap.add_argument("--rand", type=int, default=1000)
-    ap.add_argument("--rand-estres", type=int, default=300); ap.add_argument("--flip", type=int, default=200)
+    ap.add_argument("--rand-estres", type=int, default=1000); ap.add_argument("--flip", type=int, default=200)
     ap.add_argument("--sens", action="store_true"); ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--notas", default=""); ap.add_argument("--dry", action="store_true")
     ap.add_argument("--isolated", action="store_true", help="contenedor efímero: sin registro, sin bitácora, id por huella de configuración")
@@ -133,6 +133,8 @@ def main():
     # RAND base y de estrés
     _, rd = run_rand(test_id, trades, rules, slip, comm, n_runs=a.rand, sessions=dates, progress=lambda j: print(f"  RAND {j}/{len(dates)}", flush=True))
     rs = rand_summary(daily, rd)
+    _, rd2 = run_rand(test_id + "x", trades, rules, slip, comm, n_runs=a.rand, sessions=dates, with_exits=True)   # RAND2: mismas salidas
+    rs2 = rand_summary(daily, rd2); rs["p_valor_rand2"] = rs2["p_valor"]; rs["rand2_media"] = rs2["rand_media"]
     stress_net, stress_tr = redteam.resim(sig_by_date, rules, 2, comm)
     stress_daily = stats.daily_series(stress_tr, dates)
     _, rds = run_rand(test_id + "s", stress_tr, rules, 2, comm, n_runs=a.rand_estres, sessions=dates)
@@ -164,11 +166,12 @@ def main():
                                                      kw_fn=lambda d: strat_kwargs(a.strategy, a.version, L, d))
         print(f"  sensibilidad lista · {time.time()-t0:.0f}s", flush=True)
     sm = stats.summary(trades, daily, dates)
-    res = {"operaciones": len(trades), "ganancia_neta": round(net, 2), "p_rand": rs["p_valor"], "estres_neto": round(stress_net, 2),
+    anom = sum(1 for t in trades if t.get("cotizacion_anomala"))
+    res = {"operaciones": len(trades), "ganancia_neta": round(net, 2), "p_rand": rs["p_valor"], "p_rand2": rs2["p_valor"], "estres_neto": round(stress_net, 2),
+           "cotizaciones_anomalas": anom,
            "p_rand_estres": p_stress, "por_anio": sm["por_anio"], "topstep_pct": ts["pct_pasan"], "rompen_pct": round(100 * ts["rompen_mll"] / max(1, ts["cuentas"]), 1),
            "topstep_rand_pct": ts["rand_pct_pasan"] or 0.0, "sesiones_con_senal_posible": possible, "error": False, "revisar": leak,
            "sharpe_diario": round(stats.sharpe(daily), 4), "psr": sm["psr"], "concentracion": sm["concentracion"], "cpcv": sm["cpcv"]}
-    v = verdict(res, True)
     if a.isolated:
         n_trials = a.n_trials or 1; var_sr = max(a.var_sr, 0.0)
     else:
@@ -177,6 +180,7 @@ def main():
     res["dsr"] = round(stats.dsr(daily, n_trials, var_sr), 3)
     res["min_btl_anios"] = round(stats.min_btl_years(n_trials), 2)
     res["intentos_totales_al_cerrar"] = n_trials
+    v = verdict(res, True)
     meta = {"estrategia": a.strategy, "version": a.version, "fecha": time.strftime("%Y-%m-%d"), "tanda": a.study,
             "periodo": f"{dates[0]} a {dates[-1]} · {len(dates)} sesiones válidas", "veredicto": v, "notas": a.notas,
             "receta": {"git_commit": config.git_commit(), "motor": "1.0.0", "sesiones_sha256": sess_sha, "costos": c.as_dict(),
@@ -211,7 +215,9 @@ def _death_reason(r, v):
     if v == "error":
         return "error de programa"
     if v == "revisar":
-        return "el placebo desplazado gana parecido o más: hay que revisar el código antes de poder pasar (protocolo v2)"
+        r2 = dict(r); r2["revisar"] = False
+        otras = _death_reason(r2, verdict(r2, True))
+        return "placebo desplazado sospechoso: revisión de código pendiente" + (f"; además: {otras}" if otras else "")
     if v == "insuficiente":
         return f"{r['operaciones']} operaciones / {r['sesiones_con_senal_posible']} sesiones: por debajo del mínimo"
     if v == "pasa":
@@ -219,6 +225,9 @@ def _death_reason(r, v):
     causes = []
     if r["ganancia_neta"] <= 0: causes.append("pierde con costos base")
     if r["p_rand"] > 0.05: causes.append(f"no gana a RAND (p={r['p_rand']})")
+    if r.get("p_rand2", 1.0) > 0.05: causes.append(f"no gana a RAND2 con las mismas salidas (p={r.get('p_rand2')})")
+    if r.get("dsr", 0) < 0.95: causes.append(f"DSR {r.get('dsr')} < 0.95 con {r.get('intentos_totales_al_cerrar')} intentos")
+    if r.get("concentracion", {}).get("depende_de_pocos_dias"): causes.append(f"{r['concentracion'].get('top5_dias_pct')}% de la ganancia en 5 días")
     if r["estres_neto"] <= 0 or r["p_rand_estres"] > 0.10: causes.append("muere con costos al doble")
     neg = [y for y, x in r["por_anio"].items() if x["neto"] <= 0]
     if neg: causes.append("pierde en " + ", ".join(neg))

@@ -777,3 +777,12 @@ Jose Miguel delegó los pasos que Claude pueda tomar solo. Con esa aprobación (
 - **ORB v1**: ruptura del rango de los primeros 15 min, 16/16, 30 min, una vez por lado y por día. Premisa del mapa v3 (+17.8 a 30 min, estable).
 Humo (60 sesiones de 2024, `--dry`, sin registrar): BIG v2 −$1,916 (327 op., p 0.03), ORB −$401 (77 op.). El orquestador decide con las 576 sesiones.
 Lo que Claude no puede hacer solo y queda en manos de Jose Miguel: deploy key de la VM en GitHub (publicación automática), correos de avisos, revisión ciega de P005 en una conversación nueva, datos de ES y segundos contratos de rollo, exportaciones semanales nuevas de ATAS (ventana viva), y pasarle a Oscar las muestras de P003 y P005.
+
+## 2026-10-24 · Revisión ciega de P005: "No confío". El laboratorio le da la razón. Motor 1.1 y protocolo v3.
+
+Un Claude sin contexto revisó el paquete de P005 y entregó 14 hallazgos (texto íntegro en `docs/redteam/P005_revisor.md`, respuesta punto por punto en `docs/redteam/P005.md`). Nueve son correctos y accionables; los más graves: el simulador podía cobrar el objetivo en el mismo llenado de entrada cuando ATAS dejaba el libro congelado (confirmado en la cinta del 22/02/2024: libro en 71582/71584, operaciones en 71762–71778), los stops se llenaban al precio del stop aunque el mercado saltara, el percentil agrupado seguía pudiendo equivocarse, el DSR no se aplicaba como criterio, y mi descripción de ABS v2 ("sale por tiempo") era falsa (90 stops, 27 objetivos, 9 tiempo).
+Decisiones:
+- **Motor 1.1**: entrada al peor entre cotización y primer precio operado; el llenado de entrada no cuenta para objetivo/stop; stops al precio real del salto; percentiles exactos; cotizaciones anómalas contadas. Golden actualizada con motivo.
+- **Protocolo v3** (SHA-256 `5b094ef8…`, OTS; v2 guardado): DSR ≥ 0.95 como criterio aplicado, RAND2 con las mismas salidas, estrés con 1,000 corridas, semilla documentada como es, 'revisar' con todas las causas, paquete de revisión completo.
+- **P002–P008 quedan "superadas"** (motor 1.0) y se repiten con el 1.1 (estudio `repeticion_1_1`, 119 intentos declarados). El mapa se repite como v4 (umbrales exactos) y el estudio de salidas como `salidas_1_1`.
+- Segunda revisión ciega sobre la repetición de ABS v2 con el paquete completo.

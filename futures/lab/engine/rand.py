@@ -15,16 +15,21 @@ def seed_for(test_id, k):
     return int(hashlib.sha256(f"{test_id}:{k}".encode()).hexdigest()[:12], 16)
 
 
-def rand_signals(trades_by_date, rules: Rules, rng):
-    """trades_by_date: {date: [duraciones en s]} -> {date: [Signal]}"""
+def rand_signals(trades_by_date, rules: Rules, rng, with_exits=False):
+    """trades_by_date: {date: [(dur, stop, target, max_sec)]} -> {date: [Signal]}
+    with_exits=False: RAND clásico (sale por tiempo, copia la duración). with_exits=True: RAND2, copia stop,
+    objetivo y tiempo máximo de cada operación real (misma estructura de salidas; solo cambian momento y dirección)."""
     out = {}
     span = rules.last_entry - rules.first_entry
-    for d, durs in trades_by_date.items():
+    for d, items in trades_by_date.items():
         sigs = []
-        for dur in durs:
+        for dur, stop, target, mx in items:
             sec = rules.first_entry + rng.random() * span
             side = 1 if rng.random() < 0.5 else -1
-            sigs.append(Signal(sec=sec, side=side, stop_ticks=10**6, target_ticks=None, max_sec=max(dur, 1.0), kind="RAND"))
+            if with_exits:
+                sigs.append(Signal(sec=sec, side=side, stop_ticks=stop, target_ticks=target, max_sec=mx, kind="RAND2"))
+            else:
+                sigs.append(Signal(sec=sec, side=side, stop_ticks=10**6, target_ticks=None, max_sec=max(dur, 1.0), kind="RAND"))
         out[d] = sigs
     return out
 

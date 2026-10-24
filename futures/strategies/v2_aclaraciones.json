@@ -1,0 +1,6 @@
+{
+ "titulo": "Aclaración a strategies/v2.json · ABS v2 · 24/10/2026",
+ "motivo": "La revisión ciega de P005 señaló que la regla describe la salida de ABS v2 como 'por tiempo' y que el objetivo de 40 puntos 'casi nunca se toca'. Es falso: de 126 operaciones, 90 salieron por stop, 27 por objetivo (160 ticks, +$796 cada una) y 9 por tiempo. La ganancia depende de cobrar esos 27 objetivos: 27 × $796 = $21,498 contra −$14,945 de los 90 stops. La regla numérica no cambia (objetivo 160 ticks, stop v1, 15 min); cambia la descripción honesta de cómo gana y pierde.",
+ "descripcion_correcta": "ABS v2 es una estructura de pocos aciertos y objetivos grandes: ~22% de las operaciones cobra 40 puntos; ~71% pierde el stop (3–8 puntos). Si 10 de esos 27 objetivos no se hubieran llenado, el resultado sería negativo.",
+ "sellado": "OTS"
+}

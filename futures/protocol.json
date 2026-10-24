@@ -1,20 +1,21 @@
 {
- "titulo": "Protocolo estadístico del laboratorio NQ v2 · definiciones exactas",
- "fecha_registro": "2026-10-23",
+ "titulo": "Protocolo estadístico del laboratorio NQ v3 · definiciones exactas",
+ "fecha_registro": "2026-10-24",
  "proposito": "El plan de investigación dice QUÉ se exige. Este protocolo dice CÓMO se mide, con números, para que nadie (ni Claude, ni Jose Miguel, ni Oscar) pueda acomodar la medición después de ver el resultado.",
  "rand_emparejado": {
   "que_es": "Un bot que entra al azar pero copia la 'forma' de la estrategia: misma cantidad de operaciones por sesión, misma duración de cada operación (en segundos), mismo horario permitido, mismos costos, mismo número de contratos. Lo único que no copia es CUÁNDO entra ni en qué dirección.",
   "como_se_genera": "Para cada sesión, se toman las N operaciones reales de la estrategia. Para cada una se sortea un instante de entrada uniforme dentro del horario permitido (09:30–11:30 ET menos ventanas de noticias) y una dirección con 50/50. Se mantiene la duración exacta de la operación original (sale por tiempo); no usa stop ni objetivo. Se llena con las mismas reglas del simulador (mercado + deslizamiento + comisión).",
   "corridas": 1000,
-  "semilla": "la semilla de cada corrida se deriva de SHA-256(id_prueba + numero_corrida) y queda escrita en el registro",
+  "semilla": "la semilla de cada corrida es SHA-256(id_prueba:fecha:k) por sesión y corrida; queda escrita en el registro",
   "estadistico": "ganancia neta total en dólares del periodo, después de costos",
   "valor_p": "p = (1 + cantidad de corridas RAND con ganancia neta ≥ la de la estrategia) ÷ (1 + 1000)",
   "pasa_si": "p ≤ 0.05, es decir, la estrategia supera al menos a 950 de las 1000 corridas. Es el 'gana a RAND 95 de 100' del plan, ahora con número exacto.",
-  "se_publica": "la curva de la estrategia sobre la franja del percentil 5 al 95 de las 1000 curvas RAND, y el valor p"
+  "se_publica": "la curva de la estrategia sobre la franja del percentil 5 al 95 de las 1000 curvas RAND, y el valor p",
+  "rand2": "control adicional con las mismas salidas de cada operación real (stop, objetivo, tiempo máximo); solo cambian momento y dirección. Pasa si p ≤ 0.05 contra RAND y contra RAND2."
  },
  "costos": {
   "base": "comisión $3.78 round turn + 1 tick de deslizamiento por lado (futures/costs.json)",
-  "estres": "2 ticks por lado; la ganancia neta debe seguir siendo positiva y p ≤ 0.10",
+  "estres": "2 ticks por lado; la ganancia neta debe seguir siendo positiva y p ≤ 0.10 contra 1,000 corridas RAND",
   "curva": "0, 1, 2, 3 y 4 ticks por lado; se publica completa aunque no decida nada"
  },
  "por_anio": {
@@ -65,14 +66,14 @@
   "pasa_si": "el porcentaje de cuentas que pasan es ≥ 50% y supera el del RAND emparejado con p ≤ 0.05 (mismas fechas de arranque)"
  },
  "veredicto_final": {
-  "pasa": "cumple los cuatro criterios del plan (RAND, costos al doble, los 3 años, Topstep) con las definiciones de este protocolo, y supera el largo mínimo",
+  "pasa": "cumple los cuatro criterios del plan (RAND y RAND2, costos al doble, los 3 años, Topstep) con las definiciones de este protocolo, DSR ≥ 0.95, y supera el largo mínimo",
   "no_pasa": "falla alguno",
   "insuficiente": "no llega al largo mínimo",
   "error": "falló un placebo de fuga o el programa; no cuenta para nada hasta que se corrija y se vuelva a correr como intento nuevo",
-  "revisar": "placebo desplazado sospechoso; pendiente de revisión de código antes de poder pasar"
+  "revisar": "placebo desplazado sospechoso; pendiente de revisión de código antes de poder pasar; la causa lista además todos los criterios que no cumple"
  },
- "regla": "Este protocolo (v2) se congela con su huella SHA-256 y OpenTimestamps. El v1 queda en futures/protocol_v1.json. Cualquier cambio crea v3 con el motivo escrito, y las pruebas ya corridas conservan la versión que usaron.",
- "version": 2,
+ "regla": "Este protocolo (v3) se congela con su huella SHA-256 y OpenTimestamps. v1 y v2 quedan en futures/protocol_v1.json y protocol_v2.json. Cualquier cambio crea v4 con el motivo escrito, y las pruebas ya corridas conservan la versión que usaron.",
+ "version": 3,
  "cambios_v2": {
   "motivo": "La corrida de ABS v1 mostró que el 'placebo desplazado' no distingue fuga de futuro de una señal cuyo valor está en el nivel y la dirección (no en el momento): entrar 5 min antes, más cerca del extremo absorbido, gana más sin usar datos del futuro. Marcarlo 'error' automáticamente mataría resultados válidos. Además, con 1,000 sorteos el p mínimo de dos colas (0.002) no puede pasar Holm con 40-48 pruebas (< 0.00125).",
   "cambios": [
@@ -81,5 +82,21 @@
    "mapa: un evento por celda de 10 s y dirección; p de dos colas con sentido 'a favor' o 'contraria'"
   ],
   "protocolo_v1_sha256": "dad6c111f88fab2d45b25ebc73b4251865e366935e6c39b65b171ef947477b7a"
+ },
+ "cambios_v3": {
+  "motivo": "Revisión ciega (Red Team sin contexto) de P005 el 24/10/2026: 14 hallazgos, 9 aceptados. El motor 1.0 podía cobrar el objetivo en el mismo llenado de entrada cuando la cotización de ATAS estaba congelada, llenaba los stops al precio del stop aunque el mercado saltara, el percentil agrupado podía equivocarse, el DSR no se aplicaba como criterio, RAND no copiaba las salidas, el estrés usaba 300 corridas (p=0.0066 no era reproducible con 1,000) y el paquete de revisión no traía el motor completo ni el registro.",
+  "cambios": [
+   "entrada a mercado = peor entre la cotización previa y el primer precio operado, más deslizamiento; el llenado de entrada no cuenta para objetivo ni stop; se reporta cuántas entradas tuvieron cotización anómala (>20 ticks)",
+   "stop = peor entre el precio del stop y el precio real del llenado que lo disparó, menos deslizamiento",
+   "percentiles agrupados exactos (se guardan todos los valores por sesión); el programa falla si falta alguno",
+   "DSR ≥ 0.95 es criterio explícito de 'pasa' (ya estaba escrito en pruebas_multiples; ahora lo aplica el veredicto)",
+   "RAND2: control adicional con las MISMAS salidas (stop, objetivo, tiempo máximo) de cada operación real; pasa si p ≤ 0.05 también contra RAND2",
+   "estrés con 1,000 corridas RAND",
+   "semilla de RAND: SHA-256(id_prueba:fecha:k) por sesión y corrida (lo que el motor hace desde el inicio; el texto v1/v2 lo describía mal)",
+   "'revisar' lista TODAS las causas de no-pasa, no solo el placebo",
+   "el paquete de revisión ciega lleva el motor completo, el registro, la lista de sesiones con exclusiones, las huellas de los datos, los recibos de las dos corridas y el Dockerfile",
+   "toda prueba corrida con el motor 1.0 queda marcada 'superada' y se repite con el 1.1 (los intentos cuentan igual)"
+  ],
+  "protocolo_v2_sha256": "b4f30dc2cc8d1fc2d55059610ac17dd54f63e88d150c31e54facf53168dd2a1e"
  }
 }

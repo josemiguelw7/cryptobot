@@ -41,9 +41,10 @@ def _session_stats(d):
     k = np.ones(6)
     b60 = np.convolve(b10, k, mode="valid") if nb >= 6 else b10
     s60 = np.convolve(s10, k, mode="valid") if nb >= 6 else s10
-    return {"date": d, "n_orders": int(len(sizes)), "n_all": int(len(all_sizes)), "top_orders": sizes[:600].tolist(),
-            "n_win": int(len(b60)), "top_buy60": np.sort(b60)[::-1][:500].tolist(),
-            "top_sell60": np.sort(s60)[::-1][:500].tolist()}
+    # se guardan TODOS los valores (≈4,800 órdenes y 2×2,340 ventanas por sesión): el percentil agrupado es exacto.
+    # (la revisión ciega del 24/10/2026 demostró que guardar solo los mayores puede dar un percentil equivocado)
+    return {"date": d, "n_orders": int(len(sizes)), "n_all": int(len(all_sizes)), "top_orders": sizes.tolist(),
+            "n_win": int(len(b60)), "top_buy60": np.sort(b60)[::-1].tolist(), "top_sell60": np.sort(s60)[::-1].tolist()}
 
 
 def precompute_stats(dates, workers=6):
@@ -59,14 +60,13 @@ def precompute_stats(dates, workers=6):
 
 
 def pooled_quantile(tops, ns, q):
-    """Percentil q (0-1) de la unión de varias distribuciones de las que solo se guardaron
-    los mayores valores. Exacto mientras el rango pedido quede dentro de lo guardado."""
+    """Percentil q (0-1) de la unión de varias distribuciones. Exacto: exige que cada sesión traiga TODOS sus valores."""
+    for t, n in zip(tops, ns):
+        if len(t) != n:
+            raise ValueError(f"sesión con {len(t)} valores guardados de {n}: el percentil agrupado no sería exacto; recalcula lab_stats")
     allv = np.sort(np.concatenate([np.asarray(t, dtype=float) for t in tops]))[::-1]
-    N = int(sum(ns))
-    rank = int(np.floor((1 - q) * N))
-    if rank >= len(allv):
-        raise ValueError(f"percentil {q} fuera de lo guardado: rango {rank} >= {len(allv)}; hay que guardar más valores por sesión")
-    return float(allv[rank])
+    N = int(sum(ns)); rank = int(np.floor((1 - q) * N))
+    return float(allv[min(rank, len(allv) - 1)])
 
 
 class Levels:

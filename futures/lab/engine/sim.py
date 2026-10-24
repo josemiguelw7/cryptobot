@@ -1,10 +1,14 @@
 """Simulación de operaciones contra la cinta real (cada llenado, en orden).
 
 Reglas de llenado (conservadoras, fijas):
-  - Entrada a mercado: se llena en la mejor oferta contraria que ve el PRIMER llenado posterior a la decisión
-    (su bid/ask "antes"), más `slip` ticks en contra. No se usa el libro "después" del último llenado previo:
-    una orden grande ejecuta todos sus llenados en el mismo instante y ATAS deja ese libro congelado en el
-    valor previo al barrido, lo que daba precios de entrada imposibles (hallazgo del 23/10/2026).
+  - Entrada a mercado: se llena en el PEOR entre (a) la mejor oferta contraria que ve el primer llenado posterior
+    a la decisión (su bid/ask "antes") y (b) el precio de ese primer llenado; más `slip` ticks en contra. Las
+    cotizaciones de ATAS pueden quedar congeladas durante segundos (hallazgo de la revisión ciega del 24/10/2026:
+    libro en 71582 con operaciones en 71762), así que nunca se acepta una cotización mejor que el precio que
+    realmente se operó. El llenado de entrada NO cuenta para el objetivo ni el stop: el recorrido empieza en el
+    llenado siguiente. Se cuenta cuántas entradas tuvieron cotización anómala (> 20 ticks del precio operado).
+  - Stop: se llena al PEOR entre el precio del stop y el precio real del llenado que lo disparó, menos `slip`:
+    si el mercado salta más allá del stop, la pérdida es la del salto (hallazgo de la misma revisión).
   - Stop: es un stop de mercado; se llena al precio del stop más `slip` ticks en contra
     en cuanto la cinta opera en o más allá del stop.
   - Objetivo: es una orden límite; se da por llenada solo cuando la cinta opera MÁS ALLÁ
@@ -108,12 +112,17 @@ def simulate(s, signals, rules: Rules, slip: int, commission_rt: float, tick_usd
             r = fill_limit(s, i, side, sig.limit_px, sig.wait_sec)
             if r is None:
                 continue
-            i, entry_px = r
+            i, entry_px = r; anomal = False
             if i >= s.n:
                 continue
         else:
-            entry_px = _best(s, i, side) + side * slip
+            q = _best(s, i, side); first = int(s.px[i])
+            anomal = abs(first - q) > 20                      # cotización congelada o rota
+            entry_px = (max(q, first) if side > 0 else min(q, first)) + side * slip
         entry_sec = float(s.sec[i])   # el llenado ocurre en el primer evento posterior a la decisión
+        i = i + 1                      # el recorrido empieza DESPUÉS del llenado de entrada
+        if i >= s.n:
+            continue
         stop_px = entry_px - side * sig.stop_ticks
         target_px = entry_px + side * sig.target_ticks if sig.target_ticks else None
         t_end = min(entry_sec + sig.max_sec, rules.forced_close)
@@ -132,7 +141,8 @@ def simulate(s, signals, rules: Rules, slip: int, commission_rt: float, tick_usd
         ks = int(np.argmax(hit_stop)) if hit_stop.any() else None
         kt = int(np.argmax(hit_tgt)) if hit_tgt.any() else None
         if ks is not None and (kt is None or ks <= kt):
-            k, exit_px, reason = ks, stop_px - side * slip, "stop"
+            hit_px = int(px[ks])                                   # precio real que disparó el stop (puede saltar)
+            k, exit_px, reason = ks, (min(stop_px, hit_px) if side > 0 else max(stop_px, hit_px)) - side * slip, "stop"
         elif kt is not None:
             k, exit_px, reason = kt, target_px, "objetivo"
         else:
@@ -158,7 +168,7 @@ def simulate(s, signals, rules: Rules, slip: int, commission_rt: float, tick_usd
                     seg = px[ka:]; hs = (seg <= stop_now) if side > 0 else (seg >= stop_now)
                     ks2 = ka + int(np.argmax(hs)) if hs.any() else None
                     if ks2 is not None and (kt is None or ks2 <= kt) and ks2 < k_lim:
-                        k_lim, exit_px, reason = ks2, stop_now - side * slip, "stop_breakeven"
+                        hp = int(px[ks2]); k_lim, exit_px, reason = ks2, (min(stop_now, hp) if side > 0 else max(stop_now, hp)) - side * slip, "stop_breakeven"
             k = k_lim
         exit_sec = float(s.sec[i + k])
         path = px[: k + 1]
@@ -175,7 +185,7 @@ def simulate(s, signals, rules: Rules, slip: int, commission_rt: float, tick_usd
             "reason": reason, "pnl_ticks": pnl_ticks, "gross_usd": gross, "commission_usd": cost,
             "net_usd": net, "mae_ticks": mae, "mfe_ticks": mfe, "duration_s": exit_sec - entry_sec,
             "contracts": n_contr, "fills": [f / 4 for f in fills], "slip_ticks": slip, "stop_ticks": sig.stop_ticks,
-            "target_ticks": sig.target_ticks, "meta": sig.meta,
+            "target_ticks": sig.target_ticks, "max_sec": sig.max_sec, "cotizacion_anomala": bool(anomal), "meta": sig.meta,
         })
         busy_until = exit_sec
         consec = consec + 1 if net < 0 else 0
