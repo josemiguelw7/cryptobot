@@ -38,7 +38,7 @@
 .tf .n{background:#121212;border:1px solid #262626;border-radius:12px;padding:10px 12px}
 .tf .n b{display:block;font-size:20px;font-variant-numeric:tabular-nums}.tf .n small{color:#9a9a9a;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
 @media(max-width:820px){.tf .grid{grid-template-columns:1fr 1fr}}
-@media(max-width:520px){.tf .grid{grid-template-columns:1fr}.tf .frame{padding:14px}.tf .nums{grid-template-columns:1fr 1fr}.tf h2{font-size:22px}}
+@media(max-width:520px){.tf .grid{grid-template-columns:1fr 1fr;gap:8px}.tf .grid .box{padding:12px 8px}.tf .grid .name{font-size:14.5px}.tf .grid .who{display:block;margin:4px 0 0}.tf .frame{padding:14px}.tf .nums{grid-template-columns:1fr 1fr}.tf h2{font-size:22px}}
 </style>
 <div class="in">
   <h2>Research Trading Floor</h2>
@@ -78,7 +78,7 @@
     </div>
     <div class="arrow">↓</div>
 
-    <div class="box comm">
+    <div class="box comm" id="comite">
       <div class="name">Strategy Committee</div>
       <div style="color:#bdbdbd">Jose Miguel + Oscar · con los informes de Estadística, Red Team y Riesgo</div>
       <div style="color:#9a9a9a;font-size:14px">Dos trabajos: (1) decidir qué ideas se prueban, antes de correrlas, y (2) decidir si una estrategia que pasó todo puede abrir el examen final sellado.</div>
@@ -108,9 +108,19 @@ fetch('data/research.json').then(r=>r.json()).then(R=>{
   const prop=BL.filter(i=>i.estado==='propuesta'),apr=BL.filter(i=>dec(i).startsWith('aprobada')||(dec(i).includes('aprobada por')&&!dec(i).startsWith('automática'))),desc=BL.filter(i=>i.estado==='descartada');
   const chip=([a,b,c])=>`<span${c?` style="border:1px solid ${c}"`:''}>${a}<b>${b}</b></span>`;
   document.getElementById('tf-verd').innerHTML=[['Esperan su decisión',prop.length,prop.length?'#f5b942':''],['Aprobadas para probar',apr.length],['Descartadas antes de correr',desc.length]].map(chip).join('');
-  document.getElementById('tf-pend').innerHTML=prop.length?`<b style="color:#f5b942">Esperan decisión de Jose Miguel y Oscar:</b><ul style="margin:6px 0 0;padding-left:18px">${prop.map(i=>`<li><b>${esc(i.id)}</b> · ${esc(i.nombre)}</li>`).join('')}</ul>`:'<span style="color:#9a9a9a">No hay ideas esperando decisión.</span>';
+  const VN={aprobar:'✅ aprobar',descartar:'❌ descartar',mas_datos:'🔎 más datos'};
+  const vline=(i,p,n)=>{const v=(i.votos||{})[p];return `<span style="margin-right:12px">${n}: ${v?`<b>${VN[v.voto]||esc(v.voto)}</b>`:'<span style="color:#8a8a8a">sin votar</span>'}</span>`};
+  window.tfProp=prop;
+  document.getElementById('tf-pend').innerHTML=prop.length?`<b style="color:#f5b942">Esperan decisión de Jose Miguel y Oscar</b><p style="color:#9a9a9a;font-size:13px;margin:4px 0 8px">Cada uno vota con su PIN. La idea cambia de estado solo cuando los dos votan lo mismo; si votan distinto, va a la reunión. Lo votado aparece aquí en la siguiente publicación (máx. 30 min) y les llega un correo al momento.</p>${prop.map(i=>`<div style="background:#161616;border:1px solid #2a2a2a;border-radius:12px;padding:12px;margin-top:8px"><b>${esc(i.id)}</b> · ${esc(i.nombre)}<div style="color:#bdbdbd;font-size:13.5px;margin:6px 0">${esc(i.hipotesis||'')}</div>${i.decision?`<div style="color:#8a8a8a;font-size:12.5px;margin-bottom:6px">Nota: ${esc(i.decision)}</div>`:''}<div style="font-size:13px;margin:6px 0">${vline(i,'jose','Jose Miguel')}${vline(i,'oscar','Oscar')}</div><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">${Object.keys(VN).map(v=>`<button type="button" data-vote="${esc(i.id)}:${v}" style="background:#1f1f1f;color:#e5e5e5;border:1px solid #333;border-radius:999px;padding:7px 12px;font:inherit;font-size:13.5px;cursor:pointer">${VN[v]}</button>`).join('')}</div><div class="tf-vst" data-for="${esc(i.id)}" style="font-size:13px;margin-top:6px"></div></div>`).join('')}`:'<span style="color:#9a9a9a">No hay ideas esperando decisión.</span>';
   const cand=T.filter(t=>t.veredicto==='pasa').length;
   document.getElementById('tf-exam').innerHTML=[['Estrategias que pasaron todo',cand],['Aprobadas para el examen',0],['Examen sellado',cand?'listo para abrir':'cerrado']].map(chip).join('')+`<p style="margin:10px 0 0;font-size:13px;color:#9a9a9a">${cand?'Hay una estrategia que pasó todo: el comité decide si abre el examen.':'Ninguna estrategia ha pasado todas las pruebas todavía, así que el comité no ha tenido nada que aprobar para el examen.'}</p>`;
+  if(!window._tfVote){window._tfVote=1;document.addEventListener('click',async e=>{const b=e.target.closest('[data-vote]');if(!b)return;const [id,voto]=b.dataset.vote.split(':');
+   const st=document.querySelector(`.tf-vst[data-for="${id}"]`);const a=await window.labAuth();if(!a){st.textContent='Sin PIN no se puede votar.';return}
+   const it=(window.tfProp||[]).find(x=>x.id===id)||{};const comentario=prompt(`${a.nombre}: ${VN[voto]} en ${id}.\nComentario opcional (Aceptar para votar, Cancelar para no votar):`,'');if(comentario===null){st.textContent='';return}
+   st.style.color='#9a9a9a';st.textContent='Guardando el voto…';
+   try{const r=await fetch('/api/comite',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({accion:'votar',pin:a.pin,id,voto,comentario})});const j=await r.json();
+    if(j.ok){st.style.color='#4ade80';st.textContent=`✓ ${a.nombre}: ${VN[voto]}. ${j.estado}`}else{if(r.status===401&&window.labLogout)window.labLogout();st.style.color='#f87171';st.textContent='No se guardó: '+(j.error||r.status)}}
+   catch(err){st.style.color='#f87171';st.textContent='Sin conexión.'}})}
   if(R.generado)document.getElementById('tf-upd').textContent='actualizado '+new Date(R.generado).toLocaleString('es-MX',{dateStyle:'medium',timeStyle:'short'});
 }).catch(()=>{});
 })();

@@ -3,6 +3,36 @@
   "entries": [
     {
       "date": "2026-10-24",
+      "kind": "avance",
+      "title": "Comité con PIN: Jose Miguel y Oscar votan desde la página",
+      "body": "Cada uno tiene un PIN personal. En el Floor › Strategy Committee se vota aprobar, descartar o pedir más datos en cada idea propuesta; la idea cambia de estado solo cuando los dos votan lo mismo, y cada voto llega por correo. Sin PIN la página se puede leer pero no se puede votar ni enviar notas."
+    },
+    {
+      "date": "2026-10-24",
+      "kind": "avance",
+      "title": "Buzón con captura de pantalla en todas las pestañas",
+      "body": "El botón ❓ abajo a la derecha manda una pregunta, algo a corregir, datos para agregar o una idea, con captura. Llega por correo a los dos y queda guardado para la agenda del comité. Los correos del laboratorio ahora traen enlaces con iconos y el mismo botón."
+    },
+    {
+      "date": "2026-10-24",
+      "kind": "prueba",
+      "title": "Repeticiones con el motor 1.1: BIG v2 (P010) y HVN v1 (P011) no pasan",
+      "body": "Con los llenados corregidos, BIG v2 pierde $102,618 (p contra RAND 0.95) y HVN v1 pierde $87,676 (p 0.999); los dos pierden en 2024, 2025 y 2026 y no pasan Topstep. Confirman el veredicto anterior con el motor corregido."
+    },
+    {
+      "date": "2026-10-24",
+      "kind": "avance",
+      "title": "ES y YM en el servidor",
+      "body": "728 sesiones de ES y 728 de YM (enero 2024 a octubre 2026), descargadas de ATAS, verificadas archivo por archivo y copiadas al servidor. Sirven para el chequeo cruzado: una estrategia que pase en NQ no debe perder en ES ni en YM con las mismas reglas."
+    },
+    {
+      "date": "2026-10-24",
+      "kind": "hallazgo",
+      "title": "Revisión ciega: el motor 1.0 era optimista y todas las pruebas se repiten",
+      "body": "Una revisión ciega del paquete de ABS v2 encontró que el simulador podía cobrar el objetivo en el mismo llenado de entrada y llenaba los stops al precio exacto aunque el mercado saltara. Se corrigió (motor 1.1, protocolo v3) y todas las pruebas anteriores quedan como superadas y se repiten."
+    },
+    {
+      "date": "2026-10-24",
       "kind": "prueba",
       "title": "Prueba P007 · BIG v2 · no pasa",
       "body": "BIG v2: 2724 operaciones, ganancia neta $-72,187 con costos base, p contra RAND 0.8052, estrés $-90,755, Topstep 0.0% de las cuentas (RAND 0.0%). Veredicto: no pasa. Causa: pierde con costos base; no gana a RAND (p=0.8052); muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%.",

@@ -1,6 +1,6 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-24 12:10 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-24 12:20 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
@@ -122,14 +122,14 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 
 ## Últimos movimientos (bitácora)
 
+- 2026-10-24 · avance · Comité con PIN: Jose Miguel y Oscar votan desde la página
+- 2026-10-24 · avance · Buzón con captura de pantalla en todas las pestañas
+- 2026-10-24 · prueba · Repeticiones con el motor 1.1: BIG v2 (P010) y HVN v1 (P011) no pasan
+- 2026-10-24 · avance · ES y YM en el servidor
+- 2026-10-24 · hallazgo · Revisión ciega: el motor 1.0 era optimista y todas las pruebas se repiten
 - 2026-10-24 · prueba · Prueba P007 · BIG v2 · no pasa
 - 2026-10-24 · prueba · Prueba P008 · ORB v1 · no pasa
 - 2026-10-24 · prueba · Prueba P009 · ORB v1 · no pasa
-- 2026-10-24 · prueba · Prueba P010 · BIG v2 · no pasa
-- 2026-10-24 · prueba · Prueba P011 · HVN v1 · no pasa
-- 2026-10-23 · hallazgo · Mapa de señales v1 publicado: 38 de 48 pruebas distintas del azar
-- 2026-10-23 · decisión · Protocolo v2: placebo sospechoso → revisar; mapa con 5,000 sorteos
-- 2026-10-23 · hallazgo · Red Team: la primera corrida tenía el umbral mal y se marca como error
 
 ## Cómo se corre una prueba nueva
 

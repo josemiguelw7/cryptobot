@@ -4,9 +4,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Liga de Futuros · NQ</title>
 <style>
-:root{--bg:#F6F5F1;--card:#FFFFFF;--line:#E4E2DA;--txt:#181C22;--dim:#7E838C;
---accent:#2B4C7E;--accent-bg:#E7EDF6;--ok:#0E8F5B;--ok-bg:#E3F3EA;--warn:#9A6B15;
---warn-bg:#F7EEDB;--bad:#C0392B;--bar:#E9E7E0;color-scheme:light}
+:root{--bg:#000;--card:#121212;--line:#262626;--txt:#EDEDED;--dim:#9A9A9A;
+--accent:#7FA4DB;--accent-bg:#1E2A3B;--ok:#4CC38A;--ok-bg:#16291F;--warn:#E0B062;
+--warn-bg:#2C2416;--bad:#E07A6E;--bar:#262A31;color-scheme:dark}
+html{background:#000}
 @media (prefers-color-scheme:dark){:root{--bg:#111316;--card:#191C21;--line:#2A2E35;
 --txt:#E8EAED;--dim:#8B919B;--accent:#7FA4DB;--accent-bg:#1E2A3B;--ok:#4CC38A;
 --ok-bg:#16291F;--warn:#E0B062;--warn-bg:#2C2416;--bad:#E07A6E;--bar:#262A31;color-scheme:dark}}
@@ -66,7 +67,7 @@ a{color:var(--accent)}
  #tabbar a{padding:8px 11px;font-size:14px}
  #tabbar a .lg{display:none}
  .tf{padding:20px 12px 30px}
- .tf .grid{grid-template-columns:1fr !important}
+ .tf .grid{grid-template-columns:1fr 1fr !important}
  .xp{padding:18px 10px 36px}
  .xp h2{font-size:20px}
  .xp select{width:100%;font-size:14px}
@@ -225,7 +226,7 @@ const esc = s => String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>'
 <script>
 (function(){
 const tabs=['floor','pruebas','estrategias','explorador','bitacora'];
-function show(){let h=(location.hash||'#floor').slice(1),go=null;if(h.startsWith('prueba-')){go=h;h='pruebas'}if(!tabs.includes(h))h='floor';
+function show(){let h=(location.hash||'#floor').slice(1),go=null;if(h.startsWith('prueba-')){go=h;h='pruebas'}if(h==='comite'){go='comite';h='floor'}if(!tabs.includes(h))h='floor';
  tabs.forEach(t=>{document.getElementById('tab-'+t).hidden=(t!==h)});
  document.querySelectorAll('#tabbar a[data-t]').forEach(a=>a.classList.toggle('on',a.dataset.t===h));
  if(h==='explorador'&&window.xpShow)window.xpShow();window.scrollTo(0,0);

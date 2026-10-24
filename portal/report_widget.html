@@ -1,3 +1,45 @@
+<!-- PIN personal: identifica a Jose Miguel u Oscar para enviar notas y votar. La página se puede leer sin PIN. -->
+<style>
+#pin-ov{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:1000;display:none;align-items:center;justify-content:center;padding:16px}
+#pin-ov.on{display:flex}
+#pin-m{background:#141414;color:#f2f2f2;border:1px solid #2a2a2a;border-radius:18px;width:100%;max-width:380px;padding:22px;font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+#pin-m h3{margin:0 0 4px;font-size:19px}#pin-m p{color:#9a9a9a;font-size:13px;margin:0 0 14px}
+#pin-i{width:100%;box-sizing:border-box;background:#0b0b0b;color:#fff;border:1px solid #333;border-radius:10px;padding:12px;font:600 20px ui-monospace,Menlo,monospace;letter-spacing:3px;text-align:center;text-transform:uppercase}
+#pin-m label{display:flex;gap:8px;align-items:center;color:#bdbdbd;font-size:13px;margin-top:10px}
+#pin-st{min-height:20px;font-size:14px;margin-top:8px;color:#f87171}
+#pin-m .row{display:flex;gap:8px;justify-content:flex-end;margin-top:14px}
+#pin-m button{border:0;border-radius:10px;padding:10px 16px;font-family:inherit;font-weight:600;font-size:15px;cursor:pointer}
+#pin-ok{background:#2563eb;color:#fff}#pin-no{background:#262626;color:#cfcfcf}
+</style>
+<div id="pin-ov" role="dialog" aria-modal="true" aria-labelledby="pin-h"><div id="pin-m">
+ <h3 id="pin-h">¿Quién eres?</h3>
+ <p>Escribe tu PIN personal. Solo Jose Miguel y Oscar tienen uno; sin PIN la página se puede leer pero no se puede enviar ni votar.</p>
+ <input id="pin-i" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="XXXX-XXXX" maxlength="12">
+ <label><input type="checkbox" id="pin-r"> Recordar en este dispositivo</label>
+ <div id="pin-st"></div>
+ <div class="row"><button type="button" id="pin-no">Cancelar</button><button type="button" id="pin-ok">Entrar</button></div>
+</div></div>
+<script>
+(function(){
+const $=id=>document.getElementById(id);let cur=null,wait=null;
+function saved(){try{return JSON.parse(localStorage.getItem('lab-pin')||sessionStorage.getItem('lab-pin')||'null')}catch(e){return null}}
+function store(a,rem){try{localStorage.removeItem('lab-pin');sessionStorage.removeItem('lab-pin');(rem?localStorage:sessionStorage).setItem('lab-pin',JSON.stringify(a))}catch(e){}}
+window.labWho=()=>cur||saved();
+window.labLogout=()=>{cur=null;try{localStorage.removeItem('lab-pin');sessionStorage.removeItem('lab-pin')}catch(e){}document.dispatchEvent(new Event('lab-auth'))};
+window.labForget=window.labLogout;
+window.labAuth=function(){const s=cur||saved();if(s)return Promise.resolve(s);
+ return new Promise(ok=>{wait=ok;$('pin-i').value='';$('pin-st').textContent='';$('pin-ov').classList.add('on');setTimeout(()=>$('pin-i').focus(),50)})};
+async function go(){const pin=$('pin-i').value.trim();if(pin.length<4){$('pin-st').textContent='Escribe tu PIN.';return}
+ $('pin-ok').disabled=true;$('pin-st').style.color='#9a9a9a';$('pin-st').textContent='Comprobando…';
+ try{const r=await fetch('/api/comite',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({accion:'quien',pin})});const j=await r.json();
+  if(j.ok){cur={pin,persona:j.persona,nombre:j.nombre};store(cur,$('pin-r').checked);$('pin-ov').classList.remove('on');document.dispatchEvent(new Event('lab-auth'));if(wait){wait(cur);wait=null}}
+  else{$('pin-st').style.color='#f87171';$('pin-st').textContent=j.error||'PIN incorrecto.'}}
+ catch(e){$('pin-st').style.color='#f87171';$('pin-st').textContent='Sin conexión.'}
+ $('pin-ok').disabled=false}
+$('pin-ok').addEventListener('click',go);$('pin-i').addEventListener('keydown',e=>{if(e.key==='Enter')go()});
+$('pin-no').addEventListener('click',()=>{$('pin-ov').classList.remove('on');if(wait){wait(null);wait=null}});
+})();
+</script>
 <!-- Buzón flotante: pregunta, problema, datos o idea, con captura. Envía a api/subir (correo a los dos + commit al repo). -->
 <style>
 #bz-fab{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:900;background:#2563eb;color:#fff;border:0;border-radius:999px;padding:12px 18px;font:600 15px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;box-shadow:0 6px 24px rgba(0,0,0,.45);cursor:pointer}
@@ -37,8 +79,7 @@
    <button type="button" data-v="datos">Datos para agregar</button>
    <button type="button" data-v="idea">Idea o prueba nueva</button>
   </div>
-  <span class="lb">Quién escribe</span>
-  <div class="ch" id="bz-quien"><button type="button" data-v="oscar" class="on">Oscar</button><button type="button" data-v="jose">Jose Miguel</button></div>
+  <div class="ctx" id="bz-yo" style="margin-top:12px"></div>
   <span class="lb">Título (opcional)</span>
   <input id="bz-t" maxlength="140" placeholder="p. ej. El P005 no coincide con lo que veo en ATAS">
   <span class="lb">Detalle</span>
@@ -54,14 +95,13 @@
 </div>
 <script>
 (function(){
-const $=id=>document.getElementById(id),ov=$('bz-ov');let img=null,tipo='pregunta',quien='oscar';
-try{quien=localStorage.getItem('bz-quien')||'oscar'}catch(e){}
+const $=id=>document.getElementById(id),ov=$('bz-ov');let img=null,tipo='pregunta';
 function pick(g,v){g.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.v===v))}
-pick($('bz-quien'),quien);
+function yo(){const w=window.labWho&&window.labWho();$('bz-yo').innerHTML=w?`Envías como <b style="color:#fff">${w.nombre}</b> · <a href="#" id="bz-out" style="color:#38bdf8">no soy yo</a>`:'Al enviar te pido tu PIN personal.'}
+document.addEventListener('lab-auth',yo);document.addEventListener('click',e=>{if(e.target.id==='bz-out'){e.preventDefault();window.labLogout()}});
 $('bz-tipos').addEventListener('click',e=>{const b=e.target.closest('button');if(b){tipo=b.dataset.v;pick($('bz-tipos'),tipo)}});
-$('bz-quien').addEventListener('click',e=>{const b=e.target.closest('button');if(b){quien=b.dataset.v;pick($('bz-quien'),quien);try{localStorage.setItem('bz-quien',quien)}catch(e){}}});
 function where(){const t=(location.hash||'#floor').slice(1);return location.origin+location.pathname+'#'+(t==='reportar'?'floor':t)}
-function open(t){if(t)$('bz-x').value=t;ov.classList.add('on');$('bz-st').textContent='';$('bz-st').className='';$('bz-ctx').textContent='Se envía con la página donde estás: '+where();setTimeout(()=>$('bz-x').focus(),50)}
+function open(t){if(t)$('bz-x').value=t;yo();ov.classList.add('on');$('bz-st').textContent='';$('bz-st').className='';$('bz-ctx').textContent='Se envía con la página donde estás: '+where();setTimeout(()=>$('bz-x').focus(),50)}
 function close(){ov.classList.remove('on');if(location.hash==='#reportar')history.replaceState(null,'','#floor')}
 window.bzOpen=open;
 $('bz-fab').addEventListener('click',()=>open());$('bz-c').addEventListener('click',close);
@@ -76,11 +116,12 @@ $('bz-drop').addEventListener('drop',e=>setImg(e.dataTransfer.files[0]));
 document.addEventListener('paste',e=>{if(!ov.classList.contains('on'))return;const it=[...(e.clipboardData||{}).items||[]].find(i=>i.type.startsWith('image/'));if(it){e.preventDefault();setImg(it.getAsFile())}});
 $('bz-rm').addEventListener('click',()=>{img=null;$('bz-prev').style.display='none';$('bz-drop').style.display='block';$('bz-f').value=''});
 $('bz-s').addEventListener('click',async()=>{const x=$('bz-x').value.trim(),st=$('bz-st');if(x.length<5){st.textContent='Escribe la pregunta o el problema.';st.className='err';return}
+ const a=await window.labAuth();if(!a){st.textContent='Sin PIN no se puede enviar.';st.className='err';return}
  $('bz-s').disabled=true;st.className='';st.textContent='Enviando…';
- try{const r=await fetch('/api/subir',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({tipo,autor:quien,titulo:$('bz-t').value.trim(),texto:x,pagina:where()+' · pantalla '+innerWidth+'×'+innerHeight,imagen:img})});
+ try{const r=await fetch('/api/subir',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({tipo,pin:a.pin,titulo:$('bz-t').value.trim(),texto:x,pagina:where()+' · pantalla '+innerWidth+'×'+innerHeight,imagen:img})});
   const j=await r.json().catch(()=>({}));
   if(j.ok){st.className='ok';st.textContent='✓ Enviado. '+(j.nota||'');$('bz-x').value='';$('bz-t').value='';$('bz-rm').click();setTimeout(close,2500)}
-  else{st.className='err';st.textContent='No se envió: '+(j.error||('error '+r.status))+' Puedes escribir a jose@radtak.com mientras tanto.'}}
+  else{if(r.status===401)window.labLogout();st.className='err';st.textContent='No se envió: '+(j.error||('error '+r.status))+(r.status===401?' Vuelve a intentarlo con tu PIN.':' Puedes escribir a jose@radtak.com mientras tanto.')}}
  catch(e){st.className='err';st.textContent='Sin conexión. Inténtalo de nuevo.'}
  $('bz-s').disabled=false});
 function fromHash(){if(location.hash==='#reportar')open()}

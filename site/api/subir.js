@@ -11,6 +11,15 @@ const MAX_IMG = 3 * 1024 * 1024;
 const TIPOS = { pregunta: "Pregunta", problema: "Problema a corregir", datos: "Datos para agregar", idea: "Idea o petición de prueba",
   hallazgo: "Hallazgo", respuesta: "Respuesta a preguntas", peticion: "Petición de prueba", ojos: "Los ojos de Oscar" };
 
+const crypto = require("crypto");
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+function eq(a, b) { const x = crypto.createHash("sha256").update(String(a)).digest(), y = crypto.createHash("sha256").update(String(b)).digest(); return crypto.timingSafeEqual(x, y); }
+async function persona(pin) {   // mismo PIN personal que el comité (PIN_JOSE, PIN_OSCAR en Vercel)
+  const p = String(pin || "").trim().toUpperCase().replace(/[\s-]/g, ""); let who = null;
+  for (const k of ["jose", "oscar"]) { const v = (process.env["PIN_" + k.toUpperCase()] || "").toUpperCase().replace(/[\s-]/g, ""); if (v && p && eq(p, v)) who = k; }
+  if (!who) await sleep(1200); return who;
+}
+const NOMBRE = { jose: "Jose Miguel", oscar: "Oscar" };
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
 async function gh(path, b64, message, token) {
@@ -32,7 +41,9 @@ module.exports = async (req, res) => {
   body = body || {};
   const texto = String(body.texto ?? body.contenido ?? "").trim();
   const titulo = String(body.titulo || "").replace(/\n/g, " ").slice(0, 140);
-  const autor = String(body.autor || "oscar").slice(0, 40);
+  const quien = await persona(body.pin);
+  if (!quien) return res.status(401).json({ error: "PIN incorrecto." });
+  const autor = NOMBRE[quien];
   const tipo = TIPOS[body.tipo] ? body.tipo : "pregunta";
   const pagina = String(body.pagina || "").slice(0, 300);
   if (texto.length < 5) return res.status(400).json({ error: "Escribe la pregunta o el problema." });

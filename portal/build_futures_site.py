@@ -171,6 +171,7 @@ def research_export():
 
 
 def build():
+    import apply_votes; apply_votes.apply()   # votos del comité (página con PIN) -> backlog
     r = research_export()
     data = {"generated": datetime.now(timezone.utc).isoformat(timespec="minutes"),
             "roster": load("roster.json", {"bots": []}), "dataset": load("data_status.json", {}),
