@@ -96,6 +96,7 @@ a{color:var(--accent)}
 <a href="#estrategias" data-t="estrategias">Estrategias</a>
 <a href="#explorador" data-t="explorador">Explorador</a>
 <a href="#bitacora" data-t="bitacora">Bitácora</a>
+<a href="#" id="salir" style="margin-left:auto" onclick="event.preventDefault();try{localStorage.removeItem('lab-pin');sessionStorage.removeItem('lab-pin')}catch(e){};fetch('/api/entrar',{method:'POST',headers:{'Content-Type':'application/json'},body:'{"salir":true}'}).finally(()=>location.replace('/entrar.html'))">Salir</a>
 </nav>
 
 

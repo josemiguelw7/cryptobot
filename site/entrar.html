@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Laboratorio NQ · entrar</title>
+<style>
+:root{color-scheme:dark}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:#000;color:#f2f2f2;font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+main{min-height:100%;display:flex;align-items:center;justify-content:center;padding:calc(24px + env(safe-area-inset-top,0px)) 20px calc(24px + env(safe-area-inset-bottom,0px))}
+.c{width:100%;max-width:360px;background:#121212;border:1px solid #262626;border-radius:18px;padding:26px}
+h1{font-size:21px;margin:0 0 4px}p{color:#9a9a9a;font-size:14px;margin:0 0 18px}
+input{width:100%;background:#0b0b0b;color:#fff;border:1px solid #333;border-radius:12px;padding:14px;font:600 24px ui-monospace,Menlo,monospace;letter-spacing:6px;text-align:center;text-transform:uppercase}
+input:focus{outline:2px solid #2563eb;border-color:#2563eb}
+button{width:100%;margin-top:14px;background:#2563eb;color:#fff;border:0;border-radius:12px;padding:13px;font:600 16px inherit;font-family:inherit;cursor:pointer}
+button:disabled{opacity:.6}
+#st{min-height:22px;margin-top:10px;font-size:14px;color:#f87171;text-align:center}
+small{display:block;color:#6f6f6f;font-size:12px;margin-top:14px;text-align:center}
+</style></head><body><main><div class="c">
+<h1>Laboratorio NQ</h1>
+<p>Acceso privado. Escribe tu PIN personal.</p>
+<input id="pin" type="password" inputmode="text" autocomplete="current-password" autocapitalize="characters" spellcheck="false" maxlength="12" autofocus aria-label="PIN">
+<button id="go" type="button">Entrar</button>
+<div id="st" role="status"></div>
+<small>Quedas dentro 30 días en este dispositivo.</small>
+</div></main>
+<script>
+const $=id=>document.getElementById(id);
+async function go(){const pin=$('pin').value.trim();if(!pin){$('st').textContent='Escribe tu PIN.';return}
+ $('go').disabled=true;$('st').style.color='#9a9a9a';$('st').textContent='Comprobando…';
+ try{const r=await fetch('/api/entrar',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pin})});const j=await r.json();
+  if(j.ok){try{localStorage.setItem('lab-pin',JSON.stringify({pin,persona:j.persona,nombre:j.nombre}))}catch(e){}
+   let n=new URLSearchParams(location.search).get('next')||'/';if(!n.startsWith('/')||n.startsWith('//'))n='/';location.replace(n+(n.includes('#')?'':location.hash));return}
+  $('st').style.color='#f87171';$('st').textContent=j.error||'PIN incorrecto.';$('pin').select()}
+ catch(e){$('st').style.color='#f87171';$('st').textContent='Sin conexión.'}
+ $('go').disabled=false}
+$('go').addEventListener('click',go);$('pin').addEventListener('keydown',e=>{if(e.key==='Enter')go()});
+</script></body></html>
