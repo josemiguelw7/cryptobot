@@ -108,6 +108,14 @@ def copy_results(tests):
             for f in ("trades.csv", "trades.json", "report.json", "oscar/muestra.csv", "oscar/muestra.json", "oscar/acuerdo.json"):
                 if os.path.exists(os.path.join(src, f)):
                     os.makedirs(os.path.dirname(os.path.join(dst, f)), exist_ok=True); shutil.copy2(os.path.join(src, f), os.path.join(dst, f))
+            try:   # resumen ejecutivo en el Formato Estándar de Oscar (mismo que el correo)
+                if os.path.join(FUT, "lab") not in sys.path: sys.path.insert(0, os.path.join(FUT, "lab"))
+                from engine import informe_floor as IF
+                X = IF.secciones(t["id"]); E = X.pop("extremos")
+                X["extremos"] = {k: {"mejor": [IF._periodo(k, E[k]["mejor"][0]), E[k]["mejor"][1]], "peor": [IF._periodo(k, E[k]["peor"][0]), E[k]["peor"][1]]} for k in ("mes", "semana", "dia")}
+                json.dump(X, open(os.path.join(dst, "informe.json"), "w", encoding="utf-8"), ensure_ascii=False, default=str)
+            except Exception as e:
+                print(f"informe {t['id']}: no se pudo generar ({type(e).__name__}: {e})")
             rt = os.path.join(src, "redteam")
             if os.path.isdir(rt):   # paquete de revisión ciega, descargable desde la página
                 shutil.rmtree(os.path.join(dst, "redteam"), ignore_errors=True); shutil.copytree(rt, os.path.join(dst, "redteam"))

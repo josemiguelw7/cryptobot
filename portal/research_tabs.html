@@ -136,8 +136,12 @@ function testCard(t){
  return `<div class="card" id="prueba-${t.id}">
   <div class="head"><span class="t">${t.id} · ${esc(t.estrategia)} v${t.version}</span><span><span class="pill ${v[1]}">${v[0]}</span> <span class="chip ${cmp.includes(t.id)?'on':''}" data-cmp="${t.id}" style="padding:3px 9px;font-size:12px">comparar</span></span></div>
   <p class="sub" style="margin:4px 0 10px">${esc(t.fecha)} · estudio ${esc(t.tanda)} · ${esc(t.periodo||'')} · reglas: <a href="#estrategias" data-goto-est="${t.estrategia}">${t.estrategia} v${t.version}</a></p>
-  <div class="row">${kpi('Operaciones',num(r.operaciones))}${kpi('Ganancia neta',money(r.ganancia_neta),r.ganancia_neta>0?'g':'r')}${kpi('p contra RAND',pv==null?'—':num(pv,3),pc)}${kpi('Pasa Topstep',pct(r.topstep)+(ts.rand_pct_pasan!=null?` <span class="note">(RAND ${pct(ts.rand_pct_pasan)})</span>`:''),r.topstep>=50?'g':'')}${kpi('Aciertos',pct(r.aciertos))}${kpi('Factor',num(r.factor,2))}${kpi('Peor drawdown',money(r.drawdown_max),'r')}${kpi('Sharpe anual',num(r.sharpe_anual,2))}</div>
+  <div class="inf" id="inf-${t.id}"><p class="note">Cargando resumen ejecutivo…</p></div>
+  <details class="tec"><summary>Indicadores técnicos del laboratorio (RAND, factor, Sharpe, causa)</summary>
+  <div class="row" style="margin-top:10px">${kpi('Operaciones',num(r.operaciones))}${kpi('Ganancia neta',money(r.ganancia_neta),r.ganancia_neta>0?'g':'r')}${kpi('p contra RAND',pv==null?'—':num(pv,3),pc)}${kpi('Pasa Topstep',pct(r.topstep)+(ts.rand_pct_pasan!=null?` <span class="note">(RAND ${pct(ts.rand_pct_pasan)})</span>`:''),r.topstep>=50?'g':'')}${kpi('Aciertos',pct(r.aciertos))}${kpi('Factor',num(r.factor,2))}${kpi('Peor drawdown',money(r.drawdown_max),'r')}${kpi('Sharpe anual',num(r.sharpe_anual,2))}</div>
   <div class="muerte ${t.veredicto==='pasa'?'pass':''}">${t.veredicto==='pasa'?'✅ Cumple los cuatro criterios del protocolo.':'<b>Causa:</b> '+esc(t.muerte||'—')}${t.estres?` · <b>Con costos al doble:</b> ${money(t.estres.neto)} (p ${num(t.estres.p_rand,3)})`:''}${t.dsr!=null?` · <b>DSR</b> ${num(t.dsr,3)} con ${t.intentos_totales} intentos`:''}</div>
+  </details>
+  <h4 style="margin-top:12px">Curva de ganancia contra el bot aleatorio</h4>
   <div id="curva-${t.id}" class="plot" style="height:230px"></div>
   ${t.notas?`<p class="idea">${esc(t.notas)}</p>`:''}
   <details data-full="${t.id}"><summary>Hoja de resultados completa, Red Team, Topstep, sensibilidad y operaciones</summary><div class="sec" id="full-${t.id}"><p class="note">Cargando…</p></div></details>
@@ -149,7 +153,28 @@ function renderTests(){
  const T=(R.pruebas||[]).filter(t=>filter==='todas'||t.veredicto===filter).slice().reverse();
  const el=document.getElementById('rx-tests');
  el.innerHTML=T.length?T.map(testCard).join(''):`<div class="empty">${(R.pruebas||[]).length?'Ninguna prueba en esta categoría.':'Todavía no hay pruebas publicadas. La tanda 1 (BIG, ABS y POC v1) corre con toda la infraestructura ya lista: registro de intentos, RAND emparejado, Red Team y cuentas Topstep.'}</div>`;
- if(T.length)plotly().then(()=>T.forEach(t=>drawCurve('curva-'+t.id,t)));
+ if(T.length){T.forEach(t=>loadInforme(t));plotly().then(()=>T.forEach(t=>drawCurve('curva-'+t.id,t)))}
+}
+const INF={};
+const usd=x=>(x<0?'−':'+')+'$'+Math.abs(Math.round(x)).toLocaleString('en-US');
+async function loadInforme(t){
+ const box=document.getElementById('inf-'+t.id); if(!box)return;
+ let X=INF[t.id];
+ if(!X){try{X=INF[t.id]=await (await fetch(`data/tests/${t.id}/informe.json`)).json()}catch(e){box.innerHTML='<p class="note">Esta prueba no tiene resumen ejecutivo (no generó operaciones).</p>';return}}
+ const T=X.topstep,E=X.extremos,V={pasa:'pasa',revisar:'revisar',no_pasa:'no pasa'}[X.veredicto]||X.veredicto;
+ const sec=(n,ti,b)=>`<div class="is"><div class="il">${n} · ${ti}</div><div>${b}</div></div>`;
+ const fila=(k,l)=>`<tr><td>${l}</td><td>${esc(E[k].mejor[0])}<br><b class="ig">${usd(E[k].mejor[1])}</b></td><td>${esc(E[k].peor[0])}<br><b class="ir">${usd(E[k].peor[1])}</b></td></tr>`;
+ const aviso=t.veredicto==='superada'?'<p class="note" style="margin-bottom:6px">Prueba superada: se midió con una versión anterior del motor. Queda como registro; la versión vigente es otra prueba.</p>':t.veredicto==='error'?'<p class="note" style="margin-bottom:6px">Esta corrida terminó con error; las cifras son solo de registro.</p>':'';
+ box.innerHTML=`<div class="ihead">Formato estándar · Trading Floor · resumen ejecutivo</div>${aviso}`
+  +sec(1,'Estrategia',`<b style="font-size:16px">${esc(X.nombre)}</b> <span class="note">· prueba ${X.tid} · veredicto del laboratorio: <b>${V}</b></span>`)
+  +sec(2,'Explicación de la estrategia',esc(X.expl))
+  +sec(3,'Explicación de la prueba',esc(X.prueba))
+  +sec(4,'Take profit / stop loss',esc(X.tpsl))
+  +sec(5,'Rango testeado',`Desde ${esc(X.rango.replace(' a ',' hasta '))} · <b>${X.n.toLocaleString('en-US')}</b> operaciones · win rate <b>${X.win.toFixed(1)}%</b>`)
+  +sec(6,'Resultado global',`<div class="row">${kpi('P/L neto',usd(X.neto),X.neto>=0?'g':'r')}${kpi('Drawdown máximo','−$'+Math.abs(Math.round(X.mdd)).toLocaleString('en-US'),'r')}${kpi('Operaciones / día',X.tpd.toFixed(2))}</div>`)
+  +sec(7,'Mejores y peores resultados',`<table class="itab"><tr><th></th><th>MEJOR</th><th>PEOR</th></tr>${fila('mes','Mes')}${fila('semana','Semana')}${fila('dia','Día')}</table><div class="note">Neto después de costos.</div>`)
+  +sec(8,'¿Pasa las reglas de prop firms?',`<b style="font-size:16px" class="${T.veredicto==='SÍ'?'ig':'ir'}">${T.veredicto}</b> · Topstep $50K Trading Combine<br>${esc(T.con)}.<br>${esc(T.sin)}.${T.motivo?`<br><span class="ir">${esc(T.motivo)}</span>`:''}<div class="note">${esc(T.reglas)}</div>`)
+  +sec(9,'Conclusión',`<b>${esc(X.concl)}</b>`);
 }
 function drawCurve(id,t){
  if(!t.curva||!document.getElementById(id))return;
