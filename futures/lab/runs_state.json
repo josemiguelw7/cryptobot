@@ -50,7 +50,21 @@
   "ultimo_error": "fall\u00f3 una corrida; ver log"
  },
  "R-BIG2": {
+  "estado": "corrida",
+  "inicio_utc": "2026-10-24T11:30:01+00:00",
+  "fin_utc": "2026-10-24T11:35:23+00:00",
+  "test_id": "P010",
+  "veredicto": "no_pasa"
+ },
+ "R-HVN1": {
+  "estado": "corrida",
+  "inicio_utc": "2026-10-24T11:45:01+00:00",
+  "fin_utc": "2026-10-24T11:56:43+00:00",
+  "test_id": "P011",
+  "veredicto": "no_pasa"
+ },
+ "R-ABS2": {
   "estado": "corriendo",
-  "inicio_utc": "2026-10-24T11:30:01+00:00"
+  "inicio_utc": "2026-10-24T12:00:01+00:00"
  }
 }

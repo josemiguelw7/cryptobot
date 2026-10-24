@@ -23,6 +23,20 @@
       "test_id": "P009"
     },
     {
+      "date": "2026-10-24",
+      "kind": "prueba",
+      "title": "Prueba P010 · BIG v2 · no pasa",
+      "body": "BIG v2: 2715 operaciones, ganancia neta $-102,618 con costos base, p contra RAND 0.95, estrés $-123,878, Topstep 0.0% de las cuentas (RAND 0.0%). Veredicto: no pasa. Causa: pierde con costos base; no gana a RAND (p=0.95); no gana a RAND2 con las mismas salidas (p=0.9391); DSR 0.0 < 0.95 con 569 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%.",
+      "test_id": "P010"
+    },
+    {
+      "date": "2026-10-24",
+      "kind": "prueba",
+      "title": "Prueba P011 · HVN v1 · no pasa",
+      "body": "HVN v1: 1458 operaciones, ganancia neta $-87,676 con costos base, p contra RAND 0.999, estrés $-99,834, Topstep 0.0% de las cuentas (RAND 0.0%). Veredicto: no pasa. Causa: pierde con costos base; no gana a RAND (p=0.999); no gana a RAND2 con las mismas salidas (p=1.0); DSR 0.0 < 0.95 con 584 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%.",
+      "test_id": "P011"
+    },
+    {
       "date": "2026-10-23",
       "kind": "hallazgo",
       "title": "Mapa de señales v1 publicado: 38 de 48 pruebas distintas del azar",

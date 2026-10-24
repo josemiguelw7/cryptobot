@@ -1,13 +1,13 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-24 11:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-24 12:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga-radtak-projects.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
 ## En una línea
 
 - Sesiones válidas de diseño: **576** (examen sellado desde 2026-04-22, cerrado).
-- Intentos registrados: **568** · pruebas publicadas: **9** (error 1, superada 7, no_pasa 1).
+- Intentos registrados: **600** · pruebas publicadas: **11** (error 1, superada 7, no_pasa 3).
 - Estrategias aprobadas por el comité: **0**. Nada toca dinero real.
 
 ## Pruebas corridas
@@ -23,6 +23,8 @@ Página: https://cryptobot-liga-radtak-projects.vercel.app · Guía del repo: `d
 | P007 | BIG v2 | **superada** | −$72,187 | 0.8052 | 0.0% | pierde con costos base; no gana a RAND (p=0.8052); muere con costos al doble; pierde en 2024, 2025, 2026; pasa |
 | P008 | ORB v1 | **superada** | −$15,144 | 0.5005 | 0.0% | pierde con costos base; no gana a RAND (p=0.5005); muere con costos al doble; pierde en 2024, 2025, 2026; pasa |
 | P009 | ORB v1 | **no_pasa** | −$19,064 | 0.5455 | 0.0% | pierde con costos base; no gana a RAND (p=0.5455); no gana a RAND2 con las mismas salidas (p=0.5614); DSR 0.0  |
+| P010 | BIG v2 | **no_pasa** | −$102,618 | 0.95 | 0.0% | pierde con costos base; no gana a RAND (p=0.95); no gana a RAND2 con las mismas salidas (p=0.9391); DSR 0.0 <  |
+| P011 | HVN v1 | **no_pasa** | −$87,676 | 0.999 | 0.0% | pierde con costos base; no gana a RAND (p=0.999); no gana a RAND2 con las mismas salidas (p=1.0); DSR 0.0 < 0. |
 
 ## Cola de pruebas (backlog)
 
@@ -31,9 +33,9 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 | Id | Prueba | Estado | Origen | Falta |
 |---|---|---|---|---|
 | R-ORB1 | Repetición de P008 (ORB v1) con el motor 1.1 | **corrida** → P009 | revisión ciega P005 |  · ERROR: falló una corrida; ver log |
-| R-BIG2 | Repetición de P007 (BIG v2) con el motor 1.1 | **corriendo** | revisión ciega P005 |  |
-| R-HVN1 | Repetición de P006 (HVN v1) con el motor 1.1 | **congelada** | revisión ciega P005 |  |
-| R-ABS2 | Repetición de P005 (ABS v2) con el motor 1.1 | **congelada** | revisión ciega P005 |  |
+| R-BIG2 | Repetición de P007 (BIG v2) con el motor 1.1 | **corrida** → P010 | revisión ciega P005 |  |
+| R-HVN1 | Repetición de P006 (HVN v1) con el motor 1.1 | **corrida** → P011 | revisión ciega P005 |  |
+| R-ABS2 | Repetición de P005 (ABS v2) con el motor 1.1 | **corriendo** | revisión ciega P005 |  |
 | R-POC1 | Repetición de P004 (POC v1) con el motor 1.1 | **congelada** | revisión ciega P005 |  |
 | R-ABS1 | Repetición de P003 (ABS v1) con el motor 1.1 | **congelada** | revisión ciega P005 |  |
 | R-BIG1 | Repetición de P002 (BIG v1) con el motor 1.1 | **congelada** | revisión ciega P005 |  |
@@ -63,7 +65,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - **mapa_v3**: Repetición del mapa v2 midiendo desde el mid del libro operable (bid/ask antes del primer llenado posterior) en vez del último llenado, que  · declarados 72, usados 12
 - **proxy_v1**: Con el rango y el cuerpo de los primeros 15 minutos, la apertura dentro/fuera del valor y la distancia al VWAP a las 09:45 se puede anticipa · declarados 1, usados 1
 - **tanda3**: BIG v2 (seguir la orden grande con entrada inmediata, objetivo 12, stop 16) y ORB v1 (ruptura del rango inicial, 16/16, 30 min), con premisa · declarados 34, usados 32
-- **repeticion_1_1**: Repetición de P002–P008 con el motor 1.1 (llenados corregidos tras la revisión ciega del 24/10/2026). Las reglas selladas no cambian. Se esp · declarados 119, usados 17
+- **repeticion_1_1**: Repetición de P002–P008 con el motor 1.1 (llenados corregidos tras la revisión ciega del 24/10/2026). Las reglas selladas no cambian. Se esp · declarados 119, usados 49
 - **salidas_1_1**: Repetición del estudio de salidas (pedido de Oscar) con el motor 1.1 y percentiles exactos. · declarados 159, usados 159
 - **mapa_v4**: Repetición del mapa v3 con percentiles exactos de órdenes y ventanas (los umbrales de 'órdenes grandes' y 'absorción' cambian). · declarados 72, usados 12
 
@@ -123,11 +125,11 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - 2026-10-24 · prueba · Prueba P007 · BIG v2 · no pasa
 - 2026-10-24 · prueba · Prueba P008 · ORB v1 · no pasa
 - 2026-10-24 · prueba · Prueba P009 · ORB v1 · no pasa
+- 2026-10-24 · prueba · Prueba P010 · BIG v2 · no pasa
+- 2026-10-24 · prueba · Prueba P011 · HVN v1 · no pasa
 - 2026-10-23 · hallazgo · Mapa de señales v1 publicado: 38 de 48 pruebas distintas del azar
 - 2026-10-23 · decisión · Protocolo v2: placebo sospechoso → revisar; mapa con 5,000 sorteos
 - 2026-10-23 · hallazgo · Red Team: la primera corrida tenía el umbral mal y se marca como error
-- 2026-10-23 · prueba · Prueba P005 · ABS v2 · revisar
-- 2026-10-23 · prueba · Prueba P006 · HVN v1 · no pasa
 
 ## Cómo se corre una prueba nueva
 
