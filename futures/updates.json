@@ -51,6 +51,13 @@
       "test_id": "P022"
     },
     {
+      "date": "2026-10-25",
+      "kind": "prueba",
+      "title": "Prueba P023 · HVF v1 · revisar",
+      "body": "HVF v1: 107 operaciones, ganancia neta $536 con costos base, p contra RAND 0.2607, estrés $-2,569, Topstep 4.4% de las cuentas (RAND 3.0%). Veredicto: revisar. Causa: placebo desplazado sospechoso: revisión de código pendiente; además: no gana a RAND (p=0.2607); no gana a RAND2 con las mismas salidas (p=0.3956); DSR 0.0 < 0.95 con 777 intentos; 1780.7% de la ganancia en 5 días; muere con costos al doble; pierde en 2025; pasa Topstep solo 4.4%.",
+      "test_id": "P023"
+    },
+    {
       "date": "2026-10-24",
       "kind": "avance",
       "title": "Comité con PIN: Jose Miguel y Oscar votan desde la página",

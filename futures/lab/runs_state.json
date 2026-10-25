@@ -139,5 +139,12 @@
   "fin_utc": "2026-10-25T07:48:10+00:00",
   "test_id": "P022",
   "veredicto": "revisar"
+ },
+ "T8-HVF": {
+  "estado": "corrida",
+  "inicio_utc": "2026-10-25T08:15:01+00:00",
+  "fin_utc": "2026-10-25T08:25:23+00:00",
+  "test_id": "P023",
+  "veredicto": "revisar"
  }
 }
