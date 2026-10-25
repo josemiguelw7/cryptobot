@@ -1,6 +1,6 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-25 02:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-25 02:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
@@ -112,6 +112,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 
 ## Buzón de Oscar
 
+- `docs/oscar/inbox/2026-10-25_0230_has-probado-aceptacion.md`
 - `docs/oscar/inbox/2026-10-24_1645_sugerencia-o-pedido-aparte-de-las-pruebas-que-estas-haciendo.md`
 
 ## Preguntas abiertas para Oscar
