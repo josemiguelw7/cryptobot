@@ -1,0 +1,95 @@
+{
+ "sesiones": 556,
+ "proxies": {
+  "p_rango15": {
+   "cortes": [
+    0.278,
+    0.401
+   ],
+   "terciles": [
+    {
+     "tercil": 1,
+     "n": 185,
+     "pct_tendencia": 47.6
+    },
+    {
+     "tercil": 2,
+     "n": 185,
+     "pct_tendencia": 43.8
+    },
+    {
+     "tercil": 3,
+     "n": 186,
+     "pct_tendencia": 52.7
+    }
+   ],
+   "precision_extremo": 0.527
+  },
+  "p_cuerpo15": {
+   "cortes": [
+    0.319,
+    0.636
+   ],
+   "terciles": [
+    {
+     "tercil": 1,
+     "n": 185,
+     "pct_tendencia": 45.9
+    },
+    {
+     "tercil": 2,
+     "n": 185,
+     "pct_tendencia": 44.9
+    },
+    {
+     "tercil": 3,
+     "n": 186,
+     "pct_tendencia": 53.2
+    }
+   ],
+   "precision_extremo": 0.541
+  },
+  "p_vwap": {
+   "cortes": [
+    51.884,
+    118.831
+   ],
+   "terciles": [
+    {
+     "tercil": 1,
+     "n": 185,
+     "pct_tendencia": 43.2
+    },
+    {
+     "tercil": 2,
+     "n": 185,
+     "pct_tendencia": 48.6
+    },
+    {
+     "tercil": 3,
+     "n": 186,
+     "pct_tendencia": 52.2
+    }
+   ],
+   "precision_extremo": 0.568
+  },
+  "p_valor": {
+   "fuera": {
+    "n": 363,
+    "pct_tendencia": 49.3
+   },
+   "dentro": {
+    "n": 193,
+    "pct_tendencia": 45.6
+   }
+  }
+ },
+ "base_pct_tendencia": 48.0,
+ "mejor": {
+  "proxy": "p_vwap",
+  "precision_extremo": 0.568
+ },
+ "nota": "precision_extremo = en el tercil alto, % de días de tendencia (o en el bajo, % de balance), lo que sea mayor. Base = % de días de tendencia sin proxy. Un proxy útil separa bastante más que la base.",
+ "fecha": "2026-10-23",
+ "sesiones_sha256": "efa6fa9dbd9f0e8005cb30be48a5867a6717292f78604ff67f06f420ae4bb782"
+}

@@ -1,0 +1,38 @@
+{
+ "version": 8,
+ "fecha_registro": "2026-10-25",
+ "titulo": "Tanda 7 · VAR v1 (regla del 80%: re-entrada aceptada al área de valor)",
+ "estado": "Pendiente anotado por el investigador en aceptacion.md. Escrita por el investigador autónomo; sellada y congelada al publicar. Investigación: docs/investigacion/regla80.md.",
+ "comun": {
+  "instrumento": "NQ (contrato del frente), 1 contrato por operación en la v1",
+  "horario": "Nueva York 09:30–11:30 ET (los traders estudiados operan casi solo la primera hora u hora y media)",
+  "cierre_forzado": "cualquier posición abierta se cierra a mercado a las 11:45 ET",
+  "noticias": "no se abre de −2 a +5 min de CPI, NFP y Fed",
+  "costos": "comisión Topstep + 1 tick de deslizamiento por lado; prueba extra al doble",
+  "limites_dia": "máximo 6 operaciones por estrategia por día; se detiene tras 3 pérdidas seguidas",
+  "una_posicion": "nunca más de una posición abierta por estrategia",
+  "niveles_de_referencia": "del día anterior (perfil de Nueva York): VAH y VAL (70%)",
+  "umbrales_relativos": "VAR no usa percentiles: las ventanas son fijas en segundos",
+  "datos": "solo periodo de diseño 2024-01-02 a 2026-04-21; el examen sellado no se abre",
+  "control": "RAND emparejado: mismas cantidades de operaciones por día, misma dirección al azar, misma duración y mismo horario"
+ },
+ "estrategias": [
+  {
+   "id": "VAR",
+   "version": 1,
+   "nombre": "Regla del 80% · re-entrada aceptada al valor",
+   "idea": "Si abre fuera del área de valor de ayer, vuelve adentro y se queda adentro con flujo agresivo que no lo contradice, el precio rota hacia el otro lado del valor.",
+   "contexto": "VAH y VAL del perfil de Nueva York del día anterior; solo días en que el primer llenado de las 09:30 está fuera del valor.",
+   "disparador": "Primer llenado ≥ 2 ticks dentro del borde (VAH o VAL) después de abrir fuera.",
+   "ubicacion": "Dentro del valor, junto al borde cruzado. Un disparo por día.",
+   "confirmacion": "180 s seguidos sin salir del valor (≥ 2 ticks adentro) y delta agresivo neto de la ventana, hacia el interior, ≥ 2% del volumen.",
+   "entrada": "A mercado, hacia el interior (en contra de la apertura), al cumplirse la ventana.",
+   "stop": "4 ticks fuera del borde cruzado; entre 12 y 32 ticks.",
+   "objetivo": "Ninguno.",
+   "tiempo_maximo": "30 minutos.",
+   "filtros": "Reglas comunes.",
+   "motivo_cambio": "Estrategia nueva (no hay versión previa)."
+  }
+ ],
+ "nota": "Parámetros en futures/lab/engine/strategies/v6.py::PARAMS['VAR']. Definición y alternativas en docs/investigacion/regla80.md."
+}

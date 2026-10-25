@@ -1,0 +1,38 @@
+{
+ "version": 7,
+ "fecha_registro": "2026-10-25",
+ "titulo": "Tanda 6 · SMT v1 (divergencia NQ vs ES en el extremo de la sesión)",
+ "estado": "Propuesta T3-SMT, aprobada por Jose Miguel el 24/10/2026 (\"todo lo pendiente\"). Escrita por el investigador autónomo; sellada y congelada al publicar. Investigación: docs/investigacion/smt.md.",
+ "comun": {
+  "instrumento": "NQ (contrato del frente), 1 contrato por operación en la v1",
+  "horario": "Nueva York 09:30–11:30 ET (los traders estudiados operan casi solo la primera hora u hora y media)",
+  "cierre_forzado": "cualquier posición abierta se cierra a mercado a las 11:45 ET",
+  "noticias": "no se abre de −2 a +5 min de CPI, NFP y Fed",
+  "costos": "comisión Topstep + 1 tick de deslizamiento por lado; prueba extra al doble",
+  "limites_dia": "máximo 6 operaciones por estrategia por día; se detiene tras 3 pérdidas seguidas",
+  "una_posicion": "nunca más de una posición abierta por estrategia",
+  "niveles_de_referencia": "extremos (máximo y mínimo) de la sesión de NQ desde las 09:30 ET; ES solo como dato auxiliar (futures canónicos de ES, contrato de más volumen en la ventana de NY)",
+  "umbrales_relativos": "SMT no usa percentiles: las ventanas son fijas en segundos",
+  "datos": "solo periodo de diseño 2024-01-02 a 2026-04-21; el examen sellado no se abre",
+  "control": "RAND emparejado: mismas cantidades de operaciones por día, misma dirección al azar, misma duración y mismo horario"
+ },
+ "estrategias": [
+  {
+   "id": "SMT",
+   "version": 1,
+   "nombre": "Divergencia NQ vs ES · barrido fallido",
+   "idea": "Si NQ barre el máximo (mínimo) de la sesión y ES no lo confirma, y NQ regresa dentro del extremo con flujo agresivo contrario, el barrido fue falso y el precio revierte.",
+   "contexto": "Máximo/mínimo de la sesión de NQ desde las 09:30 ET; solo después de las 09:45.",
+   "disparador": "Un llenado de NQ por encima (debajo) del extremo previo. ES no supera su propio extremo previo en los 120 s anteriores al barrido ni hasta la entrada.",
+   "ubicacion": "En el extremo de la sesión.",
+   "confirmacion": "NQ vuelve a operar en o dentro del extremo previo en menos de 120 s y el delta agresivo de NQ del barrido al regreso no favorece al barrido (≤ 0 tras máximo, ≥ 0 tras mínimo).",
+   "entrada": "A mercado, en contra del barrido, al regreso.",
+   "stop": "4 ticks más allá del extremo del barrido; entre 12 y 32 ticks.",
+   "objetivo": "Ninguno.",
+   "tiempo_maximo": "15 minutos.",
+   "filtros": "Reglas comunes; cooldown de 300 s por lado.",
+   "motivo_cambio": "Estrategia nueva (no hay versión previa)."
+  }
+ ],
+ "nota": "Parámetros en futures/lab/engine/strategies/v5.py::PARAMS['SMT']. Definición y alternativas en docs/investigacion/smt.md. Datos de ES: /srv/lab/data/canonical/ES (595 sesiones; las 576 de diseño están completas)."
+}

@@ -1,0 +1,37 @@
+{
+ "version": 13,
+ "fecha_registro": "2026-10-25",
+ "titulo": "Tanda 12 · ABK v1 (absorción medida con el libro)",
+ "estado": "Escrita por el investigador autónomo; sellada y congelada al publicar. Estrategia nueva con id propio. Investigación: docs/investigacion/absorcion_libro.md.",
+ "comun": {
+  "instrumento": "NQ (contrato del frente), 1 contrato por operación",
+  "horario": "Nueva York 09:30–11:30 ET",
+  "cierre_forzado": "cualquier posición abierta se cierra a mercado a las 11:45 ET",
+  "noticias": "no se abre de −2 a +5 min de CPI, NFP y Fed",
+  "costos": "comisión Topstep + 1 tick de deslizamiento por lado; prueba extra al doble",
+  "limites_dia": "máximo 6 operaciones por día; se detiene tras 3 pérdidas seguidas",
+  "una_posicion": "nunca más de una posición abierta por estrategia",
+  "umbrales_relativos": "p95 de volumen agresivo en 60 s sobre las 20 sesiones anteriores (como ABS v1)",
+  "datos": "solo periodo de diseño 2024-01-02 a 2026-04-21; el examen sellado no se abre",
+  "control": "RAND emparejado y RAND2 con las mismas salidas"
+ },
+ "estrategias": [
+  {
+   "id": "ABK",
+   "version": 1,
+   "nombre": "Absorción medida con el libro (la mejor oferta aguanta y se repone)",
+   "idea": "Absorción real = el lado pasivo recibe el flujo agresivo y su oferta no retrocede. Si además se repone, hay una pared que defiende el precio y el precio se aleja del lado absorbido.",
+   "contexto": "Ninguno de nivel: se mide el libro (mejor compra/venta y su tamaño) en la propia ventana.",
+   "disparador": "≥ p95 de volumen agresivo de un lado en 60 s, precio sin avanzar más de 2 ticks.",
+   "ubicacion": "La mejor oferta contraria nunca es peor que la de antes del primer llenado de la ventana y su tamaño final es ≥ 50% del inicial.",
+   "confirmacion": "En los 60 s siguientes el delta de la ventana cambia de signo y el precio se aleja 4 ticks del extremo.",
+   "entrada": "A mercado, contra el lado absorbido, al confirmar. No antes de 10 min desde la apertura; un disparo por lado cada 5 min.",
+   "stop": "4 ticks más allá del extremo; entre 12 y 32 ticks.",
+   "objetivo": "Ninguno.",
+   "tiempo_maximo": "15 minutos.",
+   "filtros": "Reglas comunes.",
+   "motivo_cambio": "Estrategia nueva (id propio). Cambia la definición de absorción (libro en vez de solo precio) y quita el filtro de nivel. Salida a 15 min y confirmación vienen de P012 (diseño): exploratorio. Solo se contaron señales antes de fijarla."
+  }
+ ],
+ "nota": "Parámetros en futures/lab/engine/strategies/v11.py::PARAMS['ABK']."
+}

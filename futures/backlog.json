@@ -345,20 +345,15 @@
   {
    "id": "T3-SMT",
    "nombre": "Divergencia NQ vs ES (SMT)",
-   "hipotesis": "Cuando NQ hace nuevo extremo y ES no (o al revés), el precio revierte.",
+   "hipotesis": "Cuando NQ barre el máximo (mínimo) de la sesión y ES no lo confirma, y NQ regresa adentro en menos de 120 s con delta agresivo contrario, el barrido es falso y el precio revierte (entrada contra el barrido, stop 4 ticks más allá, salida a 15 min).",
    "origen": "videos · plan v1",
    "estado": "corrida",
    "estrategia": "SMT",
    "version": 1,
-   "estudio": "tanda3",
-   "requisitos": [
-    "descargar datos tick de ES (laptop ATAS)",
-    "lector canónico para ES"
-   ],
-   "notas": "Bloqueada por datos.",
-   "inicio_utc": "2026-10-25T04:45:01+00:00",
-   "ultimo_error": "SMT v1 no está registrada en ningún strategies/v*.json del commit d2037d12",
-   "fin_utc": "2026-10-25T04:51:15+00:00",
+   "estudio": "smt_v1",
+   "requisitos": [],
+   "notas": "1 definición base + 16 sensibilidades (estudio smt_v1, 17 intentos). Solo NQ barre / ES no confirma; el espejo (ES barre, NQ no) queda para SMT v2.",
+   "decision": "aprobada por Jose Miguel 24/10/2026 (todo lo pendiente); definición investigada por el laboratorio (docs/investigacion/smt.md); reglas en strategies/v7.json (código engine/strategies/v5.py); datos de ES ya en el servidor · P018: no pasa (−$67k, Topstep 1.2%, pierde los 3 años)",
    "test_id": "P018",
    "veredicto": "no_pasa"
   },
@@ -376,7 +371,8 @@
     "chequeo cruzado en ES y YM sin abrir el examen de NQ",
     "indicador C# para ATAS"
    ],
-   "decision": "aprobada por Oscar 2026-10-24 (lo pidió él en el buzón)"
+   "decision": "aprobada por Oscar 2026-10-24 (lo pidió él en el buzón)",
+   "notas": "Sigue aprobada sin ejecutar (corrida 5): el orquestador solo corre estrategias; falta un runner de estudios de medición y no se puede tocar el orquestador. · 25/10/2026: la parte de 'HVN poderoso' se prueba como estrategia HVF v1 (T8-HVF, definición en docs/investigacion/hvn_poderoso.md). El estudio de reacción en primer toque sigue sin runner. · 25/10/2026 (corrida 7): sigue sin runner de estudios; la parte de reacción en primer toque queda pendiente. · 25/10/2026 (corrida 9): sigue sin runner de estudios. · 25/10/2026 (corrida 11): sigue sin runner de estudios. · 25/10/2026 (corrida 12): sigue sin runner de estudios."
   },
   {
    "id": "E-ACEPTACION-VA",
@@ -394,6 +390,149 @@
    "fin_utc": "2026-10-25T03:47:44+00:00",
    "test_id": "P017",
    "veredicto": "revisar"
+  },
+  {
+   "id": "T4-VAR",
+   "nombre": "Regla del 80%: re-entrada aceptada al área de valor · VAR v1",
+   "hipotesis": "Si abre fuera del valor de ayer, vuelve adentro y se queda 180 s con delta agresivo hacia el interior ≥ 2%, el precio rota hacia el otro lado del valor (entrada a mercado hacia el interior, stop 4 ticks fuera del borde, salida a 30 min).",
+   "origen": "pendiente de aceptacion.md (VAR v1) · ACC v1 casi positiva (P017: +$2,028 pero sin significancia): se prueba el espejo",
+   "estado": "congelada",
+   "estrategia": "VAR",
+   "version": 1,
+   "estudio": "regla80_v1",
+   "requisitos": [],
+   "decision": "decidida por el investigador (Jose aprobó todo lo pendiente 24/10/2026); definición investigada en docs/investigacion/regla80.md; reglas en strategies/v8.json (código engine/strategies/v6.py)",
+   "notas": "1 definición base + 16 sensibilidades (17 intentos). Riesgo: ~100 operaciones, cerca del mínimo."
+  },
+  {
+   "id": "T5-ACC2",
+   "nombre": "ACC v2: aceptación fuera de los bordes de la subasta anterior, solo días que abren dentro del valor",
+   "hipotesis": "ACC v1 (P017) fue +$2,028 con p 0.19 y solo 97 operaciones. Con la misma regla de aceptación (180 s fuera, delta ≥ 5% a favor), ampliando los niveles a máximo/mínimo de ayer y de la noche (~110 señales) y operando solo días que abren dentro del valor de ayer, continúa más que el azar emparejado. El filtro de apertura viene de ver que ABS v2, ABS v3 y ACC v1 ganan dentro del valor y pierden fuera (exploratorio, mismo periodo de diseño).",
+   "origen": "pedido de Oscar (aceptación, 25/10/2026) · P017 casi positiva · tablas por régimen de P012, P016, P017",
+   "estado": "congelada",
+   "estrategia": "ACC",
+   "version": 2,
+   "estudio": "aceptacion_v2",
+   "requisitos": [],
+   "decision": "decidida por el investigador; justificación en docs/investigacion/aceptacion_v2.md; reglas en strategies/v9.json (código engine/strategies/v7.py)",
+   "notas": "1 definición base + 16 sensibilidades (17 intentos). Riesgo: ~110 señales, puede quedar 'insuficiente' (<100). Placebo desplazado probablemente sospechoso, como en v1. · P020: revisar (+$4,346, p 0.12, 91 operaciones, Topstep 0%)."
+  },
+  {
+   "id": "T6-ABI",
+   "nombre": "ABI v1: absorción en los niveles del propio día",
+   "hipotesis": "La absorción de flujo agresivo (≥ p95 en 60 s sin avance) en el máximo/mínimo de la sesión, VWAP o POC/VAH/VAL en desarrollo, confirmada a 60 s, hace que el precio se aleje del lado absorbido más que el azar emparejado (~126 señales).",
+   "origen": "ABS v2 (P012) única familia positiva; ABS agotó sus 3 versiones; niveles de ayer ya probados (HVN, POC, ACC, VAR)",
+   "estado": "congelada",
+   "estrategia": "ABI",
+   "version": 1,
+   "estudio": "abi_v1",
+   "requisitos": [],
+   "decision": "decidida por el investigador; justificación en docs/investigacion/absorcion_intradia.md; reglas en strategies/v10.json (código engine/strategies/v8.py)",
+   "notas": "1 definición base + 16 sensibilidades (17 intentos). Riesgo: ~126 señales, cerca del mínimo de 100. P020 (ACC v2) quedó en revisar: +$4,346, p 0.12, 91 operaciones (insuficiente)."
+  },
+  {
+   "id": "T7-ABV",
+   "nombre": "ABV v1: absorción en el valor en desarrollo del día (POC, VAH, VAL)",
+   "hipotesis": "Cuando el flujo agresivo (≥ p95 en 60 s) no mueve el precio a ≤ 8 ticks del POC, VAH o VAL del perfil que el propio día va construyendo, y a los 60 s el delta cambia de signo y el precio se aleja 4 ticks, el precio se aleja del lado absorbido más que un RAND emparejado (entrada a mercado contra el lado absorbido, stop 4 ticks más allá del extremo entre 12 y 32, salida a 15 min).",
+   "origen": "P021 (ABI v1: +$7,261, p 0.045; POC/VAH/VAL en desarrollo +$9.4 mil en 72 operaciones, extremos y VWAP −$2.2 mil) · familia de absorción, única positiva",
+   "estado": "congelada",
+   "estrategia": "ABV",
+   "version": 1,
+   "estudio": "abv_v1",
+   "requisitos": [],
+   "decision": "decidida por el investigador; justificación en docs/investigacion/absorcion_valor_desarrollo.md; reglas en strategies/v11.json (código engine/strategies/v9.py)",
+   "notas": "1 definición base + 16 sensibilidades (17 intentos). Exploratorio: la partición por nivel se vio en P021 (mismo periodo de diseño); no es validación independiente. 132 señales posibles. Riesgo: ganancia concentrada en pocos días de tendencia, como ABS/ABI. P021 quedó en revisar (206% de la ganancia en 5 días, pierde 2024 y 2026, Topstep 23%)."
+  },
+  {
+   "id": "T8-HVF",
+   "nombre": "HVF v1: absorción en HVN poderoso del día anterior",
+   "hipotesis": "La absorción de flujo agresivo (p95 en 60 s, confirmada a 60 s) en un HVN de ayer (≥ p95 de volumen, pico a ≤ 8 puntos de POC/VAH/VAL de ayer) hace que el precio se aleje del lado absorbido más que el azar emparejado (~115 señales).",
+   "origen": "pedido de Oscar (E-HVN-FUERZA, 24/10/2026) · familia de absorción, única positiva",
+   "estado": "congelada",
+   "estrategia": "HVF",
+   "version": 1,
+   "estudio": "hvf_v1",
+   "requisitos": [],
+   "decision": "decidida por el investigador; justificación en docs/investigacion/hvn_poderoso.md; reglas en strategies/v12.json (código engine/strategies/v10.py)",
+   "notas": "1 definición base + 16 sensibilidades (17 intentos). Exploratorio: salida y confirmación vienen de P012. Riesgo: ~115 señales, cerca del mínimo; ganancia concentrada en pocos días como ABS/ABI/ABV."
+  },
+  {
+   "id": "T9-ABK",
+   "nombre": "ABK v1: absorción medida con el libro (la mejor oferta aguanta y se repone)",
+   "hipotesis": "La absorción definida como los traders de footprint (flujo agresivo ≥ p95 en 60 s contra una mejor oferta que no retrocede y se repone), sin filtro de nivel, hace que el precio se aleje del lado absorbido más que el azar emparejado (~850 señales). Distinta de ABS/ABI/ABV/HVF, que solo miran el precio.",
+   "origen": "familia de absorción (única positiva: P012, P021) · definición de ATAS/Bookmap en docs/investigacion/absorcion_libro.md",
+   "estado": "congelada",
+   "estrategia": "ABK",
+   "version": 1,
+   "estudio": "abk_v1",
+   "requisitos": [],
+   "decision": "decidida por el investigador; reglas en strategies/v13.json (código engine/strategies/v11.py)",
+   "notas": "1 definición base + 16 sensibilidades (17 intentos); la reposición 0% es la definición alternativa."
+  },
+  {
+   "id": "T10-LVN",
+   "nombre": "LVN v1: travesía de un vacío de volumen del perfil de ayer con flujo iniciador",
+   "hipotesis": "Si el precio cruza por primera vez un vacío (LVN) del perfil NY de ayer con delta agresivo ≥ 10 % a favor en los últimos 60 s, sigue hasta el borde lejano del vacío más que un RAND emparejado (~370 señales).",
+   "origen": "hueco de investigación: LVN nunca probado; familia de absorción agotada (P024 ABK no pasa)",
+   "estado": "congelada",
+   "estrategia": "LVN",
+   "version": 1,
+   "estudio": "lvn_v1",
+   "requisitos": [],
+   "decision": "decidida por el investigador; justificación en docs/investigacion/lvn.md; reglas en strategies/v14.json (código engine/strategies/v12.py)",
+   "notas": "1 definición base + 16 sensibilidades (17 intentos). Continuación por iniciativa, no rechazo. Solo se contaron señales."
+  },
+  {
+   "id": "T11-ABI2",
+   "nombre": "ABI v2: absorción en los niveles del propio día, tarde (11:30–15:30)",
+   "hipotesis": "ABI v1 (mañana) fue lo mejor de la familia de absorción (P021: +$7,261, p 0.045) y nunca se midió la tarde. Mismo detector, entradas 11:30–15:30, cierre 15:45, umbral p95 relativo a la hora anterior (el umbral de 20 sesiones da solo 2 señales en 57 sesiones). Operaciones distintas a las de P021.",
+   "origen": "P021 + parte del día nunca medida",
+   "estado": "congelada",
+   "estrategia": "ABI",
+   "version": 2,
+   "estudio": "abi_v2",
+   "requisitos": [],
+   "decision": "decidida por el investigador; reglas en strategies/v15.json (código engine/strategies/v13.py; ventana en run_test.py::RULES_WINDOW); definición en docs/investigacion/ventana_tarde.md",
+   "notas": "1 definición base + 16 sensibilidades (17 intentos). Riesgo: ~130 operaciones, cerca del mínimo de 100. Responde a T2-ABS-HOURS (tarde) sin tocar el motor: la ventana se pasa en Rules desde run_test.py."
+  },
+  {
+   "id": "T12-ABD",
+   "nombre": "ABD v1: absorción en niveles de ayer, solo días que abren dentro del valor",
+   "hipotesis": "La absorción de ABS v1 (niveles de ayer y de la noche, confirmación a 60 s, objetivo 2R, 15 min), restringida a días que abren dentro del valor de ayer y ampliada a 09:30–15:30 con umbral relativo a la hora, aleja el precio del lado absorbido más que un RAND emparejado (~115 señales).",
+   "origen": "P012/P014/P016/P017/P020: la absorción y la aceptación solo ganan en días que abren dentro del valor; ABS agotó sus 3 versiones",
+   "estado": "congelada",
+   "estrategia": "ABD",
+   "version": 1,
+   "estudio": "abd_v1",
+   "requisitos": [],
+   "decision": "decidida por el investigador; justificación en docs/investigacion/absorcion_dias_balance.md; reglas en strategies/v16.json (código engine/strategies/v14.py; ventana en run_test.py::RULES_WINDOW)",
+   "notas": "1 definición base + 16 sensibilidades (17 intentos). Exploratorio: el filtro viene de los mismos datos de diseño. Riesgo: ~115 señales, cerca del mínimo de 100."
+  },
+  {
+   "id": "T13-VBR",
+   "nombre": "VBR v1: reversión a la VWAP desde la banda de 2σ, días que abren dentro del valor",
+   "hipotesis": "En días que abren dentro del valor de ayer, cuando el precio toca VWAP ± 2σ y el delta agresivo se agota (cambia de signo y el precio se aleja 4 ticks), vuelve hacia la VWAP más que un RAND emparejado. Entrada a mercado, stop 4 ticks más allá del extremo (12–32), objetivo = distancia a la VWAP, salida a 20 min (~700 señales esperadas).",
+   "origen": "P012/P016/P017/P027: lo que gana lo hace en días de balance, pero con ~100 operaciones y Topstep bajo; se busca una idea distinta con más frecuencia",
+   "estado": "congelada",
+   "estrategia": "VBR",
+   "version": 1,
+   "estudio": "vbr_v1",
+   "requisitos": [],
+   "decision": "decidida por el investigador; definición en docs/investigacion/vwap_bandas.md; reglas en strategies/v17.json (código engine/strategies/v15.py; ventana en run_test.py::RULES_WINDOW)",
+   "notas": "1 definición base + 16 sensibilidades (17 intentos). Exploratorio: el filtro de apertura viene de los mismos datos de diseño. E-HVN-FUERZA sigue aprobada sin runner de estudios (el orquestador solo corre estrategias)."
+  },
+  {
+   "id": "T14-IMB",
+   "nombre": "IMB v1: desequilibrios diagonales apilados y reprueba de la zona",
+   "hipotesis": "Una pila de 3 o más desequilibrios diagonales (>= 3:1, >= 10 contratos) en 60 s, con el precio alejado >= 4 ticks, hace que la vuelta a la zona (límite en el borde cercano) rinda más que un RAND emparejado (~2 900 señales).",
+   "origen": "hueco de investigación: desequilibrios nunca probados; la absorción (única positiva) tiene pocas operaciones y no llega a Topstep · P028 (VBR) no pasa",
+   "estado": "congelada",
+   "estrategia": "IMB",
+   "version": 1,
+   "estudio": "imb_v1",
+   "requisitos": [],
+   "decision": "decidida por el investigador; definición en docs/investigacion/desequilibrios_apilados.md; reglas en strategies/v18.json (código engine/strategies/v16.py; ventana en run_test.py::RULES_WINDOW)",
+   "notas": "1 definición base + 16 sensibilidades (17 intentos). Sin filtro de régimen. Reprueba con límite; la continuación a mercado quedaría para IMB v2."
   }
  ]
 }

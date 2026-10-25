@@ -174,5 +174,12 @@
   "fin_utc": "2026-10-25T11:55:50+00:00",
   "test_id": "P027",
   "veredicto": "revisar"
+ },
+ "T13-VBR": {
+  "estado": "corrida",
+  "inicio_utc": "2026-10-25T12:15:01+00:00",
+  "fin_utc": "2026-10-25T12:24:45+00:00",
+  "test_id": "P028",
+  "veredicto": "no_pasa"
  }
 }

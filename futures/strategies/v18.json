@@ -1,0 +1,36 @@
+{
+ "version": 18,
+ "fecha_registro": "2026-10-25",
+ "titulo": "Tanda 17 · IMB v1 (desequilibrios diagonales apilados y repruebas de la zona)",
+ "estado": "Escrita por el investigador autónomo; sellada y congelada al publicar. Primera versión de IMB (máximo 3). Investigación: docs/investigacion/desequilibrios_apilados.md.",
+ "comun": {
+  "instrumento": "NQ (contrato del frente), 1 contrato por operación",
+  "horario": "Nueva York 10:00–15:30 ET",
+  "cierre_forzado": "cualquier posición abierta se cierra a mercado a las 15:45 ET",
+  "noticias": "no se abre de −2 a +5 min de CPI, NFP y Fed",
+  "costos": "comisión Topstep + 1 tick de deslizamiento por lado; prueba extra al doble",
+  "limites_dia": "máximo 6 operaciones por día; se detiene tras 3 pérdidas seguidas",
+  "una_posicion": "nunca más de una posición abierta por estrategia",
+  "datos": "solo periodo de diseño 2024-01-02 a 2026-04-21; el examen sellado no se abre",
+  "control": "RAND emparejado y RAND2 con las mismas salidas, sorteados en la misma ventana 09:30–15:30"
+ },
+ "estrategias": [
+  {
+   "id": "IMB",
+   "version": 1,
+   "nombre": "Desequilibrios diagonales apilados y reprueba de la zona",
+   "idea": "Una pila de desequilibrios agresivos (flujo iniciador que atravesó la liquidez pasiva) funciona como soporte o resistencia cuando el precio vuelve a ella.",
+   "contexto": "Ninguno (sin filtro de régimen). Entradas 10:00–15:30 ET.",
+   "disparador": "En una ventana móvil de 60 s (cada 5 s): 3 o más precios seguidos con desequilibrio diagonal ≥ 3:1 y ≥ 10 contratos, del mismo lado.",
+   "ubicacion": "Zona de la pila, de su precio más bajo al más alto.",
+   "confirmacion": "El precio ya se alejó ≥ 4 ticks de la zona en el sentido de la iniciativa.",
+   "entrada": "Orden límite en el borde cercano de la zona (comprador: borde alto; vendedor: borde bajo), válida 300 s.",
+   "stop": "4 ticks más allá del borde lejano de la zona; entre 12 y 32 ticks.",
+   "objetivo": "2R.",
+   "tiempo_maximo": "15 minutos (o el cierre de las 15:45).",
+   "filtros": "Reglas comunes; un disparo por lado cada 5 minutos.",
+   "motivo_cambio": "Estrategia nueva: desequilibrios nunca probados. Alta frecuencia (~2 900 señales) para atacar el problema de Topstep de las pruebas de absorción. Solo se corrió el código en 60 sesiones para ver que produce operaciones; sin ajustes."
+  }
+ ],
+ "nota": "Parámetros en futures/lab/engine/strategies/v16.py::PARAMS['IMB']; ventana en run_test.py::RULES_WINDOW."
+}

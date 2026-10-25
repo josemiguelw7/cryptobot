@@ -1,0 +1,38 @@
+{
+ "version": 9,
+ "fecha_registro": "2026-10-25",
+ "titulo": "Tanda 8 · ACC v2 (aceptación fuera de los bordes de la subasta anterior, solo días que abren dentro del valor)",
+ "estado": "Escrita por el investigador autónomo; sellada y congelada al publicar. Segunda versión de ACC (máximo 3). Investigación: docs/investigacion/aceptacion_v2.md.",
+ "comun": {
+  "instrumento": "NQ (contrato del frente), 1 contrato por operación en la v1",
+  "horario": "Nueva York 09:30–11:30 ET (los traders estudiados operan casi solo la primera hora u hora y media)",
+  "cierre_forzado": "cualquier posición abierta se cierra a mercado a las 11:45 ET",
+  "noticias": "no se abre de −2 a +5 min de CPI, NFP y Fed",
+  "costos": "comisión Topstep + 1 tick de deslizamiento por lado; prueba extra al doble",
+  "limites_dia": "máximo 6 operaciones por estrategia por día; se detiene tras 3 pérdidas seguidas",
+  "una_posicion": "nunca más de una posición abierta por estrategia",
+  "niveles_de_referencia": "del día anterior (perfil de Nueva York): VAH, VAL, máximo y mínimo; de la noche (18:00–09:30 ET): máximo y mínimo",
+  "umbrales_relativos": "ACC v2 no usa percentiles: las ventanas son fijas en segundos",
+  "datos": "solo periodo de diseño 2024-01-02 a 2026-04-21; el examen sellado no se abre",
+  "control": "RAND emparejado: mismas cantidades de operaciones por día, misma dirección al azar, misma duración y mismo horario"
+ },
+ "estrategias": [
+  {
+   "id": "ACC",
+   "version": 2,
+   "nombre": "Aceptación fuera de los bordes de la subasta anterior · solo apertura dentro del valor",
+   "idea": "Si el día abre dentro del valor de ayer y el precio sale de los bordes de la subasta anterior (valor, extremos de ayer, extremos de la noche) y los acepta con flujo agresivo a favor, el valor se desplaza y el precio continúa.",
+   "contexto": "VAH, VAL, máximo y mínimo de ayer (perfil NY) y máximo y mínimo de la noche. Solo si el primer llenado de las 09:30 está dentro de VAL–VAH de ayer.",
+   "disparador": "Primer llenado fuera del nivel viniendo de adentro durante la sesión (un nivel ya rebasado a las 09:30 no cuenta).",
+   "ubicacion": "En el nivel. Un disparo por nivel y por día; máximo 6 operaciones por día (regla común).",
+   "confirmacion": "Igual que ACC v1: 180 s seguidos sin volver más de 2 ticks adentro y delta agresivo neto de la ventana ≥ 5% del volumen a favor de la salida. No persigue si está a más de 100 ticks del nivel.",
+   "entrada": "A mercado, a favor de la salida, al cumplirse la ventana.",
+   "stop": "4 ticks adentro del nivel; entre 12 y 32 ticks.",
+   "objetivo": "Ninguno.",
+   "tiempo_maximo": "20 minutos.",
+   "filtros": "Reglas comunes más: solo días que abren dentro del valor de ayer.",
+   "motivo_cambio": "ACC v1 (P017): +$2,028, p 0.19, 97 operaciones (insuficiente), no concluyente. Dos cambios, ambos declarados: (1) niveles ampliados a extremos de ayer y de la noche para llegar a ~110 señales; (2) filtro 'abre dentro del valor', porque en P012, P016 y P017 las estrategias de nivel ganan dentro del valor y pierden fuera (ACC v1: +$4,610 dentro, −$2,582 fuera). El filtro sale de mirar esas tablas del periodo de diseño: es exploratorio y no cuenta como validación independiente."
+  }
+ ],
+ "nota": "Parámetros en futures/lab/engine/strategies/v7.py::PARAMS['ACC2']. Definición del código sin cambios respecto de v4.py::acceptance_outside salvo los dos cambios declarados."
+}

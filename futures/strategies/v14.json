@@ -1,0 +1,36 @@
+{
+ "version": 14,
+ "fecha_registro": "2026-10-25",
+ "titulo": "Tanda 13 · LVN v1 (travesía de un vacío de volumen del perfil de ayer)",
+ "estado": "Escrita por el investigador autónomo; sellada y congelada al publicar. Estrategia nueva con id propio. Investigación: docs/investigacion/lvn.md.",
+ "comun": {
+  "instrumento": "NQ (contrato del frente), 1 contrato por operación",
+  "horario": "Nueva York 09:30–11:30 ET",
+  "cierre_forzado": "cualquier posición abierta se cierra a mercado a las 11:45 ET",
+  "noticias": "no se abre de −2 a +5 min de CPI, NFP y Fed",
+  "costos": "comisión Topstep + 1 tick de deslizamiento por lado; prueba extra al doble",
+  "limites_dia": "máximo 6 operaciones por día; se detiene tras 3 pérdidas seguidas",
+  "una_posicion": "nunca más de una posición abierta por estrategia",
+  "datos": "solo periodo de diseño 2024-01-02 a 2026-04-21; el examen sellado no se abre",
+  "control": "RAND emparejado y RAND2 con las mismas salidas"
+ },
+ "estrategias": [
+  {
+   "id": "LVN",
+   "version": 1,
+   "nombre": "Travesía de un vacío de volumen (LVN) del perfil de ayer con flujo iniciador",
+   "idea": "Donde ayer casi no se operó no hubo aceptación; si el precio entra con flujo agresivo a favor, cruza rápido hasta el otro borde del vacío.",
+   "contexto": "Perfil NY del día anterior en cubos de 8 ticks, sin 16 ticks en cada punta; cubo fino = volumen ≤ percentil 20; vacío = racha de ≥ 16 ticks.",
+   "disparador": "Primer cruce del vacío: la celda de 10 s anterior cerró fuera y la actual entra ≥ 2 ticks adentro.",
+   "ubicacion": "El vacío mismo.",
+   "confirmacion": "Delta agresivo de los últimos 60 s a favor del cruce ≥ 10 % del volumen de esos 60 s (se decide en el primer cruce, una vez por vacío).",
+   "entrada": "A mercado, en la dirección del cruce.",
+   "stop": "4 ticks detrás del borde de entrada; entre 8 y 24 ticks.",
+   "objetivo": "Borde lejano del vacío; entre 12 y 40 ticks (si hay menos de 12 no se opera).",
+   "tiempo_maximo": "15 minutos.",
+   "filtros": "Reglas comunes.",
+   "motivo_cambio": "Estrategia nueva (id propio): primera prueba de vacíos de volumen (LVN); es continuación por iniciativa, no rechazo ni absorción. Solo se contaron señales antes de fijarla."
+  }
+ ],
+ "nota": "Parámetros en futures/lab/engine/strategies/v12.py::PARAMS['LVN']."
+}

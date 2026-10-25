@@ -1,0 +1,37 @@
+{
+ "version": 11,
+ "fecha_registro": "2026-10-25",
+ "titulo": "Tanda 10 · ABV v1 (absorción en el valor en desarrollo del día)",
+ "estado": "Escrita por el investigador autónomo; sellada y congelada al publicar. Estrategia nueva con id propio (ABS agotó sus 3 versiones; ABI v1 queda en su v1). Investigación: docs/investigacion/absorcion_valor_desarrollo.md.",
+ "comun": {
+  "instrumento": "NQ (contrato del frente), 1 contrato por operación",
+  "horario": "Nueva York 09:30–11:30 ET; la primera señal posible es a los 10 minutos de la apertura",
+  "cierre_forzado": "cualquier posición abierta se cierra a mercado a las 11:45 ET",
+  "noticias": "no se abre de −2 a +5 min de CPI, NFP y Fed",
+  "costos": "comisión Topstep + 1 tick de deslizamiento por lado; prueba extra al doble",
+  "limites_dia": "máximo 6 operaciones por día; se detiene tras 3 pérdidas seguidas",
+  "una_posicion": "nunca más de una posición abierta por estrategia",
+  "umbrales_relativos": "p95 de volumen agresivo en 60 s sobre las 20 sesiones anteriores (como ABS v1)",
+  "datos": "solo periodo de diseño 2024-01-02 a 2026-04-21; el examen sellado no se abre",
+  "control": "RAND emparejado y RAND2 con las mismas salidas"
+ },
+ "estrategias": [
+  {
+   "id": "ABV",
+   "version": 1,
+   "nombre": "Absorción en el valor en desarrollo del día (POC, VAH, VAL)",
+   "idea": "Cuando el flujo agresivo de un lado no mueve el precio justo en el centro (POC) o en un borde (VAH/VAL) del área de valor que el propio día va construyendo, el lado pasivo absorbió y el precio se aleja del lado absorbido (rotación dentro del valor).",
+   "contexto": "POC, VAH y VAL (70% del volumen) del perfil de la sesión en desarrollo, calculados solo con operaciones anteriores a la ventana.",
+   "disparador": "≥ p95 de volumen agresivo de un lado en 60 s sin que el precio avance más de 2 ticks.",
+   "ubicacion": "Extremo de la ventana a ≤ 8 ticks (2 puntos) del nivel. VAH: solo compra absorbida. VAL: solo venta absorbida. POC: ambos lados.",
+   "confirmacion": "En los 60 s siguientes el delta de la ventana cambia de signo y el precio se aleja 4 ticks del extremo.",
+   "entrada": "A mercado, contra el lado absorbido, al confirmar.",
+   "stop": "4 ticks más allá del extremo; entre 12 y 32 ticks.",
+   "objetivo": "Ninguno.",
+   "tiempo_maximo": "15 minutos.",
+   "filtros": "Reglas comunes; un disparo por nivel cada 5 minutos; nada antes de los 10 minutos de la apertura.",
+   "motivo_cambio": "Estrategia nueva (id propio). En P021 (ABI v1) las operaciones en POC/VAH/VAL en desarrollo sumaron +$9.4 mil en 72 operaciones y las de máximo/mínimo/VWAP −$2.2 mil en 48; esa partición se vio en el periodo de diseño, así que es exploratoria y el DSR la penaliza con todos los intentos. Para llegar a 100 operaciones se ensanchó la tolerancia de cercanía (4 a 8 ticks) y se acortó el enfriamiento (10 a 5 min) mirando solo el conteo de señales (132 en 576 sesiones), nunca ganancias."
+  }
+ ],
+ "nota": "Parámetros en futures/lab/engine/strategies/v9.py::PARAMS['ABV']."
+}
