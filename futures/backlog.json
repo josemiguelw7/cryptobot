@@ -568,13 +568,14 @@
    "nombre": "IMB v1: desequilibrios diagonales apilados y reprueba de la zona",
    "hipotesis": "Una pila de 3 o más desequilibrios diagonales (>= 3:1, >= 10 contratos) en 60 s, con el precio alejado >= 4 ticks, hace que la vuelta a la zona (límite en el borde cercano) rinda más que un RAND emparejado (~2 900 señales).",
    "origen": "hueco de investigación: desequilibrios nunca probados; la absorción (única positiva) tiene pocas operaciones y no llega a Topstep · P028 (VBR) no pasa",
-   "estado": "congelada",
+   "estado": "corriendo",
    "estrategia": "IMB",
    "version": 1,
    "estudio": "imb_v1",
    "requisitos": [],
    "decision": "decidida por el investigador; definición en docs/investigacion/desequilibrios_apilados.md; reglas en strategies/v18.json (código engine/strategies/v16.py; ventana en run_test.py::RULES_WINDOW)",
-   "notas": "1 definición base + 16 sensibilidades (17 intentos). Sin filtro de régimen. Reprueba con límite; la continuación a mercado quedaría para IMB v2."
+   "notas": "1 definición base + 16 sensibilidades (17 intentos). Sin filtro de régimen. Reprueba con límite; la continuación a mercado quedaría para IMB v2.",
+   "inicio_utc": "2026-10-25T12:45:01+00:00"
   }
  ]
 }

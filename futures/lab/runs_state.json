@@ -181,5 +181,9 @@
   "fin_utc": "2026-10-25T12:24:45+00:00",
   "test_id": "P028",
   "veredicto": "no_pasa"
+ },
+ "T14-IMB": {
+  "estado": "corriendo",
+  "inicio_utc": "2026-10-25T12:45:01+00:00"
  }
 }
