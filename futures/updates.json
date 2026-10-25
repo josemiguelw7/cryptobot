@@ -114,6 +114,13 @@
       "test_id": "P031"
     },
     {
+      "date": "2026-10-25",
+      "kind": "prueba",
+      "title": "Prueba P032 · ABT v1 · no pasa",
+      "body": "ABT v1: 128 operaciones, ganancia neta $-3,589 con costos base, p contra RAND 0.7143, estrés $-4,079, Topstep 0.0% de las cuentas (RAND 0.3%). Veredicto: no pasa. Causa: pierde con costos base; no gana a RAND (p=0.7143); no gana a RAND2 con las mismas salidas (p=0.7093); DSR 0.0 < 0.95 con 927 intentos; muere con costos al doble; pierde en 2024, 2025; pasa Topstep solo 0.0%.",
+      "test_id": "P032"
+    },
+    {
       "date": "2026-10-24",
       "kind": "avance",
       "title": "Comité con PIN: Jose Miguel y Oscar votan desde la página",
