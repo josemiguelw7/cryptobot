@@ -1,6 +1,6 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-25 22:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-25 22:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
@@ -97,6 +97,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 | T19-DVG | DVG v1: divergencia de delta acumulado en el extremo del día | **corrida** → P034 | P033 (ABQ v1) no pasa: la absorción depende de niveles y de días de balance y no gana frecuencia; falta una señal de flujo agresivo independiente del nivel |  |
 | T20-FAF | FAF v1: subasta fallida en los extremos de ayer y de la noche | **corrida** → P035 | P034 (DVG v1) no pasa: el agotamiento sin nivel no sirve; falta probar el intento fallido en los niveles donde ABU sí tiene ventaja |  |
 | T21-ABF | ABF v1: absorción fallida, seguir la ruptura del extremo absorbido | **corrida** → P036 | P035 (FAF v1) no pasa y los reversos sin nivel pierden con p≈1; ABU pierde el 60% con el stop: el fracaso de la absorción es la señal |  |
+| T22-ABR | ABR v1: absorción de ABU con entrada pasiva en la reprueba del extremo | **congelada** | P031/P030 (ABU: única ventaja; placebo desplazado gana más = el valor está cerca del extremo) · P036 (ABF) no pasa: la reversión es el lado correcto |  |
 
 ## Estudios y cuenta de intentos
 
@@ -133,6 +134,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - **dvg_v1**: DVG v1 (divergencia de delta acumulado en el extremo del día: nuevo máximo de la sesión con menos delta acumulado que el máximo anterior, ma · declarados 13, usados 13
 - **faf_v1**: FAF v1 (subasta fallida: una celda de 10 s cruza VAH/máximo de ayer/máximo de la noche (o VAL/mínimos) ≥ 2 ticks con flujo agresivo del lado · declarados 17, usados 16
 - **abf_v1**: ABF v1 (absorción fallida: el detector de absorción de ABU v1 en niveles de ayer, de la noche y POC/VAH/VAL del día, confirmado a 60 s; si e · declarados 17, usados 17
+- **abr_v1**: ABR v1 (absorción con reprueba: el detector de ABU v1 en niveles de ayer, de la noche y POC/VAH/VAL del día, solo días que abren dentro del  · declarados 17, usados 0
 
 ## Mapa de señales (resumen)
 
