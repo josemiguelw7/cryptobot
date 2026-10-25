@@ -7,6 +7,13 @@ import sys
 from . import registry, config
 
 STUDIES = {
+    "faf_v1": {
+        "hypothesis": "FAF v1 (subasta fallida: una celda de 10 s cruza VAH/máximo de ayer/máximo de la noche (o VAL/mínimos) ≥ 2 ticks con flujo agresivo del lado de la salida en 60 s ≥ 0.5 × p95, y en 120 s el precio vuelve al nivel con delta de 30 s contrario; entrada a mercado contra la salida, stop 4 ticks más allá del extremo (12–32), objetivo 2R, salida a 15 min, 1 contrato, 09:30–15:30, un intento por nivel y día): el precio se aleja del lado que falló más de lo que lo hace un RAND emparejado y RAND2 sorteados en la misma ventana; gana después de costos, es positiva en 2024, 2025 y 2026 y tiene al menos 100 operaciones.",
+        "n_declared": 1 + 16,
+        "kill": ["ganancia neta <= 0 con costos base", "p vs RAND > 0.20", "pierde en 2 de 3 años", "rompe MLL en > 50% de arranques"],
+        "strategies": ["FAF v1"],
+        "notes": "1 prueba + 16 de sensibilidad (penetración 0/1/3/4 ticks, ventana de fallo 60/90/150/180 s, stop máximo 24/28/36/40, objetivo 1/1.5/2.5/3 R). Una sola definición (docs/investigacion/subasta_fallida.md). Filtro 'abre dentro del valor' descartado por conteo de señales (~0.12/día) y no por ganancias. Humo: solo señales en 40 días. Exploratoria: no es evidencia independiente. Pregunta única: ¿el intento fallido de salir de un nivel clave con flujo agresivo aleja el precio más que el azar emparejado?",
+    },
     "dvg_v1": {
         "hypothesis": "DVG v1 (divergencia de delta acumulado en el extremo del día: nuevo máximo de la sesión con menos delta acumulado que el máximo anterior, marcado hace ≥ 2 min y con retroceso intermedio ≥ 10 ticks, y espejo para mínimos; confirmación: el precio se aleja 3 ticks del extremo en 30 s; entrada a mercado en contra, stop 3 ticks más allá (8–24), objetivo 2R, salida a 5 min, hasta 8 operaciones por día, 09:30–15:30, no antes de 10 min de sesión, 1 contrato): el precio se aleja del extremo agotado más de lo que lo hace un RAND emparejado y RAND2 sorteados en la misma ventana; gana después de costos, es positiva en 2024, 2025 y 2026 y tiene al menos 100 operaciones.",
         "n_declared": 1 + 12,

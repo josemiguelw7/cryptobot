@@ -1,0 +1,35 @@
+{
+ "version": 24,
+ "fecha_registro": "2026-10-25",
+ "titulo": "Tanda 23 · FAF v1 (subasta fallida en los extremos de ayer y de la noche)",
+ "estado": "Escrita por el investigador autónomo; sellada y congelada al publicar. Primera versión de FAF (máximo 3). Investigación: docs/investigacion/subasta_fallida.md.",
+ "comun": {
+  "instrumento": "NQ (contrato del frente), 1 contrato por operación",
+  "horario": "Nueva York 09:30–15:30 ET",
+  "cierre_forzado": "cualquier posición abierta se cierra a mercado a las 15:45 ET",
+  "noticias": "no se abre de −2 a +5 min de CPI, NFP y Fed",
+  "costos": "comisión Topstep + 1 tick de deslizamiento por lado; prueba extra al doble",
+  "limites_dia": "máximo 6 operaciones por día; se detiene tras 3 pérdidas seguidas",
+  "una_posicion": "nunca más de una posición abierta por estrategia",
+  "datos": "solo periodo de diseño 2024-01-02 a 2026-04-21; el examen sellado no se abre",
+  "control": "RAND emparejado y RAND2 con las mismas salidas, sorteados en la misma ventana 09:30–15:30"
+ },
+ "estrategias": [
+  {
+   "id": "FAF",
+   "version": 1,
+   "nombre": "Subasta fallida en extremos de ayer y de la noche",
+   "idea": "Un intento de salir de un nivel clave con iniciativa que no se sostiene y regresa con delta contrario es una subasta fallida; el precio se aleja del lado que falló.",
+   "contexto": "Niveles superiores: VAH, máximo de ayer, máximo de la noche; inferiores: VAL, mínimo de ayer, mínimo de la noche. Todos los días. Un intento por nivel y día.",
+   "disparador": "Una celda de 10 s cruza el nivel ≥ 2 ticks con flujo agresivo del mismo lado en 60 s ≥ 0.5 × p95 de las 20 sesiones previas.",
+   "confirmacion": "En 120 s el precio vuelve al nivel (cierre de celda en o dentro) y el delta de los últimos 30 s es contrario a la salida.",
+   "entrada": "A mercado, contra la salida fallida.",
+   "stop": "4 ticks más allá del extremo de la excursión; entre 12 y 32 ticks.",
+   "objetivo": "2R.",
+   "tiempo_maximo": "15 minutos (o el cierre de las 15:45).",
+   "filtros": "Reglas comunes.",
+   "motivo_cambio": "Estrategia nueva: DVG (sin nivel) y ABQ (absorción rápida) no pasaron; esta usa el intento fallido de salir del nivel, no estancamiento ni divergencia. Filtro de apertura dentro del valor descartado por conteo de señales (<100 operaciones), nunca por ganancias."
+  }
+ ],
+ "nota": "Parámetros en futures/lab/engine/strategies/v22.py::PARAMS['FAF']; ventana en run_test.py::RULES_WINDOW."
+}
