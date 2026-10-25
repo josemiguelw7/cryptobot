@@ -1,5 +1,5 @@
 {
- "actualizado_utc": "2026-10-25T19:03:32Z",
+ "actualizado_utc": "2026-10-25T20:03:50Z",
  "porcentaje": 40,
  "criterios": {
   "a_ganancia_neta_positiva": {
@@ -28,8 +28,8 @@
   "test_id": "P031",
   "por_que": "+$11.9k, p 0.001 contra RAND, positiva los 3 años. Pero 'revisar' (placebo sospechoso), DSR 0, Topstep 41.2% y 214 cuentas rompen el MLL. 40% es un techo generoso: sin revisión de código."
  },
- "ultima_accion": "Leí P034 (DVG v1): no pasa, −$57k, p 0.998; el agotamiento de delta sin nivel pierde. Dejé congelada FAF v1 (T20-FAF): subasta fallida en VAH/VAL y extremos de ayer y de la noche, con ráfaga de flujo agresivo y regreso en 120 s con delta contrario. Reglas en strategies/v24.json, código engine/strategies/v22.py, estudio faf_v1 (17 intentos), investigación en docs/investigacion/subasta_fallida.md. Humo: ~19 señales en 40 días.",
- "siguiente_idea": "Si FAF v1 no gana, la absorción de ABU sigue siendo la única ventaja: probar overnight/Londres si un humano habilita sesiones completas en rand.py/run_test.py. E-HVN-FUERZA sigue sin runner de estudios.",
+ "ultima_accion": "Leí P035 (FAF v1): no pasa, −$50k, p 1.0. Descubrí que 5 sesiones (2024-02-02, 2024-02-22, 2025-04-07, 2026-01-29, 2026-03-06) tienen la cotización congelada y inflan las pérdidas de FAF, DVG, SMT y VBR; sin esas operaciones siguen negativas. Dejé congelada ABF v1 (T21-ABF): seguir la ruptura cuando una absorción de ABU falla, con guarda de cotización. Reglas en strategies/v25.json, código engine/strategies/v23.py, estudio abf_v1 (17 intentos), docs/investigacion/absorcion_fallida.md.",
+ "siguiente_idea": "Si ABF v1 no gana, la absorción de ABU sigue siendo la única ventaja. Pedir a un humano revisar la cotización anómala en sim.py (5 sesiones). E-HVN-FUERZA sigue sin runner de estudios.",
  "historial": [
   "2026-10-25T02:45:53Z · Primera corrida del investigador: ABS v3 congelada (entrada temprana). Mejor prueba P012: 20%.",
   "2026-10-25T03:33:46Z · Segunda corrida: ACC v1 congelada (aceptación VAH/VAL). P016 (ABS v3) no mejora. Mejor prueba P012: 20%.",
@@ -40,6 +40,7 @@
   "2026-10-25T15:33:02Z · Corrida 15: ABT v1 congelada (absorción a favor de la tendencia, días fuera del valor). P031 (ABU v2): +$11.9k, p 0.001, Topstep 41.2%, 214 cuentas rompen MLL. Mejor prueba P031: 40% (a y d).",
   "2026-10-25T17:03:42Z · Corrida 16: ABQ v1 congelada (absorción rápida, 30 s). P032 (ABT v1) no pasa (−$3.6k, p 0.71). Mejor prueba P031: 40% (a y d).",
   "2026-10-25T18:02:17Z · Corrida 17: DVG v1 congelada (divergencia de delta en el extremo del día). P033 (ABQ v1) no pasa (−$2.0k, p 0.24). Mejor prueba P031: 40% (a y d).",
-  "2026-10-25T19:03:32Z · Corrida 18: FAF v1 congelada (subasta fallida en niveles de ayer y de la noche). P034 (DVG v1) no pasa (−$57k, p 0.998). Mejor prueba P031: 40% (a y d)."
+  "2026-10-25T19:03:32Z · Corrida 18: FAF v1 congelada (subasta fallida en niveles de ayer y de la noche). P034 (DVG v1) no pasa (−$57k, p 0.998). Mejor prueba P031: 40% (a y d).",
+  "2026-10-25T20:03:50Z · Corrida 19: ABF v1 congelada (absorción fallida). P035 (FAF v1) no pasa (−$50k, p 1.0). Hallazgo: 5 sesiones con cotización congelada. Mejor prueba P031: 40% (a y d)."
  ]
 }

@@ -7,6 +7,13 @@ import sys
 from . import registry, config
 
 STUDIES = {
+    "abf_v1": {
+        "hypothesis": "ABF v1 (absorción fallida: el detector de absorción de ABU v1 en niveles de ayer, de la noche y POC/VAH/VAL del día, confirmado a 60 s; si en 300 s el precio rompe el extremo absorbido >= 4 ticks con delta de 30 s a favor del lado que agredía, entrada a mercado EN LA DIRECCIÓN de la ruptura, stop 16 ticks, objetivo 2R, salida a 15 min, 1 contrato, 09:30–15:30, todos los días, con guarda de cotización congelada): el precio sigue la ruptura más de lo que lo hace un RAND emparejado y RAND2 sorteados en la misma ventana; gana después de costos, es positiva en 2024, 2025 y 2026 y tiene al menos 100 operaciones.",
+        "n_declared": 1 + 16,
+        "kill": ["ganancia neta <= 0 con costos base", "p vs RAND > 0.20", "pierde en 2 de 3 años", "rompe MLL en > 50% de arranques"],
+        "strategies": ["ABF v1"],
+        "notes": "1 prueba + 16 de sensibilidad (ruptura 2/3/5/6 ticks, ventana de fallo 180/240/360/420 s, stop 8/12/20/24, objetivo 1/1.5/2.5/3 R). Una sola definición (docs/investigacion/absorcion_fallida.md). Humo: solo señales (9 en 20 sesiones). Exploratoria: sale de ver que ABU pierde el 60% con el stop y que los reversos sin nivel pierden con p~1; NO es evidencia independiente. Pregunta única: ¿una absorción que falla en un nivel produce continuación?",
+    },
     "faf_v1": {
         "hypothesis": "FAF v1 (subasta fallida: una celda de 10 s cruza VAH/máximo de ayer/máximo de la noche (o VAL/mínimos) ≥ 2 ticks con flujo agresivo del lado de la salida en 60 s ≥ 0.5 × p95, y en 120 s el precio vuelve al nivel con delta de 30 s contrario; entrada a mercado contra la salida, stop 4 ticks más allá del extremo (12–32), objetivo 2R, salida a 15 min, 1 contrato, 09:30–15:30, un intento por nivel y día): el precio se aleja del lado que falló más de lo que lo hace un RAND emparejado y RAND2 sorteados en la misma ventana; gana después de costos, es positiva en 2024, 2025 y 2026 y tiene al menos 100 operaciones.",
         "n_declared": 1 + 16,

@@ -1,0 +1,35 @@
+{
+ "version": 25,
+ "fecha_registro": "2026-10-25",
+ "titulo": "Tanda 24 · ABF v1 (absorción fallida: seguir la ruptura del extremo absorbido)",
+ "estado": "Escrita por el investigador autónomo; sellada y congelada al publicar. Primera versión de ABF (máximo 3). Investigación: docs/investigacion/absorcion_fallida.md.",
+ "comun": {
+  "instrumento": "NQ (contrato del frente), 1 contrato por operación",
+  "horario": "Nueva York 09:30–15:30 ET",
+  "cierre_forzado": "cualquier posición abierta se cierra a mercado a las 15:45 ET",
+  "noticias": "no se abre de −2 a +5 min de CPI, NFP y Fed",
+  "costos": "comisión Topstep + 1 tick de deslizamiento por lado; prueba extra al doble",
+  "limites_dia": "máximo 6 operaciones por día; se detiene tras 3 pérdidas seguidas",
+  "una_posicion": "nunca más de una posición abierta por estrategia",
+  "datos": "solo periodo de diseño 2024-01-02 a 2026-04-21; el examen sellado no se abre",
+  "control": "RAND emparejado y RAND2 con las mismas salidas, sorteados en la misma ventana 09:30–15:30",
+  "guarda_datos": "no se entra si el mid de la cotización antes de la operación está a más de 20 ticks del último precio"
+ },
+ "estrategias": [
+  {
+   "id": "ABF",
+   "version": 1,
+   "nombre": "Absorción fallida",
+   "idea": "Cuando una absorción en un nivel falla y el precio rompe el extremo con el delta a favor, los pasivos quedaron atrapados y el movimiento continúa.",
+   "contexto": "Niveles de ABU v1: ayer, noche, POC/VAH/VAL del día. Todos los días.",
+   "disparador": "Absorción de ABU v1 confirmada a 60 s; luego, en 300 s, una celda de 10 s rompe el extremo absorbido ≥ 4 ticks con delta de los últimos 30 s a favor del lado que agredía.",
+   "entrada": "A mercado, en la dirección de la ruptura, al cierre de la celda.",
+   "stop": "16 ticks.",
+   "objetivo": "2R (32 ticks).",
+   "tiempo_maximo": "15 minutos (o el cierre de las 15:45).",
+   "filtros": "Reglas comunes y guarda de cotización.",
+   "motivo_cambio": "Estrategia nueva: ABU opera la absorción; ABF opera su fracaso. Reversos sin nivel (DVG, FAF, VBR) perdieron con p≈1."
+  }
+ ],
+ "nota": "Parámetros en futures/lab/engine/strategies/v23.py::PARAMS['ABF']; ventana en run_test.py::RULES_WINDOW."
+}
