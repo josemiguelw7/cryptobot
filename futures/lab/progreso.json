@@ -1,22 +1,22 @@
 {
- "actualizado_utc": "2026-10-25T13:33:04Z",
- "porcentaje": 20,
+ "actualizado_utc": "2026-10-25T14:33:56Z",
+ "porcentaje": 40,
  "criterios": {
   "a_ganancia_neta_positiva": {
    "cumple": true,
-   "dato": "P012 (ABS v2): +$7,874; P027 (ABD v1): +$5,720 con costos base"
+   "dato": "P030 (ABU v1): +$5,956 con costos y slippage base, 181 operaciones"
   },
   "b_gana_a_RAND_con_todos_los_intentos": {
    "cumple": false,
-   "dato": "P027 p 0.001 contra RAND pero DSR 0.001 < 0.95 con 842 intentos; P012 DSR 0.0 con 601"
+   "dato": "P030 p 0.001 contra RAND, pero DSR 0.0 < 0.95 con 893 intentos"
   },
   "c_topstep_mas_de_50": {
    "cumple": false,
-   "dato": "Mejor: 41.4% (P012); P027 0.0% (111 operaciones, muy pocas)"
+   "dato": "P030: 9.9% (0 de 517 cuentas rompen el MLL; 466 sin resolver por lentitud). Mejor: 43.1% (P012)"
   },
   "d_positivo_2024_2025_2026": {
-   "cumple": false,
-   "dato": "pierde en 2026 (P012)"
+   "cumple": true,
+   "dato": "P030: 2024 +$2,358 · 2025 +$3,277 · 2026 +$321 (solo 13 operaciones en 2026). Corrijo la nota anterior: P027 también era positiva los 3 años"
   },
   "e_sellado": {
    "cumple": false,
@@ -24,17 +24,18 @@
   }
  },
  "mejor_candidata": {
-  "id": "ABS v2",
-  "test_id": "P012",
-  "por_que": "Única familia con ganancia neta positiva y p bajo contra RAND tras el motor 1.1. Aún falla DSR, Topstep (41%) y 2026; su prueba tiene placebo sospechoso (revisar)."
+  "id": "ABU v1",
+  "test_id": "P030",
+  "por_que": "Gana neto, p 0.001 contra RAND y es positiva los 3 años, sin romper ninguna cuenta Topstep. Pero está en 'revisar' (placebo sospechoso), el DSR es 0 y Topstep solo 9.9% por lentitud. 40% es un techo generoso: la prueba aún no tiene revisión de código."
  },
- "ultima_accion": "Dejé congelada ABU v1 (T15-ABU): absorción unificada (niveles de ayer + POC/VAH/VAL del día) solo en días que abren dentro del valor. Investigación en docs/investigacion/absorcion_unificada.md, reglas en strategies/v19.json, estudio abu_v1 con 17 intentos. En 58 sesiones da ~2× las señales de ABD. Restauré backlog.json desde HEAD (la copia local tenía estados viejos y habría repetido pruebas ya corridas).",
- "siguiente_idea": "Si ABU v1 no llega a Topstep ≥ 50%, la absorción con 1 contrato está agotada en frecuencia: probar un régimen distinto (overnight/Londres, nunca medido) o dejar de buscar. IMB v1 (P029) no tiene ventaja bruta (aciertos 32.8% con 2R): IMB v2 no se justifica. E-HVN-FUERZA sigue sin runner de estudios.",
+ "ultima_accion": "Dejé congelada ABU v2 (T16-ABU2): las mismas señales de ABU v1 con 2 contratos. Reglas en strategies/v20.json, código engine/strategies/v18.py, estudio abu_v2 (17 intentos), investigación en docs/investigacion/tamano_posicion.md. Humo en 70 sesiones: mismas 23 operaciones y el doble de dinero. Overnight/Londres no se puede probar: run_test y rand.py solo cargan Nueva York y rand.py no se puede tocar.",
+ "siguiente_idea": "Si ABU v2 pasa Topstep ≥ 50% sin romper el MLL, el cuello era el tamaño: falta la revisión del placebo de P030 y el DSR (893+ intentos). Si no, la absorción en NY está agotada con 1–2 contratos; lo siguiente es overnight/Londres, que exige que un humano permita cargar sesiones completas en rand.py/run_test.py. E-HVN-FUERZA sigue sin runner de estudios.",
  "historial": [
   "2026-10-25T02:45:53Z · Primera corrida del investigador: ABS v3 congelada (entrada temprana). Mejor prueba P012: 20%.",
   "2026-10-25T03:33:46Z · Segunda corrida: ACC v1 congelada (aceptación VAH/VAL). P016 (ABS v3) no mejora. Mejor prueba P012: 20%.",
   "2026-10-25T12:02:51Z · Corrida 11: VBR v1 congelada (bandas de VWAP). P027 (ABD v1) quedó en 'revisar', +$5,720 pero Topstep 0%. Mejor prueba P012: 20%.",
   "2026-10-25T12:33:19Z · Corrida 12: IMB v1 congelada (desequilibrios apilados). P028 (VBR v1) no pasa (−$33.7k). Clon reparado. Mejor prueba P012: 20%.",
-  "2026-10-25T13:33:04Z · Corrida 13: ABU v1 congelada (absorción unificada). P029 (IMB v1) no pasa (−$23.8k, 0 caminos CPCV positivos). Mejor prueba P012: 20%."
+  "2026-10-25T13:33:04Z · Corrida 13: ABU v1 congelada (absorción unificada). P029 (IMB v1) no pasa (−$23.8k, 0 caminos CPCV positivos). Mejor prueba P012: 20%.",
+  "2026-10-25T14:33:56Z · Corrida 14: ABU v2 congelada (2 contratos). P030 (ABU v1): +$5,956, p 0.001, positiva 3 años, Topstep 9.9%, 'revisar'. Mejor prueba P030: 40% (a y d)."
  ]
 }

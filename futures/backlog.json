@@ -593,6 +593,19 @@
    "decision": "decidida por el investigador; justificación en docs/investigacion/absorcion_unificada.md; reglas en strategies/v19.json (código engine/strategies/v17.py; ventana en run_test.py::RULES_WINDOW)",
    "notas": "1 definición base + 16 sensibilidades (17 intentos). Exploratoria: la combinación sale de ver resultados de diseño. Riesgo: solapamiento con ABD, DSR penalizado.",
    "inicio_utc": "2026-10-25T13:45:01+00:00"
+  },
+  {
+   "id": "T16-ABU2",
+   "nombre": "ABU v2: las señales de ABU v1 con 2 contratos (tamaño fijado por el límite diario de Topstep)",
+   "hipotesis": "Con las mismas señales de ABU v1 (P030: +$5,956, 0 de 517 cuentas rompen el MLL, Topstep 9.9% por lentitud), 2 contratos duplican la ganancia por día y llevan el Topstep por encima del 50% sin romper el MLL en más del 50% de los arranques, conservando la ventaja contra RAND (~180 operaciones).",
+   "origen": "P030 (ABU v1): el problema de Topstep es lentitud, no pérdidas · overnight/Londres no se puede probar sin cambiar rand.py",
+   "estado": "congelada",
+   "estrategia": "ABU",
+   "version": 2,
+   "estudio": "abu_v2",
+   "requisitos": [],
+   "decision": "decidida por el investigador; justificación en docs/investigacion/tamano_posicion.md; reglas en strategies/v20.json (código engine/strategies/v18.py, reutiliza v17.py; contratos y ventana en run_test.py::RULES_WINDOW)",
+   "notas": "1 definición base + 16 sensibilidades (17 intentos). Mismas señales que ABU v1: no es evidencia nueva de ventaja ni validación independiente. Tamaño 2 fijado por regla (DLL), no por resultados. El campo 'cinco_contratos' del informe queda en 10 contratos: ignorarlo."
   }
  ]
 }

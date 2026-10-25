@@ -7,6 +7,13 @@ import sys
 from . import registry, config
 
 STUDIES = {
+    "abu_v2": {
+        "hypothesis": "ABU v2 (las mismas señales de ABU v1 —absorción de flujo agresivo en niveles de ayer y de la noche y en POC/VAH/VAL del día, solo días que abren dentro del valor de ayer, stop 12–32, objetivo 2R, salida a 15 min— con 2 contratos por operación): conserva la ventaja contra RAND y RAND2 sorteados en la misma ventana y con el mismo tamaño; gana después de costos, es positiva en 2024, 2025 y 2026, tiene al menos 100 operaciones y pasa Topstep en más del 50% de los arranques sin romper el MLL en más del 50%.",
+        "n_declared": 1 + 16,
+        "kill": ["ganancia neta <= 0 con costos base", "p vs RAND > 0.20", "pierde en 2 de 3 años", "rompe MLL en > 50% de arranques"],
+        "strategies": ["ABU v2"],
+        "notes": "1 prueba + 16 de sensibilidad de señal (las mismas de ABU v1: cercanía 2/3/5/6 ticks, confirmación 40/50/70/80 s, percentil relativo 86/88/92/94, objetivo 1/1.5/2.5/3 R), todas con 2 contratos. El tamaño (2) se fijó por el límite diario de Topstep (3 pérdidas al stop máximo ≈ $1,000), no por resultados; no se probó otro tamaño como candidata. NO es evidencia nueva de ventaja ni validación independiente: mismas señales y mismos datos de diseño que P030. Pregunta única: ¿el cuello de Topstep (9.9%, 0 MLL rotos) era el tamaño? Ver docs/investigacion/tamano_posicion.md.",
+    },
     "abu_v1": {
         "hypothesis": "ABU v1 (absorción de flujo agresivo en los niveles de ayer y de la noche y en POC/VAH/VAL del perfil en desarrollo, solo en días que abren dentro del valor de ayer, entradas 09:30–15:30; detector, umbral relativo, confirmación a 60 s, stop 12–32, objetivo 2R y salida a 15 min de ABD v1): el precio se aleja del lado absorbido más de lo que lo hace un RAND emparejado y RAND2 sorteados en la misma ventana; la estrategia gana después de costos, es positiva en 2024, 2025 y 2026, tiene al menos 100 operaciones y pasa Topstep.",
         "n_declared": 1 + 16,
