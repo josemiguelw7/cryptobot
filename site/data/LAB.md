@@ -1,6 +1,6 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-25 15:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-25 16:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
@@ -87,7 +87,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 | T14-IMB | IMB v1: desequilibrios diagonales apilados y reprueba de la zona | **corrida** → P029 | hueco de investigación: desequilibrios nunca probados; la absorción (única positiva) tiene pocas operaciones y no llega a Topstep · P028 (VBR) no pasa |  |
 | T15-ABU | ABU v1: absorción unificada (niveles de ayer + valor en desarrollo), solo días que abren dentro del valor | **corrida** → P030 | P027 (ABD v1) + P021/P022 por régimen · P029 (IMB v1) no pasa: la pila de desequilibrios no tiene ventaja bruta |  |
 | T16-ABU2 | ABU v2: las señales de ABU v1 con 2 contratos (tamaño fijado por el límite diario de Topstep) | **corrida** → P031 | P030 (ABU v1): el problema de Topstep es lentitud, no pérdidas · overnight/Londres no se puede probar sin cambiar rand.py |  |
-| T17-ABT | ABT v1: absorción a favor de la tendencia, días que abren fuera del valor de ayer | **congelada** | P031 (ABU v2): más tamaño no resuelve Topstep (41.2%, 214 cuentas rompen MLL); la frecuencia debe venir de días que ABU/ABD no operan |  |
+| T17-ABT | ABT v1: absorción a favor de la tendencia, días que abren fuera del valor de ayer | **corriendo** | P031 (ABU v2): más tamaño no resuelve Topstep (41.2%, 214 cuentas rompen MLL); la frecuencia debe venir de días que ABU/ABD no operan |  |
 
 ## Estudios y cuenta de intentos
 

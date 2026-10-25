@@ -619,13 +619,14 @@
    "nombre": "ABT v1: absorción a favor de la tendencia, días que abren fuera del valor de ayer",
    "hipotesis": "La absorción del flujo agresivo contra el sesgo (apertura sobre el VAH → se absorbe la venta; bajo el VAL → se absorbe la compra) en niveles de ayer, de la noche y del valor en desarrollo aleja el precio del lado absorbido más que un RAND emparejado (~165 señales en días complementarios a ABU).",
    "origen": "P031 (ABU v2): más tamaño no resuelve Topstep (41.2%, 214 cuentas rompen MLL); la frecuencia debe venir de días que ABU/ABD no operan",
-   "estado": "congelada",
+   "estado": "corriendo",
    "estrategia": "ABT",
    "version": 1,
    "estudio": "abt_v1",
    "requisitos": [],
    "decision": "decidida por el investigador; justificación en docs/investigacion/absorcion_tendencia.md; reglas en strategies/v21.json (código engine/strategies/v19.py; ventana en run_test.py::RULES_WINDOW)",
-   "notas": "1 definición base + 16 sensibilidades (17 intentos). Exploratoria: sale de ver que la absorción solo ganó en días de balance. 1 contrato (P031 mostró que 2 rompen el MLL)."
+   "notas": "1 definición base + 16 sensibilidades (17 intentos). Exploratoria: sale de ver que la absorción solo ganó en días de balance. 1 contrato (P031 mostró que 2 rompen el MLL).",
+   "inicio_utc": "2026-10-25T15:45:01+00:00"
   }
  ]
 }
