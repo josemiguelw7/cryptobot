@@ -125,5 +125,9 @@
   "fin_utc": "2026-10-25T05:47:44+00:00",
   "test_id": "P020",
   "veredicto": "revisar"
+ },
+ "T6-ABI": {
+  "estado": "corriendo",
+  "inicio_utc": "2026-10-25T06:15:01+00:00"
  }
 }
