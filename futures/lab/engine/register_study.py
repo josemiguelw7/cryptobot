@@ -7,6 +7,13 @@ import sys
 from . import registry, config
 
 STUDIES = {
+    "abu_v1": {
+        "hypothesis": "ABU v1 (absorción de flujo agresivo en los niveles de ayer y de la noche y en POC/VAH/VAL del perfil en desarrollo, solo en días que abren dentro del valor de ayer, entradas 09:30–15:30; detector, umbral relativo, confirmación a 60 s, stop 12–32, objetivo 2R y salida a 15 min de ABD v1): el precio se aleja del lado absorbido más de lo que lo hace un RAND emparejado y RAND2 sorteados en la misma ventana; la estrategia gana después de costos, es positiva en 2024, 2025 y 2026, tiene al menos 100 operaciones y pasa Topstep.",
+        "n_declared": 1 + 16,
+        "kill": ["ganancia neta <= 0 con costos base", "p vs RAND > 0.20", "pierde en 2 de 3 años", "rompe MLL en > 50% de arranques"],
+        "strategies": ["ABU v1"],
+        "notes": "1 prueba + 16 de sensibilidad (cercanía 2/3/5/6 ticks, confirmación 40/50/70/80 s, percentil relativo 86/88/92/94, objetivo 1/1.5/2.5/3 R). Definición fijada antes de correr (docs/investigacion/absorcion_unificada.md); solo se contaron señales (58 sesiones: ABD 9, ABU 20). Une los niveles de ABD (P027: +$5,720, 111 operaciones, Topstep 0% sin resolver) con el valor en desarrollo de ABI/ABV. Elegida mirando P021/P022/P027 por régimen en los mismos datos de diseño: exploratoria, el DSR la penaliza. Ataca el problema de frecuencia de Topstep.",
+    },
     "imb_v1": {
         "hypothesis": "IMB v1 (desequilibrios diagonales apilados): cuando en 60 s hay 3 o más precios seguidos con desequilibrio agresivo diagonal >= 3:1 y >= 10 contratos, y el precio se aleja >= 4 ticks de la zona, una orden límite en el borde cercano de la zona (300 s) gana más de lo que lo hace un RAND emparejado y RAND2 sorteados en la misma ventana (10:00-15:30); la estrategia gana después de costos, es positiva en 2024, 2025 y 2026, tiene al menos 100 operaciones y pasa Topstep.",
         "n_declared": 1 + 16,

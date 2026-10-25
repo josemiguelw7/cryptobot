@@ -18,10 +18,10 @@ from .data import load
 from .levels import Levels, precompute_stats
 from .rand import run_rand, summarize as rand_summary
 from .sim import Rules, simulate
-from .strategies import v1 as S1, v2 as S2, v3 as S3, v4 as S4, v5 as S5, v6 as S6, v7 as S7, v8 as S8, v9 as S9, v10 as S10, v11 as S11, v12 as S12, v13 as S13, v14 as S14, v15 as S15, v16 as S16
+from .strategies import v1 as S1, v2 as S2, v3 as S3, v4 as S4, v5 as S5, v6 as S6, v7 as S7, v8 as S8, v9 as S9, v10 as S10, v11 as S11, v12 as S12, v13 as S13, v14 as S14, v15 as S15, v16 as S16, v17 as S17
 import polars as pl
 
-MODULES = {("BIG", 1): S1, ("ABS", 1): S1, ("POC", 1): S1, ("FADE", 1): S2, ("HVN", 1): S2, ("ABS", 2): S2, ("FADE", 2): S2, ("FADEL", 1): S2, ("BIG", 2): S2, ("ORB", 1): S2, ("ABS", 3): S3, ("ACC", 1): S4, ("SMT", 1): S5, ("VAR", 1): S6, ("ACC", 2): S7, ("ABI", 1): S8, ("ABV", 1): S9, ("HVF", 1): S10, ("ABK", 1): S11, ("LVN", 1): S12, ("ABI", 2): S13, ("ABD", 1): S14, ("VBR", 1): S15, ("IMB", 1): S16}
+MODULES = {("BIG", 1): S1, ("ABS", 1): S1, ("POC", 1): S1, ("FADE", 1): S2, ("HVN", 1): S2, ("ABS", 2): S2, ("FADE", 2): S2, ("FADEL", 1): S2, ("BIG", 2): S2, ("ORB", 1): S2, ("ABS", 3): S3, ("ACC", 1): S4, ("SMT", 1): S5, ("VAR", 1): S6, ("ACC", 2): S7, ("ABI", 1): S8, ("ABV", 1): S9, ("HVF", 1): S10, ("ABK", 1): S11, ("LVN", 1): S12, ("ABI", 2): S13, ("ABD", 1): S14, ("VBR", 1): S15, ("IMB", 1): S16, ("ABU", 1): S17}
 REG_KEY = {("FADE", 2): "FADE2", ("BIG", 2): "BIG2", ("ABS", 3): "ABS3", ("ACC", 2): "ACC2", ("ABI", 2): "ABI2"}   # nombre del generador/parámetros cuando difiere del id
 
 SENS_STEPS = {
@@ -49,13 +49,15 @@ SENS_STEPS = {
     ("ABD", 1): {"near_ticks": 1, "confirm_s": 10, "rel_pct": 2, "rr": 0.5},
     ("VBR", 1): {"k_sigma": 0.25, "away_ticks": 1, "max_min": 5, "sigma_floor": 2},
     ("IMB", 1): {"ratio": 0.5, "min_vol": 2, "away_ticks": 1, "max_min": 5},
+    ("ABU", 1): {"near_ticks": 1, "confirm_s": 10, "rel_pct": 2, "rr": 0.5},
 }
 
 # Ventana de entradas propia de una estrategia (segundos ET): el control RAND usa la misma ventana. Por defecto 09:30–11:30, cierre 11:45.
 RULES_WINDOW = {("ABI", 2): {"first_entry": 41400.0, "last_entry": 55800.0, "forced_close": 56700.0},
                 ("ABD", 1): {"first_entry": 34200.0, "last_entry": 55800.0, "forced_close": 56700.0},
                 ("VBR", 1): {"first_entry": 36000.0, "last_entry": 55800.0, "forced_close": 56700.0},
-                ("IMB", 1): {"first_entry": 36000.0, "last_entry": 55800.0, "forced_close": 56700.0}}   # 11:30–15:30, cierre 15:45
+                ("IMB", 1): {"first_entry": 36000.0, "last_entry": 55800.0, "forced_close": 56700.0},
+                ("ABU", 1): {"first_entry": 34200.0, "last_entry": 55800.0, "forced_close": 56700.0}}   # 11:30–15:30, cierre 15:45
 
 
 def strat_kwargs(strategy, version, L, d):

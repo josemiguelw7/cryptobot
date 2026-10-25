@@ -1,5 +1,5 @@
 {
- "actualizado_utc": "2026-10-25T12:33:19Z",
+ "actualizado_utc": "2026-10-25T13:33:04Z",
  "porcentaje": 20,
  "criterios": {
   "a_ganancia_neta_positiva": {
@@ -28,12 +28,13 @@
   "test_id": "P012",
   "por_que": "Única familia con ganancia neta positiva y p bajo contra RAND tras el motor 1.1. Aún falla DSR, Topstep (41%) y 2026; su prueba tiene placebo sospechoso (revisar)."
  },
- "ultima_accion": "Dejé congelada IMB v1 (T14-IMB): desequilibrios diagonales apilados (≥3 precios, razón 3:1) con orden límite en la zona. Investigación en docs/investigacion/desequilibrios_apilados.md, reglas en strategies/v18.json, estudio imb_v1 con 17 intentos. Antes reparé el clon: tenía un rebase colgado que impedía publicar y le faltaban v7–v17, el código v5–v15 y las notas de investigación (las recuperé de la VM y de commits colgados).",
- "siguiente_idea": "Si IMB v1 falla: IMB v2 con entrada a mercado por continuación al formarse la pila. P028 (VBR) y P024/P025 no pasan: lo único positivo sigue siendo la absorción en días de balance, con ~110 operaciones. E-HVN-FUERZA sigue sin runner de estudios.",
+ "ultima_accion": "Dejé congelada ABU v1 (T15-ABU): absorción unificada (niveles de ayer + POC/VAH/VAL del día) solo en días que abren dentro del valor. Investigación en docs/investigacion/absorcion_unificada.md, reglas en strategies/v19.json, estudio abu_v1 con 17 intentos. En 58 sesiones da ~2× las señales de ABD. Restauré backlog.json desde HEAD (la copia local tenía estados viejos y habría repetido pruebas ya corridas).",
+ "siguiente_idea": "Si ABU v1 no llega a Topstep ≥ 50%, la absorción con 1 contrato está agotada en frecuencia: probar un régimen distinto (overnight/Londres, nunca medido) o dejar de buscar. IMB v1 (P029) no tiene ventaja bruta (aciertos 32.8% con 2R): IMB v2 no se justifica. E-HVN-FUERZA sigue sin runner de estudios.",
  "historial": [
   "2026-10-25T02:45:53Z · Primera corrida del investigador: ABS v3 congelada (entrada temprana). Mejor prueba P012: 20%.",
   "2026-10-25T03:33:46Z · Segunda corrida: ACC v1 congelada (aceptación VAH/VAL). P016 (ABS v3) no mejora. Mejor prueba P012: 20%.",
   "2026-10-25T12:02:51Z · Corrida 11: VBR v1 congelada (bandas de VWAP). P027 (ABD v1) quedó en 'revisar', +$5,720 pero Topstep 0%. Mejor prueba P012: 20%.",
-  "2026-10-25T12:33:19Z · Corrida 12: IMB v1 congelada (desequilibrios apilados). P028 (VBR v1) no pasa (−$33.7k). Clon reparado. Mejor prueba P012: 20%."
+  "2026-10-25T12:33:19Z · Corrida 12: IMB v1 congelada (desequilibrios apilados). P028 (VBR v1) no pasa (−$33.7k). Clon reparado. Mejor prueba P012: 20%.",
+  "2026-10-25T13:33:04Z · Corrida 13: ABU v1 congelada (absorción unificada). P029 (IMB v1) no pasa (−$23.8k, 0 caminos CPCV positivos). Mejor prueba P012: 20%."
  ]
 }
