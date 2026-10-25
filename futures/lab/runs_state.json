@@ -97,5 +97,12 @@
   "fin_utc": "2026-10-25T03:09:56+00:00",
   "test_id": "P016",
   "veredicto": "revisar"
+ },
+ "E-ACEPTACION-VA": {
+  "estado": "corrida",
+  "inicio_utc": "2026-10-25T03:45:01+00:00",
+  "fin_utc": "2026-10-25T03:47:44+00:00",
+  "test_id": "P017",
+  "veredicto": "revisar"
  }
 }

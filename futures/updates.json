@@ -9,6 +9,13 @@
       "test_id": "P016"
     },
     {
+      "date": "2026-10-25",
+      "kind": "prueba",
+      "title": "Prueba P017 · ACC v1 · revisar",
+      "body": "ACC v1: 97 operaciones, ganancia neta $2,028 con costos base, p contra RAND 0.1928, estrés $688, Topstep 0.0% de las cuentas (RAND 5.4%). Veredicto: revisar. Causa: placebo desplazado sospechoso: revisión de código pendiente; además: 97 operaciones / 556 sesiones: por debajo del mínimo.",
+      "test_id": "P017"
+    },
+    {
       "date": "2026-10-24",
       "kind": "avance",
       "title": "Comité con PIN: Jose Miguel y Oscar votan desde la página",

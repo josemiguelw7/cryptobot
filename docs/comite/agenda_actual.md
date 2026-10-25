@@ -18,6 +18,7 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 - P014 · ABS v1 · **revisar** · neto 4319.94 · p 0.003 · Topstep 3.7%
 - P015 · BIG v1 · **no_pasa** · neto -2235.06 · p 0.4845 · Topstep 0.0%
 - P016 · ABS v3 · **revisar** · neto 4404.46 · p 0.0539 · Topstep 13.9%
+- P017 · ACC v1 · **revisar** · neto 2028.34 · p 0.1928 · Topstep 0.0%
 
 ## 2. Qué murió y por qué
 - P013 · POC v1: umbral de orden grande mal calculado (percentil truncado y sobre todas las órdenes: 15 contratos). Ver strategies/v1_aclaraciones.json
