@@ -195,5 +195,9 @@
   "fin_utc": "2026-10-25T14:23:17+00:00",
   "test_id": "P030",
   "veredicto": "revisar"
+ },
+ "T16-ABU2": {
+  "estado": "corriendo",
+  "inicio_utc": "2026-10-25T14:45:01+00:00"
  }
 }
