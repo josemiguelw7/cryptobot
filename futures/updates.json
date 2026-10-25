@@ -86,6 +86,13 @@
       "test_id": "P027"
     },
     {
+      "date": "2026-10-25",
+      "kind": "prueba",
+      "title": "Prueba P028 · VBR v1 · no pasa",
+      "body": "VBR v1: 658 operaciones, ganancia neta $-33,702 con costos base, p contra RAND 1.0, estrés $-39,727, Topstep 0.0% de las cuentas (RAND 1.4%). Veredicto: no pasa. Causa: pierde con costos base; no gana a RAND (p=1.0); no gana a RAND2 con las mismas salidas (p=0.998); DSR 0.0 < 0.95 con 859 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%.",
+      "test_id": "P028"
+    },
+    {
       "date": "2026-10-24",
       "kind": "avance",
       "title": "Comité con PIN: Jose Miguel y Oscar votan desde la página",

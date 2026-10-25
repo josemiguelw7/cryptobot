@@ -1,13 +1,13 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-25 12:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-25 12:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
 ## En una línea
 
 - Sesiones válidas de diseño: **576** (examen sellado desde 2026-04-22, cerrado).
-- Intentos registrados: **858** · pruebas publicadas: **26** (error 1, superada 7, no_pasa 9, revisar 9).
+- Intentos registrados: **875** · pruebas publicadas: **27** (error 1, superada 7, no_pasa 10, revisar 9).
 - Estrategias aprobadas por el comité: **0**. Nada toca dinero real.
 
 ## Pruebas corridas
@@ -40,6 +40,7 @@ Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` �
 | P025 | LVN v1 | **no_pasa** | −$8,670 | 0.6763 | 0.0% | pierde con costos base; no gana a RAND (p=0.6763); no gana a RAND2 con las mismas salidas (p=0.6374); DSR 0.0  |
 | P026 | ABI v2 | **no_pasa** | −$1,124 | 0.3606 | 0.0% | pierde con costos base; no gana a RAND (p=0.3606); no gana a RAND2 con las mismas salidas (p=0.3057); DSR 0.0  |
 | P027 | ABD v1 | **revisar** | $5,720 | 0.001 | 0.0% | placebo desplazado sospechoso: revisión de código pendiente; además: DSR 0.001 < 0.95 con 842 intentos; 57.8%  |
+| P028 | VBR v1 | **no_pasa** | −$33,702 | 1.0 | 0.0% | pierde con costos base; no gana a RAND (p=1.0); no gana a RAND2 con las mismas salidas (p=0.998); DSR 0.0 < 0. |
 
 ## Cola de pruebas (backlog)
 
@@ -67,9 +68,20 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 | T2-ABS-HOURS | ABS v1 en toda la sesión de Nueva York | **descartada** | P003 · pocas operaciones | si se combina con T2-ABS-EARLY es una sola v2; máximo 3 versiones |
 | T2-ICE | Icebergs con definición medida | **descartada** | mapa v1 · ice | agregar tamaños 'antes' del libro al lector de sesión |
 | M2-DIR | Mapa v2 con azar de dirección aleatoria | **corrida** → mapa_v2 | revisión del mapa v1 | cambio de código en signal_map.py; estudio mapa_v2 registrado |
-| T3-SMT | Divergencia NQ vs ES (SMT) | **corrida** → P018 | videos · plan v1 | descargar datos tick de ES (laptop ATAS); lector canónico para ES · ERROR: SMT v1 no está registrada en ningún strategies/v*.json del commit d2037d12 |
+| T3-SMT | Divergencia NQ vs ES (SMT) | **corrida** → P018 | videos · plan v1 |  |
 | E-HVN-FUERZA | Estudio: qué hace poderoso a un HVN (base del indicador para ATAS) | **aprobada** | pedido de Oscar en el buzón (24/10/2026): indicador de ATAS que muestre HVN poderosos en vivo | estudio registrado antes de correr (fases y umbrales); definición de 'HVN poderoso' congelada con huella y sello; cheque |
 | E-ACEPTACION-VA | Aceptación fuera del valor (VAH/VAL) · ACC v1 | **corrida** → P017 | nota del buzón de Oscar (2026-10-25), resumida por el asistente |  |
+| T4-VAR | Regla del 80%: re-entrada aceptada al área de valor · VAR v1 | **corrida** → P019 | pendiente de aceptacion.md (VAR v1) · ACC v1 casi positiva (P017: +$2,028 pero sin significancia): se prueba el espejo |  |
+| T5-ACC2 | ACC v2: aceptación fuera de los bordes de la subasta anterior, solo días que abren dentro del valor | **corrida** → P020 | pedido de Oscar (aceptación, 25/10/2026) · P017 casi positiva · tablas por régimen de P012, P016, P017 |  |
+| T6-ABI | ABI v1: absorción en los niveles del propio día | **corrida** → P021 | ABS v2 (P012) única familia positiva; ABS agotó sus 3 versiones; niveles de ayer ya probados (HVN, POC, ACC, VAR) |  |
+| T7-ABV | ABV v1: absorción en el valor en desarrollo del día (POC, VAH, VAL) | **corrida** → P022 | P021 (ABI v1: +$7,261, p 0.045; POC/VAH/VAL en desarrollo +$9.4 mil en 72 operaciones, extremos y VWAP −$2.2 mil) · familia de absorción, única positiva |  |
+| T8-HVF | HVF v1: absorción en HVN poderoso del día anterior | **corrida** → P023 | pedido de Oscar (E-HVN-FUERZA, 24/10/2026) · familia de absorción, única positiva |  |
+| T9-ABK | ABK v1: absorción medida con el libro (la mejor oferta aguanta y se repone) | **corrida** → P024 | familia de absorción (única positiva: P012, P021) · definición de ATAS/Bookmap en docs/investigacion/absorcion_libro.md |  |
+| T10-LVN | LVN v1: travesía de un vacío de volumen del perfil de ayer con flujo iniciador | **corrida** → P025 | hueco de investigación: LVN nunca probado; familia de absorción agotada (P024 ABK no pasa) |  |
+| T11-ABI2 | ABI v2: absorción en los niveles del propio día, tarde (11:30–15:30) | **corrida** → P026 | P021 + parte del día nunca medida |  |
+| T12-ABD | ABD v1: absorción en niveles de ayer, solo días que abren dentro del valor | **corrida** → P027 | P012/P014/P016/P017/P020: la absorción y la aceptación solo ganan en días que abren dentro del valor; ABS agotó sus 3 versiones |  |
+| T13-VBR | VBR v1: reversión a la VWAP desde la banda de 2σ, días que abren dentro del valor | **corrida** → P028 | P012/P016/P017/P027: lo que gana lo hace en días de balance, pero con ~100 operaciones y Topstep bajo; se busca una idea distinta con más frecuencia |  |
+| T14-IMB | IMB v1: desequilibrios diagonales apilados y reprueba de la zona | **congelada** | hueco de investigación: desequilibrios nunca probados; la absorción (única positiva) tiene pocas operaciones y no llega a Topstep · P028 (VBR) no pasa |  |
 
 ## Estudios y cuenta de intentos
 
@@ -97,7 +109,8 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - **lvn_v1**: LVN v1 (travesía de un vacío de volumen del perfil NY de ayer: cubos de 8 ticks, cubo fino ≤ percentil 20, vacío ≥ 16 ticks): cuando el prec · declarados 17, usados 15
 - **abi_v2**: ABI v2 (misma absorción en los niveles del propio día que ABI v1, pero en la tarde de Nueva York, entradas 11:30–15:30, cierre 15:45, umbral · declarados 17, usados 17
 - **abd_v1**: ABD v1 (absorción de flujo agresivo en los niveles de ayer y de la noche, solo en días que abren dentro del valor de ayer, entradas 09:30–15 · declarados 17, usados 17
-- **vbr_v1**: VBR v1 (reversión a la VWAP desde la banda de 2σ, solo en días que abren dentro del valor de ayer): cuando el precio toca VWAP ± 2σ (pondera · declarados 17, usados 0
+- **vbr_v1**: VBR v1 (reversión a la VWAP desde la banda de 2σ, solo en días que abren dentro del valor de ayer): cuando el precio toca VWAP ± 2σ (pondera · declarados 17, usados 17
+- **imb_v1**: IMB v1 (desequilibrios diagonales apilados): cuando en 60 s hay 3 o más precios seguidos con desequilibrio agresivo diagonal >= 3:1 y >= 10  · declarados 17, usados 0
 
 ## Mapa de señales (resumen)
 
