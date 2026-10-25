@@ -1,0 +1,33 @@
+{
+ "version": 26,
+ "fecha_registro": "2026-10-25",
+ "titulo": "Tanda 25 · ABR v1 (absorción de ABU con entrada pasiva en la reprueba del extremo)",
+ "estado": "Escrita por el investigador autónomo; sellada y congelada al publicar. Primera versión de ABR. Investigación: docs/investigacion/absorcion_reprueba.md.",
+ "comun": {
+  "instrumento": "NQ (contrato del frente), 1 contrato",
+  "horario": "Nueva York 09:30–15:30 ET",
+  "cierre_forzado": "cualquier posición abierta se cierra a mercado a las 15:45 ET",
+  "noticias": "no se abre de −2 a +5 min de CPI, NFP y Fed",
+  "costos": "comisión Topstep + 1 tick de deslizamiento por lado (la entrada límite no paga deslizamiento); prueba extra al doble",
+  "limites_dia": "máximo 6 operaciones por día; se detiene tras 3 pérdidas seguidas",
+  "una_posicion": "nunca más de una posición abierta por estrategia",
+  "datos": "solo periodo de diseño 2024-01-02 a 2026-04-21; el examen sellado no se abre",
+  "control": "RAND emparejado y RAND2 sorteados en la misma ventana 09:30–15:30"
+ },
+ "estrategias": [
+  {
+   "id": "ABR",
+   "version": 1,
+   "nombre": "Absorción con reprueba",
+   "idea": "El flujo agresivo absorbido en un nivel deja pasivos que defienden el extremo; si el precio vuelve a probarlo, una orden pasiva ahí entra con riesgo corto.",
+   "contexto": "Igual que ABU v1: días en que el primer precio de las 09:30 cae entre VAL y VAH de ayer.",
+   "disparador": "Detector de absorción de ABU v1 (v17.py), sin cambios, incluida la confirmación a 60 s.",
+   "entrada": "Orden límite 2 ticks dentro del extremo absorbido, válida 300 s, contra el lado absorbido; con cola del simulador. Sin llenado no hay operación.",
+   "stop": "8 ticks desde el llenado.",
+   "objetivo": "2R (16 ticks).",
+   "tiempo_maximo": "15 minutos tras el llenado (o el cierre de las 15:45).",
+   "motivo_cambio": "ABU entra a mercado después del alejamiento con stops de 12–32 ticks. ABR cambia solo la entrada y el stop. Mismas señales: no es evidencia independiente."
+  }
+ ],
+ "nota": "Parámetros en futures/lab/engine/strategies/v24.py::PARAMS['ABR']; ventana en run_test.py::RULES_WINDOW."
+}

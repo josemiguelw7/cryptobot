@@ -18,10 +18,10 @@ from .data import load
 from .levels import Levels, precompute_stats
 from .rand import run_rand, summarize as rand_summary
 from .sim import Rules, simulate
-from .strategies import v1 as S1, v2 as S2, v3 as S3, v4 as S4, v5 as S5, v6 as S6, v7 as S7, v8 as S8, v9 as S9, v10 as S10, v11 as S11, v12 as S12, v13 as S13, v14 as S14, v15 as S15, v16 as S16, v17 as S17, v18 as S18, v19 as S19, v20 as S20, v21 as S21, v22 as S22, v23 as S23
+from .strategies import v1 as S1, v2 as S2, v3 as S3, v4 as S4, v5 as S5, v6 as S6, v7 as S7, v8 as S8, v9 as S9, v10 as S10, v11 as S11, v12 as S12, v13 as S13, v14 as S14, v15 as S15, v16 as S16, v17 as S17, v18 as S18, v19 as S19, v20 as S20, v21 as S21, v22 as S22, v23 as S23, v24 as S24
 import polars as pl
 
-MODULES = {("BIG", 1): S1, ("ABS", 1): S1, ("POC", 1): S1, ("FADE", 1): S2, ("HVN", 1): S2, ("ABS", 2): S2, ("FADE", 2): S2, ("FADEL", 1): S2, ("BIG", 2): S2, ("ORB", 1): S2, ("ABS", 3): S3, ("ACC", 1): S4, ("SMT", 1): S5, ("VAR", 1): S6, ("ACC", 2): S7, ("ABI", 1): S8, ("ABV", 1): S9, ("HVF", 1): S10, ("ABK", 1): S11, ("LVN", 1): S12, ("ABI", 2): S13, ("ABD", 1): S14, ("VBR", 1): S15, ("IMB", 1): S16, ("ABU", 1): S17, ("ABU", 2): S18, ("ABT", 1): S19, ("ABQ", 1): S20, ("DVG", 1): S21, ("FAF", 1): S22, ("ABF", 1): S23}
+MODULES = {("BIG", 1): S1, ("ABS", 1): S1, ("POC", 1): S1, ("FADE", 1): S2, ("HVN", 1): S2, ("ABS", 2): S2, ("FADE", 2): S2, ("FADEL", 1): S2, ("BIG", 2): S2, ("ORB", 1): S2, ("ABS", 3): S3, ("ACC", 1): S4, ("SMT", 1): S5, ("VAR", 1): S6, ("ACC", 2): S7, ("ABI", 1): S8, ("ABV", 1): S9, ("HVF", 1): S10, ("ABK", 1): S11, ("LVN", 1): S12, ("ABI", 2): S13, ("ABD", 1): S14, ("VBR", 1): S15, ("IMB", 1): S16, ("ABU", 1): S17, ("ABU", 2): S18, ("ABT", 1): S19, ("ABQ", 1): S20, ("DVG", 1): S21, ("FAF", 1): S22, ("ABF", 1): S23, ("ABR", 1): S24}
 REG_KEY = {("FADE", 2): "FADE2", ("BIG", 2): "BIG2", ("ABS", 3): "ABS3", ("ACC", 2): "ACC2", ("ABI", 2): "ABI2", ("ABU", 2): "ABU2"}   # nombre del generador/parámetros cuando difiere del id
 
 SENS_STEPS = {
@@ -56,6 +56,7 @@ SENS_STEPS = {
     ("DVG", 1): {"pullback_ticks": 2, "away_ticks": 1, "rr": 0.5},
     ("FAF", 1): {"pen_ticks": 1, "fail_s": 30, "stop_max": 4, "rr": 0.5},
     ("ABF", 1): {"brk_ticks": 1, "break_s": 60, "stop": 4, "rr": 0.5},
+    ("ABR", 1): {"limit_in_ticks": 1, "stop": 2, "rr": 0.5, "wait_s": 60},
 }
 
 # Ventana de entradas propia de una estrategia (segundos ET): el control RAND usa la misma ventana. Por defecto 09:30–11:30, cierre 11:45.
@@ -69,7 +70,8 @@ RULES_WINDOW = {("ABI", 2): {"first_entry": 41400.0, "last_entry": 55800.0, "for
                 ("ABQ", 1): {"first_entry": 34200.0, "last_entry": 55800.0, "forced_close": 56700.0, "max_trades": 12},
                 ("DVG", 1): {"first_entry": 34200.0, "last_entry": 55800.0, "forced_close": 56700.0, "max_trades": 8},
                 ("FAF", 1): {"first_entry": 34200.0, "last_entry": 55800.0, "forced_close": 56700.0},
-                ("ABF", 1): {"first_entry": 34200.0, "last_entry": 55800.0, "forced_close": 56700.0}}   # 11:30–15:30, cierre 15:45
+                ("ABF", 1): {"first_entry": 34200.0, "last_entry": 55800.0, "forced_close": 56700.0},
+                ("ABR", 1): {"first_entry": 34200.0, "last_entry": 55800.0, "forced_close": 56700.0}}   # 11:30–15:30, cierre 15:45
 
 
 def strat_kwargs(strategy, version, L, d):

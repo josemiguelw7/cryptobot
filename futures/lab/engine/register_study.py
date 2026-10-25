@@ -7,6 +7,13 @@ import sys
 from . import registry, config
 
 STUDIES = {
+    "abr_v1": {
+        "hypothesis": "ABR v1 (absorción con reprueba: el detector de ABU v1 en niveles de ayer, de la noche y POC/VAH/VAL del día, solo días que abren dentro del valor de ayer, confirmado a 60 s; en vez de entrar a mercado se deja una orden límite 2 ticks dentro del extremo absorbido, válida 300 s; stop 8 ticks desde el llenado, objetivo 2R, salida a 15 min, 1 contrato, 09:30–15:30): las operaciones que se llenan rinden más que un RAND emparejado y RAND2 sorteados en la misma ventana; gana después de costos, es positiva en 2024, 2025 y 2026 y tiene al menos 100 operaciones.",
+        "n_declared": 1 + 16,
+        "kill": ["ganancia neta <= 0 con costos base", "p vs RAND > 0.20", "pierde en 2 de 3 años", "rompe MLL en > 50% de arranques"],
+        "strategies": ["ABR v1"],
+        "notes": "1 prueba + 16 de sensibilidad (distancia de la orden 0/1/3/4 ticks, stop 4/6/10/12, objetivo 1/1.5/2.5/3 R, espera 180/240/360/420 s). Una sola definición (docs/investigacion/absorcion_reprueba.md). Humo: 120 sesiones, 57 señales, 28 llenados; se vio el neto de esas 120 sesiones (ruido, 28 operaciones) pero no se ajustó nada. Exploratoria: mismas señales que ABU, NO es evidencia independiente. Riesgo: ~130 operaciones, cerca del mínimo de 100. Pregunta única: ¿entrar pasivamente en la reprueba del extremo absorbido mejora a la entrada a mercado de ABU?",
+    },
     "abf_v1": {
         "hypothesis": "ABF v1 (absorción fallida: el detector de absorción de ABU v1 en niveles de ayer, de la noche y POC/VAH/VAL del día, confirmado a 60 s; si en 300 s el precio rompe el extremo absorbido >= 4 ticks con delta de 30 s a favor del lado que agredía, entrada a mercado EN LA DIRECCIÓN de la ruptura, stop 16 ticks, objetivo 2R, salida a 15 min, 1 contrato, 09:30–15:30, todos los días, con guarda de cotización congelada): el precio sigue la ruptura más de lo que lo hace un RAND emparejado y RAND2 sorteados en la misma ventana; gana después de costos, es positiva en 2024, 2025 y 2026 y tiene al menos 100 operaciones.",
         "n_declared": 1 + 16,
