@@ -44,6 +44,13 @@
       "test_id": "P021"
     },
     {
+      "date": "2026-10-25",
+      "kind": "prueba",
+      "title": "Prueba P022 · ABV v1 · revisar",
+      "body": "ABV v1: 126 operaciones, ganancia neta $1,819 con costos base, p contra RAND 0.1648, estrés $-626, Topstep 12.2% de las cuentas (RAND 4.5%). Veredicto: revisar. Causa: placebo desplazado sospechoso: revisión de código pendiente; además: no gana a RAND (p=0.1648); no gana a RAND2 con las mismas salidas (p=0.1948); DSR 0.0 < 0.95 con 760 intentos; 796.5% de la ganancia en 5 días; muere con costos al doble; pierde en 2024, 2026; pasa Topstep solo 12.2%.",
+      "test_id": "P022"
+    },
+    {
       "date": "2026-10-24",
       "kind": "avance",
       "title": "Comité con PIN: Jose Miguel y Oscar votan desde la página",
