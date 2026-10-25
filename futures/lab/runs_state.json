@@ -118,5 +118,12 @@
   "fin_utc": "2026-10-25T05:17:46+00:00",
   "test_id": "P019",
   "veredicto": "no_pasa"
+ },
+ "T5-ACC2": {
+  "estado": "corrida",
+  "inicio_utc": "2026-10-25T05:45:01+00:00",
+  "fin_utc": "2026-10-25T05:47:44+00:00",
+  "test_id": "P020",
+  "veredicto": "revisar"
  }
 }
