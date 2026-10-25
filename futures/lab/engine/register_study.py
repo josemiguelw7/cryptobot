@@ -7,6 +7,13 @@ import sys
 from . import registry, config
 
 STUDIES = {
+    "abe_v1": {
+        "hypothesis": "ABE v1 (absorción de ABU v1 confirmada por ES: el detector de absorción de ABU v1 en niveles de ayer, de la noche y POC/VAH/VAL del día, solo días que abren dentro del valor de ayer, confirmado a 60 s, se opera solo si en los 120 s que terminan en la confirmación ES no avanzó más de 2 ticks en la dirección del flujo absorbido, con al menos 20 llenados de ES; entrada a mercado contra el lado absorbido, stop 12–32, objetivo 2R, salida a 15 min, 1 contrato, 09:30–15:30): las operaciones rinden más que un RAND emparejado y RAND2 sorteados en la misma ventana; gana después de costos, es positiva en 2024, 2025 y 2026 y tiene al menos 100 operaciones.",
+        "n_declared": 1 + 16,
+        "kill": ["ganancia neta <= 0 con costos base", "p vs RAND > 0.20", "pierde en 2 de 3 años", "rompe MLL en > 50% de arranques"],
+        "strategies": ["ABE v1"],
+        "notes": "1 prueba + 16 de sensibilidad (avance de ES 0/1/3/4 ticks, ventana de ES 90/150/60/180 s, objetivo 1/1.5/2.5/3 R, confirmación 30/45/75/90 s). Una sola definición (docs/investigacion/absorcion_es.md); el escenario espejo (ES avanzó) no se corre. Humo: 120 sesiones, solo conteo de señales (ABU 43, ABE 24; ~115 esperadas). Exploratoria: mismas señales que ABU, NO es evidencia independiente. Riesgo: cerca del mínimo de 100 operaciones. Pregunta única: ¿que ES también se detenga separa las absorciones que revierten?",
+    },
     "abr_v1": {
         "hypothesis": "ABR v1 (absorción con reprueba: el detector de ABU v1 en niveles de ayer, de la noche y POC/VAH/VAL del día, solo días que abren dentro del valor de ayer, confirmado a 60 s; en vez de entrar a mercado se deja una orden límite 2 ticks dentro del extremo absorbido, válida 300 s; stop 8 ticks desde el llenado, objetivo 2R, salida a 15 min, 1 contrato, 09:30–15:30): las operaciones que se llenan rinden más que un RAND emparejado y RAND2 sorteados en la misma ventana; gana después de costos, es positiva en 2024, 2025 y 2026 y tiene al menos 100 operaciones.",
         "n_declared": 1 + 16,

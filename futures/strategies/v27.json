@@ -1,0 +1,35 @@
+{
+ "version": 27,
+ "fecha_registro": "2026-10-25",
+ "titulo": "Tanda 26 · ABE v1 (absorción de ABU confirmada por ES)",
+ "estado": "Escrita por el investigador autónomo; sellada y congelada al publicar. Primera versión de ABE. Investigación: docs/investigacion/absorcion_es.md.",
+ "comun": {
+  "instrumento": "NQ (contrato del frente), 1 contrato",
+  "horario": "Nueva York 09:30–15:30 ET",
+  "cierre_forzado": "cualquier posición abierta se cierra a mercado a las 15:45 ET",
+  "noticias": "no se abre de −2 a +5 min de CPI, NFP y Fed",
+  "costos": "comisión Topstep + 1 tick de deslizamiento por lado; prueba extra al doble",
+  "limites_dia": "máximo 6 operaciones por día; se detiene tras 3 pérdidas seguidas",
+  "una_posicion": "nunca más de una posición abierta por estrategia",
+  "datos": "solo periodo de diseño 2024-01-02 a 2026-04-21; el examen sellado no se abre",
+  "control": "RAND emparejado y RAND2 sorteados en la misma ventana 09:30–15:30",
+  "auxiliar": "ES solo como dato auxiliar (filtro); se opera NQ"
+ },
+ "estrategias": [
+  {
+   "id": "ABE",
+   "version": 1,
+   "nombre": "Absorción confirmada por ES",
+   "idea": "Si el flujo agresivo se absorbe en NQ y ES también se detiene, la absorción es de todo el mercado y la reversión es más confiable que cuando solo NQ aguanta.",
+   "contexto": "Igual que ABU v1: días en que el primer precio de las 09:30 cae entre VAL y VAH de ayer.",
+   "disparador": "Detector de absorción de ABU v1 (v17.py), sin cambios, confirmado a 60 s.",
+   "filtro_es": "En los 120 s que terminan en la confirmación, el avance máximo de ES en la dirección del flujo absorbido es ≤ 2 ticks, con al menos 20 llenados de ES. Sin datos de ES no se opera.",
+   "entrada": "A mercado, contra el lado absorbido (igual que ABU v1).",
+   "stop": "4 ticks más allá del extremo absorbido, entre 12 y 32 ticks (igual que ABU v1).",
+   "objetivo": "2R.",
+   "tiempo_maximo": "15 minutos (o el cierre de las 15:45).",
+   "motivo_cambio": "ABU gana pero pierde el 60% con el stop; se prueba si la información de ES separa las absorciones buenas. Mismas señales: no es evidencia independiente."
+  }
+ ],
+ "nota": "Parámetros en futures/lab/engine/strategies/v25.py::PARAMS['ABE']; ventana en run_test.py::RULES_WINDOW."
+}
