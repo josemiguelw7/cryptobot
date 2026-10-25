@@ -43,7 +43,7 @@ rm -f $D/salida.json
 set -a; . $HOME/.config/oscar-lab/claude.env; set +a
 log "arranca diseño (base ${BASE:0:8})"
 timeout 3h claude -p "$(cat $D/PROMPT.md)" --permission-mode acceptEdits \
-  --allowedTools Bash Read Edit Write Glob Grep --settings $D/settings.json --max-turns 250 \
+  --allowedTools Bash Read Edit Write Glob Grep WebSearch WebFetch --settings $D/settings.json --max-turns 250 \
   > $D/ultima_salida.txt 2>&1
 RC=$?
 if grep -qiE "usage limit|limit reached|rate.limit|resets? (at|in)" $D/ultima_salida.txt; then

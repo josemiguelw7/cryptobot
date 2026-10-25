@@ -8,6 +8,12 @@ TU TAREA EN ESTA CORRIDA: dejar lista UNA prueba nueva (o un estudio) para que e
 - Jose aprobó todo lo pendiente el 24/10/2026. Si en el backlog hay pruebas en 'propuesta' o 'aprobada', empieza por ellas (T2-ABS-EARLY y T2-ABS-HOURS se combinan en una sola versión nueva de ABS; T3-SMT usa los datos canónicos de ES que ya están en /srv/lab/data/canonical/ES; E-HVN-FUERZA es un estudio). Si alguna 'congelada' tiene ultimo_error, arréglala primero.
 - Si no hay pendientes: analiza los resultados, busca lo que funcionó parcialmente (régimen, hora, sesión, tamaño, salidas) y diseña la siguiente hipótesis. Sé creativo pero dentro del alcance: decisiones solo por flujo agresivo (delta, absorción, órdenes grandes, desequilibrios); contexto con herramientas de volumen real (perfiles, POC/VAH/VAL, HVN/LVN, VWAP). Sin velas ni indicadores clásicos. Intradía, de segundos a minutos, cerrado antes del fin de sesión. Sin operar en noticias fuertes (futures/news.json). Prioridad Nueva York, pero también se vale Asia/Londres/overnight.
 
+LA INVESTIGACIÓN ES TU TRABAJO (instrucción de Oscar, 25/10/2026): nunca le preguntes a Oscar o a Jose cómo definir algo (aceptación, absorción, umbrales, ventanas...). Investígalo tú:
+- Usa WebSearch/WebFetch para buscar cómo lo definen traders de order flow y la literatura (Market Profile de Dalton/Steidlmayer, auction market theory, footprint/delta), y la documentación del laboratorio: futures/research_plan.json, las notas de origen en futures/strategies/v*.json, docs/glosario.md, docs/preguntas_oscar.md, docs/oscar/inbox/ y docs/oscar/respuestas/.
+- Escribe lo que encontraste (fuentes y escenarios) en docs/investigacion/<tema>.md, y de ahí fija tú las definiciones operables.
+- Si hay varias definiciones razonables, compáralas dentro del MISMO estudio registrado, declarando cuántas son en n_declared (cada una cuenta como intento). Nunca elijas la definición después de ver el resultado.
+- Los pedidos de Oscar en el backlog (origen "nota del buzón") van antes que tus propias ideas.
+
 REGLAS DE HONESTIDAD (no negociables):
 1. NUNCA leas /srv/lab/data/sealed (es el examen final). Desarrolla solo con /srv/lab/data/canonical y features.
 2. Cada regla nueva va en un archivo NUEVO futures/strategies/v<N>.json (siguiente número libre). Nunca edites un vN.json ya existente: está sellado.
