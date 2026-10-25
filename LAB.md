@@ -1,6 +1,6 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-25 20:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-25 20:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
@@ -95,7 +95,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 | T18-ABQ | ABQ v1: absorción rápida (ventana de 30 s) en días que abren dentro del valor | **corrida** → P033 | P032 (ABT v1) no pasa: ampliar días no sirve; ABU (P030/P031) es la única familia con ventaja pero lenta y con costos de riesgo por operación altos |  |
 | T19-DVG | DVG v1: divergencia de delta acumulado en el extremo del día | **corrida** → P034 | P033 (ABQ v1) no pasa: la absorción depende de niveles y de días de balance y no gana frecuencia; falta una señal de flujo agresivo independiente del nivel |  |
 | T20-FAF | FAF v1: subasta fallida en los extremos de ayer y de la noche | **corrida** → P035 | P034 (DVG v1) no pasa: el agotamiento sin nivel no sirve; falta probar el intento fallido en los niveles donde ABU sí tiene ventaja |  |
-| T21-ABF | ABF v1: absorción fallida, seguir la ruptura del extremo absorbido | **congelada** | P035 (FAF v1) no pasa y los reversos sin nivel pierden con p≈1; ABU pierde el 60% con el stop: el fracaso de la absorción es la señal |  |
+| T21-ABF | ABF v1: absorción fallida, seguir la ruptura del extremo absorbido | **corriendo** | P035 (FAF v1) no pasa y los reversos sin nivel pierden con p≈1; ABU pierde el 60% con el stop: el fracaso de la absorción es la señal |  |
 
 ## Estudios y cuenta de intentos
 
