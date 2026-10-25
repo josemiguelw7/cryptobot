@@ -1,13 +1,13 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-25 11:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-25 12:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
 ## En una línea
 
 - Sesiones válidas de diseño: **576** (examen sellado desde 2026-04-22, cerrado).
-- Intentos registrados: **841** · pruebas publicadas: **25** (error 1, superada 7, no_pasa 9, revisar 8).
+- Intentos registrados: **858** · pruebas publicadas: **26** (error 1, superada 7, no_pasa 9, revisar 9).
 - Estrategias aprobadas por el comité: **0**. Nada toca dinero real.
 
 ## Pruebas corridas
@@ -39,6 +39,7 @@ Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` �
 | P024 | ABK v1 | **no_pasa** | −$36,133 | 0.5574 | 8.7% | pierde con costos base; no gana a RAND (p=0.5574); no gana a RAND2 con las mismas salidas (p=0.7812); DSR 0.0  |
 | P025 | LVN v1 | **no_pasa** | −$8,670 | 0.6763 | 0.0% | pierde con costos base; no gana a RAND (p=0.6763); no gana a RAND2 con las mismas salidas (p=0.6374); DSR 0.0  |
 | P026 | ABI v2 | **no_pasa** | −$1,124 | 0.3606 | 0.0% | pierde con costos base; no gana a RAND (p=0.3606); no gana a RAND2 con las mismas salidas (p=0.3057); DSR 0.0  |
+| P027 | ABD v1 | **revisar** | $5,720 | 0.001 | 0.0% | placebo desplazado sospechoso: revisión de código pendiente; además: DSR 0.001 < 0.95 con 842 intentos; 57.8%  |
 
 ## Cola de pruebas (backlog)
 
@@ -95,6 +96,8 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - **abk_v1**: ABK v1 (absorción medida con el libro, no solo con el precio): cuando entra ≥ p95 de flujo agresivo de un lado en 60 s, la mejor oferta cont · declarados 17, usados 16
 - **lvn_v1**: LVN v1 (travesía de un vacío de volumen del perfil NY de ayer: cubos de 8 ticks, cubo fino ≤ percentil 20, vacío ≥ 16 ticks): cuando el prec · declarados 17, usados 15
 - **abi_v2**: ABI v2 (misma absorción en los niveles del propio día que ABI v1, pero en la tarde de Nueva York, entradas 11:30–15:30, cierre 15:45, umbral · declarados 17, usados 17
+- **abd_v1**: ABD v1 (absorción de flujo agresivo en los niveles de ayer y de la noche, solo en días que abren dentro del valor de ayer, entradas 09:30–15 · declarados 17, usados 17
+- **vbr_v1**: VBR v1 (reversión a la VWAP desde la banda de 2σ, solo en días que abren dentro del valor de ayer): cuando el precio toca VWAP ± 2σ (pondera · declarados 17, usados 0
 
 ## Mapa de señales (resumen)
 

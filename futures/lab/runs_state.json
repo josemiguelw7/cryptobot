@@ -167,5 +167,12 @@
   "fin_utc": "2026-10-25T11:27:01+00:00",
   "test_id": "P026",
   "veredicto": "no_pasa"
+ },
+ "T12-ABD": {
+  "estado": "corrida",
+  "inicio_utc": "2026-10-25T11:45:01+00:00",
+  "fin_utc": "2026-10-25T11:55:50+00:00",
+  "test_id": "P027",
+  "veredicto": "revisar"
  }
 }

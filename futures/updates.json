@@ -79,6 +79,13 @@
       "test_id": "P026"
     },
     {
+      "date": "2026-10-25",
+      "kind": "prueba",
+      "title": "Prueba P027 · ABD v1 · revisar",
+      "body": "ABD v1: 111 operaciones, ganancia neta $5,720 con costos base, p contra RAND 0.001, estrés $4,900, Topstep 0.0% de las cuentas (RAND 0.0%). Veredicto: revisar. Causa: placebo desplazado sospechoso: revisión de código pendiente; además: DSR 0.001 < 0.95 con 842 intentos; 57.8% de la ganancia en 5 días; pasa Topstep solo 0.0%.",
+      "test_id": "P027"
+    },
+    {
       "date": "2026-10-24",
       "kind": "avance",
       "title": "Comité con PIN: Jose Miguel y Oscar votan desde la página",
