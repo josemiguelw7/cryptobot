@@ -121,6 +121,13 @@
       "test_id": "P032"
     },
     {
+      "date": "2026-10-25",
+      "kind": "prueba",
+      "title": "Prueba P033 · ABQ v1 · no pasa",
+      "body": "ABQ v1: 167 operaciones, ganancia neta $-1,961 con costos base, p contra RAND 0.2428, estrés $-3,230, Topstep 0.0% de las cuentas (RAND 0.0%). Veredicto: no pasa. Causa: pierde con costos base; no gana a RAND (p=0.2428); no gana a RAND2 con las mismas salidas (p=0.2527); DSR 0.0 < 0.95 con 944 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%.",
+      "test_id": "P033"
+    },
+    {
       "date": "2026-10-24",
       "kind": "avance",
       "title": "Comité con PIN: Jose Miguel y Oscar votan desde la página",
