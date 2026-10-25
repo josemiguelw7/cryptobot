@@ -1,0 +1,37 @@
+{
+ "version": 21,
+ "fecha_registro": "2026-10-25",
+ "titulo": "Tanda 20 · ABT v1 (absorción a favor de la tendencia, días que abren fuera del valor)",
+ "estado": "Escrita por el investigador autónomo; sellada y congelada al publicar. Primera versión de ABT. Investigación: docs/investigacion/absorcion_tendencia.md.",
+ "comun": {
+  "instrumento": "NQ (contrato del frente), 1 contrato",
+  "horario": "Nueva York 09:30–15:30 ET",
+  "cierre_forzado": "cualquier posición abierta se cierra a mercado a las 15:45 ET",
+  "noticias": "no se abre de −2 a +5 min de CPI, NFP y Fed",
+  "costos": "comisión Topstep + 1 tick de deslizamiento por lado; prueba extra al doble",
+  "limites_dia": "máximo 6 operaciones por día; se detiene tras 3 pérdidas seguidas",
+  "una_posicion": "nunca más de una posición abierta por estrategia",
+  "umbrales_relativos": "el menor entre el p95 de las 20 sesiones anteriores y el p90 de los volúmenes agresivos de 60 s de los 60 min anteriores de la propia sesión; piso 0.5 × el p95 de 20 sesiones",
+  "datos": "solo periodo de diseño 2024-01-02 a 2026-04-21; el examen sellado no se abre",
+  "control": "RAND emparejado y RAND2 sorteados en la misma ventana 09:30–15:30"
+ },
+ "estrategias": [
+  {
+   "id": "ABT",
+   "version": 1,
+   "nombre": "Absorción a favor de la tendencia",
+   "idea": "Cuando el día abre fuera del valor de ayer, el mercado busca aceptación en la nueva zona. Un retroceso cuyo flujo agresivo es absorbido en un nivel indica que el lado pasivo a favor de la apertura defiende; el precio se aleja del lado absorbido, o sea, a favor del sesgo.",
+   "contexto": "Solo días en que el primer precio de las 09:30 queda por encima del VAH de ayer (solo largos) o por debajo del VAL de ayer (solo cortos).",
+   "disparador": "Volumen agresivo CONTRA el sesgo (ventas si abrió arriba, compras si abrió abajo) en 60 s ≥ umbral relativo, con el precio avanzando ≤ 2 ticks.",
+   "ubicacion": "Extremo de la ventana a ≤ 4 ticks de un nivel: máximo/mínimo/POC/VAH/VAL de ayer, máximo/mínimo de la noche, o POC/VAH/VAL del perfil en desarrollo (no antes de 10 min de sesión).",
+   "confirmacion": "En los 60 s siguientes el delta de la ventana cambia de signo y el precio se aleja ≥ 4 ticks del extremo.",
+   "entrada": "A mercado, a favor del sesgo de la apertura.",
+   "stop": "4 ticks más allá del extremo; entre 12 y 32 ticks.",
+   "objetivo": "2R.",
+   "tiempo_maximo": "15 minutos (o el cierre de las 15:45).",
+   "filtros": "Reglas comunes; niveles de ayer una vez por día; niveles del día un disparo cada 10 min por nivel.",
+   "motivo_cambio": "Estrategia nueva (id ABT). Mismo detector que ABU v1 (copia en v19.py), con dos cambios: el filtro de día se invierte (abre fuera del valor) y solo se opera en la dirección del sesgo. P031 (ABU v2, 2 contratos) mostró que más tamaño no resuelve Topstep (41.2%, 214 de 517 cuentas rompen el MLL); falta frecuencia con 1 contrato, y los días fuera del valor no se habían usado."
+  }
+ ],
+ "nota": "Parámetros en futures/lab/engine/strategies/v19.py::PARAMS['ABT'] (copia de ABU); ventana en run_test.py::RULES_WINDOW."
+}

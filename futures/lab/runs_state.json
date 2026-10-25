@@ -197,7 +197,10 @@
   "veredicto": "revisar"
  },
  "T16-ABU2": {
-  "estado": "corriendo",
-  "inicio_utc": "2026-10-25T14:45:01+00:00"
+  "estado": "corrida",
+  "inicio_utc": "2026-10-25T14:45:01+00:00",
+  "fin_utc": "2026-10-25T15:23:58+00:00",
+  "test_id": "P031",
+  "veredicto": "revisar"
  }
 }
