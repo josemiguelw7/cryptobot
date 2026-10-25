@@ -35,6 +35,7 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 - P031 · ABU v2 · **revisar** · neto 11911.64 · p 0.001 · Topstep 41.2%
 - P032 · ABT v1 · **no_pasa** · neto -3588.84 · p 0.7143 · Topstep 0.0%
 - P033 · ABQ v1 · **no_pasa** · neto -1961.26 · p 0.2428 · Topstep 0.0%
+- P034 · DVG v1 · **no_pasa** · neto -57138.88 · p 0.998 · Topstep 0.0%
 
 ## 2. Qué murió y por qué
 - P013 · POC v1: umbral de orden grande mal calculado (percentil truncado y sobre todas las órdenes: 15 contratos). Ver strategies/v1_aclaraciones.json
@@ -51,6 +52,7 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 - P029 · IMB v1: pierde con costos base; DSR 0.0 < 0.95 con 876 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%
 - P032 · ABT v1: pierde con costos base; no gana a RAND (p=0.7143); no gana a RAND2 con las mismas salidas (p=0.7093); DSR 0.0 < 0.95 con 927 intentos; muere con costos al doble; pierde en 2024, 2025; pasa Topstep solo 0.0%
 - P033 · ABQ v1: pierde con costos base; no gana a RAND (p=0.2428); no gana a RAND2 con las mismas salidas (p=0.2527); DSR 0.0 < 0.95 con 944 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%
+- P034 · DVG v1: pierde con costos base; no gana a RAND (p=0.998); no gana a RAND2 con las mismas salidas (p=1.0); DSR 0.0 < 0.95 con 961 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%
 
 ## 3. Qué está propuesto (decidir: aprobar / descartar / pedir más datos)
 

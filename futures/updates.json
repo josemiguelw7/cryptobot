@@ -128,6 +128,13 @@
       "test_id": "P033"
     },
     {
+      "date": "2026-10-25",
+      "kind": "prueba",
+      "title": "Prueba P034 · DVG v1 · no pasa",
+      "body": "DVG v1: 1296 operaciones, ganancia neta $-57,139 con costos base, p contra RAND 0.998, estrés $-68,575, Topstep 0.0% de las cuentas (RAND 0.5%). Veredicto: no pasa. Causa: pierde con costos base; no gana a RAND (p=0.998); no gana a RAND2 con las mismas salidas (p=1.0); DSR 0.0 < 0.95 con 961 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%.",
+      "test_id": "P034"
+    },
+    {
       "date": "2026-10-24",
       "kind": "avance",
       "title": "Comité con PIN: Jose Miguel y Oscar votan desde la página",

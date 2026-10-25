@@ -653,13 +653,17 @@
    "nombre": "DVG v1: divergencia de delta acumulado en el extremo del día",
    "hipotesis": "Un nuevo máximo (mínimo) de la sesión con menos (más) delta acumulado que el extremo anterior, tras un retroceso ≥ 10 ticks, es un empuje agotado: confirmado con 3 ticks de retorno en 30 s, el precio se aleja del extremo más que un RAND emparejado (~4 señales por día, sin depender de niveles de ayer).",
    "origen": "P033 (ABQ v1) no pasa: la absorción depende de niveles y de días de balance y no gana frecuencia; falta una señal de flujo agresivo independiente del nivel",
-   "estado": "congelada",
+   "estado": "corrida",
    "estrategia": "DVG",
    "version": 1,
    "estudio": "dvg_v1",
    "requisitos": [],
    "decision": "decidida por el investigador; justificación en docs/investigacion/divergencia_delta.md; reglas en strategies/v23.json (código engine/strategies/v21.py; ventana y tope diario en run_test.py::RULES_WINDOW)",
-   "notas": "1 definición base + 12 sensibilidades (13 intentos). Exploratoria, 1 contrato. Humo: 4/5/3 señales en 3 días, nunca ganancias."
+   "notas": "1 definición base + 12 sensibilidades (13 intentos). Exploratoria, 1 contrato. Humo: 4/5/3 señales en 3 días, nunca ganancias.",
+   "inicio_utc": "2026-10-25T18:15:01+00:00",
+   "fin_utc": "2026-10-25T18:31:17+00:00",
+   "test_id": "P034",
+   "veredicto": "no_pasa"
   }
  ]
 }

@@ -216,5 +216,12 @@
   "fin_utc": "2026-10-25T17:54:04+00:00",
   "test_id": "P033",
   "veredicto": "no_pasa"
+ },
+ "T19-DVG": {
+  "estado": "corrida",
+  "inicio_utc": "2026-10-25T18:15:01+00:00",
+  "fin_utc": "2026-10-25T18:31:17+00:00",
+  "test_id": "P034",
+  "veredicto": "no_pasa"
  }
 }
