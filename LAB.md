@@ -1,13 +1,13 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-25 13:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-25 13:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
 ## En una línea
 
 - Sesiones válidas de diseño: **576** (examen sellado desde 2026-04-22, cerrado).
-- Intentos registrados: **875** · pruebas publicadas: **27** (error 1, superada 7, no_pasa 10, revisar 9).
+- Intentos registrados: **892** · pruebas publicadas: **28** (error 1, superada 7, no_pasa 11, revisar 9).
 - Estrategias aprobadas por el comité: **0**. Nada toca dinero real.
 
 ## Pruebas corridas
@@ -41,6 +41,7 @@ Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` �
 | P026 | ABI v2 | **no_pasa** | −$1,124 | 0.3606 | 0.0% | pierde con costos base; no gana a RAND (p=0.3606); no gana a RAND2 con las mismas salidas (p=0.3057); DSR 0.0  |
 | P027 | ABD v1 | **revisar** | $5,720 | 0.001 | 0.0% | placebo desplazado sospechoso: revisión de código pendiente; además: DSR 0.001 < 0.95 con 842 intentos; 57.8%  |
 | P028 | VBR v1 | **no_pasa** | −$33,702 | 1.0 | 0.0% | pierde con costos base; no gana a RAND (p=1.0); no gana a RAND2 con las mismas salidas (p=0.998); DSR 0.0 < 0. |
+| P029 | IMB v1 | **no_pasa** | −$23,784 | 0.001 | 0.0% | pierde con costos base; DSR 0.0 < 0.95 con 876 intentos; muere con costos al doble; pierde en 2024, 2025, 2026 |
 
 ## Cola de pruebas (backlog)
 
@@ -81,7 +82,8 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 | T11-ABI2 | ABI v2: absorción en los niveles del propio día, tarde (11:30–15:30) | **corrida** → P026 | P021 + parte del día nunca medida |  |
 | T12-ABD | ABD v1: absorción en niveles de ayer, solo días que abren dentro del valor | **corrida** → P027 | P012/P014/P016/P017/P020: la absorción y la aceptación solo ganan en días que abren dentro del valor; ABS agotó sus 3 versiones |  |
 | T13-VBR | VBR v1: reversión a la VWAP desde la banda de 2σ, días que abren dentro del valor | **corrida** → P028 | P012/P016/P017/P027: lo que gana lo hace en días de balance, pero con ~100 operaciones y Topstep bajo; se busca una idea distinta con más frecuencia |  |
-| T14-IMB | IMB v1: desequilibrios diagonales apilados y reprueba de la zona | **corriendo** | hueco de investigación: desequilibrios nunca probados; la absorción (única positiva) tiene pocas operaciones y no llega a Topstep · P028 (VBR) no pasa |  |
+| T14-IMB | IMB v1: desequilibrios diagonales apilados y reprueba de la zona | **corrida** → P029 | hueco de investigación: desequilibrios nunca probados; la absorción (única positiva) tiene pocas operaciones y no llega a Topstep · P028 (VBR) no pasa |  |
+| T15-ABU | ABU v1: absorción unificada (niveles de ayer + valor en desarrollo), solo días que abren dentro del valor | **congelada** | P027 (ABD v1) + P021/P022 por régimen · P029 (IMB v1) no pasa: la pila de desequilibrios no tiene ventaja bruta |  |
 
 ## Estudios y cuenta de intentos
 
@@ -110,7 +112,8 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - **abi_v2**: ABI v2 (misma absorción en los niveles del propio día que ABI v1, pero en la tarde de Nueva York, entradas 11:30–15:30, cierre 15:45, umbral · declarados 17, usados 17
 - **abd_v1**: ABD v1 (absorción de flujo agresivo en los niveles de ayer y de la noche, solo en días que abren dentro del valor de ayer, entradas 09:30–15 · declarados 17, usados 17
 - **vbr_v1**: VBR v1 (reversión a la VWAP desde la banda de 2σ, solo en días que abren dentro del valor de ayer): cuando el precio toca VWAP ± 2σ (pondera · declarados 17, usados 17
-- **imb_v1**: IMB v1 (desequilibrios diagonales apilados): cuando en 60 s hay 3 o más precios seguidos con desequilibrio agresivo diagonal >= 3:1 y >= 10  · declarados 17, usados 0
+- **imb_v1**: IMB v1 (desequilibrios diagonales apilados): cuando en 60 s hay 3 o más precios seguidos con desequilibrio agresivo diagonal >= 3:1 y >= 10  · declarados 17, usados 17
+- **abu_v1**: ABU v1 (absorción de flujo agresivo en los niveles de ayer y de la noche y en POC/VAH/VAL del perfil en desarrollo, solo en días que abren d · declarados 17, usados 0
 
 ## Mapa de señales (resumen)
 
