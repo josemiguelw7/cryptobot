@@ -1,0 +1,38 @@
+{
+ "version": 5,
+ "fecha_registro": "2026-10-24",
+ "titulo": "Tanda 4 · ABS v3 (absorción con entrada temprana)",
+ "estado": "Aprobadas por Jose Miguel el 24/10/2026 (T2-ABS-EARLY). Escrita por el investigador autónomo; sellada y congelada al publicar.",
+ "comun": {
+  "instrumento": "NQ (contrato del frente), 1 contrato por operación en la v1",
+  "horario": "Nueva York 09:30–11:30 ET (igual que todas las pruebas: el horario vive en el motor y en RAND, no se cambia en esta versión)",
+  "cierre_forzado": "cualquier posición abierta se cierra a mercado a las 11:45 ET",
+  "noticias": "no se abre de −2 a +5 min de CPI, NFP y Fed",
+  "costos": "comisión Topstep + 1 tick de deslizamiento por lado; prueba extra al doble",
+  "limites_dia": "máximo 6 operaciones por estrategia por día; se detiene tras 3 pérdidas seguidas",
+  "una_posicion": "nunca más de una posición abierta por estrategia",
+  "niveles_de_referencia": "del día anterior (perfil de Nueva York): POC, VAH, VAL (70%), máximo y mínimo; de la noche (18:00–09:30 ET): máximo y mínimo; VWAP del día desde las 09:30",
+  "umbrales_relativos": "todo umbral en percentiles se calcula con las 20 sesiones ANTERIORES, tramo de Nueva York; nunca con el mismo día ni con el futuro",
+  "datos": "solo periodo de diseño 2024-01-02 a 2026-04-21; el examen sellado no se abre",
+  "control": "RAND emparejado: mismas cantidades de operaciones por día, misma dirección al azar, misma duración y mismo horario"
+ },
+ "estrategias": [
+  {
+   "id": "ABS",
+   "version": 3,
+   "nombre": "Absorción · entrada temprana",
+   "idea": "ABS v1 y v2 ganan a RAND (p ≈ 0.003) pero el placebo desplazado 5 min antes gana más: el valor está en el nivel y en entrar cerca del extremo absorbido. Entrar al detectar la absorción, sin esperar 60 s de confirmación, queda más cerca del extremo y deja un stop más corto.",
+   "contexto": "Niveles del día anterior y de la noche (POC, VAH, VAL, máximo, mínimo).",
+   "disparador": "Volumen agresivo de un lado ≥ percentil 95 en 60 s (20 sesiones anteriores) sin que el precio avance más de 2 ticks.",
+   "ubicacion": "El extremo de la ventana está a ≤ 4 ticks de un nivel de referencia. Un solo disparo por nivel y por día.",
+   "confirmacion": "Ninguna (se quitó la confirmación de 60 s de v1).",
+   "entrada": "A mercado, en contra del lado absorbido, al cerrar la ventana de 60 s.",
+   "stop": "4 ticks más allá del extremo; entre 12 y 32 ticks.",
+   "objetivo": "160 ticks (no se toca): sale por tiempo, como ABS v2.",
+   "tiempo_maximo": "15 minutos.",
+   "filtros": "Reglas comunes.",
+   "motivo_cambio": "Versión 3 de 3 (la última de ABS). Combina T2-ABS-EARLY con la salida por tiempo de v2. La parte T2-ABS-HOURS (ampliar a 15:30) no entra: requiere cambiar el horario del motor y de RAND, que están protegidos."
+  }
+ ],
+ "nota": "Parámetros en futures/lab/engine/strategies/v3.py::PARAMS['ABS3']."
+}

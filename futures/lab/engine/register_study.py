@@ -7,6 +7,13 @@ import sys
 from . import registry, config
 
 STUDIES = {
+    "abs_v3": {
+        "hypothesis": "ABS v3 (absorción con entrada temprana, sin confirmación de 60 s, stop v1, salida por tiempo a 15 min) gana a RAND y RAND2 después de costos, es positiva en 2024, 2025 y 2026, y sube la tasa de Topstep sobre el 41-43% de ABS v2.",
+        "n_declared": 1 + 16,
+        "kill": ["ganancia neta <= 0 con costos base", "p vs RAND > 0.20", "pierde en 2 de 3 años", "rompe MLL en > 50% de arranques"],
+        "strategies": ["ABS v3"],
+        "notes": "1 prueba + 16 de sensibilidad (4 parámetros x 4 vecinos). Tercera y última versión de ABS. T2-ABS-HOURS descartada (requiere cambio de motor).",
+    },
     "salidas_1_1": {"hypothesis": "Repetición del estudio de salidas (pedido de Oscar) con el motor 1.1 y percentiles exactos.", "n_declared": 159, "kill": ["sin meseta"], "strategies": ["BIG v1", "ABS v1", "POC v1 (salidas)"], "notes": "Repite salidas_v1 (motor 1.0, superado)."},
     "mapa_v4": {"hypothesis": "Repetición del mapa v3 con percentiles exactos de órdenes y ventanas (los umbrales de 'órdenes grandes' y 'absorción' cambian).", "n_declared": 72, "kill": ["no sobrevive Holm", "signo distinto 2024/2025"], "strategies": ["12 señales × régimen"], "notes": "Repite mapa_v3 (umbrales del motor 1.0)."},
     "repeticion_1_1": {
