@@ -7,6 +7,13 @@ import sys
 from . import registry, config
 
 STUDIES = {
+    "dvg_v1": {
+        "hypothesis": "DVG v1 (divergencia de delta acumulado en el extremo del día: nuevo máximo de la sesión con menos delta acumulado que el máximo anterior, marcado hace ≥ 2 min y con retroceso intermedio ≥ 10 ticks, y espejo para mínimos; confirmación: el precio se aleja 3 ticks del extremo en 30 s; entrada a mercado en contra, stop 3 ticks más allá (8–24), objetivo 2R, salida a 5 min, hasta 8 operaciones por día, 09:30–15:30, no antes de 10 min de sesión, 1 contrato): el precio se aleja del extremo agotado más de lo que lo hace un RAND emparejado y RAND2 sorteados en la misma ventana; gana después de costos, es positiva en 2024, 2025 y 2026 y tiene al menos 100 operaciones.",
+        "n_declared": 1 + 12,
+        "kill": ["ganancia neta <= 0 con costos base", "p vs RAND > 0.20", "pierde en 2 de 3 años", "rompe MLL en > 50% de arranques"],
+        "strategies": ["DVG v1"],
+        "notes": "1 prueba + 12 de sensibilidad (retroceso 6/8/12/14 ticks, alejamiento 1/2/4/5 ticks, objetivo 1/1.5/2.5/3 R). Definición fijada antes de correr (docs/investigacion/divergencia_delta.md) a partir de la regla común de CVD (precio máximo más alto, delta máximo más bajo); no se compararon otras definiciones (pivotes, delta por vela). Humo: solo señales en 3 días (4, 5 y 3), nunca ganancias. Exploratoria: sale de ver que solo la familia de absorción funciona y que depende de niveles de ayer; NO es evidencia independiente. Pregunta única: ¿el agotamiento de delta en el extremo del propio día, que ocurre ~4 veces al día, aleja el precio más que el azar emparejado?",
+    },
     "abq_v1": {
         "hypothesis": "ABQ v1 (el detector de absorción de ABU v1 a escala de scalping: ventana de flujo agresivo de 30 s con umbral relativo p90 de la hora anterior, confirmación a 20 s, stop 8–20 ticks, objetivo 2R, salida a 5 min, hasta 12 operaciones por día; mismos niveles de ayer, de la noche y POC/VAH/VAL del día, solo días que abren dentro del valor de ayer, 09:30–15:30, 1 contrato): el precio se aleja del lado absorbido más de lo que lo hace un RAND emparejado y RAND2 sorteados en la misma ventana; gana después de costos, es positiva en 2024, 2025 y 2026 y tiene al menos 100 operaciones.",
         "n_declared": 1 + 16,

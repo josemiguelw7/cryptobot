@@ -1,0 +1,35 @@
+{
+ "version": 23,
+ "fecha_registro": "2026-10-25",
+ "titulo": "Tanda 22 · DVG v1 (divergencia de delta acumulado en el extremo del día)",
+ "estado": "Escrita por el investigador autónomo; sellada y congelada al publicar. Primera versión de DVG (máximo 3). Investigación: docs/investigacion/divergencia_delta.md.",
+ "comun": {
+  "instrumento": "NQ (contrato del frente), 1 contrato por operación",
+  "horario": "Nueva York 09:30–15:30 ET",
+  "cierre_forzado": "cualquier posición abierta se cierra a mercado a las 15:45 ET",
+  "noticias": "no se abre de −2 a +5 min de CPI, NFP y Fed",
+  "costos": "comisión Topstep + 1 tick de deslizamiento por lado; prueba extra al doble",
+  "limites_dia": "máximo 8 operaciones por día; se detiene tras 3 pérdidas seguidas",
+  "una_posicion": "nunca más de una posición abierta por estrategia",
+  "datos": "solo periodo de diseño 2024-01-02 a 2026-04-21; el examen sellado no se abre",
+  "control": "RAND emparejado y RAND2 con las mismas salidas, sorteados en la misma ventana 09:30–15:30"
+ },
+ "estrategias": [
+  {
+   "id": "DVG",
+   "version": 1,
+   "nombre": "Divergencia de delta acumulado en el extremo del día",
+   "idea": "Un nuevo máximo (mínimo) de la sesión que llega con menos delta acumulado que el máximo (mínimo) anterior es un empuje agotado; el precio vuelve en pocos minutos.",
+   "contexto": "Extremo de la propia sesión; no usa niveles de ayer ni tipo de día. No antes de 10 min de sesión.",
+   "disparador": "Nuevo máximo de sesión (celda de 10 s) con: máximo anterior marcado hace ≥ 2 min, retroceso intermedio ≥ 10 ticks, y delta acumulado de la sesión menor que en el máximo anterior. Espejo para mínimos (delta acumulado mayor).",
+   "confirmacion": "En los 30 s siguientes el precio se aleja 3 ticks del extremo sin hacer otro extremo.",
+   "entrada": "A mercado, en contra del extremo.",
+   "stop": "3 ticks más allá del extremo; entre 8 y 24 ticks.",
+   "objetivo": "2R.",
+   "tiempo_maximo": "5 minutos (o el cierre de las 15:45).",
+   "filtros": "Reglas comunes.",
+   "motivo_cambio": "Estrategia nueva: la familia de absorción (ABU/ABD/ABT/ABQ) depende de niveles y de días de balance y es lenta; esta usa solo el extremo del día y otra señal de flujo agresivo (agotamiento por delta acumulado). Humo: 3 días, 4/5/3 señales, sin mirar ganancias."
+  }
+ ],
+ "nota": "Parámetros en futures/lab/engine/strategies/v21.py::PARAMS['DVG']; ventana y tope diario en run_test.py::RULES_WINDOW."
+}
