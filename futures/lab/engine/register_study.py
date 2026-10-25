@@ -7,6 +7,13 @@ import sys
 from . import registry, config
 
 STUDIES = {
+    "abq_v1": {
+        "hypothesis": "ABQ v1 (el detector de absorción de ABU v1 a escala de scalping: ventana de flujo agresivo de 30 s con umbral relativo p90 de la hora anterior, confirmación a 20 s, stop 8–20 ticks, objetivo 2R, salida a 5 min, hasta 12 operaciones por día; mismos niveles de ayer, de la noche y POC/VAH/VAL del día, solo días que abren dentro del valor de ayer, 09:30–15:30, 1 contrato): el precio se aleja del lado absorbido más de lo que lo hace un RAND emparejado y RAND2 sorteados en la misma ventana; gana después de costos, es positiva en 2024, 2025 y 2026 y tiene al menos 100 operaciones.",
+        "n_declared": 1 + 16,
+        "kill": ["ganancia neta <= 0 con costos base", "p vs RAND > 0.20", "pierde en 2 de 3 años", "rompe MLL en > 50% de arranques"],
+        "strategies": ["ABQ v1"],
+        "notes": "1 prueba + 16 de sensibilidad de señal (cercanía 2/3/5/6 ticks, confirmación 10/15/25/30 s, percentil relativo 86/88/92/94, objetivo 1/1.5/2.5/3 R). Definición fijada antes de correr (docs/investigacion/absorcion_rapida.md); una sola escala (30 s), no se compararon otras como candidatas. Solo se contaron señales (80 sesiones consecutivas: ABQ 32, ABU 33), nunca ganancias. Exploratoria: sale de ver que ABU (P030/P031) es la única con ventaja; NO es evidencia independiente ni resuelve la frecuencia (misma cantidad de señales). Pregunta única: ¿la ventaja de ABU sobrevive a una escala de segundos-minutos con menos riesgo por operación?",
+    },
     "abt_v1": {
         "hypothesis": "ABT v1 (absorción de flujo agresivo A FAVOR de la tendencia, solo en días que abren FUERA del valor de ayer: si abre sobre el VAH solo se compra la venta agresiva absorbida, si abre bajo el VAL solo se vende la compra agresiva absorbida; niveles de ayer, de la noche y POC/VAH/VAL del perfil en desarrollo; detector, confirmación a 60 s, stop 12–32, objetivo 2R y salida a 15 min de ABU v1; 1 contrato): el precio se aleja del lado absorbido más de lo que lo hace un RAND emparejado y RAND2 sorteados en la misma ventana; gana después de costos, es positiva en 2024, 2025 y 2026 y tiene al menos 100 operaciones.",
         "n_declared": 1 + 16,

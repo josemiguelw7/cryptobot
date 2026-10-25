@@ -1,5 +1,5 @@
 {
- "actualizado_utc": "2026-10-25T15:33:02Z",
+ "actualizado_utc": "2026-10-25T17:03:42Z",
  "porcentaje": 40,
  "criterios": {
   "a_ganancia_neta_positiva": {
@@ -28,8 +28,8 @@
   "test_id": "P031",
   "por_que": "+$11.9k, p 0.001 contra RAND, positiva los 3 años. Pero 'revisar' (placebo sospechoso), DSR 0, Topstep 41.2% y 214 cuentas rompen el MLL. 40% es un techo generoso: sin revisión de código."
  },
- "ultima_accion": "Leí P031 (ABU v2): más contratos no resuelven Topstep (41.2%, 214 de 517 cuentas rompen el MLL). Dejé congelada ABT v1 (T17-ABT): absorción a favor de la tendencia en días que abren fuera del valor, los días que ABU no opera. Reglas en strategies/v21.json, código engine/strategies/v19.py, estudio abt_v1 (17 intentos), investigación en docs/investigacion/absorcion_tendencia.md. Humo: ~165 señales esperadas; la corrida corta de 80 sesiones funciona.",
- "siguiente_idea": "Si ABT v1 gana y es positiva, la siguiente es una estrategia que una ABU+ABT (más frecuencia con 1 contrato) y revisar el placebo de la familia. Si no, la absorción en NY está agotada: falta overnight/Londres, que requiere que un humano permita cargar sesiones completas en rand.py/run_test.py. E-HVN-FUERZA sigue sin runner de estudios.",
+ "ultima_accion": "Leí P032 (ABT v1): no pasa, −$3,588, p 0.71; ampliar a días fuera del valor no sirve. Dejé congelada ABQ v1 (T18-ABQ): el detector de ABU a escala de 30 s, stop 8–20 ticks, salida a 5 min. Reglas en strategies/v22.json, código engine/strategies/v20.py, estudio abq_v1 (17 intentos), investigación en docs/investigacion/absorcion_rapida.md. Humo: 32 señales en 80 sesiones, igual que ABU (33): no gana frecuencia, solo prueba la escala.",
+ "siguiente_idea": "Si ABQ v1 no gana, la absorción en NY queda agotada con las herramientas actuales: falta overnight/Londres (requiere que un humano permita sesiones completas en rand.py/run_test.py) y el runner de estudios para E-HVN-FUERZA. Una idea nueva sería una regla de flujo agresivo con otra señal de entrada que no dependa de estar cerca de un nivel.",
  "historial": [
   "2026-10-25T02:45:53Z · Primera corrida del investigador: ABS v3 congelada (entrada temprana). Mejor prueba P012: 20%.",
   "2026-10-25T03:33:46Z · Segunda corrida: ACC v1 congelada (aceptación VAH/VAL). P016 (ABS v3) no mejora. Mejor prueba P012: 20%.",
@@ -37,6 +37,7 @@
   "2026-10-25T12:33:19Z · Corrida 12: IMB v1 congelada (desequilibrios apilados). P028 (VBR v1) no pasa (−$33.7k). Clon reparado. Mejor prueba P012: 20%.",
   "2026-10-25T13:33:04Z · Corrida 13: ABU v1 congelada (absorción unificada). P029 (IMB v1) no pasa (−$23.8k, 0 caminos CPCV positivos). Mejor prueba P012: 20%.",
   "2026-10-25T14:33:56Z · Corrida 14: ABU v2 congelada (2 contratos). P030 (ABU v1): +$5,956, p 0.001, positiva 3 años, Topstep 9.9%, 'revisar'. Mejor prueba P030: 40% (a y d).",
-  "2026-10-25T15:33:02Z · Corrida 15: ABT v1 congelada (absorción a favor de la tendencia, días fuera del valor). P031 (ABU v2): +$11.9k, p 0.001, Topstep 41.2%, 214 cuentas rompen MLL. Mejor prueba P031: 40% (a y d)."
+  "2026-10-25T15:33:02Z · Corrida 15: ABT v1 congelada (absorción a favor de la tendencia, días fuera del valor). P031 (ABU v2): +$11.9k, p 0.001, Topstep 41.2%, 214 cuentas rompen MLL. Mejor prueba P031: 40% (a y d).",
+  "2026-10-25T17:03:42Z · Corrida 16: ABQ v1 congelada (absorción rápida, 30 s). P032 (ABT v1) no pasa (−$3.6k, p 0.71). Mejor prueba P031: 40% (a y d)."
  ]
 }

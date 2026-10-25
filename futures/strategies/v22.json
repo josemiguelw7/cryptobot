@@ -1,0 +1,37 @@
+{
+ "version": 22,
+ "fecha_registro": "2026-10-25",
+ "titulo": "Tanda 21 · ABQ v1 (absorción rápida: el detector de ABU a escala de 30 s, solo días que abren dentro del valor)",
+ "estado": "Escrita por el investigador autónomo; sellada y congelada al publicar. Primera versión de ABQ (máximo 3). Investigación: docs/investigacion/absorcion_rapida.md.",
+ "comun": {
+  "instrumento": "NQ (contrato del frente), 1 contrato por operación",
+  "horario": "Nueva York 09:30–15:30 ET",
+  "cierre_forzado": "cualquier posición abierta se cierra a mercado a las 15:45 ET",
+  "noticias": "no se abre de −2 a +5 min de CPI, NFP y Fed",
+  "costos": "comisión Topstep + 1 tick de deslizamiento por lado; prueba extra al doble",
+  "limites_dia": "máximo 12 operaciones por día; se detiene tras 3 pérdidas seguidas",
+  "una_posicion": "nunca más de una posición abierta por estrategia",
+  "umbrales_relativos": "p90 de los volúmenes agresivos de 30 s de los 60 min anteriores de la propia sesión (con al menos 10 min de historia); antes de eso, 0.5 × el p95 de 60 s de las 20 sesiones anteriores; piso siempre 0.25 × ese p95 de 60 s",
+  "datos": "solo periodo de diseño 2024-01-02 a 2026-04-21; el examen sellado no se abre",
+  "control": "RAND emparejado y RAND2 con las mismas salidas, sorteados en la misma ventana 09:30–15:30"
+ },
+ "estrategias": [
+  {
+   "id": "ABQ",
+   "version": 1,
+   "nombre": "Absorción rápida en niveles de ayer y valor en desarrollo",
+   "idea": "El flujo agresivo que no logra mover el precio en un borde de valor (de ayer o del propio día) en un día de balance es absorbido por liquidez pasiva; a escala de 30 s el precio se aleja del lado absorbido en pocos minutos.",
+   "contexto": "Solo días en que el primer precio de las 09:30 cae entre VAL y VAH de ayer.",
+   "disparador": "Volumen agresivo de un lado en 30 s ≥ umbral relativo, con el precio avanzando ≤ 2 ticks.",
+   "ubicacion": "Extremo de la ventana a ≤ 4 ticks de un nivel: máximo/mínimo/POC/VAH/VAL de ayer, máximo/mínimo de la noche, o POC/VAH/VAL del perfil en desarrollo (VAH solo compra absorbida, VAL solo venta absorbida; no antes de 10 min de sesión). Mismo universo que ABU v1.",
+   "confirmacion": "En los 20 s siguientes el delta de la ventana de 30 s cambia de signo y el precio se aleja ≥ 3 ticks del extremo.",
+   "entrada": "A mercado, en contra del lado absorbido.",
+   "stop": "3 ticks más allá del extremo; entre 8 y 20 ticks.",
+   "objetivo": "2R.",
+   "tiempo_maximo": "5 minutos (o el cierre de las 15:45).",
+   "filtros": "Reglas comunes; niveles de ayer una vez por día; niveles del día un disparo cada 5 min por nivel.",
+   "motivo_cambio": "Estrategia nueva (ABU agotó 2 de 3 versiones y ABT no pasó). Misma familia, otra escala de tiempo: pregunta si la ventaja de ABU sobrevive con ventanas, stops y tiempo en mercado más cortos (scalping de segundos a minutos). Humo: solo señales (80 sesiones consecutivas: ABQ 32, ABU 33), sin ganancias."
+  }
+ ],
+ "nota": "Parámetros en futures/lab/engine/strategies/v20.py::PARAMS['ABQ']; ventana y tope diario en run_test.py::RULES_WINDOW."
+}
