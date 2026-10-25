@@ -368,6 +368,14 @@
     "indicador C# para ATAS"
    ],
    "decision": "aprobada por Oscar 2026-10-24 (lo pidió él en el buzón)"
+  },
+  {
+   "id": "E-ACEPTACION-VA",
+   "nombre": "Estudio: aceptación vs rechazo en VAL, VAH y HVN",
+   "hipotesis": "Medir si, cuando el precio es aceptado (permanece N minutos o cierres) más allá de VAL/VAH o dentro de un HVN del día anterior, continúa hacia el otro extremo del valor o el POC más que niveles al azar. Comparar contra rechazo en los mismos niveles, a 5, 15 y 30 min, con definición congelada antes de correr.",
+   "origen": "nota del buzón de Oscar (2026-10-25), resumida por el asistente",
+   "estado": "aprobada",
+   "decision": "pedida por Oscar en el buzón 2026-10-25"
   }
  ]
 }
