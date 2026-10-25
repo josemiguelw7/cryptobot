@@ -107,6 +107,13 @@
       "test_id": "P030"
     },
     {
+      "date": "2026-10-25",
+      "kind": "prueba",
+      "title": "Prueba P031 · ABU v2 · revisar",
+      "body": "ABU v2: 181 operaciones, ganancia neta $11,912 con costos base, p contra RAND 0.001, estrés $9,772, Topstep 41.2% de las cuentas (RAND 3.4%). Veredicto: revisar. Causa: placebo desplazado sospechoso: revisión de código pendiente; además: DSR 0.0 < 0.95 con 910 intentos; 69.1% de la ganancia en 5 días; pasa Topstep solo 41.2%.",
+      "test_id": "P031"
+    },
+    {
       "date": "2026-10-24",
       "kind": "avance",
       "title": "Comité con PIN: Jose Miguel y Oscar votan desde la página",
