@@ -23,6 +23,13 @@
       "test_id": "P018"
     },
     {
+      "date": "2026-10-25",
+      "kind": "prueba",
+      "title": "Prueba P019 · VAR v1 · no pasa",
+      "body": "VAR v1: 113 operaciones, ganancia neta $-7,947 con costos base, p contra RAND 0.8911, estrés $-8,567, Topstep 0.0% de las cuentas (RAND 4.8%). Veredicto: no pasa. Causa: pierde con costos base; no gana a RAND (p=0.8911); no gana a RAND2 con las mismas salidas (p=0.9131); DSR 0.0 < 0.95 con 714 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%.",
+      "test_id": "P019"
+    },
+    {
       "date": "2026-10-24",
       "kind": "avance",
       "title": "Comité con PIN: Jose Miguel y Oscar votan desde la página",

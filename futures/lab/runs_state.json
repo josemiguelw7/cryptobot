@@ -111,5 +111,12 @@
   "fin_utc": "2026-10-25T04:51:15+00:00",
   "test_id": "P018",
   "veredicto": "no_pasa"
+ },
+ "T4-VAR": {
+  "estado": "corrida",
+  "inicio_utc": "2026-10-25T05:15:01+00:00",
+  "fin_utc": "2026-10-25T05:17:46+00:00",
+  "test_id": "P019",
+  "veredicto": "no_pasa"
  }
 }
