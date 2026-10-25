@@ -72,6 +72,13 @@
       "test_id": "P025"
     },
     {
+      "date": "2026-10-25",
+      "kind": "prueba",
+      "title": "Prueba P026 · ABI v2 · no pasa",
+      "body": "ABI v2: 132 operaciones, ganancia neta $-1,124 con costos base, p contra RAND 0.3606, estrés $-2,898, Topstep 0.0% de las cuentas (RAND 1.4%). Veredicto: no pasa. Causa: pierde con costos base; no gana a RAND (p=0.3606); no gana a RAND2 con las mismas salidas (p=0.3057); DSR 0.0 < 0.95 con 825 intentos; muere con costos al doble; pierde en 2024, 2025; pasa Topstep solo 0.0%.",
+      "test_id": "P026"
+    },
+    {
       "date": "2026-10-24",
       "kind": "avance",
       "title": "Comité con PIN: Jose Miguel y Oscar votan desde la página",
