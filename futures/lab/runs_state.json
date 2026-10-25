@@ -132,5 +132,9 @@
   "fin_utc": "2026-10-25T06:47:59+00:00",
   "test_id": "P021",
   "veredicto": "revisar"
+ },
+ "T7-ABV": {
+  "estado": "corriendo",
+  "inicio_utc": "2026-10-25T07:15:01+00:00"
  }
 }

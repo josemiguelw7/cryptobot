@@ -1,6 +1,6 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-25 07:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-25 07:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
@@ -85,6 +85,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - **regla80_v1**: VAR v1 (regla del 80%, pendiente de aceptacion.md): cuando el precio abre fuera del área de valor de ayer (VAH/VAL), vuelve adentro y se que · declarados 17, usados 15
 - **aceptacion_v2**: ACC v2 (aceptación fuera de los bordes de la subasta anterior: VAH, VAL, máximo y mínimo de ayer, máximo y mínimo de la noche; solo días que · declarados 17, usados 14
 - **abi_v1**: ABI v1 (absorción en los niveles del propio día: máximo y mínimo de la sesión, VWAP, POC/VAH/VAL del perfil en desarrollo; mismo detector de · declarados 17, usados 17
+- **abv_v1**: ABV v1 (absorción de flujo agresivo en POC, VAH y VAL del perfil en desarrollo del propio día; mismo detector que ABS/ABI con confirmación a · declarados 17, usados 0
 
 ## Mapa de señales (resumen)
 
