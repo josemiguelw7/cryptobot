@@ -153,5 +153,12 @@
   "fin_utc": "2026-10-25T08:55:40+00:00",
   "test_id": "P024",
   "veredicto": "no_pasa"
+ },
+ "T10-LVN": {
+  "estado": "corrida",
+  "inicio_utc": "2026-10-25T09:15:01+00:00",
+  "fin_utc": "2026-10-25T09:25:19+00:00",
+  "test_id": "P025",
+  "veredicto": "no_pasa"
  }
 }

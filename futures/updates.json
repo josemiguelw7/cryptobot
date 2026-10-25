@@ -65,6 +65,13 @@
       "test_id": "P024"
     },
     {
+      "date": "2026-10-25",
+      "kind": "prueba",
+      "title": "Prueba P025 · LVN v1 · no pasa",
+      "body": "LVN v1: 381 operaciones, ganancia neta $-8,670 con costos base, p contra RAND 0.6763, estrés $-13,145, Topstep 0.0% de las cuentas (RAND 0.0%). Veredicto: no pasa. Causa: pierde con costos base; no gana a RAND (p=0.6763); no gana a RAND2 con las mismas salidas (p=0.6374); DSR 0.0 < 0.95 con 810 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%.",
+      "test_id": "P025"
+    },
+    {
       "date": "2026-10-24",
       "kind": "avance",
       "title": "Comité con PIN: Jose Miguel y Oscar votan desde la página",

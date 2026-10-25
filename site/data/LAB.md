@@ -1,13 +1,13 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-25 09:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-25 09:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
 ## En una línea
 
 - Sesiones válidas de diseño: **576** (examen sellado desde 2026-04-22, cerrado).
-- Intentos registrados: **809** · pruebas publicadas: **23** (error 1, superada 7, no_pasa 7, revisar 8).
+- Intentos registrados: **824** · pruebas publicadas: **24** (error 1, superada 7, no_pasa 8, revisar 8).
 - Estrategias aprobadas por el comité: **0**. Nada toca dinero real.
 
 ## Pruebas corridas
@@ -37,6 +37,7 @@ Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` �
 | P022 | ABV v1 | **revisar** | $1,819 | 0.1648 | 12.2% | placebo desplazado sospechoso: revisión de código pendiente; además: no gana a RAND (p=0.1648); no gana a RAND |
 | P023 | HVF v1 | **revisar** | $536 | 0.2607 | 4.4% | placebo desplazado sospechoso: revisión de código pendiente; además: no gana a RAND (p=0.2607); no gana a RAND |
 | P024 | ABK v1 | **no_pasa** | −$36,133 | 0.5574 | 8.7% | pierde con costos base; no gana a RAND (p=0.5574); no gana a RAND2 con las mismas salidas (p=0.7812); DSR 0.0  |
+| P025 | LVN v1 | **no_pasa** | −$8,670 | 0.6763 | 0.0% | pierde con costos base; no gana a RAND (p=0.6763); no gana a RAND2 con las mismas salidas (p=0.6374); DSR 0.0  |
 
 ## Cola de pruebas (backlog)
 
@@ -91,7 +92,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - **abv_v1**: ABV v1 (absorción de flujo agresivo en POC, VAH y VAL del perfil en desarrollo del propio día; mismo detector que ABS/ABI con confirmación a · declarados 17, usados 17
 - **hvf_v1**: HVF v1 (E-HVN-FUERZA, pedido de Oscar): la absorción de flujo agresivo (mismo detector que ABS, confirmación a 60 s, salida a 15 min) en un  · declarados 17, usados 17
 - **abk_v1**: ABK v1 (absorción medida con el libro, no solo con el precio): cuando entra ≥ p95 de flujo agresivo de un lado en 60 s, la mejor oferta cont · declarados 17, usados 16
-- **lvn_v1**: LVN v1 (travesía de un vacío de volumen del perfil NY de ayer: cubos de 8 ticks, cubo fino ≤ percentil 20, vacío ≥ 16 ticks): cuando el prec · declarados 17, usados 0
+- **lvn_v1**: LVN v1 (travesía de un vacío de volumen del perfil NY de ayer: cubos de 8 ticks, cubo fino ≤ percentil 20, vacío ≥ 16 ticks): cuando el prec · declarados 17, usados 15
 
 ## Mapa de señales (resumen)
 
