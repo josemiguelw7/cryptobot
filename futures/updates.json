@@ -16,6 +16,13 @@
       "test_id": "P017"
     },
     {
+      "date": "2026-10-25",
+      "kind": "prueba",
+      "title": "Prueba P018 · SMT v1 · no pasa",
+      "body": "SMT v1: 1353 operaciones, ganancia neta $-67,444 con costos base, p contra RAND 0.958, estrés $-77,991, Topstep 1.2% de las cuentas (RAND 4.8%). Veredicto: no pasa. Causa: pierde con costos base; no gana a RAND (p=0.958); no gana a RAND2 con las mismas salidas (p=0.96); DSR 0.0 < 0.95 con 698 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 1.2%.",
+      "test_id": "P018"
+    },
+    {
       "date": "2026-10-24",
       "kind": "avance",
       "title": "Comité con PIN: Jose Miguel y Oscar votan desde la página",

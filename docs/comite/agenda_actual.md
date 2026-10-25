@@ -19,6 +19,7 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 - P015 · BIG v1 · **no_pasa** · neto -2235.06 · p 0.4845 · Topstep 0.0%
 - P016 · ABS v3 · **revisar** · neto 4404.46 · p 0.0539 · Topstep 13.9%
 - P017 · ACC v1 · **revisar** · neto 2028.34 · p 0.1928 · Topstep 0.0%
+- P018 · SMT v1 · **no_pasa** · neto -67444.34 · p 0.958 · Topstep 1.2%
 
 ## 2. Qué murió y por qué
 - P013 · POC v1: umbral de orden grande mal calculado (percentil truncado y sobre todas las órdenes: 15 contratos). Ver strategies/v1_aclaraciones.json
@@ -26,6 +27,7 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 - P010 · BIG v2: pierde con costos base; no gana a RAND (p=0.95); no gana a RAND2 con las mismas salidas (p=0.9391); DSR 0.0 < 0.95 con 569 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%
 - P011 · HVN v1: pierde con costos base; no gana a RAND (p=0.999); no gana a RAND2 con las mismas salidas (p=1.0); DSR 0.0 < 0.95 con 584 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%
 - P015 · BIG v1: pierde con costos base; no gana a RAND (p=0.4845); no gana a RAND2 con las mismas salidas (p=0.4675); DSR 0.0 < 0.95 con 651 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%
+- P018 · SMT v1: pierde con costos base; no gana a RAND (p=0.958); no gana a RAND2 con las mismas salidas (p=0.96); DSR 0.0 < 0.95 con 698 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 1.2%
 
 ## 3. Qué está propuesto (decidir: aprobar / descartar / pedir más datos)
 

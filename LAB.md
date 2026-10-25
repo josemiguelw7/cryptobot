@@ -1,13 +1,13 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-25 04:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-25 05:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
 ## En una línea
 
 - Sesiones válidas de diseño: **576** (examen sellado desde 2026-04-22, cerrado).
-- Intentos registrados: **697** · pruebas publicadas: **16** (error 1, superada 7, no_pasa 4, revisar 4).
+- Intentos registrados: **713** · pruebas publicadas: **17** (error 1, superada 7, no_pasa 5, revisar 4).
 - Estrategias aprobadas por el comité: **0**. Nada toca dinero real.
 
 ## Pruebas corridas
@@ -30,6 +30,7 @@ Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` �
 | P015 | BIG v1 | **no_pasa** | −$2,235 | 0.4845 | 0.0% | pierde con costos base; no gana a RAND (p=0.4845); no gana a RAND2 con las mismas salidas (p=0.4675); DSR 0.0  |
 | P016 | ABS v3 | **revisar** | $4,404 | 0.0539 | 13.9% | placebo desplazado sospechoso: revisión de código pendiente; además: no gana a RAND (p=0.0539); no gana a RAND |
 | P017 | ACC v1 | **revisar** | $2,028 | 0.1928 | 0.0% | placebo desplazado sospechoso: revisión de código pendiente; además: 97 operaciones / 556 sesiones: por debajo |
+| P018 | SMT v1 | **no_pasa** | −$67,444 | 0.958 | 1.2% | pierde con costos base; no gana a RAND (p=0.958); no gana a RAND2 con las mismas salidas (p=0.96); DSR 0.0 < 0 |
 
 ## Cola de pruebas (backlog)
 
@@ -57,7 +58,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 | T2-ABS-HOURS | ABS v1 en toda la sesión de Nueva York | **descartada** | P003 · pocas operaciones | si se combina con T2-ABS-EARLY es una sola v2; máximo 3 versiones |
 | T2-ICE | Icebergs con definición medida | **descartada** | mapa v1 · ice | agregar tamaños 'antes' del libro al lector de sesión |
 | M2-DIR | Mapa v2 con azar de dirección aleatoria | **corrida** → mapa_v2 | revisión del mapa v1 | cambio de código en signal_map.py; estudio mapa_v2 registrado |
-| T3-SMT | Divergencia NQ vs ES (SMT) | **congelada** | videos · plan v1 | descargar datos tick de ES (laptop ATAS); lector canónico para ES · ERROR: SMT v1 no está registrada en ningún strategies/v*.json del commit d2037d12 |
+| T3-SMT | Divergencia NQ vs ES (SMT) | **corrida** → P018 | videos · plan v1 | descargar datos tick de ES (laptop ATAS); lector canónico para ES · ERROR: SMT v1 no está registrada en ningún strategies/v*.json del commit d2037d12 |
 | E-HVN-FUERZA | Estudio: qué hace poderoso a un HVN (base del indicador para ATAS) | **aprobada** | pedido de Oscar en el buzón (24/10/2026): indicador de ATAS que muestre HVN poderosos en vivo | estudio registrado antes de correr (fases y umbrales); definición de 'HVN poderoso' congelada con huella y sello; cheque |
 | E-ACEPTACION-VA | Aceptación fuera del valor (VAH/VAL) · ACC v1 | **corrida** → P017 | nota del buzón de Oscar (2026-10-25), resumida por el asistente |  |
 
@@ -77,7 +78,8 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - **mapa_v4**: Repetición del mapa v3 con percentiles exactos de órdenes y ventanas (los umbrales de 'órdenes grandes' y 'absorción' cambian). · declarados 72, usados 12
 - **abs_v3**: ABS v3 (absorción con entrada temprana, sin confirmación de 60 s, stop v1, salida por tiempo a 15 min) gana a RAND y RAND2 después de costos · declarados 17, usados 16
 - **aceptacion_v1**: Pedido de Oscar (25/10/2026): cuando el precio sale del área de valor de ayer (VAH/VAL) y la acepta (180 s seguidos fuera con delta agresivo · declarados 17, usados 14
-- **smt_v1**: T3-SMT (aprobada por Jose Miguel 24/10/2026): cuando NQ barre el máximo (mínimo) de la sesión y ES no lo confirma, y NQ regresa adentro en m · declarados 17, usados 0
+- **smt_v1**: T3-SMT (aprobada por Jose Miguel 24/10/2026): cuando NQ barre el máximo (mínimo) de la sesión y ES no lo confirma, y NQ regresa adentro en m · declarados 17, usados 16
+- **regla80_v1**: VAR v1 (regla del 80%, pendiente de aceptacion.md): cuando el precio abre fuera del área de valor de ayer (VAH/VAL), vuelve adentro y se que · declarados 17, usados 0
 
 ## Mapa de señales (resumen)
 
@@ -135,12 +137,12 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 
 - 2026-10-25 · prueba · Prueba P016 · ABS v3 · revisar
 - 2026-10-25 · prueba · Prueba P017 · ACC v1 · revisar
+- 2026-10-25 · prueba · Prueba P018 · SMT v1 · no pasa
 - 2026-10-24 · avance · Comité con PIN: Jose Miguel y Oscar votan desde la página
 - 2026-10-24 · avance · Buzón con captura de pantalla en todas las pestañas
 - 2026-10-24 · prueba · Repeticiones con el motor 1.1: BIG v2 (P010) y HVN v1 (P011) no pasan
 - 2026-10-24 · avance · ES y YM en el servidor
 - 2026-10-24 · hallazgo · Revisión ciega: el motor 1.0 era optimista y todas las pruebas se repiten
-- 2026-10-24 · prueba · Prueba P007 · BIG v2 · no pasa
 
 ## Cómo se corre una prueba nueva
 

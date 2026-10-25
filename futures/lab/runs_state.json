@@ -106,8 +106,10 @@
   "veredicto": "revisar"
  },
  "T3-SMT": {
-  "estado": "congelada",
-  "inicio_utc": "2026-10-25T04:30:01+00:00",
-  "ultimo_error": "SMT v1 no est\u00e1 registrada en ning\u00fan strategies/v*.json del commit d2037d12"
+  "estado": "corrida",
+  "inicio_utc": "2026-10-25T04:45:01+00:00",
+  "fin_utc": "2026-10-25T04:51:15+00:00",
+  "test_id": "P018",
+  "veredicto": "no_pasa"
  }
 }
