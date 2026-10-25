@@ -1,0 +1,38 @@
+{
+ "version": 6,
+ "fecha_registro": "2026-10-25",
+ "titulo": "Tanda 5 · ACC v1 (aceptación fuera del área de valor del día anterior)",
+ "estado": "Pedido de Oscar (buzón 25/10/2026). Escrita por el investigador autónomo; sellada y congelada al publicar. Investigación: docs/investigacion/aceptacion.md.",
+ "comun": {
+  "instrumento": "NQ (contrato del frente), 1 contrato por operación en la v1",
+  "horario": "Nueva York 09:30–11:30 ET (los traders estudiados operan casi solo la primera hora u hora y media)",
+  "cierre_forzado": "cualquier posición abierta se cierra a mercado a las 11:45 ET",
+  "noticias": "no se abre de −2 a +5 min de CPI, NFP y Fed",
+  "costos": "comisión Topstep + 1 tick de deslizamiento por lado; prueba extra al doble",
+  "limites_dia": "máximo 6 operaciones por estrategia por día; se detiene tras 3 pérdidas seguidas",
+  "una_posicion": "nunca más de una posición abierta por estrategia",
+  "niveles_de_referencia": "del día anterior (perfil de Nueva York): POC, VAH, VAL (70%), máximo y mínimo; de la noche (18:00–09:30 ET): máximo y mínimo; VWAP del día desde las 09:30",
+  "umbrales_relativos": "todo umbral en percentiles se calcula con las 20 sesiones ANTERIORES, tramo de Nueva York; nunca con el mismo día ni con el futuro",
+  "datos": "solo periodo de diseño 2024-01-02 a 2026-04-21; el examen sellado no se abre",
+  "control": "RAND emparejado: mismas cantidades de operaciones por día, misma dirección al azar, misma duración y mismo horario"
+ },
+ "estrategias": [
+  {
+   "id": "ACC",
+   "version": 1,
+   "nombre": "Aceptación fuera del valor · continuación",
+   "idea": "Si el precio sale del área de valor de ayer y la acepta (se queda fuera con flujo agresivo a favor), el valor se desplaza y el precio continúa.",
+   "contexto": "VAH y VAL del perfil de Nueva York del día anterior.",
+   "disparador": "Primer llenado fuera del VAH (arriba) o del VAL (abajo) viniendo de adentro; el hueco de apertura queda fuera.",
+   "ubicacion": "En el nivel de valor. Un disparo por nivel y por día.",
+   "confirmacion": "Aceptación: 180 s seguidos sin volver más de 2 ticks adentro, y delta agresivo neto de la ventana ≥ 5% del volumen a favor de la salida. No persigue si está a más de 100 ticks del nivel.",
+   "entrada": "A mercado, a favor de la salida, al cumplirse la ventana.",
+   "stop": "4 ticks adentro del nivel; entre 12 y 32 ticks.",
+   "objetivo": "Ninguno.",
+   "tiempo_maximo": "20 minutos.",
+   "filtros": "Reglas comunes.",
+   "motivo_cambio": "Estrategia nueva (no hay versión previa)."
+  }
+ ],
+ "nota": "Parámetros en futures/lab/engine/strategies/v4.py::PARAMS['ACC']. Definición y alternativas en docs/investigacion/aceptacion.md."
+}

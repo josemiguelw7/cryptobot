@@ -1,18 +1,18 @@
 {
- "actualizado_utc": "2026-10-25T02:45:53Z",
+ "actualizado_utc": "2026-10-25T03:33:46Z",
  "porcentaje": 20,
  "criterios": {
   "a_ganancia_neta_positiva": {
    "cumple": true,
-   "dato": "P012 (ABS v2, motor 1.1): +$7,874 con costos base"
+   "dato": "P012 (ABS v2): +$7,874; P016 (ABS v3): +$4,404 con costos base"
   },
   "b_gana_a_RAND_con_todos_los_intentos": {
    "cumple": false,
-   "dato": "p vs RAND 0.005, pero DSR 0.0 con 601 intentos (pide 0.95)"
+   "dato": "P012 p 0.005 pero DSR 0.0 con 601 intentos; P016 p 0.054 (no gana)"
   },
   "c_topstep_mas_de_50": {
    "cumple": false,
-   "dato": "41.4% de los arranques (P012)"
+   "dato": "Mejor: 41.4% (P012); P016 13.9%"
   },
   "d_positivo_2024_2025_2026": {
    "cumple": false,
@@ -28,9 +28,10 @@
   "test_id": "P012",
   "por_que": "Única familia con ganancia neta positiva y p bajo contra RAND tras el motor 1.1. Aún falla DSR, Topstep (41%) y 2026; su prueba tiene placebo sospechoso (revisar)."
  },
- "ultima_accion": "Dejé congelada ABS v3 (entrada temprana, strategies/v5.json, estudio abs_v3 con 17 intentos). Descarté T2-ABS-HOURS: ampliar el horario requiere cambiar el motor protegido. T3-SMT y E-HVN-FUERZA siguen pendientes.",
- "siguiente_idea": "Si ABS v3 no mejora, ABS queda agotada (3 de 3 versiones). Siguiente: E-HVN-FUERZA como estudio, y T3-SMT con los datos de ES ya disponibles (necesita lector canónico de ES).",
+ "ultima_accion": "Dejé congelada ACC v1 (aceptación fuera del valor VAH/VAL, pedido de Oscar): investigación en docs/investigacion/aceptacion.md, reglas en strategies/v6.json, estudio aceptacion_v1 con 17 intentos. ABS v3 (P016) ya corrió: queda en 'revisar', no mejora a ABS v2; ABS agotada.",
+ "siguiente_idea": "Si ACC v1 falla: probar la regla del 80% (VAR v1: abre fuera, vuelve y se queda dentro → rota al otro extremo) y la aceptación en HVN dentro de E-HVN-FUERZA (hace falta un runner de estudios; el orquestador solo corre estrategias). T3-SMT sigue sin lector de ES.",
  "historial": [
-  "2026-10-25T02:45:53Z · Primera corrida del investigador: ABS v3 congelada (entrada temprana). Mejor prueba P012: 20%."
+  "2026-10-25T02:45:53Z · Primera corrida del investigador: ABS v3 congelada (entrada temprana). Mejor prueba P012: 20%.",
+  "2026-10-25T03:33:46Z · Segunda corrida: ACC v1 congelada (aceptación VAH/VAL). P016 (ABS v3) no mejora. Mejor prueba P012: 20%."
  ]
 }

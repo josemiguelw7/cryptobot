@@ -283,14 +283,13 @@
    "nombre": "ABS con entrada temprana",
    "hipotesis": "ABS v1 gana a RAND (p 0.002) y el placebo desplazado 5 min antes gana más: entrar al detectar la absorción (sin esperar la confirmación) debería ganar más con el mismo stop. ABS v3: entrada al cerrar la ventana de 60 s, sin confirmación, stop v1, salida por tiempo a 15 min (como v2).",
    "origen": "P003 + placebo del Red Team + P012 (ABS v2 con motor 1.1: +$7,874, p 0.005, Topstep 41%)",
-   "estado": "corriendo",
+   "estado": "congelada",
    "estrategia": "ABS",
    "version": 3,
    "estudio": "abs_v3",
    "requisitos": [],
    "notas": "La v1 pierde en 2025 y tiene 128 operaciones: una v2 debería también ampliar horas o niveles para tener más operaciones.",
-   "decision": "aprobada por Jose Miguel 24/10/2026; combinada en ABS v3 (strategies/v5.json). Última versión de ABS.",
-   "inicio_utc": "2026-10-25T03:00:01+00:00"
+   "decision": "aprobada por Jose Miguel 24/10/2026; combinada en ABS v3 (strategies/v5.json). Última versión de ABS."
   },
   {
    "id": "T2-ABS-HOURS",
@@ -372,11 +371,16 @@
   },
   {
    "id": "E-ACEPTACION-VA",
-   "nombre": "Estudio: aceptación vs rechazo en VAL, VAH y HVN",
+   "nombre": "Aceptación fuera del valor (VAH/VAL) · ACC v1",
    "hipotesis": "Medir si, cuando el precio es aceptado (permanece N minutos o cierres) más allá de VAL/VAH o dentro de un HVN del día anterior, continúa hacia el otro extremo del valor o el POC más que niveles al azar. Comparar contra rechazo en los mismos niveles, a 5, 15 y 30 min, con definición congelada antes de correr.",
    "origen": "nota del buzón de Oscar (2026-10-25), resumida por el asistente",
-   "estado": "aprobada",
-   "decision": "pedida por Oscar en el buzón 2026-10-25"
+   "estado": "congelada",
+   "decision": "pedida por Oscar 2026-10-25; definición investigada por el laboratorio (docs/investigacion/aceptacion.md); reglas en strategies/v6.json; 1 definición base + 16 alternativas como intentos del estudio aceptacion_v1. Pendiente: regla del 80% (VAR v1) y aceptación en HVN (dentro de E-HVN-FUERZA).",
+   "notas": " Oscar (25/10/2026): la definición de aceptación la investiga el laboratorio (web, Market Profile/auction theory, documentación del lab); comparar las definiciones razonables dentro del mismo estudio registrado.",
+   "estrategia": "ACC",
+   "version": 1,
+   "estudio": "aceptacion_v1",
+   "requisitos": []
   }
  ]
 }

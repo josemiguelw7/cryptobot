@@ -7,6 +7,13 @@ import sys
 from . import registry, config
 
 STUDIES = {
+    "aceptacion_v1": {
+        "hypothesis": "Pedido de Oscar (25/10/2026): cuando el precio sale del área de valor de ayer (VAH/VAL) y la acepta (180 s seguidos fuera con delta agresivo a favor ≥ 5%), continúa más de lo que lo hace un RAND emparejado, y la estrategia ACC v1 gana a RAND y RAND2 después de costos, es positiva en 2024, 2025 y 2026 y pasa Topstep.",
+        "n_declared": 1 + 16,
+        "kill": ["ganancia neta <= 0 con costos base", "p vs RAND > 0.20", "pierde en 2 de 3 años", "rompe MLL en > 50% de arranques"],
+        "strategies": ["ACC v1"],
+        "notes": "1 prueba + 16 de sensibilidad. Las definiciones alternativas de aceptación (tiempo 90/270/360 s, delta 2/8/11%, stop 2/6/8, salida 10/15/25/30 min) se comparan aquí y cuentan como intentos. Definición base fijada antes de correr (docs/investigacion/aceptacion.md).",
+    },
     "abs_v3": {
         "hypothesis": "ABS v3 (absorción con entrada temprana, sin confirmación de 60 s, stop v1, salida por tiempo a 15 min) gana a RAND y RAND2 después de costos, es positiva en 2024, 2025 y 2026, y sube la tasa de Topstep sobre el 41-43% de ABS v2.",
         "n_declared": 1 + 16,
