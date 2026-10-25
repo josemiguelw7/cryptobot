@@ -202,7 +202,9 @@ def run_one(item):
                 if not informe_floor.enviar(it["test_id"]):
                     raise RuntimeError("envío falló")
             except Exception:
-                notify.send(f"{item['id']} terminó · {V} ({it['test_id']})", "\n\n".join(lin), test_id=it["test_id"])
+                notify.send(f"{it['test_id']} · {item['estrategia']} v{item['version']}"
+                            + (f" · {'−' if R_['ganancia_neta'] < 0 else '+'}${abs(R_['ganancia_neta']):,.0f}" if isinstance(R_.get("ganancia_neta"), (int, float)) else "")
+                            + (f" · {R_['operaciones']:,} ops" if isinstance(R_.get("operaciones"), int) else "") + f" · {V}", "\n\n".join(lin), test_id=it["test_id"])
         else:
             notify.send(f"{item['id']} no terminó · se reintenta sola",
                         f"La prueba {nombre} no terminó: {it.get('ultimo_error') or 'error sin detalle'}.\n\n"

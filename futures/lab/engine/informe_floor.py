@@ -132,7 +132,7 @@ def secciones(tid):
 def render(tid):
     X = secciones(tid); T = X["topstep"]; E = X["extremos"]
     V = {"pasa": "pasa", "revisar": "revisar", "no_pasa": "no pasa"}.get(X["veredicto"], X["veredicto"])
-    subject = f"{X['tid']} · {X['nombre'].split(' · ')[0]} · {V}"
+    subject = f"{X['tid']} · {X['nombre'].split(' · ')[0]} · {_usd(X['neto'])} · {X['n']:,} ops · {V}"
     sec = lambda n, t, body: (f'<tr><td style="padding:14px 0 4px;font:700 12px Arial,sans-serif;letter-spacing:1px;color:#01874E">{n} · {t.upper()}</td></tr>'
                               f'<tr><td style="font:15px/1.5 Arial,sans-serif;color:#14181f;padding-bottom:4px">{body}</td></tr>')
     rows = "".join(f'<tr><td style="padding:6px 8px;border-top:1px solid #e3e6eb">{lab}</td>'
