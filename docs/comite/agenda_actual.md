@@ -17,6 +17,7 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 - P012 · ABS v2 · **revisar** · neto 7873.72 · p 0.005 · Topstep 41.4%
 - P014 · ABS v1 · **revisar** · neto 4319.94 · p 0.003 · Topstep 3.7%
 - P015 · BIG v1 · **no_pasa** · neto -2235.06 · p 0.4845 · Topstep 0.0%
+- P016 · ABS v3 · **revisar** · neto 4404.46 · p 0.0539 · Topstep 13.9%
 
 ## 2. Qué murió y por qué
 - P013 · POC v1: umbral de orden grande mal calculado (percentil truncado y sobre todas las órdenes: 15 contratos). Ver strategies/v1_aclaraciones.json
@@ -30,7 +31,6 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 
 ## 4. Qué está aprobado y falta congelar
 - E-HVN-FUERZA Estudio: qué hace poderoso a un HVN (base del indicador para ATAS) · falta: estudio registrado antes de correr (fases y umbrales); definición de 'HVN poderoso' congelada con huella y sello; chequeo cruzado en ES y YM sin abrir el examen de NQ; indicador C# para ATAS
-- E-ACEPTACION-VA Estudio: aceptación vs rechazo en VAL, VAH y HVN · falta: 
 
 ## 5. Respuestas que faltan de Oscar
 - 1. ¿Los niveles que tú miras son los del perfil de Nueva York del día anterior (09:30–16:00) o del día completo (incluida la noche)? Hoy usamos Nueva York.

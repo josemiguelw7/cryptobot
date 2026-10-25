@@ -2,6 +2,13 @@
   "note": "Bitácora del laboratorio: hallazgos, decisiones y avances, del más reciente al más antiguo. Cada entrada nueva se agrega arriba.",
   "entries": [
     {
+      "date": "2026-10-25",
+      "kind": "prueba",
+      "title": "Prueba P016 · ABS v3 · revisar",
+      "body": "ABS v3: 143 operaciones, ganancia neta $4,404 con costos base, p contra RAND 0.0539, estrés $3,606, Topstep 13.9% de las cuentas (RAND 2.3%). Veredicto: revisar. Causa: placebo desplazado sospechoso: revisión de código pendiente; además: no gana a RAND (p=0.0539); no gana a RAND2 con las mismas salidas (p=0.0679); DSR 0.0 < 0.95 con 668 intentos; 108.5% de la ganancia en 5 días; pasa Topstep solo 13.9%.",
+      "test_id": "P016"
+    },
+    {
       "date": "2026-10-24",
       "kind": "avance",
       "title": "Comité con PIN: Jose Miguel y Oscar votan desde la página",

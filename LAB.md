@@ -1,13 +1,13 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-25 03:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-25 03:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
 ## En una línea
 
 - Sesiones válidas de diseño: **576** (examen sellado desde 2026-04-22, cerrado).
-- Intentos registrados: **667** · pruebas publicadas: **14** (error 1, superada 7, no_pasa 4, revisar 2).
+- Intentos registrados: **683** · pruebas publicadas: **15** (error 1, superada 7, no_pasa 4, revisar 3).
 - Estrategias aprobadas por el comité: **0**. Nada toca dinero real.
 
 ## Pruebas corridas
@@ -28,6 +28,7 @@ Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` �
 | P012 | ABS v2 | **revisar** | $7,874 | 0.005 | 41.4% | placebo desplazado sospechoso: revisión de código pendiente; además: DSR 0.0 < 0.95 con 601 intentos; 80.9% de |
 | P014 | ABS v1 | **revisar** | $4,320 | 0.003 | 3.7% | placebo desplazado sospechoso: revisión de código pendiente; además: DSR 0.0 < 0.95 con 634 intentos; 65.9% de |
 | P015 | BIG v1 | **no_pasa** | −$2,235 | 0.4845 | 0.0% | pierde con costos base; no gana a RAND (p=0.4845); no gana a RAND2 con las mismas salidas (p=0.4675); DSR 0.0  |
+| P016 | ABS v3 | **revisar** | $4,404 | 0.0539 | 13.9% | placebo desplazado sospechoso: revisión de código pendiente; además: no gana a RAND (p=0.0539); no gana a RAND |
 
 ## Cola de pruebas (backlog)
 
@@ -51,13 +52,13 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 | E-PROXY | Estudio: proxy de régimen en tiempo real | **corrida** → proxy_v1 | mapa v2 (HVN +53 en balance, −22 en tendencia) | estudio proxy_v1 registrado; script engine/regime_proxy.py |
 | T2-FADE | Desvanecer órdenes grandes | **descartada** | mapa v1 · hipótesis inversa de BIG | reglas escritas y selladas en strategies/v2.json (listo); aprobación de Oscar y Jose Miguel → pasar a congelada |
 | T2-HVN | Rechazo de zonas HVN del día anterior | **corrida** → P006 | mapa v1 · estilo Profit Pro | reglas escritas y selladas en strategies/v2.json (listo); aprobación de Oscar y Jose Miguel → pasar a congelada |
-| T2-ABS-EARLY | ABS con entrada temprana | **corriendo** | P003 + placebo del Red Team + P012 (ABS v2 con motor 1.1: +$7,874, p 0.005, Topstep 41%) |  |
+| T2-ABS-EARLY | ABS con entrada temprana | **corrida** → P016 | P003 + placebo del Red Team + P012 (ABS v2 con motor 1.1: +$7,874, p 0.005, Topstep 41%) |  |
 | T2-ABS-HOURS | ABS v1 en toda la sesión de Nueva York | **descartada** | P003 · pocas operaciones | si se combina con T2-ABS-EARLY es una sola v2; máximo 3 versiones |
 | T2-ICE | Icebergs con definición medida | **descartada** | mapa v1 · ice | agregar tamaños 'antes' del libro al lector de sesión |
 | M2-DIR | Mapa v2 con azar de dirección aleatoria | **corrida** → mapa_v2 | revisión del mapa v1 | cambio de código en signal_map.py; estudio mapa_v2 registrado |
 | T3-SMT | Divergencia NQ vs ES (SMT) | **propuesta** | videos · plan v1 | descargar datos tick de ES (laptop ATAS); lector canónico para ES |
 | E-HVN-FUERZA | Estudio: qué hace poderoso a un HVN (base del indicador para ATAS) | **aprobada** | pedido de Oscar en el buzón (24/10/2026): indicador de ATAS que muestre HVN poderosos en vivo | estudio registrado antes de correr (fases y umbrales); definición de 'HVN poderoso' congelada con huella y sello; cheque |
-| E-ACEPTACION-VA | Estudio: aceptación vs rechazo en VAL, VAH y HVN | **aprobada** | nota del buzón de Oscar (2026-10-25), resumida por el asistente |  |
+| E-ACEPTACION-VA | Aceptación fuera del valor (VAH/VAL) · ACC v1 | **congelada** | nota del buzón de Oscar (2026-10-25), resumida por el asistente |  |
 
 ## Estudios y cuenta de intentos
 
@@ -73,7 +74,8 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - **repeticion_1_1**: Repetición de P002–P008 con el motor 1.1 (llenados corregidos tras la revisión ciega del 24/10/2026). Las reglas selladas no cambian. Se esp · declarados 119, usados 116
 - **salidas_1_1**: Repetición del estudio de salidas (pedido de Oscar) con el motor 1.1 y percentiles exactos. · declarados 159, usados 159
 - **mapa_v4**: Repetición del mapa v3 con percentiles exactos de órdenes y ventanas (los umbrales de 'órdenes grandes' y 'absorción' cambian). · declarados 72, usados 12
-- **abs_v3**: ABS v3 (absorción con entrada temprana, sin confirmación de 60 s, stop v1, salida por tiempo a 15 min) gana a RAND y RAND2 después de costos · declarados 17, usados 0
+- **abs_v3**: ABS v3 (absorción con entrada temprana, sin confirmación de 60 s, stop v1, salida por tiempo a 15 min) gana a RAND y RAND2 después de costos · declarados 17, usados 16
+- **aceptacion_v1**: Pedido de Oscar (25/10/2026): cuando el precio sale del área de valor de ayer (VAH/VAL) y la acepta (180 s seguidos fuera con delta agresivo · declarados 17, usados 0
 
 ## Mapa de señales (resumen)
 
@@ -129,6 +131,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 
 ## Últimos movimientos (bitácora)
 
+- 2026-10-25 · prueba · Prueba P016 · ABS v3 · revisar
 - 2026-10-24 · avance · Comité con PIN: Jose Miguel y Oscar votan desde la página
 - 2026-10-24 · avance · Buzón con captura de pantalla en todas las pestañas
 - 2026-10-24 · prueba · Repeticiones con el motor 1.1: BIG v2 (P010) y HVN v1 (P011) no pasan
@@ -136,7 +139,6 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - 2026-10-24 · hallazgo · Revisión ciega: el motor 1.0 era optimista y todas las pruebas se repiten
 - 2026-10-24 · prueba · Prueba P007 · BIG v2 · no pasa
 - 2026-10-24 · prueba · Prueba P008 · ORB v1 · no pasa
-- 2026-10-24 · prueba · Prueba P009 · ORB v1 · no pasa
 
 ## Cómo se corre una prueba nueva
 
