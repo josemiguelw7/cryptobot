@@ -28,7 +28,6 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 - P015 · BIG v1: pierde con costos base; no gana a RAND (p=0.4845); no gana a RAND2 con las mismas salidas (p=0.4675); DSR 0.0 < 0.95 con 651 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%
 
 ## 3. Qué está propuesto (decidir: aprobar / descartar / pedir más datos)
-- [ ] **T3-SMT** Divergencia NQ vs ES (SMT) — Cuando NQ hace nuevo extremo y ES no (o al revés), el precio revierte.
 
 ## 4. Qué está aprobado y falta congelar
 - E-HVN-FUERZA Estudio: qué hace poderoso a un HVN (base del indicador para ATAS) · falta: estudio registrado antes de correr (fases y umbrales); definición de 'HVN poderoso' congelada con huella y sello; chequeo cruzado en ES y YM sin abrir el examen de NQ; indicador C# para ATAS

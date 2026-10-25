@@ -1,6 +1,6 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-25 04:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-25 04:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
@@ -57,7 +57,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 | T2-ABS-HOURS | ABS v1 en toda la sesión de Nueva York | **descartada** | P003 · pocas operaciones | si se combina con T2-ABS-EARLY es una sola v2; máximo 3 versiones |
 | T2-ICE | Icebergs con definición medida | **descartada** | mapa v1 · ice | agregar tamaños 'antes' del libro al lector de sesión |
 | M2-DIR | Mapa v2 con azar de dirección aleatoria | **corrida** → mapa_v2 | revisión del mapa v1 | cambio de código en signal_map.py; estudio mapa_v2 registrado |
-| T3-SMT | Divergencia NQ vs ES (SMT) | **propuesta** | videos · plan v1 | descargar datos tick de ES (laptop ATAS); lector canónico para ES |
+| T3-SMT | Divergencia NQ vs ES (SMT) | **congelada** | videos · plan v1 | descargar datos tick de ES (laptop ATAS); lector canónico para ES · ERROR: SMT v1 no está registrada en ningún strategies/v*.json del commit d2037d12 |
 | E-HVN-FUERZA | Estudio: qué hace poderoso a un HVN (base del indicador para ATAS) | **aprobada** | pedido de Oscar en el buzón (24/10/2026): indicador de ATAS que muestre HVN poderosos en vivo | estudio registrado antes de correr (fases y umbrales); definición de 'HVN poderoso' congelada con huella y sello; cheque |
 | E-ACEPTACION-VA | Aceptación fuera del valor (VAH/VAL) · ACC v1 | **corrida** → P017 | nota del buzón de Oscar (2026-10-25), resumida por el asistente |  |
 
@@ -77,6 +77,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - **mapa_v4**: Repetición del mapa v3 con percentiles exactos de órdenes y ventanas (los umbrales de 'órdenes grandes' y 'absorción' cambian). · declarados 72, usados 12
 - **abs_v3**: ABS v3 (absorción con entrada temprana, sin confirmación de 60 s, stop v1, salida por tiempo a 15 min) gana a RAND y RAND2 después de costos · declarados 17, usados 16
 - **aceptacion_v1**: Pedido de Oscar (25/10/2026): cuando el precio sale del área de valor de ayer (VAH/VAL) y la acepta (180 s seguidos fuera con delta agresivo · declarados 17, usados 14
+- **smt_v1**: T3-SMT (aprobada por Jose Miguel 24/10/2026): cuando NQ barre el máximo (mínimo) de la sesión y ES no lo confirma, y NQ regresa adentro en m · declarados 17, usados 0
 
 ## Mapa de señales (resumen)
 

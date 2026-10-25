@@ -347,7 +347,7 @@
    "nombre": "Divergencia NQ vs ES (SMT)",
    "hipotesis": "Cuando NQ hace nuevo extremo y ES no (o al revés), el precio revierte.",
    "origen": "videos · plan v1",
-   "estado": "propuesta",
+   "estado": "congelada",
    "estrategia": "SMT",
    "version": 1,
    "estudio": "tanda3",
@@ -355,7 +355,9 @@
     "descargar datos tick de ES (laptop ATAS)",
     "lector canónico para ES"
    ],
-   "notas": "Bloqueada por datos."
+   "notas": "Bloqueada por datos.",
+   "inicio_utc": "2026-10-25T04:30:01+00:00",
+   "ultimo_error": "SMT v1 no está registrada en ningún strategies/v*.json del commit d2037d12"
   },
   {
    "id": "E-HVN-FUERZA",
