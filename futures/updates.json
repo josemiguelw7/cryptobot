@@ -58,6 +58,13 @@
       "test_id": "P023"
     },
     {
+      "date": "2026-10-25",
+      "kind": "prueba",
+      "title": "Prueba P024 · ABK v1 · no pasa",
+      "body": "ABK v1: 694 operaciones, ganancia neta $-36,133 con costos base, p contra RAND 0.5574, estrés $-42,932, Topstep 8.7% de las cuentas (RAND 18.6%). Veredicto: no pasa. Causa: pierde con costos base; no gana a RAND (p=0.5574); no gana a RAND2 con las mismas salidas (p=0.7812); DSR 0.0 < 0.95 con 794 intentos; muere con costos al doble; pierde en 2024, 2026; pasa Topstep solo 8.7%.",
+      "test_id": "P024"
+    },
+    {
       "date": "2026-10-24",
       "kind": "avance",
       "title": "Comité con PIN: Jose Miguel y Oscar votan desde la página",
