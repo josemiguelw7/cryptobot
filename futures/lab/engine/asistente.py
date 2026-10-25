@@ -4,7 +4,7 @@ Cada 5 min (cron): trae el repo, busca notas nuevas en docs/oscar/inbox/, y por 
   2) manda la respuesta por correo a Oscar y Jose Miguel (formato Oscar Lab),
   3) guarda la respuesta en docs/oscar/respuestas/ y, si Oscar pidió trabajo nuevo, lo deja en la cola
      como 'aprobada' (lo pidió él; decide Oscar). NUNCA cambia reglas congeladas, código ni corre pruebas.
-Config: /srv/lab/asistente.json  {"anthropic_api_key": "sk-ant-...", "modelo": "claude-sonnet-5-5", "activo": true}
+Config: /srv/lab/asistente.json  {"activo": true}  (Claude Code con la suscripción de Jose; sin API key)
   python -m engine.asistente            # una vuelta
   python -m engine.asistente --seco     # no manda correo ni hace push; imprime la respuesta
   python -m engine.asistente --marcar   # marca todas las notas actuales como ya atendidas (arranque)
@@ -25,7 +25,7 @@ REGLAS QUE NO SE ROMPEN
 - Solo afirmas cifras que estén en el CONTEXTO (LAB.md, cola, resultados). Si un dato no está, lo dices ("eso no está medido todavía") y no lo inventas.
 - Cita la prueba o el estudio de donde sale cada cifra (p. ej. P012, mapa de señales).
 - Nunca prometas ganancias ni digas que algo "funciona" si el laboratorio no lo validó. Ninguna estrategia ha pasado todo todavía; el examen final sellado (desde 22/04/2026) sigue cerrado y nadie lo mira.
-- No puedes cambiar reglas congeladas, código, ni correr pruebas. Si la nota pide trabajo (un estudio, una prueba, un indicador, una corrección), explica en pocas líneas cómo se haría con el método del laboratorio (estudio registrado antes de correr, definición congelada con huella y sello, comparación contra el azar, chequeo en ES/YM) y di que queda en la cola. Jose Miguel y Claude lo ejecutan.
+- No puedes cambiar reglas congeladas, código, ni correr pruebas. Si la nota pide trabajo (un estudio, una prueba, un indicador, una corrección), explica en pocas líneas cómo se haría con el método del laboratorio (estudio registrado antes de correr, definición congelada con huella y sello, comparación contra el azar) y di que queda en la cola: el investigador autónomo del servidor lo toma primero, antes que sus propias ideas, y el resultado le llega por correo.
 - Si es un problema de la página o del servidor, describe qué entendiste y di que queda anotado para Jose Miguel.
 - En el comité decide Oscar. Nunca reveles PINs, llaves ni datos privados.
 - Respuestas cortas: lo que se lee en un minuto. Si la pregunta es amplia, contesta lo esencial y ofrece profundizar.
@@ -80,22 +80,21 @@ def contexto():
 
 
 def claude(cfg, meta, texto, img_path):
-    contenido = []
-    if img_path and os.path.exists(img_path) and os.path.getsize(img_path) < 4_500_000:
-        ext = img_path.rsplit(".", 1)[-1].lower()
-        contenido.append({"type": "image", "source": {"type": "base64", "media_type": {"jpg": "image/jpeg", "jpeg": "image/jpeg", "png": "image/png", "webp": "image/webp"}.get(ext, "image/jpeg"),
-                                                     "data": base64.b64encode(open(img_path, "rb").read()).decode()}})
-    contenido.append({"type": "text", "text": f"{contexto()}\n\n=== NOTA DEL BUZÓN ===\nDe: {meta.get('autor')}\nTipo: {meta.get('tipo')}\nFecha: {meta.get('fecha')}\n"
-                                              f"Título: {meta.get('titulo')}\nEnviada desde: {meta.get('pagina')}\n" + ("Trae captura de pantalla (arriba).\n" if len(contenido) > 1 else "")
-                                              + f"\n{texto}\n\nContesta según las reglas. Solo el JSON."})
-    body = {"model": cfg.get("modelo", "claude-sonnet-5-5"), "max_tokens": 2000, "system": SISTEMA,
-            "messages": [{"role": "user", "content": contenido}]}
-    req = urllib.request.Request("https://api.anthropic.com/v1/messages", method="POST", data=json.dumps(body).encode(),
-                                 headers={"x-api-key": cfg["anthropic_api_key"], "anthropic-version": "2023-06-01",
-                                          "content-type": "application/json", "User-Agent": "oscarlab-asistente/1.0"})
-    with urllib.request.urlopen(req, timeout=120) as r:
-        d = json.load(r)
-    out = "".join(b.get("text", "") for b in d.get("content", []) if b.get("type") == "text").strip()
+    """Usa Claude Code con la suscripción de Jose (token OAuth en ~/.config/oscar-lab/claude.env), no API key."""
+    img = img_path if img_path and os.path.exists(img_path) else None
+    prompt = (f"{contexto()}\n\n=== NOTA DEL BUZÓN ===\nDe: {meta.get('autor')}\nTipo: {meta.get('tipo')}\nFecha: {meta.get('fecha')}\n"
+              f"Título: {meta.get('titulo')}\nEnviada desde: {meta.get('pagina')}\n"
+              + (f"Trae captura de pantalla: léela con la herramienta Read en {img}\n" if img else "")
+              + f"\n{texto}\n\nContesta según las reglas. Solo el JSON.")
+    env = dict(os.environ, PATH=os.path.expanduser("~/.local/bin") + ":" + os.environ.get("PATH", ""))
+    for line in open(os.path.expanduser("~/.config/oscar-lab/claude.env")):
+        if "=" in line:
+            k, v = line.strip().split("=", 1); env[k] = v
+    r = subprocess.run(["claude", "-p", prompt, "--append-system-prompt", SISTEMA, "--allowedTools", "Read",
+                        "--max-turns", "6", "--output-format", "text"], env=env, capture_output=True, text=True, timeout=600, cwd="/tmp")
+    out = r.stdout.strip()
+    if r.returncode != 0 or "{" not in out:
+        raise RuntimeError(f"claude -p falló ({r.returncode}): {(r.stderr or out)[-300:]}")
     out = re.sub(r"^```(?:json)?\s*|\s*```$", "", out)
     j = json.loads(out[out.index("{"): out.rindex("}") + 1])
     assert j.get("respuesta") and j.get("asunto")
@@ -136,6 +135,11 @@ def registrar(base, meta, j):
                                  "estado": "aprobada" if "oscar" in quien else "propuesta",
                                  "decision": f"pedida por Oscar en el buzón {(meta.get('fecha') or '')[:10]}" if "oscar" in quien else ""})
             json.dump(b, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+            live = "/srv/lab/repo/futures/backlog.json"
+            if os.path.exists(live):
+                bl = json.load(open(live, encoding="utf-8"))
+                if not any(i["id"] == w["id"] for i in bl["pruebas"]):
+                    bl["pruebas"].append(b["pruebas"][-1]); json.dump(bl, open(live, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
 
 def push(msg):
