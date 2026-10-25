@@ -1,13 +1,13 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-25 21:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-25 22:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
 ## En una línea
 
 - Sesiones válidas de diseño: **576** (examen sellado desde 2026-04-22, cerrado).
-- Intentos registrados: **989** · pruebas publicadas: **34** (error 1, superada 7, no_pasa 15, revisar 11).
+- Intentos registrados: **1006** · pruebas publicadas: **35** (error 1, superada 7, no_pasa 16, revisar 11).
 - Estrategias aprobadas por el comité: **0**. Nada toca dinero real.
 
 ## Pruebas corridas
@@ -48,6 +48,7 @@ Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` �
 | P033 | ABQ v1 | **no_pasa** | −$1,961 | 0.2428 | 0.0% | pierde con costos base; no gana a RAND (p=0.2428); no gana a RAND2 con las mismas salidas (p=0.2527); DSR 0.0  |
 | P034 | DVG v1 | **no_pasa** | −$57,139 | 0.998 | 0.0% | pierde con costos base; no gana a RAND (p=0.998); no gana a RAND2 con las mismas salidas (p=1.0); DSR 0.0 < 0. |
 | P035 | FAF v1 | **no_pasa** | −$50,477 | 1.0 | 0.0% | pierde con costos base; no gana a RAND (p=1.0); no gana a RAND2 con las mismas salidas (p=1.0); DSR 0.0 < 0.95 |
+| P036 | ABF v1 | **no_pasa** | −$6,649 | 0.986 | 0.0% | pierde con costos base; no gana a RAND (p=0.986); no gana a RAND2 con las mismas salidas (p=0.99); DSR 0.0 < 0 |
 
 ## Cola de pruebas (backlog)
 
@@ -95,7 +96,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 | T18-ABQ | ABQ v1: absorción rápida (ventana de 30 s) en días que abren dentro del valor | **corrida** → P033 | P032 (ABT v1) no pasa: ampliar días no sirve; ABU (P030/P031) es la única familia con ventaja pero lenta y con costos de riesgo por operación altos |  |
 | T19-DVG | DVG v1: divergencia de delta acumulado en el extremo del día | **corrida** → P034 | P033 (ABQ v1) no pasa: la absorción depende de niveles y de días de balance y no gana frecuencia; falta una señal de flujo agresivo independiente del nivel |  |
 | T20-FAF | FAF v1: subasta fallida en los extremos de ayer y de la noche | **corrida** → P035 | P034 (DVG v1) no pasa: el agotamiento sin nivel no sirve; falta probar el intento fallido en los niveles donde ABU sí tiene ventaja |  |
-| T21-ABF | ABF v1: absorción fallida, seguir la ruptura del extremo absorbido | **corriendo** | P035 (FAF v1) no pasa y los reversos sin nivel pierden con p≈1; ABU pierde el 60% con el stop: el fracaso de la absorción es la señal |  |
+| T21-ABF | ABF v1: absorción fallida, seguir la ruptura del extremo absorbido | **corrida** → P036 | P035 (FAF v1) no pasa y los reversos sin nivel pierden con p≈1; ABU pierde el 60% con el stop: el fracaso de la absorción es la señal |  |
 
 ## Estudios y cuenta de intentos
 
@@ -131,7 +132,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - **abq_v1**: ABQ v1 (el detector de absorción de ABU v1 a escala de scalping: ventana de flujo agresivo de 30 s con umbral relativo p90 de la hora anteri · declarados 17, usados 17
 - **dvg_v1**: DVG v1 (divergencia de delta acumulado en el extremo del día: nuevo máximo de la sesión con menos delta acumulado que el máximo anterior, ma · declarados 13, usados 13
 - **faf_v1**: FAF v1 (subasta fallida: una celda de 10 s cruza VAH/máximo de ayer/máximo de la noche (o VAL/mínimos) ≥ 2 ticks con flujo agresivo del lado · declarados 17, usados 16
-- **abf_v1**: ABF v1 (absorción fallida: el detector de absorción de ABU v1 en niveles de ayer, de la noche y POC/VAH/VAL del día, confirmado a 60 s; si e · declarados 17, usados 0
+- **abf_v1**: ABF v1 (absorción fallida: el detector de absorción de ABU v1 en niveles de ayer, de la noche y POC/VAH/VAL del día, confirmado a 60 s; si e · declarados 17, usados 17
 
 ## Mapa de señales (resumen)
 
