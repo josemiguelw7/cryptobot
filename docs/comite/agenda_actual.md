@@ -26,12 +26,11 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 - P015 · BIG v1: pierde con costos base; no gana a RAND (p=0.4845); no gana a RAND2 con las mismas salidas (p=0.4675); DSR 0.0 < 0.95 con 651 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%
 
 ## 3. Qué está propuesto (decidir: aprobar / descartar / pedir más datos)
-- [ ] **T2-ABS-EARLY** ABS con entrada temprana — ABS v1 gana a RAND (p 0.002) y el placebo desplazado 5 min antes gana más: entrar al detectar la absorción (sin esperar la confirmación) debería ganar más con e
-- [ ] **T2-ABS-HOURS** ABS v1 en toda la sesión de Nueva York — Las mismas reglas de ABS v1 de 09:30 a 15:30 (cierre 15:45) producen suficientes operaciones para pasar Topstep.
 - [ ] **T3-SMT** Divergencia NQ vs ES (SMT) — Cuando NQ hace nuevo extremo y ES no (o al revés), el precio revierte.
 
 ## 4. Qué está aprobado y falta congelar
 - E-HVN-FUERZA Estudio: qué hace poderoso a un HVN (base del indicador para ATAS) · falta: estudio registrado antes de correr (fases y umbrales); definición de 'HVN poderoso' congelada con huella y sello; chequeo cruzado en ES y YM sin abrir el examen de NQ; indicador C# para ATAS
+- E-ACEPTACION-VA Estudio: aceptación vs rechazo en VAL, VAH y HVN · falta: 
 
 ## 5. Respuestas que faltan de Oscar
 - 1. ¿Los niveles que tú miras son los del perfil de Nueva York del día anterior (09:30–16:00) o del día completo (incluida la noche)? Hoy usamos Nueva York.

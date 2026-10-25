@@ -1,6 +1,6 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-25 02:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-25 03:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
@@ -51,12 +51,13 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 | E-PROXY | Estudio: proxy de régimen en tiempo real | **corrida** → proxy_v1 | mapa v2 (HVN +53 en balance, −22 en tendencia) | estudio proxy_v1 registrado; script engine/regime_proxy.py |
 | T2-FADE | Desvanecer órdenes grandes | **descartada** | mapa v1 · hipótesis inversa de BIG | reglas escritas y selladas en strategies/v2.json (listo); aprobación de Oscar y Jose Miguel → pasar a congelada |
 | T2-HVN | Rechazo de zonas HVN del día anterior | **corrida** → P006 | mapa v1 · estilo Profit Pro | reglas escritas y selladas en strategies/v2.json (listo); aprobación de Oscar y Jose Miguel → pasar a congelada |
-| T2-ABS-EARLY | ABS con entrada temprana | **propuesta** | P003 + placebo del Red Team | cuenta como versión 2 de 3 de ABS; aprobación de Oscar |
-| T2-ABS-HOURS | ABS v1 en toda la sesión de Nueva York | **propuesta** | P003 · pocas operaciones | si se combina con T2-ABS-EARLY es una sola v2; máximo 3 versiones |
+| T2-ABS-EARLY | ABS con entrada temprana | **corriendo** | P003 + placebo del Red Team + P012 (ABS v2 con motor 1.1: +$7,874, p 0.005, Topstep 41%) |  |
+| T2-ABS-HOURS | ABS v1 en toda la sesión de Nueva York | **descartada** | P003 · pocas operaciones | si se combina con T2-ABS-EARLY es una sola v2; máximo 3 versiones |
 | T2-ICE | Icebergs con definición medida | **descartada** | mapa v1 · ice | agregar tamaños 'antes' del libro al lector de sesión |
 | M2-DIR | Mapa v2 con azar de dirección aleatoria | **corrida** → mapa_v2 | revisión del mapa v1 | cambio de código en signal_map.py; estudio mapa_v2 registrado |
 | T3-SMT | Divergencia NQ vs ES (SMT) | **propuesta** | videos · plan v1 | descargar datos tick de ES (laptop ATAS); lector canónico para ES |
 | E-HVN-FUERZA | Estudio: qué hace poderoso a un HVN (base del indicador para ATAS) | **aprobada** | pedido de Oscar en el buzón (24/10/2026): indicador de ATAS que muestre HVN poderosos en vivo | estudio registrado antes de correr (fases y umbrales); definición de 'HVN poderoso' congelada con huella y sello; cheque |
+| E-ACEPTACION-VA | Estudio: aceptación vs rechazo en VAL, VAH y HVN | **aprobada** | nota del buzón de Oscar (2026-10-25), resumida por el asistente |  |
 
 ## Estudios y cuenta de intentos
 
@@ -72,6 +73,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - **repeticion_1_1**: Repetición de P002–P008 con el motor 1.1 (llenados corregidos tras la revisión ciega del 24/10/2026). Las reglas selladas no cambian. Se esp · declarados 119, usados 116
 - **salidas_1_1**: Repetición del estudio de salidas (pedido de Oscar) con el motor 1.1 y percentiles exactos. · declarados 159, usados 159
 - **mapa_v4**: Repetición del mapa v3 con percentiles exactos de órdenes y ventanas (los umbrales de 'órdenes grandes' y 'absorción' cambian). · declarados 72, usados 12
+- **abs_v3**: ABS v3 (absorción con entrada temprana, sin confirmación de 60 s, stop v1, salida por tiempo a 15 min) gana a RAND y RAND2 después de costos · declarados 17, usados 0
 
 ## Mapa de señales (resumen)
 

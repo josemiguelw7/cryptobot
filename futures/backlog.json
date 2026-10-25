@@ -283,13 +283,14 @@
    "nombre": "ABS con entrada temprana",
    "hipotesis": "ABS v1 gana a RAND (p 0.002) y el placebo desplazado 5 min antes gana más: entrar al detectar la absorción (sin esperar la confirmación) debería ganar más con el mismo stop. ABS v3: entrada al cerrar la ventana de 60 s, sin confirmación, stop v1, salida por tiempo a 15 min (como v2).",
    "origen": "P003 + placebo del Red Team + P012 (ABS v2 con motor 1.1: +$7,874, p 0.005, Topstep 41%)",
-   "estado": "congelada",
+   "estado": "corriendo",
    "estrategia": "ABS",
    "version": 3,
    "estudio": "abs_v3",
    "requisitos": [],
    "notas": "La v1 pierde en 2025 y tiene 128 operaciones: una v2 debería también ampliar horas o niveles para tener más operaciones.",
-   "decision": "aprobada por Jose Miguel 24/10/2026; combinada en ABS v3 (strategies/v5.json). Última versión de ABS."
+   "decision": "aprobada por Jose Miguel 24/10/2026; combinada en ABS v3 (strategies/v5.json). Última versión de ABS.",
+   "inicio_utc": "2026-10-25T03:00:01+00:00"
   },
   {
    "id": "T2-ABS-HOURS",
