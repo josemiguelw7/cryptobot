@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(//srv/lab/data/sealed/**)",
+      "Edit(//srv/lab/data/**)",
+      "Bash(sudo:*)",
+      "Bash(git push:*)",
+      "Bash(git commit:*)",
+      "Bash(git reset:*)",
+      "Bash(*sealed*)",
+      "Bash(crontab:*)",
+      "Bash(rm -rf /srv:*)"
+    ]
+  }
+}

@@ -11,7 +11,7 @@ case "$1" in
     git -C "$ROOT" push -q vm main 2>/dev/null || true      # espejo local en la VM: el orquestador clona commits exactos de aquí
     ssh $VM 'mkdir -p /srv/lab/repo/futures/lab /srv/lab/repo/futures/strategies'
     rsync -az --delete --exclude '__pycache__' --exclude 'results' --exclude 'registry' --exclude 'golden.json' --exclude 'regimes.json' --exclude 'runs_state.json' --exclude 'runs' "$ROOT/futures/lab/" $VM:/srv/lab/repo/futures/lab/
-    rsync -az --exclude 'tests.json' --exclude 'updates.json' --exclude 'signal_map.json' "$ROOT/futures/"*.json $VM:/srv/lab/repo/futures/
+    rsync -az --exclude 'tests.json' --exclude 'updates.json' --exclude 'signal_map.json' --exclude 'backlog.json' "$ROOT/futures/"*.json $VM:/srv/lab/repo/futures/
     rsync -az "$ROOT/futures/strategies/" $VM:/srv/lab/repo/futures/strategies/
     # el registro y los resultados viven en la VM mientras corre el motor; el push no los pisa
     rsync -az --ignore-existing "$ROOT/futures/lab/registry/" $VM:/srv/lab/repo/futures/lab/registry/ 2>/dev/null || true
