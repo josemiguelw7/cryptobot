@@ -149,6 +149,13 @@
       "test_id": "P036"
     },
     {
+      "date": "2026-10-25",
+      "kind": "prueba",
+      "title": "Prueba P037 · ABR v1 · insuficiente",
+      "body": "ABR v1: 77 operaciones, ganancia neta $-1,186 con costos base, p contra RAND 0.3407, estrés $-1,466, Topstep 0.0% de las cuentas (RAND 0.0%). Veredicto: insuficiente. Causa: 77 operaciones / 556 sesiones: por debajo del mínimo.",
+      "test_id": "P037"
+    },
+    {
       "date": "2026-10-24",
       "kind": "avance",
       "title": "Comité con PIN: Jose Miguel y Oscar votan desde la página",
