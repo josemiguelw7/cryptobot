@@ -37,6 +37,13 @@
       "test_id": "P020"
     },
     {
+      "date": "2026-10-25",
+      "kind": "prueba",
+      "title": "Prueba P021 · ABI v1 · revisar",
+      "body": "ABI v1: 120 operaciones, ganancia neta $7,261 con costos base, p contra RAND 0.045, estrés $4,851, Topstep 23.0% de las cuentas (RAND 5.2%). Veredicto: revisar. Causa: placebo desplazado sospechoso: revisión de código pendiente; además: DSR 0.0 < 0.95 con 743 intentos; 206.4% de la ganancia en 5 días; pierde en 2024, 2026; pasa Topstep solo 23.0%.",
+      "test_id": "P021"
+    },
+    {
       "date": "2026-10-24",
       "kind": "avance",
       "title": "Comité con PIN: Jose Miguel y Oscar votan desde la página",

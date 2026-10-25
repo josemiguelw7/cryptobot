@@ -127,7 +127,10 @@
   "veredicto": "revisar"
  },
  "T6-ABI": {
-  "estado": "corriendo",
-  "inicio_utc": "2026-10-25T06:15:01+00:00"
+  "estado": "corrida",
+  "inicio_utc": "2026-10-25T06:15:01+00:00",
+  "fin_utc": "2026-10-25T06:47:59+00:00",
+  "test_id": "P021",
+  "veredicto": "revisar"
  }
 }

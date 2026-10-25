@@ -22,6 +22,7 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 - P018 · SMT v1 · **no_pasa** · neto -67444.34 · p 0.958 · Topstep 1.2%
 - P019 · VAR v1 · **no_pasa** · neto -7947.14 · p 0.8911 · Topstep 0.0%
 - P020 · ACC v2 · **revisar** · neto 4346.02 · p 0.1209 · Topstep 0.0%
+- P021 · ABI v1 · **revisar** · neto 7261.4 · p 0.045 · Topstep 23.0%
 
 ## 2. Qué murió y por qué
 - P013 · POC v1: umbral de orden grande mal calculado (percentil truncado y sobre todas las órdenes: 15 contratos). Ver strategies/v1_aclaraciones.json
