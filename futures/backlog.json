@@ -670,13 +670,17 @@
    "nombre": "FAF v1: subasta fallida en los extremos de ayer y de la noche",
    "hipotesis": "Un intento de salir de VAH/VAL, máximo/mínimo de ayer o de la noche con ráfaga de flujo agresivo (≥ 0.5 × p95 en 60 s) que vuelve al nivel en 120 s con delta contrario es una subasta fallida; el precio se aleja del lado que falló más que un RAND emparejado (~250 operaciones esperadas).",
    "origen": "P034 (DVG v1) no pasa: el agotamiento sin nivel no sirve; falta probar el intento fallido en los niveles donde ABU sí tiene ventaja",
-   "estado": "congelada",
+   "estado": "corrida",
    "estrategia": "FAF",
    "version": 1,
    "estudio": "faf_v1",
    "requisitos": [],
    "decision": "decidida por el investigador; justificación en docs/investigacion/subasta_fallida.md; reglas en strategies/v24.json (código engine/strategies/v22.py; ventana en run_test.py::RULES_WINDOW)",
-   "notas": "1 definición base + 16 sensibilidades (17 intentos). Exploratoria, 1 contrato. Humo: ~19 señales en 40 días, nunca ganancias. Stops casi siempre en el máximo de 32 ticks."
+   "notas": "1 definición base + 16 sensibilidades (17 intentos). Exploratoria, 1 contrato. Humo: ~19 señales en 40 días, nunca ganancias. Stops casi siempre en el máximo de 32 ticks.",
+   "inicio_utc": "2026-10-25T19:15:01+00:00",
+   "fin_utc": "2026-10-25T19:33:31+00:00",
+   "test_id": "P035",
+   "veredicto": "no_pasa"
   }
  ]
 }

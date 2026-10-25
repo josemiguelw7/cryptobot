@@ -135,6 +135,13 @@
       "test_id": "P034"
     },
     {
+      "date": "2026-10-25",
+      "kind": "prueba",
+      "title": "Prueba P035 · FAF v1 · no pasa",
+      "body": "FAF v1: 396 operaciones, ganancia neta $-50,477 con costos base, p contra RAND 1.0, estrés $-54,121, Topstep 0.0% de las cuentas (RAND 0.3%). Veredicto: no pasa. Causa: pierde con costos base; no gana a RAND (p=1.0); no gana a RAND2 con las mismas salidas (p=1.0); DSR 0.0 < 0.95 con 974 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%.",
+      "test_id": "P035"
+    },
+    {
       "date": "2026-10-24",
       "kind": "avance",
       "title": "Comité con PIN: Jose Miguel y Oscar votan desde la página",
