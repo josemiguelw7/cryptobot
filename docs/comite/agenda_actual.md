@@ -69,9 +69,16 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 - P043 · ABW v1: pierde con costos base; no gana a RAND (p=0.9291); no gana a RAND2 con las mismas salidas (p=0.9121); DSR 0.0 < 0.95 con 1105 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%
 
 ## 3. Qué está propuesto (decidir: aprobar / descartar / pedir más datos)
+- [ ] **G7-ICEBERG-MBO** Icebergs y liquidez retirada (pulling) con datos MBO — Se descartó ICE porque la data ATAS no permite medirlo. Requiere datos MBO (Databento); es un gap de datos. No correr sin la decisión de Jose sobre la compra.
 
 ## 4. Qué está aprobado y falta congelar
 - E-HVN-FUERZA Estudio: qué hace poderoso a un HVN (base del indicador para ATAS) · falta: estudio registrado antes de correr (fases y umbrales); definición de 'HVN poderoso' congelada con huella y sello; chequeo cruzado en ES y YM sin abrir el examen de NQ; indicador C# para ATAS
+- G1-PLACEBO-ABU Validación: revisión placebo de ABU v2 (P031) · falta: 
+- G2-ABU-MANEJO Estudio de manejo de la operación sobre ABU (Topstep) · falta: 
+- G3-SESIONES Patrones de flujo fuera de Nueva York (Asia, Londres, overnight) · falta: 
+- G4-IB-DELTA Extensión del balance inicial (9:30–10:30) confirmada por delta · falta: 
+- G5-CLIMAX Agotamiento / clímax en extremos del día · falta: 
+- G6-ATRAPADOS Traders atrapados · falta: 
 
 ## 5. Respuestas que faltan de Oscar
 - 1. ¿Los niveles que tú miras son los del perfil de Nueva York del día anterior (09:30–16:00) o del día completo (incluida la noche)? Hoy usamos Nueva York.
