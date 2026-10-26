@@ -37,6 +37,13 @@
       "test_id": "P042"
     },
     {
+      "date": "2026-10-26",
+      "kind": "prueba",
+      "title": "Prueba P043 · ABW v1 · no pasa",
+      "body": "ABW v1: 156 operaciones, ganancia neta $-12,559 con costos base, p contra RAND 0.9291, estrés $-14,229, Topstep 0.0% de las cuentas (RAND 1.7%). Veredicto: no pasa. Causa: pierde con costos base; no gana a RAND (p=0.9291); no gana a RAND2 con las mismas salidas (p=0.9121); DSR 0.0 < 0.95 con 1105 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%.",
+      "test_id": "P043"
+    },
+    {
       "date": "2026-10-25",
       "kind": "prueba",
       "title": "Prueba P016 · ABS v3 · revisar",

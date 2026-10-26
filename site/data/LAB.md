@@ -1,13 +1,13 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-26 05:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-26 05:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
 ## En una línea
 
 - Sesiones válidas de diseño: **576** (examen sellado desde 2026-04-22, cerrado).
-- Intentos registrados: **1104** · pruebas publicadas: **41** (error 1, superada 7, no_pasa 18, revisar 13, insuficiente 2).
+- Intentos registrados: **1121** · pruebas publicadas: **42** (error 1, superada 7, no_pasa 19, revisar 13, insuficiente 2).
 - Estrategias aprobadas por el comité: **0**. Nada toca dinero real.
 
 ## Pruebas corridas
@@ -55,6 +55,7 @@ Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` �
 | P040 | ABM v1 | **insuficiente** | −$2,738 | 0.5345 | 0.0% | 58 operaciones / 556 sesiones: por debajo del mínimo |
 | P041 | ABB v1 | **no_pasa** | −$9,002 | 0.8731 | 0.0% | pierde con costos base; no gana a RAND (p=0.8731); no gana a RAND2 con las mismas salidas (p=0.8921); DSR 0.0  |
 | P042 | VPT v1 | **no_pasa** | −$45,819 | 0.981 | 5.0% | pierde con costos base; no gana a RAND (p=0.981); no gana a RAND2 con las mismas salidas (p=0.969); DSR 0.0 <  |
+| P043 | ABW v1 | **no_pasa** | −$12,559 | 0.9291 | 0.0% | pierde con costos base; no gana a RAND (p=0.9291); no gana a RAND2 con las mismas salidas (p=0.9121); DSR 0.0  |
 
 ## Cola de pruebas (backlog)
 
@@ -109,7 +110,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 | T25-ABM | ABM v1: absorción en el valor compuesto de 5 días (niveles multi-día) | **corrida** → P040 | P039 (ABU v3): Topstep 39.1%, el riesgo diario no era el cuello; ABU gastó sus 3 versiones; niveles de varios días nunca probados |  |
 | T26-ABB | ABB v1: absorción tras re-entrada aceptada al valor de ayer | **corrida** → P041 | P040 (ABM v1) insuficiente y negativa: los niveles multi-día no sirven; ABU (única ventaja) solo cubre días que abren dentro del valor; la re-entrada aceptada (regla del 80%) nunca se combinó con absorción |  |
 | T27-VPT | VPT v1: pullback a la VWAP a favor de la tendencia, días que abren fuera del valor | **corrida** → P042 | P041 (ABB v1) no pasa: la absorción solo funciona en balance; la tendencia con VWAP como soporte dinámico nunca se probó |  |
-| T28-ABW | ABW v1: absorción en días de apertura ancha | **corriendo** | P042 (VPT v1) no pasa (−$45.8k, p 0.98); ABU es la única ventaja pero su filtro de día casi no separa balance de tendencia |  |
+| T28-ABW | ABW v1: absorción en días de apertura ancha | **corrida** → P043 | P042 (VPT v1) no pasa (−$45.8k, p 0.98); ABU es la única ventaja pero su filtro de día casi no separa balance de tendencia |  |
 
 ## Estudios y cuenta de intentos
 
@@ -152,7 +153,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - **abm_v1**: ABM v1 (absorción en el valor multi-día: el detector de ABU, confirmado a 60 s, en los niveles del perfil compuesto de los 5 días válidos an · declarados 17, usados 17
 - **abb_v1**: ABB v1 (absorción tras re-entrada aceptada: el detector de ABU, confirmado a 60 s, en niveles de ayer, de la noche y POC/VAH/VAL del día, pe · declarados 17, usados 17
 - **vpt_v1**: VPT v1 (pullback a la VWAP a favor de la tendencia: en días que abren FUERA del valor de ayer y no regresan a él, tras una extensión previa  · declarados 17, usados 15
-- **abw_v1**: ABW v1 (absorción en días de apertura ancha: el detector de ABU, confirmado a 60 s, en niveles de ayer, de la noche, POC/VAH/VAL del día y m · declarados 17, usados 0
+- **abw_v1**: ABW v1 (absorción en días de apertura ancha: el detector de ABU, confirmado a 60 s, en niveles de ayer, de la noche, POC/VAH/VAL del día y m · declarados 17, usados 17
 
 ## Mapa de señales (resumen)
 
@@ -213,9 +214,9 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - 2026-10-26 · prueba · Prueba P040 · ABM v1 · insuficiente
 - 2026-10-26 · prueba · Prueba P041 · ABB v1 · no pasa
 - 2026-10-26 · prueba · Prueba P042 · VPT v1 · no pasa
+- 2026-10-26 · prueba · Prueba P043 · ABW v1 · no pasa
 - 2026-10-25 · prueba · Prueba P016 · ABS v3 · revisar
 - 2026-10-25 · prueba · Prueba P017 · ACC v1 · revisar
-- 2026-10-25 · prueba · Prueba P018 · SMT v1 · no pasa
 
 ## Cómo se corre una prueba nueva
 
