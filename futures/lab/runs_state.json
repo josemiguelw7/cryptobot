@@ -297,5 +297,9 @@
  "G1-PLACEBO-ABU": {
   "estado": "corriendo",
   "inicio_utc": "2026-10-26T20:22:01+00:00"
+ },
+ "G2-ABU-MANEJO": {
+  "estado": "corriendo",
+  "inicio_utc": "2026-10-26T20:28:01+00:00"
  }
 }

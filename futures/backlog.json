@@ -817,17 +817,22 @@
    "estado": "aprobada",
    "prioridad": 3,
    "requisitos": [],
-   "decision": "aprobada por Jose el 26/10/2026; prioridad 3 (1 = primero)"
+   "decision": "aprobada por Jose el 26/10/2026; prioridad 3 (1 = primero)",
+   "notas": "26/10/2026 (corrida 30): no se puede sin cambiar el motor: run_test/RAND/rand.py cargan solo la sesión NY (ny_only=True). Pendiente de cambio de motor por Jose."
   },
   {
    "id": "G4-IB-DELTA",
    "nombre": "Extensión del balance inicial (9:30–10:30) confirmada por delta",
    "hipotesis": "ORB usó 15 min y sin flujo. La extensión del IB con iniciativa (Dalton) nunca se midió con delta agresivo.",
    "origen": "pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas",
-   "estado": "aprobada",
+   "estado": "congelada",
    "prioridad": 4,
    "requisitos": [],
-   "decision": "aprobada por Jose el 26/10/2026; prioridad 4 (1 = primero)"
+   "decision": "decidida por el investigador; justificación en docs/investigacion/extension_ib.md; reglas en strategies/v36.json (código engine/strategies/v34.py; ventana en run_test.py::RULES_WINDOW)",
+   "estrategia": "IBX",
+   "version": 1,
+   "estudio": "ibx_v1",
+   "notas": "1 base + 16 sensibilidades (17 intentos). Exploratoria, 1 contrato. Humo: 36 señales en 50 sesiones. Distinta de ORB (15 min, sin flujo) y OPD (apertura)."
   },
   {
    "id": "G5-CLIMAX",

@@ -1,5 +1,5 @@
 {
- "actualizado_utc": "2026-10-26T20:26:33Z",
+ "actualizado_utc": "2026-10-26T20:31:56Z",
  "porcentaje": 40,
  "criterios": {
   "a_ganancia_neta_positiva": {
@@ -28,8 +28,8 @@
   "test_id": "P031",
   "por_que": "+$11.9k, p 0.001 contra RAND, positiva los 3 años. Pero 'revisar' (placebo sospechoso), DSR 0, Topstep 41.2% y 214 cuentas rompen el MLL. P039 (ABU v3) no mejora Topstep (39.1%); P043 (ABW) pierde. 40% (criterios a y d) es un techo generoso."
  },
- "ultima_accion": "G1 (ABP) ya estaba congelada y espera correr. Tomé G2-ABU-MANEJO y dejé congelada ABG v1: las señales de ABU v2 con stop máximo 24 ticks, objetivo 1.5R y salida a 10 min. Reglas en strategies/v35.json, código engine/strategies/v33.py, estudio abg_v1 (17 intentos), docs/investigacion/manejo_abu.md. Humo: 60 sesiones, 20 señales (igual que ABU v2), sin errores. Breakeven/parcial/stop por flujo no se pueden probar sin cambiar el motor.",
- "siguiente_idea": "Leer P045 (ABP) y P046 (ABG). Si el placebo rinde parecido a ABU, bajar el progreso a 20%. Luego G3 (sesiones fuera de NY; RAND solo carga NY), G4 IB con delta, G5 clímax, G6 atrapados. G7 espera decisión de Jose.",
+ "ultima_accion": "G1 (ABP) y G2 (ABG) esperan correr. Tomé G4-IB-DELTA y dejé congelada IBX v1: extensión del balance inicial (09:30–10:30) con delta agresivo ≥5% a favor. Reglas en strategies/v36.json, código engine/strategies/v34.py, estudio ibx_v1 (17 intentos), docs/investigacion/extension_ib.md. Humo: 50 sesiones, 36 señales, sin errores. G3 no se puede sin cambiar el motor (solo carga NY).",
+ "siguiente_idea": "Leer P045 (ABP), P046 (ABG), P047 (IBX). Si el placebo ABP rinde parecido a ABU, bajar el progreso a 20%. Luego G5 clímax, G6 atrapados. G3 y G7 esperan decisión de Jose.",
  "historial": [
   "2026-10-25T02:45:53Z · Primera corrida del investigador: ABS v3 congelada (entrada temprana). Mejor prueba P012: 20%.",
   "2026-10-25T03:33:46Z · Segunda corrida: ACC v1 congelada (aceptación VAH/VAL). P016 (ABS v3) no mejora. Mejor prueba P012: 20%.",
@@ -51,6 +51,7 @@
   "2026-10-26T04:50:00Z · Corrida 26: ABW v1 congelada (absorción en días de apertura ancha). P042 (VPT v1) no pasa (−$45.8k, p 0.98). Mejor prueba P031: 40% (a y d).",
   "2026-10-26T05:36:42Z · Corrida 27: OPD v1 congelada (apertura impulsiva por flujo). P043 (ABW v1) no pasa (−$12.6k, p 0.93). PEX descartada por vacía. Mejor prueba P031: 40% (a y d).",
   "2026-10-26T20:20:47Z · Corrida 28: ABP v1 congelada (placebo de niveles de ABU v2, G1). P044 (OPD v1) no pasa (−$7.5k, p 0.69). Mejor prueba P031: 40% (a y d).",
-  "2026-10-26T20:26:33Z · Corrida 29: ABG v1 congelada (manejo de ABU v2, G2). Mejor prueba P031: 40% (a y d)."
+  "2026-10-26T20:26:33Z · Corrida 29: ABG v1 congelada (manejo de ABU v2, G2). Mejor prueba P031: 40% (a y d).",
+  "2026-10-26T20:31:56Z · Corrida 30: IBX v1 congelada (extensión del IB con delta, G4). G3 bloqueada por el motor. Mejor prueba P031: 40% (a y d)."
  ]
 }

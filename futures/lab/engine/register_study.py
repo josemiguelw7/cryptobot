@@ -7,6 +7,13 @@ import sys
 from . import registry, config
 
 STUDIES = {
+    "ibx_v1": {
+        "hypothesis": "IBX v1 (extensión del balance inicial confirmada por delta: IB = máximo y mínimo de 09:30–10:30; entre 10:30 y 14:30, una celda de 10 s supera el borde >= 4 ticks, el último precio sigue fuera del borde y el delta agresivo de los últimos 120 s es >= 5 % del volumen a favor; entrada a mercado a favor, stop 4 ticks dentro del IB 12–32, objetivo 1.5R, salida a 20 min, 1 contrato, una vez por lado y por día, parada tras 2 pérdidas): las operaciones rinden más que un RAND emparejado y RAND2 sorteados en la misma ventana y con las mismas reglas; gana después de costos, es positiva en 2024, 2025 y 2026 y tiene al menos 100 operaciones.",
+        "n_declared": 1 + 16,
+        "kill": ["ganancia neta <= 0 con costos base", "p vs RAND > 0.20", "pierde en 2 de 3 años", "rompe MLL en > 50% de arranques"],
+        "strategies": ["IBX v1"],
+        "notes": "1 prueba + 16 de sensibilidad (ventana de flujo 60/90/150/180 s, delta 1/3/7/9 %, ruptura 2/3/5/6 ticks, objetivo 0.5/1.0/2.0/2.5R). Una sola definición (docs/investigacion/extension_ib.md) con números redondos fijados sin ver ganancias; humo de 50 sesiones solo con conteo (36 señales, ~400 esperadas). Exploratoria, mismos datos de diseño, NO es validación independiente.",
+    },
     "abg_v1": {
         "hypothesis": "ABG v1 (manejo de la operación sobre las señales de ABU v2: mismo detector de absorción, filtro de día que abre dentro del valor de ayer, niveles, confirmación a 60 s, 2 contratos y 09:30–15:30, pero con stop máximo 24 ticks en vez de 32, objetivo 1.5R en vez de 2R y salida por tiempo a 10 min en vez de 15): las operaciones rinden más que un RAND emparejado y RAND2 sorteados en la misma ventana y con las mismas reglas; gana después de costos, es positiva en 2024, 2025 y 2026, y pasa Topstep $50K en más del 50% de los arranques (ABU v2: 41.2%, 214 de 517 cuentas rompen el MLL) sin perder la ventaja contra RAND.",
         "n_declared": 1 + 16,

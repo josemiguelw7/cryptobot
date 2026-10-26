@@ -1,0 +1,34 @@
+{
+ "version": 36,
+ "fecha_registro": "2026-10-26",
+ "titulo": "Tanda 35 · IBX v1 (extensión del balance inicial confirmada por delta; G4)",
+ "estado": "Escrita por el investigador autónomo; sellada y congelada al publicar. Investigación: docs/investigacion/extension_ib.md.",
+ "comun": {
+  "instrumento": "NQ (contrato del frente), 1 contrato por operación",
+  "horario": "Nueva York 10:30–14:30 ET (entradas)",
+  "cierre_forzado": "cualquier posición abierta se cierra a mercado a las 15:45 ET",
+  "noticias": "no se abre de −2 a +5 min de CPI, NFP y Fed",
+  "costos": "comisión Topstep + 1 tick de deslizamiento por lado; prueba extra al doble",
+  "limites_dia": "máximo 2 operaciones por día (una por lado); se detiene tras 2 pérdidas seguidas",
+  "una_posicion": "nunca más de una posición abierta por estrategia",
+  "datos": "solo periodo de diseño 2024-01-02 a 2026-04-21; el examen sellado no se abre",
+  "control": "RAND emparejado y RAND2 sorteados en la misma ventana 10:30–14:30 y con 1 contrato"
+ },
+ "estrategias": [
+  {
+   "id": "IBX",
+   "version": 1,
+   "nombre": "Extensión del balance inicial confirmada por delta",
+   "idea": "Salir del rango de la primera hora con delta agresivo a favor es iniciativa de otros horizontes (Steidlmayer/Dalton) y continúa más que el azar.",
+   "contexto": "IB = máximo y mínimo de 09:30–10:30.",
+   "disparador": "Celda de 10 s que supera el borde del IB ≥ 4 ticks, último precio fuera del borde y delta agresivo de los últimos 120 s ≥ 5 % del volumen a favor.",
+   "entrada": "A mercado a favor al cerrar la celda; una vez por lado y por día.",
+   "stop": "4 ticks dentro del IB; entre 12 y 32 ticks.",
+   "objetivo": "1.5R.",
+   "tiempo_maximo": "20 minutos.",
+   "tamano": "1 contrato",
+   "motivo": "G4 (Jose, 26/10/2026): la extensión del IB con delta nunca se midió."
+  }
+ ],
+ "nota": "Código en futures/lab/engine/strategies/v34.py::PARAMS['IBX']; ventana en run_test.py::RULES_WINDOW."
+}
