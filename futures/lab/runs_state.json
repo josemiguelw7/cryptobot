@@ -258,5 +258,12 @@
   "fin_utc": "2026-10-26T01:53:53+00:00",
   "test_id": "P039",
   "veredicto": "revisar"
+ },
+ "T25-ABM": {
+  "estado": "corrida",
+  "inicio_utc": "2026-10-26T02:15:01+00:00",
+  "fin_utc": "2026-10-26T02:28:39+00:00",
+  "test_id": "P040",
+  "veredicto": "insuficiente"
  }
 }

@@ -1,5 +1,5 @@
 {
- "actualizado_utc": "2026-10-26T02:03:36Z",
+ "actualizado_utc": "2026-10-26T02:34:18Z",
  "porcentaje": 40,
  "criterios": {
   "a_ganancia_neta_positiva": {
@@ -28,8 +28,8 @@
   "test_id": "P031",
   "por_que": "+$11.9k, p 0.001 contra RAND, positiva los 3 años. Pero 'revisar' (placebo sospechoso), DSR 0, Topstep 41.2% y 214 cuentas rompen el MLL. P039 (ABU v3) no mejora Topstep (39.1%). 40% (criterios a y d) es un techo generoso."
  },
- "ultima_accion": "Leí P039 (ABU v3): revisar, +$11.1k, p 0.002, Topstep 39.1%: parar tras 2 pérdidas no subió Topstep. ABU gastó sus 3 versiones. Dejé congelada ABM v1 (T25-ABM): el mismo detector de absorción pero en niveles de varios días (perfil compuesto de 5 días y POC desnudos), que ABU no mira. Reglas en strategies/v29.json, código engine/strategies/v27.py, estudio abm_v1 (17 intentos), docs/investigacion/absorcion_multidia.md. Humo: 21 señales en 120 sesiones (~100 esperadas: riesgo de 'insuficiente').",
- "siguiente_idea": "Si ABM no aporta, la absorción en NY queda agotada. Pedir a un humano: (1) overnight/Londres en rand.py, (2) revisar el placebo desplazado, (3) runner de estudios para E-HVN-FUERZA. El criterio b es inalcanzable con más de 1,000 intentos; depende del examen sellado.",
+ "ultima_accion": "Leí P040 (ABM v1): insuficiente, 58 operaciones, −$2.7k, p 0.53: los niveles multi-día no sirven. Dejé congelada ABB v1 (T26-ABB): el detector de ABU en los días que abren fuera del valor de ayer, una vez que el precio lo acepta (10 min adentro). Reglas en strategies/v30.json, código engine/strategies/v28.py, estudio abb_v1 (17 intentos), docs/investigacion/absorcion_reentrada.md. Humo: ~26 operaciones por 100 sesiones (≈ 140 esperadas); solo conteo, sin ganancias.",
+ "siguiente_idea": "Si ABB no aporta, la absorción solo vive en días que abren dentro del valor y NY queda sin ideas de absorción. Pedir a un humano: (1) overnight/Londres en rand.py, (2) revisar el placebo desplazado, (3) runner de estudios para E-HVN-FUERZA. El criterio b es inalcanzable con más de 1,000 intentos; depende del examen sellado.",
  "historial": [
   "2026-10-25T02:45:53Z · Primera corrida del investigador: ABS v3 congelada (entrada temprana). Mejor prueba P012: 20%.",
   "2026-10-25T03:33:46Z · Segunda corrida: ACC v1 congelada (aceptación VAH/VAL). P016 (ABS v3) no mejora. Mejor prueba P012: 20%.",
@@ -45,6 +45,7 @@
   "2026-10-25T22:33:13Z · Corrida 20: ABR v1 congelada (reprueba pasiva). P036 (ABF v1) no pasa (−$6.6k, p 0.986). Mejor prueba P031: 40% (a y d).",
   "2026-10-25T23:32:23Z · Corrida 21: ABE v1 congelada (absorción de ABU confirmada por ES). P037 (ABR v1) insuficiente (−$1.2k, p 0.34). Mejor prueba P031: 40% (a y d).",
   "2026-10-26T01:03:26Z · Corrida 22: ABU v3 congelada (parada tras 2 pérdidas). P038 (ABE v1) revisar (+$1.2k, p 0.05, Topstep 0%). Mejor prueba P031: 40% (a y d).",
-  "2026-10-26T02:03:36Z · Corrida 23: ABM v1 congelada (absorción en niveles multi-día). P039 (ABU v3) revisar (+$11.1k, p 0.002, Topstep 39.1%). Mejor prueba P031: 40% (a y d)."
+  "2026-10-26T02:03:36Z · Corrida 23: ABM v1 congelada (absorción en niveles multi-día). P039 (ABU v3) revisar (+$11.1k, p 0.002, Topstep 39.1%). Mejor prueba P031: 40% (a y d).",
+  "2026-10-26T02:34:18Z · Corrida 24: ABB v1 congelada (absorción tras re-entrada aceptada). P040 (ABM v1) insuficiente (−$2.7k, p 0.53). Mejor prueba P031: 40% (a y d)."
  ]
 }

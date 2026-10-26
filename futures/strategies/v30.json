@@ -1,0 +1,38 @@
+{
+ "version": 30,
+ "fecha_registro": "2026-10-26",
+ "titulo": "Tanda 29 · ABB v1 (absorción tras re-entrada aceptada al valor de ayer)",
+ "estado": "Escrita por el investigador autónomo; sellada y congelada al publicar. Investigación: docs/investigacion/absorcion_reentrada.md.",
+ "comun": {
+  "instrumento": "NQ (contrato del frente), 2 contratos por operación",
+  "horario": "Nueva York 09:30–15:30 ET",
+  "cierre_forzado": "cualquier posición abierta se cierra a mercado a las 15:45 ET",
+  "noticias": "no se abre de −2 a +5 min de CPI, NFP y Fed",
+  "costos": "comisión Topstep + 1 tick de deslizamiento por lado; prueba extra al doble",
+  "limites_dia": "máximo 6 operaciones por día; se detiene tras 2 pérdidas seguidas",
+  "una_posicion": "nunca más de una posición abierta por estrategia",
+  "umbrales_relativos": "el menor entre el p95 de las 20 sesiones anteriores y el p90 de los volúmenes agresivos de 60 s de los 60 min anteriores de la propia sesión; piso 0.5 × el p95 de 20 sesiones",
+  "datos": "solo periodo de diseño 2024-01-02 a 2026-04-21; el examen sellado no se abre",
+  "control": "RAND emparejado y RAND2 sorteados en la misma ventana 09:30–15:30, con 2 contratos y el mismo límite de pérdidas"
+ },
+ "estrategias": [
+  {
+   "id": "ABB",
+   "version": 1,
+   "nombre": "Absorción tras re-entrada aceptada al valor de ayer",
+   "idea": "En los días que abren fuera del valor de ayer y luego lo aceptan (10 min seguidos adentro), el mercado pasa a balance; el flujo agresivo que no mueve el precio en los niveles de ayer, de la noche o del valor del día es absorbido y el precio se aleja del lado absorbido.",
+   "contexto": "Solo días en que el primer precio de las 09:30 cae FUERA de [VAL, VAH] de ayer (complemento de ABU). Habilitado desde que el precio lleva 600 s seguidos dentro de ese rango; la ventana de absorción de 60 s debe empezar después.",
+   "niveles": "Los de ABU v1: POC/VAH/VAL/máx/mín de ayer, máx/mín de la noche, y POC/VAH/VAL en desarrollo del día (desde los 10 min). Cada nivel de ayer o de la noche dispara una vez; los del día, una vez cada 10 min.",
+   "disparador": "Volumen agresivo de un lado en 60 s ≥ umbral relativo, con el precio avanzando ≤ 2 ticks.",
+   "ubicacion": "Extremo de la ventana a ≤ 4 ticks de uno de esos niveles.",
+   "confirmacion": "En los 60 s siguientes el delta de la ventana cambia de signo y el precio se aleja ≥ 4 ticks del extremo.",
+   "entrada": "A mercado, en contra del lado absorbido.",
+   "stop": "4 ticks más allá del extremo; entre 12 y 32 ticks.",
+   "objetivo": "2R.",
+   "tiempo_maximo": "15 minutos (o el cierre de las 15:45).",
+   "tamano": "2 contratos",
+   "motivo": "P040 (ABM v1) insuficiente y negativa: los niveles multi-día no sirven. ABB es otra estrategia: el mismo detector de ABU en los días que ABU no opera (abren fuera del valor) una vez que el valor de ayer fue aceptado. Busca frecuencia. No es validación independiente."
+  }
+ ],
+ "nota": "Parámetros en futures/lab/engine/strategies/v28.py::PARAMS['ABB']; contratos, límite de pérdidas y ventana en run_test.py::RULES_WINDOW."
+}

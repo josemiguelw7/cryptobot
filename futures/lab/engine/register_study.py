@@ -7,6 +7,13 @@ import sys
 from . import registry, config
 
 STUDIES = {
+    "abb_v1": {
+        "hypothesis": "ABB v1 (absorción tras re-entrada aceptada: el detector de ABU, confirmado a 60 s, en niveles de ayer, de la noche y POC/VAH/VAL del día, pero en los días que abren FUERA del valor de ayer y solo después de que el precio lleva 600 s seguidos dentro del valor de ayer; entrada a mercado contra el lado absorbido, stop 12–32, objetivo 2R, salida a 15 min, 2 contratos, parada tras 2 pérdidas, 09:30–15:30): las operaciones rinden más que un RAND emparejado y RAND2 sorteados en la misma ventana y con las mismas reglas; gana después de costos, es positiva en 2024, 2025 y 2026 y tiene al menos 100 operaciones.",
+        "n_declared": 1 + 16,
+        "kill": ["ganancia neta <= 0 con costos base", "p vs RAND > 0.20", "pierde en 2 de 3 años", "rompe MLL en > 50% de arranques"],
+        "strategies": ["ABB v1"],
+        "notes": "1 prueba + 16 de sensibilidad (cercanía al nivel 2/3/5/6 ticks, confirmación 40/50/70/80 s, umbral relativo p86/p88/p92/p94, aceptación 300/450/750/900 s). Una sola definición (docs/investigacion/absorcion_reentrada.md); 600 s elegido por conteo de señales (1,800 s daba ~70 operaciones esperadas), sin mirar ganancias. Exploratoria: mismo detector y datos que ABU, NO es evidencia independiente. Pregunta única: ¿la absorción de ABU también revierte en días que abren fuera del valor una vez aceptado el valor de ayer?",
+    },
     "abm_v1": {
         "hypothesis": "ABM v1 (absorción en el valor multi-día: el detector de ABU, confirmado a 60 s, en los niveles del perfil compuesto de los 5 días válidos anteriores (POC, VAH, VAL al 70%, máximo, mínimo) y los POC desnudos de esos días, descartando los niveles a <= 8 ticks de un nivel de ayer o de la noche; solo días cuya apertura de las 09:30 cae dentro del valor compuesto; entrada a mercado contra el lado absorbido, stop 12–32, objetivo 2R, salida a 15 min, 2 contratos, parada tras 2 pérdidas, 09:30–15:30): las operaciones rinden más que un RAND emparejado y RAND2 sorteados en la misma ventana y con las mismas reglas; gana después de costos, es positiva en 2024, 2025 y 2026 y tiene al menos 100 operaciones.",
         "n_declared": 1 + 16,
