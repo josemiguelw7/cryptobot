@@ -9,6 +9,13 @@
       "test_id": "P038"
     },
     {
+      "date": "2026-10-26",
+      "kind": "prueba",
+      "title": "Prueba P039 · ABU v3 · revisar",
+      "body": "ABU v3: 171 operaciones, ganancia neta $11,107 con costos base, p contra RAND 0.002, estrés $10,007, Topstep 39.1% de las cuentas (RAND 2.2%). Veredicto: revisar. Causa: placebo desplazado sospechoso: revisión de código pendiente; además: DSR 0.0 < 0.95 con 1039 intentos; 74.1% de la ganancia en 5 días; pasa Topstep solo 39.1%.",
+      "test_id": "P039"
+    },
+    {
       "date": "2026-10-25",
       "kind": "prueba",
       "title": "Prueba P016 · ABS v3 · revisar",

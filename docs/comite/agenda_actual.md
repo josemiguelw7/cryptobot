@@ -40,6 +40,7 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 - P036 · ABF v1 · **no_pasa** · neto -6649.18 · p 0.986 · Topstep 0.0%
 - P037 · ABR v1 · **insuficiente** · neto -1186.06 · p 0.3407 · Topstep 0.0%
 - P038 · ABE v1 · **revisar** · neto 1180.66 · p 0.0519 · Topstep 0.0%
+- P039 · ABU v3 · **revisar** · neto 11107.24 · p 0.002 · Topstep 39.1%
 
 ## 2. Qué murió y por qué
 - P013 · POC v1: umbral de orden grande mal calculado (percentil truncado y sobre todas las órdenes: 15 contratos). Ver strategies/v1_aclaraciones.json
