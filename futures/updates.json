@@ -65,6 +65,13 @@
       "test_id": "P046"
     },
     {
+      "date": "2026-10-26",
+      "kind": "prueba",
+      "title": "Prueba P047 · ATR v1 · revisar",
+      "body": "ATR v1: 147 operaciones, ganancia neta $7,989 con costos base, p contra RAND 0.007, estrés $6,039, Topstep 36.8% de las cuentas (RAND 2.7%). Veredicto: revisar. Causa: placebo desplazado sospechoso: revisión de código pendiente; además: DSR 0.0 < 0.95 con 1190 intentos; 63.1% de la ganancia en 5 días; pasa Topstep solo 36.8%.",
+      "test_id": "P047"
+    },
+    {
       "date": "2026-10-25",
       "kind": "prueba",
       "title": "Prueba P016 · ABS v3 · revisar",
