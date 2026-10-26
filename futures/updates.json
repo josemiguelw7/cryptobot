@@ -16,6 +16,13 @@
       "test_id": "P039"
     },
     {
+      "date": "2026-10-26",
+      "kind": "prueba",
+      "title": "Prueba P040 · ABM v1 · insuficiente",
+      "body": "ABM v1: 58 operaciones, ganancia neta $-2,738 con costos base, p contra RAND 0.5345, estrés $-3,526, Topstep 0.0% de las cuentas (RAND 0.1%). Veredicto: insuficiente. Causa: 58 operaciones / 556 sesiones: por debajo del mínimo.",
+      "test_id": "P040"
+    },
+    {
       "date": "2026-10-25",
       "kind": "prueba",
       "title": "Prueba P016 · ABS v3 · revisar",
