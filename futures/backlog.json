@@ -721,13 +721,14 @@
    "nombre": "ABE v1: absorción de ABU confirmada por ES (ES también se detuvo)",
    "hipotesis": "Con el detector de ABU v1 (días que abren dentro del valor de ayer), operar solo si ES no avanzó más de 2 ticks en la dirección del flujo absorbido en los 120 s previos a la confirmación; rinde más que un RAND emparejado y RAND2 (~115 operaciones esperadas).",
    "origen": "P037 (ABR v1) no pasa: −$1,186, p 0.34; ABU (P030/P031) sigue siendo la única familia con ventaja y pierde el 60% con el stop; ES nunca se probó como filtro",
-   "estado": "congelada",
+   "estado": "corriendo",
    "estrategia": "ABE",
    "version": 1,
    "estudio": "abe_v1",
    "requisitos": [],
    "decision": "decidida por el investigador; justificación en docs/investigacion/absorcion_es.md; reglas en strategies/v27.json (código engine/strategies/v25.py; ventana en run_test.py::RULES_WINDOW)",
-   "notas": "1 definición base + 16 sensibilidades (17 intentos). Exploratoria, mismas señales que ABU: no es validación independiente. Humo: 24 señales ABE contra 43 de ABU en 120 sesiones."
+   "notas": "1 definición base + 16 sensibilidades (17 intentos). Exploratoria, mismas señales que ABU: no es validación independiente. Humo: 24 señales ABE contra 43 de ABU en 120 sesiones.",
+   "inicio_utc": "2026-10-25T23:45:01+00:00"
   }
  ]
 }

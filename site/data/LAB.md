@@ -1,6 +1,6 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-25 23:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-26 00:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
@@ -99,7 +99,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 | T20-FAF | FAF v1: subasta fallida en los extremos de ayer y de la noche | **corrida** → P035 | P034 (DVG v1) no pasa: el agotamiento sin nivel no sirve; falta probar el intento fallido en los niveles donde ABU sí tiene ventaja |  |
 | T21-ABF | ABF v1: absorción fallida, seguir la ruptura del extremo absorbido | **corrida** → P036 | P035 (FAF v1) no pasa y los reversos sin nivel pierden con p≈1; ABU pierde el 60% con el stop: el fracaso de la absorción es la señal |  |
 | T22-ABR | ABR v1: absorción de ABU con entrada pasiva en la reprueba del extremo | **corrida** → P037 | P031/P030 (ABU: única ventaja; placebo desplazado gana más = el valor está cerca del extremo) · P036 (ABF) no pasa: la reversión es el lado correcto |  |
-| T23-ABE | ABE v1: absorción de ABU confirmada por ES (ES también se detuvo) | **congelada** | P037 (ABR v1) no pasa: −$1,186, p 0.34; ABU (P030/P031) sigue siendo la única familia con ventaja y pierde el 60% con el stop; ES nunca se probó como filtro |  |
+| T23-ABE | ABE v1: absorción de ABU confirmada por ES (ES también se detuvo) | **corriendo** | P037 (ABR v1) no pasa: −$1,186, p 0.34; ABU (P030/P031) sigue siendo la única familia con ventaja y pierde el 60% con el stop; ES nunca se probó como filtro |  |
 
 ## Estudios y cuenta de intentos
 
