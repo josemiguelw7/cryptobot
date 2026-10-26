@@ -1,6 +1,6 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-26 10:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-26 10:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
