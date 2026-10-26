@@ -144,6 +144,8 @@ def registrar(base, meta, j):
 
 
 def push(msg):
+    import fcntl
+    _lk = open("/tmp/lab-git.lock", "w"); fcntl.flock(_lk, fcntl.LOCK_EX)
     git("add", "-A")
     if not git("status", "--porcelain").stdout.strip():
         return
