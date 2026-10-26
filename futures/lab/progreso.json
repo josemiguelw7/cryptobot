@@ -1,5 +1,5 @@
 {
- "actualizado_utc": "2026-10-26T22:45:00Z",
+ "actualizado_utc": "2026-10-26T23:08:17Z",
  "porcentaje": 40,
  "criterios": {
   "a_ganancia_neta_positiva": {
@@ -28,7 +28,7 @@
   "test_id": "P031",
   "por_que": "+$11.9k, p 0.001 contra RAND, positiva los 3 años. Pero 'revisar' (placebo sospechoso), DSR 0, Topstep 41.2% y 214 cuentas rompen el MLL. P045 (placebo de niveles, ABP) perdió −$9.7k con p 0.81: el nivel sí importa, no era fuga. P039 no mejora Topstep; P043 pierde. 40% (criterios a y d) es un techo generoso."
  },
- "ultima_accion": "Corrida 38: sin prueba nueva. G2 (ABG), G4, G5 (CLX), G6 en cola o corriendo; G3 bloqueada por el motor; E-HVN-FUERZA sin runner; G7 espera datos MBO. Otra variante sería un intento más sin base.",
+ "ultima_accion": "Corrida 39: sin prueba nueva. G2 (ABG) y G5 (CLX) siguen corriendo; G3 bloqueada por el motor, E-HVN-FUERZA sin runner ni indicador, G7 sin datos MBO. Otra variante de ABU sería un intento más sin base.",
  "siguiente_idea": "Leer G2 (ABG) y G5 (CLX) cuando terminen. Si ninguna pasa Topstep >50% con DSR razonable, la familia de absorción/atrapados queda agotada con estos datos. Pedir a Jose: cambio de motor para Asia/Londres (G3) y decisión sobre datos MBO (G7).",
  "historial": [
   "2026-10-25T02:45:53Z · Primera corrida del investigador: ABS v3 congelada (entrada temprana). Mejor prueba P012: 20%.",
@@ -60,6 +60,7 @@
   "2026-10-26T22:06:22Z · Corrida 35: sin prueba nueva (cola llena con G2, G5, G6; pendientes bloqueados). Mejor prueba P031: 40% (a y d).",
   "2026-10-26T22:28:28Z · Corrida 36: sin prueba nueva (G2, G5 corriendo; pendientes bloqueados). P047 (ATR v1) revisar: +$8.0k, p 0.007, Topstep 36.8%, no mejora a ABU. Mejor prueba P031: 40% (a y d).",
   "2026-10-26T22:42:17Z · Corrida 37: sin prueba nueva (G2, G5 corriendo; pendientes bloqueados). Mejor prueba P031: 40% (a y d).",
-  "2026-10-26T22:45:00Z · Corrida 38: sin prueba nueva (cola ocupada; pendientes bloqueados). Mejor prueba P031: 40% (a y d)."
+  "2026-10-26T22:45:00Z · Corrida 38: sin prueba nueva (cola ocupada; pendientes bloqueados). Mejor prueba P031: 40% (a y d).",
+  "2026-10-26T23:08:17Z · Corrida 39: sin prueba nueva (G2, G5 corriendo; pendientes bloqueados). Mejor prueba P031: 40% (a y d)."
  ]
 }
