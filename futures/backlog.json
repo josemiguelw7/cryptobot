@@ -902,10 +902,14 @@
    "nombre": "Agotamiento / clímax en extremos del día",
    "hipotesis": "Volumen y delta extremos que se cortan en el máximo/mínimo (subasta terminada vs no terminada) revierten más que RAND. Distinto de PEX (extremo pobre), que se descartó por pocas señales.",
    "origen": "pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas",
-   "estado": "aprobada",
+   "estado": "congelada",
    "prioridad": 5,
    "requisitos": [],
-   "decision": "aprobada por Jose el 26/10/2026; prioridad 5 (1 = primero)"
+   "decision": "decidida por el investigador; justificación en docs/investigacion/climax.md; reglas en strategies/v37.json (código engine/strategies/v35.py; ventana en run_test.py::RULES_WINDOW)",
+   "estrategia": "CLX",
+   "version": 1,
+   "estudio": "clx_v1",
+   "notas": "1 base + 16 sensibilidades (17 intentos). Exploratoria, 1 contrato. Humo: 12 señales en 40 sesiones. Distinta de DVG (sin volumen), FAF/ABF (niveles) y PEX."
   },
   {
    "id": "G6-ATRAPADOS",

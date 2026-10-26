@@ -7,6 +7,13 @@ import sys
 from . import registry, config
 
 STUDIES = {
+    "clx_v1": {
+        "hypothesis": "CLX v1 (clímax de volumen y delta en el extremo del día: ventana de 60 s con nuevo máximo/mínimo de la sesión, no antes de 10:00, volumen >= 3 veces el medio por 60 s de los 30 min previos, delta agresivo >= 20 % del volumen a favor del empuje y avance >= 12 ticks; confirmado como terminado si en los 60 s siguientes el precio no supera el extremo, cae 4 ticks y el delta de 30 s es contrario; entrada a mercado en contra, stop 3 ticks más allá del extremo 12–32, objetivo 1.5R, salida a 10 min, 1 contrato, máx. 4 al día, parada tras 2 pérdidas, 10:00–15:30): las operaciones rinden más que un RAND emparejado y RAND2 sorteados en la misma ventana y con las mismas reglas; gana después de costos, es positiva en 2024, 2025 y 2026 y tiene al menos 100 operaciones.",
+        "n_declared": 1 + 16,
+        "kill": ["ganancia neta <= 0 con costos base", "p vs RAND > 0.20", "pierde en 2 de 3 años", "rompe MLL en > 50% de arranques"],
+        "strategies": ["CLX v1"],
+        "notes": "1 prueba + 16 de sensibilidad (múltiplo de volumen 2/2.5/3.5/4, delta 10/15/25/30 %, avance 8/10/14/16 ticks, alejamiento 2/3/5/6 ticks). Una sola definición (docs/investigacion/climax.md) fijada sin ver ganancias; humo de 40 sesiones solo con conteo (12 señales; ~170 esperadas, cerca del mínimo de 100). Distinta de DVG, FAF, ABF y PEX. Exploratoria, mismos datos de diseño, NO es validación independiente. Se espera no_pasa: los reversos sin nivel perdieron antes.",
+    },
     "ibx_v1": {
         "hypothesis": "IBX v1 (extensión del balance inicial confirmada por delta: IB = máximo y mínimo de 09:30–10:30; entre 10:30 y 14:30, una celda de 10 s supera el borde >= 4 ticks, el último precio sigue fuera del borde y el delta agresivo de los últimos 120 s es >= 5 % del volumen a favor; entrada a mercado a favor, stop 4 ticks dentro del IB 12–32, objetivo 1.5R, salida a 20 min, 1 contrato, una vez por lado y por día, parada tras 2 pérdidas): las operaciones rinden más que un RAND emparejado y RAND2 sorteados en la misma ventana y con las mismas reglas; gana después de costos, es positiva en 2024, 2025 y 2026 y tiene al menos 100 operaciones.",
         "n_declared": 1 + 16,
