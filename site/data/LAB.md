@@ -1,6 +1,6 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-26 02:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-26 03:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
@@ -105,7 +105,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 | T23-ABE | ABE v1: absorción de ABU confirmada por ES (ES también se detuvo) | **corrida** → P038 | P037 (ABR v1) no pasa: −$1,186, p 0.34; ABU (P030/P031) sigue siendo la única familia con ventaja y pierde el 60% con el stop; ES nunca se probó como filtro |  |
 | T24-ABU3 | ABU v3: ABU v2 con parada tras 2 pérdidas seguidas (riesgo diario) | **corrida** → P039 | P031 (ABU v2) · P038 (ABE v1) no pasa: el filtro de ES no mejora a ABU; el mapa v3 no deja señales sin probar |  |
 | T25-ABM | ABM v1: absorción en el valor compuesto de 5 días (niveles multi-día) | **corrida** → P040 | P039 (ABU v3): Topstep 39.1%, el riesgo diario no era el cuello; ABU gastó sus 3 versiones; niveles de varios días nunca probados |  |
-| T26-ABB | ABB v1: absorción tras re-entrada aceptada al valor de ayer | **congelada** | P040 (ABM v1) insuficiente y negativa: los niveles multi-día no sirven; ABU (única ventaja) solo cubre días que abren dentro del valor; la re-entrada aceptada (regla del 80%) nunca se combinó con absorción |  |
+| T26-ABB | ABB v1: absorción tras re-entrada aceptada al valor de ayer | **corriendo** | P040 (ABM v1) insuficiente y negativa: los niveles multi-día no sirven; ABU (única ventaja) solo cubre días que abren dentro del valor; la re-entrada aceptada (regla del 80%) nunca se combinó con absorción |  |
 
 ## Estudios y cuenta de intentos
 

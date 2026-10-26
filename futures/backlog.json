@@ -772,13 +772,14 @@
    "nombre": "ABB v1: absorción tras re-entrada aceptada al valor de ayer",
    "hipotesis": "El detector de absorción de ABU, aplicado a los días que ABU no opera (abren fuera del valor de ayer) y solo después de que el precio lleva 10 min seguidos dentro de ese valor (aceptación), gana a RAND y aporta operaciones adicionales (≥ 100).",
    "origen": "P040 (ABM v1) insuficiente y negativa: los niveles multi-día no sirven; ABU (única ventaja) solo cubre días que abren dentro del valor; la re-entrada aceptada (regla del 80%) nunca se combinó con absorción",
-   "estado": "congelada",
+   "estado": "corriendo",
    "estrategia": "ABB",
    "version": 1,
    "estudio": "abb_v1",
    "requisitos": [],
    "decision": "decidida por el investigador; justificación y fuentes en docs/investigacion/absorcion_reentrada.md; reglas en strategies/v30.json (código engine/strategies/v28.py; ventana y límites en run_test.py::RULES_WINDOW).",
-   "notas": "1 base + 16 sensibilidades (17 intentos). Exploratoria, mismo detector y datos que ABU: NO es validación independiente. Aceptación de 600 s elegida por conteo de señales (1,800 s daba ~70 operaciones), sin mirar ganancias."
+   "notas": "1 base + 16 sensibilidades (17 intentos). Exploratoria, mismo detector y datos que ABU: NO es validación independiente. Aceptación de 600 s elegida por conteo de señales (1,800 s daba ~70 operaciones), sin mirar ganancias.",
+   "inicio_utc": "2026-10-26T02:45:01+00:00"
   }
  ]
 }
