@@ -1,5 +1,5 @@
 {
- "actualizado_utc": "2026-10-26T22:06:22Z",
+ "actualizado_utc": "2026-10-26T22:28:28Z",
  "porcentaje": 40,
  "criterios": {
   "a_ganancia_neta_positiva": {
@@ -28,8 +28,8 @@
   "test_id": "P031",
   "por_que": "+$11.9k, p 0.001 contra RAND, positiva los 3 años. Pero 'revisar' (placebo sospechoso), DSR 0, Topstep 41.2% y 214 cuentas rompen el MLL. P045 (placebo de niveles, ABP) perdió −$9.7k con p 0.81: el nivel sí importa, no era fuga. P039 no mejora Topstep; P043 pierde. 40% (criterios a y d) es un techo generoso."
  },
- "ultima_accion": "Corrida 35: no agregué prueba nueva. G2 (ABG), G5 (CLX) y G6 (ATR) siguen congeladas o corriendo; G4 (IBX, P046) ya no pasó. G3 sigue bloqueada por el motor, E-HVN-FUERZA sin runner y G7 espera datos MBO. Otra variante de absorción sería un intento más sin base. Progreso sigue en 40%.",
- "siguiente_idea": "Leer P047+ (G2 ABG, G5 CLX, G6 ATR). Si ninguna mejora a ABU, la familia queda agotada. Pedir a Jose: cambio de motor para Asia/Londres (G3) y decisión sobre datos MBO (G7).",
+ "ultima_accion": "Corrida 36: sin prueba nueva. P047 (ATR v1, traders atrapados) salió: +$7,988, p 0.007, positiva 2024/2025/2026, pero 'revisar', DSR 0 con 1,190 intentos, Topstep 36.8%. Es otra variante de la familia de absorción (comparte ráfagas con ABU) y no mejora a P031. G2 (ABG) y G5 (CLX) siguen corriendo. G3 sigue bloqueada por el motor, E-HVN-FUERZA sin runner y G7 espera datos MBO. Otra variante sería un intento más sin base.",
+ "siguiente_idea": "Leer G2 (ABG) y G5 (CLX) cuando terminen. Si ninguna pasa Topstep >50% con DSR razonable, la familia de absorción/atrapados queda agotada con estos datos. Pedir a Jose: cambio de motor para Asia/Londres (G3) y decisión sobre datos MBO (G7).",
  "historial": [
   "2026-10-25T02:45:53Z · Primera corrida del investigador: ABS v3 congelada (entrada temprana). Mejor prueba P012: 20%.",
   "2026-10-25T03:33:46Z · Segunda corrida: ACC v1 congelada (aceptación VAH/VAL). P016 (ABS v3) no mejora. Mejor prueba P012: 20%.",
@@ -57,6 +57,7 @@
   "2026-10-26T21:31:39Z · Corrida 32: ATR v1 congelada (traders atrapados, G6). G2 reintentándose, el código de ABG corre. Mejor prueba P031: 40% (a y d).",
   "2026-10-26T21:40:26Z · Corrida 33: sin prueba nueva (cola llena, pendientes bloqueados). P046 (IBX v1) no pasa (−$10.9k, p 0.46). Mejor prueba P031: 40% (a y d).",
   "2026-10-26T21:42:29Z · Corrida 34: sin prueba nueva (G2, G5, G6 corriendo; pendientes bloqueados). Error de G2 era del orquestador. Mejor prueba P031: 40% (a y d).",
-  "2026-10-26T22:06:22Z · Corrida 35: sin prueba nueva (cola llena con G2, G5, G6; pendientes bloqueados). Mejor prueba P031: 40% (a y d)."
+  "2026-10-26T22:06:22Z · Corrida 35: sin prueba nueva (cola llena con G2, G5, G6; pendientes bloqueados). Mejor prueba P031: 40% (a y d).",
+  "2026-10-26T22:28:28Z · Corrida 36: sin prueba nueva (G2, G5 corriendo; pendientes bloqueados). P047 (ATR v1) revisar: +$8.0k, p 0.007, Topstep 36.8%, no mejora a ABU. Mejor prueba P031: 40% (a y d)."
  ]
 }

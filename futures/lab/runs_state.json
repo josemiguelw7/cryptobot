@@ -317,7 +317,10 @@
   "inicio_utc": "2026-10-26T21:40:01+00:00"
  },
  "G6-ATRAPADOS": {
-  "estado": "corriendo",
-  "inicio_utc": "2026-10-26T21:38:01+00:00"
+  "estado": "corrida",
+  "inicio_utc": "2026-10-26T21:38:01+00:00",
+  "fin_utc": "2026-10-26T22:18:02+00:00",
+  "test_id": "P047",
+  "veredicto": "revisar"
  }
 }
