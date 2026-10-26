@@ -1,5 +1,5 @@
 {
- "actualizado_utc": "2026-10-26T05:36:42Z",
+ "actualizado_utc": "2026-10-26T20:20:47Z",
  "porcentaje": 40,
  "criterios": {
   "a_ganancia_neta_positiva": {
@@ -28,8 +28,8 @@
   "test_id": "P031",
   "por_que": "+$11.9k, p 0.001 contra RAND, positiva los 3 años. Pero 'revisar' (placebo sospechoso), DSR 0, Topstep 41.2% y 214 cuentas rompen el MLL. P039 (ABU v3) no mejora Topstep (39.1%); P043 (ABW) pierde. 40% (criterios a y d) es un techo generoso."
  },
- "ultima_accion": "Leí P043 (ABW v1): no pasa, −$12.6k, p 0.93, 156 operaciones; la absorción ya no tiene más variantes de contexto. Probé una idea nueva, extremo pobre de ayer (PEX): solo 30–60 señales posibles en 576 sesiones, la descarté por vacía (docs/investigacion/extremo_pobre.md). Dejé congelada OPD v1 (T29-OPD): apertura impulsiva (open drive de Dalton) medida por delta en 09:30–09:35. Reglas en strategies/v33.json, código engine/strategies/v31.py, estudio opd_v1 (17 intentos), docs/investigacion/apertura_impulsiva.md. Humo: 22 señales en 94 sesiones (~135 esperadas); solo conteo.",
- "siguiente_idea": "Si OPD no pasa, queda la iniciativa a mitad del día (rupturas con delta) o pedir a un humano: overnight/Londres en rand.py (RAND carga solo sesión NY), revisar el placebo desplazado y un runner de estudios para E-HVN-FUERZA. El criterio b depende del examen sellado.",
+ "ultima_accion": "Leí P044 (OPD v1): no pasa, −$7.5k, p 0.69, Topstep 7.4%; la apertura impulsiva no sirve. Tomé G1-PLACEBO-ABU (prioridad 1, validación) y dejé congelada ABP v1 (backlog G1-PLACEBO-ABU): ABU v2 con todos los niveles desplazados 40 ticks (± por paridad de fecha). Reglas en strategies/v34.json, código engine/strategies/v32.py, estudio abp_v1 (17 intentos), docs/investigacion/placebo_abu.md. Humo: 100 sesiones, 33 señales de ABU v2 y 33 de ABP, solo 2 coinciden; simulé 40 sesiones sin errores. Lectura fijada antes: si el placebo rinde ≥ 50% de ABU v2 o p ≤ 0.05, el 40% baja a 20%.",
+ "siguiente_idea": "Leer P045 (ABP). Si el placebo pierde, seguir con G2-ABU-MANEJO (manejo de la operación sobre las señales de ABU v2 para Topstep); luego G3 (sesiones fuera de NY; ojo: RAND solo carga NY), G4 IB con delta, G5 clímax, G6 atrapados. G7 (MBO) espera decisión de Jose.",
  "historial": [
   "2026-10-25T02:45:53Z · Primera corrida del investigador: ABS v3 congelada (entrada temprana). Mejor prueba P012: 20%.",
   "2026-10-25T03:33:46Z · Segunda corrida: ACC v1 congelada (aceptación VAH/VAL). P016 (ABS v3) no mejora. Mejor prueba P012: 20%.",
@@ -49,6 +49,7 @@
   "2026-10-26T02:34:18Z · Corrida 24: ABB v1 congelada (absorción tras re-entrada aceptada). P040 (ABM v1) insuficiente (−$2.7k, p 0.53). Mejor prueba P031: 40% (a y d).",
   "2026-10-26T03:50:00Z · Corrida 25: VPT v1 congelada (pullback a la VWAP en tendencia). P041 (ABB v1) no pasa (−$9.0k, p 0.87). Mejor prueba P031: 40% (a y d).",
   "2026-10-26T04:50:00Z · Corrida 26: ABW v1 congelada (absorción en días de apertura ancha). P042 (VPT v1) no pasa (−$45.8k, p 0.98). Mejor prueba P031: 40% (a y d).",
-  "2026-10-26T05:36:42Z · Corrida 27: OPD v1 congelada (apertura impulsiva por flujo). P043 (ABW v1) no pasa (−$12.6k, p 0.93). PEX descartada por vacía. Mejor prueba P031: 40% (a y d)."
+  "2026-10-26T05:36:42Z · Corrida 27: OPD v1 congelada (apertura impulsiva por flujo). P043 (ABW v1) no pasa (−$12.6k, p 0.93). PEX descartada por vacía. Mejor prueba P031: 40% (a y d).",
+  "2026-10-26T20:20:47Z · Corrida 28: ABP v1 congelada (placebo de niveles de ABU v2, G1). P044 (OPD v1) no pasa (−$7.5k, p 0.69). Mejor prueba P031: 40% (a y d)."
  ]
 }

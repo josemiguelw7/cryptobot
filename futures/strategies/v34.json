@@ -1,0 +1,37 @@
+{
+ "version": 34,
+ "fecha_registro": "2026-10-26",
+ "titulo": "Tanda 33 · ABP v1 (placebo de niveles de ABU v2; validación G1)",
+ "estado": "Escrita por el investigador autónomo; sellada y congelada al publicar. Investigación: docs/investigacion/placebo_abu.md.",
+ "comun": {
+  "instrumento": "NQ (contrato del frente), 2 contratos por operación",
+  "horario": "Nueva York 09:30–15:30 ET",
+  "cierre_forzado": "cualquier posición abierta se cierra a mercado a las 15:45 ET",
+  "noticias": "no se abre de −2 a +5 min de CPI, NFP y Fed",
+  "costos": "comisión Topstep + 1 tick de deslizamiento por lado; prueba extra al doble",
+  "limites_dia": "máximo 6 operaciones por día; se detiene tras 3 pérdidas seguidas (igual que ABU v2)",
+  "una_posicion": "nunca más de una posición abierta por estrategia",
+  "umbrales_relativos": "igual que ABU v2: el menor entre el p95 de 20 sesiones y el p90 de los volúmenes de 60 s de los 60 min anteriores; piso 0.5 × p95",
+  "datos": "solo periodo de diseño 2024-01-02 a 2026-04-21; el examen sellado no se abre",
+  "control": "RAND emparejado y RAND2 sorteados en la misma ventana 09:30–15:30 y con 2 contratos"
+ },
+ "estrategias": [
+  {
+   "id": "ABP",
+   "version": 1,
+   "nombre": "Placebo de niveles de ABU v2",
+   "idea": "Si la ventaja de ABU viene de dónde está el nivel, el mismo detector con niveles falsos (desplazados 10 puntos) debe perder.",
+   "contexto": "Igual que ABU v2: días en que el primer precio de las 09:30 cae entre VAL y VAH REALES de ayer.",
+   "disparador": "Igual que ABU v2: volumen agresivo de un lado en 60 s ≥ umbral relativo, con el precio avanzando ≤ 2 ticks.",
+   "ubicacion": "Extremo a ≤ 4 ticks de un nivel FALSO: cada nivel de ABU (ayer, noche, POC/VAH/VAL del día) más 40 ticks en fechas de ordinal par y menos 40 en impares.",
+   "confirmacion": "Igual que ABU v2: en 60 s el delta cambia de signo y el precio se aleja ≥ 4 ticks.",
+   "entrada": "A mercado, en contra del lado absorbido.",
+   "stop": "4 ticks más allá del extremo; entre 12 y 32 ticks.",
+   "objetivo": "2R.",
+   "tiempo_maximo": "15 minutos.",
+   "tamano": "2 contratos",
+   "motivo": "Validación G1 (Jose, 26/10/2026): P031 quedó en 'revisar' por el placebo temporal; este es el placebo directo de niveles. No es una estrategia para operar."
+  }
+ ],
+ "nota": "Código en futures/lab/engine/strategies/v32.py::PARAMS['ABP'] (copia de v17.py + desplazamiento); contratos y ventana en run_test.py::RULES_WINDOW."
+}

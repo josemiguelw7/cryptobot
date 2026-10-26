@@ -288,7 +288,10 @@
   "veredicto": "no_pasa"
  },
  "T29-OPD": {
-  "estado": "corriendo",
-  "inicio_utc": "2026-10-26T20:00:01+00:00"
+  "estado": "corrida",
+  "inicio_utc": "2026-10-26T20:00:01+00:00",
+  "fin_utc": "2026-10-26T20:05:07+00:00",
+  "test_id": "P044",
+  "veredicto": "no_pasa"
  }
 }

@@ -7,6 +7,13 @@ import sys
 from . import registry, config
 
 STUDIES = {
+    "abp_v1": {
+        "hypothesis": "ABP v1 (placebo de niveles de ABU v2, validación G1: el detector, filtro de día real, confirmación a 60 s, stop 12–32, objetivo 2R, salida a 15 min, 2 contratos y 09:30–15:30 de ABU v2, pero con todos los niveles —ayer, noche, POC/VAH/VAL del día— desplazados 40 ticks, + en fechas de ordinal par y − en impares): si la ventaja de ABU viene de dónde está el nivel, el placebo NO rinde más que un RAND emparejado y RAND2 (p vs RAND > 0.05) y su neto es <= 50% del de ABU v2 (+$11,912 en P031); si lo rinde, la ventaja no es del nivel y el progreso se rebaja.",
+        "n_declared": 1 + 16,
+        "kill": ["ganancia neta <= 0 con costos base", "p vs RAND > 0.20", "pierde en 2 de 3 años", "rompe MLL en > 50% de arranques"],
+        "strategies": ["ABP v1"],
+        "notes": "1 prueba + 16 de sensibilidad (cercanía 2/3/5/6 ticks, confirmación 40/50/70/80 s, umbral relativo p86/p88/p92/p94, desplazamiento 24/32/48/56 ticks). Una sola definición de placebo (docs/investigacion/placebo_abu.md) y lectura del resultado fijadas antes de correr. Humo: 100 sesiones, solo conteo (ABU v2 33 señales, ABP 33, solo 2 coinciden). Es una validación del criterio de nivel, no una estrategia: se espera no_pasa; un neto positivo y alto sería la señal de alarma. Mismos datos de diseño, NO es evidencia independiente.",
+    },
     "opd_v1": {
         "hypothesis": "OPD v1 (apertura impulsiva por flujo: en los primeros 300 s desde las 09:30 el delta agresivo neto es >= 3 % del volumen en una dirección, el precio avanza >= 40 ticks en esa dirección y el mayor retroceso desde el extremo corrido es <= 1.0 x el avance; entrada a mercado a favor a las 09:35, stop en el contra-extremo de la ventana 12–32, objetivo 1.5R, salida a 15 min, 2 contratos, una operación por día): las operaciones rinden más que un RAND emparejado y RAND2 sorteados entre 09:34 y 09:38 con las mismas reglas; gana después de costos, es positiva en 2024, 2025 y 2026 y tiene al menos 100 operaciones.",
         "n_declared": 1 + 16,
