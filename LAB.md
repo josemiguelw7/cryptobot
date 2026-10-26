@@ -1,6 +1,6 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-26 05:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-26 06:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
@@ -154,6 +154,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - **abb_v1**: ABB v1 (absorción tras re-entrada aceptada: el detector de ABU, confirmado a 60 s, en niveles de ayer, de la noche y POC/VAH/VAL del día, pe · declarados 17, usados 17
 - **vpt_v1**: VPT v1 (pullback a la VWAP a favor de la tendencia: en días que abren FUERA del valor de ayer y no regresan a él, tras una extensión previa  · declarados 17, usados 15
 - **abw_v1**: ABW v1 (absorción en días de apertura ancha: el detector de ABU, confirmado a 60 s, en niveles de ayer, de la noche, POC/VAH/VAL del día y m · declarados 17, usados 17
+- **opd_v1**: OPD v1 (apertura impulsiva por flujo: en los primeros 300 s desde las 09:30 el delta agresivo neto es >= 3 % del volumen en una dirección, e · declarados 17, usados 0
 
 ## Mapa de señales (resumen)
 
