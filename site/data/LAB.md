@@ -1,6 +1,6 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-26 00:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-26 01:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
@@ -101,6 +101,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 | T21-ABF | ABF v1: absorción fallida, seguir la ruptura del extremo absorbido | **corrida** → P036 | P035 (FAF v1) no pasa y los reversos sin nivel pierden con p≈1; ABU pierde el 60% con el stop: el fracaso de la absorción es la señal |  |
 | T22-ABR | ABR v1: absorción de ABU con entrada pasiva en la reprueba del extremo | **corrida** → P037 | P031/P030 (ABU: única ventaja; placebo desplazado gana más = el valor está cerca del extremo) · P036 (ABF) no pasa: la reversión es el lado correcto |  |
 | T23-ABE | ABE v1: absorción de ABU confirmada por ES (ES también se detuvo) | **corrida** → P038 | P037 (ABR v1) no pasa: −$1,186, p 0.34; ABU (P030/P031) sigue siendo la única familia con ventaja y pierde el 60% con el stop; ES nunca se probó como filtro |  |
+| T24-ABU3 | ABU v3: ABU v2 con parada tras 2 pérdidas seguidas (riesgo diario) | **congelada** | P031 (ABU v2) · P038 (ABE v1) no pasa: el filtro de ES no mejora a ABU; el mapa v3 no deja señales sin probar |  |
 
 ## Estudios y cuenta de intentos
 
@@ -139,6 +140,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - **abf_v1**: ABF v1 (absorción fallida: el detector de absorción de ABU v1 en niveles de ayer, de la noche y POC/VAH/VAL del día, confirmado a 60 s; si e · declarados 17, usados 17
 - **abr_v1**: ABR v1 (absorción con reprueba: el detector de ABU v1 en niveles de ayer, de la noche y POC/VAH/VAL del día, solo días que abren dentro del  · declarados 17, usados 16
 - **abe_v1**: ABE v1 (absorción de ABU v1 confirmada por ES: el detector de absorción de ABU v1 en niveles de ayer, de la noche y POC/VAH/VAL del día, sol · declarados 17, usados 16
+- **abu_v3**: ABU v3 (las señales de ABU v2: detector de absorción unificada en niveles de ayer, de la noche y POC/VAH/VAL del día, solo días que abren de · declarados 17, usados 0
 
 ## Mapa de señales (resumen)
 
