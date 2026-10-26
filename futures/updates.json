@@ -30,6 +30,13 @@
       "test_id": "P041"
     },
     {
+      "date": "2026-10-26",
+      "kind": "prueba",
+      "title": "Prueba P042 · VPT v1 · no pasa",
+      "body": "VPT v1: 611 operaciones, ganancia neta $-45,819 con costos base, p contra RAND 0.981, estrés $-56,646, Topstep 5.0% de las cuentas (RAND 5.3%). Veredicto: no pasa. Causa: pierde con costos base; no gana a RAND (p=0.981); no gana a RAND2 con las mismas salidas (p=0.969); DSR 0.0 < 0.95 con 1090 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 5.0%.",
+      "test_id": "P042"
+    },
+    {
       "date": "2026-10-25",
       "kind": "prueba",
       "title": "Prueba P016 · ABS v3 · revisar",

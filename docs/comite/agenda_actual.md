@@ -43,6 +43,7 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 - P039 · ABU v3 · **revisar** · neto 11107.24 · p 0.002 · Topstep 39.1%
 - P040 · ABM v1 · **insuficiente** · neto -2738.48 · p 0.5345 · Topstep 0.0%
 - P041 · ABB v1 · **no_pasa** · neto -9001.6 · p 0.8731 · Topstep 0.0%
+- P042 · VPT v1 · **no_pasa** · neto -45819.16 · p 0.981 · Topstep 5.0%
 
 ## 2. Qué murió y por qué
 - P013 · POC v1: umbral de orden grande mal calculado (percentil truncado y sobre todas las órdenes: 15 contratos). Ver strategies/v1_aclaraciones.json
@@ -63,6 +64,7 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 - P035 · FAF v1: pierde con costos base; no gana a RAND (p=1.0); no gana a RAND2 con las mismas salidas (p=1.0); DSR 0.0 < 0.95 con 974 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%
 - P036 · ABF v1: pierde con costos base; no gana a RAND (p=0.986); no gana a RAND2 con las mismas salidas (p=0.99); DSR 0.0 < 0.95 con 990 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%
 - P041 · ABB v1: pierde con costos base; no gana a RAND (p=0.8731); no gana a RAND2 con las mismas salidas (p=0.8921); DSR 0.0 < 0.95 con 1073 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%
+- P042 · VPT v1: pierde con costos base; no gana a RAND (p=0.981); no gana a RAND2 con las mismas salidas (p=0.969); DSR 0.0 < 0.95 con 1090 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 5.0%
 
 ## 3. Qué está propuesto (decidir: aprobar / descartar / pedir más datos)
 
