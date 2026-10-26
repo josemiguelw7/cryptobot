@@ -738,13 +738,14 @@
    "nombre": "ABU v3: ABU v2 con parada tras 2 pérdidas seguidas (riesgo diario)",
    "hipotesis": "P031 (ABU v2) gana (+$11.9k, p 0.001, 3 años positivos) pero 214 de 517 cuentas Topstep rompen el MLL, muchas por el mismo racimo de inicios de 2024. Con las mismas señales y 2 contratos, detener el día tras 2 pérdidas (peor día ≈ $660 en vez de ≈ $1,000) baja las cuentas rotas y sube el paso de Topstep por encima del 50% sin matar la ganancia.",
    "origen": "P031 (ABU v2) · P038 (ABE v1) no pasa: el filtro de ES no mejora a ABU; el mapa v3 no deja señales sin probar",
-   "estado": "congelada",
+   "estado": "corriendo",
    "estrategia": "ABU",
    "version": 3,
    "estudio": "abu_v3",
    "requisitos": [],
    "decision": "decidida por el investigador; justificación en docs/investigacion/riesgo_diario.md; reglas en strategies/v28.json (código engine/strategies/v26.py; ventana y límite de pérdidas en run_test.py::RULES_WINDOW). Última versión de ABU.",
-   "notas": "1 definición base + 16 sensibilidades (17 intentos). Exploratoria, mismas señales que ABU v2: NO es validación independiente ni evidencia nueva de ventaja. Puede bajar la ganancia por tener menos operaciones."
+   "notas": "1 definición base + 16 sensibilidades (17 intentos). Exploratoria, mismas señales que ABU v2: NO es validación independiente ni evidencia nueva de ventaja. Puede bajar la ganancia por tener menos operaciones.",
+   "inicio_utc": "2026-10-26T01:15:01+00:00"
   }
  ]
 }
