@@ -1,13 +1,13 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-26 03:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-26 03:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
 ## En una línea
 
 - Sesiones válidas de diseño: **576** (examen sellado desde 2026-04-22, cerrado).
-- Intentos registrados: **1072** · pruebas publicadas: **39** (error 1, superada 7, no_pasa 16, revisar 13, insuficiente 2).
+- Intentos registrados: **1089** · pruebas publicadas: **40** (error 1, superada 7, no_pasa 17, revisar 13, insuficiente 2).
 - Estrategias aprobadas por el comité: **0**. Nada toca dinero real.
 
 ## Pruebas corridas
@@ -53,6 +53,7 @@ Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` �
 | P038 | ABE v1 | **revisar** | $1,181 | 0.0519 | 0.0% | placebo desplazado sospechoso: revisión de código pendiente; además: no gana a RAND (p=0.0519); no gana a RAND |
 | P039 | ABU v3 | **revisar** | $11,107 | 0.002 | 39.1% | placebo desplazado sospechoso: revisión de código pendiente; además: DSR 0.0 < 0.95 con 1039 intentos; 74.1% d |
 | P040 | ABM v1 | **insuficiente** | −$2,738 | 0.5345 | 0.0% | 58 operaciones / 556 sesiones: por debajo del mínimo |
+| P041 | ABB v1 | **no_pasa** | −$9,002 | 0.8731 | 0.0% | pierde con costos base; no gana a RAND (p=0.8731); no gana a RAND2 con las mismas salidas (p=0.8921); DSR 0.0  |
 
 ## Cola de pruebas (backlog)
 
@@ -105,7 +106,8 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 | T23-ABE | ABE v1: absorción de ABU confirmada por ES (ES también se detuvo) | **corrida** → P038 | P037 (ABR v1) no pasa: −$1,186, p 0.34; ABU (P030/P031) sigue siendo la única familia con ventaja y pierde el 60% con el stop; ES nunca se probó como filtro |  |
 | T24-ABU3 | ABU v3: ABU v2 con parada tras 2 pérdidas seguidas (riesgo diario) | **corrida** → P039 | P031 (ABU v2) · P038 (ABE v1) no pasa: el filtro de ES no mejora a ABU; el mapa v3 no deja señales sin probar |  |
 | T25-ABM | ABM v1: absorción en el valor compuesto de 5 días (niveles multi-día) | **corrida** → P040 | P039 (ABU v3): Topstep 39.1%, el riesgo diario no era el cuello; ABU gastó sus 3 versiones; niveles de varios días nunca probados |  |
-| T26-ABB | ABB v1: absorción tras re-entrada aceptada al valor de ayer | **corriendo** | P040 (ABM v1) insuficiente y negativa: los niveles multi-día no sirven; ABU (única ventaja) solo cubre días que abren dentro del valor; la re-entrada aceptada (regla del 80%) nunca se combinó con absorción |  |
+| T26-ABB | ABB v1: absorción tras re-entrada aceptada al valor de ayer | **corrida** → P041 | P040 (ABM v1) insuficiente y negativa: los niveles multi-día no sirven; ABU (única ventaja) solo cubre días que abren dentro del valor; la re-entrada aceptada (regla del 80%) nunca se combinó con absorción |  |
+| T27-VPT | VPT v1: pullback a la VWAP a favor de la tendencia, días que abren fuera del valor | **congelada** | P041 (ABB v1) no pasa: la absorción solo funciona en balance; la tendencia con VWAP como soporte dinámico nunca se probó |  |
 
 ## Estudios y cuenta de intentos
 
@@ -146,7 +148,8 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - **abe_v1**: ABE v1 (absorción de ABU v1 confirmada por ES: el detector de absorción de ABU v1 en niveles de ayer, de la noche y POC/VAH/VAL del día, sol · declarados 17, usados 16
 - **abu_v3**: ABU v3 (las señales de ABU v2: detector de absorción unificada en niveles de ayer, de la noche y POC/VAH/VAL del día, solo días que abren de · declarados 17, usados 17
 - **abm_v1**: ABM v1 (absorción en el valor multi-día: el detector de ABU, confirmado a 60 s, en los niveles del perfil compuesto de los 5 días válidos an · declarados 17, usados 17
-- **abb_v1**: ABB v1 (absorción tras re-entrada aceptada: el detector de ABU, confirmado a 60 s, en niveles de ayer, de la noche y POC/VAH/VAL del día, pe · declarados 17, usados 0
+- **abb_v1**: ABB v1 (absorción tras re-entrada aceptada: el detector de ABU, confirmado a 60 s, en niveles de ayer, de la noche y POC/VAH/VAL del día, pe · declarados 17, usados 17
+- **vpt_v1**: VPT v1 (pullback a la VWAP a favor de la tendencia: en días que abren FUERA del valor de ayer y no regresan a él, tras una extensión previa  · declarados 17, usados 0
 
 ## Mapa de señales (resumen)
 
@@ -205,11 +208,11 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - 2026-10-26 · prueba · Prueba P038 · ABE v1 · revisar
 - 2026-10-26 · prueba · Prueba P039 · ABU v3 · revisar
 - 2026-10-26 · prueba · Prueba P040 · ABM v1 · insuficiente
+- 2026-10-26 · prueba · Prueba P041 · ABB v1 · no pasa
 - 2026-10-25 · prueba · Prueba P016 · ABS v3 · revisar
 - 2026-10-25 · prueba · Prueba P017 · ACC v1 · revisar
 - 2026-10-25 · prueba · Prueba P018 · SMT v1 · no pasa
 - 2026-10-25 · prueba · Prueba P019 · VAR v1 · no pasa
-- 2026-10-25 · prueba · Prueba P020 · ACC v2 · revisar
 
 ## Cómo se corre una prueba nueva
 
