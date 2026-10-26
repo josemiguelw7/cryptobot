@@ -44,6 +44,13 @@
       "test_id": "P043"
     },
     {
+      "date": "2026-10-26",
+      "kind": "prueba",
+      "title": "Prueba P044 · OPD v1 · no pasa",
+      "body": "OPD v1: 150 operaciones, ganancia neta $-7,474 con costos base, p contra RAND 0.6903, estrés $-9,304, Topstep 7.4% de las cuentas (RAND 2.4%). Veredicto: no pasa. Causa: pierde con costos base; no gana a RAND (p=0.6903); no gana a RAND2 con las mismas salidas (p=0.5864); DSR 0.0 < 0.95 con 1122 intentos; muere con costos al doble; pierde en 2024, 2025; pasa Topstep solo 7.4%.",
+      "test_id": "P044"
+    },
+    {
       "date": "2026-10-25",
       "kind": "prueba",
       "title": "Prueba P016 · ABS v3 · revisar",

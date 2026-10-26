@@ -45,6 +45,7 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 - P041 · ABB v1 · **no_pasa** · neto -9001.6 · p 0.8731 · Topstep 0.0%
 - P042 · VPT v1 · **no_pasa** · neto -45819.16 · p 0.981 · Topstep 5.0%
 - P043 · ABW v1 · **no_pasa** · neto -12559.36 · p 0.9291 · Topstep 0.0%
+- P044 · OPD v1 · **no_pasa** · neto -7474.0 · p 0.6903 · Topstep 7.4%
 
 ## 2. Qué murió y por qué
 - P013 · POC v1: umbral de orden grande mal calculado (percentil truncado y sobre todas las órdenes: 15 contratos). Ver strategies/v1_aclaraciones.json
@@ -67,16 +68,14 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 - P041 · ABB v1: pierde con costos base; no gana a RAND (p=0.8731); no gana a RAND2 con las mismas salidas (p=0.8921); DSR 0.0 < 0.95 con 1073 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%
 - P042 · VPT v1: pierde con costos base; no gana a RAND (p=0.981); no gana a RAND2 con las mismas salidas (p=0.969); DSR 0.0 < 0.95 con 1090 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 5.0%
 - P043 · ABW v1: pierde con costos base; no gana a RAND (p=0.9291); no gana a RAND2 con las mismas salidas (p=0.9121); DSR 0.0 < 0.95 con 1105 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%
+- P044 · OPD v1: pierde con costos base; no gana a RAND (p=0.6903); no gana a RAND2 con las mismas salidas (p=0.5864); DSR 0.0 < 0.95 con 1122 intentos; muere con costos al doble; pierde en 2024, 2025; pasa Topstep solo 7.4%
 
 ## 3. Qué está propuesto (decidir: aprobar / descartar / pedir más datos)
 - [ ] **G7-ICEBERG-MBO** Icebergs y liquidez retirada (pulling) con datos MBO — Se descartó ICE porque la data ATAS no permite medirlo. Requiere datos MBO (Databento); es un gap de datos. No correr sin la decisión de Jose sobre la compra.
 
 ## 4. Qué está aprobado y falta congelar
 - E-HVN-FUERZA Estudio: qué hace poderoso a un HVN (base del indicador para ATAS) · falta: estudio registrado antes de correr (fases y umbrales); definición de 'HVN poderoso' congelada con huella y sello; chequeo cruzado en ES y YM sin abrir el examen de NQ; indicador C# para ATAS
-- G1-PLACEBO-ABU Validación: revisión placebo de ABU v2 (P031) · falta: 
-- G2-ABU-MANEJO Estudio de manejo de la operación sobre ABU (Topstep) · falta: 
 - G3-SESIONES Patrones de flujo fuera de Nueva York (Asia, Londres, overnight) · falta: 
-- G4-IB-DELTA Extensión del balance inicial (9:30–10:30) confirmada por delta · falta: 
 - G5-CLIMAX Agotamiento / clímax en extremos del día · falta: 
 - G6-ATRAPADOS Traders atrapados · falta: 
 
