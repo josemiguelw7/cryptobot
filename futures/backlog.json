@@ -806,13 +806,14 @@
    "nombre": "ABW v1: absorción en días de apertura ancha",
    "hipotesis": "Si el rango de 09:30–10:00 es ≥ 0.5 del rango de ayer, el día rota y la absorción en niveles (ayer, noche, perfil del día, rango de apertura) revierte más que un RAND emparejado y RAND2 (~250 operaciones esperadas).",
    "origen": "P042 (VPT v1) no pasa (−$45.8k, p 0.98); ABU es la única ventaja pero su filtro de día casi no separa balance de tendencia",
-   "estado": "congelada",
+   "estado": "corriendo",
    "estrategia": "ABW",
    "version": 1,
    "estudio": "abw_v1",
    "requisitos": [],
    "decision": "decidida por el investigador; justificación y fuentes en docs/investigacion/apertura_ancha.md; reglas en strategies/v32.json (código engine/strategies/v30.py; ventana en run_test.py::RULES_WINDOW).",
-   "notas": "1 base + 16 sensibilidades (17 intentos). Exploratoria, mismos datos de diseño: NO es validación independiente. Humo de solo conteo: 50 señales en 112 sesiones."
+   "notas": "1 base + 16 sensibilidades (17 intentos). Exploratoria, mismos datos de diseño: NO es validación independiente. Humo de solo conteo: 50 señales en 112 sesiones.",
+   "inicio_utc": "2026-10-26T04:15:01+00:00"
   }
  ]
 }

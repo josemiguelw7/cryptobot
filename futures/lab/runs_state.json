@@ -279,5 +279,9 @@
   "fin_utc": "2026-10-26T03:59:09+00:00",
   "test_id": "P042",
   "veredicto": "no_pasa"
+ },
+ "T28-ABW": {
+  "estado": "corriendo",
+  "inicio_utc": "2026-10-26T04:15:01+00:00"
  }
 }
