@@ -374,7 +374,8 @@
     "indicador C# para ATAS"
    ],
    "decision": "aprobada por Oscar 2026-10-24 (lo pidió él en el buzón)",
-   "notas": "Sigue aprobada sin ejecutar (corrida 5): el orquestador solo corre estrategias; falta un runner de estudios de medición y no se puede tocar el orquestador. · 25/10/2026: la parte de 'HVN poderoso' se prueba como estrategia HVF v1 (T8-HVF, definición en docs/investigacion/hvn_poderoso.md). El estudio de reacción en primer toque sigue sin runner. · 25/10/2026 (corrida 7): sigue sin runner de estudios; la parte de reacción en primer toque queda pendiente. · 25/10/2026 (corrida 9): sigue sin runner de estudios. · 25/10/2026 (corrida 11): sigue sin runner de estudios. · 25/10/2026 (corrida 12): sigue sin runner de estudios. · 25/10/2026 (corrida 13): sigue sin runner de estudios; el orquestador solo corre estrategias. · 25/10/2026 (corrida 17): sigue sin runner de estudios; el orquestador solo corre estrategias. · 25/10/2026 (corrida 18): sigue sin runner de estudios; el orquestador solo corre estrategias. · 25/10/2026 (corrida 19): sigue sin runner de estudios; el orquestador solo corre estrategias. · 25/10/2026 (corrida 21): sigue sin runner de estudios; el orquestador solo corre estrategias. · 25/10/2026 (corrida 22): sigue sin runner de estudios; el orquestador solo corre estrategias. · 26/10/2026 (corrida 24): sigue sin runner de estudios; no se puede tocar el orquestador. · 26/10/2026 (corrida 25): sigue sin runner de estudios; no se puede tocar el orquestador. · 26/10/2026 (corrida 26): sigue sin runner de estudios; no se puede tocar el orquestador. · 26/10/2026 (corrida 27): sigue sin runner de estudios; el orquestador solo corre estrategias."
+   "notas": "Sigue aprobada sin ejecutar (corrida 5): el orquestador solo corre estrategias; falta un runner de estudios de medición y no se puede tocar el orquestador. · 25/10/2026: la parte de 'HVN poderoso' se prueba como estrategia HVF v1 (T8-HVF, definición en docs/investigacion/hvn_poderoso.md). El estudio de reacción en primer toque sigue sin runner. · 25/10/2026 (corrida 7): sigue sin runner de estudios; la parte de reacción en primer toque queda pendiente. · 25/10/2026 (corrida 9): sigue sin runner de estudios. · 25/10/2026 (corrida 11): sigue sin runner de estudios. · 25/10/2026 (corrida 12): sigue sin runner de estudios. · 25/10/2026 (corrida 13): sigue sin runner de estudios; el orquestador solo corre estrategias. · 25/10/2026 (corrida 17): sigue sin runner de estudios; el orquestador solo corre estrategias. · 25/10/2026 (corrida 18): sigue sin runner de estudios; el orquestador solo corre estrategias. · 25/10/2026 (corrida 19): sigue sin runner de estudios; el orquestador solo corre estrategias. · 25/10/2026 (corrida 21): sigue sin runner de estudios; el orquestador solo corre estrategias. · 25/10/2026 (corrida 22): sigue sin runner de estudios; el orquestador solo corre estrategias. · 26/10/2026 (corrida 24): sigue sin runner de estudios; no se puede tocar el orquestador. · 26/10/2026 (corrida 25): sigue sin runner de estudios; no se puede tocar el orquestador. · 26/10/2026 (corrida 26): sigue sin runner de estudios; no se puede tocar el orquestador. · 26/10/2026 (corrida 27): sigue sin runner de estudios; el orquestador solo corre estrategias.",
+   "prioridad": 8
   },
   {
    "id": "E-ACEPTACION-VA",
@@ -779,6 +780,78 @@
    "requisitos": [],
    "decision": "decidida por el investigador; justificación y fuentes en docs/investigacion/apertura_impulsiva.md; reglas en strategies/v33.json (código engine/strategies/v31.py; ventana en run_test.py::RULES_WINDOW).",
    "notas": "1 base + 16 sensibilidades (17 intentos). Exploratoria, mismos datos de diseño: NO es validación independiente. Humo de solo conteo: 22 señales en 94 sesiones (~135 en 576). Retroceso 1.0 es más laxo que Dalton; declarado."
+  },
+  {
+   "id": "G1-PLACEBO-ABU",
+   "nombre": "Validación: revisión placebo de ABU v2 (P031)",
+   "hipotesis": "ABU v2 marcó 'placebo sospechoso'. Si la ventaja de ABU es real, el placebo (mismas reglas con niveles/tiempos desplazados) debe perder contra ABU; si el placebo rinde parecido, la ventaja es un artefacto y el 40% de progreso cae. Va antes que cualquier estrategia nueva.",
+   "origen": "pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas",
+   "estado": "aprobada",
+   "prioridad": 1,
+   "requisitos": [],
+   "decision": "aprobada por Jose el 26/10/2026; prioridad 1 (1 = primero)"
+  },
+  {
+   "id": "G2-ABU-MANEJO",
+   "nombre": "Estudio de manejo de la operación sobre ABU (Topstep)",
+   "hipotesis": "El problema de ABU no es la ventaja sino el drawdown: Topstep 41%, 214 cuentas rompen el MLL. Probar sobre las MISMAS señales de ABU v2: breakeven, salida parcial, stop dinámico por flujo, salida por tiempo, 1 vs 2 contratos y freno diario más fino. Meta: Topstep >50% sin perder p contra RAND. El estudio de salidas anterior solo cubrió las v1.",
+   "origen": "pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas",
+   "estado": "aprobada",
+   "prioridad": 2,
+   "requisitos": [],
+   "decision": "aprobada por Jose el 26/10/2026; prioridad 2 (1 = primero)"
+  },
+  {
+   "id": "G3-SESIONES",
+   "nombre": "Patrones de flujo fuera de Nueva York (Asia, Londres, overnight)",
+   "hipotesis": "Las reglas del lab piden buscar también en Asia/Londres/overnight y casi todo se probó en NY. Ej.: absorción en máximo/mínimo de Londres; barrido del extremo overnight en la apertura de NY.",
+   "origen": "pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas",
+   "estado": "aprobada",
+   "prioridad": 3,
+   "requisitos": [],
+   "decision": "aprobada por Jose el 26/10/2026; prioridad 3 (1 = primero)"
+  },
+  {
+   "id": "G4-IB-DELTA",
+   "nombre": "Extensión del balance inicial (9:30–10:30) confirmada por delta",
+   "hipotesis": "ORB usó 15 min y sin flujo. La extensión del IB con iniciativa (Dalton) nunca se midió con delta agresivo.",
+   "origen": "pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas",
+   "estado": "aprobada",
+   "prioridad": 4,
+   "requisitos": [],
+   "decision": "aprobada por Jose el 26/10/2026; prioridad 4 (1 = primero)"
+  },
+  {
+   "id": "G5-CLIMAX",
+   "nombre": "Agotamiento / clímax en extremos del día",
+   "hipotesis": "Volumen y delta extremos que se cortan en el máximo/mínimo (subasta terminada vs no terminada) revierten más que RAND. Distinto de PEX (extremo pobre), que se descartó por pocas señales.",
+   "origen": "pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas",
+   "estado": "aprobada",
+   "prioridad": 5,
+   "requisitos": [],
+   "decision": "aprobada por Jose el 26/10/2026; prioridad 5 (1 = primero)"
+  },
+  {
+   "id": "G6-ATRAPADOS",
+   "nombre": "Traders atrapados",
+   "hipotesis": "Agresión fuerte en un nivel que no avanza y luego se revierte: entrar cuando el precio cruza contra los atrapados. Medido desde el lado del perdedor (no es una variante más de absorción).",
+   "origen": "pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas",
+   "estado": "aprobada",
+   "prioridad": 6,
+   "requisitos": [],
+   "decision": "aprobada por Jose el 26/10/2026; prioridad 6 (1 = primero)"
+  },
+  {
+   "id": "G7-ICEBERG-MBO",
+   "nombre": "Icebergs y liquidez retirada (pulling) con datos MBO",
+   "hipotesis": "Se descartó ICE porque la data ATAS no permite medirlo. Requiere datos MBO (Databento); es un gap de datos. No correr sin la decisión de Jose sobre la compra.",
+   "origen": "pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas",
+   "estado": "propuesta",
+   "prioridad": 7,
+   "requisitos": [
+    "datos MBO de Databento — compra pendiente de decisión de Jose"
+   ],
+   "decision": "propuesta; requiere decisión de Jose sobre datos"
   }
  ]
 }
