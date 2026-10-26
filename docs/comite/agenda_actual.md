@@ -78,8 +78,6 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 ## 4. Qué está aprobado y falta congelar
 - E-HVN-FUERZA Estudio: qué hace poderoso a un HVN (base del indicador para ATAS) · falta: estudio registrado antes de correr (fases y umbrales); definición de 'HVN poderoso' congelada con huella y sello; chequeo cruzado en ES y YM sin abrir el examen de NQ; indicador C# para ATAS
 - G3-SESIONES Patrones de flujo fuera de Nueva York (Asia, Londres, overnight) · falta: 
-- G5-CLIMAX Agotamiento / clímax en extremos del día · falta: 
-- G6-ATRAPADOS Traders atrapados · falta: 
 
 ## 5. Respuestas que faltan de Oscar
 - 1. ¿Los niveles que tú miras son los del perfil de Nueva York del día anterior (09:30–16:00) o del día completo (incluida la noche)? Hoy usamos Nueva York.

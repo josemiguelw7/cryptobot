@@ -1,6 +1,6 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-26 21:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-26 21:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
@@ -115,11 +115,11 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 | T28-ABW | ABW v1: absorción en días de apertura ancha | **corrida** → P043 | P042 (VPT v1) no pasa (−$45.8k, p 0.98); ABU es la única ventaja pero su filtro de día casi no separa balance de tendencia |  |
 | T29-OPD | OPD v1: apertura impulsiva (open drive) medida por flujo | **corrida** → P044 | P043 (ABW v1) no pasa (−$12.6k, p 0.93): la familia de absorción agotó sus variantes de contexto; la iniciativa de apertura (Dalton, open-drive) nunca se midió con delta · PEX (extremo pobre de ayer) descartada por vacía (30–60 señales) |  |
 | G1-PLACEBO-ABU | Validación: revisión placebo de ABU v2 (P031) | **corrida** → P045 | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
-| G2-ABU-MANEJO | Estudio de manejo de la operación sobre ABU (Topstep) | **congelada** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  · ERROR: falló una corrida; ver log |
+| G2-ABU-MANEJO | Estudio de manejo de la operación sobre ABU (Topstep) | **corriendo** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  · ERROR: falló una corrida; ver log |
 | G3-SESIONES | Patrones de flujo fuera de Nueva York (Asia, Londres, overnight) | **aprobada** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
 | G4-IB-DELTA | Extensión del balance inicial (9:30–10:30) confirmada por delta | **corriendo** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
-| G5-CLIMAX | Agotamiento / clímax en extremos del día | **aprobada** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
-| G6-ATRAPADOS | Traders atrapados | **aprobada** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
+| G5-CLIMAX | Agotamiento / clímax en extremos del día | **corriendo** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
+| G6-ATRAPADOS | Traders atrapados | **congelada** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
 | G7-ICEBERG-MBO | Icebergs y liquidez retirada (pulling) con datos MBO | **propuesta** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas | datos MBO de Databento — compra pendiente de decisión de Jose |
 
 ## Estudios y cuenta de intentos
@@ -168,6 +168,8 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - **abp_v1**: ABP v1 (placebo de niveles de ABU v2, validación G1: el detector, filtro de día real, confirmación a 60 s, stop 12–32, objetivo 2R, salida a · declarados 17, usados 17
 - **abg_v1**: ABG v1 (manejo de la operación sobre las señales de ABU v2: mismo detector de absorción, filtro de día que abre dentro del valor de ayer, ni · declarados 17, usados 0
 - **ibx_v1**: IBX v1 (extensión del balance inicial confirmada por delta: IB = máximo y mínimo de 09:30–10:30; entre 10:30 y 14:30, una celda de 10 s supe · declarados 17, usados 0
+- **clx_v1**: CLX v1 (clímax de volumen y delta en el extremo del día: ventana de 60 s con nuevo máximo/mínimo de la sesión, no antes de 10:00, volumen >= · declarados 17, usados 0
+- **atr_v1**: ATR v1 (traders atrapados: la ráfaga, los niveles, el filtro de día (abre dentro del valor de ayer), 2 contratos y 09:30–15:30 de ABU v2, pe · declarados 17, usados 0
 
 ## Mapa de señales (resumen)
 
