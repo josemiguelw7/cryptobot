@@ -13,7 +13,7 @@ que esté en estado 'congelada', en un entorno que empieza SIEMPRE sin informaci
   python -m engine.orchestrator --status
 Estado por prueba en /srv/lab/runs/<id>/ (log, commit, huellas, receipt.json).
 """
-import argparse, hashlib, json, os, shutil, subprocess, sys, time
+import argparse, fcntl, hashlib, json, os, shutil, subprocess, sys, time
 from datetime import datetime, timezone
 
 MIRROR = "/srv/lab/git/cryptobot.git"
@@ -22,6 +22,14 @@ DATA = "/srv/lab/data"
 REPO = "/srv/lab/repo"           # copia de trabajo sincronizada desde la Mac (backlog, registro, resultados)
 IMAGE = "nqlab:1"
 LOCK = os.path.join(RUNS, ".lock")
+SLOTS = 2                 # pruebas en paralelo (cada una usa ~1 núcleo y ~11 GB de RAM)
+RAM_MIN_GB = 14           # no arranca otra prueba si queda menos RAM libre que esto
+ATTEMPTS_PER_TEST = 17    # 1 base + 16 sensibilidades: intentos que aporta cada prueba en curso al DSR
+
+
+def _crit():
+    """Candado corto para lo compartido: state.json, id de prueba, registro encadenado."""
+    f = open(os.path.join(RUNS, ".critical"), "w"); fcntl.flock(f, fcntl.LOCK_EX); return f
 
 
 def sh(cmd, **kw):
@@ -52,12 +60,16 @@ def backlog():
     return b
 
 
-def save_backlog(b):
+def save_backlog(b, only=None):
+    lk = _crit()
     st = json.load(open(STATE)) if os.path.exists(STATE) else {}
     for it in b["pruebas"]:
+        if only and it["id"] != only:
+            continue
         if it["estado"] in ("corriendo", "corrida") or it.get("ultimo_error"):
             st[it["id"]] = {k: it[k] for k in ("estado", "inicio_utc", "fin_utc", "test_id", "veredicto", "ultimo_error") if k in it}
-    os.makedirs(RUNS, exist_ok=True); json.dump(st, open(STATE, "w"), indent=1)
+    os.makedirs(RUNS, exist_ok=True); json.dump(st, open(STATE + ".tmp", "w"), indent=1); os.replace(STATE + ".tmp", STATE)
+    lk.close()
 
 
 def ensure_image():
@@ -121,7 +133,7 @@ def run_in_container(wd, item, out, tag):
 
 
 def run_one(item):
-    b = backlog(); it = next(x for x in b["pruebas"] if x["id"] == item["id"]); it["estado"] = "corriendo"; it["inicio_utc"] = now(); save_backlog(b)
+    b = backlog(); it = next(x for x in b["pruebas"] if x["id"] == item["id"]); it["estado"] = "corriendo"; it["inicio_utc"] = now(); save_backlog(b, item["id"])
     rd = os.path.join(RUNS, item["id"]); shutil.rmtree(rd, ignore_errors=True); os.makedirs(rd)
     logf = open(os.path.join(rd, "log.txt"), "a")
     commit = item.get("commit") or sh(f"git --git-dir={MIRROR} rev-parse main").stdout.strip()
@@ -130,17 +142,19 @@ def run_one(item):
     fails = preflight(item, commit, wd)
     if fails:
         logf.write("PREFLIGHT FALLA: " + "; ".join(fails) + "\n"); logf.close()
-        it["estado"] = "congelada"; it["ultimo_error"] = "; ".join(fails); save_backlog(b); return
+        it["estado"] = "congelada"; it["ultimo_error"] = "; ".join(fails); save_backlog(b, item["id"]); return
     ensure_image()
     gok, glog = golden_in_container(wd, rd); logf.write(f"{now()} golden: {glog}\n")
     if not gok:
         logf.write("GOLDEN DIFIERE: el motor cambió sin actualizar golden.json; no se corre nada\n"); logf.close()
-        it["estado"] = "congelada"; it["ultimo_error"] = "golden difiere: " + glog[-160:]; save_backlog(b); return
+        it["estado"] = "congelada"; it["ultimo_error"] = "golden difiere: " + glog[-160:]; save_backlog(b, item["id"]); return
     sys.path.insert(0, os.path.join(REPO, "futures", "lab"))
     from engine import registry
     import statistics
     shs = registry.all_sharpes()
-    item["_n_trials"] = len(registry.read(registry.TRIALS)) + 1
+    _st = json.load(open(STATE)) if os.path.exists(STATE) else {}
+    _otros = sum(1 for k, v in _st.items() if k != item["id"] and v.get("estado") == "corriendo")
+    item["_n_trials"] = len(registry.read(registry.TRIALS)) + 1 + ATTEMPTS_PER_TEST * _otros   # cuenta también lo que corre en paralelo
     item["_var_sr"] = statistics.pvariance(shs) if len(shs) > 1 else 0.0
     ok1, l1 = run_in_container(wd, item, os.path.join(rd, "out1"), "a"); logf.write(l1)
     ok2, l2 = run_in_container(wd, item, os.path.join(rd, "out2"), "b"); logf.write(l2)
@@ -150,6 +164,7 @@ def run_one(item):
         h1, h2 = sha(os.path.join(res1, "trades.csv")), sha(os.path.join(res2, "trades.csv"))
         receipt["trades_sha256"] = [h1, h2]; receipt["reproducible"] = h1 == h2
         if h1 == h2:
+            _lk = _crit()   # id, resultados y registro encadenado: uno a la vez
             test_id = registry.next_test_id()          # id secuencial al publicar; dentro del contenedor era X<huella>
             dst = os.path.join(REPO, "futures", "lab", "results", test_id)
             shutil.rmtree(dst, ignore_errors=True); shutil.copytree(res1, dst)
@@ -172,6 +187,7 @@ def run_one(item):
                     p2 = dict(params); p2[name] = cell["valor"]
                     registry.record_trial(f"{test_id}-{name}{cell['valor']}", item["estudio"], item["estrategia"], item["version"], "sensibilidad", p2,
                                           rep["receta"].get("sesiones_sha256"), 0, "-", rep["receta"].get("costos"), {"ganancia_neta": cell["neto"], "operaciones": cell["operaciones"]}, "vecino", "")
+            _lk.close()
             it["estado"] = "corrida"; it["test_id"] = test_id; it["veredicto"] = rep["veredicto"]; it.pop("ultimo_error", None)
             logf.write(f"{now()} PUBLICADA como {test_id} ({rep['veredicto']})\n")
         else:
@@ -179,7 +195,7 @@ def run_one(item):
             logf.write(f"{now()} NO REPRODUCIBLE, no se publica\n")
     else:
         it["estado"] = "congelada"; it["ultimo_error"] = "falló una corrida; ver log"
-    it["fin_utc"] = now(); save_backlog(b)
+    it["fin_utc"] = now(); save_backlog(b, item["id"])
     json.dump(receipt, open(os.path.join(rd, "receipt.json"), "w"), indent=1); logf.close()
     try:
         from . import notify
@@ -244,15 +260,34 @@ def main():
         for it in b["pruebas"]:
             print(f"{it['id']:14} {it['estado']:10} {it.get('test_id','')} {it.get('ultimo_error','')}")
         return
-    if os.path.exists(LOCK) and time.time() - os.path.getmtime(LOCK) < 6 * 3600:
+    fresh = lambda p: os.path.exists(p) and time.time() - os.path.getmtime(p) < 6 * 3600
+    slots = [LOCK + f".{i}" for i in range(SLOTS)]
+    busy = sum(fresh(p) for p in slots) + fresh(LOCK)          # LOCK sin número = versión anterior (1 a la vez)
+    free = [p for p in slots if not fresh(p)]
+    if busy >= SLOTS or not free:
         return
-    open(LOCK, "w").write(now())
+    if busy > 0:
+        mem = int(next(l for l in open("/proc/meminfo") if l.startswith("MemAvailable")).split()[1]) / 1048576
+        if mem < RAM_MIN_GB:
+            print(f"{now()} RAM libre {mem:.1f} GB < {RAM_MIN_GB}: no arranco otra en paralelo"); return
+    lk = _crit()
     try:
-        nxt = next((it for it in b["pruebas"] if it["estado"] == "congelada"), None)
-        if nxt:
-            print(f"{now()} arranca {nxt['id']}"); run_one(nxt)
+        b = backlog()
+        nxt = next((it for it in b["pruebas"] if it["estado"] == "congelada" and not it.get("ultimo_error")), None) \
+            or next((it for it in b["pruebas"] if it["estado"] == "congelada"), None)
+        if not nxt:
+            return
+        mine = free[0]; open(mine, "w").write(f"{now()} {nxt['id']}")
+        nxt["estado"] = "corriendo"; nxt["inicio_utc"] = now()
+        st = json.load(open(STATE)) if os.path.exists(STATE) else {}
+        st[nxt["id"]] = {"estado": "corriendo", "inicio_utc": nxt["inicio_utc"]}
+        json.dump(st, open(STATE + ".tmp", "w"), indent=1); os.replace(STATE + ".tmp", STATE)
     finally:
-        os.remove(LOCK)
+        lk.close()
+    try:
+        print(f"{now()} arranca {nxt['id']} (carril {mine[-1]})"); run_one(nxt)
+    finally:
+        os.remove(mine)
 
 
 if __name__ == "__main__":
