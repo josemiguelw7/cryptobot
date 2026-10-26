@@ -7,6 +7,13 @@ import sys
 from . import registry, config
 
 STUDIES = {
+    "abg_v1": {
+        "hypothesis": "ABG v1 (manejo de la operación sobre las señales de ABU v2: mismo detector de absorción, filtro de día que abre dentro del valor de ayer, niveles, confirmación a 60 s, 2 contratos y 09:30–15:30, pero con stop máximo 24 ticks en vez de 32, objetivo 1.5R en vez de 2R y salida por tiempo a 10 min en vez de 15): las operaciones rinden más que un RAND emparejado y RAND2 sorteados en la misma ventana y con las mismas reglas; gana después de costos, es positiva en 2024, 2025 y 2026, y pasa Topstep $50K en más del 50% de los arranques (ABU v2: 41.2%, 214 de 517 cuentas rompen el MLL) sin perder la ventaja contra RAND.",
+        "n_declared": 1 + 16,
+        "kill": ["ganancia neta <= 0 con costos base", "p vs RAND > 0.20", "pierde en 2 de 3 años", "rompe MLL en > 50% de arranques"],
+        "strategies": ["ABG v1"],
+        "notes": "1 prueba + 16 de sensibilidad (objetivo 1.0/1.5R/2.5/3.0 vía rr ±2 pasos de 0.5, tiempo 5/10/20/25 min, stop máximo 16/20/28/32, stop mínimo 4/8/16/20). Una sola configuración base fijada antes de correr (docs/investigacion/manejo_abu.md); es una superficie de salidas, se busca meseta y no la mejor celda. NO se prueban breakeven, salidas parciales, stop dinámico por flujo ni piramidar: el simulador y RAND no los soportan de forma comparable y no se tocan (pendiente de cambio de motor). Misma señal y mismos datos que ABU v2: exploratoria, NO es validación independiente.",
+    },
     "abp_v1": {
         "hypothesis": "ABP v1 (placebo de niveles de ABU v2, validación G1: el detector, filtro de día real, confirmación a 60 s, stop 12–32, objetivo 2R, salida a 15 min, 2 contratos y 09:30–15:30 de ABU v2, pero con todos los niveles —ayer, noche, POC/VAH/VAL del día— desplazados 40 ticks, + en fechas de ordinal par y − en impares): si la ventaja de ABU viene de dónde está el nivel, el placebo NO rinde más que un RAND emparejado y RAND2 (p vs RAND > 0.05) y su neto es <= 50% del de ABU v2 (+$11,912 en P031); si lo rinde, la ventaja no es del nivel y el progreso se rebaja.",
         "n_declared": 1 + 16,

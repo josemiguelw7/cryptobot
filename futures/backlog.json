@@ -800,10 +800,14 @@
    "nombre": "Estudio de manejo de la operación sobre ABU (Topstep)",
    "hipotesis": "El problema de ABU no es la ventaja sino el drawdown: Topstep 41%, 214 cuentas rompen el MLL. Probar sobre las MISMAS señales de ABU v2: breakeven, salida parcial, stop dinámico por flujo, salida por tiempo, 1 vs 2 contratos y freno diario más fino. Meta: Topstep >50% sin perder p contra RAND. El estudio de salidas anterior solo cubrió las v1.",
    "origen": "pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas",
-   "estado": "aprobada",
+   "estado": "congelada",
    "prioridad": 2,
    "requisitos": [],
-   "decision": "aprobada por Jose el 26/10/2026; prioridad 2 (1 = primero)"
+   "decision": "decidida por el investigador; justificación en docs/investigacion/manejo_abu.md; reglas en strategies/v35.json (código engine/strategies/v33.py; ventana en run_test.py::RULES_WINDOW)",
+   "estrategia": "ABG",
+   "version": 1,
+   "estudio": "abg_v1",
+   "notas": "1 base + 16 sensibilidades (17 intentos). Cubre stop, objetivo, tiempo y tamaño; NO cubre breakeven, parcial ni stop por flujo (requieren cambiar sim.py/rand.py). Exploratoria, mismos datos."
   },
   {
    "id": "G3-SESIONES",

@@ -1,0 +1,37 @@
+{
+ "version": 35,
+ "fecha_registro": "2026-10-26",
+ "titulo": "Tanda 34 · ABG v1 (manejo de la operación sobre ABU v2; G2)",
+ "estado": "Escrita por el investigador autónomo; sellada y congelada al publicar. Investigación: docs/investigacion/manejo_abu.md.",
+ "comun": {
+  "instrumento": "NQ (contrato del frente), 2 contratos por operación",
+  "horario": "Nueva York 09:30–15:30 ET",
+  "cierre_forzado": "cualquier posición abierta se cierra a mercado a las 15:45 ET",
+  "noticias": "no se abre de −2 a +5 min de CPI, NFP y Fed",
+  "costos": "comisión Topstep + 1 tick de deslizamiento por lado; prueba extra al doble",
+  "limites_dia": "máximo 6 operaciones por día; se detiene tras 3 pérdidas seguidas (igual que ABU v2)",
+  "una_posicion": "nunca más de una posición abierta por estrategia",
+  "umbrales_relativos": "igual que ABU v2",
+  "datos": "solo periodo de diseño 2024-01-02 a 2026-04-21; el examen sellado no se abre",
+  "control": "RAND emparejado y RAND2 sorteados en la misma ventana 09:30–15:30 y con 2 contratos"
+ },
+ "estrategias": [
+  {
+   "id": "ABG",
+   "version": 1,
+   "nombre": "Manejo de la operación sobre ABU v2",
+   "idea": "Las mismas señales de ABU v2, con pérdida máxima menor y objetivo más cercano para evitar racimos de pérdidas que rompen el MLL de Topstep.",
+   "contexto": "Igual que ABU v2: días en que el primer precio de las 09:30 cae entre VAL y VAH de ayer.",
+   "disparador": "Igual que ABU v2: volumen agresivo de un lado en 60 s ≥ umbral relativo, con el precio avanzando ≤ 2 ticks.",
+   "ubicacion": "Igual que ABU v2: extremo a ≤ 4 ticks de un nivel (ayer, noche, POC/VAH/VAL del día).",
+   "confirmacion": "Igual que ABU v2: en 60 s el delta cambia de signo y el precio se aleja ≥ 4 ticks.",
+   "entrada": "A mercado, en contra del lado absorbido.",
+   "stop": "4 ticks más allá del extremo; entre 12 y 24 ticks (ABU v2: 12–32).",
+   "objetivo": "1.5R (ABU v2: 2R).",
+   "tiempo_maximo": "10 minutos (ABU v2: 15).",
+   "tamano": "2 contratos",
+   "motivo": "G2 (Jose, 26/10/2026): ABU tiene ventaja pero Topstep 41%. Se prueba solo lo que el motor permite comparar con RAND: stop, objetivo y tiempo. Breakeven/parcial/stop por flujo quedan pendientes."
+  }
+ ],
+ "nota": "Código en futures/lab/engine/strategies/v33.py::PARAMS['ABG'] (ABU v2 con stop_max 24, rr 1.5, max_min 10); contratos y ventana en run_test.py::RULES_WINDOW."
+}
