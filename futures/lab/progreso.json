@@ -1,18 +1,18 @@
 {
- "actualizado_utc": "2026-10-26T01:03:26Z",
+ "actualizado_utc": "2026-10-26T02:03:36Z",
  "porcentaje": 40,
  "criterios": {
   "a_ganancia_neta_positiva": {
    "cumple": true,
-   "dato": "P031 (ABU v2): +$11,912 con costos y slippage base, 181 operaciones (P030: +$5,956)"
+   "dato": "P039 (ABU v3): +$11,107 con costos y slippage base, 171 operaciones (P031: +$11,912)"
   },
   "b_gana_a_RAND_con_todos_los_intentos": {
    "cumple": false,
-   "dato": "P031 p 0.001 contra RAND, pero DSR 0.0 < 0.95 con 910 intentos"
+   "dato": "P039 p 0.002 contra RAND, pero DSR 0.0 < 0.95 con 1,039 intentos"
   },
   "c_topstep_mas_de_50": {
    "cumple": false,
-   "dato": "P031: 41.2% (213 pasan, pero 214 de 517 cuentas rompen el MLL). P030 con 1 contrato: 9.9% y 0 rotas. Mejor: 43.5% (P005, motor 1.0)"
+   "dato": "P039: 39.1% (P031: 41.2%). Mejor: 43.5% (P005, motor 1.0). Ninguna pasa 50%"
   },
   "d_positivo_2024_2025_2026": {
    "cumple": true,
@@ -26,10 +26,10 @@
  "mejor_candidata": {
   "id": "ABU v2",
   "test_id": "P031",
-  "por_que": "+$11.9k, p 0.001 contra RAND, positiva los 3 años. Pero 'revisar' (placebo sospechoso), DSR 0, Topstep 41.2% y 214 cuentas rompen el MLL. 40% (criterios a y d) es un techo generoso: sin revisión de código."
+  "por_que": "+$11.9k, p 0.001 contra RAND, positiva los 3 años. Pero 'revisar' (placebo sospechoso), DSR 0, Topstep 41.2% y 214 cuentas rompen el MLL. P039 (ABU v3) no mejora Topstep (39.1%). 40% (criterios a y d) es un techo generoso."
  },
- "ultima_accion": "Leí P038 (ABE v1): revisar, +$1,181 en 103 operaciones, p 0.05, Topstep 0%: el filtro de ES no mejora a ABU. Revisé el mapa v3: no queda señal sin probar con ventaja. Dejé congelada ABU v3 (T24-ABU3): las señales y los 2 contratos de ABU v2, pero el día se detiene tras 2 pérdidas seguidas (peor día ≈ $660 en vez de ≈ $1,000) para bajar las 214 cuentas Topstep que rompen el MLL. Reglas en strategies/v28.json, código engine/strategies/v26.py, estudio abu_v3 (17 intentos), docs/investigacion/riesgo_diario.md. Humo: 12 señales en 25 sesiones, 2 contratos.",
- "siguiente_idea": "Si ABU v3 no pasa Topstep, la absorción queda cerrada en NY (ABU sin versiones). Pedir a un humano: (1) runner de estudios para E-HVN-FUERZA, (2) permitir overnight/Londres en rand.py (única vía a señales nuevas), (3) revisar el placebo desplazado y la cotización congelada en sim.py. El DSR con más de 1,000 intentos es inalcanzable: el criterio b depende del examen sellado.",
+ "ultima_accion": "Leí P039 (ABU v3): revisar, +$11.1k, p 0.002, Topstep 39.1%: parar tras 2 pérdidas no subió Topstep. ABU gastó sus 3 versiones. Dejé congelada ABM v1 (T25-ABM): el mismo detector de absorción pero en niveles de varios días (perfil compuesto de 5 días y POC desnudos), que ABU no mira. Reglas en strategies/v29.json, código engine/strategies/v27.py, estudio abm_v1 (17 intentos), docs/investigacion/absorcion_multidia.md. Humo: 21 señales en 120 sesiones (~100 esperadas: riesgo de 'insuficiente').",
+ "siguiente_idea": "Si ABM no aporta, la absorción en NY queda agotada. Pedir a un humano: (1) overnight/Londres en rand.py, (2) revisar el placebo desplazado, (3) runner de estudios para E-HVN-FUERZA. El criterio b es inalcanzable con más de 1,000 intentos; depende del examen sellado.",
  "historial": [
   "2026-10-25T02:45:53Z · Primera corrida del investigador: ABS v3 congelada (entrada temprana). Mejor prueba P012: 20%.",
   "2026-10-25T03:33:46Z · Segunda corrida: ACC v1 congelada (aceptación VAH/VAL). P016 (ABS v3) no mejora. Mejor prueba P012: 20%.",
@@ -44,6 +44,7 @@
   "2026-10-25T20:03:50Z · Corrida 19: ABF v1 congelada (absorción fallida). P035 (FAF v1) no pasa (−$50k, p 1.0). Hallazgo: 5 sesiones con cotización congelada. Mejor prueba P031: 40% (a y d).",
   "2026-10-25T22:33:13Z · Corrida 20: ABR v1 congelada (reprueba pasiva). P036 (ABF v1) no pasa (−$6.6k, p 0.986). Mejor prueba P031: 40% (a y d).",
   "2026-10-25T23:32:23Z · Corrida 21: ABE v1 congelada (absorción de ABU confirmada por ES). P037 (ABR v1) insuficiente (−$1.2k, p 0.34). Mejor prueba P031: 40% (a y d).",
-  "2026-10-26T01:03:26Z · Corrida 22: ABU v3 congelada (parada tras 2 pérdidas). P038 (ABE v1) revisar (+$1.2k, p 0.05, Topstep 0%). Mejor prueba P031: 40% (a y d)."
+  "2026-10-26T01:03:26Z · Corrida 22: ABU v3 congelada (parada tras 2 pérdidas). P038 (ABE v1) revisar (+$1.2k, p 0.05, Topstep 0%). Mejor prueba P031: 40% (a y d).",
+  "2026-10-26T02:03:36Z · Corrida 23: ABM v1 congelada (absorción en niveles multi-día). P039 (ABU v3) revisar (+$11.1k, p 0.002, Topstep 39.1%). Mejor prueba P031: 40% (a y d)."
  ]
 }

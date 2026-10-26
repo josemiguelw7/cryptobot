@@ -7,6 +7,13 @@ import sys
 from . import registry, config
 
 STUDIES = {
+    "abm_v1": {
+        "hypothesis": "ABM v1 (absorción en el valor multi-día: el detector de ABU, confirmado a 60 s, en los niveles del perfil compuesto de los 5 días válidos anteriores (POC, VAH, VAL al 70%, máximo, mínimo) y los POC desnudos de esos días, descartando los niveles a <= 8 ticks de un nivel de ayer o de la noche; solo días cuya apertura de las 09:30 cae dentro del valor compuesto; entrada a mercado contra el lado absorbido, stop 12–32, objetivo 2R, salida a 15 min, 2 contratos, parada tras 2 pérdidas, 09:30–15:30): las operaciones rinden más que un RAND emparejado y RAND2 sorteados en la misma ventana y con las mismas reglas; gana después de costos, es positiva en 2024, 2025 y 2026 y tiene al menos 100 operaciones.",
+        "n_declared": 1 + 16,
+        "kill": ["ganancia neta <= 0 con costos base", "p vs RAND > 0.20", "pierde en 2 de 3 años", "rompe MLL en > 50% de arranques"],
+        "strategies": ["ABM v1"],
+        "notes": "1 prueba + 16 de sensibilidad (cercanía al nivel 2/3/5/6 ticks, confirmación 40/50/70/80 s, umbral relativo p86/p88/p92/p94, días del compuesto 1/3/7/9). Una sola definición (docs/investigacion/absorcion_multidia.md); 5 días fijado por ser una semana de trading, no por resultados. Humo: 120 sesiones, solo conteo de señales (21; ~100 esperadas en 576). Exploratoria: mismo detector y datos que ABU, NO es evidencia independiente. Riesgo: cerca del mínimo de 100 operaciones ('insuficiente' posible). Pregunta única: ¿los niveles de varios días dan absorciones que revierten donde ABU no mira?",
+    },
     "abu_v3": {
         "hypothesis": "ABU v3 (las señales de ABU v2: detector de absorción unificada en niveles de ayer, de la noche y POC/VAH/VAL del día, solo días que abren dentro del valor de ayer, confirmado a 60 s, entrada a mercado contra el lado absorbido, stop 12–32, objetivo 2R, salida a 15 min, 2 contratos, 09:30–15:30; ÚNICO cambio: el día se detiene tras 2 pérdidas seguidas en vez de 3, de modo que el peor día queda en ≈ $660 y no en ≈ $1,000 = límite diario de Topstep): las operaciones rinden más que un RAND emparejado y RAND2 sorteados en la misma ventana y con las mismas reglas; gana después de costos, es positiva en 2024, 2025 y 2026, tiene al menos 100 operaciones y rompe el MLL de Topstep en menos cuentas que ABU v2 (P031: 214 de 517).",
         "n_declared": 1 + 16,

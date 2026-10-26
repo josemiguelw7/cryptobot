@@ -253,7 +253,10 @@
   "veredicto": "revisar"
  },
  "T24-ABU3": {
-  "estado": "corriendo",
-  "inicio_utc": "2026-10-26T01:15:01+00:00"
+  "estado": "corrida",
+  "inicio_utc": "2026-10-26T01:15:01+00:00",
+  "fin_utc": "2026-10-26T01:53:53+00:00",
+  "test_id": "P039",
+  "veredicto": "revisar"
  }
 }
