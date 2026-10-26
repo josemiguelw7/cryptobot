@@ -374,7 +374,7 @@
     "indicador C# para ATAS"
    ],
    "decision": "aprobada por Oscar 2026-10-24 (lo pidió él en el buzón)",
-   "notas": "Sigue aprobada sin ejecutar (corrida 5): el orquestador solo corre estrategias; falta un runner de estudios de medición y no se puede tocar el orquestador. · 25/10/2026: la parte de 'HVN poderoso' se prueba como estrategia HVF v1 (T8-HVF, definición en docs/investigacion/hvn_poderoso.md). El estudio de reacción en primer toque sigue sin runner. · 25/10/2026 (corrida 7): sigue sin runner de estudios; la parte de reacción en primer toque queda pendiente. · 25/10/2026 (corrida 9): sigue sin runner de estudios. · 25/10/2026 (corrida 11): sigue sin runner de estudios. · 25/10/2026 (corrida 12): sigue sin runner de estudios. · 25/10/2026 (corrida 13): sigue sin runner de estudios; el orquestador solo corre estrategias. · 25/10/2026 (corrida 17): sigue sin runner de estudios; el orquestador solo corre estrategias. · 25/10/2026 (corrida 18): sigue sin runner de estudios; el orquestador solo corre estrategias. · 25/10/2026 (corrida 19): sigue sin runner de estudios; el orquestador solo corre estrategias. · 25/10/2026 (corrida 21): sigue sin runner de estudios; el orquestador solo corre estrategias. · 25/10/2026 (corrida 22): sigue sin runner de estudios; el orquestador solo corre estrategias. · 26/10/2026 (corrida 24): sigue sin runner de estudios; no se puede tocar el orquestador. · 26/10/2026 (corrida 25): sigue sin runner de estudios; no se puede tocar el orquestador. · 26/10/2026 (corrida 26): sigue sin runner de estudios; no se puede tocar el orquestador. · 26/10/2026 (corrida 27): sigue sin runner de estudios; el orquestador solo corre estrategias.",
+   "notas": "Sigue aprobada sin ejecutar (corrida 5): el orquestador solo corre estrategias; falta un runner de estudios de medición y no se puede tocar el orquestador. · 25/10/2026: la parte de 'HVN poderoso' se prueba como estrategia HVF v1 (T8-HVF, definición en docs/investigacion/hvn_poderoso.md). El estudio de reacción en primer toque sigue sin runner. · 25/10/2026 (corrida 7): sigue sin runner de estudios; la parte de reacción en primer toque queda pendiente. · 25/10/2026 (corrida 9): sigue sin runner de estudios. · 25/10/2026 (corrida 11): sigue sin runner de estudios. · 25/10/2026 (corrida 12): sigue sin runner de estudios. · 25/10/2026 (corrida 13): sigue sin runner de estudios; el orquestador solo corre estrategias. · 25/10/2026 (corrida 17): sigue sin runner de estudios; el orquestador solo corre estrategias. · 25/10/2026 (corrida 18): sigue sin runner de estudios; el orquestador solo corre estrategias. · 25/10/2026 (corrida 19): sigue sin runner de estudios; el orquestador solo corre estrategias. · 25/10/2026 (corrida 21): sigue sin runner de estudios; el orquestador solo corre estrategias. · 25/10/2026 (corrida 22): sigue sin runner de estudios; el orquestador solo corre estrategias. · 26/10/2026 (corrida 24): sigue sin runner de estudios; no se puede tocar el orquestador. · 26/10/2026 (corrida 25): sigue sin runner de estudios; no se puede tocar el orquestador. · 26/10/2026 (corrida 26): sigue sin runner de estudios; no se puede tocar el orquestador. · 26/10/2026 (corrida 27): sigue sin runner de estudios; el orquestador solo corre estrategias. · 26/10/2026 (corrida 34): sigue sin runner de estudios; el orquestador solo corre estrategias.",
    "prioridad": 8
   },
   {
@@ -866,7 +866,7 @@
    "estrategia": "ABG",
    "version": 1,
    "estudio": "abg_v1",
-   "notas": "1 base + 16 sensibilidades (17 intentos). Cubre stop, objetivo, tiempo y tamaño; NO cubre breakeven, parcial ni stop por flujo (requieren cambiar sim.py/rand.py). Exploratoria, mismos datos. · 26/10/2026 (corrida 32): el código de ABG corre bien sobre 40 sesiones; el error era de una corrida anterior y el orquestador la reintenta.",
+   "notas": "1 base + 16 sensibilidades (17 intentos). Cubre stop, objetivo, tiempo y tamaño; NO cubre breakeven, parcial ni stop por flujo (requieren cambiar sim.py/rand.py). Exploratoria, mismos datos. · 26/10/2026 (corrida 32): el código de ABG corre bien sobre 40 sesiones; el error era de una corrida anterior y el orquestador la reintenta. · 26/10/2026 (corrida 34): causa real del error: el orquestador falló con FileExistsError al crear su carpeta de corrida (choque de arranques en dos carriles), no el código de ABG. No se toca el orquestador; el reintento de las 21:06 está corriendo.",
    "inicio_utc": "2026-10-26T20:28:01+00:00",
    "fin_utc": "2026-10-26T21:04:06+00:00",
    "ultimo_error": "falló una corrida; ver log"
@@ -880,7 +880,7 @@
    "prioridad": 3,
    "requisitos": [],
    "decision": "aprobada por Jose el 26/10/2026; prioridad 3 (1 = primero)",
-   "notas": "26/10/2026 (corrida 30): no se puede sin cambiar el motor: run_test/RAND/rand.py cargan solo la sesión NY (ny_only=True). Pendiente de cambio de motor por Jose."
+   "notas": "26/10/2026 (corrida 30): no se puede sin cambiar el motor: run_test/RAND/rand.py cargan solo la sesión NY (ny_only=True). Pendiente de cambio de motor por Jose. · 26/10/2026 (corrida 34): sigue bloqueada por el motor (solo sesión NY)."
   },
   {
    "id": "G4-IB-DELTA",
