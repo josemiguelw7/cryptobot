@@ -7,6 +7,13 @@ import sys
 from . import registry, config
 
 STUDIES = {
+    "vpt_v1": {
+        "hypothesis": "VPT v1 (pullback a la VWAP a favor de la tendencia: en días que abren FUERA del valor de ayer y no regresan a él, tras una extensión previa >= 24 ticks de la VWAP, cuando el precio toca la VWAP (<= 4 ticks) y en los 60 s siguientes el delta agresivo va a favor de la tendencia (>= 5 %) y el precio se aleja 4 ticks del extremo del pullback; entrada a mercado a favor, stop 12–32 detrás del extremo, objetivo 2R, salida a 15 min, 2 contratos, parada tras 2 pérdidas, 10:00–15:30): las operaciones rinden más que un RAND emparejado y RAND2 sorteados en la misma ventana y con las mismas reglas; gana después de costos, es positiva en 2024, 2025 y 2026 y tiene al menos 100 operaciones.",
+        "n_declared": 1 + 16,
+        "kill": ["ganancia neta <= 0 con costos base", "p vs RAND > 0.20", "pierde en 2 de 3 años", "rompe MLL en > 50% de arranques"],
+        "strategies": ["VPT v1"],
+        "notes": "1 prueba + 16 de sensibilidad (toque a la VWAP 2/3/5/6 ticks, extensión previa 16/20/28/32 ticks, delta 3/4/6/7 %, alejamiento 2/3/5/6 ticks). Una sola definición (docs/investigacion/vwap_tendencia.md) fijada antes de correr; solo se miró el conteo de señales en humo, ninguna ganancia. Primera prueba de continuación en días de tendencia con VWAP: ABT, ACC, VAR y ABB (días fuera del valor) no pasaron, pero ninguna usó la VWAP como soporte dinámico. Exploratoria, NO es validación independiente. Pregunta única: ¿en días que no regresan al valor de ayer, el pullback a la VWAP con delta a favor continúa más que el azar?",
+    },
     "abb_v1": {
         "hypothesis": "ABB v1 (absorción tras re-entrada aceptada: el detector de ABU, confirmado a 60 s, en niveles de ayer, de la noche y POC/VAH/VAL del día, pero en los días que abren FUERA del valor de ayer y solo después de que el precio lleva 600 s seguidos dentro del valor de ayer; entrada a mercado contra el lado absorbido, stop 12–32, objetivo 2R, salida a 15 min, 2 contratos, parada tras 2 pérdidas, 09:30–15:30): las operaciones rinden más que un RAND emparejado y RAND2 sorteados en la misma ventana y con las mismas reglas; gana después de costos, es positiva en 2024, 2025 y 2026 y tiene al menos 100 operaciones.",
         "n_declared": 1 + 16,

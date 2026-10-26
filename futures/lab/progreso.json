@@ -1,5 +1,5 @@
 {
- "actualizado_utc": "2026-10-26T02:34:18Z",
+ "actualizado_utc": "2026-10-26T03:50:00Z",
  "porcentaje": 40,
  "criterios": {
   "a_ganancia_neta_positiva": {
@@ -28,8 +28,8 @@
   "test_id": "P031",
   "por_que": "+$11.9k, p 0.001 contra RAND, positiva los 3 años. Pero 'revisar' (placebo sospechoso), DSR 0, Topstep 41.2% y 214 cuentas rompen el MLL. P039 (ABU v3) no mejora Topstep (39.1%). 40% (criterios a y d) es un techo generoso."
  },
- "ultima_accion": "Leí P040 (ABM v1): insuficiente, 58 operaciones, −$2.7k, p 0.53: los niveles multi-día no sirven. Dejé congelada ABB v1 (T26-ABB): el detector de ABU en los días que abren fuera del valor de ayer, una vez que el precio lo acepta (10 min adentro). Reglas en strategies/v30.json, código engine/strategies/v28.py, estudio abb_v1 (17 intentos), docs/investigacion/absorcion_reentrada.md. Humo: ~26 operaciones por 100 sesiones (≈ 140 esperadas); solo conteo, sin ganancias.",
- "siguiente_idea": "Si ABB no aporta, la absorción solo vive en días que abren dentro del valor y NY queda sin ideas de absorción. Pedir a un humano: (1) overnight/Londres en rand.py, (2) revisar el placebo desplazado, (3) runner de estudios para E-HVN-FUERZA. El criterio b es inalcanzable con más de 1,000 intentos; depende del examen sellado.",
+ "ultima_accion": "Leí P041 (ABB v1): no pasa, −$9.0k, p 0.87, 110 operaciones. La absorción solo sirve en días de balance. Dejé congelada VPT v1 (T27-VPT): pullback a la VWAP a favor de la tendencia en días que abren fuera del valor de ayer. Reglas en strategies/v31.json, código engine/strategies/v29.py, estudio vpt_v1 (17 intentos), docs/investigacion/vwap_tendencia.md. Humo: 229 operaciones en 115 sesiones; solo conteo.",
+ "siguiente_idea": "Si VPT no pasa, NY queda sin ideas de flujo fuera de ABU. Pedir a un humano: overnight/Londres en rand.py, revisar el placebo desplazado y un runner de estudios para E-HVN-FUERZA. El criterio b depende del examen sellado.",
  "historial": [
   "2026-10-25T02:45:53Z · Primera corrida del investigador: ABS v3 congelada (entrada temprana). Mejor prueba P012: 20%.",
   "2026-10-25T03:33:46Z · Segunda corrida: ACC v1 congelada (aceptación VAH/VAL). P016 (ABS v3) no mejora. Mejor prueba P012: 20%.",
@@ -46,6 +46,7 @@
   "2026-10-25T23:32:23Z · Corrida 21: ABE v1 congelada (absorción de ABU confirmada por ES). P037 (ABR v1) insuficiente (−$1.2k, p 0.34). Mejor prueba P031: 40% (a y d).",
   "2026-10-26T01:03:26Z · Corrida 22: ABU v3 congelada (parada tras 2 pérdidas). P038 (ABE v1) revisar (+$1.2k, p 0.05, Topstep 0%). Mejor prueba P031: 40% (a y d).",
   "2026-10-26T02:03:36Z · Corrida 23: ABM v1 congelada (absorción en niveles multi-día). P039 (ABU v3) revisar (+$11.1k, p 0.002, Topstep 39.1%). Mejor prueba P031: 40% (a y d).",
-  "2026-10-26T02:34:18Z · Corrida 24: ABB v1 congelada (absorción tras re-entrada aceptada). P040 (ABM v1) insuficiente (−$2.7k, p 0.53). Mejor prueba P031: 40% (a y d)."
+  "2026-10-26T02:34:18Z · Corrida 24: ABB v1 congelada (absorción tras re-entrada aceptada). P040 (ABM v1) insuficiente (−$2.7k, p 0.53). Mejor prueba P031: 40% (a y d).",
+  "2026-10-26T03:50:00Z · Corrida 25: VPT v1 congelada (pullback a la VWAP en tendencia). P041 (ABB v1) no pasa (−$9.0k, p 0.87). Mejor prueba P031: 40% (a y d)."
  ]
 }

@@ -267,7 +267,10 @@
   "veredicto": "insuficiente"
  },
  "T26-ABB": {
-  "estado": "corriendo",
-  "inicio_utc": "2026-10-26T02:45:01+00:00"
+  "estado": "corrida",
+  "inicio_utc": "2026-10-26T02:45:01+00:00",
+  "fin_utc": "2026-10-26T03:22:26+00:00",
+  "test_id": "P041",
+  "veredicto": "no_pasa"
  }
 }

@@ -1,0 +1,36 @@
+{
+ "version": 31,
+ "fecha_registro": "2026-10-26",
+ "titulo": "Tanda 30 · VPT v1 (pullback a la VWAP a favor de la tendencia)",
+ "estado": "Escrita por el investigador autónomo; sellada y congelada al publicar. Investigación: docs/investigacion/vwap_tendencia.md.",
+ "comun": {
+  "instrumento": "NQ (contrato del frente), 2 contratos por operación",
+  "horario": "Nueva York 10:00–15:30 ET",
+  "cierre_forzado": "cualquier posición abierta se cierra a mercado a las 15:45 ET",
+  "noticias": "no se abre de −2 a +5 min de CPI, NFP y Fed",
+  "costos": "comisión Topstep + 1 tick de deslizamiento por lado; prueba extra al doble",
+  "limites_dia": "máximo 6 operaciones por día; se detiene tras 2 pérdidas seguidas",
+  "una_posicion": "nunca más de una posición abierta por estrategia",
+  "datos": "solo periodo de diseño 2024-01-02 a 2026-04-21; el examen sellado no se abre",
+  "control": "RAND emparejado y RAND2 sorteados en la misma ventana 09:30–15:30, con 2 contratos y el mismo límite de pérdidas"
+ },
+ "estrategias": [
+  {
+   "id": "VPT",
+   "version": 1,
+   "nombre": "Pullback a la VWAP a favor de la tendencia",
+   "idea": "En días que abren fuera del valor de ayer y no regresan a él, el pullback a la VWAP con delta agresivo a favor continúa la tendencia.",
+   "contexto": "Primer precio de las 09:30 fuera de [VAL, VAH] de ayer; el día se invalida si el precio toca ese borde. Extensión previa ≥ 24 ticks de la VWAP acumulada.",
+   "disparador": "El extremo del pullback en 60 s llega a ≤ 4 ticks de la VWAP.",
+   "confirmacion": "En los 60 s siguientes: delta de la ventana de 60 s a favor ≥ 5 % del volumen y el precio se aleja 4 ticks del extremo del pullback.",
+   "entrada": "A mercado, a favor de la tendencia.",
+   "stop": "4 ticks más allá del extremo del pullback; entre 12 y 32 ticks.",
+   "objetivo": "2R.",
+   "tiempo_maximo": "15 minutos (o el cierre de las 15:45).",
+   "tamano": "2 contratos",
+   "enfriamiento": "10 minutos entre señales",
+   "motivo": "P041 (ABB) no pasa; la tendencia con VWAP nunca se probó. Complemento de ABU. No es validación independiente."
+  }
+ ],
+ "nota": "Parámetros en futures/lab/engine/strategies/v29.py::PARAMS['VPT']; contratos, límite de pérdidas y ventana en run_test.py::RULES_WINDOW."
+}
