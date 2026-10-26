@@ -1,0 +1,34 @@
+{
+ "version": 38,
+ "fecha_registro": "2026-10-26",
+ "titulo": "Tanda 37 · ATR v1 (traders atrapados; G6)",
+ "estado": "Escrita por el investigador autónomo; sellada y congelada al publicar. Investigación: docs/investigacion/atrapados.md.",
+ "comun": {
+  "instrumento": "NQ (contrato del frente), 2 contratos por operación",
+  "horario": "Nueva York 09:30–15:30 ET (entradas)",
+  "cierre_forzado": "cualquier posición abierta se cierra a mercado a las 15:45 ET",
+  "noticias": "no se abre de −2 a +5 min de CPI, NFP y Fed",
+  "costos": "comisión Topstep + 1 tick de deslizamiento por lado; prueba extra al doble",
+  "limites_dia": "se detiene tras 2 pérdidas seguidas",
+  "una_posicion": "nunca más de una posición abierta por estrategia",
+  "datos": "solo periodo de diseño 2024-01-02 a 2026-04-21; el examen sellado no se abre",
+  "control": "RAND emparejado y RAND2 sorteados en la misma ventana 09:30–15:30 y con 2 contratos"
+ },
+ "estrategias": [
+  {
+   "id": "ATR",
+   "version": 1,
+   "nombre": "Traders atrapados",
+   "idea": "Cuando una ráfaga agresiva que no avanza en un nivel deja a la mayoría de sus agresores en pérdida y el delta se vuelve contrario, esos atrapados se liquidan y el precio sigue en su contra.",
+   "contexto": "Días que abren dentro del valor de ayer; niveles de ayer, de la noche y POC/VAH/VAL en desarrollo (como ABU v2).",
+   "disparador": "Ráfaga de ABU v2 (≥ umbral relativo, avance ≤ 2 ticks, a ≤ 4 ticks del nivel). En los 180 s siguientes: ≥ 70 % del volumen agresivo de la ráfaga quedó a un precio peor que el actual, delta de los últimos 30 s contrario a los atrapados, y el precio no superó el extremo en más de 4 ticks.",
+   "entrada": "A mercado contra los atrapados.",
+   "stop": "4 ticks más allá del extremo; entre 12 y 32 ticks.",
+   "objetivo": "2R.",
+   "tiempo_maximo": "15 minutos.",
+   "tamano": "2 contratos",
+   "motivo": "G6 (Jose, 26/10/2026): medir desde el lado del perdedor, no como otra variante de la distancia al extremo."
+  }
+ ],
+ "nota": "Código en futures/lab/engine/strategies/v36.py::PARAMS['ATR']; ventana en run_test.py::RULES_WINDOW."
+}

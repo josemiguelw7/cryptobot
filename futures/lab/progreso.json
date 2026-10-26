@@ -1,5 +1,5 @@
 {
- "actualizado_utc": "2026-10-26T21:05:54Z",
+ "actualizado_utc": "2026-10-26T21:31:39Z",
  "porcentaje": 40,
  "criterios": {
   "a_ganancia_neta_positiva": {
@@ -28,8 +28,8 @@
   "test_id": "P031",
   "por_que": "+$11.9k, p 0.001 contra RAND, positiva los 3 años. Pero 'revisar' (placebo sospechoso), DSR 0, Topstep 41.2% y 214 cuentas rompen el MLL. P045 (placebo de niveles, ABP) perdió −$9.7k con p 0.81: el nivel sí importa, no era fuga. P039 no mejora Topstep; P043 pierde. 40% (criterios a y d) es un techo generoso."
  },
- "ultima_accion": "Leí P045 (ABP): placebo pierde −$9,746, p 0.81, así que la ventaja de ABU viene de dónde está el nivel; el progreso no baja. Tomé G5-CLIMAX y dejé congelada CLX v1: clímax de volumen (≥3x) y delta en el extremo del día, rechazado en 60 s, entrada en contra. Reglas en strategies/v37.json, código engine/strategies/v35.py, estudio clx_v1 (17 intentos), docs/investigacion/climax.md. Humo: 40 sesiones, 12 señales, una pasa por el simulador.",
- "siguiente_idea": "Leer P046 (ABG), P047 (IBX), P048 (CLX). Luego G6 traders atrapados. G3 (Asia/Londres) y G7 (MBO) esperan decisión de Jose: G3 necesita cambiar el motor (solo carga NY).",
+ "ultima_accion": "Tomé G6-ATRAPADOS (siguiente aprobada ejecutable; G3 espera cambio de motor y E-HVN-FUERZA no tiene runner). Dejé congelada ATR v1: la ráfaga de ABU v2 pero la entrada exige que ≥70% del volumen agresivo esté en pérdida y el delta sea contrario. Reglas en strategies/v38.json, código engine/strategies/v36.py, estudio atr_v1 (17 intentos), docs/investigacion/atrapados.md. Humo: 150 sesiones, 25 señales, pasan por el simulador. G2 (ABG) corre bien: su error era de una corrida anterior. El progreso sigue en 40%.",
+ "siguiente_idea": "Leer P046 (ABG), P047 (IBX), P048 (CLX), P049 (ATR). Si ninguna mejora a ABU, la familia está agotada: queda G3 (Asia/Londres, necesita cambio de motor decidido por Jose) y G7 (MBO).",
  "historial": [
   "2026-10-25T02:45:53Z · Primera corrida del investigador: ABS v3 congelada (entrada temprana). Mejor prueba P012: 20%.",
   "2026-10-25T03:33:46Z · Segunda corrida: ACC v1 congelada (aceptación VAH/VAL). P016 (ABS v3) no mejora. Mejor prueba P012: 20%.",
@@ -53,6 +53,7 @@
   "2026-10-26T20:20:47Z · Corrida 28: ABP v1 congelada (placebo de niveles de ABU v2, G1). P044 (OPD v1) no pasa (−$7.5k, p 0.69). Mejor prueba P031: 40% (a y d).",
   "2026-10-26T20:26:33Z · Corrida 29: ABG v1 congelada (manejo de ABU v2, G2). Mejor prueba P031: 40% (a y d).",
   "2026-10-26T20:31:56Z · Corrida 30: IBX v1 congelada (extensión del IB con delta, G4). G3 bloqueada por el motor. Mejor prueba P031: 40% (a y d).",
-  "2026-10-26T21:05:54Z · Corrida 31: CLX v1 congelada (clímax de volumen y delta, G5). P045 (ABP, placebo) no pasa (−$9.7k, p 0.81): bien para ABU. Mejor prueba P031: 40% (a y d)."
+  "2026-10-26T21:05:54Z · Corrida 31: CLX v1 congelada (clímax de volumen y delta, G5). P045 (ABP, placebo) no pasa (−$9.7k, p 0.81): bien para ABU. Mejor prueba P031: 40% (a y d).",
+  "2026-10-26T21:31:39Z · Corrida 32: ATR v1 congelada (traders atrapados, G6). G2 reintentándose, el código de ABG corre. Mejor prueba P031: 40% (a y d)."
  ]
 }

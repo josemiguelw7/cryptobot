@@ -18,10 +18,10 @@ from .data import load
 from .levels import Levels, precompute_stats
 from .rand import run_rand, summarize as rand_summary
 from .sim import Rules, simulate
-from .strategies import v1 as S1, v2 as S2, v3 as S3, v4 as S4, v5 as S5, v6 as S6, v7 as S7, v8 as S8, v9 as S9, v10 as S10, v11 as S11, v12 as S12, v13 as S13, v14 as S14, v15 as S15, v16 as S16, v17 as S17, v18 as S18, v19 as S19, v20 as S20, v21 as S21, v22 as S22, v23 as S23, v24 as S24, v25 as S25, v26 as S26, v27 as S27, v28 as S28, v29 as S29, v30 as S30, v31 as S31, v32 as S32, v33 as S33, v34 as S34, v35 as S35
+from .strategies import v1 as S1, v2 as S2, v3 as S3, v4 as S4, v5 as S5, v6 as S6, v7 as S7, v8 as S8, v9 as S9, v10 as S10, v11 as S11, v12 as S12, v13 as S13, v14 as S14, v15 as S15, v16 as S16, v17 as S17, v18 as S18, v19 as S19, v20 as S20, v21 as S21, v22 as S22, v23 as S23, v24 as S24, v25 as S25, v26 as S26, v27 as S27, v28 as S28, v29 as S29, v30 as S30, v31 as S31, v32 as S32, v33 as S33, v34 as S34, v35 as S35, v36 as S36
 import polars as pl
 
-MODULES = {("BIG", 1): S1, ("ABS", 1): S1, ("POC", 1): S1, ("FADE", 1): S2, ("HVN", 1): S2, ("ABS", 2): S2, ("FADE", 2): S2, ("FADEL", 1): S2, ("BIG", 2): S2, ("ORB", 1): S2, ("ABS", 3): S3, ("ACC", 1): S4, ("SMT", 1): S5, ("VAR", 1): S6, ("ACC", 2): S7, ("ABI", 1): S8, ("ABV", 1): S9, ("HVF", 1): S10, ("ABK", 1): S11, ("LVN", 1): S12, ("ABI", 2): S13, ("ABD", 1): S14, ("VBR", 1): S15, ("IMB", 1): S16, ("ABU", 1): S17, ("ABU", 2): S18, ("ABT", 1): S19, ("ABQ", 1): S20, ("DVG", 1): S21, ("FAF", 1): S22, ("ABF", 1): S23, ("ABR", 1): S24, ("ABE", 1): S25, ("ABU", 3): S26, ("ABM", 1): S27, ("ABB", 1): S28, ("VPT", 1): S29, ("ABW", 1): S30, ("OPD", 1): S31, ("ABP", 1): S32, ("ABG", 1): S33, ("IBX", 1): S34, ("CLX", 1): S35}
+MODULES = {("BIG", 1): S1, ("ABS", 1): S1, ("POC", 1): S1, ("FADE", 1): S2, ("HVN", 1): S2, ("ABS", 2): S2, ("FADE", 2): S2, ("FADEL", 1): S2, ("BIG", 2): S2, ("ORB", 1): S2, ("ABS", 3): S3, ("ACC", 1): S4, ("SMT", 1): S5, ("VAR", 1): S6, ("ACC", 2): S7, ("ABI", 1): S8, ("ABV", 1): S9, ("HVF", 1): S10, ("ABK", 1): S11, ("LVN", 1): S12, ("ABI", 2): S13, ("ABD", 1): S14, ("VBR", 1): S15, ("IMB", 1): S16, ("ABU", 1): S17, ("ABU", 2): S18, ("ABT", 1): S19, ("ABQ", 1): S20, ("DVG", 1): S21, ("FAF", 1): S22, ("ABF", 1): S23, ("ABR", 1): S24, ("ABE", 1): S25, ("ABU", 3): S26, ("ABM", 1): S27, ("ABB", 1): S28, ("VPT", 1): S29, ("ABW", 1): S30, ("OPD", 1): S31, ("ABP", 1): S32, ("ABG", 1): S33, ("IBX", 1): S34, ("CLX", 1): S35, ("ATR", 1): S36}
 REG_KEY = {("FADE", 2): "FADE2", ("BIG", 2): "BIG2", ("ABS", 3): "ABS3", ("ACC", 2): "ACC2", ("ABI", 2): "ABI2", ("ABU", 2): "ABU2", ("ABU", 3): "ABU3"}   # nombre del generador/parámetros cuando difiere del id
 
 SENS_STEPS = {
@@ -64,6 +64,7 @@ SENS_STEPS = {
     ("ABW", 1): {"near_ticks": 1, "confirm_s": 10, "rel_pct": 2, "ib_ratio": 0.1},
     ("ABP", 1): {"near_ticks": 1, "confirm_s": 10, "rel_pct": 2, "shift_ticks": 8},
     ("ABG", 1): {"rr": 0.5, "max_min": 5, "stop_max": 4, "stop_min": 4},
+    ("ATR", 1): {"trap_frac": 0.1, "wait_s": 30, "delta_s": 10, "ext_ticks": 1},
     ("CLX", 1): {"vol_mult": 0.5, "delta_min": 0.05, "rise_ticks": 2, "away_ticks": 1},
     ("IBX", 1): {"win_s": 30, "delta_min": 0.02, "brk_ticks": 1, "rr": 0.5},
     ("OPD", 1): {"win_s": 60, "delta_min": 0.01, "move_min": 10, "retrace": 0.2},
@@ -93,6 +94,7 @@ RULES_WINDOW = {("ABI", 2): {"first_entry": 41400.0, "last_entry": 55800.0, "for
                 ("ABP", 1): {"first_entry": 34200.0, "last_entry": 55800.0, "forced_close": 56700.0, "contracts": 2},
                 ("ABG", 1): {"first_entry": 34200.0, "last_entry": 55800.0, "forced_close": 56700.0, "contracts": 2},
                 ("IBX", 1): {"first_entry": 37800.0, "last_entry": 52200.0, "forced_close": 56700.0, "max_trades": 2, "max_consec_losses": 2},
+                ("ATR", 1): {"first_entry": 34200.0, "last_entry": 55800.0, "forced_close": 56700.0, "contracts": 2, "max_consec_losses": 2},
                 ("CLX", 1): {"first_entry": 36000.0, "last_entry": 55800.0, "forced_close": 56700.0, "max_trades": 4, "max_consec_losses": 2}}   # 11:30–15:30, cierre 15:45
 
 

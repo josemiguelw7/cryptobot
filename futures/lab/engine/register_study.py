@@ -7,6 +7,13 @@ import sys
 from . import registry, config
 
 STUDIES = {
+    "atr_v1": {
+        "hypothesis": "ATR v1 (traders atrapados: la ráfaga, los niveles, el filtro de día (abre dentro del valor de ayer), 2 contratos y 09:30–15:30 de ABU v2, pero la entrada se decide desde el lado del perdedor: en los 180 s tras la ráfaga, >= 70 % del volumen agresivo de la ráfaga (a nivel de operación) quedó a un precio peor que el actual, el delta de los últimos 30 s es contrario a los atrapados y el precio no superó el extremo en más de 4 ticks; entrada a mercado contra los atrapados, stop 12–32, objetivo 2R, salida a 15 min) revierte más que el azar emparejado y que RAND2.",
+        "n_declared": 1 + 16,
+        "kill": ["ganancia neta <= 0 con costos base", "p vs RAND > 0.20", "pierde en 2 de 3 años", "rompe MLL en > 50% de arranques"],
+        "strategies": ["ATR v1"],
+        "notes": "1 prueba + 16 de sensibilidad (fracción atrapada 0.5/0.6/0.8/0.9, espera 120/150/210/240 s, ventana de delta 10/20/40/50 s, tolerancia de extensión 2/3/5/6 ticks). Una sola definición (docs/investigacion/atrapados.md) fijada antes de correr; humo de 150 sesiones solo con conteo (25 señales vs 32 de ABU v2). Comparte ráfagas con ABU: no es independiente. Exploratoria, mismos datos.",
+    },
     "clx_v1": {
         "hypothesis": "CLX v1 (clímax de volumen y delta en el extremo del día: ventana de 60 s con nuevo máximo/mínimo de la sesión, no antes de 10:00, volumen >= 3 veces el medio por 60 s de los 30 min previos, delta agresivo >= 20 % del volumen a favor del empuje y avance >= 12 ticks; confirmado como terminado si en los 60 s siguientes el precio no supera el extremo, cae 4 ticks y el delta de 30 s es contrario; entrada a mercado en contra, stop 3 ticks más allá del extremo 12–32, objetivo 1.5R, salida a 10 min, 1 contrato, máx. 4 al día, parada tras 2 pérdidas, 10:00–15:30): las operaciones rinden más que un RAND emparejado y RAND2 sorteados en la misma ventana y con las mismas reglas; gana después de costos, es positiva en 2024, 2025 y 2026 y tiene al menos 100 operaciones.",
         "n_declared": 1 + 16,
