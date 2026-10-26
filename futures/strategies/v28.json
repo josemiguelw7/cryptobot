@@ -1,0 +1,38 @@
+{
+ "version": 28,
+ "fecha_registro": "2026-10-25",
+ "titulo": "Tanda 27 · ABU v3 (las señales y el tamaño de ABU v2 con parada tras 2 pérdidas seguidas)",
+ "estado": "Escrita por el investigador autónomo; sellada y congelada al publicar. Tercera y última versión de ABU. Investigación: docs/investigacion/riesgo_diario.md.",
+ "comun": {
+  "instrumento": "NQ (contrato del frente), 2 contratos por operación",
+  "horario": "Nueva York 09:30–15:30 ET",
+  "cierre_forzado": "cualquier posición abierta se cierra a mercado a las 15:45 ET",
+  "noticias": "no se abre de −2 a +5 min de CPI, NFP y Fed",
+  "costos": "comisión Topstep + 1 tick de deslizamiento por lado; prueba extra al doble",
+  "limites_dia": "máximo 6 operaciones por día; se detiene tras 2 pérdidas seguidas (ABU v2: 3)",
+  "una_posicion": "nunca más de una posición abierta por estrategia",
+  "umbrales_relativos": "el menor entre el p95 de las 20 sesiones anteriores y el p90 de los volúmenes agresivos de 60 s de los 60 min anteriores de la propia sesión; piso 0.5 × el p95 de 20 sesiones",
+  "datos": "solo periodo de diseño 2024-01-02 a 2026-04-21; el examen sellado no se abre",
+  "control": "RAND emparejado y RAND2 sorteados en la misma ventana 09:30–15:30, con 2 contratos y el mismo límite de pérdidas"
+ },
+ "estrategias": [
+  {
+   "id": "ABU",
+   "version": 3,
+   "nombre": "Absorción unificada, 2 contratos, parada tras 2 pérdidas",
+   "idea": "El flujo agresivo que no logra mover el precio en un borde de valor (de ayer o del propio día) en un día de balance es absorbido por liquidez pasiva; el precio se aleja del lado absorbido.",
+   "contexto": "Solo días en que el primer precio de las 09:30 cae entre VAL y VAH de ayer.",
+   "disparador": "Volumen agresivo de un lado en 60 s ≥ umbral relativo, con el precio avanzando ≤ 2 ticks.",
+   "ubicacion": "Extremo de la ventana a ≤ 4 ticks de un nivel: máximo/mínimo/POC/VAH/VAL de ayer, máximo/mínimo de la noche, o POC/VAH/VAL del perfil en desarrollo (VAH solo compra absorbida, VAL solo venta absorbida; no antes de 10 min de sesión).",
+   "confirmacion": "En los 60 s siguientes el delta de la ventana cambia de signo y el precio se aleja ≥ 4 ticks del extremo.",
+   "entrada": "A mercado, en contra del lado absorbido.",
+   "stop": "4 ticks más allá del extremo; entre 12 y 32 ticks.",
+   "objetivo": "2R.",
+   "tiempo_maximo": "15 minutos (o el cierre de las 15:45).",
+   "filtros": "Reglas comunes; niveles de ayer una vez por día; niveles del día un disparo cada 10 min por nivel.",
+   "motivo_cambio": "Solo cambia el límite de pérdidas del día: 3 → 2. P031 (ABU v2): +$11.9k, p 0.001, pero Topstep 41.2% con 214 de 517 cuentas rompiendo el MLL, muchas por el mismo racimo de pérdidas de inicios de 2024. Con 2 contratos, 3 pérdidas al stop máximo ≈ $1,000 = límite diario; 2 ≈ $660. El valor sale de las reglas de la cuenta, no de probar. Señales idénticas (mismo código v17.py). No es evidencia nueva de ventaja ni validación independiente.",
+   "tamano": "2 contratos"
+  }
+ ],
+ "nota": "Parámetros en futures/lab/engine/strategies/v26.py::PARAMS['ABU3'] (copia de ABU); contratos, límite de pérdidas y ventana en run_test.py::RULES_WINDOW."
+}

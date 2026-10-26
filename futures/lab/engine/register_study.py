@@ -7,6 +7,13 @@ import sys
 from . import registry, config
 
 STUDIES = {
+    "abu_v3": {
+        "hypothesis": "ABU v3 (las señales de ABU v2: detector de absorción unificada en niveles de ayer, de la noche y POC/VAH/VAL del día, solo días que abren dentro del valor de ayer, confirmado a 60 s, entrada a mercado contra el lado absorbido, stop 12–32, objetivo 2R, salida a 15 min, 2 contratos, 09:30–15:30; ÚNICO cambio: el día se detiene tras 2 pérdidas seguidas en vez de 3, de modo que el peor día queda en ≈ $660 y no en ≈ $1,000 = límite diario de Topstep): las operaciones rinden más que un RAND emparejado y RAND2 sorteados en la misma ventana y con las mismas reglas; gana después de costos, es positiva en 2024, 2025 y 2026, tiene al menos 100 operaciones y rompe el MLL de Topstep en menos cuentas que ABU v2 (P031: 214 de 517).",
+        "n_declared": 1 + 16,
+        "kill": ["ganancia neta <= 0 con costos base", "p vs RAND > 0.20", "pierde en 2 de 3 años", "rompe MLL en > 50% de arranques"],
+        "strategies": ["ABU v3"],
+        "notes": "1 prueba + 16 de sensibilidad (cercanía al nivel, confirmación, umbral relativo y objetivo R, las mismas cuatro perillas de ABU v1/v2). Una sola definición de riesgo (docs/investigacion/riesgo_diario.md): el 2 sale del cálculo con el límite diario de la cuenta, no se probaron otros valores. Exploratoria: mismas señales y datos que ABU v1/v2, NO es evidencia independiente ni nueva de ventaja; solo mide si el cuello de Topstep era el riesgo diario. Última versión de ABU. Pregunta única: ¿limitar a 2 pérdidas seguidas baja las cuentas que rompen el MLL sin matar la ganancia?",
+    },
     "abe_v1": {
         "hypothesis": "ABE v1 (absorción de ABU v1 confirmada por ES: el detector de absorción de ABU v1 en niveles de ayer, de la noche y POC/VAH/VAL del día, solo días que abren dentro del valor de ayer, confirmado a 60 s, se opera solo si en los 120 s que terminan en la confirmación ES no avanzó más de 2 ticks en la dirección del flujo absorbido, con al menos 20 llenados de ES; entrada a mercado contra el lado absorbido, stop 12–32, objetivo 2R, salida a 15 min, 1 contrato, 09:30–15:30): las operaciones rinden más que un RAND emparejado y RAND2 sorteados en la misma ventana; gana después de costos, es positiva en 2024, 2025 y 2026 y tiene al menos 100 operaciones.",
         "n_declared": 1 + 16,
