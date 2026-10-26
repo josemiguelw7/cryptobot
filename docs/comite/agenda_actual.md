@@ -46,6 +46,7 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 - P042 · VPT v1 · **no_pasa** · neto -45819.16 · p 0.981 · Topstep 5.0%
 - P043 · ABW v1 · **no_pasa** · neto -12559.36 · p 0.9291 · Topstep 0.0%
 - P044 · OPD v1 · **no_pasa** · neto -7474.0 · p 0.6903 · Topstep 7.4%
+- P045 · ABP v1 · **no_pasa** · neto -9746.68 · p 0.8102 · Topstep 0.0%
 
 ## 2. Qué murió y por qué
 - P013 · POC v1: umbral de orden grande mal calculado (percentil truncado y sobre todas las órdenes: 15 contratos). Ver strategies/v1_aclaraciones.json
@@ -69,6 +70,7 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 - P042 · VPT v1: pierde con costos base; no gana a RAND (p=0.981); no gana a RAND2 con las mismas salidas (p=0.969); DSR 0.0 < 0.95 con 1090 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 5.0%
 - P043 · ABW v1: pierde con costos base; no gana a RAND (p=0.9291); no gana a RAND2 con las mismas salidas (p=0.9121); DSR 0.0 < 0.95 con 1105 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%
 - P044 · OPD v1: pierde con costos base; no gana a RAND (p=0.6903); no gana a RAND2 con las mismas salidas (p=0.5864); DSR 0.0 < 0.95 con 1122 intentos; muere con costos al doble; pierde en 2024, 2025; pasa Topstep solo 7.4%
+- P045 · ABP v1: pierde con costos base; no gana a RAND (p=0.8102); no gana a RAND2 con las mismas salidas (p=0.7842); DSR 0.0 < 0.95 con 1139 intentos; muere con costos al doble; pierde en 2024, 2025; pasa Topstep solo 0.0%
 
 ## 3. Qué está propuesto (decidir: aprobar / descartar / pedir más datos)
 - [ ] **G7-ICEBERG-MBO** Icebergs y liquidez retirada (pulling) con datos MBO — Se descartó ICE porque la data ATAS no permite medirlo. Requiere datos MBO (Databento); es un gap de datos. No correr sin la decisión de Jose sobre la compra.

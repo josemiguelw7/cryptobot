@@ -841,7 +841,7 @@
    "nombre": "Validación: revisión placebo de ABU v2 (P031)",
    "hipotesis": "ABU v2 marcó 'placebo sospechoso'. Si la ventaja de ABU es real, el placebo (mismas reglas con niveles/tiempos desplazados) debe perder contra ABU; si el placebo rinde parecido, la ventaja es un artefacto y el 40% de progreso cae. Va antes que cualquier estrategia nueva.",
    "origen": "pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas",
-   "estado": "corriendo",
+   "estado": "corrida",
    "prioridad": 1,
    "requisitos": [],
    "decision": "decidida por el investigador; justificación en docs/investigacion/placebo_abu.md; reglas en strategies/v34.json (código engine/strategies/v32.py; ventana en run_test.py::RULES_WINDOW)",
@@ -849,14 +849,17 @@
    "version": 1,
    "estudio": "abp_v1",
    "notas": "1 base + 16 sensibilidades (17 intentos). Placebo de niveles: ABU v2 con todos los niveles desplazados 40 ticks (± por paridad de fecha). Lectura fijada antes: neto <= 50% de P031 y p > 0.05 = ventaja ligada al nivel; si no, se rebaja el progreso.",
-   "inicio_utc": "2026-10-26T20:22:01+00:00"
+   "inicio_utc": "2026-10-26T20:22:01+00:00",
+   "fin_utc": "2026-10-26T21:01:58+00:00",
+   "test_id": "P045",
+   "veredicto": "no_pasa"
   },
   {
    "id": "G2-ABU-MANEJO",
    "nombre": "Estudio de manejo de la operación sobre ABU (Topstep)",
    "hipotesis": "El problema de ABU no es la ventaja sino el drawdown: Topstep 41%, 214 cuentas rompen el MLL. Probar sobre las MISMAS señales de ABU v2: breakeven, salida parcial, stop dinámico por flujo, salida por tiempo, 1 vs 2 contratos y freno diario más fino. Meta: Topstep >50% sin perder p contra RAND. El estudio de salidas anterior solo cubrió las v1.",
    "origen": "pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas",
-   "estado": "corriendo",
+   "estado": "congelada",
    "prioridad": 2,
    "requisitos": [],
    "decision": "decidida por el investigador; justificación en docs/investigacion/manejo_abu.md; reglas en strategies/v35.json (código engine/strategies/v33.py; ventana en run_test.py::RULES_WINDOW)",
@@ -864,7 +867,9 @@
    "version": 1,
    "estudio": "abg_v1",
    "notas": "1 base + 16 sensibilidades (17 intentos). Cubre stop, objetivo, tiempo y tamaño; NO cubre breakeven, parcial ni stop por flujo (requieren cambiar sim.py/rand.py). Exploratoria, mismos datos.",
-   "inicio_utc": "2026-10-26T20:28:01+00:00"
+   "inicio_utc": "2026-10-26T20:28:01+00:00",
+   "fin_utc": "2026-10-26T21:04:06+00:00",
+   "ultimo_error": "falló una corrida; ver log"
   },
   {
    "id": "G3-SESIONES",
@@ -882,14 +887,15 @@
    "nombre": "Extensión del balance inicial (9:30–10:30) confirmada por delta",
    "hipotesis": "ORB usó 15 min y sin flujo. La extensión del IB con iniciativa (Dalton) nunca se midió con delta agresivo.",
    "origen": "pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas",
-   "estado": "congelada",
+   "estado": "corriendo",
    "prioridad": 4,
    "requisitos": [],
    "decision": "decidida por el investigador; justificación en docs/investigacion/extension_ib.md; reglas en strategies/v36.json (código engine/strategies/v34.py; ventana en run_test.py::RULES_WINDOW)",
    "estrategia": "IBX",
    "version": 1,
    "estudio": "ibx_v1",
-   "notas": "1 base + 16 sensibilidades (17 intentos). Exploratoria, 1 contrato. Humo: 36 señales en 50 sesiones. Distinta de ORB (15 min, sin flujo) y OPD (apertura)."
+   "notas": "1 base + 16 sensibilidades (17 intentos). Exploratoria, 1 contrato. Humo: 36 señales en 50 sesiones. Distinta de ORB (15 min, sin flujo) y OPD (apertura).",
+   "inicio_utc": "2026-10-26T21:02:01+00:00"
   },
   {
    "id": "G5-CLIMAX",

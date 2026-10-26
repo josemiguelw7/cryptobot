@@ -295,11 +295,20 @@
   "veredicto": "no_pasa"
  },
  "G1-PLACEBO-ABU": {
-  "estado": "corriendo",
-  "inicio_utc": "2026-10-26T20:22:01+00:00"
+  "estado": "corrida",
+  "inicio_utc": "2026-10-26T20:22:01+00:00",
+  "fin_utc": "2026-10-26T21:01:58+00:00",
+  "test_id": "P045",
+  "veredicto": "no_pasa"
  },
  "G2-ABU-MANEJO": {
+  "estado": "congelada",
+  "inicio_utc": "2026-10-26T20:28:01+00:00",
+  "fin_utc": "2026-10-26T21:04:06+00:00",
+  "ultimo_error": "fall\u00f3 una corrida; ver log"
+ },
+ "G4-IB-DELTA": {
   "estado": "corriendo",
-  "inicio_utc": "2026-10-26T20:28:01+00:00"
+  "inicio_utc": "2026-10-26T21:02:01+00:00"
  }
 }

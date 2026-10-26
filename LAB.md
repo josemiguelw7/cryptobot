@@ -1,13 +1,13 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-26 20:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-26 21:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
 ## En una línea
 
 - Sesiones válidas de diseño: **576** (examen sellado desde 2026-04-22, cerrado).
-- Intentos registrados: **1138** · pruebas publicadas: **43** (error 1, superada 7, no_pasa 20, revisar 13, insuficiente 2).
+- Intentos registrados: **1155** · pruebas publicadas: **44** (error 1, superada 7, no_pasa 21, revisar 13, insuficiente 2).
 - Estrategias aprobadas por el comité: **0**. Nada toca dinero real.
 
 ## Pruebas corridas
@@ -57,6 +57,7 @@ Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` �
 | P042 | VPT v1 | **no_pasa** | −$45,819 | 0.981 | 5.0% | pierde con costos base; no gana a RAND (p=0.981); no gana a RAND2 con las mismas salidas (p=0.969); DSR 0.0 <  |
 | P043 | ABW v1 | **no_pasa** | −$12,559 | 0.9291 | 0.0% | pierde con costos base; no gana a RAND (p=0.9291); no gana a RAND2 con las mismas salidas (p=0.9121); DSR 0.0  |
 | P044 | OPD v1 | **no_pasa** | −$7,474 | 0.6903 | 7.4% | pierde con costos base; no gana a RAND (p=0.6903); no gana a RAND2 con las mismas salidas (p=0.5864); DSR 0.0  |
+| P045 | ABP v1 | **no_pasa** | −$9,747 | 0.8102 | 0.0% | pierde con costos base; no gana a RAND (p=0.8102); no gana a RAND2 con las mismas salidas (p=0.7842); DSR 0.0  |
 
 ## Cola de pruebas (backlog)
 
@@ -113,10 +114,10 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 | T27-VPT | VPT v1: pullback a la VWAP a favor de la tendencia, días que abren fuera del valor | **corrida** → P042 | P041 (ABB v1) no pasa: la absorción solo funciona en balance; la tendencia con VWAP como soporte dinámico nunca se probó |  |
 | T28-ABW | ABW v1: absorción en días de apertura ancha | **corrida** → P043 | P042 (VPT v1) no pasa (−$45.8k, p 0.98); ABU es la única ventaja pero su filtro de día casi no separa balance de tendencia |  |
 | T29-OPD | OPD v1: apertura impulsiva (open drive) medida por flujo | **corrida** → P044 | P043 (ABW v1) no pasa (−$12.6k, p 0.93): la familia de absorción agotó sus variantes de contexto; la iniciativa de apertura (Dalton, open-drive) nunca se midió con delta · PEX (extremo pobre de ayer) descartada por vacía (30–60 señales) |  |
-| G1-PLACEBO-ABU | Validación: revisión placebo de ABU v2 (P031) | **corriendo** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
-| G2-ABU-MANEJO | Estudio de manejo de la operación sobre ABU (Topstep) | **corriendo** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
+| G1-PLACEBO-ABU | Validación: revisión placebo de ABU v2 (P031) | **corrida** → P045 | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
+| G2-ABU-MANEJO | Estudio de manejo de la operación sobre ABU (Topstep) | **congelada** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  · ERROR: falló una corrida; ver log |
 | G3-SESIONES | Patrones de flujo fuera de Nueva York (Asia, Londres, overnight) | **aprobada** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
-| G4-IB-DELTA | Extensión del balance inicial (9:30–10:30) confirmada por delta | **congelada** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
+| G4-IB-DELTA | Extensión del balance inicial (9:30–10:30) confirmada por delta | **corriendo** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
 | G5-CLIMAX | Agotamiento / clímax en extremos del día | **aprobada** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
 | G6-ATRAPADOS | Traders atrapados | **aprobada** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
 | G7-ICEBERG-MBO | Icebergs y liquidez retirada (pulling) con datos MBO | **propuesta** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas | datos MBO de Databento — compra pendiente de decisión de Jose |
@@ -164,7 +165,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - **vpt_v1**: VPT v1 (pullback a la VWAP a favor de la tendencia: en días que abren FUERA del valor de ayer y no regresan a él, tras una extensión previa  · declarados 17, usados 15
 - **abw_v1**: ABW v1 (absorción en días de apertura ancha: el detector de ABU, confirmado a 60 s, en niveles de ayer, de la noche, POC/VAH/VAL del día y m · declarados 17, usados 17
 - **opd_v1**: OPD v1 (apertura impulsiva por flujo: en los primeros 300 s desde las 09:30 el delta agresivo neto es >= 3 % del volumen en una dirección, e · declarados 17, usados 17
-- **abp_v1**: ABP v1 (placebo de niveles de ABU v2, validación G1: el detector, filtro de día real, confirmación a 60 s, stop 12–32, objetivo 2R, salida a · declarados 17, usados 0
+- **abp_v1**: ABP v1 (placebo de niveles de ABU v2, validación G1: el detector, filtro de día real, confirmación a 60 s, stop 12–32, objetivo 2R, salida a · declarados 17, usados 17
 - **abg_v1**: ABG v1 (manejo de la operación sobre las señales de ABU v2: mismo detector de absorción, filtro de día que abre dentro del valor de ayer, ni · declarados 17, usados 0
 - **ibx_v1**: IBX v1 (extensión del balance inicial confirmada por delta: IB = máximo y mínimo de 09:30–10:30; entre 10:30 y 14:30, una celda de 10 s supe · declarados 17, usados 0
 
@@ -229,7 +230,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - 2026-10-26 · prueba · Prueba P042 · VPT v1 · no pasa
 - 2026-10-26 · prueba · Prueba P043 · ABW v1 · no pasa
 - 2026-10-26 · prueba · Prueba P044 · OPD v1 · no pasa
-- 2026-10-25 · prueba · Prueba P016 · ABS v3 · revisar
+- 2026-10-26 · prueba · Prueba P045 · ABP v1 · no pasa
 
 ## Cómo se corre una prueba nueva
 

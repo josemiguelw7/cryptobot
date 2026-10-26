@@ -51,6 +51,13 @@
       "test_id": "P044"
     },
     {
+      "date": "2026-10-26",
+      "kind": "prueba",
+      "title": "Prueba P045 · ABP v1 · no pasa",
+      "body": "ABP v1: 153 operaciones, ganancia neta $-9,747 con costos base, p contra RAND 0.8102, estrés $-11,274, Topstep 0.0% de las cuentas (RAND 2.8%). Veredicto: no pasa. Causa: pierde con costos base; no gana a RAND (p=0.8102); no gana a RAND2 con las mismas salidas (p=0.7842); DSR 0.0 < 0.95 con 1139 intentos; muere con costos al doble; pierde en 2024, 2025; pasa Topstep solo 0.0%.",
+      "test_id": "P045"
+    },
+    {
       "date": "2026-10-25",
       "kind": "prueba",
       "title": "Prueba P016 · ABS v3 · revisar",
