@@ -1,5 +1,5 @@
 {
- "actualizado_utc": "2026-10-26T23:44:25Z",
+ "actualizado_utc": "2026-10-26T23:46:20Z",
  "porcentaje": 40,
  "criterios": {
   "a_ganancia_neta_positiva": {
@@ -28,7 +28,7 @@
   "test_id": "P031",
   "por_que": "+$11.9k, p 0.001 contra RAND, positiva los 3 años. Pero 'revisar' (placebo sospechoso), DSR 0, Topstep 41.2% y 214 cuentas rompen el MLL. P045 (placebo de niveles, ABP) perdió −$9.7k con p 0.81: el nivel sí importa, no era fuga. P039 no mejora Topstep; P043 pierde. 40% (criterios a y d) es un techo generoso."
  },
- "ultima_accion": "Corrida 41: sin prueba nueva. P046 (IBX, G4) no pasa: −$10.9k, p 0.46. P047 (ATR, G6): +$8.0k, p 0.007, pero Topstep 36.8%, DSR 0 y placebo sospechoso; comparte ráfagas con ABU, no es independiente. G2 (ABG) y G5 (CLX) siguen congeladas en cola; el error de G2 fue del orquestador, no del código. G3 (motor), E-HVN-FUERZA (sin runner) y G7 (sin datos MBO) siguen bloqueadas.",
+ "ultima_accion": "Corrida 42: sin prueba nueva. G2 (ABG) y G5 (CLX) siguen congeladas y en cola; su código importa bien. Las demás pendientes están bloqueadas (G3 motor, G7 datos MBO, E-HVN-FUERZA ya corrida como HVF). No agrego más pruebas para no ensuciar el registro mientras la cola está ocupada.",
  "siguiente_idea": "Leer G2 (ABG) y G5 (CLX) cuando terminen. Si ninguna pasa Topstep >50% con DSR razonable, la familia de absorción/atrapados queda agotada con estos datos. Pedir a Jose: cambio de motor para Asia/Londres (G3) y decisión sobre datos MBO (G7).",
  "historial": [
   "2026-10-25T02:45:53Z · Primera corrida del investigador: ABS v3 congelada (entrada temprana). Mejor prueba P012: 20%.",
@@ -63,6 +63,7 @@
   "2026-10-26T22:45:00Z · Corrida 38: sin prueba nueva (cola ocupada; pendientes bloqueados). Mejor prueba P031: 40% (a y d).",
   "2026-10-26T23:08:17Z · Corrida 39: sin prueba nueva (G2, G5 corriendo; pendientes bloqueados). Mejor prueba P031: 40% (a y d).",
   "2026-10-26T23:31:00Z · Corrida 40: sin prueba nueva (G2, G5 corriendo; pendientes bloqueados). Mejor prueba P031: 40% (a y d).",
-  "2026-10-26T23:44:25Z · Corrida 41: sin prueba nueva (G2, G5 en cola). P046 no pasa; P047 +$8.0k pero Topstep 36.8%. Mejor prueba P031: 40% (a y d)."
+  "2026-10-26T23:44:25Z · Corrida 41: sin prueba nueva (G2, G5 en cola). P046 no pasa; P047 +$8.0k pero Topstep 36.8%. Mejor prueba P031: 40% (a y d).",
+  "2026-10-26T23:46:20Z · Corrida 42: sin prueba nueva (G2, G5 en cola; pendientes bloqueados). Mejor prueba P031: 40% (a y d)."
  ]
 }
