@@ -7,6 +7,13 @@ import sys
 from . import registry, config
 
 STUDIES = {
+    "abw_v1": {
+        "hypothesis": "ABW v1 (absorción en días de apertura ancha: el detector de ABU, confirmado a 60 s, en niveles de ayer, de la noche, POC/VAH/VAL del día y máximo/mínimo de apertura, en los días en que el rango de 09:30–10:00 es >= 0.5 del rango de ayer, sin filtro de apertura dentro del valor; la ventana de absorción empieza después de las 10:00; entrada a mercado contra el lado absorbido, stop 12–32, objetivo 2R, salida a 15 min, 2 contratos, parada tras 2 pérdidas, 10:00–15:30): las operaciones rinden más que un RAND emparejado y RAND2 sorteados en la misma ventana y con las mismas reglas; gana después de costos, es positiva en 2024, 2025 y 2026 y tiene al menos 100 operaciones.",
+        "n_declared": 1 + 16,
+        "kill": ["ganancia neta <= 0 con costos base", "p vs RAND > 0.20", "pierde en 2 de 3 años", "rompe MLL en > 50% de arranques"],
+        "strategies": ["ABW v1"],
+        "notes": "1 prueba + 16 de sensibilidad (cercanía al nivel 2/3/5/6 ticks, confirmación 40/50/70/80 s, umbral relativo p86/p88/p92/p94, razón de apertura 0.3/0.4/0.6/0.7). Una sola definición (docs/investigacion/apertura_ancha.md); 0.5 fijado como número redondo mirando solo la distribución de la razón, sin ganancias. Humo: 112 sesiones, solo conteo (50 señales; ~257 esperadas). Exploratoria: mismo detector y datos que ABU, NO es evidencia independiente.",
+    },
     "vpt_v1": {
         "hypothesis": "VPT v1 (pullback a la VWAP a favor de la tendencia: en días que abren FUERA del valor de ayer y no regresan a él, tras una extensión previa >= 24 ticks de la VWAP, cuando el precio toca la VWAP (<= 4 ticks) y en los 60 s siguientes el delta agresivo va a favor de la tendencia (>= 5 %) y el precio se aleja 4 ticks del extremo del pullback; entrada a mercado a favor, stop 12–32 detrás del extremo, objetivo 2R, salida a 15 min, 2 contratos, parada tras 2 pérdidas, 10:00–15:30): las operaciones rinden más que un RAND emparejado y RAND2 sorteados en la misma ventana y con las mismas reglas; gana después de costos, es positiva en 2024, 2025 y 2026 y tiene al menos 100 operaciones.",
         "n_declared": 1 + 16,

@@ -272,5 +272,12 @@
   "fin_utc": "2026-10-26T03:22:26+00:00",
   "test_id": "P041",
   "veredicto": "no_pasa"
+ },
+ "T27-VPT": {
+  "estado": "corrida",
+  "inicio_utc": "2026-10-26T03:45:01+00:00",
+  "fin_utc": "2026-10-26T03:59:09+00:00",
+  "test_id": "P042",
+  "veredicto": "no_pasa"
  }
 }
