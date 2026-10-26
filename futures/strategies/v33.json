@@ -1,0 +1,34 @@
+{
+ "version": 33,
+ "fecha_registro": "2026-10-26",
+ "titulo": "Tanda 32 · OPD v1 (apertura impulsiva medida por flujo)",
+ "estado": "Escrita por el investigador autónomo; sellada y congelada al publicar. Investigación: docs/investigacion/apertura_impulsiva.md.",
+ "comun": {
+  "instrumento": "NQ (contrato del frente), 2 contratos por operación",
+  "horario": "Entrada a las 09:35 ET (cierre de la ventana de medición); una operación por día",
+  "cierre_forzado": "cualquier posición abierta se cierra a mercado a las 10:00 ET como tope (la salida normal es a 15 min)",
+  "noticias": "no se abre de −2 a +5 min de CPI, NFP y Fed",
+  "costos": "comisión Topstep + 1 tick de deslizamiento por lado; prueba extra al doble",
+  "limites_dia": "una operación por día",
+  "datos": "solo periodo de diseño 2024-01-02 a 2026-04-21; el examen sellado no se abre",
+  "control": "RAND emparejado y RAND2 sorteados entre 09:34 y 09:38, con 2 contratos"
+ },
+ "estrategias": [
+  {
+   "id": "OPD",
+   "version": 1,
+   "nombre": "Apertura impulsiva (open drive) por flujo",
+   "idea": "Si en los primeros 5 minutos el flujo agresivo neto empuja en una dirección y el precio avanza sin devolver más que lo avanzado, hay iniciativa y el movimiento continúa.",
+   "contexto": "Primeros 300 s desde las 09:30.",
+   "disparador": "|delta agresivo| ≥ 3 % del volumen; avance ≥ 40 ticks en la dirección del delta; mayor retroceso desde el extremo corrido ≤ 1.0 × el avance.",
+   "confirmacion": "Ninguna adicional (la ventana completa es la confirmación).",
+   "entrada": "A mercado a favor, al cerrar la ventana (09:35).",
+   "stop": "Contra-extremo de la ventana de 300 s; entre 12 y 32 ticks.",
+   "objetivo": "1.5R.",
+   "tiempo_maximo": "15 minutos.",
+   "tamano": "2 contratos",
+   "motivo": "Open-drive de Dalton nunca medido con delta; ORB (precio) y BIG (órdenes grandes) no pasaron; PEX descartada por vacía. No es validación independiente."
+  }
+ ],
+ "nota": "Parámetros en futures/lab/engine/strategies/v31.py::PARAMS['OPD']; contratos y ventana en run_test.py::RULES_WINDOW."
+}

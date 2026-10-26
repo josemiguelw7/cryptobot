@@ -7,6 +7,13 @@ import sys
 from . import registry, config
 
 STUDIES = {
+    "opd_v1": {
+        "hypothesis": "OPD v1 (apertura impulsiva por flujo: en los primeros 300 s desde las 09:30 el delta agresivo neto es >= 3 % del volumen en una dirección, el precio avanza >= 40 ticks en esa dirección y el mayor retroceso desde el extremo corrido es <= 1.0 x el avance; entrada a mercado a favor a las 09:35, stop en el contra-extremo de la ventana 12–32, objetivo 1.5R, salida a 15 min, 2 contratos, una operación por día): las operaciones rinden más que un RAND emparejado y RAND2 sorteados entre 09:34 y 09:38 con las mismas reglas; gana después de costos, es positiva en 2024, 2025 y 2026 y tiene al menos 100 operaciones.",
+        "n_declared": 1 + 16,
+        "kill": ["ganancia neta <= 0 con costos base", "p vs RAND > 0.20", "pierde en 2 de 3 años", "rompe MLL en > 50% de arranques"],
+        "strategies": ["OPD v1"],
+        "notes": "1 prueba + 16 de sensibilidad (ventana 240/360 s, delta 1/2/4/5 %, avance 30/50 ticks, retroceso 0.6/0.8/1.2/1.4; los pasos del motor son 60 s, 1 %, 10 ticks, 0.2). Una sola definición (docs/investigacion/apertura_impulsiva.md); umbrales fijados mirando solo la distribución de delta, avance y retroceso y el conteo de señales (~135 esperadas en 576 sesiones), sin ganancias. Definición más laxa que la de Dalton (retroceso 1.0), declarada. Antes se descartó PEX (extremo pobre) por tener solo 30–60 señales posibles. Exploratoria, NO es validación independiente. Pregunta única: ¿la iniciativa de apertura medida por delta continúa más que el azar?",
+    },
     "abw_v1": {
         "hypothesis": "ABW v1 (absorción en días de apertura ancha: el detector de ABU, confirmado a 60 s, en niveles de ayer, de la noche, POC/VAH/VAL del día y máximo/mínimo de apertura, en los días en que el rango de 09:30–10:00 es >= 0.5 del rango de ayer, sin filtro de apertura dentro del valor; la ventana de absorción empieza después de las 10:00; entrada a mercado contra el lado absorbido, stop 12–32, objetivo 2R, salida a 15 min, 2 contratos, parada tras 2 pérdidas, 10:00–15:30): las operaciones rinden más que un RAND emparejado y RAND2 sorteados en la misma ventana y con las mismas reglas; gana después de costos, es positiva en 2024, 2025 y 2026 y tiene al menos 100 operaciones.",
         "n_declared": 1 + 16,
