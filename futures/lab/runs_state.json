@@ -246,7 +246,10 @@
   "veredicto": "insuficiente"
  },
  "T23-ABE": {
-  "estado": "corriendo",
-  "inicio_utc": "2026-10-25T23:45:01+00:00"
+  "estado": "corrida",
+  "inicio_utc": "2026-10-25T23:45:01+00:00",
+  "fin_utc": "2026-10-26T00:30:56+00:00",
+  "test_id": "P038",
+  "veredicto": "revisar"
  }
 }

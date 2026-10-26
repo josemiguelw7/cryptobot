@@ -2,6 +2,13 @@
   "note": "Bitácora del laboratorio: hallazgos, decisiones y avances, del más reciente al más antiguo. Cada entrada nueva se agrega arriba.",
   "entries": [
     {
+      "date": "2026-10-26",
+      "kind": "prueba",
+      "title": "Prueba P038 · ABE v1 · revisar",
+      "body": "ABE v1: 103 operaciones, ganancia neta $1,181 con costos base, p contra RAND 0.0519, estrés $351, Topstep 0.0% de las cuentas (RAND 0.0%). Veredicto: revisar. Causa: placebo desplazado sospechoso: revisión de código pendiente; además: no gana a RAND (p=0.0519); no gana a RAND2 con las mismas salidas (p=0.0709); DSR 0.0 < 0.95 con 1023 intentos; 272.7% de la ganancia en 5 días; pasa Topstep solo 0.0%.",
+      "test_id": "P038"
+    },
+    {
       "date": "2026-10-25",
       "kind": "prueba",
       "title": "Prueba P016 · ABS v3 · revisar",
