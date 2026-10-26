@@ -58,6 +58,13 @@
       "test_id": "P045"
     },
     {
+      "date": "2026-10-26",
+      "kind": "prueba",
+      "title": "Prueba P046 · IBX v1 · no pasa",
+      "body": "IBX v1: 586 operaciones, ganancia neta $-10,855 con costos base, p contra RAND 0.4625, estrés $-15,520, Topstep 0.0% de las cuentas (RAND 0.1%). Veredicto: no pasa. Causa: pierde con costos base; no gana a RAND (p=0.4625); no gana a RAND2 con las mismas salidas (p=0.4126); DSR 0.0 < 0.95 con 1173 intentos; muere con costos al doble; pierde en 2024, 2025, 2026; pasa Topstep solo 0.0%.",
+      "test_id": "P046"
+    },
+    {
       "date": "2026-10-25",
       "kind": "prueba",
       "title": "Prueba P016 · ABS v3 · revisar",

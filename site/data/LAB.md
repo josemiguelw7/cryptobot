@@ -1,13 +1,13 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-26 21:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-26 22:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
 ## En una línea
 
 - Sesiones válidas de diseño: **576** (examen sellado desde 2026-04-22, cerrado).
-- Intentos registrados: **1155** · pruebas publicadas: **44** (error 1, superada 7, no_pasa 21, revisar 13, insuficiente 2).
+- Intentos registrados: **1172** · pruebas publicadas: **45** (error 1, superada 7, no_pasa 22, revisar 13, insuficiente 2).
 - Estrategias aprobadas por el comité: **0**. Nada toca dinero real.
 
 ## Pruebas corridas
@@ -58,6 +58,7 @@ Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` �
 | P043 | ABW v1 | **no_pasa** | −$12,559 | 0.9291 | 0.0% | pierde con costos base; no gana a RAND (p=0.9291); no gana a RAND2 con las mismas salidas (p=0.9121); DSR 0.0  |
 | P044 | OPD v1 | **no_pasa** | −$7,474 | 0.6903 | 7.4% | pierde con costos base; no gana a RAND (p=0.6903); no gana a RAND2 con las mismas salidas (p=0.5864); DSR 0.0  |
 | P045 | ABP v1 | **no_pasa** | −$9,747 | 0.8102 | 0.0% | pierde con costos base; no gana a RAND (p=0.8102); no gana a RAND2 con las mismas salidas (p=0.7842); DSR 0.0  |
+| P046 | IBX v1 | **no_pasa** | −$10,855 | 0.4625 | 0.0% | pierde con costos base; no gana a RAND (p=0.4625); no gana a RAND2 con las mismas salidas (p=0.4126); DSR 0.0  |
 
 ## Cola de pruebas (backlog)
 
@@ -117,9 +118,9 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 | G1-PLACEBO-ABU | Validación: revisión placebo de ABU v2 (P031) | **corrida** → P045 | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
 | G2-ABU-MANEJO | Estudio de manejo de la operación sobre ABU (Topstep) | **corriendo** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  · ERROR: falló una corrida; ver log |
 | G3-SESIONES | Patrones de flujo fuera de Nueva York (Asia, Londres, overnight) | **aprobada** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
-| G4-IB-DELTA | Extensión del balance inicial (9:30–10:30) confirmada por delta | **corriendo** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
+| G4-IB-DELTA | Extensión del balance inicial (9:30–10:30) confirmada por delta | **corrida** → P046 | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
 | G5-CLIMAX | Agotamiento / clímax en extremos del día | **corriendo** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
-| G6-ATRAPADOS | Traders atrapados | **congelada** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
+| G6-ATRAPADOS | Traders atrapados | **corriendo** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
 | G7-ICEBERG-MBO | Icebergs y liquidez retirada (pulling) con datos MBO | **propuesta** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas | datos MBO de Databento — compra pendiente de decisión de Jose |
 
 ## Estudios y cuenta de intentos
@@ -167,7 +168,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - **opd_v1**: OPD v1 (apertura impulsiva por flujo: en los primeros 300 s desde las 09:30 el delta agresivo neto es >= 3 % del volumen en una dirección, e · declarados 17, usados 17
 - **abp_v1**: ABP v1 (placebo de niveles de ABU v2, validación G1: el detector, filtro de día real, confirmación a 60 s, stop 12–32, objetivo 2R, salida a · declarados 17, usados 17
 - **abg_v1**: ABG v1 (manejo de la operación sobre las señales de ABU v2: mismo detector de absorción, filtro de día que abre dentro del valor de ayer, ni · declarados 17, usados 0
-- **ibx_v1**: IBX v1 (extensión del balance inicial confirmada por delta: IB = máximo y mínimo de 09:30–10:30; entre 10:30 y 14:30, una celda de 10 s supe · declarados 17, usados 0
+- **ibx_v1**: IBX v1 (extensión del balance inicial confirmada por delta: IB = máximo y mínimo de 09:30–10:30; entre 10:30 y 14:30, una celda de 10 s supe · declarados 17, usados 17
 - **clx_v1**: CLX v1 (clímax de volumen y delta en el extremo del día: ventana de 60 s con nuevo máximo/mínimo de la sesión, no antes de 10:00, volumen >= · declarados 17, usados 0
 - **atr_v1**: ATR v1 (traders atrapados: la ráfaga, los niveles, el filtro de día (abre dentro del valor de ayer), 2 contratos y 09:30–15:30 de ABU v2, pe · declarados 17, usados 0
 
