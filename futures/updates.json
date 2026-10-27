@@ -9,6 +9,13 @@
       "test_id": "P048"
     },
     {
+      "date": "2026-10-27",
+      "kind": "prueba",
+      "title": "Prueba P049 · CLX v1 · no pasa",
+      "body": "CLX v1: 189 operaciones, ganancia neta $-8,279 con costos base, p contra RAND 0.989, estrés $-9,104, Topstep 0.0% de las cuentas (RAND 0.0%). Veredicto: no pasa. Causa: pierde con costos base; no gana a RAND (p=0.989); no gana a RAND2 con las mismas salidas (p=0.992); DSR 0.0 < 0.95 con 1206 intentos; muere con costos al doble; pierde en 2024, 2025; pasa Topstep solo 0.0%.",
+      "test_id": "P049"
+    },
+    {
       "date": "2026-10-26",
       "kind": "prueba",
       "title": "Prueba P038 · ABE v1 · revisar",
