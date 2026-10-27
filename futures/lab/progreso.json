@@ -1,5 +1,5 @@
 {
- "actualizado_utc": "2026-10-27T02:42:21Z",
+ "actualizado_utc": "2026-10-27T03:14:17Z",
  "porcentaje": 40,
  "criterios": {
   "a_ganancia_neta_positiva": {
@@ -28,7 +28,7 @@
   "test_id": "P031",
   "por_que": "+$11.9k, p 0.001 contra RAND, positiva los 3 años. Pero 'revisar' (placebo sospechoso), DSR 0, Topstep 41.2% y 214 cuentas rompen el MLL. P045 (placebo de niveles, ABP) perdió −$9.7k con p 0.81: el nivel sí importa, no era fuga. P039 no mejora Topstep; P043 pierde. 40% (criterios a y d) es un techo generoso."
  },
- "ultima_accion": "Corrida 51: sin prueba nueva. Todo lo congelado ya corrió (P045–P049). Pendientes bloqueados: G3 (rand.py/run_test.py solo cargan sesión NY), E-HVN-FUERZA (sin runner de estudios), G7 (sin datos MBO).",
+ "ultima_accion": "Corrida 52: sin prueba nueva. G2, G5 y G6 siguen congeladas en cola del orquestador; G3 y G7 bloqueadas (motor/datos); E-HVN-FUERZA ya se cubrió con HVF v1 (P-corrida).",
  "siguiente_idea": "Ninguna prueba mejora Topstep sobre 41.2% (P031). El manejo de la operación (ABG) no lo arregló y ATR no es independiente de ABU. Más pruebas solo suben el conteo de intentos (DSR ya es 0). Pedir a Jose: cambio de motor para Asia/Londres (G3) y decisión sobre datos MBO (G7).",
  "historial": [
   "2026-10-25T02:45:53Z · Primera corrida del investigador: ABS v3 congelada (entrada temprana). Mejor prueba P012: 20%.",
@@ -73,6 +73,7 @@
   "2026-10-27T02:06:17Z · Corrida 48: sin prueba nueva (todo lo congelado ya corrió; pendientes bloqueados por motor/datos). Mejor prueba P031: 40% (a y d).",
   "2026-10-27T02:08:14Z · Corrida 49: sin prueba nueva (pendientes bloqueados por motor/datos; más pruebas solo suben el conteo de intentos). Mejor prueba P031: 40% (a y d).",
   "2026-10-27T02:40:29Z · Corrida 50: sin prueba nueva (pendientes bloqueados por motor/datos; más pruebas solo suben el conteo de intentos). Mejor prueba P031: 40% (a y d).",
-  "2026-10-27T02:42:21Z · Corrida 51: sin prueba nueva (pendientes bloqueados por motor/datos; más pruebas solo suben el conteo de intentos). Mejor prueba P031: 40% (a y d)."
+  "2026-10-27T02:42:21Z · Corrida 51: sin prueba nueva (pendientes bloqueados por motor/datos; más pruebas solo suben el conteo de intentos). Mejor prueba P031: 40% (a y d).",
+  "2026-10-27T03:14:17Z · Corrida 52: sin prueba nueva (cola con G2, G5, G6; pendientes bloqueados por motor/datos; más pruebas solo suben el conteo de intentos). Mejor prueba P031: 40% (a y d)."
  ]
 }
