@@ -1,5 +1,5 @@
 {
- "actualizado_utc": "2026-10-27T00:48:18Z",
+ "actualizado_utc": "2026-10-27T01:20:26Z",
  "porcentaje": 40,
  "criterios": {
   "a_ganancia_neta_positiva": {
@@ -28,8 +28,8 @@
   "test_id": "P031",
   "por_que": "+$11.9k, p 0.001 contra RAND, positiva los 3 años. Pero 'revisar' (placebo sospechoso), DSR 0, Topstep 41.2% y 214 cuentas rompen el MLL. P045 (placebo de niveles, ABP) perdió −$9.7k con p 0.81: el nivel sí importa, no era fuga. P039 no mejora Topstep; P043 pierde. 40% (criterios a y d) es un techo generoso."
  },
- "ultima_accion": "Corrida 45: sin prueba nueva. G2 (ABG) sigue 'corriendo' desde las 00:10 y G5 (CLX) espera reintento. G3 bloqueada por el motor, G7 por datos MBO, E-HVN-FUERZA sin runner. Más pruebas solo suben el conteo de intentos (1,189).",
- "siguiente_idea": "Leer G2 (ABG) y G5 (CLX) cuando terminen. Si ninguna pasa Topstep >50% con DSR razonable, la familia de absorción/atrapados queda agotada con estos datos. Pedir a Jose: cambio de motor para Asia/Londres (G3) y decisión sobre datos MBO (G7).",
+ "ultima_accion": "Corrida 46: sin prueba nueva. Llegaron P047 (ATR v1, +$8.0k, p 0.007, Topstep 36.8%, 'revisar'), P048 (ABG v1, +$536, Topstep 11.4%, 'revisar') y P049 (CLX v1, −$8.3k, p 0.99, no pasa). G4 (IBX) sigue corriendo. G3 bloqueada por el motor, G7 por datos MBO, E-HVN-FUERZA sin runner.",
+ "siguiente_idea": "Ninguna prueba mejora Topstep sobre 41.2% (P031). El manejo de la operación (ABG) no lo arregló y ATR no es independiente de ABU. Más pruebas solo suben el conteo de intentos (DSR ya es 0). Pedir a Jose: cambio de motor para Asia/Londres (G3) y decisión sobre datos MBO (G7).",
  "historial": [
   "2026-10-25T02:45:53Z · Primera corrida del investigador: ABS v3 congelada (entrada temprana). Mejor prueba P012: 20%.",
   "2026-10-25T03:33:46Z · Segunda corrida: ACC v1 congelada (aceptación VAH/VAL). P016 (ABS v3) no mejora. Mejor prueba P012: 20%.",
@@ -67,6 +67,7 @@
   "2026-10-26T23:46:20Z · Corrida 42: sin prueba nueva (G2, G5 en cola; pendientes bloqueados). Mejor prueba P031: 40% (a y d).",
   "2026-10-27T00:32:19Z · Corrida 43: sin prueba nueva (G2 corriendo, G5 en reintento; pendientes bloqueados). Mejor prueba P031: 40% (a y d).",
   "2026-10-27T00:46:23Z · Corrida 44: sin prueba nueva (G2 corriendo, G5 en reintento; pendientes bloqueados). Mejor prueba P031: 40% (a y d).",
-  "2026-10-27T00:48:18Z · Corrida 45: sin prueba nueva (G2 corriendo, G5 en reintento; pendientes bloqueados). Mejor prueba P031: 40% (a y d)."
+  "2026-10-27T00:48:18Z · Corrida 45: sin prueba nueva (G2 corriendo, G5 en reintento; pendientes bloqueados). Mejor prueba P031: 40% (a y d).",
+  "2026-10-27T01:20:26Z · Corrida 46: sin prueba nueva. P047 (ATR v1) revisar +$8.0k, Topstep 36.8%; P048 (ABG v1) revisar +$536, Topstep 11.4%; P049 (CLX v1) no pasa. Mejor prueba P031: 40% (a y d)."
  ]
 }

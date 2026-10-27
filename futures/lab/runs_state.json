@@ -316,8 +316,11 @@
   "veredicto": "no_pasa"
  },
  "G5-CLIMAX": {
-  "estado": "corriendo",
-  "inicio_utc": "2026-10-27T00:50:01+00:00"
+  "estado": "corrida",
+  "inicio_utc": "2026-10-27T00:50:01+00:00",
+  "fin_utc": "2026-10-27T01:09:21+00:00",
+  "test_id": "P049",
+  "veredicto": "no_pasa"
  },
  "G6-ATRAPADOS": {
   "estado": "corrida",
