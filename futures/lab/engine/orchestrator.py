@@ -22,7 +22,7 @@ DATA = "/srv/lab/data"
 REPO = "/srv/lab/repo"           # copia de trabajo sincronizada desde la Mac (backlog, registro, resultados)
 IMAGE = "nqlab:1"
 LOCK = os.path.join(RUNS, ".lock")
-SLOTS = 2                 # pruebas en paralelo (cada una usa ~1 núcleo y ~11 GB de RAM)
+SLOTS = 1                 # 1 a la vez: con 2 en paralelo la VM se quedó sin RAM (OOM 26/10, una prueba usa 12–17 GB)
 RAM_MIN_GB = 14           # no arranca otra prueba si queda menos RAM libre que esto
 ATTEMPTS_PER_TEST = 17    # 1 base + 16 sensibilidades: intentos que aporta cada prueba en curso al DSR
 
@@ -132,9 +132,28 @@ def run_in_container(wd, item, out, tag):
     return r.returncode == 0, log
 
 
+def _clean(rd):
+    """Borra la carpeta de una corrida anterior. Docker escribe como root, así que si queda algo se borra con sudo."""
+    shutil.rmtree(rd, ignore_errors=True)
+    if os.path.exists(rd):
+        sh(f"sudo -n rm -rf {rd}")
+    if os.path.exists(rd):
+        raise RuntimeError(f"no pude borrar {rd} (corrida anterior)")
+
+
+def _mark_failed(item_id, msg):
+    """Deja la prueba otra vez en cola con el error anotado (nunca 'corriendo' colgada)."""
+    lk = _crit()
+    st = json.load(open(STATE)) if os.path.exists(STATE) else {}
+    prev = st.get(item_id, {})
+    st[item_id] = {"estado": "congelada", "ultimo_error": msg[:500], "fin_utc": now(), "fallos": prev.get("fallos", 0) + 1}
+    json.dump(st, open(STATE + ".tmp", "w"), indent=1); os.replace(STATE + ".tmp", STATE)
+    lk.close()
+
+
 def run_one(item):
     b = backlog(); it = next(x for x in b["pruebas"] if x["id"] == item["id"]); it["estado"] = "corriendo"; it["inicio_utc"] = now(); save_backlog(b, item["id"])
-    rd = os.path.join(RUNS, item["id"]); shutil.rmtree(rd, ignore_errors=True); os.makedirs(rd)
+    rd = os.path.join(RUNS, item["id"]); _clean(rd); os.makedirs(rd)
     logf = open(os.path.join(rd, "log.txt"), "a")
     commit = item.get("commit") or sh(f"git --git-dir={MIRROR} rev-parse main").stdout.strip()
     wd = os.path.join(rd, "src"); sh(f"git clone -q {MIRROR} {wd} && git -C {wd} checkout -q {commit}")
@@ -272,9 +291,19 @@ def main():
             print(f"{now()} RAM libre {mem:.1f} GB < {RAM_MIN_GB}: no arranco otra en paralelo"); return
     lk = _crit()
     try:
+        # pruebas "corriendo" sin ningún carril activo = quedaron colgadas (proceso muerto): devolverlas a la cola
+        if busy == 0:
+            st = json.load(open(STATE)) if os.path.exists(STATE) else {}
+            ghosts = [k for k, v in st.items() if v.get("estado") == "corriendo"]
+            for k in ghosts:
+                st[k] = {"estado": "congelada", "ultimo_error": "quedó colgada en 'corriendo' (el proceso murió); reintento",
+                         "fin_utc": now(), "fallos": st[k].get("fallos", 0) + 1}
+                print(f"{now()} rescatada {k}: estaba colgada en 'corriendo'")
+            if ghosts:
+                json.dump(st, open(STATE + ".tmp", "w"), indent=1); os.replace(STATE + ".tmp", STATE)
         b = backlog()
         nxt = next((it for it in b["pruebas"] if it["estado"] == "congelada" and not it.get("ultimo_error")), None) \
-            or next((it for it in b["pruebas"] if it["estado"] == "congelada"), None)
+            or next((it for it in b["pruebas"] if it["estado"] == "congelada" and it.get("fallos", 0) < 3), None)
         if not nxt:
             return
         mine = free[0]; open(mine, "w").write(f"{now()} {nxt['id']}")
@@ -285,7 +314,11 @@ def main():
     finally:
         lk.close()
     try:
-        print(f"{now()} arranca {nxt['id']} (carril {mine[-1]})"); run_one(nxt)
+        print(f"{now()} arranca {nxt['id']} (carril {mine[-1]})", flush=True); run_one(nxt)
+    except Exception as e:
+        import traceback; traceback.print_exc()
+        _mark_failed(nxt["id"], f"orquestador: {type(e).__name__}: {e}")
+        print(f"{now()} FALLÓ {nxt['id']}: {e} (vuelve a la cola)", flush=True)
     finally:
         os.remove(mine)
 
