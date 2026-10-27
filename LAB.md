@@ -1,6 +1,6 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-27 00:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-27 00:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
@@ -120,7 +120,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 | G2-ABU-MANEJO | Estudio de manejo de la operación sobre ABU (Topstep) | **corriendo** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  · ERROR: falló una corrida; ver log |
 | G3-SESIONES | Patrones de flujo fuera de Nueva York (Asia, Londres, overnight) | **aprobada** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
 | G4-IB-DELTA | Extensión del balance inicial (9:30–10:30) confirmada por delta | **corrida** → P046 | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
-| G5-CLIMAX | Agotamiento / clímax en extremos del día | **corriendo** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
+| G5-CLIMAX | Agotamiento / clímax en extremos del día | **congelada** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  · ERROR: quedó colgada en 'corriendo' (el proceso murió); reintento |
 | G6-ATRAPADOS | Traders atrapados | **corrida** → P047 | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
 | G7-ICEBERG-MBO | Icebergs y liquidez retirada (pulling) con datos MBO | **propuesta** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas | datos MBO de Databento — compra pendiente de decisión de Jose |
 
