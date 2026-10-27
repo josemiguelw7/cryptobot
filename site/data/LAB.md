@@ -1,13 +1,13 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-27 00:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-27 01:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
 ## En una línea
 
 - Sesiones válidas de diseño: **576** (examen sellado desde 2026-04-22, cerrado).
-- Intentos registrados: **1189** · pruebas publicadas: **46** (error 1, superada 7, no_pasa 22, revisar 14, insuficiente 2).
+- Intentos registrados: **1205** · pruebas publicadas: **47** (error 1, superada 7, no_pasa 22, revisar 15, insuficiente 2).
 - Estrategias aprobadas por el comité: **0**. Nada toca dinero real.
 
 ## Pruebas corridas
@@ -60,6 +60,7 @@ Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` �
 | P045 | ABP v1 | **no_pasa** | −$9,747 | 0.8102 | 0.0% | pierde con costos base; no gana a RAND (p=0.8102); no gana a RAND2 con las mismas salidas (p=0.7842); DSR 0.0  |
 | P046 | IBX v1 | **no_pasa** | −$10,855 | 0.4625 | 0.0% | pierde con costos base; no gana a RAND (p=0.4625); no gana a RAND2 con las mismas salidas (p=0.4126); DSR 0.0  |
 | P047 | ATR v1 | **revisar** | $7,989 | 0.007 | 36.8% | placebo desplazado sospechoso: revisión de código pendiente; además: DSR 0.0 < 0.95 con 1190 intentos; 63.1% d |
+| P048 | ABG v1 | **revisar** | $536 | 0.015 | 11.4% | placebo desplazado sospechoso: revisión de código pendiente; además: DSR 0.0 < 0.95 con 1190 intentos; 804.9%  |
 
 ## Cola de pruebas (backlog)
 
@@ -117,10 +118,10 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 | T28-ABW | ABW v1: absorción en días de apertura ancha | **corrida** → P043 | P042 (VPT v1) no pasa (−$45.8k, p 0.98); ABU es la única ventaja pero su filtro de día casi no separa balance de tendencia |  |
 | T29-OPD | OPD v1: apertura impulsiva (open drive) medida por flujo | **corrida** → P044 | P043 (ABW v1) no pasa (−$12.6k, p 0.93): la familia de absorción agotó sus variantes de contexto; la iniciativa de apertura (Dalton, open-drive) nunca se midió con delta · PEX (extremo pobre de ayer) descartada por vacía (30–60 señales) |  |
 | G1-PLACEBO-ABU | Validación: revisión placebo de ABU v2 (P031) | **corrida** → P045 | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
-| G2-ABU-MANEJO | Estudio de manejo de la operación sobre ABU (Topstep) | **corriendo** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  · ERROR: falló una corrida; ver log |
+| G2-ABU-MANEJO | Estudio de manejo de la operación sobre ABU (Topstep) | **corrida** → P048 | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  · ERROR: falló una corrida; ver log |
 | G3-SESIONES | Patrones de flujo fuera de Nueva York (Asia, Londres, overnight) | **aprobada** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
 | G4-IB-DELTA | Extensión del balance inicial (9:30–10:30) confirmada por delta | **corrida** → P046 | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
-| G5-CLIMAX | Agotamiento / clímax en extremos del día | **congelada** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  · ERROR: quedó colgada en 'corriendo' (el proceso murió); reintento |
+| G5-CLIMAX | Agotamiento / clímax en extremos del día | **corriendo** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
 | G6-ATRAPADOS | Traders atrapados | **corrida** → P047 | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
 | G7-ICEBERG-MBO | Icebergs y liquidez retirada (pulling) con datos MBO | **propuesta** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas | datos MBO de Databento — compra pendiente de decisión de Jose |
 
@@ -168,7 +169,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - **abw_v1**: ABW v1 (absorción en días de apertura ancha: el detector de ABU, confirmado a 60 s, en niveles de ayer, de la noche, POC/VAH/VAL del día y m · declarados 17, usados 17
 - **opd_v1**: OPD v1 (apertura impulsiva por flujo: en los primeros 300 s desde las 09:30 el delta agresivo neto es >= 3 % del volumen en una dirección, e · declarados 17, usados 17
 - **abp_v1**: ABP v1 (placebo de niveles de ABU v2, validación G1: el detector, filtro de día real, confirmación a 60 s, stop 12–32, objetivo 2R, salida a · declarados 17, usados 17
-- **abg_v1**: ABG v1 (manejo de la operación sobre las señales de ABU v2: mismo detector de absorción, filtro de día que abre dentro del valor de ayer, ni · declarados 17, usados 0
+- **abg_v1**: ABG v1 (manejo de la operación sobre las señales de ABU v2: mismo detector de absorción, filtro de día que abre dentro del valor de ayer, ni · declarados 17, usados 16
 - **ibx_v1**: IBX v1 (extensión del balance inicial confirmada por delta: IB = máximo y mínimo de 09:30–10:30; entre 10:30 y 14:30, una celda de 10 s supe · declarados 17, usados 17
 - **clx_v1**: CLX v1 (clímax de volumen y delta en el extremo del día: ventana de 60 s con nuevo máximo/mínimo de la sesión, no antes de 10:00, volumen >= · declarados 17, usados 0
 - **atr_v1**: ATR v1 (traders atrapados: la ráfaga, los niveles, el filtro de día (abre dentro del valor de ayer), 2 contratos y 09:30–15:30 de ABU v2, pe · declarados 17, usados 17
@@ -227,6 +228,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 
 ## Últimos movimientos (bitácora)
 
+- 2026-10-27 · prueba · Prueba P048 · ABG v1 · revisar
 - 2026-10-26 · prueba · Prueba P038 · ABE v1 · revisar
 - 2026-10-26 · prueba · Prueba P039 · ABU v3 · revisar
 - 2026-10-26 · prueba · Prueba P040 · ABM v1 · insuficiente
@@ -234,7 +236,6 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - 2026-10-26 · prueba · Prueba P042 · VPT v1 · no pasa
 - 2026-10-26 · prueba · Prueba P043 · ABW v1 · no pasa
 - 2026-10-26 · prueba · Prueba P044 · OPD v1 · no pasa
-- 2026-10-26 · prueba · Prueba P045 · ABP v1 · no pasa
 
 ## Cómo se corre una prueba nueva
 

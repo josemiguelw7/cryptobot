@@ -302,10 +302,11 @@
   "veredicto": "no_pasa"
  },
  "G2-ABU-MANEJO": {
-  "estado": "corriendo",
+  "estado": "corrida",
   "inicio_utc": "2026-10-27T00:10:24+00:00",
-  "fin_utc": "2026-10-26T21:04:06+00:00",
-  "ultimo_error": "fall\u00f3 una corrida; ver log"
+  "fin_utc": "2026-10-27T00:48:01+00:00",
+  "test_id": "P048",
+  "veredicto": "revisar"
  },
  "G4-IB-DELTA": {
   "estado": "corrida",
@@ -315,10 +316,8 @@
   "veredicto": "no_pasa"
  },
  "G5-CLIMAX": {
-  "estado": "congelada",
-  "ultimo_error": "qued\u00f3 colgada en 'corriendo' (el proceso muri\u00f3); reintento",
-  "fin_utc": "2026-10-27T00:10:24+00:00",
-  "fallos": 1
+  "estado": "corriendo",
+  "inicio_utc": "2026-10-27T00:50:01+00:00"
  },
  "G6-ATRAPADOS": {
   "estado": "corrida",

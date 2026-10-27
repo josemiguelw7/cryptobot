@@ -49,6 +49,7 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 - P045 · ABP v1 · **no_pasa** · neto -9746.68 · p 0.8102 · Topstep 0.0%
 - P046 · IBX v1 · **no_pasa** · neto -10855.08 · p 0.4625 · Topstep 0.0%
 - P047 · ATR v1 · **revisar** · neto 7988.68 · p 0.007 · Topstep 36.8%
+- P048 · ABG v1 · **revisar** · neto 536.28 · p 0.015 · Topstep 11.4%
 
 ## 2. Qué murió y por qué
 - P013 · POC v1: umbral de orden grande mal calculado (percentil truncado y sobre todas las órdenes: 15 contratos). Ver strategies/v1_aclaraciones.json
