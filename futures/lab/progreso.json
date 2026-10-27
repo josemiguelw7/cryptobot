@@ -1,5 +1,5 @@
 {
- "actualizado_utc": "2026-10-27T04:56:27Z",
+ "actualizado_utc": "2026-10-27T05:28:19Z",
  "porcentaje": 40,
  "criterios": {
   "a_ganancia_neta_positiva": {
@@ -28,7 +28,7 @@
   "test_id": "P031",
   "por_que": "+$11.9k, p 0.001 contra RAND, positiva los 3 años. Pero 'revisar' (placebo sospechoso), DSR 0, Topstep 41.2% y 214 cuentas rompen el MLL. P045 (placebo de niveles, ABP) perdió −$9.7k con p 0.81: el nivel sí importa, no era fuga. P039 no mejora Topstep; P043 pierde. 40% (criterios a y d) es un techo generoso."
  },
- "ultima_accion": "Corrida 58: sin prueba nueva. El backlog del disco estaba viejo (G2, G4, G5, G6 como congelada/corriendo); lo restauré al estado publicado: ya corrieron (P046–P049). G3 (motor), G7 (datos MBO) y E-HVN-FUERZA (sin runner de estudios) siguen bloqueadas.",
+ "ultima_accion": "Corrida 59: sin prueba nueva. Nada congelado pendiente. G3 sigue bloqueada (rand.py/run_test cargan solo NY), G7 espera datos MBO y E-HVN-FUERZA no tiene runner de estudios. Una variante más sobre los mismos datos solo subiría el conteo de intentos (1,222; DSR ya es 0).",
  "siguiente_idea": "Con 1,222 intentos el DSR ya es 0: otra variante sobre los mismos datos de diseño solo sube el conteo. Lo útil ahora es de Jose: (1) cambio de motor para probar Asia/Londres (G3), (2) decisión sobre datos MBO (G7), (3) decidir si se abre el examen sellado con ABU v2.",
  "historial": [
   "2026-10-25T02:45:53Z · Primera corrida del investigador: ABS v3 congelada (entrada temprana). Mejor prueba P012: 20%.",
@@ -80,6 +80,7 @@
   "2026-10-27T03:50:19Z · Corrida 55: sin prueba nueva (todo lo congelado ya corrió; G3/G7/E-HVN-FUERZA bloqueadas; más pruebas solo suben el conteo de intentos). Mejor prueba P031: 40% (a y d).",
   "2026-10-27T04:22:20Z · Corrida 56: sin prueba nueva (G3/G7/E-HVN-FUERZA bloqueadas; P047–P049 no mejoran). Mejor prueba P031: 40% (a y d).",
   "2026-10-27T04:24:14Z · Corrida 57: sin prueba nueva (todo lo congelado ya corrió; bloqueadas G3/G7/E-HVN-FUERZA; más variantes solo suben el conteo). Mejor prueba P031: 40% (a y d).",
-  "2026-10-27T04:56:27Z · Corrida 58: sin prueba nueva (backlog del disco restaurado al publicado; nada pendiente que se pueda correr; más variantes solo suben el conteo de intentos). Mejor prueba P031: 40% (a y d)."
+  "2026-10-27T04:56:27Z · Corrida 58: sin prueba nueva (backlog del disco restaurado al publicado; nada pendiente que se pueda correr; más variantes solo suben el conteo de intentos). Mejor prueba P031: 40% (a y d).",
+  "2026-10-27T05:28:19Z · Corrida 59: sin prueba nueva (G3/G7/E-HVN-FUERZA bloqueadas por motor/datos; más variantes solo suben el conteo). Mejor prueba P031: 40% (a y d)."
  ]
 }
