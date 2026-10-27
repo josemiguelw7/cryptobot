@@ -1,5 +1,5 @@
 {
- "actualizado_utc": "2026-10-27T03:50:19Z",
+ "actualizado_utc": "2026-10-27T04:22:20Z",
  "porcentaje": 40,
  "criterios": {
   "a_ganancia_neta_positiva": {
@@ -28,8 +28,8 @@
   "test_id": "P031",
   "por_que": "+$11.9k, p 0.001 contra RAND, positiva los 3 años. Pero 'revisar' (placebo sospechoso), DSR 0, Topstep 41.2% y 214 cuentas rompen el MLL. P045 (placebo de niveles, ABP) perdió −$9.7k con p 0.81: el nivel sí importa, no era fuga. P039 no mejora Topstep; P043 pierde. 40% (criterios a y d) es un techo generoso."
  },
- "ultima_accion": "Corrida 55: sin prueba nueva. G2, G4, G5 y G6 ya corrieron (P046–P049). El error de G2 fue del orquestador (carpeta duplicada), no del código, y ya se reintentó bien (P048). G3, G7 y E-HVN-FUERZA siguen bloqueadas por motor/datos.",
- "siguiente_idea": "Ninguna prueba mejora Topstep sobre 41.2% (P031). El manejo de la operación (ABG) no lo arregló y ATR no es independiente de ABU. Más pruebas solo suben el conteo de intentos (DSR ya es 0). Pedir a Jose: cambio de motor para Asia/Londres (G3) y decisión sobre datos MBO (G7).",
+ "ultima_accion": "Corrida 56: sin prueba nueva. P047 (ATR v1: +$7,989, Topstep 36.8%), P048 (ABG v1: +$536, Topstep 11.4%) y P049 (CLX v1: −$8,279, p 0.99) ya corrieron y no superan a P031. G3 (necesita cambio de motor para Asia/Londres), G7 (datos MBO) y E-HVN-FUERZA (sin runner de estudios) siguen bloqueadas.",
+ "siguiente_idea": "Con 1,222 intentos el DSR ya es 0: otra variante sobre los mismos datos de diseño solo sube el conteo. Lo útil ahora es de Jose: (1) cambio de motor para probar Asia/Londres (G3), (2) decisión sobre datos MBO (G7), (3) decidir si se abre el examen sellado con ABU v2.",
  "historial": [
   "2026-10-25T02:45:53Z · Primera corrida del investigador: ABS v3 congelada (entrada temprana). Mejor prueba P012: 20%.",
   "2026-10-25T03:33:46Z · Segunda corrida: ACC v1 congelada (aceptación VAH/VAL). P016 (ABS v3) no mejora. Mejor prueba P012: 20%.",
@@ -77,6 +77,7 @@
   "2026-10-27T03:14:17Z · Corrida 52: sin prueba nueva (cola con G2, G5, G6; pendientes bloqueados por motor/datos; más pruebas solo suben el conteo de intentos). Mejor prueba P031: 40% (a y d).",
   "2026-10-27T03:16:19Z · Corrida 53: sin prueba nueva (todo lo congelado ya corrió; G3/G7 bloqueadas por motor/datos; más pruebas solo suben el conteo de intentos). Mejor prueba P031: 40% (a y d).",
   "2026-10-27T03:48:24Z · Corrida 54: sin prueba nueva (nada congelado pendiente; G3/G7/E-HVN-FUERZA bloqueadas por motor/datos; más pruebas solo suben el conteo de intentos). Mejor prueba P031: 40% (a y d).",
-  "2026-10-27T03:50:19Z · Corrida 55: sin prueba nueva (todo lo congelado ya corrió; G3/G7/E-HVN-FUERZA bloqueadas; más pruebas solo suben el conteo de intentos). Mejor prueba P031: 40% (a y d)."
+  "2026-10-27T03:50:19Z · Corrida 55: sin prueba nueva (todo lo congelado ya corrió; G3/G7/E-HVN-FUERZA bloqueadas; más pruebas solo suben el conteo de intentos). Mejor prueba P031: 40% (a y d).",
+  "2026-10-27T04:22:20Z · Corrida 56: sin prueba nueva (G3/G7/E-HVN-FUERZA bloqueadas; P047–P049 no mejoran). Mejor prueba P031: 40% (a y d)."
  ]
 }
