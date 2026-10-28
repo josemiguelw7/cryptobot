@@ -1,5 +1,5 @@
 {
-  "actualizado_utc": "2026-10-28T22:06:15Z",
+  "actualizado_utc": "2026-10-28T22:38:13Z",
   "porcentaje": 40,
   "criterios": {
     "a_ganancia_neta_positiva": {
@@ -150,6 +150,7 @@
     "2026-10-28T20:30:19Z · Sin prueba nueva: mismos bloqueos. P047 ATR (+$8.0k, Topstep 36.8%, revisar), P048 ABG (+$0.5k), P049 CLX (no pasa) no superan a P031. Mejor prueba P031: 40% (a y d).",
     "2026-10-28T21:02:15Z · Sin prueba nueva: mismos bloqueos (G3 motor, G7 datos, E-HVN-FUERZA runner); sin resultados ni pedidos nuevos desde P049. Mejor prueba P031: 40% (a y d).",
     "2026-10-28T21:34:18Z · Sin prueba nueva: mismos bloqueos (G3 motor, G7 datos, E-HVN-FUERZA runner); sin resultados ni pedidos nuevos desde P049 (último movimiento: P049, 27/10). Mejor prueba P031: 40% (a y d).",
-    "2026-10-28T22:06:15Z · Sin prueba nueva: mismos bloqueos (G3 motor, G7 datos, E-HVN-FUERZA runner); sin resultados ni pedidos nuevos desde P049. Mejor prueba P031: 40% (a y d)."
+    "2026-10-28T22:06:15Z · Sin prueba nueva: mismos bloqueos (G3 motor, G7 datos, E-HVN-FUERZA runner); sin resultados ni pedidos nuevos desde P049. Mejor prueba P031: 40% (a y d).",
+    "2026-10-28T22:38:13Z · Sin prueba nueva: mismos bloqueos (G3 motor, G7 datos, E-HVN-FUERZA runner); sin resultados ni pedidos nuevos desde P049. Mejor prueba P031: 40% (a y d)."
   ]
 }
