@@ -1,5 +1,5 @@
 {
- "actualizado_utc": "2026-10-28T09:18:14Z",
+ "actualizado_utc": "2026-10-28T09:50:19Z",
  "porcentaje": 40,
  "criterios": {
   "a_ganancia_neta_positiva": {
@@ -28,7 +28,7 @@
   "test_id": "P031",
   "por_que": "+$11.9k, p 0.001 contra RAND, positiva los 3 años. Pero 'revisar' (placebo sospechoso), DSR 0, Topstep 41.2% y 214 cuentas rompen el MLL. P045 (placebo de niveles, ABP) perdió −$9.7k con p 0.81: el nivel sí importa, no era fuga. P039 no mejora Topstep; P043 pierde. 40% (criterios a y d) es un techo generoso."
  },
- "ultima_accion": "sin prueba nueva: G3 sigue bloqueada (rand.py:40 fuerza ny_only=True, no puedo tocarlo); G7 sin datos MBO; E-HVN-FUERZA sin runner de estudios; sin pedidos nuevos de Oscar. Más variantes sobre los mismos datos solo suben el conteo de intentos (1,222). Mejor prueba P031: 40% (a y d).",
+ "ultima_accion": "sin prueba nueva: sin pedidos nuevos de Oscar; G3 bloqueada por el motor (rand.py solo NY), G7 sin datos MBO, E-HVN-FUERZA sin runner de estudios. Los 'ultimo_error' de R-ORB1 y G2 ya están corridos (P009, P048). Más variantes sobre los mismos datos solo suben el conteo de intentos (1,222). Mejor prueba P031: 40% (a y d).",
  "siguiente_idea": "Con 1,222 intentos el DSR ya es 0: otra variante sobre los mismos datos de diseño solo sube el conteo. Lo útil ahora es de Jose: (1) cambio de motor para probar Asia/Londres (G3), (2) decisión sobre datos MBO (G7), (3) decidir si se abre el examen sellado con ABU v2.",
  "historial": [
   "2026-10-25T02:45:53Z · Primera corrida del investigador: ABS v3 congelada (entrada temprana). Mejor prueba P012: 20%.",
@@ -126,6 +126,7 @@
   "2026-10-28T07:42:20Z · Corrida 101: sin prueba nueva (G3 sigue bloqueada: rand.py:40 y run_test.py:193 fuerzan ny_only=True y no puedo tocarlos; G7 sin datos MBO; E-HVN-FUERZA sin runner de estudios; sin pedidos nuevos de Oscar; 1,222 intentos, más variantes solo suben el conteo). Mejor prueba P031: 40% (a y d).",
   "2026-10-28T08:14:14Z · Corrida nueva: sin prueba nueva. Mismos bloqueos. Mejor prueba P031: 40% (a y d).",
   "2026-10-28T08:46:15Z · Corrida nueva: sin prueba nueva. Mismos bloqueos. Mejor prueba P031: 40% (a y d).",
-  "2026-10-28T09:18:14Z · Corrida nueva: sin prueba nueva. Mismos bloqueos. Mejor prueba P031: 40% (a y d)."
+  "2026-10-28T09:18:14Z · Corrida nueva: sin prueba nueva. Mismos bloqueos. Mejor prueba P031: 40% (a y d).",
+  "2026-10-28T09:50:19Z · Corrida nueva: sin prueba nueva. Mismos bloqueos. Mejor prueba P031: 40% (a y d)."
  ]
 }
