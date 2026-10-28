@@ -1,5 +1,5 @@
 {
-  "actualizado_utc": "2026-10-28T18:54:19Z",
+  "actualizado_utc": "2026-10-28T19:26:15Z",
   "porcentaje": 40,
   "criterios": {
     "a_ganancia_neta_positiva": {
@@ -28,7 +28,7 @@
     "test_id": "P031",
     "por_que": "+$11.9k, p 0.001 contra RAND, positiva los 3 años. Pero 'revisar' (placebo sospechoso), DSR 0, Topstep 41.2% y 214 cuentas rompen el MLL. P045 (placebo de niveles, ABP) perdió −$9.7k con p 0.81: el nivel sí importa, no era fuga. P039 no mejora Topstep; P043 pierde. 40% (criterios a y d) es un techo generoso."
   },
-  "ultima_accion": "Sin prueba nueva: no hay resultados nuevos desde la última corrida. G3 (motor solo NY), G7 (sin datos MBO) y E-HVN-FUERZA (sin runner de estudios) siguen bloqueadas. Buzón sin pedidos nuevos. Los errores de R-ORB1 y G2 ya tienen prueba publicada (P009, P048); no hay congeladas con error.",
+  "ultima_accion": "Sin prueba nueva: mismos bloqueos (G3 motor, G7 datos, E-HVN-FUERZA runner); sin resultados ni pedidos nuevos. Mejor prueba P031: 40% (a y d).",
   "siguiente_idea": "Con 1,222 intentos el DSR ya es 0: otra variante sobre los mismos datos de diseño solo sube el conteo. Lo útil ahora es de Jose: (1) cambio de motor para probar Asia/Londres (G3), (2) decisión sobre datos MBO (G7), (3) decidir si se abre el examen sellado con ABU v2.",
   "historial": [
     "2026-10-25T02:45:53Z · Primera corrida del investigador: ABS v3 congelada (entrada temprana). Mejor prueba P012: 20%.",
@@ -144,6 +144,7 @@
     "2026-10-28T17:18:20Z · Corrida nueva: sin prueba nueva (pendientes bloqueados por motor/datos; más pruebas solo suben el conteo de intentos). Mejor prueba P031: 40% (a y d).",
     "2026-10-28T17:50:15Z · Sin prueba nueva: mismos bloqueos (G3 motor, G7 datos, E-HVN-FUERZA runner). Mejor prueba P031: 40% (a y d).",
     "2026-10-28T18:22:13Z · Sin prueba nueva: mismos bloqueos (G3 motor, G7 datos, E-HVN-FUERZA runner). Mejor prueba P031: 40% (a y d).",
-    "2026-10-28T18:54:19Z · Sin prueba nueva: mismos bloqueos (G3 motor, G7 datos, E-HVN-FUERZA runner); nada nuevo que analizar. Mejor prueba P031: 40% (a y d)."
+    "2026-10-28T18:54:19Z · Sin prueba nueva: mismos bloqueos (G3 motor, G7 datos, E-HVN-FUERZA runner); nada nuevo que analizar. Mejor prueba P031: 40% (a y d).",
+    "2026-10-28T19:26:15Z · Sin prueba nueva: mismos bloqueos (G3 motor, G7 datos, E-HVN-FUERZA runner); sin resultados ni pedidos nuevos. Mejor prueba P031: 40% (a y d)."
   ]
 }
