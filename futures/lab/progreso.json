@@ -1,5 +1,5 @@
 {
- "actualizado_utc": "2026-10-28T08:46:15Z",
+ "actualizado_utc": "2026-10-28T09:18:14Z",
  "porcentaje": 40,
  "criterios": {
   "a_ganancia_neta_positiva": {
@@ -125,6 +125,7 @@
   "2026-10-28T07:10:20Z · Corrida 100: sin prueba nueva (G3 sigue bloqueada: rand.py:40 y run_test.py:193 fuerzan ny_only=True y no puedo tocarlos; G7 sin datos MBO; E-HVN-FUERZA sin runner de estudios; sin pedidos nuevos de Oscar; 1,222 intentos, más variantes solo suben el conteo). Mejor prueba P031: 40% (a y d).",
   "2026-10-28T07:42:20Z · Corrida 101: sin prueba nueva (G3 sigue bloqueada: rand.py:40 y run_test.py:193 fuerzan ny_only=True y no puedo tocarlos; G7 sin datos MBO; E-HVN-FUERZA sin runner de estudios; sin pedidos nuevos de Oscar; 1,222 intentos, más variantes solo suben el conteo). Mejor prueba P031: 40% (a y d).",
   "2026-10-28T08:14:14Z · Corrida nueva: sin prueba nueva. Mismos bloqueos. Mejor prueba P031: 40% (a y d).",
-  "2026-10-28T08:46:15Z · Corrida nueva: sin prueba nueva. Mismos bloqueos. Mejor prueba P031: 40% (a y d)."
+  "2026-10-28T08:46:15Z · Corrida nueva: sin prueba nueva. Mismos bloqueos. Mejor prueba P031: 40% (a y d).",
+  "2026-10-28T09:18:14Z · Corrida nueva: sin prueba nueva. Mismos bloqueos. Mejor prueba P031: 40% (a y d)."
  ]
 }
