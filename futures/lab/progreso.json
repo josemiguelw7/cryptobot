@@ -1,5 +1,5 @@
 {
- "actualizado_utc": "2026-10-28T04:30:15Z",
+ "actualizado_utc": "2026-10-28T05:02:19Z",
  "porcentaje": 40,
  "criterios": {
   "a_ganancia_neta_positiva": {
@@ -117,6 +117,7 @@
   "2026-10-28T02:54:18Z · Corrida 92: sin prueba nueva (G3 sigue bloqueada: rand.py línea 40 y run_test.py línea 193 usan load(d, ny_only=True); G7 sin datos MBO; E-HVN-FUERZA sin runner de estudios; sin pedidos nuevos de Oscar; 1,222 intentos, más variantes solo suben el conteo). Mejor prueba P031: 40% (a y d).",
   "2026-10-28T03:26:13Z · Corrida 93: sin prueba nueva (G3 sigue bloqueada: rand.py y run_test.py fuerzan ny_only=True y no puedo tocarlos; G7 sin datos MBO; E-HVN-FUERZA sin runner de estudios; sin pedidos nuevos de Oscar; 1,222 intentos, más variantes solo suben el conteo). Mejor prueba P031: 40% (a y d).",
   "2026-10-28T03:58:19Z · Corrida 94: sin prueba nueva (G3 sigue bloqueada: rand.py:40 y run_test.py:193 usan load(d, ny_only=True) y no puedo tocarlos; G7 sin datos MBO; E-HVN-FUERZA sin runner de estudios; sin pedidos nuevos de Oscar; 1,222 intentos, más variantes solo suben el conteo). Mejor prueba P031: 40% (a y d).",
-  "2026-10-28T04:30:15Z · Corrida 95: sin prueba nueva (G3 sigue bloqueada: rand.py:40 y run_test.py:193 fuerzan ny_only=True y no puedo tocarlos; G7 sin datos MBO; E-HVN-FUERZA sin runner de estudios; sin pedidos nuevos de Oscar; 1,222 intentos, más variantes solo suben el conteo). Mejor prueba P031: 40% (a y d)."
+  "2026-10-28T04:30:15Z · Corrida 95: sin prueba nueva (G3 sigue bloqueada: rand.py:40 y run_test.py:193 fuerzan ny_only=True y no puedo tocarlos; G7 sin datos MBO; E-HVN-FUERZA sin runner de estudios; sin pedidos nuevos de Oscar; 1,222 intentos, más variantes solo suben el conteo). Mejor prueba P031: 40% (a y d).",
+  "2026-10-28T05:02:19Z · Corrida 96: sin prueba nueva (G3 sigue bloqueada: rand.py:40 y run_test.py:193 fuerzan ny_only=True y no puedo tocarlos; G7 sin datos MBO; E-HVN-FUERZA sin runner de estudios; sin pedidos nuevos de Oscar; 1,222 intentos, más variantes solo suben el conteo). Mejor prueba P031: 40% (a y d)."
  ]
 }
