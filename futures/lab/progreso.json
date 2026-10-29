@@ -1,5 +1,5 @@
 {
- "actualizado_utc": "2026-10-29T11:26:19Z",
+ "actualizado_utc": "2026-10-29T11:58:16Z",
  "porcentaje": 40,
  "criterios": {
   "a_ganancia_neta_positiva": {
@@ -28,7 +28,7 @@
   "test_id": "P031",
   "por_que": "+$11.9k, p 0.001 contra RAND, positiva los 3 años. Pero 'revisar' (placebo sospechoso), DSR 0, Topstep 41.2% y 214 cuentas rompen el MLL. P045 (placebo de niveles, ABP) perdió −$9.7k con p 0.81: el nivel sí importa, no era fuga. P039 no mejora Topstep; P043 pierde. 40% (criterios a y d) es un techo generoso."
  },
- "ultima_accion": "Corrida 46: sin prueba nueva. G3 bloqueada (el motor solo carga la sesión NY; sim.py/rand.py sin cambios), G7 necesita datos MBO, E-HVN-FUERZA no tiene runner de estudios. Sin resultados ni pedidos nuevos desde P049.",
+ "ultima_accion": "Corrida 47: sin prueba nueva. G3 bloqueada (el motor solo carga la sesión NY), G7 necesita datos MBO, E-HVN-FUERZA no tiene runner de estudios. Sin resultados ni pedidos nuevos desde P049.",
  "siguiente_idea": "Con 1,222 intentos el DSR ya es 0: otra variante sobre los mismos datos de diseño solo sube el conteo. Lo útil ahora es de Jose: (1) cambio de motor para probar Asia/Londres (G3), (2) decisión sobre datos MBO (G7), (3) decidir si se abre el examen sellado con ABU v2.",
  "historial": [
   "2026-10-25T02:45:53Z · Primera corrida del investigador: ABS v3 congelada (entrada temprana). Mejor prueba P012: 20%.",
@@ -175,6 +175,7 @@
   "2026-10-29T09:50:15Z · Corrida 43: sin prueba nueva. Mismos bloqueos (G3 motor, G7 datos, E-HVN-FUERZA runner); sin resultados ni pedidos nuevos; otra variante solo subiría el conteo de intentos (1,222). Mejor prueba P031: 40% (a y d).",
   "2026-10-29T10:22:15Z · Corrida 44: sin prueba nueva. Mismos bloqueos (G3 motor, G7 datos, E-HVN-FUERZA runner); sin resultados ni pedidos nuevos; otra variante solo subiría el conteo de intentos (1,222). Mejor prueba P031: 40% (a y d).",
   "2026-10-29T10:54:20Z · Corrida 45: sin prueba nueva. Mismos bloqueos (G3 motor, G7 datos, E-HVN-FUERZA runner); sin resultados ni pedidos nuevos; otra variante solo subiría el conteo de intentos (1,222). Mejor prueba P031: 40% (a y d).",
-  "2026-10-29T11:26:19Z · Corrida 46: sin prueba nueva. Mismos bloqueos (G3 motor, G7 datos, E-HVN-FUERZA runner); sin resultados ni pedidos nuevos; otra variante solo subiría el conteo de intentos (1,222). Mejor prueba P031: 40% (a y d)."
+  "2026-10-29T11:26:19Z · Corrida 46: sin prueba nueva. Mismos bloqueos (G3 motor, G7 datos, E-HVN-FUERZA runner); sin resultados ni pedidos nuevos; otra variante solo subiría el conteo de intentos (1,222). Mejor prueba P031: 40% (a y d).",
+  "2026-10-29T11:58:16Z · Corrida 47: sin prueba nueva. Mismos bloqueos (G3 motor, G7 datos, E-HVN-FUERZA runner); sin resultados ni pedidos nuevos; otra variante solo subiría el conteo de intentos (1,222). Mejor prueba P031: 40% (a y d)."
  ]
 }
