@@ -1,4 +1,4 @@
-# Comité · agenda del 2026-10-28
+# Comité · agenda del 2026-10-29
 
 _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `docs/decisions.md`._
 
