@@ -1,6 +1,6 @@
-# Prerregistro · Prueba hacia adelante de ABU v2 (BORRADOR para aprobación de Jose y Oscar)
+# Prerregistro · Prueba hacia adelante de ABU v2
 
-Fecha del borrador: 2026-10-29 · Estado: **BORRADOR, sin firmar, sin sello**. Nada de lo que dice aquí tiene efecto hasta que Jose y Oscar lo aprueben; entonces se sella con OpenTimestamps y se registra en `futures/lab/registry/studies.jsonl` como estudio `forward_abu_v2` con **1 intento declarado**.
+Borrador: 2026-10-29 · **Aprobado por Jose Miguel el 2026-10-29** (operador y dueño del laboratorio). Oscar: su conformidad se anota en `docs/decisions.md` cuando la dé; no modifica este archivo, que queda sellado con OpenTimestamps (`.ots` junto a él) y registrado en `futures/lab/registry/studies.jsonl` como estudio `forward_abu_v2` con **1 intento declarado**. Cualquier cambio posterior es una versión nueva, solo más estricta (§7).
 
 ## 1. Qué es y qué no es
 
@@ -58,6 +58,6 @@ Se aplican los criterios **ya codificados** en `run_test.py::verdict()` y `proto
 
 ## 8. Firmas
 
-- Jose Miguel: ☐ aprobado · fecha ____
-- Oscar: ☐ aprobado · fecha ____
-- Sello OTS del archivo aprobado: ____ · Estudio registrado: `forward_abu_v2`, 1 intento declarado · Commit: ____
+- Jose Miguel: ☑ aprobado · 2026-10-29 (por escrito, sesión de trabajo con Claude)
+- Oscar: ☐ pendiente · se anota en decisions.md (no cambia este archivo)
+- Sello OTS: `docs/prerregistro_forward_ABU_v2.md.ots` · Estudio registrado: `forward_abu_v2`, 1 intento declarado · Primer día elegible: 2026-10-23
