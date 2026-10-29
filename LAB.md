@@ -1,13 +1,13 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-29 19:05 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-29 19:34 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
 ## En una línea
 
 - Sesiones válidas de diseño: **576** (examen sellado desde 2026-04-22, cerrado).
-- Intentos registrados: **1222** · pruebas publicadas: **48** (error 1, superada 7, no_pasa 23, revisar 15, insuficiente 2).
+- Intentos registrados: **1225** · pruebas publicadas: **49** (error 1, superada 7, no_pasa 23, revisar 16, insuficiente 2).
 - Estrategias aprobadas por el comité: **0**. Nada toca dinero real.
 
 ## Pruebas corridas
@@ -62,6 +62,7 @@ Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` �
 | P047 | ATR v1 | **revisar** | $7,989 | 0.007 | 36.8% | placebo desplazado sospechoso: revisión de código pendiente; además: DSR 0.0 < 0.95 con 1190 intentos; 63.1% d |
 | P048 | ABG v1 | **revisar** | $536 | 0.015 | 11.4% | placebo desplazado sospechoso: revisión de código pendiente; además: DSR 0.0 < 0.95 con 1190 intentos; 804.9%  |
 | P049 | CLX v1 | **no_pasa** | −$8,279 | 0.989 | 0.0% | pierde con costos base; no gana a RAND (p=0.989); no gana a RAND2 con las mismas salidas (p=0.992); DSR 0.0 <  |
+| P050 | ABU v2 | **revisar** | $11,912 | 0.001 | 41.2% | repetición de corrección de P031 con el motor 1.2.0: diagnóstico de una regla ya elegida en esta cinta, no val |
 
 ## Cola de pruebas (backlog)
 
@@ -125,6 +126,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 | G5-CLIMAX | Agotamiento / clímax en extremos del día | **corrida** → P049 | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
 | G6-ATRAPADOS | Traders atrapados | **corrida** → P047 | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas |  |
 | G7-ICEBERG-MBO | Icebergs y liquidez retirada (pulling) con datos MBO | **propuesta** | pedido de Jose (26/10/2026): gaps detectados al revisar las 43 pruebas | datos MBO de Databento — compra pendiente de decisión de Jose |
+| C1-ABU2-MOTOR-1-2 | Repetición de corrección: ABU v2 (P031) con el motor 1.2.0 | **corrida** → P050 | revisión externa (no Claude) del 29/10/2026, aprobada por Jose; docs/decisions.md 2026-10-29 |  |
 
 ## Estudios y cuenta de intentos
 
@@ -174,6 +176,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - **ibx_v1**: IBX v1 (extensión del balance inicial confirmada por delta: IB = máximo y mínimo de 09:30–10:30; entre 10:30 y 14:30, una celda de 10 s supe · declarados 17, usados 17
 - **clx_v1**: CLX v1 (clímax de volumen y delta en el extremo del día: ventana de 60 s con nuevo máximo/mínimo de la sesión, no antes de 10:00, volumen >= · declarados 17, usados 17
 - **atr_v1**: ATR v1 (traders atrapados: la ráfaga, los niveles, el filtro de día (abre dentro del valor de ayer), 2 contratos y 09:30–15:30 de ABU v2, pe · declarados 17, usados 17
+- **correccion_motor_1_2**: Comprobación de corrección del motor 1.2.0 sobre ABU v2 (P031): misma regla y parámetros, perfil en desarrollo causal, mismas sesiones de di · declarados 1, usados 1
 
 ## Mapa de señales (resumen)
 
@@ -192,7 +195,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 | Desequilibrio de la mejor compra/venta | 2,481 | -6.19 | -3.31 | no distinta |
 | Icebergs (orden que se repone) | 17 | 8.94 | 59.68 | no distinta |
 | Ráfagas de intensidad | 10,153 | -3.45 | -2.58 | distinta del azar · contraria |
-| Momentum primera → última media hora | 554 | -0.98 | -5.87 | distinta del azar · mixto |
+| Momentum primera → última media hora | 554 | -0.98 | -5.87 | no distinta |
 
 ## Documentos congelados
 
@@ -229,6 +232,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 
 ## Últimos movimientos (bitácora)
 
+- 2026-10-29 · prueba · Prueba P050 · ABU v2 · revisar
 - 2026-10-27 · prueba · Prueba P048 · ABG v1 · revisar
 - 2026-10-27 · prueba · Prueba P049 · CLX v1 · no pasa
 - 2026-10-26 · prueba · Prueba P038 · ABE v1 · revisar
@@ -236,7 +240,6 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - 2026-10-26 · prueba · Prueba P040 · ABM v1 · insuficiente
 - 2026-10-26 · prueba · Prueba P041 · ABB v1 · no pasa
 - 2026-10-26 · prueba · Prueba P042 · VPT v1 · no pasa
-- 2026-10-26 · prueba · Prueba P043 · ABW v1 · no pasa
 
 ## Cómo se corre una prueba nueva
 

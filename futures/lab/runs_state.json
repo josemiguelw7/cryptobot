@@ -328,5 +328,12 @@
   "fin_utc": "2026-10-26T22:18:02+00:00",
   "test_id": "P047",
   "veredicto": "revisar"
+ },
+ "C1-ABU2-MOTOR-1-2": {
+  "estado": "corrida",
+  "inicio_utc": "2026-10-29T19:26:01+00:00",
+  "fin_utc": "2026-10-29T19:30:25+00:00",
+  "test_id": "P050",
+  "veredicto": "revisar"
  }
 }

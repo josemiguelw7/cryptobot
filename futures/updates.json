@@ -2,6 +2,13 @@
   "note": "Bitácora del laboratorio: hallazgos, decisiones y avances, del más reciente al más antiguo. Cada entrada nueva se agrega arriba.",
   "entries": [
     {
+      "date": "2026-10-29",
+      "kind": "prueba",
+      "title": "Prueba P050 · ABU v2 · revisar",
+      "body": "ABU v2: 181 operaciones, ganancia neta $11,912 con costos base, p contra RAND 0.001, estrés $9,772, Topstep 41.2% de las cuentas (RAND 3.3%). Veredicto: revisar. Causa: repetición de corrección de P031 con el motor 1.2.0: diagnóstico de una regla ya elegida en esta cinta, no validación; no puede recibir 'pasa' ni abrir el examen sellado (veredicto mecánico que habría salido: revisar).",
+      "test_id": "P050"
+    },
+    {
       "date": "2026-10-27",
       "kind": "prueba",
       "title": "Prueba P048 · ABG v1 · revisar",

@@ -51,6 +51,7 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 - P047 · ATR v1 · **revisar** · neto 7988.68 · p 0.007 · Topstep 36.8%
 - P048 · ABG v1 · **revisar** · neto 536.28 · p 0.015 · Topstep 11.4%
 - P049 · CLX v1 · **no_pasa** · neto -8279.42 · p 0.989 · Topstep 0.0%
+- P050 · ABU v2 · **revisar** · neto 11911.64 · p 0.001 · Topstep 41.2%
 
 ## 2. Qué murió y por qué
 - P013 · POC v1: umbral de orden grande mal calculado (percentil truncado y sobre todas las órdenes: 15 contratos). Ver strategies/v1_aclaraciones.json
@@ -97,9 +98,9 @@ _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `
 - P005: 30 operaciones en la pestaña Pruebas › hoja completa
 
 ## 7. Lo más fuerte del mapa (para decidir la siguiente tanda)
-- Momentum primera → última media hora: -5.87 ticks a 30 min · mixto · 554 eventos
 - Absorción: 7.98 ticks a 30 min · contraria · 5,784 eventos
 - Divergencia de delta: -0.66 ticks a 30 min · a favor · 33,785 eventos
+- Ráfagas de intensidad: -2.58 ticks a 30 min · contraria · 10,153 eventos
 
 ## 7b. Buzón de Oscar (notas nuevas)
 - 2026-10-25_0230_has-probado-aceptacion.md
