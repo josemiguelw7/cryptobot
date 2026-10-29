@@ -1,6 +1,6 @@
 # Laboratorio NQ · estado actual
 
-_Generado automáticamente el 2026-10-29 20:35 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
+_Generado automáticamente el 2026-10-29 20:45 UTC desde el registro, tests.json, backlog.json y signal_map.json. No editar a mano: cambia los archivos fuente._
 
 Página: https://cryptobot-liga.vercel.app · Guía del repo: `docs/README.md` · Decisiones: `docs/decisions.md`
 
@@ -177,6 +177,7 @@ Estados: propuesta → aprobada (Oscar + Jose Miguel) → congelada (reglas con 
 - **clx_v1**: CLX v1 (clímax de volumen y delta en el extremo del día: ventana de 60 s con nuevo máximo/mínimo de la sesión, no antes de 10:00, volumen >= · declarados 17, usados 17
 - **atr_v1**: ATR v1 (traders atrapados: la ráfaga, los niveles, el filtro de día (abre dentro del valor de ayer), 2 contratos y 09:30–15:30 de ABU v2, pe · declarados 17, usados 17
 - **correccion_motor_1_2**: Comprobación de corrección del motor 1.2.0 sobre ABU v2 (P031): misma regla y parámetros, perfil en desarrollo causal, mismas sesiones de di · declarados 1, usados 1
+- **forward_abu_v2**: Prueba hacia adelante prerregistrada (docs/prerregistro_forward_ABU_v2.md, sha256 ee10464f..., OTS): ABU v2 exactamente como P031/P050 (v20. · declarados 1, usados 0
 
 ## Mapa de señales (resumen)
 
