@@ -1,4 +1,6 @@
-"""Prueba dorada del motor: ABS v1 sobre un conjunto fijo de 60 sesiones, sin RAND ni Red Team (≈ 10 s).
+"""Prueba dorada del motor: ABS v1 sobre un conjunto fijo de 60 sesiones, sin RAND ni Red Team (≈ 10 s),
+más (desde el motor 1.2.0) la huella del PERFIL EN DESARROLLO (POC/VAH/VAL por celda de 10 s, strategies/v8.py::_developing_profile)
+sobre las primeras 20 sesiones: ABS v1 no usa ese ayudante, así que la dorada de ABS no lo cubría.
 La huella de las operaciones debe salir IDÉNTICA después de cualquier cambio de código. Si cambia, fue a propósito:
 se actualiza futures/lab/golden.json con el motivo escrito y el commit, nunca en silencio.
 
@@ -16,6 +18,29 @@ from .sim import sec_to_hms
 
 GOLDEN = os.path.join(config.LAB, "golden.json")
 N_SESSIONS = 60
+N_PROFILE = 20
+
+
+def run_profile():
+    """Huella del perfil en desarrollo sobre las primeras N_PROFILE sesiones, ventana 09:30–15:45 ET (la de ABU)."""
+    import numpy as np
+    from .data import NY_OPEN
+    from .strategies import v1 as V1
+    from .strategies.v8 import _developing_profile
+    dates, sess_sha = config.design_sessions()
+    h = hashlib.sha256(); n = 0
+    for d in dates[:N_PROFILE]:
+        s = load(d, ny_only=True)
+        i, j = s.idx_sec(NY_OPEN), s.idx_sec(56700.0)
+        if j - i < 50:
+            continue
+        buy, sell, hi, lo, first, last = V1._bins(s, i, j); nb = len(buy)
+        px = s.px[i:j].astype(float); vol = s.vol[i:j].astype(float); sec = s.sec[i:j]
+        b = ((sec - NY_OPEN) // V1.BIN).astype(int)
+        poc, vah, val = _developing_profile(px, vol, b, nb)
+        h.update(d.encode()); h.update(np.asarray(poc, dtype=np.int64).tobytes()); h.update(np.asarray(vah, dtype=np.int64).tobytes()); h.update(np.asarray(val, dtype=np.int64).tobytes())
+        n += nb
+    return h.hexdigest(), n, sess_sha
 
 
 def run():
@@ -37,17 +62,25 @@ def run():
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--update", default=""); a = ap.parse_args()
-    t0 = time.time(); h, n, sess_sha = run()
+    t0 = time.time(); h, n, sess_sha = run(); hp, np_, _ = run_profile()
     if a.update:
+        old = json.load(open(GOLDEN)) if os.path.exists(GOLDEN) else {}
+        abs_same = old.get("trades_sha256") == h
         json.dump({"estrategia": "ABS v1", "sesiones": N_SESSIONS, "sesiones_sha256": sess_sha, "operaciones": n, "trades_sha256": h,
-                   "commit": config.git_commit(), "fecha": time.strftime("%Y-%m-%d"), "motivo": a.update}, open(GOLDEN, "w"), indent=1)
-        print(f"golden fijada: {h[:16]} ({n} operaciones) · {time.time()-t0:.0f}s · RECUERDA: sync pull + commit + push, o el orquestador se negará a correr"); return
+                   "commit": config.git_commit(), "fecha": time.strftime("%Y-%m-%d"), "motivo": a.update,
+                   "abs_v1_sin_cambio_respecto_a_la_anterior": abs_same,
+                   "perfil_en_desarrollo": {"sesiones": N_PROFILE, "celdas": np_, "sha256": hp, "commit": config.git_commit(), "fecha": time.strftime("%Y-%m-%d"), "motivo": a.update}},
+                  open(GOLDEN, "w"), indent=1)
+        print(f"golden fijada: ABS {h[:16]} ({n} operaciones, {'igual' if abs_same else 'CAMBIÓ'} respecto a la anterior) · perfil {hp[:16]} ({np_} celdas) · {time.time()-t0:.0f}s · RECUERDA: commit + push, o el orquestador se negará a correr"); return
     if not os.path.exists(GOLDEN):
         print("no hay golden.json; fíjala con --update"); sys.exit(2)
     g = json.load(open(GOLDEN))
-    ok = g["trades_sha256"] == h and g["sesiones_sha256"] == sess_sha
-    print(f"golden {'OK' if ok else 'DIFIERE'}: esperado {g['trades_sha256'][:16]} ({g['operaciones']} op.) · obtenido {h[:16]} ({n} op.) · {time.time()-t0:.0f}s")
-    sys.exit(0 if ok else 1)
+    ok_abs = g["trades_sha256"] == h and g["sesiones_sha256"] == sess_sha
+    gp = g.get("perfil_en_desarrollo")
+    ok_prof = bool(gp) and gp["sha256"] == hp
+    print(f"golden ABS {'OK' if ok_abs else 'DIFIERE'}: esperado {g['trades_sha256'][:16]} ({g['operaciones']} op.) · obtenido {h[:16]} ({n} op.) · "
+          f"perfil {'OK' if ok_prof else ('SIN FIJAR' if not gp else 'DIFIERE')}: {hp[:16]} ({np_} celdas) · {time.time()-t0:.0f}s")
+    sys.exit(0 if (ok_abs and ok_prof) else 1)
 
 
 if __name__ == "__main__":

@@ -4,7 +4,16 @@
  "sesiones_sha256": "efa6fa9dbd9f0e8005cb30be48a5867a6717292f78604ff67f06f420ae4bb782",
  "operaciones": 14,
  "trades_sha256": "82db41a871a2b585af0e49fa416d14a5781d672c8e23b99fbd836e96e322ba31",
- "commit": "00ebb64d9545b76885137e1e9e5b4cd2b0bf16c4",
- "fecha": "2026-10-24",
- "motivo": "motor 1.1: entrada al peor entre cotizacion y primer precio operado, llenado de entrada excluido del recorrido, stop al precio real del salto, percentiles exactos (revision ciega 24/10/2026)"
+ "commit": "82ab2989a76cf5a3061be8ea17d1259499d9d4c6",
+ "fecha": "2026-10-29",
+ "motivo": "motor 1.2.0: perfil en desarrollo causal (rejilla solo con precios vistos); dorada aparte del perfil; ABS v1 sin cambio (revision externa 29/10/2026)",
+ "abs_v1_sin_cambio_respecto_a_la_anterior": true,
+ "perfil_en_desarrollo": {
+  "sesiones": 20,
+  "celdas": 44010,
+  "sha256": "c8a33787c4ec1a1fc1b912eaee3e636875793bacd766a0fda8d7f2f7765aecbd",
+  "commit": "82ab2989a76cf5a3061be8ea17d1259499d9d4c6",
+  "fecha": "2026-10-29",
+  "motivo": "motor 1.2.0: perfil en desarrollo causal (rejilla solo con precios vistos); dorada aparte del perfil; ABS v1 sin cambio (revision externa 29/10/2026)"
+ }
 }

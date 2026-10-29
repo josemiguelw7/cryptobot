@@ -113,12 +113,14 @@ def events(s, L, d, thr, ref, prof):
     quote_after = np.where(sd[rs_] > 0, s.asz[i + re_ - 1], s.bsz[i + re_ - 1])
     cand = np.flatnonzero((runvol >= 100) & (norders >= 5) & (quote_after >= 20) & (sd[rs_] != 0))
     out["ice"] = [(float(sec[re_[c] - 1]), -int(sd[rs_[c]])) for c in cand]
-    # ráfagas: celda de 10 s con volumen >= p99 de las celdas de la sesión
-    p99 = np.percentile(tot, 99)
-    for e in np.flatnonzero(tot >= p99):
-        dl = buy[e] - sell[e]
-        if dl != 0:
-            out["burst"].append((NY_OPEN + (e + 1) * BIN, 1 if dl > 0 else -1))
+    # ráfagas: celda de 10 s con volumen >= p99 de las celdas vistas HASTA ESA CELDA (motor 1.2.0: umbral causal, tras 10 min de calentamiento).
+    # Hasta el motor 1.1 el umbral era el p99 de la sesión completa: una ráfaga temprana se elegía con un umbral que todavía no se conocía.
+    WARM = 60
+    for e in range(WARM, nb):
+        if tot[e] >= np.percentile(tot[:e + 1], 99):
+            dl = buy[e] - sell[e]
+            if dl != 0:
+                out["burst"].append((NY_OPEN + (e + 1) * BIN, 1 if dl > 0 else -1))
     # un evento por celda de 10 s y dirección: niveles o celdas vecinas que disparan a la vez no se cuentan varias veces
     for k, lst in out.items():
         seen, uniq = set(), []
@@ -225,6 +227,8 @@ def main():
             cnt[k] += len(secs); ycnt[k][y] = ycnt[k].get(y, 0) + len(secs)
         if (n + 1) % 25 == 0: print(f"  {n+1}/{len(dates)} sesiones · {time.time()-t0:.0f}s", flush=True)
     rows, pv = [], []
+    if "mom" in NAMES and not a.dry:
+        print("aviso: 'mom' (momentum primera -> última media hora) tiene control degenerado por construcción (un solo instante): se publica sin p", flush=True)
     prev_map = {}
     mp = os.path.join(config.FUT, "signal_map.json")
     if only and os.path.exists(mp):
@@ -236,14 +240,21 @@ def main():
                 if r.get(h + "_p") is not None: pv.append((k, h, r[h + "_p"]))
             continue
         r = {"id": k, "senal": NAMES[k], "hipotesis": HYP[k], "n": cnt[k]}
+        r["control_degenerado"] = []
         for h in H:
             if cnt[k]:
                 obs = sums[k][h] / cnt[k]; bm = bsum[k][h] / cnt[k]
+                if bm.std() <= 0:
+                    # motor 1.2.0: control sin dispersión (p. ej. 'mom': evento en NY_CLOSE−1800 y sorteos topados en NY_CLOSE−1801 -> un solo instante).
+                    # Sin dispersión no hay valor p: la fila se publica sin p, fuera de Holm, y no puede ser 'significativa'.
+                    r[h] = round(obs, 2); r[h + "_azar"] = round(float(bm.mean()), 2); r[h + "_p"] = None; r[h + "_dir"] = None; r[h + "_z"] = None
+                    r["control_degenerado"].append(h)
+                    continue
                 p_up = (1 + int((bm >= obs).sum())) / (1 + a.draws); p_dn = (1 + int((bm <= obs).sum())) / (1 + a.draws)
                 p = min(1.0, 2 * min(p_up, p_dn))   # dos colas: la señal puede ser mejor O peor que el azar
                 r[h] = round(obs, 2); r[h + "_azar"] = round(float(bm.mean()), 2); r[h + "_p"] = round(p, 4)
                 r[h + "_dir"] = "a favor" if obs > float(bm.mean()) else "contraria"; pv.append((k, h, p))
-                r[h + "_z"] = round(float((obs - bm.mean()) / bm.std()), 2) if bm.std() > 0 else None
+                r[h + "_z"] = round(float((obs - bm.mean()) / bm.std()), 2)
                 rd = rdsum[k][h] / cnt[k]   # azar con dirección aleatoria: ¿la DIRECCIÓN es rentable por sí sola?
                 pu = (1 + int((rd >= obs).sum())) / (1 + a.draws); pd_ = (1 + int((rd <= obs).sum())) / (1 + a.draws)
                 r[h + "_p_bruto"] = round(min(1.0, 2 * min(pu, pd_)), 4)

@@ -13,7 +13,7 @@ Pasos (en este orden, siempre):
 """
 import argparse, json, os, sys, time
 import numpy as np
-from . import config, registry, report, stats, topstep, redteam
+from . import config, registry, report, stats, topstep, redteam, ENGINE_VERSION
 from .data import load
 from .levels import Levels, precompute_stats
 from .rand import run_rand, summarize as rand_summary
@@ -164,6 +164,8 @@ def main():
     ap.add_argument("--notas", default=""); ap.add_argument("--dry", action="store_true")
     ap.add_argument("--isolated", action="store_true", help="contenedor efímero: sin registro, sin bitácora, id por huella de configuración")
     ap.add_argument("--n-trials", type=int, default=0); ap.add_argument("--var-sr", type=float, default=-1.0)
+    ap.add_argument("--n-sharpes", type=int, default=-1, help="cuántos intentos aportaron Sharpe a la varianza del DSR (lo pasa el orquestador)")
+    ap.add_argument("--replay-de", default="", help="repetición de corrección de una prueba ya publicada (p. ej. P031): diagnóstico, nunca 'pasa'")
     a = ap.parse_args()
     t0 = time.time()
     st = next((s for s in registry.read(registry.STUDIES) if s["study_id"] == a.study), None)
@@ -184,6 +186,7 @@ def main():
     c = config.Costs(); slip, comm = c.slip_ticks, c.commission_rt
     win = RULES_WINDOW.get((a.strategy, int(a.version)), {})
     rules = Rules(**win)
+    news = {d: news_windows(d) for d in dates}      # motor 1.2.0: las MISMAS ventanas de noticias para la estrategia y todos los controles
     sig_by_date, trades, possible = {}, [], 0
     for d in dates:
         ref, thr = L.reference(d), L.thresholds(d)
@@ -193,7 +196,7 @@ def main():
         s = load(d, ny_only=True)
         kw = strat_kwargs(a.strategy, a.version, L, d)
         sigs = gen(s, ref, thr, params, **kw)
-        r = Rules(news=news_windows(d), **win)
+        r = Rules(news=news[d], **win)
         sig_by_date[d] = sigs
         trades += simulate(s, sigs, r, slip, comm)
     print(f"[{a.strategy}] {len(trades)} operaciones en {possible} sesiones · {time.time()-t0:.0f}s", flush=True)
@@ -201,39 +204,56 @@ def main():
     daily = stats.daily_series(trades, dates)
     net = float(daily.sum())
     # RAND base y de estrés
-    _, rd = run_rand(test_id, trades, rules, slip, comm, n_runs=a.rand, sessions=dates, progress=lambda j: print(f"  RAND {j}/{len(dates)}", flush=True))
+    _, rd, rc = run_rand(test_id, trades, rules, slip, comm, n_runs=a.rand, sessions=dates, progress=lambda j: print(f"  RAND {j}/{len(dates)}", flush=True),
+                         news_by_date=news, return_counts=True)
     rs = rand_summary(daily, rd)
-    _, rd2 = run_rand(test_id + "x", trades, rules, slip, comm, n_runs=a.rand, sessions=dates, with_exits=True)   # RAND2: mismas salidas
+    _, rd2, rc2 = run_rand(test_id + "x", trades, rules, slip, comm, n_runs=a.rand, sessions=dates, with_exits=True, news_by_date=news, return_counts=True)   # RAND2: mismas salidas
     rs2 = rand_summary(daily, rd2); rs["p_valor_rand2"] = rs2["p_valor"]; rs["rand2_media"] = rs2["rand_media"]
-    stress_net, stress_tr = redteam.resim(sig_by_date, rules, 2, comm)
+    stress_net, stress_tr = redteam.resim(sig_by_date, rules, 2, comm, news_by_date=news)
     stress_daily = stats.daily_series(stress_tr, dates)
-    _, rds = run_rand(test_id + "s", stress_tr, rules, 2, comm, n_runs=a.rand_estres, sessions=dates)
+    _, rds = run_rand(test_id + "s", stress_tr, rules, 2, comm, n_runs=a.rand_estres, sessions=dates, news_by_date=news)
     p_stress = rand_summary(stress_daily, rds)["p_valor"]
+    # ¿RAND llenó la misma cantidad de operaciones que la estrategia? (el protocolo lo promete; aquí se mide y se publica)
+    conteo = {"estrategia": len(trades), "rand_media": round(float(rc.sum(axis=1).mean()), 1), "rand_min": int(rc.sum(axis=1).min()), "rand_max": int(rc.sum(axis=1).max()),
+              "rand2_media": round(float(rc2.sum(axis=1).mean()), 1), "estres": len(stress_tr)}
+    conteo["coinciden"] = bool(conteo["rand_min"] == conteo["rand_max"] == len(trades) and conteo["rand2_media"] == len(trades))
+    conteo["nota"] = ("RAND llenó exactamente las mismas operaciones que la estrategia." if conteo["coinciden"] else
+                      "RAND NO llenó siempre la misma cantidad: sorteos solapados en una misma sesión se suprimen (una posición a la vez), igual que en la estrategia; "
+                      "las ventanas de noticias ya no restan operaciones porque el instante se sortea fuera de ellas.")
+    rs["conteo_operaciones"] = conteo
     print(f"  neto {net:.0f} · p RAND {rs['p_valor']} · estrés {stress_net:.0f} (p {p_stress}) · {time.time()-t0:.0f}s", flush=True)
-    # Topstep: estrategia y RAND (100 corridas, solo P&L diario)
+    # Topstep: estrategia (con MAE intradía) y RAND (100 corridas; RAND solo tiene P&L diario, SIN MAE: no es la misma prueba)
     acc = topstep.run_all(trades, dates, consistency=0.50)
     ts = topstep.summarize(acc); ts["cuentas_detalle"] = [{"arranque": x["arranque"], "resultado": x["resultado"], "dias": x["dias"], "balance": round(x["balance"], 0)} for x in acc]
     ts55 = topstep.summarize(topstep.run_all(trades, dates, consistency=0.55))
-    ts5 = topstep.summarize(topstep.run_all(trades, dates, consistency=0.50, contracts_mult=5))
+    n_contr = int(win.get("contracts", 1) or 1); mult5 = 5.0 / n_contr        # motor 1.2.0: 'cinco contratos' = 5 minis en total, no 5 × el tamaño de la estrategia
+    ts5 = topstep.summarize(topstep.run_all(trades, dates, consistency=0.50, contracts_mult=mult5))
     rand_pass = []
     for k in range(min(100, rd.shape[0])):
         fake = [{"date": d, "entry_sec": 0, "net_usd": float(rd[k, j]), "mae_ticks": 0, "commission_usd": 0.0, "contracts": 1} for j, d in enumerate(dates) if rd[k, j] != 0]
         rand_pass.append(topstep.summarize(topstep.run_all(fake, dates))["pct_pasan"])
     ts["rand_pct_pasan"] = round(float(np.mean(rand_pass)), 1) if rand_pass else None
     ts["rand_pct_p95"] = round(float(np.percentile(rand_pass, 95)), 1) if rand_pass else None
+    ts["rand_que_es"] = "RAND Topstep usa SOLO el P&L al cierre de cada sesión (sin MAE intradía): es una prueba más benigna que la de la estrategia. Compárese con solo_cierre_diario.estrategia_pct_pasan, no con pct_pasan."
+    # misma prueba para la estrategia (solo cierre diario, MAE ignorada): la única comparación como-con-como contra RAND
+    ts_sc = topstep.summarize(topstep.run_all([{**t, "mae_ticks": 0} for t in trades], dates, consistency=0.50))
+    ts["solo_cierre_diario"] = {"estrategia_pct_pasan": ts_sc["pct_pasan"], "estrategia_rompen_mll": ts_sc["rompen_mll"], "rand_pct_pasan": ts["rand_pct_pasan"], "rand_pct_p95": ts["rand_pct_p95"],
+                               "nota": "ambas sin MAE intradía: comparable. pct_pasan (con MAE) sigue siendo la cifra que juzga a la estrategia."}
     ts["oficial_55"] = {k: ts55[k] for k in ("pasan", "rompen_mll", "pct_pasan")}
-    ts["cinco_contratos"] = {k: ts5[k] for k in ("pasan", "rompen_mll", "pct_pasan")}
+    ts["cinco_contratos"] = {**{k: ts5[k] for k in ("pasan", "rompen_mll", "pct_pasan")}, "contratos": 5, "multiplicador": round(mult5, 3),
+                             "nota": f"5 minis en total (la estrategia opera {n_contr}); hasta el motor 1.1 este escenario multiplicaba por 5 el tamaño de la estrategia"}
+    ts["modelado"] = "DLL siempre activo; cuenta abandonada a los 120 días de sesión; arranques solapados cada sesión; MLL/DLL contra la MAE de cada operación; el límite que la excursión toca primero manda (motor 1.2.0)"
     # Red Team
-    rt = {"placebo_desplazado": redteam.placebo_shift(sig_by_date, rules, slip, comm),
-          "direcciones_barajadas": redteam.placebo_flip(sig_by_date, rules, slip, comm, net, n=a.flip, test_id=test_id),
-          "curva_costos": redteam.cost_curve(sig_by_date, rules, comm)}
+    rt = {"placebo_desplazado": redteam.placebo_shift(sig_by_date, rules, slip, comm, news_by_date=news),
+          "direcciones_barajadas": redteam.placebo_flip(sig_by_date, rules, slip, comm, net, n=a.flip, test_id=test_id, news_by_date=news),
+          "curva_costos": redteam.cost_curve(sig_by_date, rules, comm, news_by_date=news)}
     leak = net > 0 and rt["placebo_desplazado"]["neto"] >= 0.5 * net
-    rt["fuga_sospechada"] = bool(leak)   # protocolo v2: sospecha -> 'revisar' (revisión de código), no error automático
+    rt["fuga_sospechada"] = bool(leak)   # protocolo v2: sospecha -> 'revisar' (revisión de código), no error automático. OJO: el placebo desplazado NO prueba fuga; es un disparador conservador de revisión.
     print(f"  Topstep {ts['pct_pasan']}% (RAND {ts['rand_pct_pasan']}%) · placebo desplazado {rt['placebo_desplazado']['neto']:.0f} · {time.time()-t0:.0f}s", flush=True)
     extra = {}
     if a.sens:
         extra["sensibilidad"] = redteam.sensitivity(gen, dates, L, params, SENS_STEPS[(a.strategy, a.version)], rules, slip, comm,
-                                                     kw_fn=lambda d: strat_kwargs(a.strategy, a.version, L, d))
+                                                     kw_fn=lambda d: strat_kwargs(a.strategy, a.version, L, d), news_by_date=news)
         print(f"  sensibilidad lista · {time.time()-t0:.0f}s", flush=True)
     sm = stats.summary(trades, daily, dates)
     anom = sum(1 for t in trades if t.get("cotizacion_anomala"))
@@ -243,22 +263,36 @@ def main():
            "topstep_rand_pct": ts["rand_pct_pasan"] or 0.0, "sesiones_con_senal_posible": possible, "error": False, "revisar": leak,
            "sharpe_diario": round(stats.sharpe(daily), 4), "psr": sm["psr"], "concentracion": sm["concentracion"], "cpcv": sm["cpcv"]}
     if a.isolated:
-        n_trials = a.n_trials or 1; var_sr = max(a.var_sr, 0.0)
+        n_trials = a.n_trials or 1; var_sr = max(a.var_sr, 0.0); n_sh = a.n_sharpes if a.n_sharpes >= 0 else None
     else:
         n_trials = len(registry.read(registry.TRIALS)) + 1
-        shs = registry.all_sharpes() + [res["sharpe_diario"]]; var_sr = float(np.var(shs)) if len(shs) > 1 else 0.0
+        shs = registry.all_sharpes() + [res["sharpe_diario"]]; var_sr = float(np.var(shs)) if len(shs) > 1 else 0.0; n_sh = len(shs)
     res["dsr"] = round(stats.dsr(daily, n_trials, var_sr), 3)
     res["min_btl_anios"] = round(stats.min_btl_years(n_trials), 2)
     res["intentos_totales_al_cerrar"] = n_trials
+    # motor 1.2.0: el DSR dice con qué se calculó. Hasta el motor 1.1 casi ningún intento guardaba sharpe_diario, así que la
+    # varianza entre intentos salía de 4–5 números mientras N contaba todos: ese DSR no medía nada.
+    res["dsr_insumos"] = {"n_intentos": n_trials, "intentos_con_sharpe": n_sh, "intentos_sin_sharpe": (n_trials - n_sh) if n_sh is not None else None,
+                          "var_sharpe_diario": round(var_sr, 6), "sharpe_esperado_del_mejor": round(stats.expected_max_sr(n_trials, var_sr), 4),
+                          "nota": "la varianza usa solo los intentos que guardaron sharpe_diario; los que no lo tienen cuentan en N pero no en la varianza (no se rellenan con 0)"}
+    res["conteo_operaciones"] = rs["conteo_operaciones"]
     v = verdict(res, True)
+    if a.replay_de:   # repetición de corrección: diagnóstico del motor sobre una regla ya elegida en esta misma cinta. Nunca 'pasa', nunca abre el sello.
+        res["replay_de"] = a.replay_de; res["veredicto_mecanico"] = v
+        v = "revisar"
     meta = {"estrategia": a.strategy, "version": a.version, "fecha": time.strftime("%Y-%m-%d"), "tanda": a.study,
             "periodo": f"{dates[0]} a {dates[-1]} · {len(dates)} sesiones válidas", "veredicto": v, "notas": a.notas,
-            "receta": {"git_commit": config.git_commit(), "motor": "1.0.0", "sesiones_sha256": sess_sha, "costos": c.as_dict(),
+            "receta": {"git_commit": config.git_commit(), "motor": ENGINE_VERSION, "sesiones_sha256": sess_sha, "costos": c.as_dict(),
                        "parametros": params, "protocol_sha256": config.protocol()[1], "estrategias_sha256": (config.strategy_file(a.strategy, a.version) or ("", {}, None))[2],
                        "rand_corridas": a.rand, "semilla": f"sha256({test_id}:<fecha>:k)"},
             "estres": {"neto": round(stress_net, 2), "p_rand": p_stress, "operaciones": len(stress_tr)},
-            "dsr": res["dsr"], "min_btl_anios": res["min_btl_anios"], "intentos_totales": n_trials,
+            "dsr": res["dsr"], "min_btl_anios": res["min_btl_anios"], "intentos_totales": n_trials, "dsr_insumos": res["dsr_insumos"],
             "muerte": _death_reason(res, v)}
+    if a.replay_de:
+        meta["tipo"] = "correccion_replay"; meta["replay_de"] = a.replay_de
+        meta["muerte"] = (f"repetición de corrección de {a.replay_de} con el motor {ENGINE_VERSION}: diagnóstico de una regla ya elegida en esta cinta, no validación; "
+                          f"no puede recibir 'pasa' ni abrir el examen sellado (veredicto mecánico que habría salido: {res['veredicto_mecanico']})")
+        meta["notas"] = (a.notas + " · " if a.notas else "") + meta["muerte"]
     if a.dry:
         print(json.dumps({"veredicto": v, **res}, ensure_ascii=False, indent=1)); return
     ficha = report.build(test_id, meta, trades, dates, daily, rs, ts, rt, extra)
@@ -276,7 +310,7 @@ def main():
                     continue
                 p2 = dict(params); p2[name] = cell["valor"]
                 registry.record_trial(f"{test_id}-{name}{cell['valor']}", a.study, a.strategy, a.version, "sensibilidad", p2, sess_sha, len(dates), "-",
-                                      c.as_dict(), {"ganancia_neta": cell["neto"], "operaciones": cell["operaciones"]}, "vecino", "")
+                                      c.as_dict(), {"ganancia_neta": cell["neto"], "operaciones": cell["operaciones"], "sharpe_diario": cell.get("sharpe_diario")}, "vecino", "")
     _bitacora(test_id, a.strategy, a.version, v, res, ts)
     print(f"{test_id} {a.strategy} v{a.version}: {v} · {time.time()-t0:.0f}s", flush=True)
 

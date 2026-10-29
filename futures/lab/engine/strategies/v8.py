@@ -17,19 +17,35 @@ BIN = V1.BIN
 
 def _developing_profile(px, vol, b, nb):
     """POC, VAH y VAL (70% del volumen) del perfil de la sesión en curso al final de cada celda de 10 s, usando solo lo ocurrido hasta ahí.
-    Devuelve tres arreglos de longitud nb (en ticks; 0 mientras no hay volumen)."""
-    lo_px = int(px.min()); n = int(px.max()) - lo_px + 1
-    hist = np.zeros(n)
+    Devuelve tres arreglos de longitud nb (en ticks; 0 mientras no hay volumen).
+
+    Corrección 2026-10-29 (motor 1.2.0): la rejilla de precios del histograma crece con los precios VISTOS hasta la celda k.
+    Antes se dimensionaba con el mínimo y el máximo de toda la rebanada (incluido el futuro): el paso de expansión del área de
+    valor (1 o 2 ticks) dependía del borde de esa rejilla, así que un precio extremo posterior podía mover el VAH/VAL de una
+    celda anterior. Ahora nada posterior a la celda k entra en el cálculo de la celda k."""
     poc = np.zeros(nb, dtype=int); vah = np.zeros(nb, dtype=int); val = np.zeros(nb, dtype=int)
     order = np.argsort(b, kind="stable"); bs = b[order]
     edges = np.searchsorted(bs, np.arange(nb + 1))
+    hist = None; lo = 0                      # hist[i] = volumen en el precio lo + i; cubre SOLO precios ya vistos
     for k in range(nb):
         idx = order[edges[k]:edges[k + 1]]
         if len(idx):
-            np.add.at(hist, px[idx].astype(int) - lo_px, vol[idx])
+            pk = px[idx].astype(int); pmin = int(pk.min()); pmax = int(pk.max())
+            if hist is None:
+                lo = pmin; hist = np.zeros(pmax - pmin + 1)
+            else:
+                if pmin < lo:
+                    hist = np.concatenate([np.zeros(lo - pmin), hist]); lo = pmin
+                top = lo + len(hist) - 1
+                if pmax > top:
+                    hist = np.concatenate([hist, np.zeros(pmax - top)])
+            np.add.at(hist, pk - lo, vol[idx])
+        if hist is None:
+            continue
         tot = hist.sum()
         if tot <= 0:
             continue
+        n = len(hist)
         c = int(np.argmax(hist)); a = z = c; acc = hist[c]
         while acc < 0.7 * tot and (a > 0 or z < n - 1):
             up = hist[z + 1] + (hist[z + 2] if z + 2 < n else 0) if z < n - 1 else -1
@@ -38,7 +54,7 @@ def _developing_profile(px, vol, b, nb):
                 step = 2 if z + 2 < n else 1; z += step; acc += up
             else:
                 step = 2 if a - 2 >= 0 else 1; a -= step; acc += dn
-        poc[k] = c + lo_px; vah[k] = z + lo_px; val[k] = a + lo_px
+        poc[k] = c + lo; vah[k] = z + lo; val[k] = a + lo
     return poc, vah, val
 
 

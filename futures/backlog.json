@@ -949,6 +949,22 @@
     "datos MBO de Databento — compra pendiente de decisión de Jose"
    ],
    "decision": "propuesta; requiere decisión de Jose sobre datos"
+  },
+  {
+   "id": "C1-ABU2-MOTOR-1-2",
+   "nombre": "Repetición de corrección: ABU v2 (P031) con el motor 1.2.0",
+   "hipotesis": "No es una hipótesis de ventaja: es una comprobación de corrección. P031 se calculó con un perfil en desarrollo que podía usar precios posteriores (revisión externa 29/10/2026). Se repite la MISMA regla, mismos parámetros, mismas 576 sesiones de diseño, con el motor corregido, para medir cuántas señales y etiquetas de nivel cambian y si el neto y la p contra RAND se sostienen. Lectura fijada antes: neto <= 0 o p vs RAND > 0.20 => la candidata muere como afirmación histórica; si sigue positiva, sigue siendo exploratoria (regla elegida en esta misma cinta): no va al comité y no abre el sello.",
+   "origen": "revisión externa (no Claude) del 29/10/2026, aprobada por Jose; docs/decisions.md 2026-10-29",
+   "estado": "congelada",
+   "prioridad": 0,
+   "requisitos": [],
+   "decision": "congelada por Jose (operador) el 29/10/2026 siguiendo el plan de la revisión externa; sin sensibilidad (1 intento); el motor fuerza el veredicto a 'revisar' y anota el veredicto mecánico",
+   "estrategia": "ABU",
+   "version": 2,
+   "estudio": "correccion_motor_1_2",
+   "sens": false,
+   "replay_de": "P031",
+   "notas": "1 intento, sin sensibilidad. Comprobación de corrección, no validación: no puede recibir 'pasa', no abre el examen sellado. Se publica lado a lado con P031."
   }
  ]
 }

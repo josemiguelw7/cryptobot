@@ -5,7 +5,7 @@
  "sorteos": 5000,
  "pruebas": 48,
  "pruebas_regimen": 24,
- "correccion": "Holm 5% (48 principales; 24 de régimen aparte)",
+ "correccion": "Holm 5% (48 principales; 24 de régimen aparte) · 2026-10-29: 'mom' retirada (control degenerado); 'burst' marcada no causal (umbral p99 de sesión completa)",
  "sesiones_sha256": "efa6fa9dbd9f0e8005cb30be48a5867a6717292f78604ff67f06f420ae4bb782",
  "senales": [
   {
@@ -3048,7 +3048,9 @@
     "r30"
    ],
    "significativa": true,
-   "sentido": "contraria"
+   "sentido": "contraria",
+   "no_causal": true,
+   "nota_causalidad": "NO CAUSAL (marcada 2026-10-29, revisión externa): hasta el motor 1.1 el umbral de ráfaga era el p99 de la sesión COMPLETA, conocido solo al cierre; el motor 1.2.0 usa el p99 de las celdas vistas hasta ese momento. Esta fila queda fuera de cualquier elección de candidatas hasta que se recalcule con el motor 1.2.0."
   },
   {
    "id": "mom",
@@ -3057,28 +3059,28 @@
    "n": 554,
    "r1": -1.86,
    "r1_azar": -1.67,
-   "r1_p": 0.0004,
-   "r1_dir": "contraria",
-   "r1_z": -422720542641273.0,
-   "r1_p_bruto": 0.2619,
+   "r1_p": null,
+   "r1_dir": null,
+   "r1_z": null,
+   "r1_p_bruto": null,
    "r5": -2.13,
    "r5_azar": -1.78,
-   "r5_p": 0.0004,
-   "r5_dir": "contraria",
-   "r5_z": -1601460517314057.0,
-   "r5_p_bruto": 0.5499,
+   "r5_p": null,
+   "r5_dir": null,
+   "r5_z": null,
+   "r5_p_bruto": null,
    "r15": -0.98,
    "r15_azar": -0.98,
-   "r15_p": 0.0004,
-   "r15_dir": "contraria",
-   "r15_z": -20323103011600.5,
-   "r15_p_bruto": 0.8914,
+   "r15_p": null,
+   "r15_dir": null,
+   "r15_z": null,
+   "r15_p_bruto": null,
    "r30": -5.87,
    "r30_azar": -6.21,
-   "r30_p": 0.0004,
-   "r30_dir": "a favor",
-   "r30_z": 190021013158458.5,
-   "r30_p_bruto": 0.5463,
+   "r30_p": null,
+   "r30_dir": null,
+   "r30_z": null,
+   "r30_p_bruto": null,
    "por_anio": {
     "2024": {
      "r1": -1.43,
@@ -3246,14 +3248,16 @@
     35,
     70
    ],
-   "horizontes_significativos": [
+   "horizontes_significativos": [],
+   "significativa": false,
+   "sentido": "—",
+   "control_degenerado": [
     "r1",
     "r5",
     "r15",
     "r30"
    ],
-   "significativa": true,
-   "sentido": "mixto"
+   "retirada": "RETIRADA 2026-10-29 (revisión externa, motor 1.2.0): el control de 'mom' no tiene dispersión por construcción (evento en NY_CLOSE−1800 y sorteos topados en NY_CLOSE−1801: un solo instante), así que su valor p no existe; la fila se conserva sin p y no puede contar como significativa ni usarse para elegir candidatas. Los demás umbrales de Holm se calcularon con 48 pruebas y se dejan como están (recalcular con 44 solo los aflojaría)."
   }
  ]
 }

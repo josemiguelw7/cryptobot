@@ -60,7 +60,7 @@ def build(test_id, meta, trades, sessions, daily, rand_sum, topstep_sum, redteam
         "id": test_id, **meta,
         "resultados": {"operaciones": sm["operaciones"], "ganancia_neta": sm["ganancia_neta"], "aciertos": sm["aciertos_pct"],
                        "factor": sm["factor"], "vs_rand": rand_sum.get("p_valor"), "topstep": topstep_sum.get("pct_pasan"),
-                       "sharpe_anual": sm["sharpe_anual"], "psr": sm["psr"], "drawdown_max": sm["drawdown_max"],
+                       "sharpe_anual": sm["sharpe_anual"], "sharpe_diario": round(stats.sharpe(daily), 4), "psr": sm["psr"], "drawdown_max": sm["drawdown_max"],
                        "promedio_op": sm["promedio_op"], "sesiones_con_operacion": sm["sesiones_con_operacion"]},
         "curva": {"x": sessions, "y": np.round(cum, 2).tolist(), "rand_p5": rand_sum.get("rand_p5"), "rand_p95": rand_sum.get("rand_p95")},
         "hoja": hoja,

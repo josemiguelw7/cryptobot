@@ -90,10 +90,18 @@ def test_topstep_rules():
     assert r["resultado"] == "pasa" and r["dias"] == 3        # 3100 ganados, mejor día 1200 ≤ 50%
     r55 = topstep.run_account(dates, {dates[0]: [(2000, -10)], dates[1]: [(1100, -10)]}, consistency=0.55)
     assert r55["resultado"] != "pasa"                          # 2000/3100 = 64% > 55%
-    r_mll = topstep.run_account(dates, {dates[0]: [(500, -100)], dates[1]: [(-1500, -2600)]})
-    assert r_mll["resultado"] == "rompe_mll" and r_mll["dias"] == 2   # 50500 - 2600 <= 48500 (MLL subió a 48500)
+    # motor 1.2.0: el límite que la excursión toca PRIMERO manda. Aquí el DLL (−1,000) queda más cerca que el MLL (−2,000):
+    # la posición se liquida en el DLL (+$10 de liquidación) y la MAE de −2,600 ya no puede romper el MLL.
+    r_dll1 = topstep.run_account(dates, {dates[0]: [(500, -100)], dates[1]: [(-1500, -2600)]})
+    assert r_dll1["resultado"] != "rompe_mll" and abs(r_dll1["balance"] - 49490) < 1e-9
     r_dll = topstep.run_account(dates, {dates[0]: [(-900, -900), (-900, -900)]})
-    assert r_dll["resultado"] == "sin_resolver" and r_dll["balance"] == 49000   # DLL corta el día en -1000
+    assert r_dll["resultado"] == "sin_resolver" and abs(r_dll["balance"] - 48990) < 1e-9   # DLL corta el día en -1000 (+10 liquidación)
+    # MLL más cerca que el DLL (cuenta ya 1,010 abajo del pico): la MAE rompe el MLL antes de llegar al DLL
+    r_mll = topstep.run_account(dates, {dates[0]: [(500, -100)], dates[1]: [(-1000, -1000)], dates[2]: [(100, -1200)]})
+    assert r_mll["resultado"] == "rompe_mll" and r_mll["dias"] == 3
+    # la liquidación del DLL también rompe el MLL si el saldo cae por debajo
+    r_mll2 = topstep.run_account(dates, {dates[0]: [(-1000, -1000)], dates[1]: [(-1000, -1000)]})
+    assert r_mll2["resultado"] == "rompe_mll" and r_mll2["dias"] == 2     # 50000 − 1010 − 1010 = 47980 ≤ 48000
 
 
 def test_frozen_quote_and_gap():

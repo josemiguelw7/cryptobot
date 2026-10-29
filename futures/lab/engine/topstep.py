@@ -4,9 +4,16 @@ Entrada: operaciones de la estrategia (con fecha, net_usd y mae_ticks) y la list
 Por cada arranque se corre una cuenta nueva:
   - balance 50,000; MLL = 48,000; sube con el balance al cierre, nunca baja; se congela en 50,000
   - MLL y DLL se revisan contra el PEOR momento de cada operación (MAE), no solo contra su cierre
-  - DLL −1,000: al tocarlo se cierra el día (las operaciones restantes de ese día no se toman)
-  - meta 3,000 con consistencia: mejor día ≤ pct × ganancia total (0.50 laboratorio, 0.55 oficial)
+  - DLL −1,000: al tocarlo se liquida la posición (con costo de liquidación) y se cierra el día
+  - orden dentro de una operación (motor 1.2.0): el límite que la excursión adversa toca PRIMERO es el que manda.
+    Si el DLL queda más cerca que el MLL, la posición se liquida en el DLL y el MLL no puede romperse con una
+    excursión posterior que ya no ocurrió; antes se revisaba el MLL con la MAE completa aunque el DLL hubiera
+    cerrado el día antes (revisión externa 29/10/2026).
+  - meta 3,000 con consistencia: mejor día ≤ pct × ganancia total (0.50 laboratorio, 0.55 oficial Topstep)
   - resultado: pasa / rompe_mll / sin_resolver, con días usados y peor drawdown
+Decisiones de modelado (no son reglas de Topstep, son elecciones del laboratorio): el DLL se aplica siempre
+(Topstep lo ofrece como opción configurable), la cuenta se abandona a los 120 días de sesión (`max_days`) y las
+cuentas se arrancan en todas las sesiones con al menos 60 por delante (arranques solapados, no independientes).
 """
 import numpy as np
 
@@ -28,17 +35,22 @@ def run_account(dates, paths, consistency=0.50, max_days=120, liq_fee=10.0):
     for n, d in enumerate(dates[:max_days]):
         day = 0.0
         for net, worst in paths.get(d, []):
-            if bal + day + worst <= mll:                      # MLL intradía con P&L no realizado
+            # excursión (negativa) a la que cada límite se toca; el más cercano a cero ocurre primero
+            x_mll = mll - bal - day                            # MLL intradía con P&L no realizado
+            x_dll = -DLL - day                                 # DLL del día
+            if worst <= x_mll and x_mll >= x_dll:              # el MLL se toca antes (o a la vez) que el DLL
                 return {"resultado": "rompe_mll", "dias": n + 1, "balance": bal + day + worst - liq_fee,
                         "mejor_dia": best_day, "fecha_fin": d}
-            if day + worst <= -DLL:                            # DLL: se liquida y se cierra el día
-                day = -DLL
+            if worst <= x_dll:                                 # DLL: se liquida (con costo) y se cierra el día
+                day = -DLL - liq_fee
                 break
             day += net
             if day <= -DLL:
-                day = -DLL
+                day = -DLL - liq_fee
                 break
         bal += day
+        if bal <= mll:                                         # la liquidación del DLL también puede romper el MLL
+            return {"resultado": "rompe_mll", "dias": n + 1, "balance": bal, "mejor_dia": best_day, "fecha_fin": d}
         day_pnls.append(day)
         best_day = max(best_day, day)
         mll = min(START, max(mll, bal - MLL))                  # trailing al cierre, se congela en START

@@ -126,7 +126,8 @@ def run_in_container(wd, item, out, tag):
     cmd = (f"sudo -n docker run --rm --network none --name nqlab-{item['id']}-{tag} "
            f"-v {wd}:/lab:ro -v {DATA}:/srv/lab/data:ro -v {out}:/out -e LAB_DATA=/srv/lab/data -e LAB_OUT=/out -e LAB_RESULTS=/out/results -e LAB_STATS=/out/lab_stats.jsonl "
            f"-w /lab/futures/lab {IMAGE} python -m engine.run_test --strategy {item['estrategia']} --version {item['version']} "
-           f"--study {item['estudio']} --sens --isolated --n-trials {item.get('_n_trials', 1)} --var-sr {item.get('_var_sr', 0.0)}")
+           f"--study {item['estudio']} {'--sens ' if item.get('sens', True) else ''}--isolated --n-trials {item.get('_n_trials', 1)} --var-sr {item.get('_var_sr', 0.0)} "
+           f"--n-sharpes {item.get('_n_sharpes', 0)}" + (f" --replay-de {item['replay_de']}" if item.get('replay_de') else ""))
     t0 = time.time(); r = sh(cmd)
     log = f"$ {cmd}\n{r.stdout}\n{r.stderr}\n[{time.time()-t0:.0f}s exit {r.returncode}]\n"
     return r.returncode == 0, log
@@ -175,6 +176,7 @@ def run_one(item):
     _otros = sum(1 for k, v in _st.items() if k != item["id"] and v.get("estado") == "corriendo")
     item["_n_trials"] = len(registry.read(registry.TRIALS)) + 1 + ATTEMPTS_PER_TEST * _otros   # cuenta también lo que corre en paralelo
     item["_var_sr"] = statistics.pvariance(shs) if len(shs) > 1 else 0.0
+    item["_n_sharpes"] = len(shs)          # motor 1.2.0: el reporte dice cuántos intentos entraron en la varianza del DSR
     ok1, l1 = run_in_container(wd, item, os.path.join(rd, "out1"), "a"); logf.write(l1)
     ok2, l2 = run_in_container(wd, item, os.path.join(rd, "out2"), "b"); logf.write(l2)
     receipt = {"id": item["id"], "commit": commit, "inicio": it["inicio_utc"], "fin": now(), "corrida_1_ok": ok1, "corrida_2_ok": ok2}
@@ -195,8 +197,11 @@ def run_one(item):
             # el registro se escribe FUERA del contenedor, con la receta que trae el reporte
             registry.record_trial(test_id, item["estudio"], item["estrategia"], item["version"], "prueba", rep["receta"].get("parametros", {}),
                                   rep["receta"].get("sesiones_sha256"), 0, rep["receta"].get("semilla"), rep["receta"].get("costos"),
-                                  {**rep["resultados"], "reproducible": True, "commit": commit, "contenedor": IMAGE}, rep["veredicto"],
-                                  f"orquestador: 2 corridas en contenedor efímero sin red, trades.csv idéntico ({h1[:12]})")
+                                  {**rep["resultados"], "reproducible": True, "commit": commit, "contenedor": IMAGE, "dsr": rep.get("dsr"), "dsr_insumos": rep.get("dsr_insumos"),
+                                   **({"replay_de": rep["replay_de"], "tipo": "correccion_replay"} if rep.get("replay_de") else {})}, rep["veredicto"],
+                                  f"orquestador: 2 corridas en contenedor efímero sin red, trades.csv idéntico ({h1[:12]})" + (f" · repetición de corrección de {rep['replay_de']}, no validación" if rep.get("replay_de") else ""))
+            if rep.get("replay_de"):
+                registry.record_correction(rep["replay_de"], f"repetida como {test_id} con el motor {rep['receta'].get('motor')} (commit {commit[:8]}): la prueba original queda intacta; ver {test_id}", "revisar")
             # las corridas de sensibilidad también cuentan como intentos (protocolo › sensibilidad)
             params = rep["receta"].get("parametros", {})
             for name, row in (rep.get("hoja", {}).get("sensibilidad") or {}).items():
@@ -205,7 +210,8 @@ def run_one(item):
                         continue
                     p2 = dict(params); p2[name] = cell["valor"]
                     registry.record_trial(f"{test_id}-{name}{cell['valor']}", item["estudio"], item["estrategia"], item["version"], "sensibilidad", p2,
-                                          rep["receta"].get("sesiones_sha256"), 0, "-", rep["receta"].get("costos"), {"ganancia_neta": cell["neto"], "operaciones": cell["operaciones"]}, "vecino", "")
+                                          rep["receta"].get("sesiones_sha256"), 0, "-", rep["receta"].get("costos"),
+                                          {"ganancia_neta": cell["neto"], "operaciones": cell["operaciones"], "sharpe_diario": cell.get("sharpe_diario")}, "vecino", "")
             _lk.close()
             it["estado"] = "corrida"; it["test_id"] = test_id; it["veredicto"] = rep["veredicto"]; it.pop("ultimo_error", None)
             logf.write(f"{now()} PUBLICADA como {test_id} ({rep['veredicto']})\n")

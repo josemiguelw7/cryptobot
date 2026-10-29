@@ -15,4 +15,4 @@ Piezas (todas deterministas, ninguna usa IA):
   signal_map fase 1: qué hace el precio después de cada señal
   run_test   línea de comandos que une todo y publica
 """
-ENGINE_VERSION = "1.1.0"
+ENGINE_VERSION = "1.2.0"
