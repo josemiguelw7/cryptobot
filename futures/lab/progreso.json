@@ -1,5 +1,5 @@
 {
-  "actualizado_utc": "2026-10-29T01:18:19Z",
+  "actualizado_utc": "2026-10-29T01:50:12Z",
   "porcentaje": 40,
   "criterios": {
     "a_ganancia_neta_positiva": {
@@ -156,6 +156,7 @@
     "2026-10-28T23:42:15Z · Sin prueba nueva: mismos bloqueos (G3 motor, G7 datos, E-HVN-FUERZA runner); sin resultados ni pedidos nuevos desde P049. Mejor prueba P031: 40% (a y d).",
     "2026-10-29T00:14:15Z · Sin prueba nueva: mismos bloqueos (G3 motor, G7 datos, E-HVN-FUERZA runner); sin resultados ni pedidos nuevos desde P049. Mejor prueba P031: 40% (a y d).",
     "2026-10-29T00:46:18Z · Sin prueba nueva: mismos bloqueos, otra variante solo sube el conteo de intentos. Mejor prueba P031: 40% (a y d).",
-    "2026-10-29T01:18:19Z · Sin prueba nueva: mismos bloqueos (G3 motor, G7 datos, E-HVN-FUERZA runner); sin resultados ni pedidos nuevos desde P049. Mejor prueba P031: 40% (a y d)."
+    "2026-10-29T01:18:19Z · Sin prueba nueva: mismos bloqueos (G3 motor, G7 datos, E-HVN-FUERZA runner); sin resultados ni pedidos nuevos desde P049. Mejor prueba P031: 40% (a y d).",
+    "2026-10-29T01:50:12Z · Sin prueba nueva: mismos bloqueos (G3 motor, G7 datos, E-HVN-FUERZA runner); sin resultados ni pedidos nuevos desde P049. Mejor prueba P031: 40% (a y d)."
   ]
 }
