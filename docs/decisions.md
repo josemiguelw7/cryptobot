@@ -833,3 +833,15 @@ Tras la revisión externa y la auditoría de implementación, Jose Miguel acept�
 - **Libro de ingreso** `futures/lab/registry/forward_sessions.jsonl` (`engine/forward_intake.py`, cron los domingos 03:15): anota fecha, huella y tamaño de cada exportación nueva de NQ, con cadena de huellas; no lee precios; publica solo el conteo. Depende de que las exportaciones de ATAS sigan llegando a `/srv/lab/data/raw/NQ/` (hoy la última es 2026-10-22).
 - **Pendiente de DSR:** N = 1 para este examen prerregistrado, salvo que el revisor externo argumente antes de puntuar que debe incluir los intentos de diseño; se adopta lo más estricto.
 - Mientras tanto el laboratorio solo hace dos cosas: ingresar sesiones nuevas y revisar el instrumento de medida (`sim.py`: llenados, deslizamiento en noticias, rollos). Regla nueva de código (CLAUDE.md): el código nuevo se escribe en inglés.
+
+## 2026-10-29 (noche) — Alimentación de datos de la prueba forward
+
+**Problema:** la última sesión del NQ en el laboratorio era del 22/10. El descargador de ATAS solo bajaba cuando alguien le daba fechas a mano y la copia a la VM era manual, así que la prueba forward de ABU v2 tenía 0 sesiones y no iba a acumular.
+
+**Arreglos (no tocan el motor, la regla ni la línea de aprobación):**
+- Radtak Tick Downloader V3.3 (Mac GL, repo `atas-exporter` commit `32cb2d4`): modo automático, mira los últimos 14 días, baja toda sesión terminada que falte y revisa cada 30 min con ATAS abierto. No reintenta días ya anotados en el manifiesto.
+- Copia automática cada hora (launchd `com.radtak.atas-sync`) con una llave propia que solo puede AGREGAR archivos en `/srv/lab/data/raw` (`rrsync -wo`) y nunca sobrescribe una sesión existente; los hashes de la libreta forward quedan intactos.
+- Vigilante: con el investigador apagado, "inactivo" ya no es alerta. Ahora avisa si la prueba forward pasa más de 3 días hábiles sin datos nuevos y si el registro semanal (`forward_intake`) falla.
+- Días de rollo: no bloquean. `sessions_audit.py` ya excluye los días de rollo sin el segundo contrato; cuesta ~1 sesión por trimestre de las 320.
+
+**Pendiente:** acuerdo de Oscar con el pre-registro; revisión externa de `sim.py` + postura sobre DSR con N = 1 (paquete listo: `revision_grok/laboratorio_nq_revision_sim_2026-10-29.zip`).
