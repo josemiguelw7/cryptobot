@@ -1,11 +1,9 @@
-# Comité · agenda del 2026-10-30
+# Comité · agenda del 2026-10-31
 
 _Generada sola. 30 minutos. Un punto por línea; las decisiones se escriben en `docs/decisions.md`._
 
 ## 1. Qué corrió esta semana
 - P013 · POC v1 · **error** · neto -3934.44 · p 0.5804 · Topstep 12.0%
-- P005 · ABS v2 · **superada** · neto 8868.72 · p 0.003 · Topstep 43.5%
-- P006 · HVN v1 · **superada** · neto -30238.8 · p 0.5624 · Topstep 0.0%
 - P007 · BIG v2 · **superada** · neto -72186.72 · p 0.8052 · Topstep 0.0%
 - P008 · ORB v1 · **superada** · neto -15143.54 · p 0.5005 · Topstep 0.0%
 - P009 · ORB v1 · **no_pasa** · neto -19063.54 · p 0.5455 · Topstep 0.0%
